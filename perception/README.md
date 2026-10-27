@@ -1,46 +1,47 @@
-# Perception SAM 3.1 — vidéo → masques → trajectoires (Prompt 2)
+# SAM 3.1 perception — video → masks → trajectories (Prompt 2)
 
-Pipeline réel, exécutable sur une nouvelle vidéo sans modification. Aucun vrai
-paramètre de scène n'est utilisé : cette phase mesure des positions, point.
+Real pipeline, runs on a new video without modification. No true scene
+parameter is ever used: this stage measures positions, period.
 
-## Lancer
+## Run
 
 ```bash
 pip install -r perception/requirements.txt
-# clé Meta dans .env racine (META_MODEL_API_KEY=...) ou l'environnement — jamais commitée
+# Meta key in the root .env (META_MODEL_API_KEY=...) or the environment — never committed
 python3 perception/sam_perception.py --video perception/test_shot.mp4 --out perception/output
-python3 -m unittest tests.test_perception -v   # tests purs (parse/tracking/FP-01/FP-02/events)
+python3 -m unittest discover tests -v   # pure tests (parse / tracking / FP-01 / FP-02 / events / induction)
 ```
 
-Vidéo de test droits-propres (scène 3D seule, aucun UI, aucune footage tierce) :
+Rights-clean test video (3D scene only, no UI, no third-party footage):
 
 ```bash
 PYTHONPATH=/tmp/w3d-pw:/tmp/samdeps python3 perception/make_test_video.py
 ```
 
-## Comment ça marche
+## How it works
 
-1. **Échantillonnage** : frames à ~6 fps (cible Prompt 2 : 5–10 fps sur les segments utiles).
-2. **SAM 3.1** (Meta Model API, `POST /v1/responses`, modèle `sam-3.1`) par concept texte,
-   avec formulations de repli mesurées : `ball`/`basketball`, `basketball hoop`/`hoop`
-   (`vertical hoop` seul ne renvoie rien sur notre scène — constat journalisé), `backboard`.
-   Concepts statiques échantillonnés 1 frame sur 6, balle à chaque frame.
-3. **Extraction déterministe (zéro LLM)** : centroïdes de boîtes (échelle recadrée sur la
-   frame d'origine), vitesses par différences finies fenêtrées, polygones = boîtes.
-   Masques encodés décodables en raster via `decode_masks.mjs` (@meta-sam/parser, optionnel).
-4. **Suivi FP-01** : association par trajectoire prédite (gate 175 px pleine résolution),
-   ré-acquisition après occlusion ; compteur FP-01 sur la piste principale uniquement.
-5. **FP-02** : frames à aire/excentricité anormales flaguées `fp02_outlier` (exclues du fit).
-6. **Monde monoculaire** : échelle par le diamètre réel de l'anneau (0,4572 m), plan z=0.
-   Limite assumée : pas de profondeur en mono ; fiduciaires + homographie = amélioration prévue.
-7. **Événements** : launch, apex, rim_cross_down, zone d'occlusion anneau.
+1. **Sampling**: frames at ~6–10 fps (Prompt 2 target: 5–10 fps on useful segments).
+2. **SAM 3.1** (Meta Model API, `POST /v1/responses`, model `sam-3.1`) per text concept,
+   with measured prompt fallbacks: `ball`/`basketball`, `basketball hoop`/`hoop`
+   (`vertical hoop` alone returns nothing on our scene — logged finding), `backboard`.
+   Static concepts sampled 1 frame in 6, the ball on every frame.
+3. **Deterministic extraction (zero LLM)**: box centroids (rescaled to the original
+   frame), windowed finite-difference velocities, polygons = boxes.
+   Encoded masks decode to rasters via `decode_masks.mjs` (@meta-sam/parser, optional).
+4. **FP-01 tracking**: association by predicted trajectory (175 px gate at full res),
+   re-acquisition after occlusion; FP-01 counted on the main track only.
+5. **FP-02**: frames with abnormal area/eccentricity flagged `fp02_outlier` (excluded from fit).
+6. **Monocular world**: X scale from the real rim diameter (0.4572 m), Y scale from
+   the real backboard height (1.07 m) — perspective makes the two differ.
+   Stated limit: no depth in mono; `--fiducials` JSON enables a full homography.
+7. **Events**: launch, apex, rim_cross_down, rim occlusion zone.
 
-## Résultat sur la vidéo de test (générée le 2026-10-27)
+## Result on the test video (generated 2026-10-27, re-sampled at 10 fps)
 
-- 48 frames échantillonnées, balle trouvée sur **85 %**, FP-02 outliers **2 %**.
-- **ID 1 stable sur tout le segment de vol**, de lancer à la traversée de l'anneau
-  (critère de sortie Prompt 2 : GO sur ce tir).
-- Événements détectés : launch, apex @0,5 s, rim_cross_down @1,0 s.
-- Après l'anneau (filet, rebonds, roulement, fantômes Monte-Carlo dans le champ),
-  l'ID se fragmente ([1,3,4,5,6] sur la vidéo entière) : rapporté tel quel, jamais moyenné.
-- Dataset : [output/trajectories.json](output/trajectories.json) · Rapport : [output/report.md](output/report.md)
+- 39 frames sampled over the flight segment, ball found on **90%**, FP-02 outliers **2%**.
+- **ID 1 stable across the whole flight segment**, from launch to rim crossing
+  (Prompt 2 exit criterion: GO on this shot).
+- Events detected: launch, apex @0.5 s, rim_cross_down @1.0 s.
+- After the rim (net, bounces, rolling, Monte-Carlo ghosts in frame), the ID
+  fragments ([1,3,4,5,6] over the full video): reported as-is, never averaged away.
+- Dataset: [output/trajectories.json](output/trajectories.json) · Report: [output/report.md](output/report.md)

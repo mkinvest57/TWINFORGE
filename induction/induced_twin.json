@@ -1,0 +1,12 @@
+{
+ "source": "trajectories.json",
+ "model": "ballistic plane twin (gravity + quadratic drag)",
+ "g": 9.946,
+ "unc_g": 0.5605,
+ "drag": 0.26106,
+ "unc_drag": 0.09337,
+ "wind_plane_acc": -1.3447,
+ "held_out_cm": 4.93,
+ "free_flight_samples": 12,
+ "verdict_replay_agree": true
+}

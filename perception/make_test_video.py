@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Génère une vidéo de test droits-propres, cadrée sur la seule scène 3D TwinForge
-pendant un tir complet (aucune footage tierce, aucun élément d'UI dans le champ).
-Assemblée en MP4 à fps fixe depuis des captures du canvas WebGL en temps réel.
+"""Generate a rights-clean test video framed on the TwinForge 3D scene only
+during one full shot (no third-party footage, no UI element in frame).
+Assembled into an MP4 at fixed fps from real-time WebGL canvas captures.
 
 Sortie : perception/test_shot.mp4
 Usage  : PYTHONPATH=/tmp/w3d-pw:/tmp/samdeps python3 perception/make_test_video.py
@@ -40,12 +40,12 @@ async def main():
                 h, w = arr.shape[:2]
                 writer = cv2.VideoWriter(DEST, cv2.VideoWriter_fourcc(*"mp4v"), FPS, (w, h))
             writer.write(arr)
-            # cadence temps réel approximative
+            # approximate real-time cadence
             target = t0 + (i + 1) / FPS
             await page.wait_for_timeout(max(1, int((target - time.time()) * 1000)))
         writer.release()
         await browser.close()
-    print(f"Vidéo de test : {DEST} ({os.path.getsize(DEST)//1024} Ko, {FPS} fps, {SECONDS}s, scène 3D seule)")
+    print(f"Test video: {DEST} ({os.path.getsize(DEST)//1024} KB, {FPS} fps, {SECONDS}s, 3D scene only)")
 
 
 if __name__ == "__main__":

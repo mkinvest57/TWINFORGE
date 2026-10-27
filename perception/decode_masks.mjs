@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-/** TWINFORGE — décodage optionnel des masques SAM 3.1 via @meta-sam/parser.
+/** TWINFORGE — optional SAM 3.1 mask decoding via @meta-sam/parser.
  * Usage : npm install (dans perception/) puis
  *   node decode_masks.mjs sam_output.txt
- * Lit le texte structuré SAM (records <|box|><|mask|>) et affiche, par masque,
- * centroïde raster + aire en pixels. Sans le package, le pipeline Python
- * retombe sur les centroïdes de boîtes (documenté dans le rapport).
+ * Reads SAM structured text (records <|box|><|mask|>) et affiche, par masque,
+ * raster centroid + area in pixels. Without the package, the Python pipeline
+ * falls back to box centroids (documented in the report).
  */
 import { readFileSync } from 'node:fs';
 
@@ -12,7 +12,7 @@ let parser;
 try {
   parser = await import('@meta-sam/parser');
 } catch {
-  console.error('@meta-sam/parser introuvable — lancez `npm install` dans perception/. Repli pipeline : centroïdes de boîtes.');
+  console.error('@meta-sam/parser not found — run `npm install` in perception/. Pipeline fallback: box centroids.');
   process.exit(2);
 }
 const { parseImageStream, decodeMaskToRaster, recordsOfKind } = parser;

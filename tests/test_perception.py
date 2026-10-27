@@ -1,6 +1,6 @@
-"""Tests unitaires du pipeline perception SAM 3.1 (sans réseau, sans cv2).
+"""Unit tests for the SAM 3.1 perception pipeline (no network, no cv2).
 
-Lancer : python3 -m unittest tests.test_perception -v
+Run: python3 -m unittest tests.test_perception -v
 """
 import os
 import sys
@@ -48,10 +48,10 @@ class TestTrackingFP01(unittest.TestCase):
         a1 = tr.update([det(100, 300)], t=0.0)
         tid = a1[0]["track_id"]
         tr.update([det(115, 280)], t=0.1)
-        # occlusion : aucune détection pendant 2 frames
+        # occlusion: no detection for 2 frames
         tr.update([], t=0.2)
         tr.update([], t=0.3)
-        # réapparition près de la trajectoire prédite -> même ID (FP-01)
+        # reappearance near the predicted trajectory -> same ID (FP-01)
         a = tr.update([det(150, 235)], t=0.4)
         self.assertEqual(a[0]["track_id"], tid)
         self.assertEqual(tr.stats["fp01_losses"], 2)
@@ -61,7 +61,7 @@ class TestTrackingFP01(unittest.TestCase):
 class TestFP02(unittest.TestCase):
     def test_blur_outlier_flagged(self):
         frames = [det(100 + i * 10, 300 - i * 5) for i in range(8)]
-        frames.append(det(190, 255, w=90, h=18))  # masque étiré = flou de mouvement
+        frames.append(det(190, 255, w=90, h=18))  # stretched mask = motion blur
         flags = sp.flag_fp02(frames)
         self.assertTrue(flags[-1])
         self.assertFalse(flags[0])
@@ -69,7 +69,7 @@ class TestFP02(unittest.TestCase):
 
 class TestWorldTransform(unittest.TestCase):
     def test_scale_from_rim(self):
-        # anneau de 100 px de large = 0,4572 m ; centre anneau (320,180) à 3,05 m
+        # 100 px-wide rim = 0.4572 m; rim centre (320,180) at 3.05 m
         w = sp.world_from_scale((320, 80), rim_centroid=(320, 180), rim_width_px=100)
         self.assertAlmostEqual(w[0], 0.0, places=6)
         self.assertAlmostEqual(w[1], 3.05 + 100 * 0.4572 / 100, places=4)
@@ -78,7 +78,7 @@ class TestWorldTransform(unittest.TestCase):
 
 class TestEvents(unittest.TestCase):
     def test_launch_apex_score_events(self):
-        # trajectoire : montée, sommet, descente qui traverse l'anneau (y pixel croissant vers le bas)
+        # trajectory: rise, apex, descent crossing the rim (pixel y grows downward)
         pts = []
         ys = [400, 340, 290, 255, 240, 250, 285, 330, 375, 395]
         for i, y in enumerate(ys):
@@ -88,6 +88,15 @@ class TestEvents(unittest.TestCase):
         kinds = [e["event"] for e in events]
         self.assertIn("apex", kinds)
         self.assertIn("rim_cross_down", kinds)
+
+
+class TestHomography(unittest.TestCase):
+    def test_identity_and_scale(self):
+        ident = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+        self.assertEqual(sp.apply_homography(ident, (3.0, 4.0)), (3.0, 4.0))
+        scale = [[0.01, 0, 0], [0, -0.01, 3.05], [0, 0, 1]]
+        x, y = sp.apply_homography(scale, (150.0, 100.0))
+        self.assertAlmostEqual(x, 1.5); self.assertAlmostEqual(y, 2.05)
 
 
 if __name__ == "__main__":

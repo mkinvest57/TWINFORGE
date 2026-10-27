@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""TWINFORGE — serveur local : fichiers statiques + proxy API (clés côté serveur uniquement).
+"""TWINFORGE — local server: static files + API proxy (server-side keys only).
 
-Les clés ne sont JAMAIS dans le code ni dans le navigateur :
-elles sont lues depuis l'environnement ou un fichier `.env` local (ignoré par git).
+Keys are NEVER in the code or the browser: they are read from the environment
+or a local `.env` file (git-ignored).
 
-  BASETEN_API_KEY      -> https://inference.baseten.co/v1  (modèle hackathon imposé)
+  BASETEN_API_KEY      -> https://inference.baseten.co/v1  (imposed hackathon model)
   META_MODEL_API_KEY   -> https://api.meta.ai/v1           (Muse Spark / Wonder / SAM 3.1...)
 
-Lancer :  python3 server.py   puis http://localhost:8000
+Run:  python3 server.py   then http://localhost:8000
 """
 import json
 import os
@@ -16,7 +16,7 @@ import urllib.error
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 BASETEN_URL = "https://inference.baseten.co/v1"
-BASETEN_MODEL = "meta-models/muse-spark-open-1026"  # imposé hackathon, ne pas changer
+BASETEN_MODEL = "meta-models/muse-spark-open-1026"  # imposed by the hackathon, do not change
 META_URL = "https://api.meta.ai/v1"
 META_MODELS_ALLOWED = {"muse-spark-1.3", "muse-spark-1.3-contributor", "muse-wonder-1.0"}
 
@@ -82,8 +82,8 @@ class Handler(SimpleHTTPRequestHandler):
                 body = self._read_json()
                 ctx = str(body.get("context", ""))[:6000]
                 messages = [
-                    {"role": "system", "content": "Tu es l'agent scientifique de TWINFORGE. Tu analyses un journal d'induction physique (gravité, traînée, restitution estimés des seules observations, erreur tenue à l'écart). Réponds en français, concis, structuré : 1) diagnostic, 2) révision d'hypothèse proposée, 3) prochain test. N'invente aucun paramètre vrai."},
-                    {"role": "user", "content": ctx or "Aucun tir encore : propose le premier protocole d'observation."},
+                    {"role": "system", "content": "You are the TWINFORGE scientific agent. You analyse a physics induction journal (gravity, drag, restitution estimated from observations alone, held-out error). Answer in English, concise, structured: 1) diagnosis, 2) proposed hypothesis revision, 3) next test. Never invent a true parameter."},
+                    {"role": "user", "content": ctx or "No shot yet: propose the first observation protocol."},
                 ]
                 bk = os.environ.get("BASETEN_API_KEY", "").strip()
                 if bk:
@@ -99,15 +99,15 @@ class Handler(SimpleHTTPRequestHandler):
                     out = chat(META_URL, mk, "muse-spark-1.3", messages, max_tokens=4096)
                     out["provider"] = "meta-model-api"
                     return self._json(200, out)
-                return self._json(503, {"error": "Aucune clé API configurée côté serveur (.env). Voir .env.example."})
+                return self._json(503, {"error": "No API key configured server-side (.env). See .env.example."})
             if self.path == "/api/meta/chat":
                 body = self._read_json()
                 model = body.get("model", "muse-spark-1.3")
                 if model not in META_MODELS_ALLOWED:
-                    return self._json(400, {"error": f"Modèle non autorisé ici : {model}. Autorisés : {sorted(META_MODELS_ALLOWED)} (SAM 3.1 / image passent par leurs endpoints dédiés, pas le chat.)"})
+                    return self._json(400, {"error": f"Model not allowed here: {model}. Allowed: {sorted(META_MODELS_ALLOWED)} (SAM 3.1 / image use their dedicated endpoints, not chat.)"})
                 mk = os.environ.get("META_MODEL_API_KEY", "").strip()
                 if not mk:
-                    return self._json(503, {"error": "META_MODEL_API_KEY manquante côté serveur (.env)."})
+                    return self._json(503, {"error": "META_MODEL_API_KEY missing server-side (.env)."})
                 out = chat(META_URL, mk, model, body.get("messages") or [], max_tokens=int(body.get("max_tokens", 900)))
                 out["provider"] = "meta-model-api"
                 return self._json(200, out)
@@ -123,5 +123,5 @@ class Handler(SimpleHTTPRequestHandler):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "8000"))
-    print(f"TWINFORGE server http://localhost:{port}  baseten={'oui' if os.environ.get('BASETEN_API_KEY') else 'non'} meta={'oui' if os.environ.get('META_MODEL_API_KEY') else 'non'}", flush=True)
+    print(f"TWINFORGE server http://localhost:{port}  baseten={'yes' if os.environ.get('BASETEN_API_KEY') else 'no'} meta={'yes' if os.environ.get('META_MODEL_API_KEY') else 'no'}", flush=True)
     ThreadingHTTPServer(("127.0.0.1", port), Handler).serve_forever()

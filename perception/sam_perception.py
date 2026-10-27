@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
-"""TWINFORGE — Prompt 2 : perception vidéo réelle SAM 3.1 -> trajectoires.
+"""TWINFORGE — Prompt 2: real SAM 3.1 video perception -> trajectories.
 
-Pipeline (exécutable sur une nouvelle vidéo sans modification) :
-  vidéo -> frames échantillonnées (5-10 fps) -> SAM 3.1 (Meta Model API, /v1/responses,
-  prompts texte par concept) -> masques/boîtes -> extraction d'état 100 % déterministe
-  (centroïdes, polygones, vitesses par différences finies) -> suivi d'ID avec
-  ré-acquisition FP-01 -> flags qualité FP-02 -> coordonnées monde (homographie
-  fiduciaire si fournie, sinon échelle par le diamètre réel de l'anneau) ->
-  événements -> dataset JSON + rapport + frames annotées.
+Pipeline (runs on a new video without modification):
+  video -> sampled frames (5-10 fps) -> SAM 3.1 (Meta Model API, /v1/responses,
+  text concept prompts) -> masks/boxes -> 100% deterministic state extraction
+  (centroids, polygons, finite-difference velocities) -> ID tracking with
+  FP-01 re-acquisition -> FP-02 quality flags -> world coordinates (fiducial
+  homography when provided, otherwise scale from the real rim diameter) ->
+  events -> JSON dataset + report + annotated frames.
 
-Aucun vrai paramètre de scène n'est utilisé : on mesure des positions, point.
-La clé Meta se lit dans l'environnement META_MODEL_API_KEY ou le `.env` racine
-(jamais commitée). Dépendances vidéo : opencv-python-headless, pillow (requirements.txt).
-Les fonctions pures (parse, tracking, events) n'ont aucune dépendance lourde.
+No true scene parameter is ever used: we measure positions, period.
+The Meta key is read from the META_MODEL_API_KEY environment variable or the root
+`.env` (never committed). Video dependencies: opencv-python-headless, pillow (requirements.txt).
+Pure functions (parse, tracking, events) have no heavy dependency.
 """
 import argparse
 import base64
@@ -27,15 +27,15 @@ import urllib.error
 
 META_BASE = "https://api.meta.ai/v1"
 SAM_MODEL = "sam-3.1"
-RIM_DIAMETER_M = 0.4572   # diamètre réglementaire d'un anneau de basket
-RIM_HEIGHT_M = 3.05       # hauteur réglementaire de l'anneau
+RIM_DIAMETER_M = 0.4572   # regulation basketball rim diameter
+RIM_HEIGHT_M = 3.05       # regulation rim height
 
 # ---------------------------------------------------------------- SAM parsing
 _BOX_RE = re.compile(r"(\d+)<\|box;([^|]*)\|>(?:<\|mask;([^|]*)\|>)?")
 
 
 def parse_sam_text(text):
-    """Parse le texte structuré SAM 3 : records `id<|box;...|><|mask;...|>`."""
+    """Parse SAM 3 structured text: records `id<|box;...|><|mask;...|>`."""
     records = []
     for m in _BOX_RE.finditer(text or ""):
         box = {}
@@ -63,7 +63,7 @@ def box_area(box):
 
 # ------------------------------------------------------------------- tracking
 class Tracker:
-    """Suivi d'ID par continuité position/vitesse + ré-acquisition FP-01."""
+    """ID tracking by position/velocity continuity + FP-01 re-acquisition."""
 
     def __init__(self, gate_px=90, max_missing=4):
         self.gate = gate_px
@@ -80,7 +80,7 @@ class Tracker:
             if cand[1].get("hits", 1) >= 2:
                 primary_id = cand[0]
         assigned, used = [], set()
-        # prédiction par trajectoire (FP-01 : extrapolation courte)
+        # trajectory prediction (FP-01: short extrapolation)
         for det in sorted(detections, key=lambda d: -box_area(d["box"])):
             c = det.get("centroid") or box_centroid(det["box"])
             best, best_d = None, 1e18
@@ -111,10 +111,10 @@ class Tracker:
         for tid, tr in self.tracks.items():
             if tid not in used:
                 tr["missing"] += 1
-        # FP-01 compté sur la piste PRINCIPALE uniquement (les détections parasites ne polluent pas le compteur)
+        # FP-01 counted on the MAIN track only (spurious detections do not pollute the counter)
         if primary_id is not None and primary_id not in used:
             self.stats["fp01_losses"] += 1
-        # retraite des pistes perdues trop longtemps
+        # retire tracks lost for too long
         dead = [tid for tid, tr in self.tracks.items() if tr["missing"] > self.max_missing]
         for tid in dead:
             del self.tracks[tid]
@@ -123,7 +123,7 @@ class Tracker:
 
 # ------------------------------------------------------------------ FP-02 flou
 def flag_fp02(frames):
-    """Frames dégradées : aire/excentricité anormales vs médiane de la piste."""
+    """Degraded frames: abnormal area/eccentricity vs the track median."""
     if not frames:
         return []
     areas = [box_area(f["box"]) for f in frames]
@@ -140,18 +140,30 @@ def flag_fp02(frames):
 
 
 # --------------------------------------------------------------- monde / events
-def world_from_scale(centroid, rim_centroid, rim_width_px, rim_y_m=RIM_HEIGHT_M, rim_diameter_m=RIM_DIAMETER_M):
-    """Monoculaire, plan de la scène : échelle par le diamètre réel de l'anneau.
+def world_from_scale(centroid, rim_centroid, rim_width_px, rim_y_m=RIM_HEIGHT_M,
+                     rim_diameter_m=RIM_DIAMETER_M, board_height_px=None, board_height_m=1.07):
+    """Monocular scene plane: X scale from the real rim diameter (0.4572 m),
+    Y scale from the real backboard height (1.07 m) when the board is known —
+    perspective makes the two pixel scales differ, so they are calibrated
+    independently. Origin: rim centre. z = 0 (camera plane) — stated limit;
+    with printed fiducials, use the full homography path (--fiducials)."""
+    sx = rim_diameter_m / max(rim_width_px, 1)
+    sy = (board_height_m / board_height_px) if board_height_px else sx
+    return ((centroid[0] - rim_centroid[0]) * sx, rim_y_m + (rim_centroid[1] - centroid[1]) * sy, 0.0)
 
-    Origine monde : centre de l'anneau. z = 0 (plan caméra) — limite monoculaire
-    assumée et documentée ; avec fiduciaires, utiliser l'homographie complète.
-    """
-    s = rim_diameter_m / max(rim_width_px, 1)
-    return ((centroid[0] - rim_centroid[0]) * s, rim_y_m + (rim_centroid[1] - centroid[1]) * s, 0.0)
+
+def apply_homography(H, point):
+    """Apply a 3x3 homography to a pixel point -> world (x, y). Pure python."""
+    x, y = point
+    w = H[2][0] * x + H[2][1] * y + H[2][2]
+    if abs(w) < 1e-12:
+        return (0.0, 0.0)
+    return ((H[0][0] * x + H[0][1] * y + H[0][2]) / w,
+            (H[1][0] * x + H[1][1] * y + H[1][2]) / w)
 
 
 def detect_events(points, rim):
-    """points: [{t, centroid(px)}] triés ; rim: {centroid, box} ou None."""
+    """points: sorted [{t, centroid(px)}]; rim: {centroid, box} or None."""
     events = []
     if len(points) < 3:
         return events
@@ -160,10 +172,10 @@ def detect_events(points, rim):
         dt = max(points[i]["t"] - points[i - 1]["t"], 1e-3)
         vys.append((points[i]["centroid"][1] - points[i - 1]["centroid"][1]) / dt)
     if vys and abs(vys[0]) > 40:
-        events.append({"t": points[0]["t"], "event": "launch", "detail": "premier mouvement rapide détecté"})
+        events.append({"t": points[0]["t"], "event": "launch", "detail": "first fast motion detected"})
     for i in range(1, len(vys)):
         if vys[i - 1] < 0 and vys[i] >= 0:
-            events.append({"t": points[i]["t"], "event": "apex", "detail": "sommet du tir (vy pixel s'inverse)"})
+            events.append({"t": points[i]["t"], "event": "apex", "detail": "shot apex (pixel vy flips)"})
             break
     if rim:
         rc, rb = rim["centroid"], rim["box"]
@@ -171,10 +183,10 @@ def detect_events(points, rim):
             c0, c1 = points[i - 1]["centroid"], points[i]["centroid"]
             if c0[1] < rc[1] <= c1[1] and rb["x1"] <= c1[0] <= rb["x2"]:
                 events.append({"t": points[i]["t"], "event": "rim_cross_down",
-                               "detail": "traversée descendante du plan de l'anneau dans son emprise"})
+                               "detail": "downward crossing of the rim plane within its span"})
             if c0[1] > rc[1] and abs(c1[0] - rc[0]) < 12 and abs(c1[1] - rc[1]) < 12:
                 events.append({"t": points[i]["t"], "event": "rim_occlusion_zone",
-                               "detail": "balle au contact de l'anneau (zone FP-01)"})
+                               "detail": "ball in contact with the rim (FP-01 zone)"})
     return events
 
 
@@ -192,7 +204,7 @@ def load_key():
 
 
 def sam_segment_image(image_bytes, concept, key, max_side=640):
-    """Un appel SAM 3.1 (/v1/responses) pour un concept sur une image JPEG."""
+    """One SAM 3.1 call (/v1/responses) for one concept on a JPEG image."""
     from PIL import Image
     import io
     im = Image.open(io.BytesIO(image_bytes)).convert("RGB")
@@ -207,15 +219,23 @@ def sam_segment_image(image_bytes, concept, key, max_side=640):
     req = urllib.request.Request(META_BASE + "/responses", data=json.dumps(payload).encode(),
                                  headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
                                  method="POST")
-    with urllib.request.urlopen(req, timeout=120) as r:
-        d = json.load(r)
+    d = None
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=120) as r:
+                d = json.load(r)
+            break
+        except Exception:
+            if attempt == 2:
+                raise
+            import time as _t; _t.sleep(2 * (attempt + 1))
     text = ""
     for item in d.get("output") or []:
         for c in item.get("content") or []:
             if c.get("type") == "output_text":
                 text += c.get("text", "")
     recs = parse_sam_text(text)
-    sx = (image_bytes and 1)  # placeholder, échelle gérée par l'appelant via w/h du box
+    sx = (image_bytes and 1)  # placeholder, caller handles scale via box w/h
     return recs, text, im.size
 
 
@@ -224,17 +244,17 @@ def run_pipeline(args):
     import cv2
     key = load_key()
     if not key:
-        print("ERREUR : META_MODEL_API_KEY absente (env ou .env racine).", file=sys.stderr)
+        print("ERROR: META_MODEL_API_KEY missing (env or root .env).", file=sys.stderr)
         return 2
     os.makedirs(args.out, exist_ok=True)
     cap = cv2.VideoCapture(args.video)
     if not cap.isOpened():
-        print(f"ERREUR : vidéo illisible {args.video}", file=sys.stderr)
+        print(f"ERROR: unreadable video {args.video}", file=sys.stderr)
         return 2
     src_fps = cap.get(cv2.CAP_PROP_FPS) or 30.0
     total = int(cap.get(cv2.CAP_PROP_FRAME_COUNT) or 0)
     step = max(1, round(src_fps / args.sample_fps))
-    print(f"Vidéo {args.video} : {total} frames @ {src_fps:.1f} fps, échantillonnage 1/{step} (~{args.sample_fps} fps)")
+    print(f"Video {args.video}: {total} frames @ {src_fps:.1f} fps, sampling 1/{step} (~{args.sample_fps} fps)")
 
     PROMPTS = {"ball": ["ball", "basketball"],
                "vertical hoop": ["basketball hoop", "hoop", "vertical hoop"],
@@ -243,7 +263,7 @@ def run_pipeline(args):
         for prompt in PROMPTS[concept]:
             recs, _t, resized = sam_segment_image(jpg_bytes, prompt, key)
             if recs:
-                # SAM répond dans l'espace de l'image redimensionnée : retour aux px de la frame d'origine
+                # SAM answers in the resized image space: back to original frame px
                 fx, fy = frame_w / max(1, resized[0]), frame_h / max(1, resized[1])
                 for r in recs:
                     b = r["box"]
@@ -268,7 +288,7 @@ def run_pipeline(args):
             break
         sampled += 1
         ok2, jpg = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 85])
-        # concept dynamique à chaque frame échantillonnée
+        # dynamic concept on every sampled frame
         recs, _used_prompt = segment_with_fallback(jpg.tobytes(), "ball", frame.shape[1], frame.shape[0])
         dets = []
         for r in recs:
@@ -276,13 +296,13 @@ def run_pipeline(args):
             r["area"] = box_area(r["box"])
             dets.append(r)
         assigned = tracker.update(dets, t)
-        # piste principale = la plus mature (historique), pas la plus grosse boîte du moment
+        # main track = the most mature (history), not the biggest box of the moment
         main = max(assigned, key=lambda d: (d.get("track_hits", 1), d["area"])) if assigned else None
         if main:
             ball_frames.append({"t": round(t, 3), "frame": frame_no, "track_id": main["track_id"],
                                 "centroid": [round(main["centroid"][0], 1), round(main["centroid"][1], 1)],
                                 "box": main["box"], "area": main["area"], "mask": bool(main.get("mask_data"))})
-        # concepts statiques moins souvent (coût cible : pas frame-par-frame inutile)
+        # static concepts less often (cost target: no useless frame-by-frame)
         if sampled == 1 or sampled % args.static_every == 0:
             for concept in ("vertical hoop", "backboard"):
                 try:
@@ -295,8 +315,8 @@ def run_pipeline(args):
                     if srecs:
                         static_hits[concept].append(max(srecs, key=lambda r: r["area"]))
                 except Exception as e:
-                    print(f"  [static {concept} @t={t:.2f}] échec appel: {e}")
-        # frame annotée (contrôle visuel pour UN tir complet)
+                    print(f"  [static {concept} @t={t:.2f}] call failed: {e}")
+        # annotated frame (visual check for ONE full shot)
         if main:
             x1, y1, x2, y2 = main["box"]["x1"], main["box"]["y1"], main["box"]["x2"], main["box"]["y2"]
             cv2.rectangle(frame, (x1, y1), (x2, y2), (20, 110, 255), 2)
@@ -307,11 +327,11 @@ def run_pipeline(args):
                 cv2.circle(frame, (int(p["centroid"][0]), int(p["centroid"][1])), 2, (220, 180, 40), -1)
             cv2.imwrite(os.path.join(args.out, f"annotated_{annotated_idx:03d}.jpg"), frame)
             annotated_idx += 1
-        print(f"  t={t:5.2f}s frame {frame_no}: ball={'ID'+str(main['track_id']) if main else 'PERDUE'} "
-              f"({'ok' if main else 'recherche FP-01…'})")
+        print(f"  t={t:5.2f}s frame {frame_no}: ball={'ID'+str(main['track_id']) if main else 'LOST'} "
+              f"({'ok' if main else 'FP-01 searching…'})")
     cap.release()
 
-    # centroïdes statiques médians
+    # median static centroids
     statics = {}
     for concept, hits in static_hits.items():
         if hits:
@@ -323,7 +343,16 @@ def run_pipeline(args):
                         "w": hits[0]["box"]["w"], "h": hits[0]["box"]["h"]},
                 "hits": len(hits), "prompt_used": hits[0].get("prompt_used")}
 
-    # vitesses par différences finies fenêtrées + monde
+    # optional fiducial homography (4 printed markers: px -> metres)
+    H = None
+    if getattr(args, "fiducials", ""):
+        import numpy as np
+        with open(args.fiducials) as fh:
+            fid = json.load(fh)
+        H = cv2.getPerspectiveTransform(np.array(fid["points_px"], dtype="float32"),
+                                        np.array(fid["points_m"], dtype="float32")).tolist()
+        print(f"Fiducial homography loaded from {args.fiducials}")
+    # windowed finite-difference velocities + world
     rim = statics.get("vertical hoop")
     dataset = {"video": os.path.basename(args.video), "sample_fps": args.sample_fps,
                "model": SAM_MODEL, "provider": "Meta Model API /v1/responses",
@@ -335,9 +364,15 @@ def run_pipeline(args):
         vx = (ball_frames[hi]["centroid"][0] - ball_frames[lo]["centroid"][0]) / dt
         vy = (ball_frames[hi]["centroid"][1] - ball_frames[lo]["centroid"][1]) / dt
         world = None
-        if rim:
+        if H is not None:
+            wx, wy = apply_homography(H, f["centroid"])
+            world = [round(wx, 4), round(wy, 4), 0.0]
+        elif rim:
+            board = statics.get("backboard")
+            board_h = max(1, board["box"]["y2"] - board["box"]["y1"]) if board else None
             world = list(world_from_scale(f["centroid"], rim["centroid"],
-                                          max(1, rim["box"]["x2"] - rim["box"]["x1"])))
+                                          max(1, rim["box"]["x2"] - rim["box"]["x1"]),
+                                          board_height_px=board_h))
             world = [round(v, 4) for v in world]
         dataset["frames"].append({**f, "vel_px_s": [round(vx, 1), round(vy, 1)], "world_m": world,
                                   "quality": {"fp02_outlier": bool(flags[i]) if i < len(flags) else False}})
@@ -355,38 +390,38 @@ def run_pipeline(args):
     found_ratio = len(ball_frames) / max(1, sampled)
     fp02_ratio = (sum(1 for fl in flags if fl) / max(1, len(flags))) if flags else 0
     report = [
-        "# TWINFORGE — Rapport perception SAM 3.1",
+        "# TWINFORGE — SAM 3.1 perception report",
         "",
-        f"Vidéo : `{os.path.basename(args.video)}` · Modèle : `{SAM_MODEL}` via Meta Model API `/v1/responses` · Concepts : ball / vertical hoop / backboard",
-        f"Frames échantillonnées : {sampled} (~{args.sample_fps} fps) · Balle trouvée : {len(ball_frames)} ({found_ratio:.0%})",
+        f"Video: `{os.path.basename(args.video)}` · Model: `{SAM_MODEL}` via Meta Model API `/v1/responses` · Concepts: ball / vertical hoop / backboard",
+        f"Sampled frames : {sampled} (~{args.sample_fps} fps) · Ball found : {len(ball_frames)} ({found_ratio:.0%})",
         "",
-        "## Continuité des ID (FP-01)",
-        f"- Pertes de suivi (frames sans la balle alors qu'elle était suivie) : {tracker.stats['fp01_losses']}",
-        f"- Ré-acquisitions par trajectoire prédite : {tracker.stats['fp01_reacquired']}",
-        f"- IDs distincts attribués à la balle : {sorted(set(f['track_id'] for f in ball_frames)) if ball_frames else []} (toute la vidéo, rebonds/roulement inclus)",
-        f"- IDs sur le segment de vol (lancer -> traversée de l'anneau) : {sorted(set(f['track_id'] for f in ball_frames if not any(e['event'] == 'rim_cross_down' and f['t'] > e['t'] for e in events)))} — critère Prompt 2 : ID stable à travers l'arceau",
+        "## ID continuity (FP-01)",
+        f"- Tracking losses (frames without the ball while it was tracked) : {tracker.stats['fp01_losses']}",
+        f"- Re-acquisitions by predicted trajectory : {tracker.stats['fp01_reacquired']}",
+        f"- Distinct IDs assigned to the ball : {sorted(set(f['track_id'] for f in ball_frames)) if ball_frames else []} (whole video, bounces/rolling included)",
+        f"- IDs on the flight segment (launch -> rim crossing) : {sorted(set(f['track_id'] for f in ball_frames if not any(e['event'] == 'rim_cross_down' and f['t'] > e['t'] for e in events)))} — Prompt 2 criterion: ID stable through the rim",
         "",
-        "## Frames dégradées (FP-02, flou de mouvement)",
-        f"- Outliers aire/excentricité exclus du fit ultérieur : {fp02_ratio:.0%} des frames balle",
+        "## Degraded frames (FP-02, motion blur)",
+        f"- Area/eccentricity outliers excluded from the later fit : {fp02_ratio:.0%} des frames balle",
         "",
-        "## Événements détectés",
+        "## Detected events",
         *event_lines,
         "",
-        "## Limites honnêtes",
-        "- Coordonnées monde monoculaires (plan de la scène, z=0) : échelle par le diamètre réel de l'anneau (0,4572 m).",
-        "  Avec 4 fiduciaires imprimés + homographie, la précision planimétrique s'améliore ; la profondeur reste indéterminée en mono.",
-        "- Centroïdes issus des boîtes SAM (les masques encodés sont conservés bruts dans la réponse ; décodage raster via @meta-sam/parser si Node est présent).",
-        "- Aucun paramètre physique (gravité, vent, restitution) n'est estimé ici : cette phase mesure des positions, point.",
+        "## Honest limits",
+        "- Monocular world coordinates (scene plane, z=0): scale from the real rim diameter (0.4572 m).",
+        "  With 4 printed fiducials + homography, planimetric accuracy improves; depth stays undetermined in mono.",
+        "- Centroids from SAM boxes (encoded masks are kept raw in the response; raster decoding via @meta-sam/parser when Node is present).",
+        "- No physical parameter (gravity, wind, restitution) is estimated here: this stage measures positions, period.",
         "",
-        "## Critère de sortie (Prompt 2)",
-        ("GO : trajectoire balle propre, rejouable frame par frame (frames annotées + trajectories.json)."
+        "## Exit criterion (Prompt 2)",
+        ("GO: clean ball trajectory, replayable frame by frame (annotated frames + trajectories.json)."
          if found_ratio > 0.7 else
-         "NO-GO partiel : continuité insuffisante — échec nommé FP-01/FP-02, voir compteurs ci-dessus ; parade : échantillonner plus dense autour de l'anneau et relever le seuil de gate."),
+         "PARTIAL NO-GO: insufficient continuity — named FP-01/FP-02 failure, see counters above; remedy: sample denser around the rim and widen the gate."),
     ]
     with open(os.path.join(args.out, "report.md"), "w") as fh:
         fh.write("\n".join(report) + "\n")
     print("\n".join(report[:6]))
-    print(f"\nDataset : {args.out}/trajectories.json · Rapport : {args.out}/report.md · Frames annotées : {annotated_idx}")
+    print(f"\nDataset: {args.out}/trajectories.json · Report: {args.out}/report.md · Annotated frames: {annotated_idx}")
     return 0
 
 
@@ -395,9 +430,10 @@ def main():
     ap.add_argument("--video", required=True)
     ap.add_argument("--out", default="perception/output")
     ap.add_argument("--sample-fps", type=float, default=8.0)
-    ap.add_argument("--static-every", type=int, default=6, help="échantillonnage des concepts statiques (1 sur N)")
-    ap.add_argument("--gate", type=int, default=175, help="gate d'association FP-01 en px (pleine résolution)")
+    ap.add_argument("--static-every", type=int, default=6, help="static concept sampling (1 in N)")
+    ap.add_argument("--gate", type=int, default=175, help="FP-01 association gate in px (full resolution)")
     ap.add_argument("--max-seconds", type=float, default=0)
+    ap.add_argument("--fiducials", default="", help="JSON {points_px: [[x,y]x4], points_m: [[x,y]x4]} for world homography")
     args = ap.parse_args()
     return run_pipeline(args)
 

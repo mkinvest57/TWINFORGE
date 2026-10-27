@@ -1,27 +1,27 @@
-# TWINFORGE — Rapport perception SAM 3.1
+# TWINFORGE — SAM 3.1 perception report
 
-Vidéo : `test_shot.mp4` · Modèle : `sam-3.1` via Meta Model API `/v1/responses` · Concepts : ball / vertical hoop / backboard
-Frames échantillonnées : 48 (~6.0 fps) · Balle trouvée : 41 (85%)
+Video: `test_shot.mp4` · Model: `sam-3.1` via Meta Model API `/v1/responses` · Concepts: ball / vertical hoop / backboard
+Sampled frames: 39 (~10.0 fps) · Ball found: 35 (90%)
 
-## Continuité des ID (FP-01)
-- Pertes de suivi (frames sans la balle alors qu'elle était suivie) : 23
-- Ré-acquisitions par trajectoire prédite : 8
-- IDs distincts attribués à la balle : [1, 3, 4, 5, 6] (toute la vidéo, rebonds/roulement inclus)
-- IDs sur le segment de vol (lancer -> traversée de l'anneau) : [1] — critère Prompt 2 : ID stable à travers l'arceau
+## ID continuity (FP-01)
+- Tracking losses (frames without the ball while it was tracked): 16
+- Re-acquisitions by predicted trajectory: 12
+- Distinct IDs assigned to the ball: [1, 3, 4] (whole video, bounces/rolling included)
+- IDs on the flight segment (launch -> rim crossing): [1] — Prompt 2 criterion: ID stable through the rim
 
-## Frames dégradées (FP-02, flou de mouvement)
-- Outliers aire/excentricité exclus du fit ultérieur : 2% des frames balle
+## Degraded frames (FP-02, motion blur)
+- Area/eccentricity outliers excluded from the later fit: 3% of ball frames
 
-## Événements détectés
-- launch @ t=0.0s — premier mouvement rapide détecté
-- apex @ t=0.5s — sommet du tir (vy pixel s'inverse)
-- rim_cross_down @ t=1.0s — traversée descendante du plan de l'anneau dans son emprise
+## Detected events
+- launch @ t=0.0s — first fast motion detected
+- apex @ t=0.5s — shot apex (pixel vy flips)
+- rim_cross_down @ t=1.0s — downward crossing of the rim plane within its span
 
-## Limites honnêtes
-- Coordonnées monde monoculaires (plan de la scène, z=0) : échelle par le diamètre réel de l'anneau (0,4572 m).
-  Avec 4 fiduciaires imprimés + homographie, la précision planimétrique s'améliore ; la profondeur reste indéterminée en mono.
-- Centroïdes issus des boîtes SAM (les masques encodés sont conservés bruts dans la réponse ; décodage raster via @meta-sam/parser si Node est présent).
-- Aucun paramètre physique (gravité, vent, restitution) n'est estimé ici : cette phase mesure des positions, point.
+## Honest limits
+- Monocular world coordinates (scene plane, z=0): X scale from the real rim diameter (0.4572 m), Y scale from the real backboard height (1.07 m).
+  With 4 printed fiducials + homography, planimetric accuracy improves; depth stays undetermined in mono.
+- Centroids from SAM boxes (encoded masks are kept raw in the response; raster decoding via @meta-sam/parser when Node is present).
+- No physical parameter (gravity, wind, restitution) is estimated here: this stage measures positions, period.
 
-## Critère de sortie (Prompt 2)
-GO : trajectoire balle propre, rejouable frame par frame (frames annotées + trajectories.json).
+## Exit criterion (Prompt 2)
+GO: clean ball trajectory, replayable frame by frame (annotated frames + trajectories.json).
