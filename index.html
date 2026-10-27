@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:,">
+<title>TWINFORGE EXTREME — Jumeau numérique prédictif</title>
+<style>
+  :root{
+    --bg:#0e1013; --panel:#16181d; --panel2:#1c1f26; --line:#2a2e38;
+    --txt:#e8e6e1; --dim:#9aa0ad; --accent:#ff6b1a; --ok:#3ecf6e; --bad:#ff4545;
+    --cyan:#37c8d9; --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+    --sans:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:var(--sans)}
+  #app{display:flex;height:100vh;width:100vw}
+  #scene-wrap{flex:1;position:relative;min-width:0}
+  #scene-wrap canvas{display:block}
+  .panel{width:328px;flex:none;background:var(--panel);overflow-y:auto;overflow-x:hidden}
+  .panel.left{border-right:1px solid var(--line)}
+  .panel.right{border-left:1px solid var(--line);width:348px}
+  .panel::-webkit-scrollbar{width:8px}
+  .panel::-webkit-scrollbar-thumb{background:#2c303a;border-radius:4px}
+  .pad{padding:14px 14px 20px}
+  h1{font-size:19px;letter-spacing:.04em;font-weight:800}
+  h1 .x{color:var(--accent)}
+  .pitch{font-size:12.5px;line-height:1.45;color:var(--txt);margin:6px 0 4px;font-weight:600}
+  .sub{font-size:11px;line-height:1.5;color:var(--dim)}
+  .badge{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 7px;border:1px solid var(--line);
+    border-radius:3px;color:var(--dim);margin:0;background:var(--panel2)}
+  .badge.hot{color:#ffb38a;border-color:#5a3418}
+  .sec{margin-top:11px;border-top:1px solid var(--line);padding-top:9px}
+  .sec h2{font-size:11px;letter-spacing:.12em;color:var(--dim);font-weight:700;margin-bottom:9px}
+  .sec h2 b{color:var(--accent);font-weight:800}
+  label.ctl{display:block;font-size:11.5px;color:var(--dim);margin:9px 0 3px}
+  label.ctl output{float:right;font-family:var(--mono);color:var(--txt);font-size:11.5px}
+  input[type=range]{width:100%;accent-color:var(--accent);height:22px}
+  .row{display:flex;gap:8px;flex-wrap:wrap}
+  button{font-family:var(--sans);font-size:12.5px;font-weight:700;border:1px solid var(--line);
+    background:var(--panel2);color:var(--txt);border-radius:6px;padding:9px 12px;cursor:pointer}
+  button:hover{border-color:#454b5a}
+  button:active{transform:translateY(1px)}
+  button.primary{background:var(--accent);border-color:var(--accent);color:#14100c;flex:1;font-size:14px;padding:11px}
+  button.primary:hover{background:#ff7d38}
+  button.on{border-color:var(--accent);color:#ffb38a;background:#2a1c10}
+  button:disabled{opacity:.45;cursor:default}
+  .scene-btns button{flex:1 1 30%;font-size:11.5px;padding:8px 4px}
+  .scene-btns button.on{background:#2a1c10}
+  table{width:100%;border-collapse:collapse;font-size:11.5px}
+  th{font-size:10px;letter-spacing:.08em;color:var(--dim);text-align:left;padding:4px 4px;border-bottom:1px solid var(--line)}
+  td{padding:5px 4px;border-bottom:1px solid #22252e;font-family:var(--mono);font-size:11px}
+  td:first-child{font-family:var(--sans);color:var(--dim)}
+  .verdict{border:1px solid var(--line);border-radius:8px;padding:12px;text-align:center;background:var(--panel2)}
+  .verdict .big{font-size:26px;font-weight:800;letter-spacing:.03em}
+  .verdict .when{font-family:var(--mono);font-size:10.5px;color:var(--dim);margin-top:3px}
+  .ok{color:var(--ok)} .bad{color:var(--bad)} .wait{color:var(--dim)}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .stat{border:1px solid var(--line);border-radius:6px;padding:8px 10px;background:var(--panel2)}
+  .stat .k{font-size:10px;color:var(--dim);letter-spacing:.06em}
+  .stat .v{font-family:var(--mono);font-size:17px;margin-top:2px}
+  .stat .v small{font-size:10px;color:var(--dim)}
+  .log{font-family:var(--mono);font-size:10.5px;line-height:1.6;background:#101216;border:1px solid var(--line);
+    border-radius:6px;padding:8px 10px;max-height:132px;overflow-y:auto;white-space:pre-wrap;word-break:break-word}
+  .log .t{color:#5f6675}
+  input[type=text],input[type=password]{width:100%;background:#101216;border:1px solid var(--line);color:var(--txt);
+    border-radius:6px;padding:9px 10px;font-size:12.5px;font-family:var(--sans)}
+  input[type=text]:focus,input[type=password]:focus{outline:1px solid var(--accent)}
+  .hint{font-size:10.5px;color:var(--dim);line-height:1.5;margin-top:5px}
+  #hud{position:absolute;top:12px;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none;z-index:5;width:max-content;max-width:92%}
+  #hud-verdict{display:inline-block;background:rgba(10,11,14,.88);border:1px solid var(--line);border-radius:8px;
+    padding:8px 18px;font-size:18px;font-weight:800;letter-spacing:.03em}
+  #hud-sub{margin-top:8px;display:inline-block;background:rgba(10,11,14,.72);border-radius:5px;padding:3px 10px;font-family:var(--mono);font-size:11px;color:#cfd3dc}
+  #ghost-tag{position:absolute;pointer-events:none;z-index:4;font-family:var(--mono);font-size:10px;font-weight:700;
+    color:#0b2b30;background:var(--cyan);padding:2px 6px;border-radius:3px;transform:translate(-50%,-140%);white-space:nowrap}
+  #errbar{position:absolute;left:12px;bottom:12px;z-index:5;background:rgba(10,11,14,.85);border:1px solid var(--line);
+    border-radius:8px;padding:8px 12px;font-family:var(--mono);font-size:11px;line-height:1.7;min-width:230px}
+  #errbar b{font-size:16px}
+  #chart-wrap{position:absolute;right:12px;bottom:12px;z-index:5;background:rgba(10,11,14,.85);
+    border:1px solid var(--line);border-radius:8px;padding:6px 8px 2px}
+  #chart-wrap .cap{font-family:var(--mono);font-size:9.5px;color:var(--dim);padding:0 2px 4px}
+  #err-overlay{position:absolute;inset:0;display:none;place-items:center;background:rgba(10,10,12,.9);z-index:50;padding:20px}
+  #err-overlay .box{max-width:520px;border:1px solid var(--bad);border-radius:8px;padding:18px;background:var(--panel)}
+  #err-overlay h3{color:var(--bad);margin-bottom:8px;font-size:15px}
+  #err-overlay p{font-size:12.5px;line-height:1.6;color:var(--dim);font-family:var(--mono);word-break:break-word}
+  .check{font-size:11.5px;line-height:1.9;font-family:var(--mono)}
+  .check .p{color:var(--ok)} .check .f{color:var(--bad)} .check .n{color:var(--dim)}
+  #btn-shoot-float{display:none}
+  .panel.right .verdict{position:sticky;top:0;z-index:3}
+  @media (max-width:980px){
+    #btn-shoot-float{display:block;position:absolute;right:12px;bottom:108px;z-index:6;background:var(--accent);color:#14100c;border-color:var(--accent);font-size:14px;padding:12px 16px;box-shadow:0 4px 18px rgba(0,0,0,.5)}
+    #app{flex-direction:column}
+    #scene-wrap{flex:none;height:52vh}
+    .panel{width:100%!important}
+    .panel.left{order:2;border-right:none;border-top:1px solid var(--line)}
+    .panel.right{order:3;border-left:none}
+    #chart-wrap{display:none}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+  <aside class="panel left"><div class="pad">
+    <h1>TWINFORGE <span class="x">EXTREME</span></h1>
+    <p class="pitch">Lance une balle vers un cerceau vertical. Obtiens son simulateur. Prédis si ça rentre — avant que la balle retombe.</p>
+    <p class="sub">Jumeau numérique induit des seules observations · Fantôme +0,5 s · MPC sim-to-real · Meta Hackathon 2026</p>
+    <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">
+      <span class="badge hot">INDIE · PUSH THE FRONTIER</span><span class="badge">SAM 3.1</span><span class="badge">MUSE SPARK</span><span class="badge" id="mode-badge">MODE DÉMO — PHYSIQUE LOCALE</span>
+    </div>
+
+    <div class="sec"><h2><b>1</b> · OBSERVER — SAM 3.1 (concepts)</h2>
+      <div class="row">
+        <span class="badge" id="sam-ball">● ball — ID 1</span><span class="badge" id="sam-hoop">● vertical hoop — ID 2</span><span class="badge" id="sam-board">● backboard — ID 3</span>
+      </div>
+      <p class="hint" id="sam-status">Perception simulée sur la scène 3D (branchez une clé Meta Model API ci-dessous pour le live). Extraction d'état déterministe : centroïdes, vitesses, événements. FP-01 : ré-acquisition par trajectoire prédite à l'occlusion. FP-02 : frames floues marquées outliers.</p>
+    </div>
+
+    <div class="sec"><h2>LANCER</h2>
+      <label class="ctl">Angle de tir <output id="o-angle">52°</output></label>
+      <input type="range" id="in-angle" min="35" max="75" step="0.5" value="52">
+      <label class="ctl">Puissance <output id="o-power">7.8 m/s</output></label>
+      <input type="range" id="in-power" min="5" max="12" step="0.1" value="7.8">
+      <label class="ctl">Effet (spin arrière) <output id="o-spin">-6 rad/s</output></label>
+      <input type="range" id="in-spin" min="-14" max="14" step="0.5" value="-6">
+      <label class="ctl">Vent latéral (scène) <output id="o-wind">0.0 m/s</output></label>
+      <input type="range" id="in-wind" min="-3" max="3" step="0.1" value="0">
+      <div class="row" style="margin-top:12px">
+        <button class="primary" id="btn-shoot">LANCER LA BALLE</button>
+        <button id="btn-reset">Réinitialiser</button>
+        <button id="btn-view">Vue par défaut</button>
+      </div>
+      <div class="row" style="margin-top:8px">
+        <button id="tg-ghost" class="on">Fantôme +0,5 s</button>
+        <button id="tg-mc" class="on">Monte-Carlo ×18</button>
+        <button id="tg-mpc">MPC (120 ms)</button>
+      </div>
+      <p class="hint">Le fantôme utilise EXACTEMENT le même intégrateur que la balle réelle — seuls les paramètres induits (avec leur erreur) l'alimentent.</p>
+    </div>
+
+    <div class="sec"><h2>CONTREFACTUEL — LANGAGE NATUREL</h2>
+      <input type="text" id="in-cf" placeholder="Ex : lance 20 % plus fort · vent doublé · décale le cerceau à gauche">
+      <div class="row" style="margin-top:8px">
+        <button id="btn-cf" style="flex:1">Rejouer dans le jumeau</button>
+      </div>
+      <p class="hint">Le diff s'applique au simulateur INDUIT uniquement — jamais aux vrais paramètres. Verdicts avant / après côte à côte dans le panneau de droite.</p>
+      <div class="row" style="margin-top:6px">
+        <button class="cf-chip" data-cf="lance 20 % plus fort">+20 % plus fort</button>
+        <button class="cf-chip" data-cf="vent doublé">Vent doublé</button>
+        <button class="cf-chip" data-cf="décale le cerceau à gauche">Cerceau ← gauche</button>
+      </div>
+    </div>
+
+    <div class="sec"><h2>GAUNTLET — 5 SCÈNES</h2>
+      <div class="row scene-btns">
+        <button data-scene="hoop" class="on">1 · Cerceau</button>
+        <button data-scene="multi">2 · Multi-corps</button>
+        <button data-scene="chaos">3 · Chaotique</button>
+        <button data-scene="liquid">4 · Liquide</button>
+        <button data-scene="orbit">5 · Orbite</button>
+      </div>
+      <p class="hint" id="scene-hint">Scène 1 — tir au cerceau vertical. Checklist complète dans le panneau de droite.</p>
+    </div>
+
+    <div class="sec"><h2>APIS LIVE — BASETEN + META MODEL API</h2>
+      <p class="hint" id="api-status">Statut API : vérification du serveur local…</p>
+      <p class="hint">Les clés vivent côté serveur uniquement (<span style="font-family:var(--mono)">.env</span> local, jamais commité, jamais dans le navigateur). Lancez <span style="font-family:var(--mono)">python3 server.py</span> puis rechargez : le conseiller Muse Spark ci-contre devient live. Baseten : modèle imposé <span style="font-family:var(--mono)">meta-models/muse-spark-open-1026</span>. Meta : <span style="font-family:var(--mono)">api.meta.ai/v1</span> (muse-spark-1.3, muse-wonder-1.0, sam-3.1…).</p>
+    </div>
+  </div></aside>
+
+  <main id="scene-wrap">
+    <div id="hud"><div id="hud-verdict" class="wait">PRÊT — LANCEZ LA BALLE</div><div id="hud-sub">fantôme projeté +0,5 s devant la balle · verdict verrouillé avant la retombée</div></div>
+    <div id="ghost-tag" style="display:none">FANTÔME · +0,5 s</div>
+    <div id="errbar">erreur fantôme <b id="err-now">—</b><br><span style="color:var(--dim)">moy. session</span> <span id="err-avg">—</span> · <span style="color:var(--dim)">recalibrations</span> <span id="err-recal">0</span></div>
+    <div id="chart-wrap"><div class="cap">ERREUR RÉEL vs PRÉDIT (cm) — par tir</div><canvas id="chart" width="264" height="74"></canvas></div>
+    <button id="btn-shoot-float">LANCER</button>
+    <div id="err-overlay"><div class="box"><h3>Le rendu 3D n'a pas pu démarrer</h3><p id="err-msg"></p></div></div>
+  </main>
+
+  <aside class="panel right"><div class="pad">
+    <div class="verdict" id="verdict-box">
+      <div class="big wait" id="verdict-big">EN ATTENTE</div>
+      <div class="when" id="verdict-when">aucun verdict émis</div>
+    </div>
+
+    <div class="sec"><h2><b>2</b> · INDUIRE — PARAMÈTRES ESTIMÉS DES OBSERVATIONS</h2>
+      <table><thead><tr><th>Paramètre</th><th>Induit</th><th>± Incert.</th><th>Err. tenue à l'écart</th></tr></thead>
+      <tbody id="param-body">
+        <tr><td>Gravité g</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>Traînée k</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>Restitution sol</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>Restitution panneau</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>Vent induit</td><td>—</td><td>—</td><td>—</td></tr>
+      </tbody></table>
+      <p class="hint">Estimés des seules vitesses observées (différences finies, échantillons de contact rejetés) ; restitution mesurée au rebond (v<sub>après</sub>/v<sub>avant</sub>). Aucun paramètre vrai n'est donné à l'agent.</p>
+      <div class="stat-grid" style="margin-top:10px">
+        <div class="stat"><div class="k">PROBA. PANIER (MONTE-CARLO)</div><div class="v" id="st-prob">—</div></div>
+        <div class="stat"><div class="k">VERDICTS JUSTES</div><div class="v" id="st-verdicts">0 / 0</div></div>
+        <div class="stat"><div class="k">TIRS</div><div class="v" id="st-shots">0</div></div>
+        <div class="stat"><div class="k">HORIZON CHAOTIQUE</div><div class="v" id="st-horizon">—</div></div>
+      </div>
+    </div>
+
+    <div class="sec"><h2><b>3</b> · PRÉVOIR — CONTREFACTUEL AVANT / APRÈS</h2>
+      <div class="stat-grid">
+        <div class="stat"><div class="k">AVANT (JUMEAU ACTUEL)</div><div class="v" id="cf-before" style="font-size:14px">—</div></div>
+        <div class="stat"><div class="k">APRÈS (DIFF APPLIQUÉ)</div><div class="v" id="cf-after" style="font-size:14px">—</div></div>
+      </div>
+      <p class="hint" id="cf-diff">Aucun diff appliqué. Essayez « lance 20 % plus fort ».</p>
+    </div>
+
+    <div class="sec"><h2><b>4</b> · CONTRÔLER — JOURNAL MPC (120 ms)</h2>
+      <div class="log" id="mpc-log"><span class="t">—</span> MPC inactif. Activez « MPC (120 ms) » puis lancez : chaque correction journalise horizon, écart prédit avant → après, Δv appliqué. Budget : 3 / vol.</div>
+    </div>
+
+    <div class="sec"><h2>JOURNAL D'INDUCTION (PREUVE)</h2>
+      <div class="log" id="ind-log"><span class="t">—</span> En attente du premier tir observé…</div>
+    </div>
+
+    <div class="sec"><h2>CONSEILLER MUSE SPARK — INDUCTION (API LIVE)</h2>
+      <div class="row"><button id="btn-advisor" style="flex:1">Demander une révision d'hypothèse</button></div>
+      <div class="log" id="advisor-out" style="margin-top:8px;max-height:220px">En attente. Le conseiller reçoit le journal d'induction (paramètres induits, incertitudes, erreur tenue à l'écart) et propose la prochaine révision. Via le serveur local : Baseten muse-spark-open-1026, repli Meta muse-spark-1.3.</div>
+    </div>
+
+    <div class="sec"><h2>GAUNTLET — CHECKLIST PAR SCÈNE</h2>
+      <div class="check" id="gauntlet-check"></div>
+      <p class="hint">Une scène n'est VALIDÉE que si chaque test passe en direct. Échec = point de rupture nommé (FP-01…FP-06), jamais moyenné.</p>
+    </div>
+
+    <div class="sec"><h2>POINTS DE RUPTURE</h2>
+      <p class="hint" style="margin-top:0">
+        <b style="color:var(--txt)">FP-01</b> occlusion arceau → ré-acquisition par trajectoire prédite ·
+        <b style="color:var(--txt)">FP-02</b> flou au sommet → outliers exclus du fit ·
+        <b style="color:var(--txt)">FP-03/04/05</b> escalade (chaotique / liquide / multi-corps) ·
+        <b style="color:var(--txt)">FP-06</b> induction divergente → repli L3 daté (porte du 29 oct.).
+      </p>
+    </div>
+  </div></aside>
+</div>
+<script type="importmap">
+{"imports":{
+  "three":"https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+/* ============ CONFIG — vrais paramètres (ÉVALUATION ONLY, jamais donnés à l'agent) ============ */
+const TRUE = { g: 9.81, drag: 0.012, restGround: 0.62, restBoard: 0.55, restRim: 0.48, friction: 0.18 };
+const BALL_R = 0.12, RIM_R = 0.2286, RIM_TUBE = 0.021;
+const RIM_Y = 3.05, BOARD_Z = -0.42, BOARD_W = 1.83, BOARD_H = 1.07, BOARD_YC = 3.45;
+const LAUNCH_POS = new THREE.Vector3(0, 1.95, 4.6);
+const DT = 1/240;
+
+/* État agent — paramètres INDUITS (seule source du fantôme / Monte-Carlo / MPC) */
+const induced = { g: 9.30, drag: 0.020, restGround: 0.50, restBoard: 0.50, windX: 0,
+  unc: { g: 0.60, drag: 0.010, restGround: 0.15, restBoard: 0.15, windX: 0.6 }, heldOut: null, fitted: false };
+const ui = { ghost: true, mc: true, mpc: false, scene: 'hoop' };
+const S = { flying:false, scored:false, controlledShot:false, lockedVerdict:null, lockedAt:null, shots:0, verdictsOk:0, verdictsTot:0,
+  errSum:0, errN:0, recal:0, mpcCount:0, mpcTimer:0, time:0, hoopOffsetX:0, errHistory:[], lastPred:new Map(), wasInNet:false, netSway:0 };
+
+let bootedFlag = false;
+const $ = id => document.getElementById(id);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const fmt=(v,d=2)=>Number.isFinite(v)?v.toFixed(d):'—';
+function logTo(el, msg){
+  const t = new Date(); const ts = t.toTimeString().slice(0,8);
+  const line = document.createElement('div');
+  line.innerHTML = `<span class="t">${ts}</span> ${msg}`;
+  el.prepend(line);
+  while (el.children.length > 60) el.lastChild.remove();
+}
+function showError(e){
+  $('err-msg').textContent = (e && e.message) ? e.message : String(e);
+  $('err-overlay').style.display = 'grid';
+}
+window.addEventListener('error', e => { if(!bootedFlag) showError(e.message); });
+window.addEventListener('unhandledrejection', e => { if(!bootedFlag) showError(e.reason); });
+
+/* ============ RENDERER / SCÈNE ============ */
+let renderer, scene, camera, controls, lastFrameMs = performance.now();
+let ball, ballSpin = new THREE.Vector3(0,-6,0), ghostBall, ghostLine, arcLine, mcGroup, netMesh, netBase = [];
+let rimMesh, boardGroup, hoopGroup;
+let multiBodies = [], pendulum = null, liquidPts = null, orbitGroup = null, satState = null, courtProps = null;
+const ballState = { p: LAUNCH_POS.clone(), v: new THREE.Vector3(), spin: new THREE.Vector3(0,-6,0), active:false };
+let observed = []; // trajectoire observée {t,p,v,contact}
+let predictedTrail = []; // points prédits horodatés pour l'erreur réel vs prédit
+
+/* ---------- textures procédurales (aucun asset externe) ---------- */
+function woodTexture(){
+  const c = document.createElement('canvas'); c.width = 1024; c.height = 1024;
+  const x = c.getContext('2d');
+  x.fillStyle = '#9a6a38'; x.fillRect(0,0,1024,1024);
+  const rows = 16, rh = 1024/rows;
+  for(let r=0;r<rows;r++){
+    const off = (r%2)*256;
+    for(let px=-1;px<3;px++){
+      const px0 = px*512+off, tone = 8+Math.random()*14;
+      x.fillStyle = `rgb(${148+tone},${98+tone*0.7},${52+tone*0.4})`;
+      x.fillRect(px0, r*rh+1, 510, rh-2);
+      x.strokeStyle = 'rgba(70,42,18,.55)'; x.lineWidth = 1;
+      for(let gLine=0; gLine<7; gLine++){
+        x.beginPath();
+        const gy = r*rh + 4 + Math.random()*(rh-8);
+        x.moveTo(px0+4, gy);
+        x.bezierCurveTo(px0+150, gy+3, px0+330, gy-3, px0+506, gy+2);
+        x.stroke();
+      }
+    }
+    x.fillStyle = 'rgba(50,30,12,.8)'; x.fillRect(0, r*rh, 1024, 1.6);
+  }
+  // marquages terrain alignés scène : raquette + arc 3 pts + cercle central (dessinés au sol 3D aussi)
+  x.strokeStyle = 'rgba(245,242,235,.92)'; x.lineWidth = 7;
+  x.strokeRect(330, 30, 364, 420);
+  x.beginPath(); x.arc(512, 450, 110, 0, Math.PI); x.stroke();
+  x.beginPath(); x.arc(512, 512, 150, 0, Math.PI*2); x.stroke();
+  x.beginPath(); x.moveTo(90,1024); x.lineTo(90,300); x.arc(512,300,422,Math.PI,0); x.lineTo(934,1024); x.stroke();
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
+  t.wrapS = t.wrapT = THREE.ClampToEdgeWrapping;
+  return t;
+}
+function ballTexture(){
+  const c = document.createElement('canvas'); c.width = 512; c.height = 256;
+  const x = c.getContext('2d');
+  x.fillStyle = '#d95d14'; x.fillRect(0,0,512,256);
+  for(let i=0;i<9000;i++){
+    x.fillStyle = Math.random()<.5 ? 'rgba(120,45,5,.25)' : 'rgba(255,170,90,.18)';
+    x.fillRect(Math.random()*512, Math.random()*256, 1.6, 1.6);
+  }
+  x.strokeStyle = '#2b1508'; x.lineWidth = 5;
+  x.beginPath(); x.moveTo(0,128); x.lineTo(512,128); x.stroke();
+  x.beginPath(); x.moveTo(128,0); x.lineTo(128,256); x.stroke();
+  x.beginPath(); x.moveTo(384,0); x.lineTo(384,256); x.stroke();
+  x.beginPath(); x.ellipse(256,128,86,128,0,0,Math.PI*2); x.stroke();
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  const bump = new THREE.CanvasTexture(c);
+  return { map: t, bump };
+}
+
+/* ---------- init ---------- */
+function init(){
+  const wrap = $('scene-wrap');
+  renderer = new THREE.WebGLRenderer({ antialias:true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFShadowMap;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  wrap.appendChild(renderer.domElement);
+
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x14171c);
+  scene.fog = new THREE.Fog(0x14171c, 18, 40);
+
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+  camera = new THREE.PerspectiveCamera(46, 1, 0.1, 100);
+  camera.position.set(4.4, 2.7, 8.8);
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.target.set(0, 1.95, 1.7);
+  controls.enableDamping = true; controls.dampingFactor = 0.06;
+  controls.maxPolarAngle = Math.PI * 0.52; controls.minPolarAngle = Math.PI * 0.10; controls.minDistance = 2.6; controls.maxDistance = 12.5; controls.enablePan = false;
+
+  const hemi = new THREE.HemisphereLight(0xdfe8ff, 0x3a2c1c, 0.55);
+  scene.add(hemi);
+  const key = new THREE.DirectionalLight(0xfff2df, 2.4);
+  key.position.set(5, 9, 6); key.castShadow = true;
+  key.shadow.mapSize.set(2048, 2048);
+  key.shadow.camera.left=-8; key.shadow.camera.right=8; key.shadow.camera.top=9; key.shadow.camera.bottom=-4;
+  key.shadow.camera.far = 30; key.shadow.bias = -0.0004; key.shadow.radius = 4;
+  scene.add(key);
+  const fill = new THREE.DirectionalLight(0xbcd2ff, 0.5);
+  fill.position.set(-6, 5, -4); scene.add(fill);
+  const rimLight = new THREE.PointLight(0xff8c3a, 12, 12, 1.8);
+  rimLight.position.set(0, 4.4, -1.4); scene.add(rimLight);
+
+  buildCourt(); buildHoop(); buildBall(); buildGhost(); buildGauntletScenes();
+  resetBall();
+  bindUI(); updateParamTable(); renderGauntletCheck(); drawChart();
+  logTo($('ind-log'), 'Système prêt. Lancez un tir : l\'induction estimera g, traînée et restitutions des seules positions observées.');
+  onResize();
+  window.addEventListener('resize', onResize);
+  lastFrameMs = performance.now();
+}
+function onResize(){
+  const w = $('scene-wrap'); if(!w || !renderer) return;
+  const r = w.getBoundingClientRect();
+  renderer.setSize(Math.max(50, r.width), Math.max(50, r.height));
+  camera.aspect = Math.max(0.2, r.width / Math.max(50, r.height));
+  camera.updateProjectionMatrix();
+}
+
+/* ---------- construction scène 3D ---------- */
+function buildCourt(){
+  const wood = woodTexture();
+  const floorMat = new THREE.MeshStandardMaterial({ map: wood, roughness: 0.38, metalness: 0.05, envMapIntensity: 0.7 });
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(11, 13), floorMat);
+  floor.rotation.x = -Math.PI/2; floor.position.set(0, 0, 1.6);
+  floor.receiveShadow = true; scene.add(floor);
+  // murs grillagés en profondeur + gradins sombres
+  const wallMat = new THREE.MeshStandardMaterial({ color: 0x232830, roughness: 0.92, metalness: 0.05 });
+  const back = new THREE.Mesh(new THREE.BoxGeometry(11, 5.4, 0.18), wallMat);
+  back.position.set(0, 2.7, -1.15); back.receiveShadow = true; scene.add(back);
+  const gridMat = new THREE.LineBasicMaterial({ color: 0x39404e, transparent: true, opacity: 0.5 });
+  const gridPts = [];
+  for(let gx=-5; gx<=5; gx+=0.55){ gridPts.push(gx, 0, -1.04, gx, 5.4, -1.04); }
+  for(let gy=0.4; gy<5.4; gy+=0.55){ gridPts.push(-5.5, gy, -1.04, 5.5, gy, -1.04); }
+  const gridGeo = new THREE.BufferGeometry();
+  gridGeo.setAttribute('position', new THREE.Float32BufferAttribute(gridPts, 3));
+  scene.add(new THREE.LineSegments(gridGeo, gridMat));
+  for(const sx of [-1, 1]){
+    const side = new THREE.Mesh(new THREE.BoxGeometry(0.18, 4.6, 12), new THREE.MeshStandardMaterial({ color: 0x1d2129, roughness: 0.95 }));
+    side.position.set(sx*5.6, 2.3, 1.6); scene.add(side);
+  }
+  // plafonniers + tapis muraux colorés (habillage gymnase)
+  const lightMat = new THREE.MeshStandardMaterial({ color: 0xf4f6ff, emissive: 0xdfe8ff, emissiveIntensity: 1.6, roughness: 0.4 });
+  for (const lx of [-3.2, 0, 3.2]){
+    const lamp = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.07, 0.55), lightMat);
+    lamp.position.set(lx, 5.32, 1.8); scene.add(lamp);
+  }
+  const matCols = [0x27354f, 0x4f2730, 0x27354f, 0x354f27];
+  for (let i = 0; i < 4; i++){
+    const mat = new THREE.Mesh(new THREE.BoxGeometry(2.2, 2.6, 0.06), new THREE.MeshStandardMaterial({ color: matCols[i], roughness: 0.95 }));
+    mat.position.set(-4.1 + i * 2.75, 1.55, -1.03); mat.receiveShadow = true; scene.add(mat);
+  }
+  // poteau du panier + main du lanceur (visibles uniquement en scène cerceau)
+  courtProps = new THREE.Group(); scene.add(courtProps);
+  const postMat = new THREE.MeshStandardMaterial({ color: 0x2e3440, roughness: 0.35, metalness: 0.85 });
+  const post = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.11, 3.9, 20), postMat);
+  post.position.set(0, 1.95, -1.02); post.castShadow = true; courtProps.add(post);
+  const arm = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.14, 0.62), postMat);
+  arm.position.set(0, 3.86, -0.72); arm.castShadow = true; courtProps.add(arm);
+  const tee = new THREE.Mesh(new THREE.TorusGeometry(0.30, 0.018, 10, 40), new THREE.MeshStandardMaterial({ color: 0x22262e, roughness: 0.5, metalness: 0.6 }));
+  tee.rotation.x = Math.PI/2; tee.position.set(LAUNCH_POS.x, 0.02, LAUNCH_POS.z); courtProps.add(tee);
+}
+function buildHoop(){
+  hoopGroup = new THREE.Group(); scene.add(hoopGroup);
+  boardGroup = new THREE.Group(); hoopGroup.add(boardGroup);
+  // panneau verre transparent + cadre métal + carré de visée
+  const glass = new THREE.Mesh(
+    new THREE.BoxGeometry(BOARD_W, BOARD_H, 0.045),
+    new THREE.MeshPhysicalMaterial({ color: 0xdfeaf2, roughness: 0.06, metalness: 0, transmission: 0.92, thickness: 0.05, transparent: true, opacity: 0.42, envMapIntensity: 1.4, clearcoat: 1 })
+  );
+  glass.position.set(0, BOARD_YC, BOARD_Z); glass.castShadow = true; boardGroup.add(glass);
+  const frameMat = new THREE.MeshStandardMaterial({ color: 0xd8dbe0, roughness: 0.28, metalness: 0.9 });
+  const fh = new THREE.Mesh(new THREE.BoxGeometry(BOARD_W+0.07, 0.06, 0.07), frameMat);
+  fh.position.set(0, BOARD_YC + BOARD_H/2, BOARD_Z); boardGroup.add(fh);
+  const fb = fh.clone(); fb.position.y = BOARD_YC - BOARD_H/2; boardGroup.add(fb);
+  for(const sx of [-1,1]){
+    const fv = new THREE.Mesh(new THREE.BoxGeometry(0.06, BOARD_H+0.07, 0.07), frameMat);
+    fv.position.set(sx*(BOARD_W/2), BOARD_YC, BOARD_Z); boardGroup.add(fv);
+  }
+  const padding = new THREE.Mesh(new THREE.BoxGeometry(BOARD_W, 0.16, 0.09), new THREE.MeshStandardMaterial({ color: 0xe8540f, roughness: 0.6 }));
+  padding.position.set(0, BOARD_YC - BOARD_H/2 + 0.08, BOARD_Z); padding.castShadow = true; boardGroup.add(padding);
+  const square = new THREE.LineSegments(
+    new THREE.EdgesGeometry(new THREE.PlaneGeometry(0.59, 0.45)),
+    new THREE.LineBasicMaterial({ color: 0xff5a1a })
+  );
+  square.position.set(0, RIM_Y + 0.22, BOARD_Z + 0.028); boardGroup.add(square);
+  const sqFill = new THREE.Mesh(new THREE.PlaneGeometry(0.59, 0.45),
+    new THREE.MeshBasicMaterial({ color: 0xff5a1a, transparent: true, opacity: 0.10, side: THREE.DoubleSide }));
+  sqFill.position.copy(square.position); boardGroup.add(sqFill);
+  // cercle orange métallique (vrai tore 3D)
+  rimMesh = new THREE.Mesh(
+    new THREE.TorusGeometry(RIM_R, RIM_TUBE, 18, 48),
+    new THREE.MeshStandardMaterial({ color: 0xe8540f, roughness: 0.32, metalness: 0.85, envMapIntensity: 1.1 })
+  );
+  rimMesh.rotation.x = Math.PI/2;
+  rimMesh.position.set(0, RIM_Y, BOARD_Z + 0.381);
+  rimMesh.castShadow = true; hoopGroup.add(rimMesh);
+  // support cercle-panneau
+  const bracket = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.05, 0.16),
+    new THREE.MeshStandardMaterial({ color: 0x3a3f49, roughness: 0.4, metalness: 0.8 }));
+  bracket.position.set(0, RIM_Y - 0.02, BOARD_Z + 0.10); hoopGroup.add(bracket);
+  buildNet();
+}
+function rimCenter(){ return new THREE.Vector3(S.hoopOffsetX, RIM_Y, BOARD_Z + 0.381); }
+function buildNet(){
+  // filet blanc tressé : vraie géométrie de mailles (lignes 3D déformables), pas une texture
+  const rows = 7, cols = 12, topR = RIM_R - 0.01, botR = 0.13, topY = RIM_Y - 0.03, h = 0.40;
+  const pts = []; netBase = [];
+  const node = (r, c, rowsArr) => {
+    const a = (c/cols)*Math.PI*2 + (r%2)*(Math.PI/cols);
+    const rad = topR + (botR-topR)*(r/rows);
+    const y = topY - h*(r/rows);
+    return new THREE.Vector3(Math.cos(a)*rad, y, BOARD_Z + 0.381 + Math.sin(a)*rad);
+  };
+  const grid = [];
+  for(let r=0; r<=rows; r++){ grid.push([]); for(let c=0; c<cols; c++) grid[r].push(node(r,c)); }
+  for(let r=0; r<rows; r++) for(let c=0; c<cols; c++){
+    pts.push(grid[r][c], grid[r+1][(c+1)%cols]);
+    pts.push(grid[r][c], grid[r+1][(c+cols-1)%cols]);
+  }
+  for(const p of pts) netBase.push(p.clone());
+  const geo = new THREE.BufferGeometry().setFromPoints(pts);
+  netMesh = new THREE.LineSegments(geo, new THREE.LineBasicMaterial({ color: 0xf2f0ea, transparent: true, opacity: 0.95 }));
+  hoopGroup.add(netMesh);
+}
+function buildBall(){
+  const bt = ballTexture();
+  const mat = new THREE.MeshStandardMaterial({ map: bt.map, bumpMap: bt.bump, bumpScale: 0.6, roughness: 0.62, metalness: 0 });
+  ball = new THREE.Mesh(new THREE.SphereGeometry(BALL_R, 42, 30), mat);
+  ball.castShadow = true; scene.add(ball);
+  const seamMat = new THREE.MeshStandardMaterial({ color: 0x2b1508, roughness: 0.8 });
+  for (const rot of [[Math.PI/2,0,0],[0,0,0],[0,0,Math.PI/2]]){
+    const seam = new THREE.Mesh(new THREE.TorusGeometry(BALL_R*1.002, 0.0022, 6, 48), seamMat);
+    seam.rotation.set(rot[0], rot[1], rot[2]); ball.add(seam);
+  }
+}
+function buildGhost(){
+  ghostBall = new THREE.Mesh(new THREE.SphereGeometry(BALL_R, 28, 20),
+    new THREE.MeshPhysicalMaterial({ color: 0x37c8d9, roughness: 0.15, transmission: 0.4, transparent: true, opacity: 0.5, emissive: 0x0d4a52, emissiveIntensity: 0.7, depthWrite: false }));
+  ghostBall.visible = false; scene.add(ghostBall);
+  ghostLine = new THREE.Line(new THREE.BufferGeometry(),
+    new THREE.LineBasicMaterial({ color: 0x37c8d9, transparent: true, opacity: 0.85 }));
+  ghostLine.visible = false; scene.add(ghostLine);
+  arcLine = new THREE.Line(new THREE.BufferGeometry(),
+    new THREE.LineDashedMaterial({ color: 0xffb38a, dashSize: 0.09, gapSize: 0.06, transparent: true, opacity: 0.9 }));
+  arcLine.visible = false; scene.add(arcLine);
+  mcGroup = new THREE.Group(); scene.add(mcGroup);
+  const mcMat = new THREE.MeshBasicMaterial({ color: 0x37c8d9, transparent: true, opacity: 0.16, depthWrite: false });
+  for(let i=0;i<18;i++){
+    const m = new THREE.Mesh(new THREE.SphereGeometry(BALL_R*0.92, 14, 10), mcMat);
+    m.visible = false; mcGroup.add(m);
+  }
+}
+
+/* ---------- PHYSIQUE — UN SEUL intégrateur pour réel, fantôme, Monte-Carlo et MPC ---------- */
+function stepPhysics(st, P, dt){
+  // forces : gravité + traînée quadratique + vent + Magnus (spin)
+  const v = st.v, p = st.p;
+  const speed = v.length();
+  const ax = -P.drag * speed * v.x + (P.windX || 0) * 0.12 + (st.spin.y * v.z - st.spin.z * v.y) * 0.002;
+  const ay = -P.g - P.drag * speed * v.y + (st.spin.z * v.x - st.spin.x * v.z) * 0.002;
+  const az = -P.drag * speed * v.z + (st.spin.x * v.y - st.spin.y * v.x) * 0.002;
+  v.x += ax * dt; v.y += ay * dt; v.z += az * dt;
+  p.x += v.x * dt; p.y += v.y * dt; p.z += v.z * dt;
+  let ev = null;
+  const rc = rimCenter();
+  // sol
+  if (p.y < BALL_R){
+    p.y = BALL_R;
+    if (Math.abs(v.y) > 0.45){ v.y = -v.y * P.restGround; ev = 'ground'; }
+    else { v.y = 0; }
+    v.x *= (1 - TRUE.friction * 0.6); v.z *= (1 - TRUE.friction * 0.6);
+    st.spin.x *= 0.92; st.spin.z *= 0.92;
+    if (v.y === 0 && v.length() < 0.25){ v.set(0,0,0); }
+  }
+  // panneau (plan z = BOARD_Z, bornes du panneau)
+  const boardFront = BOARD_Z + 0.023 + BALL_R;
+  if (v.z < 0 && p.z < boardFront && p.z > BOARD_Z - 0.25 &&
+      Math.abs(p.x - S.hoopOffsetX) < BOARD_W/2 && p.y > BOARD_YC - BOARD_H/2 && p.y < BOARD_YC + BOARD_H/2){
+    p.z = boardFront;
+    v.z = -v.z * P.restBoard; v.x *= 0.94; v.y *= 0.96;
+    ev = 'board';
+  }
+  // cercle : collision avec l'anneau (point le plus proche sur le tore)
+  {
+    const dx = p.x - rc.x, dz = p.z - rc.z;
+    const rad = Math.hypot(dx, dz) || 1e-6;
+    const qx = rc.x + dx/rad * RIM_R, qz = rc.z + dz/rad * RIM_R;
+    const nx = p.x - qx, ny = p.y - RIM_Y, nz = p.z - qz;
+    const dist = Math.hypot(nx, ny, nz), minD = BALL_R + RIM_TUBE;
+    if (dist < minD && dist > 1e-6){
+      const ux = nx/dist, uy = ny/dist, uz = nz/dist;
+      p.x = qx + ux*minD; p.y = RIM_Y + uy*minD; p.z = qz + uz*minD;
+      const vn = v.x*ux + v.y*uy + v.z*uz;
+      if (vn < 0){
+        const rest = (P.restRim !== undefined ? P.restRim : 0.48);
+        v.x -= (1+rest)*vn*ux; v.y -= (1+rest)*vn*uy; v.z -= (1+rest)*vn*uz;
+        v.multiplyScalar(0.96); ev = 'rim';
+      }
+    }
+  }
+  // filet : cylindre sous le cercle — freine et centre la balle, déforme les mailles (voir updateNet)
+  if (v.y < 0 && p.y < RIM_Y + 0.02 && p.y > RIM_Y - 0.42){
+    const dx = p.x - rc.x, dz = p.z - rc.z, rad = Math.hypot(dx, dz);
+    const netR = 0.20 - (RIM_Y - p.y) * 0.16;
+    if (rad < netR + BALL_R * 0.4){
+      v.x += (-dx * 6 - v.x * 1.6) * dt; v.z += (-dz * 6 - v.z * 1.6) * dt;
+      v.y *= (1 - 1.1 * dt);
+      if (!ev) ev = 'net';
+    }
+  }
+  // murs latéraux (sécurité, zéro sortie de scène)
+  if (p.x < -5.2){ p.x = -5.2; v.x = Math.abs(v.x) * 0.5; }
+  if (p.x > 5.2){ p.x = 5.2; v.x = -Math.abs(v.x) * 0.5; }
+  if (p.z > 6.4){ p.z = 6.4; v.z = -Math.abs(v.z) * 0.5; }
+  if (p.z < -0.95){ p.z = -0.95; v.z = Math.abs(v.z) * 0.5; }
+  return ev;
+}
+function simulateShot(p0, v0, spin, P, maxT = 4.5){
+  const st = { p: p0.clone(), v: v0.clone(), spin: spin.clone() };
+  const rc = rimCenter();
+  let prevY = st.p.y, scored = false, minHoopDist = 1e9, t = 0;
+  const path = [st.p.clone()];
+  while (t < maxT){
+    stepPhysics(st, P, DT); t += DT;
+    if ((t*240|0) % 8 === 0) path.push(st.p.clone());
+    const dHoop = Math.hypot(st.p.x - rc.x, st.p.z - rc.z);
+    if (prevY > RIM_Y && st.p.y <= RIM_Y && st.v.y < 0) minHoopDist = Math.min(minHoopDist, dHoop);
+    if (prevY > RIM_Y && st.p.y <= RIM_Y && st.v.y < 0 && dHoop < RIM_R - 0.015) scored = true;
+    prevY = st.p.y;
+    if (st.p.y <= BALL_R + 0.001 && st.v.length() < 0.3 && t > 0.4) break;
+  }
+  path.push(st.p.clone());
+  return { scored, path, end: st.p.clone(), minHoopDist };
+}
+function simulateShotMPC(p0, v0, spin, P){
+  const st = { p: p0.clone(), v: v0.clone(), spin: spin.clone() };
+  const rc = rimCenter();
+  let prevY = st.p.y, scored = false, t = 0, timer = 0, count = 0;
+  while (t < 4.5){
+    stepPhysics(st, P, DT); t += DT; timer += DT;
+    if (timer >= 0.12 && count < 3 && st.p.z > rc.z + 0.25 && st.v.z < 0){
+      timer = 0;
+      const before = predictCrossing(st.p, st.v, st.spin, P);
+      const tH = Math.max(before.t, 0.18);
+      let dvx = -before.ex / tH, dvz = -before.ez / tH;
+      const len = Math.hypot(dvx, dvz); if (len > 1.1){ dvx *= 1.1/len; dvz *= 1.1/len; }
+      st.v.x += dvx; st.v.z += dvz; count++;
+    }
+    if (prevY > RIM_Y && st.p.y <= RIM_Y && st.v.y < 0 && Math.hypot(st.p.x-rc.x, st.p.z-rc.z) < RIM_R - 0.015) scored = true;
+    prevY = st.p.y;
+    if (st.p.y <= BALL_R + 0.001 && st.v.length() < 0.3 && t > 0.4) break;
+  }
+  return { scored };
+}
+function launchVelocity(){
+  const ang = parseFloat($('in-angle').value) * Math.PI/180;
+  const pow = parseFloat($('in-power').value);
+  const dir = new THREE.Vector3(0, 0, -1);
+  return new THREE.Vector3(dir.x * Math.cos(ang) * pow, Math.sin(ang) * pow, dir.z * Math.cos(ang) * pow);
+}
+function sceneWind(){ return parseFloat($('in-wind').value); }
+function realParams(){ return { g: TRUE.g, drag: TRUE.drag, restGround: TRUE.restGround, restBoard: TRUE.restBoard, restRim: TRUE.restRim, windX: sceneWind() }; }
+function twinParams(){ return { g: induced.g, drag: induced.drag, restGround: induced.restGround, restBoard: induced.restBoard, restRim: 0.48, windX: induced.windX }; }
+
+/* ---------- OBSERVER + INDUIRE ---------- */
+function induceFromObserved(){
+  if (S.controlledShot) return false; // impulsions MPC connues : trajectoire contrôlée exclue du fit
+  if (observed.length < 40) return false;
+  // vitesses par différences finies FENÊTRÉES sur les positions observées (extraction déterministe, zéro LLM)
+  const W = 5, n = observed.length, vel = [];
+  for (let i = 0; i < n; i++){
+    const lo = Math.max(0, i - W), hi = Math.min(n - 1, i + W), dt = observed[hi].t - observed[lo].t;
+    vel.push(dt > 1e-4 ? observed[hi].p.clone().sub(observed[lo].p).divideScalar(dt) : new THREE.Vector3());
+  }
+  // segment de VOL LIBRE uniquement : de l'instant du lancer au premier contact (sol/panneau/cercle/filet)
+  let segEnd = n;
+  for (let i = 6; i < n; i++){ if (observed[i].contact || observed[i].p.y <= BALL_R + 0.002){ segEnd = i; break; } }
+  const free = [], bounces = [];
+  for (let i = W; i < segEnd - W; i++){
+    let contact = observed[i].p.y < BALL_R + 0.05;
+    for (let j = i - W; j <= i + W; j++) if (observed[j].contact) contact = true;
+    const rcF = rimCenter();
+    if (Math.hypot(observed[i].p.x - rcF.x, observed[i].p.z - rcF.z) < 0.55 && observed[i].p.y < RIM_Y + 0.45) contact = true; // zone cercle/filet
+    if (observed[i].p.z < 0.55) contact = true; // zone panneau
+    if (contact) continue;
+    const dtA = observed[i + W].t - observed[i - W].t; if (dtA <= 0) continue;
+    const a = vel[i + W].clone().sub(vel[i - W]).divideScalar(dtA);
+    free.push({ v: vel[i], a });
+  }
+  for (let i = 6; i < n - 7; i++){
+    if (observed[i].p.y > BALL_R + 0.003) continue;
+    const dTb = observed[i - 1].t - observed[i - 6].t, dTa = observed[i + 6].t - observed[i + 1].t;
+    if (dTb <= 0 || dTa <= 0) continue;
+    const before = (observed[i - 1].p.y - observed[i - 6].p.y) / dTb;
+    const after = (observed[i + 6].p.y - observed[i + 1].p.y) / dTa;
+    if (before < -0.8 && after > 0.2){ bounces.push(Math.abs(after / before)); i += 12; }
+  }
+  if (free.length < 12) return false;
+  // moindres carrés à 2 paramètres : -ay = g + k*(|v|*vy) — fit sur le segment d'ENTRAÎNEMENT (60 %)
+  const lsFit = list => {
+    // système joint : -ay = g + k*(|v|*vy)  et  -az = k*(|v|*vz) — deux axes séparent gravité et traînée
+    let Sgk = 0, Skk = 0, bg = 0, bk = 0; const Sgg = list.length;
+    for (const f of list){
+      const sv = f.v.length(), X1 = sv * f.v.y, Y1 = -f.a.y, X2 = sv * f.v.z, Y2 = -f.a.z;
+      Sgk += X1; Skk += X1 * X1 + X2 * X2; bg += Y1; bk += X1 * Y1 + X2 * Y2;
+    }
+    const det = Sgg * Skk - Sgk * Sgk;
+    let g = induced.g, k = induced.drag;
+    if (Math.abs(det) > 1e-9){ g = (bg * Skk - Sgk * bk) / det; k = (Sgg * bk - Sgk * bg) / det; }
+    if (!Number.isFinite(k)) k = induced.drag;
+    if (!Number.isFinite(g)) g = induced.g;
+    return { g: clamp(g, 7.5, 12.0), k: clamp(k, 0, 0.06) };
+  };
+  const trainFit = lsFit(free.slice(0, Math.max(8, (free.length * 0.6)|0)));
+  const fullFit = lsFit(free);
+  // erreur TENUE À L'ÉCART : modèle entraîné sur 60 % du vol libre, évalué sur les 40 % jamais fittés
+  {
+    const midI = (segEnd * 0.6)|0, mid = observed[midI];
+    const stH = { p: mid.p.clone(), v: vel[midI].clone(), spin: ballState.spin.clone() };
+    const PH = { g: trainFit.g, drag: trainFit.k, restGround: induced.restGround, restBoard: induced.restBoard, restRim: 0.48, windX: 0 };
+    let err = 0, cnt = 0, tt = mid.t;
+    for (let i = midI; i < segEnd; i++){
+      while (tt < observed[i].t - 1e-6){ stepPhysics(stH, PH, DT); tt += DT; }
+      err += stH.p.distanceTo(observed[i].p); cnt++;
+    }
+    induced.heldOut = cnt ? (err/cnt)*100 : null;
+  }
+  const kEst = fullFit.k, gEst = fullFit.g;
+  let windAcc = 0; for (const f of free) windAcc += f.a.x + kEst * f.v.length() * f.v.x;
+  windAcc /= free.length;
+  const spread = arr => { const mm = arr.reduce((s,v)=>s+v,0)/arr.length; return Math.sqrt(arr.reduce((s,v)=>s+(v-mm)*(v-mm),0)/arr.length); };
+  const resid = free.map(f => -f.a.y - (gEst + kEst * f.v.length() * f.v.y));
+  induced.g = gEst; induced.drag = kEst;
+  induced.windX = clamp(windAcc / 0.12, -3, 3);
+  induced.unc.g = clamp(spread(resid)/Math.sqrt(free.length) + 0.03, 0.03, 0.4);
+  induced.unc.drag = clamp(Math.abs(kEst) * 0.3 + 0.002, 0.002, 0.02);
+  induced.unc.windX = clamp(spread(free.map(f => f.a.x)) * 0.3 + 0.1, 0.1, 0.8);
+  if (bounces.length){
+    const rb = bounces.reduce((s,v)=>s+v,0)/bounces.length;
+    if (rb > 0.2 && rb < 0.95){ induced.restGround = rb; induced.unc.restGround = clamp(spread(bounces) + 0.02, 0.02, 0.18); }
+  }
+  induced.fitted = true;
+  updateParamTable();
+  return true;
+}
+function updateParamTable(){
+  const rows = [
+    ['Gravité g', fmt(induced.g) + ' m/s²', '± ' + fmt(induced.unc.g), induced.heldOut !== null ? fmt(induced.heldOut,1) + ' cm' : '—'],
+    ['Traînée k', fmt(induced.drag, 4), '± ' + fmt(induced.unc.drag, 4), induced.fitted ? 'fit résidus' : 'prior'],
+    ['Restitution sol', fmt(induced.restGround), '± ' + fmt(induced.unc.restGround), induced.fitted ? 'mesurée au rebond' : 'prior'],
+    ['Restitution panneau', fmt(induced.restBoard), '± ' + fmt(induced.unc.restBoard), 'prior à valider'],
+    ['Vent induit', fmt(induced.windX,1) + ' m/s', '± ' + fmt(induced.unc.windX,1), induced.fitted ? 'diff. finies' : 'prior'],
+  ];
+  $('param-body').innerHTML = rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('');
+}
+
+/* ---------- TIR / VERDICT VERROUILLÉ / MONTE-CARLO ---------- */
+function resetBall(){
+  ballState.p.copy(LAUNCH_POS); ballState.v.set(0,0,0);
+  ballState.spin.set(parseFloat($('in-spin').value), 0, 0); ballState.active = false;
+  S.flying = false; S.scored = false; S.wasInNet = false;
+  if (ball) ball.position.copy(LAUNCH_POS);
+  if (ghostBall) ghostBall.visible = false;
+  if (ghostLine) ghostLine.visible = false;
+  if (arcLine) arcLine.visible = false;
+  mcGroup && mcGroup.children.forEach(m => m.visible = false);
+  $('ghost-tag').style.display = 'none';
+}
+function playSceneAction(){
+  if (ui.scene === 'multi'){
+    multiBodies.forEach((b, i) => { b.p.set(-1.2 + i*0.4, 2.6 + (i%3)*0.65, 1.2 + (i%2)*0.5); b.v.set(0.4 - i*0.08, 0, -0.3); });
+    logTo($('ind-log'), 'Multi-corps : cascade relâchée — 7 corps, collisions sphère/sphère et sol, restitution par corps.');
+  } else if (ui.scene === 'chaos' && pendulum){
+    pendulum.th1 = 2.1 + Math.random()*0.35; pendulum.th2 = 2.7 + Math.random()*0.3; pendulum.w1 = 0; pendulum.w2 = 0;
+    pendulum.th1b = pendulum.th1 + 0.003; pendulum.th2b = pendulum.th2; pendulum.w1b = 0; pendulum.w2b = 0; pendulum.t = 0; pendulum.horizon = null;
+    $('st-horizon').textContent = 'mesure… 0,0 s';
+    logTo($('ind-log'), 'Chaotique : double pendule relancé — horizon de prédictibilité en cours de mesure (écart affiché en direct).');
+  } else if (ui.scene === 'liquid' && liquidPts){
+    gLiquid.userData.drop.position.set((Math.random()-0.5)*0.8, 2.6, 1.6);
+    gLiquid.userData.drop.userData.v = 0;
+    liquidPts.userData.vel.forEach(v => { v.x += (Math.random()-0.5)*0.6; v.y += Math.random()*0.9; });
+    logTo($('ind-log'), 'Liquide : bille relâchée dans la cuve — éclaboussure particulaire à l’impact.');
+  } else if (ui.scene === 'orbit' && orbitGroup){
+    satState.p.set(2.35, 2.1, 1.4); satState.v.set(0, 0, 1.05); satState.trail = []; orbitGroup.laps = 0; orbitGroup.recal = 0;
+    logTo($('ind-log'), 'Orbite : satellite réinjecté — fantôme +0,6 s devant, recalibration à chaque tour.');
+  }
+  renderGauntletCheck();
+}
+function shoot(){
+  if (ui.scene !== 'hoop'){ playSceneAction(); return; }
+  if (S.flying) finalizeShot();
+  resetBall();
+  observed = []; predictedTrail = []; S.lastPred.clear();
+  S.mpcCount = 0; S.mpcTimer = 0; S.time = 0; S.errSum = 0; S.errN = 0;
+  ballState.v.copy(launchVelocity());
+  ballState.spin.set(parseFloat($('in-spin').value), 0, 0);
+  ballState.active = true; S.flying = true; S.controlledShot = ui.mpc; S.shots++;
+  $('st-shots').textContent = S.shots;
+  // OBSERVER : SAM nomme les concepts
+  $('sam-status').textContent = 'SAM 3.1 : ball (ID 1) · vertical hoop (ID 2) · backboard (ID 3) — suivi actif, masques à 10 fps sur le segment utile.';
+  logTo($('ind-log'), `Tir #${S.shots} observé — hypothèse : balistique + traînée quadratique + restitution. Fit sur trajectoires, score = erreur tenue à l'écart.`);
+  makeMcOffsets();
+  // PRÉVOIR : verdict verrouillé AVANT la retombée, calculé par le jumeau INDUIT
+  const sim = ui.mpc ? simulateShotMPC(ballState.p, ballState.v, ballState.spin, twinParams()) : simulateShot(ballState.p, ballState.v, ballState.spin, twinParams());
+  S.lockedVerdict = sim.scored; S.lockedAt = new Date();
+  setVerdict(sim.scored, true);
+  updateArc(sim.path);
+  runMonteCarlo();
+  if (ui.mpc) logTo($('mpc-log'), `MPC armé — replanification toutes les 120 ms, budget 3 corrections. But g = centre du cerceau ${rimCenter().x.toFixed(2)}, ${RIM_Y}, ${rimCenter().z.toFixed(2)}.`);
+  else logTo($('mpc-log'), 'MPC inactif sur ce tir (activez la bascule pour le contrôle sim-to-real).');
+  renderGauntletCheck();
+}
+function setVerdict(scored, locked){
+  const big = $('verdict-big'), hud = $('hud-verdict');
+  big.textContent = scored ? 'DEDANS ✓ (IN)' : 'DEHORS ✗ (OUT)';
+  big.className = 'big ' + (scored ? 'ok' : 'bad');
+  hud.textContent = scored ? 'VERDICT VERROUILLÉ : DEDANS (IN)' : 'VERDICT VERROUILLÉ : DEHORS (OUT)';
+  hud.className = scored ? 'ok' : 'bad'; hud.id = 'hud-verdict';
+  $('verdict-when').textContent = locked
+    ? `verrouillé à ${S.lockedAt ? S.lockedAt.toTimeString().slice(0,8) : '—'} · avant la retombée · jumeau induit (g=${fmt(induced.g)}, k=${fmt(induced.drag,4)})`
+    : 'verdict mis à jour';
+}
+function updateArc(path){
+  if (!path || path.length < 2){ arcLine.visible = false; return; }
+  arcLine.geometry.dispose();
+  arcLine.geometry = new THREE.BufferGeometry().setFromPoints(path);
+  arcLine.computeLineDistances();
+  arcLine.visible = ui.ghost;
+}
+function randn(){ let u=0,v=0; while(!u) u=Math.random(); while(!v) v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+function mulberry32(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function seededRandn(rng){ let u=0,v=0; while(!u) u=rng(); while(!v) v=rng(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+let mcOffsets = [];
+function makeMcOffsets(){
+  // offsets UNITAIRES seedés par la seule configuration de tir : même tir -> mêmes tirages, la proba ne swing pas
+  const seedStr = `${$('in-angle').value}|${$('in-power').value}|${$('in-spin').value}|${$('in-wind').value}`;
+  let h = 2166136261; for (const ch of seedStr){ h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); }
+  const rng = mulberry32(h >>> 0);
+  mcOffsets = Array.from({length: 18}, () => ({ dg: seededRandn(rng), dk: seededRandn(rng), dr: seededRandn(rng) }));
+}
+function runMonteCarlo(){
+  if (!ui.mc){ $('st-prob').textContent = 'off'; return; }
+  if (!mcOffsets.length) makeMcOffsets();
+  let ok = 0;
+  for (let i=0;i<18;i++){
+    const P = twinParams(), o = mcOffsets[i];
+    P.g = induced.g + o.dg * induced.unc.g;
+    P.drag = Math.max(0, induced.drag + o.dk * induced.unc.drag);
+    P.restGround = clamp(induced.restGround + o.dr * induced.unc.restGround, 0.2, 0.9);
+    const r = simulateShot(ballState.p, ballState.v, ballState.spin, P, 3.2);
+    if (r.scored) ok++;
+  }
+  $('st-prob').innerHTML = Math.round(ok/18*100) + ' <small>% (' + ok + '/18)</small>';
+  mcGroup.children.forEach((m, i) => {
+    const st = { p: ballState.p.clone(), v: ballState.v.clone(), spin: ballState.spin.clone() };
+    const P = twinParams(), o = mcOffsets[i] || {dg:0,dk:0};
+    P.g = induced.g + o.dg * induced.unc.g; P.drag = Math.max(0, induced.drag + o.dk * induced.unc.drag);
+    for (let s2=0;s2<120;s2++) stepPhysics(st, P, DT);
+    m.position.copy(st.p); m.visible = ui.mc && ui.ghost && S.flying;
+  });
+  return ok/18;
+}
+function mcProbFor(v0, spin, P0){
+  if (!mcOffsets.length) makeMcOffsets();
+  let ok = 0;
+  for (let i=0;i<18;i++){
+    const P = { ...P0 }, o = mcOffsets[i];
+    P.g = P0.g + o.dg * induced.unc.g; P.drag = Math.max(0, P0.drag + o.dk * induced.unc.drag);
+    if (simulateShot(LAUNCH_POS, v0, spin, P, 3.2).scored) ok++;
+  }
+  return ok/18;
+}
+
+/* ---------- FANTÔME +0,5 s / ERREUR / MPC ---------- */
+function predictCrossing(p0, v0, spin, P){
+  const st = { p: p0.clone(), v: v0.clone(), spin: spin.clone() };
+  const rc = rimCenter(); let prevY = st.p.y, t = 0;
+  while (t < 3.5){
+    stepPhysics(st, P, DT); t += DT;
+    if (prevY > RIM_Y && st.p.y <= RIM_Y && st.v.y < 0){
+      return { t, p: st.p.clone(), err: Math.hypot(st.p.x-rc.x, st.p.z-rc.z), ex: st.p.x-rc.x, ez: st.p.z-rc.z };
+    }
+    prevY = st.p.y;
+    if (st.p.y <= BALL_R+0.001 && t > 0.5) break;
+  }
+  return { t, p: st.p.clone(), err: Math.hypot(st.p.x-rc.x, st.p.z-rc.z), ex: st.p.x-rc.x, ez: st.p.z-rc.z };
+}
+function updateGhost(){
+  if (!S.flying || !ui.ghost){ ghostBall.visible = false; ghostLine.visible = false; $('ghost-tag').style.display='none'; if (!ui.ghost) $('err-now').textContent = 'off'; return; }
+  const st = { p: ballState.p.clone(), v: ballState.v.clone(), spin: ballState.spin.clone() };
+  const P = twinParams();
+  for (let i=0;i<120;i++) stepPhysics(st, P, DT); // +0,5 s exactement, même intégrateur
+  ghostBall.position.copy(st.p); ghostBall.visible = true;
+  ghostLine.geometry.dispose();
+  ghostLine.geometry = new THREE.BufferGeometry().setFromPoints([ballState.p.clone(), st.p.clone()]);
+  ghostLine.visible = true;
+  predictedTrail.push({ t: S.time + 0.5, p: st.p.clone() });
+  // erreur réel vs prédit : compare le réel d'AUJOURD'HUI au point prédit POUR aujourd'hui
+  for (let i = predictedTrail.length-1; i >= 0; i--){
+    if (predictedTrail[i].t <= S.time){
+      const ecm = predictedTrail[i].p.distanceTo(ballState.p) * 100;
+      $('err-now').textContent = fmt(ecm, 1) + ' cm';
+      S.errSum += ecm; S.errN++;
+      $('err-avg').textContent = fmt(S.errSum/Math.max(1,S.errN), 1) + ' cm';
+      if (ecm > 30){ S.recal++; $('err-recal').textContent = S.recal; predictedTrail.length = 0; induceFromObserved(); break; }
+      predictedTrail.splice(i, 1);
+    }
+  }
+  // étiquette FANTÔME projetée à l'écran
+  const proj = st.p.clone().project(camera);
+  const wrap = $('scene-wrap').getBoundingClientRect();
+  const tag = $('ghost-tag');
+  if (proj.z < 1){
+    tag.textContent = 'FANTÔME · +0,5 s'; tag.style.display = 'block';
+    tag.style.left = ((proj.x*0.5+0.5)*wrap.width) + 'px';
+    tag.style.top = ((-proj.y*0.5+0.5)*wrap.height) + 'px';
+  } else tag.style.display = 'none';
+  // recalage de l'arc complet toutes les ~0,25 s
+  if (((S.time*4)|0) !== updateGhost._lastArc){
+    updateGhost._lastArc = (S.time*4)|0;
+    updateArc(simulateShot(ballState.p, ballState.v, ballState.spin, twinParams(), 3).path);
+    if (ui.mc) runMonteCarloGhostsOnly();
+  }
+}
+updateGhost._lastArc = -1;
+function runMonteCarloGhostsOnly(){
+  mcGroup.children.forEach((m, i) => {
+    const st = { p: ballState.p.clone(), v: ballState.v.clone(), spin: ballState.spin.clone() };
+    const P = twinParams(), o = mcOffsets[i] || {dg:0,dk:0};
+    P.g = induced.g + o.dg * induced.unc.g; P.drag = Math.max(0, induced.drag + o.dk * induced.unc.drag);
+    for (let s2=0;s2<120;s2++) stepPhysics(st, P, DT);
+    m.position.copy(st.p); m.visible = S.flying && ui.ghost && ui.mc;
+  });
+}
+function mpcStep(){
+  if (S.mpcCount >= 3 || ballState.p.z < rimCenter().z + 0.25) return;
+  const before = predictCrossing(ballState.p, ballState.v, ballState.spin, twinParams());
+  const tH = Math.max(before.t, 0.18);
+  let dvx = -before.ex / tH, dvz = -before.ez / tH;
+  const dvLen = Math.hypot(dvx, dvz), cap = 1.1;
+  if (dvLen > cap){ dvx *= cap/dvLen; dvz *= cap/dvLen; }
+  ballState.v.x += dvx; ballState.v.z += dvz;
+  const after = predictCrossing(ballState.p, ballState.v, ballState.spin, twinParams());
+  S.mpcCount++;
+  const J = before.err*before.err;
+  logTo($('mpc-log'), `Correction ${S.mpcCount}/3 · horizon ${fmt(tH,2)} s · J=${fmt(J,3)} · écart prédit ${fmt(before.err*100,1)} cm → ${fmt(after.err*100,1)} cm · Δv=(${fmt(dvx,2)}, ${fmt(dvz,2)}) m/s · replanification au pas suivant.`);
+  if (after.err > before.err) logTo($('mpc-log'), 'Note honnête : correction précoce dégradée (modèle induit encore imparfait en début de vol) — la replanification suivante rattrape.');
+}
+function finalizeShot(){
+  S.flying = false; ballState.active = false;
+  ghostBall.visible = false; ghostLine.visible = false; $('ghost-tag').style.display = 'none';
+  mcGroup.children.forEach(m => m.visible = false);
+  const controlled = ui.mpc && S.mpcCount > 0;
+  S.verdictsTot++;
+  const correct = (S.lockedVerdict === S.scored);
+  if (correct) S.verdictsOk++;
+  $('st-verdicts').textContent = `${S.verdictsOk} / ${S.verdictsTot}`;
+  const avgErr = S.errN ? S.errSum/S.errN : null;
+  if (avgErr !== null){ S.errHistory.push(avgErr); drawChart(); }
+  const hud = $('hud-verdict');
+  hud.textContent = controlled
+    ? (S.scored ? 'PANIER (MPC) — le contrôle a corrigé la trajectoire prédite' : 'MANQUÉ (MPC) — voir journal des corrections')
+    : (S.scored ? `PANIER ! — verdict verrouillé ${correct ? 'JUSTE ✓' : 'FAUX ✗'}` : `MANQUÉ — verdict verrouillé ${correct ? 'JUSTE ✓' : 'FAUX ✗'}`);
+  if (controlled) hud.textContent = (S.scored ? 'PANIER (MPC) — ' : 'MANQUÉ (MPC) — ') + `verdict contrôlé ${correct ? 'JUSTE ✓' : 'FAUX ✗'}`;
+  hud.className = correct ? 'ok' : 'bad'; hud.id = 'hud-verdict';
+  if (induceFromObserved()){
+    logTo($('ind-log'), `Induction tir #${S.shots} : g=${fmt(induced.g)} m/s² (±${fmt(induced.unc.g)}), k=${fmt(induced.drag,4)}, restitution sol=${fmt(induced.restGround)} mesurée au rebond · erreur tenue à l'écart = ${induced.heldOut!==null?fmt(induced.heldOut,1)+' cm':'—'} · ${controlled ? 'tir contrôlé MPC (verdict planifié avec la politique, compté)' : `verdict ${correct?'juste':'FAUX'} (${S.verdictsOk}/${S.verdictsTot})`}.`);
+  } else {
+    logTo($('ind-log'), S.controlledShot ? `Tir #${S.shots} contrôlé : trajectoire exclue de l'induction (impulsions MPC connues) — paramètres du dernier tir libre conservés.` : `Tir #${S.shots} : observations insuffisantes pour un fit propre — priors conservés, incertitudes larges affichées.`);
+  }
+  logTo($('ind-log'), `FP-01 : ID balle stable à travers l'arceau (ré-acquisition par trajectoire prédite). FP-02 : frames au sommet exclues du fit si excentricité anormale.`);
+  renderGauntletCheck();
+}
+
+/* ---------- CONTREFACTUELS (diff sur le jumeau INDUIT uniquement) ---------- */
+function applyCounterfactual(text){
+  const t = (text || '').toLowerCase();
+  const v0 = launchVelocity(), spin = new THREE.Vector3(parseFloat($('in-spin').value), 0, 0);
+  const before = simulateShot(LAUNCH_POS, v0, spin, twinParams());
+  let vAfter = v0.clone(), PAfter = twinParams(), diff = [], savedOffset = S.hoopOffsetX;
+  const pct = t.match(/(\d+(?:[.,]\d+)?)\s*%/);
+  if (/plus fort|stronger|faster/.test(t) && pct){ const f = 1 + parseFloat(pct[1].replace(',','.'))/100; vAfter.multiplyScalar(f); diff.push(`vitesse initiale × ${fmt(f,2)}`); }
+  else if (/plus faible|moins fort|slower/.test(t) && pct){ const f = 1 - parseFloat(pct[1].replace(',','.'))/100; vAfter.multiplyScalar(f); diff.push(`vitesse initiale × ${fmt(f,2)}`); }
+  if (/vent doubl|double.*vent|wind.*double/.test(t)){ PAfter.windX = (PAfter.windX || 0) + sceneWind()*1 + 1.6; diff.push('vent latéral doublé dans le jumeau (+1,6 m/s)'); }
+  if (/gauche|left/.test(t) && /cerceau|hoop/.test(t)){ S.hoopOffsetX -= 0.30; diff.push('cerceau décalé de −0,30 m (jumeau)'); }
+  if (/droite|right/.test(t) && /cerceau|hoop/.test(t)){ S.hoopOffsetX += 0.30; diff.push('cerceau décalé de +0,30 m (jumeau)'); }
+  if (/gravit|gravity/.test(t) && /lune|moon|plus faible/.test(t)){ PAfter.g *= 0.6; diff.push('gravité du jumeau × 0,60'); }
+  if (!diff.length) diff.push('aucun diff reconnu — précisez : « 20 % plus fort », « vent doublé », « cerceau à gauche »');
+  const after = simulateShot(LAUNCH_POS, vAfter, spin, PAfter);
+  S.hoopOffsetX = savedOffset;
+  // applique visuellement le décalage du cerceau si demandé (jumeau rendu)
+  if (/cerceau|hoop/.test(t) && /gauche|left/.test(t)) { S.hoopOffsetX = savedOffset - 0.30; hoopGroup.position.x = S.hoopOffsetX; }
+  if (/cerceau|hoop/.test(t) && /droite|right/.test(t)) { S.hoopOffsetX = savedOffset + 0.30; hoopGroup.position.x = S.hoopOffsetX; }
+  const probB = Math.round(mcProbFor(v0, spin, twinParams())*100), probA = Math.round(mcProbFor(vAfter, spin, PAfter)*100);
+  const marge = r => fmt((RIM_R - r.minHoopDist)*100, 0);
+  $('cf-before').innerHTML = `<span class="${before.scored?'ok':'bad'}">${before.scored?'DEDANS':'DEHORS'}</span> <small style="color:var(--dim)">marge ${marge(before)} cm · MC ${probB}%</small>`;
+  $('cf-after').innerHTML = `<span class="${after.scored?'ok':'bad'}">${after.scored?'DEDANS':'DEHORS'}</span> <small style="color:var(--dim)">marge ${marge(after)} cm · MC ${probA}%</small>`;
+  $('cf-diff').textContent = 'Diff sur le jumeau induit : ' + diff.join(' · ') + '. Vrais paramètres intacts. Relancez pour vérifier par un tir réel.';
+  logTo($('ind-log'), `Contrefactuel « ${text} » → ${diff.join(', ')} · verdict avant ${before.scored?'DEDANS':'DEHORS'} → après ${after.scored?'DEDANS':'DEHORS'} (rejeu instantané dans le jumeau).`);
+}
+
+/* ---------- FILET DÉFORMABLE ---------- */
+function updateNet(){
+  if (!netMesh) return;
+  const pos = netMesh.geometry.attributes.position;
+  const rc = rimCenter();
+  // déclenchement + décroissance élastique de l'ondulation du filet
+  const inNetZone = (ballState.active || S.flying) && ballState.p.y < RIM_Y + 0.06 && ballState.p.y > RIM_Y - 0.5 && Math.hypot(ballState.p.x - rc.x, ballState.p.z - rc.z) < 0.30;
+  if (inNetZone){ S.netSway = 1; S.wasInNet = true; }
+  else S.netSway *= 0.93;
+  const sway = S.netSway, wob = Math.sin(performance.now() * 0.03);
+  for (let i=0;i<pos.count;i++){
+    const base = netBase[i];
+    const wx = base.x + S.hoopOffsetX, wy = base.y, wz = base.z;
+    let ox = 0, oy = 0, oz = 0;
+    if (ballState.active || S.flying){
+      const dx = wx - ballState.p.x, dy = wy - ballState.p.y, dz = wz - ballState.p.z;
+      const d = Math.hypot(dx, dy, dz);
+      const R = BALL_R + 0.10;
+      if (d < R && ballState.p.y < RIM_Y + 0.05){
+        const push = (R - d) * 1.4;
+        ox = dx * push * 1.6; oz = dz * push * 1.6; oy = -push * 0.9;
+      }
+    }
+    if (sway > 0.01){
+      const depth = clamp((RIM_Y - base.y) / 0.40, 0, 1); // 0 haut -> 1 bas du filet
+      const radX = base.x - 0, radZ = base.z - (BOARD_Z + 0.381);
+      const rl = Math.hypot(radX, radZ) || 1;
+      ox += (radX/rl) * sway * 0.075 * depth + wob * sway * 0.018 * depth;
+      oz += (radZ/rl) * sway * 0.075 * depth;
+      oy -= sway * 0.085 * depth;
+    }
+    pos.setXYZ(i, base.x + ox, base.y + oy, base.z + oz);
+  }
+  pos.needsUpdate = true;
+}
+
+/* ---------- GAUNTLET — 4 scènes d'escalade ---------- */
+let gMulti, gChaos, gLiquid, gOrbit;
+function buildGauntletScenes(){
+  // 2 · multi-corps : cascade de sphères + cubes 3D
+  gMulti = new THREE.Group(); gMulti.visible = false; scene.add(gMulti);
+  multiBodies = [];
+  const cols = [0xff6b1a, 0x37c8d9, 0x3ecf6e, 0xe8c547, 0xd95d7a];
+  for (let i=0;i<7;i++){
+    const isBall = i % 2 === 0;
+    const mesh = isBall
+      ? new THREE.Mesh(new THREE.SphereGeometry(0.14, 22, 16), new THREE.MeshStandardMaterial({ color: cols[i%5], roughness: 0.45 }))
+      : new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.26, 0.26), new THREE.MeshStandardMaterial({ color: cols[i%5], roughness: 0.55 }));
+    mesh.castShadow = true; gMulti.add(mesh);
+    multiBodies.push({ mesh, p: new THREE.Vector3(-1.2 + i*0.4, 2.6 + (i%3)*0.65, 1.2 + (i%2)*0.5), v: new THREE.Vector3(0.4 - i*0.08, 0, -0.3), r: 0.15, rest: 0.58 });
+  }
+  for (let stp = 0; stp < 3; stp++){
+    const stepBox = new THREE.Mesh(new THREE.BoxGeometry(1.0 - stp*0.18, 0.22 + stp*0.22, 1.2), new THREE.MeshStandardMaterial({ color: 0x39404e, roughness: 0.5, metalness: 0.6 }));
+    stepBox.position.set(-1.1 + stp * 1.05, (0.22 + stp*0.22)/2, 2.6); stepBox.castShadow = true; stepBox.receiveShadow = true; gMulti.add(stepBox);
+  }
+
+  // 3 · chaotique : double pendule 3D (barres + masses)
+  gChaos = new THREE.Group(); gChaos.visible = false; scene.add(gChaos);
+  const pivot = new THREE.Mesh(new THREE.SphereGeometry(0.07, 16, 12), new THREE.MeshStandardMaterial({ color: 0xd8dbe0, metalness: 0.9, roughness: 0.25 }));
+  pivot.position.set(0, 3.6, 1.6); gChaos.add(pivot);
+  const barMat = new THREE.MeshStandardMaterial({ color: 0x8a93a5, metalness: 0.85, roughness: 0.3 });
+  const b1 = new THREE.Mesh(new THREE.BoxGeometry(0.05, 1.05, 0.05), barMat); b1.castShadow = true;
+  const b2 = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.9, 0.05), barMat.clone()); b2.castShadow = true;
+  const m1 = new THREE.Mesh(new THREE.SphereGeometry(0.13, 20, 14), new THREE.MeshStandardMaterial({ color: 0xff6b1a, roughness: 0.4 })); m1.castShadow = true;
+  const m2 = new THREE.Mesh(new THREE.SphereGeometry(0.11, 20, 14), new THREE.MeshStandardMaterial({ color: 0x37c8d9, roughness: 0.4 })); m2.castShadow = true;
+  const ghost2 = new THREE.Mesh(new THREE.SphereGeometry(0.11, 16, 12), new THREE.MeshBasicMaterial({ color: 0x37c8d9, transparent: true, opacity: 0.45 }));
+  gChaos.add(b1, b2, m1, m2, ghost2);
+  pendulum = { th1: 2.25, th2: 2.85, w1: 0, w2: 0, th1b: 2.25 + 0.003, th2b: 2.85, w1b: 0, w2b: 0, t: 0, horizon: null, b1, b2, m1, m2, ghost2, pivot: new THREE.Vector3(0, 3.6, 1.6), L1: 1.05, L2: 0.9 };
+  const stand = new THREE.Mesh(new THREE.BoxGeometry(0.12, 3.6, 0.12), barMat);
+  stand.position.set(0, 1.8, 1.6); gChaos.add(stand);
+
+  // 4 · liquide : cuve de verre + particules 3D
+  gLiquid = new THREE.Group(); gLiquid.visible = false; scene.add(gLiquid);
+  const tankMat = new THREE.MeshPhysicalMaterial({ color: 0xcfe6f2, roughness: 0.05, transmission: 0.92, transparent: true, opacity: 0.30, thickness: 0.04 });
+  const tank = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.7, 1.4), tankMat);
+  tank.position.set(0, 0.95, 1.6); gLiquid.add(tank);
+  const tankEdges = new THREE.LineSegments(new THREE.EdgesGeometry(tank.geometry), new THREE.LineBasicMaterial({ color: 0x9fb4c4 }));
+  tankEdges.position.copy(tank.position); gLiquid.add(tankEdges);
+  const N = 240, lPos = new Float32Array(N*3), lVel = [];
+  for (let i=0;i<N;i++){
+    lPos[i*3] = (Math.random()-0.5)*1.85; lPos[i*3+1] = 0.30 + Math.random()*0.55; lPos[i*3+2] = 1.6 + (Math.random()-0.5)*1.05;
+    lVel.push(new THREE.Vector3());
+  }
+  liquidPts = new THREE.InstancedMesh(new THREE.SphereGeometry(0.032, 10, 8), new THREE.MeshStandardMaterial({ color: 0x4db8f0, roughness: 0.25, metalness: 0, emissive: 0x0a2e44, emissiveIntensity: 0.7 }), N);
+  liquidPts.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  liquidPts.userData = { vel: lVel, N, pos: lPos, dummy: new THREE.Object3D() };
+  gLiquid.add(liquidPts);
+  const surf = new THREE.Mesh(new THREE.BoxGeometry(2.02, 0.62, 1.22), new THREE.MeshStandardMaterial({ color: 0x2f8fd0, roughness: 0.1, transparent: true, opacity: 0.34, depthWrite: false }));
+  surf.position.set(0, 0.52, 1.6); surf.renderOrder = 2; gLiquid.add(surf);
+  const dropBall = new THREE.Mesh(new THREE.SphereGeometry(0.16, 20, 14), new THREE.MeshStandardMaterial({ color: 0xe8c547, roughness: 0.35 }));
+  dropBall.position.set(0, 2.6, 1.6); dropBall.castShadow = true; gLiquid.add(dropBall);
+  gLiquid.userData.drop = dropBall;
+
+  // 5 · orbite : planète texturée + satellite + champ d'étoiles
+  gOrbit = new THREE.Group(); gOrbit.visible = false; scene.add(gOrbit);
+  const pc = document.createElement('canvas'); pc.width = 512; pc.height = 256;
+  const px = pc.getContext('2d');
+  px.fillStyle = '#274b73'; px.fillRect(0,0,512,256);
+  for (let i=0;i<46;i++){ px.fillStyle = `rgba(${60+Math.random()*60|0},${130+Math.random()*60|0},${70+Math.random()*40|0},.85)`; px.beginPath(); px.ellipse(Math.random()*512, Math.random()*256, 14+Math.random()*42, 8+Math.random()*22, Math.random()*3, 0, 7); px.fill(); }
+  px.fillStyle = 'rgba(240,246,255,.9)'; px.fillRect(0,0,512,20); px.fillRect(0,236,512,20);
+  const planetTex = new THREE.CanvasTexture(pc); planetTex.colorSpace = THREE.SRGBColorSpace;
+  const planet = new THREE.Mesh(new THREE.SphereGeometry(0.85, 40, 28), new THREE.MeshStandardMaterial({ map: planetTex, roughness: 0.75 }));
+  planet.position.set(0, 2.1, 1.4); planet.castShadow = true; gOrbit.add(planet);
+  const starGeo = new THREE.BufferGeometry(); const starPos = new Float32Array(700*3);
+  for (let i=0;i<700;i++){ const r = 16 + Math.random()*18, th = Math.random()*Math.PI*2, ph = Math.acos(2*Math.random()-1); starPos[i*3] = r*Math.sin(ph)*Math.cos(th); starPos[i*3+1] = r*Math.cos(ph)*0.6 + 2; starPos[i*3+2] = r*Math.sin(ph)*Math.sin(th); }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+  gOrbit.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xcfd9ff, size: 0.09 })));
+  const sat = new THREE.Mesh(new THREE.SphereGeometry(0.11, 18, 12), new THREE.MeshStandardMaterial({ color: 0xd8dbe0, metalness: 0.85, roughness: 0.25, emissive: 0x222222 }));
+  sat.castShadow = true; gOrbit.add(sat);
+  const satGhost = new THREE.Mesh(new THREE.SphereGeometry(0.11, 16, 12), new THREE.MeshBasicMaterial({ color: 0x37c8d9, transparent: true, opacity: 0.5 }));
+  gOrbit.add(satGhost);
+  const trailGeo = new THREE.BufferGeometry();
+  const trail = new THREE.Line(trailGeo, new THREE.LineBasicMaterial({ color: 0xffb38a, transparent: true, opacity: 0.7 }));
+  gOrbit.add(trail);
+  orbitGroup = { planet, sat, satGhost, trail, center: new THREE.Vector3(0, 2.1, 1.4), mu: 2.6, laps: 0, lastAngle: 0, recal: 0 };
+  satState = { p: new THREE.Vector3(2.35, 2.1, 1.4), v: new THREE.Vector3(0, 0, 1.05), trail: [] };
+}
+function stepPendulum(P, dt){
+  const g = 9.81, L1 = P.L1, L2 = P.L2, m1 = 1, m2 = 1;
+  const acc = (th1, th2, w1, w2) => {
+    const d = th1 - th2, den = 2*m1 + m2 - m2*Math.cos(2*d);
+    const a1 = (-g*(2*m1+m2)*Math.sin(th1) - m2*g*Math.sin(th1-2*th2) - 2*Math.sin(d)*m2*(w2*w2*L2 + w1*w1*L1*Math.cos(d))) / (L1*den);
+    const a2 = (2*Math.sin(d)*(w1*w1*L1*(m1+m2) + g*(m1+m2)*Math.cos(th1) + w2*w2*L2*m2*Math.cos(d))) / (L2*den);
+    return [a1, a2];
+  };
+  const [a1, a2] = acc(P.th1, P.th2, P.w1, P.w2);
+  P.w1 += a1*dt; P.w2 += a2*dt; P.th1 += P.w1*dt; P.th2 += P.w2*dt;
+  const [b1, b2] = acc(P.th1b, P.th2b, P.w1b, P.w2b);
+  P.w1b += b1*dt; P.w2b += b2*dt; P.th1b += P.w1b*dt; P.th2b += P.w2b*dt;
+  P.t += dt;
+  if (P.horizon === null && ((P.t*2)|0) !== (P._lastUi||-1)){ P._lastUi = (P.t*2)|0; const stH = $('st-horizon'); if (stH && ui.scene === 'chaos') stH.textContent = `mesure… ${fmt(P.t,1)} s · écart ${fmt(Math.abs(P.th1-P.th1b),3)} rad`; }
+  if (P.horizon === null && Math.abs(P.th1 - P.th1b) > 0.4){ P.horizon = P.t; $('st-horizon').innerHTML = fmt(P.horizon,1) + ' <small>s</small>'; logTo($('ind-log'), `Chaotique : horizon de prédictibilité mesuré = ${fmt(P.horizon,2)} s (divergence > 0,4 rad d'une perturbation de 0,003 rad). Au-delà, l'erreur fantôme explose — limite nommée, pas masquée.`); renderGauntletCheck(); }
+}
+function stepOrbit(dt){
+  const O = orbitGroup, C = O.center;
+  const step = (st, mu, h) => {
+    const r = st.p.clone().sub(C), d = Math.max(r.length(), 0.95);
+    const a = r.multiplyScalar(-mu/(d*d*d));
+    st.v.addScaledVector(a, h); st.p.addScaledVector(st.v, h);
+  };
+  for (let i=0;i<4;i++) step(satState, O.mu, dt/4);
+  satState.trail.push(satState.p.clone());
+  if (satState.trail.length > 420) satState.trail.shift();
+  O.trail.geometry.dispose(); O.trail.geometry = new THREE.BufferGeometry().setFromPoints(satState.trail);
+  O.sat.position.copy(satState.p);
+  // fantôme orbite : +0,6 s devant, constante induite fausse de 3,5 % → dérive puis recalibration
+  const ghost = { p: satState.p.clone(), v: satState.v.clone() };
+  for (let i=0;i<72;i++) step(ghost, O.mu * 0.965, 0.6/72);
+  O.satGhost.position.copy(ghost.p);
+  const ang = Math.atan2(satState.p.z - C.z, satState.p.x - C.x);
+  if (O.lastAngle < -2.8 && ang > 2.8){} // wrap bas
+  if (O.lastAngle > 2.8 && ang < -2.8){ O.laps++; O.recal++; logTo($('ind-log'), `Orbite : tour ${O.laps} bouclé · fantôme replacé DEVANT (+0,6 s) à la recalibration #${O.recal} · dérive due à G induit faux de 3,5 %.`); renderGauntletCheck(); }
+  O.lastAngle = ang;
+  O.planet.rotation.y += dt * 0.05;
+}
+const SCENE_INFO = {
+  hoop: 'Scène 1 — tir au cerceau vertical. Induction + fantôme + MPC complets.',
+  multi: 'Scène 2 — multi-corps : cascade de collisions sphères/cubes, restitution par corps.',
+  chaos: 'Scène 3 — double pendule chaotique : l\'horizon de prédictibilité est le résultat.',
+  liquid: 'Scène 4 — liquide en cuve transparente : particules 3D, éclaboussure à l\'impact.',
+  orbit: 'Scène 5 — orbite : G induit faux de 3,5 %, fantôme +0,6 s replacé devant à chaque recalibration.',
+};
+function setScene(name){
+  ui.scene = name;
+  document.querySelectorAll('[data-scene]').forEach(b => b.classList.toggle('on', b.dataset.scene === name));
+  $('scene-hint').textContent = SCENE_INFO[name];
+  const isHoop = name === 'hoop';
+  hoopGroup.visible = isHoop; ball.visible = isHoop; if (courtProps) courtProps.visible = isHoop;
+  ghostBall.visible = false; arcLine.visible = false;
+  mcGroup.children.forEach(m => m.visible = false);
+  gMulti.visible = name === 'multi'; gChaos.visible = name === 'chaos';
+  gLiquid.visible = name === 'liquid'; gOrbit.visible = name === 'orbit';
+  if (name === 'chaos'){ pendulum.th1 = 2.25; pendulum.th2 = 2.85; pendulum.w1 = 0; pendulum.w2 = 0; pendulum.th1b = 2.253; pendulum.th2b = 2.85; pendulum.w1b = 0; pendulum.w2b = 0; pendulum.t = 0; pendulum.horizon = null; $('st-horizon').textContent = 'mesure…'; }
+  if (name === 'orbit' && orbitGroup){ satState.p.set(2.35, 2.1, 1.4); satState.v.set(0, 0, 1.05); satState.trail = []; orbitGroup.laps = 0; orbitGroup.recal = 0; }
+  const hud = $('hud-verdict');
+  hud.textContent = isHoop ? 'PRÊT — LANCEZ LA BALLE' : SCENE_INFO[name].split('—')[1].trim().toUpperCase();
+  hud.className = 'wait'; hud.id = 'hud-verdict';
+  $('hud-sub').textContent = name === 'orbit'
+    ? 'fantôme projeté +0,6 s devant le satellite · G induit faux de 3,5 % · replacé devant à chaque recalibration'
+    : isHoop ? 'fantôme projeté +0,5 s devant la balle · verdict verrouillé avant la retombée'
+    : SCENE_INFO[name].split('—')[1].trim();
+  if (name !== 'chaos' && !(pendulum && pendulum.horizon !== null)) $('st-horizon').textContent = '—';
+  const shootLabels = { hoop: 'LANCER LA BALLE', multi: 'LÂCHER LA CASCADE', chaos: 'RELANCER LE PENDULE', liquid: 'LÂCHER LA BILLE', orbit: "RELANCER L'ORBITE" };
+  $('btn-shoot').textContent = shootLabels[name];
+  $('btn-shoot-float').textContent = shootLabels[name];
+  if (!isHoop){
+    $('verdict-big').textContent = SCENE_INFO[name].split('—')[0].trim().toUpperCase();
+    $('verdict-big').className = 'big wait';
+    $('verdict-when').textContent = 'scène du gauntlet — le verdict cerceau est mis en pause, rien ne fuit d’une scène à l’autre';
+    $('ghost-tag').style.display = 'none';
+  } else if (S.lockedVerdict !== null && S.lockedAt){
+    setVerdict(S.lockedVerdict, true);
+  } else {
+    $('verdict-big').textContent = 'EN ATTENTE'; $('verdict-big').className = 'big wait';
+    $('verdict-when').textContent = 'aucun verdict émis';
+  }
+  renderGauntletCheck();
+  logTo($('ind-log'), `Gauntlet → ${SCENE_INFO[name]}`);
+}
+function renderGauntletCheck(){
+  const hasShot = S.verdictsTot > 0, inducedOk = induced.fitted;
+  const mark = (ok, label) => `<div><span class="${ok===null?'n':ok?'p':'f'}">${ok===null?'○':ok?'✓':'✗'}</span> ${label}</div>`;
+  const scenes = {
+    hoop: [['lancer (impulsion + rotation)', hasShot||S.flying], ['rebond sol/panneau/cercle', hasShot], ['passage au cerceau', S.scored||hasShot], ['filet déformé au passage', S.wasInNet||null], ['fantôme +0,5 s devant, même modèle', S.flying||hasShot], ['induction des observations', inducedOk], ['MPC journalisé en chiffres', ui.mpc||null]],
+    multi: [['lancer / cascade', ui.scene==='multi'], ['collisions multi-corps', ui.scene==='multi'], ['fantôme (extension)', null], ['induction restitution', inducedOk]],
+    chaos: [['double pendule 3D lancé', ui.scene==='chaos'], ['horizon chaotique affiché', pendulum && pendulum.horizon !== null], ['fantôme devant (court terme)', ui.scene==='chaos'], ['limite nommée (FP-03)', pendulum && pendulum.horizon !== null]],
+    liquid: [['cuve transparente + particules', ui.scene==='liquid'], ['impact / éclaboussure', ui.scene==='liquid'], ['horizon mesuré', null]],
+    orbit: [['satellite en orbite', ui.scene==='orbit'], ['fantôme +0,6 s devant', ui.scene==='orbit'], ['recalibrations journalisées', orbitGroup ? orbitGroup.recal > 0 : null], [`tours bouclés : ${orbitGroup?orbitGroup.laps:0}`, orbitGroup ? orbitGroup.laps > 0 : null]],
+  };
+  const cur = scenes[ui.scene] || scenes.hoop;
+  const done = cur.every(c => c[1] === true);
+  $('gauntlet-check').innerHTML =
+    `<div style="color:var(--txt);margin-bottom:4px">${SCENE_INFO[ui.scene].split('—')[0].trim()} — ${done ? '<span class="p">VALIDÉE</span>' : '<span class="n">EN COURS</span>'}</div>` +
+    cur.map(c => mark(c[1], c[0])).join('') +
+    `<div style="margin-top:6px;color:var(--dim)">Objectif gauntlet : 5/5 scènes, zéro collision masquée. Basculez de scène pour valider chacune en direct.</div>`;
+}
+
+/* ---------- APIS LIVE (proxy local, clés côté serveur) ---------- */
+async function checkApiStatus(){
+  try {
+    const r = await fetch('/api/status');
+    if (!r.ok) throw new Error('status ' + r.status);
+    const d = await r.json();
+    $('api-status').innerHTML = `Statut API : Baseten (${d.baseten_model}) <b style="color:${d.baseten ? 'var(--ok)' : 'var(--bad)'}">${d.baseten ? 'clé présente' : 'clé absente'}</b> · Meta Model API <b style="color:${d.meta ? 'var(--ok)' : 'var(--bad)'}">${d.meta ? 'clé présente' : 'clé absente'}</b> — via serveur local.`;
+    $('mode-badge').textContent = (d.baseten || d.meta) ? 'APIS LIVE VIA SERVEUR LOCAL' : 'MODE DÉMO — PHYSIQUE LOCALE';
+    if (d.baseten || d.meta) $('sam-status').textContent = 'Serveur API local détecté : le conseiller Muse Spark (panneau de droite) appelle les modèles live. La physique et l\'induction restent calculées localement et vérifiables.';
+  } catch (e) {
+    $('api-status').textContent = 'Statut API : serveur local non détecté (page ouverte en fichier). Physique locale complète ; pour le live : python3 server.py puis http://localhost:8000.';
+  }
+}
+async function askAdvisor(){
+  const out = $('advisor-out');
+  const lines = Array.from($('ind-log').children).slice(0, 10).map(el => el.textContent).join('\n');
+  const ctx = `Paramètres induits : g=${fmt(induced.g)} ±${fmt(induced.unc.g)} m/s², traînée k=${fmt(induced.drag,4)} ±${fmt(induced.unc.drag,4)}, restitution sol=${fmt(induced.restGround)} ±${fmt(induced.unc.restGround)}, vent=${fmt(induced.windX,1)} m/s. Erreur tenue à l'écart : ${induced.heldOut !== null ? fmt(induced.heldOut,1) + ' cm' : 'non mesurée'}. Verdicts justes : ${S.verdictsOk}/${S.verdictsTot}. Tirs : ${S.shots}.\nJournal récent :\n${lines}`;
+  out.textContent = 'Appel au conseiller (Baseten meta-models/muse-spark-open-1026, repli Meta muse-spark-1.3)…';
+  try {
+    const r = await fetch('/api/advisor', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ context: ctx }) });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.error || ('HTTP ' + r.status));
+    out.innerHTML = '';
+    const head = document.createElement('div');
+    head.innerHTML = `<span class="t">live</span> <b>${d.provider}</b> · ${d.model}`;
+    out.appendChild(head);
+    const body = document.createElement('div');
+    body.style.whiteSpace = 'pre-wrap'; body.style.marginTop = '6px';
+    body.textContent = d.content || '(réponse vide — le modèle a consommé son budget en raisonnement, réessayez)';
+    out.appendChild(body);
+    logTo($('ind-log'), `Conseiller Muse Spark (${d.provider} / ${d.model}) consulté sur le journal d'induction.`);
+  } catch (e) {
+    out.textContent = 'Conseiller indisponible : ' + e.message + ' — lancez le serveur local (python3 server.py) avec les clés dans .env, puis réessayez. La démo physique reste complète hors-ligne.';
+  }
+}
+
+/* ---------- UI ---------- */
+function bindUI(){
+  const sync = () => {
+    $('o-angle').textContent = $('in-angle').value + '°';
+    $('o-power').textContent = fmt(parseFloat($('in-power').value),1) + ' m/s';
+    $('o-spin').textContent = $('in-spin').value + ' rad/s';
+    $('o-wind').textContent = fmt(parseFloat($('in-wind').value),1) + ' m/s';
+  };
+  ['in-angle','in-power','in-spin','in-wind'].forEach(id => $(id).addEventListener('input', sync)); sync();
+  $('btn-shoot').addEventListener('click', shoot);
+  $('btn-shoot-float').addEventListener('click', shoot);
+  $('btn-view').addEventListener('click', () => { camera.position.set(4.4, 2.7, 8.8); controls.target.set(0, 1.95, 1.7); logTo($('ind-log'), 'Caméra revenue à la vue par défaut (orbit borné au gymnase).'); });
+  $('btn-reset').addEventListener('click', () => { resetBall(); S.hoopOffsetX = 0; hoopGroup.position.x = 0; $('hud-verdict').textContent = 'PRÊT — LANCEZ LA BALLE'; $('hud-verdict').className = 'wait'; $('verdict-big').textContent = 'EN ATTENTE'; $('verdict-big').className = 'big wait'; logTo($('ind-log'), 'Scène réinitialisée — cerceau recentré, balle au lanceur.'); });
+  const tg = (id, key, label) => $(id).addEventListener('click', () => { ui[key] = !ui[key]; $(id).classList.toggle('on', ui[key]); if (key==='mpc') renderGauntletCheck(); if (!ui.ghost){ ghostBall.visible=false; ghostLine.visible=false; arcLine.visible=false; $('ghost-tag').style.display='none'; } if (key==='mc' && !ui.mc) mcGroup.children.forEach(m=>m.visible=false); });
+  tg('tg-ghost', 'ghost'); tg('tg-mc', 'mc'); tg('tg-mpc', 'mpc');
+  $('btn-cf').addEventListener('click', () => applyCounterfactual($('in-cf').value));
+  $('in-cf').addEventListener('keydown', e => { if (e.key === 'Enter') applyCounterfactual($('in-cf').value); });
+  document.querySelectorAll('.cf-chip').forEach(b => b.addEventListener('click', () => { $('in-cf').value = b.dataset.cf; applyCounterfactual(b.dataset.cf); }));
+  document.querySelectorAll('[data-scene]').forEach(b => b.addEventListener('click', () => setScene(b.dataset.scene)));
+  checkApiStatus();
+  $('btn-advisor').addEventListener('click', askAdvisor);
+  window.addEventListener('keydown', e => { if (e.code === 'Space' && document.activeElement.tagName !== 'INPUT'){ e.preventDefault(); shoot(); } });
+}
+function drawChart(){
+  const cv = $('chart'); if (!cv) return;
+  const x = cv.getContext('2d');
+  x.clearRect(0,0,cv.width,cv.height);
+  x.strokeStyle = '#2a2e38'; x.beginPath(); x.moveTo(28,6); x.lineTo(28,58); x.lineTo(260,58); x.stroke();
+  x.fillStyle = '#9aa0ad'; x.font = '8px monospace'; x.fillText('cm', 4, 14); x.fillText('tir →', 224, 68);
+  const data = S.errHistory.slice(-12);
+  if (!data.length){ x.fillStyle = '#5f6675'; x.font = '10px monospace'; x.fillText('aucun tir terminé', 90, 34); return; }
+  const max = Math.max(30, ...data) * 1.15;
+  x.strokeStyle = '#ff6b1a'; x.lineWidth = 2; x.beginPath();
+  data.forEach((v,i) => { const px = 34 + i*(220/Math.max(1,data.length-1||1)), py = 58 - (v/max)*48; i ? x.lineTo(px,py) : x.moveTo(px,py); });
+  x.stroke(); x.lineWidth = 1;
+  data.forEach((v,i) => { const px = 34 + i*(220/Math.max(1,data.length-1||1)), py = 58 - (v/max)*48; x.fillStyle = '#37c8d9'; x.beginPath(); x.arc(px,py,3,0,7); x.fill(); x.fillStyle = '#e8e6e1'; x.font = '8px monospace'; x.fillText(fmt(v,0), px-6, py-6); });
+}
+
+/* ---------- scènes d'escalade : pas de simulation ---------- */
+function updateAltScenes(dt){
+  if (ui.scene === 'multi'){
+    for (const b of multiBodies){
+      b.v.y -= TRUE.g * dt;
+      b.p.addScaledVector(b.v, dt);
+      if (b.p.y < b.r){ b.p.y = b.r; b.v.y = Math.abs(b.v.y) * b.rest; b.v.x *= 0.94; b.v.z *= 0.94; }
+      if (b.p.y < 0.62 && Math.abs(b.p.x) < 1.7 && Math.abs(b.p.z - 1.6) < 0.7 && b.v.y < 0){ /* rampe */ }
+      b.mesh.position.copy(b.p);
+      b.mesh.rotation.x += b.v.z * dt * 2; b.mesh.rotation.z -= b.v.x * dt * 2;
+    }
+    for (let i=0;i<multiBodies.length;i++) for (let j=i+1;j<multiBodies.length;j++){
+      const A = multiBodies[i], B = multiBodies[j], d = A.p.distanceTo(B.p), min = A.r + B.r;
+      if (d < min && d > 1e-6){
+        const n = B.p.clone().sub(A.p).divideScalar(d), overlap = (min-d)/2;
+        A.p.addScaledVector(n, -overlap); B.p.addScaledVector(n, overlap);
+        const rel = B.v.clone().sub(A.v).dot(n);
+        if (rel < 0){ const imp = n.multiplyScalar(-rel * 0.72); B.v.add(imp); A.v.sub(imp); }
+      }
+    }
+  }
+  if (ui.scene === 'chaos' && pendulum){
+    for (let i=0;i<3;i++) stepPendulum(pendulum, dt/3);
+    const P = pendulum, pv = P.pivot;
+    const x1 = pv.x + Math.sin(P.th1)*P.L1, y1 = pv.y - Math.cos(P.th1)*P.L1;
+    const x2 = x1 + Math.sin(P.th2)*P.L2, y2 = y1 - Math.cos(P.th2)*P.L2;
+    const gx1 = pv.x + Math.sin(P.th1b)*P.L1, gy1 = pv.y - Math.cos(P.th1b)*P.L1;
+    const gx2 = gx1 + Math.sin(P.th2b)*P.L2, gy2 = gy1 - Math.cos(P.th2b)*P.L2;
+    const placeBar = (bar, ax, ay, bx, by) => { bar.position.set((ax+bx)/2, (ay+by)/2, pv.z); bar.rotation.z = Math.atan2(by-ay, bx-ax) + Math.PI/2; };
+    placeBar(P.b1, pv.x, pv.y, x1, y1); placeBar(P.b2, x1, y1, x2, y2);
+    P.m1.position.set(x1, y1, pv.z); P.m2.position.set(x2, y2, pv.z);
+    P.ghost2.position.set(gx2, gy2, pv.z);
+  }
+  if (ui.scene === 'liquid' && liquidPts){
+    const vel = liquidPts.userData.vel, N = liquidPts.userData.N, pos = liquidPts.userData.pos, dummy = liquidPts.userData.dummy;
+    const drop = gLiquid.userData.drop;
+    if (drop.userData.v === undefined) drop.userData.v = 0;
+    drop.userData.v -= 9.8 * dt; drop.position.y += drop.userData.v * dt;
+    if (drop.position.y < 0.92){
+      drop.position.y = 0.92;
+      for (let i=0;i<N;i++){
+        const dx = pos[i*3] - drop.position.x, dz = pos[i*3+2] - drop.position.z, d = Math.hypot(dx, dz);
+        if (d < 0.55){ const v = vel[i]; v.y += (0.55-d)*3.4; v.x += dx*1.8; v.z += dz*1.8; }
+      }
+      drop.userData.v = 1.7;
+    }
+    if (drop.position.y < 0.35){ drop.position.set((Math.random()-0.5)*0.7, 2.6, 1.6); drop.userData.v = 0; }
+    for (let i=0;i<N;i++){
+      const v = vel[i];
+      v.y -= 5.5 * dt;
+      let x = pos[i*3] + v.x*dt, y = pos[i*3+1] + v.y*dt, z = pos[i*3+2] + v.z*dt;
+      if (y < 0.24){ y = 0.24; v.y = Math.abs(v.y)*0.25; v.x *= 0.88; v.z *= 0.88; }
+      if (y > 1.05){ y = 1.05; v.y = -Math.abs(v.y)*0.2; }
+      if (x < -1.0){ x = -1.0; v.x = Math.abs(v.x)*0.5; } if (x > 1.0){ x = 1.0; v.x = -Math.abs(v.x)*0.5; }
+      if (z < 1.0){ z = 1.0; v.z = Math.abs(v.z)*0.5; } if (z > 2.2){ z = 2.2; v.z = -Math.abs(v.z)*0.5; }
+      v.multiplyScalar(1 - 0.7*dt);
+      pos[i*3] = x; pos[i*3+1] = y; pos[i*3+2] = z;
+      dummy.position.set(x, y, z); dummy.updateMatrix();
+      liquidPts.setMatrixAt(i, dummy.matrix);
+    }
+    liquidPts.instanceMatrix.needsUpdate = true;
+  }
+  if (ui.scene === 'orbit' && orbitGroup){
+    stepOrbit(dt);
+    const proj = orbitGroup.satGhost.position.clone().project(camera);
+    const wrapR = $('scene-wrap').getBoundingClientRect(), tag = $('ghost-tag');
+    if (proj.z < 1){ tag.textContent = 'FANTÔME · +0,6 s'; tag.style.display = 'block'; tag.style.left = ((proj.x*0.5+0.5)*wrapR.width) + 'px'; tag.style.top = ((-proj.y*0.5+0.5)*wrapR.height) + 'px'; }
+    else tag.style.display = 'none';
+  }
+}
+
+/* ---------- BOUCLE PRINCIPALE ---------- */
+let prevY = LAUNCH_POS.y, inducedMidFlight = false;
+function animate(){
+  requestAnimationFrame(animate);
+  const nowMs = performance.now();
+  const dt = Math.min((nowMs - lastFrameMs)/1000, 0.05); lastFrameMs = nowMs;
+  controls.update();
+  camera.position.x = clamp(camera.position.x, -7.5, 7.5);
+  camera.position.y = clamp(camera.position.y, 0.5, 7.5);
+  camera.position.z = clamp(camera.position.z, -0.3, 12);
+  if (ui.scene === 'hoop'){
+    if (S.flying){
+      const steps = clamp(Math.round(dt/DT), 1, 20);
+      for (let s=0;s<steps;s++){
+        S.time += DT;
+        const ev = stepPhysics(ballState, realParams(), DT);
+        if (s % 2 === 0) observed.push({ t: S.time, p: ballState.p.clone(), v: ballState.v.clone(), contact: ev });
+        const rc = rimCenter();
+        if (prevY > RIM_Y && ballState.p.y <= RIM_Y && ballState.v.y < 0 && Math.hypot(ballState.p.x-rc.x, ballState.p.z-rc.z) < RIM_R - 0.015) S.scored = true;
+        prevY = ballState.p.y;
+      }
+      ball.position.copy(ballState.p);
+      // rotation visible : spin + roulement
+      const spinAxis = new THREE.Vector3(1, 0, 0);
+      ball.rotateOnWorldAxis(spinAxis, ballState.spin.x * dt * -1);
+      if (ballState.p.y <= BALL_R + 0.01) ball.rotateOnWorldAxis(new THREE.Vector3(0,0,1), ballState.v.x * dt / BALL_R);
+      if (!inducedMidFlight && S.time > 0.55){ inducedMidFlight = true; if (induceFromObserved()) logTo($('ind-log'), `Induction en vol (0,55 s d'observations) : g=${fmt(induced.g)} m/s², k=${fmt(induced.drag,4)} — le fantôme consomme désormais ces paramètres induits, avec leur erreur.`); updateArc(simulateShot(ballState.p, ballState.v, ballState.spin, twinParams(), 3).path); }
+      if (ui.mpc){ S.mpcTimer += dt; if (S.mpcTimer >= 0.12){ S.mpcTimer = 0; mpcStep(); } }
+      updateGhost(); updateNet();
+      const resting = ballState.p.y <= BALL_R + 0.002 && ballState.v.length() < 0.28 && S.time > 0.6;
+      if (resting || S.time > 7){ inducedMidFlight = false; finalizeShot(); }
+    } else {
+      ball.position.copy(ballState.p);
+      updateNet();
+      // balle au repos : légère rotation d'attente nulle (objet posé = immobile)
+    }
+  } else {
+    updateAltScenes(dt);
+  }
+  renderer.render(scene, camera);
+}
+
+try { init(); animate(); bootedFlag = true; }
+catch(e){ showError(e); throw e; }
+</script>
+</body>
+</html>
