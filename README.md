@@ -27,6 +27,15 @@ SAM 3.1 (perception) · Muse Spark / Wonder (induction, contrefactuels) · Muse 
 Les vrais paramètres de la scène servent uniquement à l'évaluation externe : l'agent ne les
 reçoit jamais, il induit les siens — avec leur incertitude et leur erreur tenue à l'écart.
 
+## Perception vidéo réelle (Prompt 2) — branchée
+
+Pipeline [perception/sam_perception.py](perception/sam_perception.py) : vidéo → SAM 3.1
+(Meta Model API `/v1/responses`, concepts texte avec replis mesurés) → extraction
+déterministe → suivi FP-01/FP-02 → trajectoires monde monoculaires → événements.
+Sur la vidéo de test générée depuis la scène 3D : balle trouvée 85 %, **ID 1 stable sur
+tout le vol jusqu'à la traversée de l'anneau**, événements launch/apex/rim_cross_down.
+Dataset et rapport : [perception/output/](perception/output/) · Détails : [perception/README.md](perception/README.md) · Tests : `python3 -m unittest tests.test_perception -v` (7 tests).
+
 ## Statut — honnête
 
 Construit pendant le hackathon (26 oct. – 4 nov. 2026). Démo interactive 3D ci-jointe :

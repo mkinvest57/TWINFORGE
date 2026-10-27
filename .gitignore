@@ -11,3 +11,9 @@ __pycache__/
 # Never commit API keys
 *api-key*
 *secret*
+
+# Perception : frames annotées régénérables (on garde dataset + rapport + 1 frame de contrôle)
+perception/output/annotated_*.jpg
+!perception/output/annotated_control.jpg
+perception/test_video_raw/
+node_modules/

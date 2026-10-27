@@ -1,0 +1,9 @@
+{
+  "name": "twinforge-perception-tools",
+  "private": true,
+  "type": "module",
+  "description": "Outils optionnels TWINFORGE : décodage raster des masques SAM 3.1",
+  "dependencies": {
+    "@meta-sam/parser": "^0.1.0"
+  }
+}
