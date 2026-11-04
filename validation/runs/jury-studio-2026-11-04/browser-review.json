@@ -32,7 +32,8 @@
       "scenario_change_to_crossing_local_energy_j": 3.464,
       "recorded_attempt_restores_recorded_scenario": true,
       "source_language": "en",
-      "raw_original_meta_responses_unchanged": true
+      "raw_original_meta_responses_unchanged": true,
+      "optional_frozen_paths_toggle_tested": true
     },
     "camera": {
       "widths_checked": [
@@ -64,7 +65,7 @@
   "console_errors_warnings": [],
   "design_review": {
     "tool": "21st review",
-    "result": "17 informational color-token findings, no warnings or errors",
+    "result": "18 informational color-token findings, no warnings or errors",
     "primary_white_contrast": 4.5035
   },
   "screenshots": [
@@ -72,7 +73,8 @@
     "decision-desktop-1280.png",
     "meta-journal-1280.png",
     "decision-mobile-390.png",
-    "camera-mobile-390.png"
+    "camera-mobile-390.png",
+    "private-live.png"
   ],
   "limitations": [
     "Responsive browser viewport checks are not tests on physical iOS/Android devices.",

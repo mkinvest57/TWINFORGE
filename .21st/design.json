@@ -162,7 +162,7 @@
     "Actual shared light CSS tokens were read from web/causal/lab.css, web/workbench-ui.css and web/camera/scanner.css.",
     "Motion lab desktop and 390px/320px phone checks, 44px targets, clean console, native drawers and three scene controls are recorded in .21st/verification/2026-11-04/workbench-review.json.",
     "Motion lab proof screenshots are in .21st/verification/2026-11-04/.",
-    "Coordinating agent reports the 21st review passed: 17 informational hardcoded-color findings, zero warnings. The shared token mappings are now explicit in this file."
+    "Coordinating agent reports the 21st review passed: 18 informational hardcoded-color findings, zero warnings. The shared token mappings are now explicit in this file."
   ],
   "generatedAt": "2026-11-04T20:37:15.436364+00:00",
   "verification": {

@@ -80,3 +80,5 @@ The consulted event guide lists **November 4 at 9 p.m. EST**, equivalent to **No
 The [French causal brief](archive/SUBMISSION_CAUSAL_FR_2026-11-04.md), [initial workbench brief](archive/SUBMISSION_PRE_PROCESS_2026-11-04.md), and [intermediate version](archive/SUBMISSION_PROCESS_2026-11-04.md) are archived unchanged. The [PDF compliance record](PROMPT_COMPLIANCE.md) retains its original physical requirements; the October 27–29 evidence is not rewritten.
 
 Current English-interface verification: [browser review](../validation/runs/jury-studio-2026-11-04/browser-review.json). The separate motion-lab review includes all three scenarios, playback controls and mobile drawers.
+
+Publication verified: [public deployment proof](../validation/runs/jury-studio-2026-11-04/public-deployment.json). All 17 checked public files match the release sources; the browser export reproduces the locally verified Meta decision.

@@ -1,0 +1,148 @@
+{
+  "url": "https://mkinvest57.github.io/TWINFORGE/",
+  "checked_at": "2026-11-04T20:41:27.044734+00:00",
+  "source_commit": "df9c73880dadd331ac6495464ff82f7e413ad31f",
+  "workflow": "https://github.com/mkinvest57/TWINFORGE/actions/runs/41908701086",
+  "workflow_result": "success",
+  "anonymous_requests": true,
+  "files": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "sha256": "5b3fe2fe57c8af114f41a478547fc0fe5cc33546260757ebfc718935acb0bb8d",
+      "matches_source": true
+    },
+    {
+      "path": "workbench.html",
+      "status": 200,
+      "sha256": "34e94a8ea18f2add4d9b145e370b4ff714d3f0604caab22fc5e2ec5ef37950a1",
+      "matches_source": true
+    },
+    {
+      "path": "scan.html",
+      "status": 200,
+      "sha256": "6b9345746a6c2391a3a7b42340ebf6336e3fd6b402bca494dfe6fc1367264b1d",
+      "matches_source": true
+    },
+    {
+      "path": "web/causal/lab.mjs",
+      "status": 200,
+      "sha256": "d2908257fd24b9834875e12d44be63a633fa8c31ecbeed7250e46681b3454ed3",
+      "matches_source": true
+    },
+    {
+      "path": "web/causal/lab.css",
+      "status": 200,
+      "sha256": "ef346b6ddda19becad16cacd8e55df9e588a71cbf443beb9bbc07cb3646856f7",
+      "matches_source": true
+    },
+    {
+      "path": "web/causal/copy.mjs",
+      "status": 200,
+      "sha256": "0156b4b7a82ae1a9342dad837518d5e48335795a900ea722c61454aa0b577b74",
+      "matches_source": true
+    },
+    {
+      "path": "web/causal/scene.mjs",
+      "status": 200,
+      "sha256": "d723bebbe8c8c4d194b0195169c98a17ed0175ceff137fffc158e57adfe0c8b2",
+      "matches_source": true
+    },
+    {
+      "path": "web/causal/engine.mjs",
+      "status": 200,
+      "sha256": "ff7d00a37a118b42179cb5314d6056f66ab93e30d22027600250ddd01b239a09",
+      "matches_source": true
+    },
+    {
+      "path": "web/causal/worker.mjs",
+      "status": 200,
+      "sha256": "6c22ce3b6417a2116e2e062ed9bc899033e8e57642a094b2cbeb88eeb0efbebb",
+      "matches_source": true
+    },
+    {
+      "path": "web/camera/scanner.css",
+      "status": 200,
+      "sha256": "0265a393a760b6138aa0eae0483a72e3d8a1d077b54dbfcea45dc27d6d5fd9e9",
+      "matches_source": true
+    },
+    {
+      "path": "web/camera/scanner.mjs",
+      "status": 200,
+      "sha256": "cc76b2427012f16c6554d5633df0139b0087123afa21a21dd4cdd7956945ce01",
+      "matches_source": true
+    },
+    {
+      "path": "web/workbench-ui.css",
+      "status": 200,
+      "sha256": "82bb4e0ce2af619ad1b7f909ad8170333803e74183fa399abd582a82d218073a",
+      "matches_source": true
+    },
+    {
+      "path": "web/workbench-ui.js",
+      "status": 200,
+      "sha256": "90afc1d11b13ab1a130ed9a637fe57f077bc9fd4a7b33d9d319f8528f99be6f6",
+      "matches_source": true
+    },
+    {
+      "path": "web/workbench.js",
+      "status": 200,
+      "sha256": "6e7277afa24f22d8240d5a2d6e447d036401bb50dd0e7c8ac71bef06239d5d39",
+      "matches_source": true
+    },
+    {
+      "path": "web/recording.js",
+      "status": 200,
+      "sha256": "e0d3b8f4705f2286f6f114c732291b073ae9338f93a352f95ad563ffca1cffb4",
+      "matches_source": true
+    },
+    {
+      "path": "assets/causal-meta-session.json",
+      "status": 200,
+      "sha256": "0bd106566a3343f03a3f8f25abe9a15c6fdc64de5a867d5a90e8ab602a6093fa",
+      "matches_source": true
+    },
+    {
+      "path": "manifest.webmanifest",
+      "status": 200,
+      "sha256": "69964559d88b14816cb5c998c157e455f8cbaf156367643e5ef5ee47c93b51ee",
+      "matches_source": true
+    }
+  ],
+  "browser": {
+    "language": "en",
+    "default_selected_action": "steer:-0.32@0.25",
+    "baseline_peak_j": 116.56200059920455,
+    "selected_peak_j": 4.564491902149546,
+    "public_export_matches_local": {
+      "options": true,
+      "selectedRun": true,
+      "selectedRobustness": true,
+      "selectedOrigin": true,
+      "plan.schema": true,
+      "plan.scenario": true,
+      "plan.actionDelayS": true,
+      "plan.baseline": true,
+      "plan.best": true,
+      "plan.bestAction": true,
+      "plan.candidates": true,
+      "plan.safe": true,
+      "plan.deadline": true,
+      "plan.robustness": true,
+      "plan.objective": true,
+      "plan.scope": true,
+      "plan.frozenAtSimulationTimeS": true
+    },
+    "excluded_comparison_field": "plan.planningMs measures machine execution duration, not physical outcome.",
+    "scrubbed_time_s": 2.5,
+    "console_errors_warnings": [],
+    "screenshot": "public-decision.png",
+    "old_user_owned_tab_refresh": "Browser API cannot bind that tab; fresh public tab verified instead.",
+    "motion_lab": {
+      "english_navigation": true,
+      "pendulum_start_pause": true,
+      "console_errors_warnings": [],
+      "screenshot": "public-motion.png"
+    }
+  }
+}

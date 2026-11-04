@@ -88,3 +88,5 @@ The causal laboratory is the main presentation. The tank and orbit are outside t
 [Archived French README](docs/archive/README_CAUSAL_FR_2026-11-04.md) · [Earlier project history](docs/archive/README_PRE_PROCESS_2026-11-04.md) · [Licenses](docs/THIRD_PARTY.md)
 
 Current English-interface verification: [browser review](validation/runs/jury-studio-2026-11-04/browser-review.json). The separate motion-lab review includes all three scenarios, playback controls and mobile drawers.
+
+Publication verified: [public deployment proof](validation/runs/jury-studio-2026-11-04/public-deployment.json). All 17 checked public files match the release sources; the browser export reproduces the locally verified Meta decision.
