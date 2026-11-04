@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "level": "L3",
+  "declared_on": "2026-11-04",
+  "status": "incomplete",
+  "historical_deadlines_met": false,
+  "assets": {
+    "final_video": {
+      "status": "reviewed",
+      "purpose": "Current L3 simulation demonstration; not a physically validated or submitted entry",
+      "source_kind": "simulation",
+      "duration_seconds": 149.83333333333334,
+      "evidence": [
+        {
+          "path": "output/media/twinforge-demo-current.mp4",
+          "sha256": "ea3caacec0141515ea058ec618dd489daa807b05f111f3674a759fb7103235b4"
+        },
+        {
+          "path": "output/media/twinforge-demo-current.mp4.provenance.json",
+          "sha256": "509c374736d6450401eef264c4050c0e54662c64b83e45b438531413a37b45ac"
+        },
+        {
+          "path": "output/media/review-media-current.json",
+          "sha256": "fa7ff46027b9194f92998e0d21dcf339fd6613d36b2244bb6b633fe6270a6ee8"
+        },
+        {
+          "path": "output/media/review-media-current.jpg",
+          "sha256": "63f960e937ce2d227c0abc15544d0196a1dd966161ce89e8b046cef47f9f304e"
+        },
+        {
+          "path": "output/media/demo-current-preview.png",
+          "sha256": "198dc50000d9453d29ad3f74bc9f56e7cf4d648f37a8a279db2c4701cd443407"
+        },
+        {
+          "path": "output/media/mpc-current-preview.png",
+          "sha256": "4ecbc43034d1e4c150a8cf287fb22486865e6c47bad5898a03f8790e645b7e58"
+        },
+        {
+          "path": "validation/runs/23119d61-07be-492d-a370-9f996c889760/report.json",
+          "sha256": "bc450a32c0b782ba9131390b32aabf96361ba06d55167d3752e81ea68b9d1457"
+        },
+        {
+          "path": "artifacts/simulation-8a28874b4218.webm",
+          "sha256": "659ff7d2af1c86cb399f8a76018101e6ed2dd1e1cc7485128b0a2078d2ea3b92"
+        },
+        {
+          "path": "validation/runs/media-visual-review-current-2026-11-04.json",
+          "sha256": "a74c3618a3fd9e06f8779da9f656a67a79040643658a45eddf389fc800dc933c"
+        }
+      ],
+      "review": {
+        "version": 1,
+        "reviewed_at": "2026-11-04T02:13:54.316148+00:00",
+        "reviewer": "Codex root and deliverables agents",
+        "method": "Root visually inspected all 13 keyframes covering subtitle sections and MPC displays. Deliverables independently inspected the 13-frame contact sheet and GIF preview. Automated complete decode checked 3596 frames for blank rendering/caption pixels.",
+        "sample_times_seconds": [
+          3,
+          12,
+          22,
+          37,
+          46,
+          56,
+          69,
+          84,
+          99,
+          111,
+          124,
+          138,
+          146
+        ],
+        "full_watch": false,
+        "visual_review_complete_for_declared_sample": true,
+        "continuous_subtitles": true,
+        "simulation_labels_visible": true,
+        "numbers_traceable": true,
+        "no_mockup": true,
+        "subtitle_check_limit": "13 caption sections visually sampled; pixel checks on all frames are heuristics, not a semantic full watch.",
+        "source_kind": "simulation",
+        "caption_timing_evidence": "Planned captions in recording.js and sampled video frames. The on-stop precise caption-event timeline was not saved after an HTTP 400 size limit; no reconstructed actual caption timestamps are claimed. Shot, counterfactual and MPC events were recovered from memory and archived with hashes.",
+        "scope_limit": "No physical-camera or actuator validation. Recorded replay is a synthetic 3D sensor dataset, distinct from the SAM video test."
+      },
+      "run_metrics": {
+        "completed_shots": 7,
+        "correct_verdicts": 6,
+        "ghost_error_mean_cm": 2.043790500614126,
+        "error_samples": 3138,
+        "mpc_corrections": 6,
+        "mpc_degradations_preserved": 1
+      },
+      "capture_source_sha256": "0523d4539469a737637acd4c9114e0445db72d1cd6c4783c9f80160c21a47a42"
+    },
+    "ghost_gif": {
+      "status": "reviewed",
+      "purpose": "Eight-second source extract from 35 s, explicit simulation label; first frame still shows replay transition before 3D gym resumes",
+      "duration_seconds": 8,
+      "evidence": [
+        {
+          "path": "output/media/ghost-current.gif",
+          "sha256": "6e7bbb4dd4f89801f05dab8478fbb0a28065fbe4b18367c06326c89adac0ad08"
+        },
+        {
+          "path": "output/media/twinforge-demo-current.mp4.provenance.json",
+          "sha256": "509c374736d6450401eef264c4050c0e54662c64b83e45b438531413a37b45ac"
+        },
+        {
+          "path": "validation/runs/media-visual-review-current-2026-11-04.json",
+          "sha256": "a74c3618a3fd9e06f8779da9f656a67a79040643658a45eddf389fc800dc933c"
+        }
+      ],
+      "review": {
+        "reviewed_at": "2026-11-04T02:13:54.316148+00:00",
+        "reviewer": "Codex deliverables agent",
+        "method": "GIF preview inspected with mode label and subtitles; source keyframe at 37 s inspected in reviewed contact sheet. Source interval 35–43 s from current simulation capture.",
+        "full_watch": false
+      }
+    }
+  },
+  "checks": {
+    "public_repo": {
+      "status": "pending",
+      "verified_at": null,
+      "evidence": [],
+      "note": "A public repo exists; re-check the final published revision."
+    },
+    "live_demo": {
+      "status": "pending",
+      "verified_at": null,
+      "evidence": [],
+      "note": "Verify the final published revision without an account; local operation is not proof of deployment."
+    },
+    "official_rules": {
+      "status": "pending",
+      "verified_at": null,
+      "evidence": [],
+      "note": "Record the official source and applicable video/submission requirements."
+    },
+    "track_and_theme": {
+      "status": "pending",
+      "verified_at": null,
+      "evidence": [],
+      "note": "Check Indie / Push the Frontier in the actual submission form."
+    },
+    "licenses": {
+      "status": "pending",
+      "verified_at": null,
+      "evidence": [],
+      "note": "Review model terms, third-party assets and attribution for the final package."
+    }
+  },
+  "rules": {
+    "duration_exception_evidence": null
+  },
+  "real_world_evidence": {
+    "complete_shot_validated": false,
+    "evidence": [],
+    "reason": "No real filmed shot supplied and validated end-to-end."
+  },
+  "submission_receipt": {
+    "status": "not_submitted",
+    "url": null,
+    "timestamp": null,
+    "evidence": []
+  },
+  "archived_assets": {
+    "final_video": {
+      "status": "reviewed",
+      "purpose": "Simulation L3 demonstration; not a physically validated or submitted entry",
+      "source_kind": "simulation",
+      "duration_seconds": 149.91666666666666,
+      "evidence": [
+        {
+          "path": "output/media/twinforge-demo.mp4",
+          "sha256": "df4076c09ee813fa1e74b003498152c09dbb2822148f7510f5dc80ec6d07c6b9"
+        },
+        {
+          "path": "output/media/twinforge-demo.mp4.provenance.json",
+          "sha256": "08a6002fd557076a8ad07beed343b41bd41394de6aa7688b05d5f84713ea3d60"
+        },
+        {
+          "path": "validation/runs/media-checks-2026-11-04.json",
+          "sha256": "0107ef920e7e8d57dd067167a3f847c2b94b1736c0adc8d0a278c3180cabe8b8"
+        },
+        {
+          "path": "output/media/review-contact-sheet.jpg",
+          "sha256": "dc96128c6693679d51082edb4b6190534a8f2e3752552619af7b89854f815dd2"
+        },
+        {
+          "path": "output/media/demo-preview.png",
+          "sha256": "16ecf12abc678f30f3dc144ad122d663d5d95e03cf1282771ab967bb6327fc59"
+        },
+        {
+          "path": "output/media/mpc-preview.png",
+          "sha256": "78d5d618ac88aca1383b73ed31b20ccbd950805bb2b68f5a7d79484ef4dc662b"
+        },
+        {
+          "path": "validation/runs/demo-timeline-2026-11-04.json",
+          "sha256": "ea70fbfe72611675cbae02b9b3ba88c81b1b2a8d55bce5af293baea4d426e85e"
+        },
+        {
+          "path": "validation/runs/79588c74-3899-45d3-8f7b-903060272b46/report.json",
+          "sha256": "d84b6a888ed706e1d95801ef49ffbbf24300c2ff4db031ba2fe8b77822bad78f"
+        },
+        {
+          "path": "artifacts/simulation-265ee6118335.webm",
+          "sha256": "75cbd9285271632b7391322d692229e6e5bb117f73c59d35bdd4eea186b5c7e0"
+        }
+      ],
+      "review": {
+        "reviewed_at": "2026-11-04T01:39:34.550247+00:00",
+        "reviewer": "Codex: root and deliverables agents",
+        "method": "Visual inspection of 13 keyframes covering all caption sections, plus complete decode of 3598 frames with blank-render and absent-caption-pixel heuristics. Additional direct inspection of t40, t100, t146.",
+        "full_watch": false,
+        "continuous_subtitles": true,
+        "subtitle_check_limit": "All 13 caption sections visually sampled; the all-frame pixel check is a heuristic, not a semantic review of every frame.",
+        "simulation_labels_visible": true,
+        "numbers_traceable": true,
+        "no_mockup": true,
+        "scope_limit": "Does not validate physical observations, photorealism, model identification or all five scenes."
+      }
+    },
+    "ghost_gif": {
+      "status": "reviewed",
+      "purpose": "Eight-second extract of the L3 simulation forecast, preserving the mode label",
+      "evidence": [
+        {
+          "path": "output/media/ghost.gif",
+          "sha256": "c1436b14562ff818fbbbac11bee4a03577d79de4b8ef38960676768b0400c6e1"
+        },
+        {
+          "path": "output/media/twinforge-demo.mp4.provenance.json",
+          "sha256": "08a6002fd557076a8ad07beed343b41bd41394de6aa7688b05d5f84713ea3d60"
+        }
+      ],
+      "review": {
+        "reviewed_at": "2026-11-04T01:39:34.550247+00:00",
+        "reviewer": "Codex deliverables agent",
+        "method": "Rendered GIF preview inspected; scene, mode label, +0.5s marker and subtitles visible. Source interval 35–43s from reviewed simulation video.",
+        "full_watch": false
+      }
+    }
+  }
+}

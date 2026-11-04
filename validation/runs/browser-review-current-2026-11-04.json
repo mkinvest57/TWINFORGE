@@ -1,0 +1,28 @@
+{
+  "schema_version": "twinforge.browser_review.v1",
+  "reviewed_at": "2026-11-04T02:17:44.526293+00:00",
+  "mode": "simulation",
+  "source_sha256": "a14deb7edca75a829a292a2bc34adf7718df9034c80a576bda42a18847c7957f",
+  "evidence": [
+    {
+      "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/report.json",
+      "sha256": "cbb6bced01ab72d1d667aea55a4ccc901d9ccfaee70b61ac1dcfd24325c93950"
+    }
+  ],
+  "checks": {
+    "five_scenes_launch_and_ghost": "passed via actual interface actions, separate forecasts assessed at target time",
+    "independent_benchmark_api": "UI returned 5/5 passed, 3.43 s; report downloaded",
+    "synthetic_video_pipeline": "36 generated PNG frames at 12 physical FPS; SAM fully processed 24 sampled frames; cache recovery after export bug verified",
+    "new_3d_example": "import accepted 31 3D observations; replay measured 1.0 cm on 10 scoreable predictions of 15 issued; separate independent benchmark retained",
+    "local_narration": "actual local API response preserved 27 open checks and measured metrics; no provider invoked",
+    "archive_export": "IndexedDB v3 and legacy v2 download succeeded",
+    "persistence": "39 current-run records shown as persisted in IndexedDB",
+    "current_run_export_bytes": 792868,
+    "software_checks_in_ui": "all 4 passed"
+  },
+  "limitations": [
+    "Browser tests concern the simulated application, not physical validation.",
+    "Scene checklist keeps unexecuted strict PDF requirements blocked.",
+    "The complete image-based 3D error remains reported separately from the noisy 3D sensor benchmark."
+  ]
+}

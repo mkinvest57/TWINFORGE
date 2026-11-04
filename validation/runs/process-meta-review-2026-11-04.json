@@ -1,0 +1,38 @@
+{
+  "schema_version": "twinforge.process.review.v1",
+  "reviewed_at": "2026-11-04T13:51:48.906226+00:00",
+  "source_report": {
+    "path": "validation/runs/process-meta-live-2026-11-04.json",
+    "sha256": "69026d013667a9e2d8ddce49887fa4dad2abde60d1f4d6279d98bd31045ff9eb"
+  },
+  "baseline": {
+    "path": "validation/runs/process-baseline-final-2026-11-04.json",
+    "sha256": "2383a914e380ee25cdcfb302ae78d24211a93491ce819bee257eefbb07d1c65d"
+  },
+  "model": "muse-spark-1.3",
+  "provider_calls": 3,
+  "actual_cost_usd_from_usage": 0.013077499999999999,
+  "scientific_attribution": {
+    "model": "Ordered three specified hypotheses and commented on measured validation residuals.",
+    "software": "Fitted all numeric parameters; selected by validation mean; evaluated frozen model on independent test.",
+    "discovered_physics": false,
+    "real_world_validation": false,
+    "improvement_over_deterministic_baseline_claimed": false
+  },
+  "baseline_comparison": {
+    "same_selected_model": true,
+    "same_test_scores": true
+  },
+  "reasoning_review": {
+    "iteration": 3,
+    "original_response_preserved": true,
+    "note": "Spark mentions the linear candidate maximum above 1 cm. The numeric acceptance criterion in the executed code was mean_error_cm <= 1 cm; linear passed that mean criterion (0.9260 cm). All three families were still explored by the predeclared protocol and sqrt selected by the lowest validation mean. The maximum is a separate diagnostic, not the global pass/fail rule.",
+    "followup_change": "The unchanged numeric selection/acceptance criterion is now explicitly named in spec and future model context. No paid retry was performed."
+  },
+  "source_hash_note": "Original execution report source hashes are preserved; current code adds metric labels and exact unrounded cost reporting only.",
+  "limitations": [
+    "Synthetic observations with 1 mm sensor noise; not a real tank or video.",
+    "Known geometry and future valve plan supplied; no unknown controller decision predicted.",
+    "Fixed known family library; no model-authored simulator or free law discovery."
+  ]
+}

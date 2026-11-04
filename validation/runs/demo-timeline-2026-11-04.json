@@ -1,0 +1,73 @@
+{
+  "mode": "L3_simulation",
+  "recorded_elapsed_s": 150.06039999999106,
+  "steps": [
+    {
+      "planned_s": 0,
+      "executed_s": 0.0012999999970197678,
+      "caption": "Voici TWINFORGE. Le jumeau pr\u00e9dit le tir avant sa retomb\u00e9e. Cette d\u00e9monstration est une simulation L3."
+    },
+    {
+      "planned_s": 8,
+      "executed_s": 8.004699999988079,
+      "caption": "L3 : le syst\u00e8me choisit et calibre un moteur physique connu. Il ne pr\u00e9tend pas avoir d\u00e9couvert librement ses \u00e9quations."
+    },
+    {
+      "planned_s": 20,
+      "executed_s": 20.00929999999702,
+      "caption": "SAM est raccord\u00e9 par import de trajectoires. L\u2019exemple disponible provient d\u2019une vid\u00e9o synth\u00e9tique ; sa profondeur n\u2019est pas mesur\u00e9e."
+    },
+    {
+      "planned_s": 35,
+      "executed_s": 35.002,
+      "caption": "Le fant\u00f4me projette le m\u00eame int\u00e9grateur \u00e0 +0,5 seconde. Le verdict se verrouille avant l\u2019issue du tir."
+    },
+    {
+      "planned_s": 43,
+      "executed_s": 43.00439999999106,
+      "caption": "L\u2019erreur compare la position observ\u00e9e au point pr\u00e9dit pour ce m\u00eame instant. Les param\u00e8tres non mesur\u00e9s restent des priors."
+    },
+    {
+      "planned_s": 52,
+      "executed_s": 52.00789999999106,
+      "caption": "18 simulations Monte-Carlo \u00e9chantillonnent l\u2019incertitude des param\u00e8tres. Les chiffres \u00e0 droite sont ceux de cette ex\u00e9cution."
+    },
+    {
+      "planned_s": 65,
+      "executed_s": 65.01279999999701,
+      "caption": "Et si le lancer \u00e9tait 20 % plus fort ? La trajectoire orange rejoue le contrefactuel dans le jumeau."
+    },
+    {
+      "planned_s": 80,
+      "executed_s": 80.00479999999702,
+      "caption": "Et si le panier \u00e9tait d\u00e9cal\u00e9 \u00e0 gauche ? La sc\u00e8ne de r\u00e9f\u00e9rence reste inchang\u00e9e."
+    },
+    {
+      "planned_s": 95,
+      "executed_s": 95.01019999998807,
+      "caption": "Le MPC simule des s\u00e9quences candidates, compare leur co\u00fbt et n\u2019ex\u00e9cute que la premi\u00e8re correction. Ici, il contr\u00f4le la simulation."
+    },
+    {
+      "planned_s": 107,
+      "executed_s": 107.00189999999105,
+      "caption": "Chaque correction enregistre le co\u00fbt, l\u2019horizon, l\u2019\u00e9cart avant et apr\u00e8s, ainsi que l\u2019impulsion appliqu\u00e9e."
+    },
+    {
+      "planned_s": 119,
+      "executed_s": 119.008,
+      "caption": "Le gauntlet conserve les \u00e9checs et les tests non ex\u00e9cut\u00e9s. Les autres sc\u00e8nes et le transfert sur un dispositif r\u00e9el ne sont pas certifi\u00e9s."
+    },
+    {
+      "planned_s": 135,
+      "executed_s": 135.011799999997,
+      "caption": "Un simulateur v\u00e9rifiable, des observations tra\u00e7ables. Prochaine preuve requise : un vrai tir film\u00e9, puis une validation ind\u00e9pendante."
+    },
+    {
+      "planned_s": 143,
+      "executed_s": 143.00139999999107,
+      "caption": "TWINFORGE \u00b7 Indie \u00b7 Push the Frontier. Niveau L3. github.com/mkinvest57/TWINFORGE \u00b7 d\u00e9mo : mkinvest57.github.io/TWINFORGE"
+    }
+  ],
+  "media": "artifacts/simulation-265ee6118335.webm",
+  "report": "validation/runs/79588c74-3899-45d3-8f7b-903060272b46/report.json"
+}

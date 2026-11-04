@@ -1,0 +1,157 @@
+{
+  "schema_version": "twinforge.mobile-static-assets.v1",
+  "created_at": "2026-11-04T13:08:52.713947+00:00",
+  "source_root": "repository",
+  "static_root": "output/mobile-site/dist",
+  "scope": "Exact copies of index.html, scan.html, manifest.webmanifest, web/ and assets/ only. No backend, credentials, private evidence or API runtime.",
+  "files": [
+    {
+      "path": "assets/calibrated-synthetic-bundle.json",
+      "sha256": "4025e646587dfc3d7980abbfcf4ceb0d0dc5f1cba116072c4015cedae4bb8b8f",
+      "bytes": 40983
+    },
+    {
+      "path": "assets/example-bundle-baseline-2026-11-04.json",
+      "sha256": "9d4dc8ace96946a60a481ca371821757aa4df5f264eec0e33bc01f7fe15e456b",
+      "bytes": 29733
+    },
+    {
+      "path": "assets/example-bundle.json",
+      "sha256": "1339d1cfd233c11093d719d3205f565ec2ba8bc6973838449a7cd114b7e43d9a",
+      "bytes": 34224
+    },
+    {
+      "path": "assets/mobile/icon-maskable.svg",
+      "sha256": "4104f1fc77c2369d5373cd3495a9a46c7cb1bab1f2ceaafa2b47c583aae101cd",
+      "bytes": 663
+    },
+    {
+      "path": "assets/mobile/icon.svg",
+      "sha256": "fb5c8f9b579d249648b91b93afb9d031e19bad2f1283a671ff95293f3800a922",
+      "bytes": 702
+    },
+    {
+      "path": "assets/vendor/three/LICENSE.txt",
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+      "bytes": 1081
+    },
+    {
+      "path": "assets/vendor/three/build/three.core.js",
+      "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6",
+      "bytes": 1458113
+    },
+    {
+      "path": "assets/vendor/three/build/three.module.js",
+      "sha256": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea",
+      "bytes": 662772
+    },
+    {
+      "path": "assets/vendor/three/examples/jsm/controls/OrbitControls.js",
+      "sha256": "3d79d07ecb686b4e5d93232eedab255331c1beef711e13164eaa1f68655a5f2b",
+      "bytes": 40755
+    },
+    {
+      "path": "assets/vendor/three/examples/jsm/environments/RoomEnvironment.js",
+      "sha256": "55f466192cc84298755a424c5e040345006b2ee1455589b3b54126c2ea4123f4",
+      "bytes": 4960
+    },
+    {
+      "path": "assets/vendor/three/manifest.json",
+      "sha256": "cfcce767cbc40aeb29d1e7f7647563bb3d290a0f37486fc77351dbfca7e7ab6d",
+      "bytes": 886
+    },
+    {
+      "path": "index.html",
+      "sha256": "5f26383b3e012b1391d87f6219c144a56eca4142847e0c0330b3c8abb37ea8a7",
+      "bytes": 129962
+    },
+    {
+      "path": "manifest.webmanifest",
+      "sha256": "7b9c77bd9918a3cb95b6939720deb1543d2087d6ff2e6178884aa6b32ef5d291",
+      "bytes": 646
+    },
+    {
+      "path": "scan.html",
+      "sha256": "6e19b5a2a0d6fd97e2e5723198999ad0ec5320099a004f60cbe85e795b043b24",
+      "bytes": 9629
+    },
+    {
+      "path": "web/camera/media.mjs",
+      "sha256": "ee1b8d420804176d6cb9504eaa921d7b53934dd07bf47e41e9eb7488bd4a3c03",
+      "bytes": 2523
+    },
+    {
+      "path": "web/camera/prediction.mjs",
+      "sha256": "266bbcaedd6fb82d9b9165c5264c10706b811d27bc0f4ddad1e396c25e4c6eb5",
+      "bytes": 8737
+    },
+    {
+      "path": "web/camera/scanner.css",
+      "sha256": "7eb546e00e62e9be11555368e5b3255890b820353664706ad01b8ab88e7e4b5b",
+      "bytes": 13515
+    },
+    {
+      "path": "web/camera/scanner.mjs",
+      "sha256": "f886a27ee2f55674b2b6720c33e46152a8a02c955b32a4c05a53370bf2a3ccaf",
+      "bytes": 20369
+    },
+    {
+      "path": "web/camera/tracker.mjs",
+      "sha256": "c57c9287ae16c73ae76e5db72cb22e7d1698f9ebc37103bdcba24dee88a19e41",
+      "bytes": 11378
+    },
+    {
+      "path": "web/physics/alt-models.mjs",
+      "sha256": "3a758ebc2c8d4ccd9cd46143d7f5e909a792c45c5c8f0f053e2fbbacb45d932d",
+      "bytes": 3110
+    },
+    {
+      "path": "web/physics/control.mjs",
+      "sha256": "3a388fa3be48c72acd4c44d026b8c47e79975e74b6605103a830808a5a2c72b4",
+      "bytes": 3039
+    },
+    {
+      "path": "web/physics/counterfactual.mjs",
+      "sha256": "7a97fa728b20b3e5170723dbc535a3a8a82fd5997f649c3c7040ee0ad72b9507",
+      "bytes": 8027
+    },
+    {
+      "path": "web/physics/evaluator.mjs",
+      "sha256": "d464a56ecd90e76ac96c1d3a30a770b4a01d921f0dbad0e6423dbccf2ff88dde",
+      "bytes": 1459
+    },
+    {
+      "path": "web/physics/evidence.mjs",
+      "sha256": "5127ce7a1189ebffa533aee4940a46d1fc3a8aa8c4ac4e8fa2309f009a704ad3",
+      "bytes": 7354
+    },
+    {
+      "path": "web/physics/model.mjs",
+      "sha256": "a42e380b938ad7ed2711d6812abc10ac92643bf95a80230d88414cf26e61ebd6",
+      "bytes": 11114
+    },
+    {
+      "path": "web/physics/observation-replay.mjs",
+      "sha256": "a01aae66ab527d684df3a8234463cd28ec11e9f29ac034b016ff59cce39c6e91",
+      "bytes": 11217
+    },
+    {
+      "path": "web/recording.js",
+      "sha256": "8d8110abe981b201f58ddecf3b38004ae156f2305d93e216a0cc3bcaabf571c3",
+      "bytes": 9313
+    },
+    {
+      "path": "web/synthetic-capture.mjs",
+      "sha256": "a3a40be7202a1b7e8b24181bdc9489ce19a82384aba778ddbfbb92033b6b09c9",
+      "bytes": 7314
+    },
+    {
+      "path": "web/workbench.js",
+      "sha256": "954a3c14f444748aabfe25734ac8a96a3525e032d5d4154de49fef6199575649",
+      "bytes": 16767
+    }
+  ],
+  "source_changed_during_copy": false,
+  "private_file_count": 0,
+  "credential_pattern_findings": []
+}

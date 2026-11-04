@@ -1,0 +1,128 @@
+{
+  "schema_version": "twinforge.mobile-browser-review.v1",
+  "reviewed_at": "2026-11-04T13:13:38.338471+00:00",
+  "scope": "Desktop in-app browser with viewport overrides; no physical phone or live camera was used. Local browser flows and exact deployed static source are verified separately from authenticated production execution.",
+  "source_sha256": {
+    "assets/mobile/icon-maskable.svg": "4104f1fc77c2369d5373cd3495a9a46c7cb1bab1f2ceaafa2b47c583aae101cd",
+    "assets/mobile/icon.svg": "fb5c8f9b579d249648b91b93afb9d031e19bad2f1283a671ff95293f3800a922",
+    "index.html": "5f26383b3e012b1391d87f6219c144a56eca4142847e0c0330b3c8abb37ea8a7",
+    "manifest.webmanifest": "7b9c77bd9918a3cb95b6939720deb1543d2087d6ff2e6178884aa6b32ef5d291",
+    "scan.html": "6e19b5a2a0d6fd97e2e5723198999ad0ec5320099a004f60cbe85e795b043b24",
+    "server.py": "f47e463f841a9ce4f27735df5d9f83ffedbd650675cab350f5247b91bb375ca0",
+    "web/camera/media.mjs": "ee1b8d420804176d6cb9504eaa921d7b53934dd07bf47e41e9eb7488bd4a3c03",
+    "web/camera/prediction.mjs": "266bbcaedd6fb82d9b9165c5264c10706b811d27bc0f4ddad1e396c25e4c6eb5",
+    "web/camera/scanner.css": "7eb546e00e62e9be11555368e5b3255890b820353664706ad01b8ab88e7e4b5b",
+    "web/camera/scanner.mjs": "f886a27ee2f55674b2b6720c33e46152a8a02c955b32a4c05a53370bf2a3ccaf",
+    "web/camera/tracker.mjs": "c57c9287ae16c73ae76e5db72cb22e7d1698f9ebc37103bdcba24dee88a19e41"
+  },
+  "software_checks": {
+    "report": "../software-checks-mobile-2026-11-04.json",
+    "passed": true,
+    "python": 87,
+    "javascript": 61,
+    "total": 148
+  },
+  "viewport_checks": [
+    {
+      "width": 320,
+      "height": 568,
+      "scanner_scroll_width": 320,
+      "workbench_scroll_width": 320,
+      "fixed_control_height_px": 48,
+      "status": "passed"
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "scanner_scroll_width": 390,
+      "status": "passed"
+    },
+    {
+      "width": 844,
+      "height": 390,
+      "scanner_scroll_width": 844,
+      "stage_height": 257.390625,
+      "status": "passed"
+    },
+    {
+      "width": 1280,
+      "height": 900,
+      "scanner_scroll_width": 1280,
+      "mobile_bar_display": "none",
+      "status": "passed"
+    }
+  ],
+  "browser_flows": [
+    {
+      "flow": "Example pixels → pointer tap selection → tracking → causal +0.5 s forecasts → retrospective scores → JSON download",
+      "status": "passed",
+      "export": "example-export.json"
+    },
+    {
+      "flow": "Central selection by semantic button; rotate landscape to portrait while tracking",
+      "status": "passed"
+    },
+    {
+      "flow": "Original MPEG-4 Part 2 clip fails with a visible unsupported-format explanation",
+      "status": "passed"
+    },
+    {
+      "flow": "H.264 portrait clip opens paused; select ball → playback → end → JSON export",
+      "status": "passed",
+      "export": "import-export.json",
+      "note": "First decoded image is recaptured at selection to avoid a blank pre-decoder canvas. This is a functional check, not a general tracking-accuracy benchmark."
+    },
+    {
+      "flow": "Stop button stops source and leaves prior observations exportable",
+      "status": "passed"
+    },
+    {
+      "flow": "Workbench mobile camera link opens scanner",
+      "status": "passed"
+    }
+  ],
+  "privacy_review": {
+    "mobile_controller_network_upload_calls": 0,
+    "microphone_requested": false,
+    "export_includes_images": false,
+    "provider_calls_in_mobile_flow": 0,
+    "static_copy_matches_sources": true,
+    "backend_in_static_bundle": false
+  },
+  "deployment": {
+    "project_id": "appgprj_6aeb201bbbb88191b56d8dd45accb560",
+    "version_id": "appgprj_6aeb201bbbb88191b56d8dd45accb560~appgver_a698e92ce2608191a074d6d09dd25c85",
+    "deployment_id": "appgdep_6aeb2ebe8684819194ad17cf04598e5f",
+    "status": "succeeded",
+    "url": "https://twinforge-mobile-camera.mkinvest57.chatgpt.site",
+    "commit_sha": "59c882da506fe228623d828a5dd8795196a13936"
+  },
+  "production_browser_check": {
+    "https_login_gate_visible": true,
+    "authenticated_app_execution": "not_verified_no_active_browser_login",
+    "audience": "owner-private"
+  },
+  "limitations": [
+    "Camera permission, lens switching and MediaRecorder tested through software contracts/mocks, not a physical iPhone/Android.",
+    "Mobile forecasts use pixels of the downsampled image, not centimetres or reconstructed 3D.",
+    "Tracking confidence is a heuristic, not a calibrated probability; motion/occlusion/background changes can invalidate tracking.",
+    "Synthetic example scores are not real-world accuracy claims."
+  ],
+  "screenshots": [
+    "scanner-390.jpg",
+    "scanner-landscape.jpg",
+    "scanner-desktop.jpg",
+    "workbench-320.jpg"
+  ],
+  "example_diagnostic": {
+    "source": "example",
+    "observations": 839,
+    "issued": 400,
+    "scored": 396,
+    "mean_error_px": 1.6313765246173397,
+    "only_past_observations_used": true,
+    "units": "px",
+    "claim_scope": "Synthetic browser fixture only; not real-world accuracy."
+  },
+  "browser_console_errors_or_warnings": []
+}

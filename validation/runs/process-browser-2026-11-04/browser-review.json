@@ -1,0 +1,626 @@
+{
+  "schema_version": "twinforge.process-browser-review.v1",
+  "reviewed_at": "2026-11-04T14:26:29.216404+00:00",
+  "method": "Real in-app Chromium browser; semantic UI interactions and screenshots. No physical phone or camera device used.",
+  "viewports_checked": [
+    320,
+    390,
+    768,
+    1280,
+    1440
+  ],
+  "horizontal_document_overflow": false,
+  "minimum_observed_phone_control_height_px": 44,
+  "checks": {
+    "guided_program_exact_t11_control_t18_perturbation_t40_stop": true,
+    "guided_export_matches_independent_engine_run": true,
+    "meta_recorded_journal_and_receipts": true,
+    "new_free_study_browser_to_api_to_download": true,
+    "meta_free_study_calls": 0,
+    "graph_png_export": true,
+    "keyboard_tab_navigation": true,
+    "guide_from_meta_switches_to_experiment": true,
+    "scanner_navigation_and_synthetic_pixel_tracking": true,
+    "legacy_pendulum_route": true,
+    "resize_3d_intrinsic_growth_fixed": true
+  },
+  "guided_snapshot": {
+    "t": 40,
+    "timeS": 40,
+    "levelM": 1.0491766131589109,
+    "observedLevelM": 1.0487489015010503,
+    "targetM": 1.05,
+    "alertM": 1.35,
+    "maxM": 1.5,
+    "valve": 0.20000000000000007,
+    "controlEnabled": true,
+    "phase": "running",
+    "geometry": {
+      "widthM": 0.3,
+      "depthM": 0.1,
+      "heightM": 1.5,
+      "bottomM": 0,
+      "area_m2": 0.03
+    },
+    "model": {
+      "family": "sqrt_outflow",
+      "geometry": {
+        "area_m2": 0.03
+      },
+      "parameters": {
+        "qin_lps": 5.492321192140299,
+        "kout": 1.3457125833369292
+      },
+      "uncertainty": {
+        "qin_lps": 0.5783774741378723,
+        "kout": 0.13828602448887417
+      },
+      "source": "estimated_from_level_and_valve_observations",
+      "trainIds": [
+        "tank-live-20261104"
+      ],
+      "units": {
+        "qin_lps": "L/s",
+        "kout": "L/s/sqrt(m)"
+      },
+      "fit": {
+        "status": "fitted",
+        "windows": 20,
+        "window_s": 0.4,
+        "method": "nonnegative integral volume-balance fit; three Huber iterations",
+        "residual_litres": 0.06363541764840326,
+        "normalized_design_determinant": 0.06933153532341893,
+        "latest_observation_t": 40
+      },
+      "status": "fitted",
+      "limitations": [
+        "Known model family, not autonomous discovery of new fluid equations.",
+        "Conditional least-squares uncertainty excludes camera/calibration bias."
+      ],
+      "id": "local-73"
+    },
+    "modelOrigin": "local_known_family_fit",
+    "fitQuality": {
+      "status": "fitted",
+      "windows": 20,
+      "window_s": 0.4,
+      "method": "nonnegative integral volume-balance fit; three Huber iterations",
+      "residual_litres": 0.06363541764840326,
+      "normalized_design_determinant": 0.06933153532341893,
+      "latest_observation_t": 40,
+      "usingLastValidModel": false
+    },
+    "predictedLevelM": 1.0046176440494048,
+    "forecastLevelM": 1.0046176440494048,
+    "forecastSourceTime": 40,
+    "forecastTargetTime": 45,
+    "forecastScenario": "hold_current_valve",
+    "timeToAlertS": null,
+    "errorCm": 14.1745767187905,
+    "meanErrorCm": 9.148405187168652,
+    "forecastCounts": {
+      "issued": 73,
+      "scored": 63,
+      "supported": 11,
+      "pending": 10
+    },
+    "inflowLps": 1.1031281132991428,
+    "outflowLps": 1.376920481445429,
+    "inflowM3S": 0.001103128113299143,
+    "pumpOn": true,
+    "overflowLitres": 0,
+    "overflowM3S": 0,
+    "overflowVolumeM3": 0,
+    "baseline": {
+      "levelM": 1.5,
+      "observedLevelM": 1.4995722883421394,
+      "valve": 1,
+      "overflowLitres": 90.802996322119,
+      "inletLitres": 178.5433279673099,
+      "outletLitres": 55.44088229550888,
+      "inflowLps": 5.515640566495713,
+      "outflowLps": 1.6470163120268353,
+      "overflowM3S": 0.0038686242544688776,
+      "volumeBalance": {
+        "initialLitres": 12.700550650322281,
+        "inletLitres": 178.5433279673099,
+        "outletLitres": 55.44088229550888,
+        "storedLitres": 45,
+        "overflowLitres": 90.802996322119,
+        "residualLitres": 4.277467269275803e-12
+      }
+    },
+    "comparisonStartS": 4,
+    "volumeBalance": {
+      "initialLitres": 12.700550650322281,
+      "inletLitres": 67.22299296057567,
+      "outletLitres": 48.448245216133174,
+      "storedLitres": 31.47529839476732,
+      "overflowLitres": 0,
+      "residualLitres": -2.5437429940211587e-12
+    },
+    "observationCount": 401,
+    "observations": [
+      {
+        "t": 32.1,
+        "level_m": 1.0719198244849364,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 32.2,
+        "level_m": 1.0712745617875463,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 32.3,
+        "level_m": 1.068495081792523,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 32.4,
+        "level_m": 1.0671628021773245,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 32.5,
+        "level_m": 1.0700670603014584,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 32.6,
+        "level_m": 1.0660305685007927,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 32.7,
+        "level_m": 1.0647282160653129,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 32.8,
+        "level_m": 1.0664448979016634,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 32.9,
+        "level_m": 1.065456496008854,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 33,
+        "level_m": 1.0632559578097451,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 33.1,
+        "level_m": 1.060983948130594,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 33.2,
+        "level_m": 1.060612635163205,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 33.3,
+        "level_m": 1.061446198780697,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 33.4,
+        "level_m": 1.0586850157443386,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 33.5,
+        "level_m": 1.0592247835824538,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 33.6,
+        "level_m": 1.0591865733758254,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 33.7,
+        "level_m": 1.056133764418594,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 33.8,
+        "level_m": 1.0554786971185757,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 33.9,
+        "level_m": 1.0544911561579828,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 34,
+        "level_m": 1.053185779264574,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 34.1,
+        "level_m": 1.0517791713470224,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 34.2,
+        "level_m": 1.052741539968147,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 34.3,
+        "level_m": 1.0519171744620577,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 34.4,
+        "level_m": 1.0517402158120754,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 34.5,
+        "level_m": 1.053053934547715,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 34.6,
+        "level_m": 1.053776951660824,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 34.7,
+        "level_m": 1.057753528641413,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 34.8,
+        "level_m": 1.0609086411498947,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 34.9,
+        "level_m": 1.063488583775208,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 35,
+        "level_m": 1.0655419610970132,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 35.1,
+        "level_m": 1.068585314349512,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 35.2,
+        "level_m": 1.0710452797707868,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 35.3,
+        "level_m": 1.0712412026150326,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 35.4,
+        "level_m": 1.070618323058915,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 35.5,
+        "level_m": 1.0703780193524999,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 35.6,
+        "level_m": 1.0678504882191246,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 35.7,
+        "level_m": 1.0670828952007452,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 35.8,
+        "level_m": 1.067667021037126,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 35.9,
+        "level_m": 1.0652584916287846,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 36,
+        "level_m": 1.0654020292366786,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 36.1,
+        "level_m": 1.0636601358967306,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 36.2,
+        "level_m": 1.0621130726184995,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 36.3,
+        "level_m": 1.0628635211218462,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 36.4,
+        "level_m": 1.0590289946514884,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 36.5,
+        "level_m": 1.0609549842150705,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 36.6,
+        "level_m": 1.0573294967587146,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 36.7,
+        "level_m": 1.0576805441585628,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 36.8,
+        "level_m": 1.0577511743767778,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 36.9,
+        "level_m": 1.0556401104749737,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 37,
+        "level_m": 1.0550303483205976,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 37.1,
+        "level_m": 1.0541203955646794,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 37.2,
+        "level_m": 1.054129674476189,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 37.3,
+        "level_m": 1.0521180247227377,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 37.4,
+        "level_m": 1.0513408718802415,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 37.5,
+        "level_m": 1.0517647134834622,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 37.6,
+        "level_m": 1.0556286405004676,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 37.7,
+        "level_m": 1.059042452607855,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 37.8,
+        "level_m": 1.0617335128350465,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 37.9,
+        "level_m": 1.0656383821314033,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 38,
+        "level_m": 1.067385236171521,
+        "valve": 0.4000000000000001
+      },
+      {
+        "t": 38.1,
+        "level_m": 1.0664951883944884,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 38.2,
+        "level_m": 1.0672684078781638,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 38.3,
+        "level_m": 1.064538063972745,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 38.4,
+        "level_m": 1.0641329167869196,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 38.5,
+        "level_m": 1.0623513675283507,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 38.6,
+        "level_m": 1.0617649037626185,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 38.7,
+        "level_m": 1.0613559773902017,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 38.8,
+        "level_m": 1.0609416425197349,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 38.9,
+        "level_m": 1.059058987968695,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 39,
+        "level_m": 1.0590119558499402,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 39.1,
+        "level_m": 1.0575587775760937,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 39.2,
+        "level_m": 1.055831361475721,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 39.3,
+        "level_m": 1.0565613595275518,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 39.4,
+        "level_m": 1.0541117112071507,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 39.5,
+        "level_m": 1.0546537420995308,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 39.6,
+        "level_m": 1.054319270275333,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 39.7,
+        "level_m": 1.0527860908914461,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 39.8,
+        "level_m": 1.0518895465497788,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 39.9,
+        "level_m": 1.0502153614897725,
+        "valve": 0.20000000000000007
+      },
+      {
+        "t": 40,
+        "level_m": 1.0487489015010503,
+        "valve": 0.20000000000000007
+      }
+    ],
+    "latestDecision": {
+      "t": 39.82,
+      "valve": 0.20000000000000007,
+      "plannedSequence": [
+        0.20000000000000007,
+        0.20000000000000007,
+        0.20000000000000007
+      ],
+      "cost": 0.0023637099841037103,
+      "predictedTerminalM": 1.0256777758530584,
+      "predictedPeakM": 1.0518895465497788,
+      "feasible": true,
+      "reason": "minimum_cost_feasible_sequence",
+      "evaluated": 26,
+      "rejected": 0,
+      "maxDelta": 0.2,
+      "intervalS": 0.2,
+      "horizonS": 3,
+      "onlyFirstActionApplied": true,
+      "modelId": "local-72"
+    },
+    "sourceKind": "synthetic",
+    "realWorldValidation": false,
+    "flowDisplaySource": "private synthetic plant flows; never supplied to identification",
+    "limitations": [
+      "One-compartment volume balance, not CFD.",
+      "Forecast assumes current valve remains unchanged; later interventions are marked in every score.",
+      "No physical actuator or real-world validation."
+    ]
+  },
+  "free_study": {
+    "passed": true,
+    "test_mean_cm": 0.1011282328038083,
+    "provider_calls": 0
+  },
+  "software_checks": "../software-checks-process-release-2026-11-04.json",
+  "source_sha256": {
+    "index.html": "9167effd638104645d7e7ffb525e14fb7f609785ccc14f3760daed8833c5c644",
+    "workbench.html": "1cd3d3ea9ddf62de3718290d2f0cfddbfb088ccbbc79651a3ab7bf5d4247b498",
+    "scan.html": "d1fbc012177f6d347d4866cb7aaceca6162733d656676c0ba197af0eb46f67e7",
+    "manifest.webmanifest": "7b9c77bd9918a3cb95b6939720deb1543d2087d6ff2e6178884aa6b32ef5d291",
+    "assets/example-bundle.json": "1339d1cfd233c11093d719d3205f565ec2ba8bc6973838449a7cd114b7e43d9a",
+    "assets/process-meta-session.json": "69026d013667a9e2d8ddce49887fa4dad2abde60d1f4d6279d98bd31045ff9eb",
+    "assets/process-meta-review.json": "eb10415fc370ea99e8cde752add26eee20a2c5970f4fd71d7527fe94769b05d3",
+    "assets/calibrated-synthetic-bundle.json": "4025e646587dfc3d7980abbfcf4ceb0d0dc5f1cba116072c4015cedae4bb8b8f",
+    "assets/example-bundle-baseline-2026-11-04.json": "9d4dc8ace96946a60a481ca371821757aa4df5f264eec0e33bc01f7fe15e456b",
+    "assets/mobile/icon.svg": "fb5c8f9b579d249648b91b93afb9d031e19bad2f1283a671ff95293f3800a922",
+    "assets/mobile/icon-maskable.svg": "4104f1fc77c2369d5373cd3495a9a46c7cb1bab1f2ceaafa2b47c583aae101cd",
+    "assets/vendor/three/manifest.json": "cfcce767cbc40aeb29d1e7f7647563bb3d290a0f37486fc77351dbfca7e7ab6d",
+    "assets/vendor/three/LICENSE.txt": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+    "assets/vendor/three/examples/jsm/environments/RoomEnvironment.js": "55f466192cc84298755a424c5e040345006b2ee1455589b3b54126c2ea4123f4",
+    "assets/vendor/three/examples/jsm/controls/OrbitControls.js": "3d79d07ecb686b4e5d93232eedab255331c1beef711e13164eaa1f68655a5f2b",
+    "assets/vendor/three/build/three.module.js": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea",
+    "assets/vendor/three/build/three.core.js": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6",
+    "web/recording.js": "8d8110abe981b201f58ddecf3b38004ae156f2305d93e216a0cc3bcaabf571c3",
+    "web/synthetic-capture.mjs": "a3a40be7202a1b7e8b24181bdc9489ce19a82384aba778ddbfbb92033b6b09c9",
+    "web/workbench.js": "954a3c14f444748aabfe25734ac8a96a3525e032d5d4154de49fef6199575649",
+    "web/camera/scanner.mjs": "f886a27ee2f55674b2b6720c33e46152a8a02c955b32a4c05a53370bf2a3ccaf",
+    "web/camera/media.mjs": "ee1b8d420804176d6cb9504eaa921d7b53934dd07bf47e41e9eb7488bd4a3c03",
+    "web/camera/tracker.mjs": "c57c9287ae16c73ae76e5db72cb22e7d1698f9ebc37103bdcba24dee88a19e41",
+    "web/camera/prediction.mjs": "266bbcaedd6fb82d9b9165c5264c10706b811d27bc0f4ddad1e396c25e4c6eb5",
+    "web/camera/scanner.css": "7eb546e00e62e9be11555368e5b3255890b820353664706ad01b8ab88e7e4b5b",
+    "web/physics/alt-models.mjs": "3a758ebc2c8d4ccd9cd46143d7f5e909a792c45c5c8f0f053e2fbbacb45d932d",
+    "web/physics/evaluator.mjs": "d464a56ecd90e76ac96c1d3a30a770b4a01d921f0dbad0e6423dbccf2ff88dde",
+    "web/physics/evidence.mjs": "5127ce7a1189ebffa533aee4940a46d1fc3a8aa8c4ac4e8fa2309f009a704ad3",
+    "web/physics/counterfactual.mjs": "7a97fa728b20b3e5170723dbc535a3a8a82fd5997f649c3c7040ee0ad72b9507",
+    "web/physics/observation-replay.mjs": "a01aae66ab527d684df3a8234463cd28ec11e9f29ac034b016ff59cce39c6e91",
+    "web/physics/control.mjs": "3a388fa3be48c72acd4c44d026b8c47e79975e74b6605103a830808a5a2c72b4",
+    "web/physics/model.mjs": "a42e380b938ad7ed2711d6812abc10ac92643bf95a80230d88414cf26e61ebd6",
+    "web/process/report-view.mjs": "e2a96056f84a2e72d3f0bbab09bcb303a7815a5053b6706b720e748e3620d605",
+    "web/process/scene.mjs": "ed9aad6e00f97a24fee63597015176a1ea436295c9f450acb9eaf6a08dd64be0",
+    "web/process/lab.css": "18423ed04ee196f211d4e823125179af1312074721ce80a06deaa2ac18e151c9",
+    "web/process/engine.mjs": "bdcd18d4499e609f73c9d27457544744ea5e9d6ba9526d1bacb24722c60aa40c",
+    "web/process/lab.mjs": "fc68ce66d6c53346981e6ddf031140947dcf9416771bfae1dd892749be0cb2d9"
+  },
+  "limitations": [
+    "Responsive emulation is not physical iPhone/Android testing.",
+    "No real sensor, physical control, arbitrary-object 3D reconstruction or real-world accuracy claim.",
+    "The legacy workbench remains a secondary exploration, separate from the Process Lab study.",
+    "Earlier screenshots may represent intermediate layout checks; final public screenshots will be recorded separately."
+  ]
+}

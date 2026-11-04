@@ -1,0 +1,17 @@
+Fermer cette vanne maintenant, ou attendre ? Ici, cette décision sépare zéro litre débordé de quatre-vingt-dix virgule huit. Dans une simulation. Regardons ce qui fait la différence.
+
+Twinforge est un banc d’essais numérique. Deux cuves, le même départ. Après calibration, la référence reste vanne ouverte. L’autre reçoit une régulation. Pendant les premières secondes, le logiciel observe le niveau et calibre un modèle connu. Puis il commence à prévoir.
+
+Le trait orange montre le niveau attendu dans cinq secondes, si la vanne reste inchangée. Activons le contrôle. Maintenant, augmentons de trente-cinq pour cent le débit disponible à l’entrée. La même perturbation touche les deux cuves. Observez leurs niveaux.
+
+La régulation compare des suites de commandes, applique la première, puis recalcule toutes les deux cents millisecondes simulées. La cuve contrôlée reste près de sa cible. L’autre déborde. Chaque prévision évaluable est comparée au niveau observé. Même après une intervention : on garde aussi les erreurs, pas seulement la belle courbe.
+
+Mais qui choisit le modèle ? Dans la démonstration, c’est un ajustement local. Passons à une expérience distincte avec Meta Muse Spark. Il reçoit des observations synthétiques bruitées, sans les vrais coefficients ni les données de test. Il propose des familles connues. Le logiciel ajuste leurs paramètres et mesure leurs erreurs.
+
+Voici les trois appels réellement exécutés. Débit constant : insuffisant. Drainage linéaire : mieux. Drainage en racine carrée : meilleur sur la validation. Les réponses et les mesures restent consultables. Environ vingt secondes, pour un peu plus d’un centime de dollar. Vous regardez la session enregistrée.
+
+Puis le modèle est figé. Trois épisodes de test distincts : vingt et une prévisions à trois secondes, zéro virgule dix centimètre d’erreur moyenne. La référence déterministe atteint exactement la même précision. Meta aide à proposer et interpréter les hypothèses ; ce test ne démontre aucun gain de précision face au solveur seul.
+
+Tout est exportable : observations, hypothèses, commandes, résultats. Pour préparer un essai de régulation, on peut changer la cible, provoquer une perturbation, puis comprendre la décision. Le rapport distingue les expériences et leurs horizons. Chaque chiffre garde ainsi son contexte.
+
+Aujourd’hui, c’est un banc virtuel. Une installation réelle demande encore des capteurs calibrés et des essais indépendants. Twinforge : anticiper, agir, vérifier. À vous de tester la vanne.

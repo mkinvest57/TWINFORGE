@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TWINFORGE executed gauntlet evidence",
+  "type": "object",
+  "required": [
+    "version",
+    "run",
+    "scenes"
+  ],
+  "properties": {
+    "version": {
+      "const": 1
+    },
+    "run": {
+      "type": "object",
+      "required": [
+        "id",
+        "recorded_at",
+        "mode",
+        "source_commit",
+        "source_sha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recorded_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "mode": {
+          "enum": [
+            "simulation",
+            "real"
+          ]
+        },
+        "source_commit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "scenes": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "validated",
+          "tests",
+          "metrics"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "hoop",
+              "multi",
+              "chaos",
+              "liquid",
+              "orbit"
+            ]
+          },
+          "validated": {
+            "type": "boolean"
+          },
+          "tests": {
+            "type": "array",
+            "minItems": 7,
+            "maxItems": 7,
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "status",
+                "reason",
+                "evidence",
+                "measurements"
+              ],
+              "properties": {
+                "id": {
+                  "enum": [
+                    "launch",
+                    "bounce",
+                    "hoop_passage",
+                    "net",
+                    "ghost_ahead",
+                    "induction",
+                    "control"
+                  ]
+                },
+                "status": {
+                  "enum": [
+                    "pass",
+                    "fail",
+                    "blocked",
+                    "not_run",
+                    "not_applicable"
+                  ]
+                },
+                "executed_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "method": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "reason": {
+                  "type": "string"
+                },
+                "evidence": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "path",
+                      "sha256"
+                    ],
+                    "properties": {
+                      "path": {
+                        "type": "string"
+                      },
+                      "sha256": {
+                        "type": "string",
+                        "pattern": "^[0-9a-f]{64}$"
+                      }
+                    }
+                  }
+                },
+                "measurements": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "metrics": {
+            "type": "object",
+            "required": [
+              "ghost_error_mean_cm",
+              "verdicts_correct",
+              "verdicts_total",
+              "collisions"
+            ],
+            "properties": {
+              "ghost_error_mean_cm": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "verdicts_correct": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "verdicts_total": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              },
+              "collisions": {
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "minimum": 0
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$comment": "Template intentionally has nulls. JSON schema shape is not empirical validation. Run preflight for ordered tests, evidence hashes, metrics and blockers."
+}

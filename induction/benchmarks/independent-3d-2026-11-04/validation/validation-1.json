@@ -1,0 +1,751 @@
+{
+  "schema_version": "twinforge.dataset.v1",
+  "shot_id": "validation-1",
+  "provenance": {
+    "kind": "synthetic",
+    "sensor": "noisy_3d_position_sensor",
+    "source_sha256": "743a1e5bc8208ec0a03cb02516517362638b5658c5c24aa57e27dbdc60c41ec4",
+    "seed": 20261108
+  },
+  "calibration": {
+    "mode": "synthetic_world_frame",
+    "metric": true,
+    "dimensions_observed": 3,
+    "units": "metres",
+    "clock": "exact_integration_timestamps"
+  },
+  "geometry": {
+    "ball_radius_m": 0.12,
+    "hoop": {
+      "center": [
+        3.0,
+        2.3,
+        0.0
+      ],
+      "normal": [
+        0,
+        1,
+        0
+      ],
+      "inner_radius_m": 0.45
+    },
+    "kind": "non-contact measurement gate; no rim/net dynamics claimed"
+  },
+  "frames": [
+    {
+      "t": 0.0,
+      "position_m": [
+        -1.2010752809484249,
+        1.699698165531525,
+        0.10070406517039251
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.05,
+      "position_m": [
+        -0.9113249596940538,
+        1.9608428383515255,
+        0.09334868769839905
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.1,
+      "position_m": [
+        -0.6278125271939651,
+        2.191678255669345,
+        0.085883429423498
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.15,
+      "position_m": [
+        -0.3454254855672203,
+        2.3974532119316323,
+        0.07274813198448556
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.2,
+      "position_m": [
+        -0.07071618635554286,
+        2.574335684161033,
+        0.06781699269378656
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.25,
+      "position_m": [
+        0.2052553279319491,
+        2.727683070559339,
+        0.06115070359604969
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.3,
+      "position_m": [
+        0.4756661893968846,
+        2.8515261664122424,
+        0.053445153795823
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.35,
+      "position_m": [
+        0.7426642274225986,
+        2.9518844752550772,
+        0.044430820876003044
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.4,
+      "position_m": [
+        1.0115281716995483,
+        3.0231938983974693,
+        0.03648715170541505
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.45,
+      "position_m": [
+        1.2715516963432507,
+        3.074138106866604,
+        0.02534545558762547
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.5,
+      "position_m": [
+        1.529179592386288,
+        3.1044502962720673,
+        0.016404354477839087
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.55,
+      "position_m": [
+        1.7953892358071317,
+        3.1011522952647126,
+        0.008217720519222232
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.6,
+      "position_m": [
+        2.049418473746721,
+        3.0779623204953688,
+        -6.147757906050169e-06
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.65,
+      "position_m": [
+        2.304050525741272,
+        3.029166516056395,
+        -0.009109795727925352
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.7,
+      "position_m": [
+        2.5548649086546957,
+        2.954250280780202,
+        -0.019613737720150643
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.75,
+      "position_m": [
+        2.805880894716964,
+        2.8571232856904203,
+        -0.028829261890899602
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.8,
+      "position_m": [
+        3.0521724831971877,
+        2.7348844357688544,
+        -0.04287452530982771
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.85,
+      "position_m": [
+        3.2986525915878007,
+        2.6005469508249033,
+        -0.05076090894337658
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.9,
+      "position_m": [
+        3.5380178348495246,
+        2.4358750539317837,
+        -0.061282460928911146
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 0.95,
+      "position_m": [
+        3.7816258645815606,
+        2.248916268779704,
+        -0.07154217406784731
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 1.0,
+      "position_m": [
+        4.018394255572834,
+        2.0429977113663664,
+        -0.08263098601165503
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 1.05,
+      "position_m": [
+        4.253718815932669,
+        1.8139461152457914,
+        -0.09292013926699345
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 1.1,
+      "position_m": [
+        4.488206113494119,
+        1.561153458388891,
+        -0.10647961594245617
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 1.15,
+      "position_m": [
+        4.7168521870892315,
+        1.2923743105816488,
+        -0.11587551762471707
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 1.2,
+      "position_m": [
+        4.946053244930493,
+        1.0044318317446554,
+        -0.12723250426937424
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 1.25,
+      "position_m": [
+        5.167287200960924,
+        0.6918100893370036,
+        -0.13981849514090527
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 1.3,
+      "position_m": [
+        5.3925284088365375,
+        0.3610538532145481,
+        -0.15361075578558867
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 1.35,
+      "position_m": [
+        5.6061917346701895,
+        0.015601838330223336,
+        -0.15912930075362744
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 1.4,
+      "position_m": [
+        5.820215259191964,
+        -0.3542845927142022,
+        -0.1727662711328532
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 1.45,
+      "position_m": [
+        6.034373642416165,
+        -0.7358198167318287,
+        -0.18285500996377912
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    },
+    {
+      "t": 1.5,
+      "position_m": [
+        6.243710321620116,
+        -1.1348424277844222,
+        -0.19308074236877795
+      ],
+      "track_id": 1,
+      "velocity_m_s": null,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.002,
+          0.002,
+          0.002
+        ],
+        "method": "declared synthetic sensor noise"
+      },
+      "quality": {
+        "missing": false,
+        "fp02_outlier": false,
+        "contact": false
+      }
+    }
+  ],
+  "events": [],
+  "observed_outcome": false
+}

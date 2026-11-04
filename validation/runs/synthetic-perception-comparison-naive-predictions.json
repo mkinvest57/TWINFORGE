@@ -1,0 +1,695 @@
+{
+  "source_kind": "synthetic",
+  "configuration": {
+    "method": "largest_orange_HSV_contour",
+    "hsv_lower": [
+      5,
+      110,
+      60
+    ],
+    "hsv_upper": [
+      25,
+      255,
+      255
+    ],
+    "minimum_area_px": 12,
+    "maximum_image_area_fraction": 0.05,
+    "association_gate_px": 100,
+    "identity_policy": "nearest previous centroid within gate; reset after any missing frame",
+    "threshold_selection": "fixed generic orange-color rule; no tuning or sweep against evaluator truth"
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "t": 0.0,
+      "track_id": 1,
+      "centroid": [
+        142.97743055555554,
+        311.14930555555554
+      ],
+      "position_m": [
+        -1.5591284034202069,
+        0.6333598840351855,
+        0.672577858728018
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 576.0,
+      "eccentricity": 0.3212258472446707,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.18485095975714058,
+          0.09024183548313247,
+          0.154654038330558
+        ],
+        "depth_std_m": 0.24909361465057478,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 2,
+      "t": 0.16666666666666666,
+      "track_id": 1,
+      "centroid": [
+        159.48626817447496,
+        223.891760904685
+      ],
+      "position_m": [
+        -1.3500781327238363,
+        1.4881539536158095,
+        0.586585303112845
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 619.0,
+      "eccentricity": 0.25756419994622165,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.166392253794004,
+          0.051898795529864386,
+          0.14937688353143047
+        ],
+        "depth_std_m": 0.22208048418017254,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 3,
+      "t": 0.25,
+      "track_id": 1,
+      "centroid": [
+        168.88484848484848,
+        190.45
+      ],
+      "position_m": [
+        -1.1688351763929,
+        1.814865730865292,
+        0.6176574220377451
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 660.0,
+      "eccentricity": 0.2875186658752909,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.17074119761829704,
+          0.041973207440123284,
+          0.1587779504648506
+        ],
+        "depth_std_m": 0.2290768099526448,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 5,
+      "t": 0.4166666666666667,
+      "track_id": 1,
+      "centroid": [
+        189.41921397379912,
+        145.39592430858806
+      ],
+      "position_m": [
+        -0.9829252988713453,
+        2.2069057000419283,
+        0.5276079446184796
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 687.0,
+      "eccentricity": 0.19759236530109792,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.14934259664453023,
+          0.023460575755452052,
+          0.14893955284761368
+        ],
+        "depth_std_m": 0.20529117232869257,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 6,
+      "t": 0.5,
+      "track_id": 1,
+      "centroid": [
+        200.52180028129396,
+        134.59634317862165
+      ],
+      "position_m": [
+        -0.857765757227182,
+        2.3023589241610525,
+        0.517382235113875
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 711.0,
+      "eccentricity": 0.15946969143224543,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.13629481717634453,
+          0.018676501201671948,
+          0.1407992102048494
+        ],
+        "depth_std_m": 0.1903788817920437,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 8,
+      "t": 0.6666666666666666,
+      "track_id": 1,
+      "centroid": [
+        224.42634560906515,
+        138.25637393767704
+      ],
+      "position_m": [
+        -0.6873559818192332,
+        2.272439971783984,
+        0.4126662421942493
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 706.0,
+      "eccentricity": 0.16931160738632997,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.12923232372198498,
+          0.019617111809792878,
+          0.1435612689653105
+        ],
+        "depth_std_m": 0.18771353810802588,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 9,
+      "t": 0.75,
+      "track_id": 1,
+      "centroid": [
+        236.71079136690648,
+        152.0244604316547
+      ],
+      "position_m": [
+        -0.6087253444697707,
+        2.1568724302876037,
+        0.3534435342243052
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 695.0,
+      "eccentricity": 0.24474429431613376,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.12649344671915028,
+          0.023771904447224428,
+          0.14577278967127183
+        ],
+        "depth_std_m": 0.1879452402401621,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 11,
+      "t": 0.9166666666666666,
+      "track_id": 1,
+      "centroid": [
+        261.446875,
+        202.959375
+      ],
+      "position_m": [
+        -0.49105984187134055,
+        1.705415180076226,
+        0.1843033396127618
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 640.0,
+      "eccentricity": 0.2077826609608206,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.1255788278130764,
+          0.0410344006131124,
+          0.15593772429708916
+        ],
+        "depth_std_m": 0.19742943765868698,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 12,
+      "t": 1.0,
+      "track_id": 1,
+      "centroid": [
+        268.63186813186815,
+        239.1813186813187
+      ],
+      "position_m": [
+        -1.4710245551669585,
+        0.9604765953332317,
+        -1.1588573925986978
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 364.0,
+      "eccentricity": 0.8086362410132718,
+      "position_uncertainty": {
+        "position_std_m": [
+          1.014775458752848,
+          0.4297422145154488,
+          1.2892851892173591
+        ],
+        "depth_std_m": 1.6514726406229956,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 14,
+      "t": 1.1666666666666667,
+      "track_id": 1,
+      "centroid": [
+        296.9829642248722,
+        328.8143100511073
+      ],
+      "position_m": [
+        -0.2315814443683557,
+        0.532306910297081,
+        0.0322461162655685
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 587.0,
+      "eccentricity": 0.1265148506483814,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.12209092130307783,
+          0.08862454069623613,
+          0.16997930540745074
+        ],
+        "depth_std_m": 0.21949499894455166,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 15,
+      "t": 1.25,
+      "track_id": 1,
+      "centroid": [
+        308.2304964539007,
+        379.322695035461
+      ],
+      "position_m": [
+        -0.14493213684128126,
+        0.025514883271739563,
+        -0.01994719413888113
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 564.0,
+      "eccentricity": 0.3208459016859297,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.1320274727096511,
+          0.12037757541289053,
+          0.19125823884019352
+        ],
+        "depth_std_m": 0.2529707877507847,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 17,
+      "t": 1.4166666666666667,
+      "track_id": 1,
+      "centroid": [
+        323.4144736842105,
+        317.0625
+      ],
+      "position_m": [
+        0.029147238399286568,
+        0.6889778928898265,
+        -0.011331749769762922
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 608.0,
+      "eccentricity": 0.12740135396821037,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.10881553448340224,
+          0.08021478238005841,
+          0.1668006360328706
+        ],
+        "depth_std_m": 0.20722847459563093,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 18,
+      "t": 1.5,
+      "track_id": 1,
+      "centroid": [
+        331.2471728594507,
+        295.8465266558966
+      ],
+      "position_m": [
+        0.0813093716429405,
+        0.8858927655568318,
+        -0.058633049338218335
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 619.0,
+      "eccentricity": 0.17242234674371357,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.1057362096940534,
+          0.07204242240109114,
+          0.1668205403118943
+        ],
+        "depth_std_m": 0.20292369941508487,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 20,
+      "t": 1.6666666666666667,
+      "track_id": 1,
+      "centroid": [
+        347.3333333333333,
+        275.9617224880383
+      ],
+      "position_m": [
+        0.20778377630370892,
+        1.0764090091856895,
+        -0.12172161691436045
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 627.0,
+      "eccentricity": 0.08968725036040558,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.09970096713870685,
+          0.06409473226405439,
+          0.16695277570614175
+        ],
+        "depth_std_m": 0.1976394781968012,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 21,
+      "t": 1.75,
+      "track_id": 1,
+      "centroid": [
+        355.4292452830189,
+        277.1808176100629
+      ],
+      "position_m": [
+        0.2828379440706943,
+        1.0749901784064242,
+        -0.13388606494067723
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 636.0,
+      "eccentricity": 0.1513261342760459,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.09648606718156855,
+          0.06384519286648271,
+          0.1666126050828389
+        ],
+        "depth_std_m": 0.19578517644064342,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 23,
+      "t": 1.9166666666666667,
+      "track_id": 1,
+      "centroid": [
+        371.29245283018867,
+        302.92767295597486
+      ],
+      "position_m": [
+        0.419709340895253,
+        0.8490367491788926,
+        -0.18147373823189294
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 636.0,
+      "eccentricity": 0.18213576498259262,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.09284496223252295,
+          0.07318932709444786,
+          0.1708686717841163
+        ],
+        "depth_std_m": 0.20057256198000056,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 24,
+      "t": 2.0,
+      "track_id": 1,
+      "centroid": [
+        379.0517799352751,
+        326.83656957928804
+      ],
+      "position_m": [
+        0.455374002748155,
+        0.6009343968062986,
+        -0.27222734523709935
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 618.0,
+      "eccentricity": 0.2217570103553275,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.09353314808928309,
+          0.084214178276392,
+          0.1780701916001142
+        ],
+        "depth_std_m": 0.21064232425325724,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 26,
+      "t": 2.1666666666666665,
+      "track_id": 1,
+      "centroid": [
+        393.3387358184765,
+        387.26256077795784
+      ],
+      "position_m": [
+        0.6258423217000875,
+        0.0632782103980567,
+        -0.25090991092799175
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 617.0,
+      "eccentricity": 0.30132658943981566,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.0892714467461167,
+          0.10727077065035341,
+          0.18175577968490228
+        ],
+        "depth_std_m": 0.22145731481308387,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 27,
+      "t": 2.25,
+      "track_id": 1,
+      "centroid": [
+        402.1475667189953,
+        365.2087912087912
+      ],
+      "position_m": [
+        0.6962558425349901,
+        0.2909905348817512,
+        -0.26895384338508066
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 637.0,
+      "eccentricity": 0.21926437135672389,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.08637170877396383,
+          0.09822826911787992,
+          0.18212090355216598
+        ],
+        "depth_std_m": 0.21661684002797932,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 29,
+      "t": 2.4166666666666665,
+      "track_id": 1,
+      "centroid": [
+        419.62191358024694,
+        342.1975308641975
+      ],
+      "position_m": [
+        0.8243238960141634,
+        0.5172417930213817,
+        -0.3364102857576663
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 648.0,
+      "eccentricity": 0.19541287079244363,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.07869481855544119,
+          0.08647086070152131,
+          0.17860678988448936
+        ],
+        "depth_std_m": 0.20623421578754042,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 30,
+      "t": 2.5,
+      "track_id": 1,
+      "centroid": [
+        428.18684603886396,
+        342.1718983557549
+      ],
+      "position_m": [
+        0.9280491878791657,
+        0.563971696696953,
+        -0.2777947845924684
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 669.0,
+      "eccentricity": 0.23359954993263732,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.07578428629710372,
+          0.0858310328718328,
+          0.17872728435604543
+        ],
+        "depth_std_m": 0.20495823686643674,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 32,
+      "t": 2.6666666666666665,
+      "track_id": 1,
+      "centroid": [
+        444.5843023255814,
+        364.41279069767444
+      ],
+      "position_m": [
+        1.0923350642849987,
+        0.40651907142375876,
+        -0.2601823415346267
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 688.0,
+      "eccentricity": 0.26333272120411133,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.06725983208438623,
+          0.08881807363201816,
+          0.17223350983109464
+        ],
+        "depth_std_m": 0.1980784051110946,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 33,
+      "t": 2.75,
+      "track_id": 1,
+      "centroid": [
+        451.9530102790015,
+        386.6798825256975
+      ],
+      "position_m": [
+        1.1355947710501941,
+        0.1709440999233811,
+        -0.3517616191130202
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 681.0,
+      "eccentricity": 0.30730971132541823,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.06771521081204597,
+          0.10052674987889752,
+          0.18107863511230066
+        ],
+        "depth_std_m": 0.21061937556780558,
+        "method": "angular silhouette + measured diameter"
+      }
+    },
+    {
+      "frame": 35,
+      "t": 2.9166666666666665,
+      "track_id": 1,
+      "centroid": [
+        470.08522727272725,
+        380.15482954545456
+      ],
+      "position_m": [
+        1.2867176615879092,
+        0.2691576893183427,
+        -0.36585257743827526
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 704.0,
+      "eccentricity": 0.3373812825026047,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.061133207053183446,
+          0.09547656091623452,
+          0.17913076423649912
+        ],
+        "depth_std_m": 0.20490181530029467,
+        "method": "angular silhouette + measured diameter"
+      }
+    }
+  ]
+}

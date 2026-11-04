@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "profile": "simulation-only",
+  "checked_at": "2026-11-04T02:17:22+00:00",
+  "ready_for_review": true,
+  "scientifically_validated": false,
+  "strict_pdf_satisfied": false,
+  "meaning": "Logiciel local L3 et expériences synthétiques indépendantes. Aucun critère physique/historique du PDF n'est réputé satisfait par ce profil.",
+  "excluded_boundaries": [
+    "Captures et mesures réelles, calibration physique d'une caméra, appareil de contrôle/actionnement réel",
+    "Induction libre L1 et reconstruction rétrospective d'horodatages/calibration absents des archives",
+    "Délais historiques, publication du code final, acceptation des règles et envoi au portail",
+    "Exécution réelle de Glimmer sans endpoint/clé ou capacité disque suffisante; adaptateurs et comportement d'absence restent testés"
+  ],
+  "checks": [
+    {
+      "id": "benchmark/provenance",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "independent_3d/provenance",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "legacy_replay/provenance",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "tracking/provenance",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "browser/provenance",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "software/provenance",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "media/provenance",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "vendor/provenance",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "benchmark",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "independent_3d",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "legacy_replay",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "software",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "browser",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "media",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "vendor",
+      "passed": true,
+      "issues": []
+    },
+    {
+      "id": "tracking",
+      "passed": true,
+      "issues": []
+    }
+  ],
+  "issues": []
+}

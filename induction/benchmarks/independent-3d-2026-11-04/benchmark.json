@@ -1,0 +1,3660 @@
+{
+  "schema_version": "twinforge.synthetic_benchmark.v1",
+  "created_utc": "2026-11-04T01:58:30.600212+00:00",
+  "source_kind": "synthetic_position_sensor",
+  "real_world_validation": false,
+  "sensor_noise_std_m": 0.002,
+  "generator_integrator": "independent_RK4_1ms",
+  "fitted_integrator": "semi_implicit_Euler_2ms",
+  "horizon_s": 0.5,
+  "error_threshold_cm": 5.0,
+  "split_ids": {
+    "train": [
+      "train-1",
+      "train-2",
+      "train-3"
+    ],
+    "validation": [
+      "validation-1",
+      "validation-2"
+    ],
+    "test": [
+      "test-1",
+      "test-2",
+      "test-3"
+    ]
+  },
+  "fingerprints": {
+    "train": [
+      "4773bed90df476d3e5e55e62fee1ce544c5a8deabd189faec4a2839c2023d5b2",
+      "07d49c86513916afbd7c3c073941297bbbb057da822057ff0d9efc4196a9f18f",
+      "402b6face834a8691f69f4c7f5b916b2577fa066e28909eca34dfb3b8054869d"
+    ],
+    "validation": [
+      "659baf1471ffa716f751f190c8e3e15d58217fec546b37aa7ddae5474bd79fc6",
+      "832dff81ac2d1a638f5835c29c7b009064249d16fe4174f1bc62a7d95c05e78b"
+    ],
+    "test": [
+      "d0d5411cda84269cc6baf9bc9097aec2f50a542b93f6e9315be897d9e6b09c36",
+      "cb73370df1e00c54d7fddd180a61003e313e7f3c04f75d58b6765585eabd89e2",
+      "edfe5d51f90caa8ba8fde70ae16d9f186c7b94af13c9642a675347b580469363"
+    ]
+  },
+  "model_selection": [
+    {
+      "family": "gravity",
+      "validation_mean_cm": 23.61039059260925
+    },
+    {
+      "family": "quadratic_drag",
+      "validation_mean_cm": 1.774689992147143
+    }
+  ],
+  "selected_model": {
+    "schema_version": "twinforge.twin.v1",
+    "level": "L3",
+    "status": "calibrated_known_family_unvalidated",
+    "family": "quadratic_drag",
+    "parameters": {
+      "g": {
+        "value": 9.730105313336582,
+        "uncertainty": 0.002216031345423979,
+        "source": "training observations only; initialized by finite differences, refined by integrated trajectory residuals; contacts/outliers excluded",
+        "status": "estimated",
+        "units": "m/s^2"
+      },
+      "drag": {
+        "value": 0.04244397921370991,
+        "uncertainty": 0.0001966964032618509,
+        "source": "training observations only; initialized by finite differences, refined by integrated trajectory residuals; contacts/outliers excluded",
+        "status": "estimated",
+        "units": "1/m"
+      },
+      "wind": {
+        "value": [
+          0.2560446678080403,
+          0.0,
+          -0.11421583333551238
+        ],
+        "uncertainty": [
+          0.005307623374538136,
+          null,
+          0.001794678673730323
+        ],
+        "source": "training observations only; initialized by finite differences, refined by integrated trajectory residuals; contacts/outliers excluded; vertical acceleration absorbed by g",
+        "status": "estimated",
+        "units": "m/s^2"
+      },
+      "restitution": {
+        "value": null,
+        "uncertainty": null,
+        "source": "no universal material coefficient; see per-surface measurements",
+        "status": "unobserved",
+        "units": "ratio"
+      },
+      "friction": {
+        "value": null,
+        "uncertainty": null,
+        "source": "no independent rolling/sliding observations fitted",
+        "status": "unobserved",
+        "units": "ratio"
+      },
+      "magnus": {
+        "value": null,
+        "uncertainty": null,
+        "source": "spin-induced lift not identifiable without measured spin",
+        "status": "unobserved",
+        "units": null
+      },
+      "spin": {
+        "value": null,
+        "uncertainty": null,
+        "source": "ball spin not reconstructed from a silhouette",
+        "status": "unobserved",
+        "units": "rad/s"
+      }
+    },
+    "restitution_by_surface": {},
+    "numeric": {
+      "g": 9.730105313336582,
+      "drag": 0.04244397921370991,
+      "wind": [
+        0.2560446678080403,
+        0.0,
+        -0.11421583333551238
+      ],
+      "restitution": null,
+      "friction": null,
+      "magnus": null,
+      "spin": null,
+      "restitution_by_surface": {}
+    },
+    "source_fingerprints": [
+      "4773bed90df476d3e5e55e62fee1ce544c5a8deabd189faec4a2839c2023d5b2",
+      "07d49c86513916afbd7c3c073941297bbbb057da822057ff0d9efc4196a9f18f",
+      "402b6face834a8691f69f4c7f5b916b2577fa066e28909eca34dfb3b8054869d"
+    ],
+    "train_shot_ids": [
+      "train-1",
+      "train-2",
+      "train-3"
+    ],
+    "training_identity_keys": [
+      "frames:07d49c86513916afbd7c3c073941297bbbb057da822057ff0d9efc4196a9f18f",
+      "frames:402b6face834a8691f69f4c7f5b916b2577fa066e28909eca34dfb3b8054869d",
+      "frames:4773bed90df476d3e5e55e62fee1ce544c5a8deabd189faec4a2839c2023d5b2",
+      "shot:train-1",
+      "shot:train-2",
+      "shot:train-3"
+    ],
+    "calibration_dimensions": 3,
+    "fit": {
+      "initial_acceleration_residual_rms": 0.4478311794276637,
+      "acceleration_residual_rms": 0.4478311794276637,
+      "n_points": 87,
+      "drag_boundary_zero": false,
+      "trajectory_refinement": {
+        "status": "refined_on_training_observations",
+        "method": "bounded_LM_integrated_positions_with_training_Huber_weights",
+        "initial_position_rmse_cm": 3.0602128825326687,
+        "final_position_rmse_cm": 0.2109270174977617,
+        "segments": 3,
+        "positions": 93,
+        "integrator_step_s": 0.002,
+        "uncertainty": "approximate local least-squares; calibration systematic error not included",
+        "iterations": [
+          {
+            "iteration": 1,
+            "accepted": true,
+            "train_position_rmse_cm": 0.2124280768658152
+          },
+          {
+            "iteration": 2,
+            "accepted": true,
+            "train_position_rmse_cm": 0.21092776416910064
+          },
+          {
+            "iteration": 3,
+            "accepted": true,
+            "train_position_rmse_cm": 0.2109270186123175
+          },
+          {
+            "iteration": 4,
+            "accepted": true,
+            "train_position_rmse_cm": 0.21092701750162388
+          },
+          {
+            "iteration": 5,
+            "accepted": true,
+            "train_position_rmse_cm": 0.2109270174977617
+          }
+        ],
+        "uses_validation_or_test": false
+      }
+    },
+    "uncertainty_method": "linear least-squares standard errors; correlated finite differences and calibration systematic error are not included",
+    "simulator": {
+      "family": "quadratic_drag",
+      "module": "induction.simulator",
+      "dimensions": 3,
+      "integrator": "semi_implicit_euler",
+      "max_step_s": 0.002,
+      "validated_regime": "free_flight",
+      "contact_support": [
+        "plane",
+        "sphere",
+        "rim"
+      ],
+      "missing_identification": [
+        "friction",
+        "spin",
+        "net material and geometry"
+      ]
+    },
+    "limitations": [
+      "L3 calibration of predefined families, not autonomous code/physics induction.",
+      "Homography data remain planar even though the integrator uses XYZ vectors.",
+      "Unmeasured contact parameters stay null; contact rollout refuses guessed coefficients."
+    ],
+    "validation": {
+      "train_shots": [
+        "train-1",
+        "train-2",
+        "train-3"
+      ],
+      "validation_shots": [
+        "validation-1",
+        "validation-2"
+      ],
+      "test_shots": [
+        "test-1",
+        "test-2",
+        "test-3"
+      ],
+      "held_out_cm": 1.7635369205532896,
+      "validation_result": {
+        "mean_error_cm": 1.774689992147143,
+        "shots": [
+          {
+            "shot_id": "validation-1",
+            "observation_sha256": "659baf1471ffa716f751f190c8e3e15d58217fec546b37aa7ddae5474bd79fc6",
+            "initialization_end_s": 0.15,
+            "mean_error_cm": 2.5574983523930905,
+            "max_error_cm": 4.567461524652912,
+            "samples_scored": 27,
+            "forecast_errors": [
+              {
+                "t": 0.2,
+                "error_cm": 0.40408292630140913
+              },
+              {
+                "t": 0.25,
+                "error_cm": 0.6379612361254414
+              },
+              {
+                "t": 0.3,
+                "error_cm": 0.8467001273548134
+              },
+              {
+                "t": 0.35,
+                "error_cm": 1.0445658676891167
+              },
+              {
+                "t": 0.4,
+                "error_cm": 1.116320851933984
+              },
+              {
+                "t": 0.45,
+                "error_cm": 1.2376703235307511
+              },
+              {
+                "t": 0.5,
+                "error_cm": 1.8282333816904626
+              },
+              {
+                "t": 0.55,
+                "error_cm": 1.573413040709289
+              },
+              {
+                "t": 0.6,
+                "error_cm": 1.964184905884422
+              },
+              {
+                "t": 0.65,
+                "error_cm": 2.131451691578672
+              },
+              {
+                "t": 0.7,
+                "error_cm": 2.1970291111962434
+              },
+              {
+                "t": 0.75,
+                "error_cm": 2.3327269515019466
+              },
+              {
+                "t": 0.8,
+                "error_cm": 2.1879408299015934
+              },
+              {
+                "t": 0.85,
+                "error_cm": 2.596560411120765
+              },
+              {
+                "t": 0.9,
+                "error_cm": 2.910638830670231
+              },
+              {
+                "t": 0.95,
+                "error_cm": 2.9005768226899042
+              },
+              {
+                "t": 1.0,
+                "error_cm": 3.127726311304556
+              },
+              {
+                "t": 1.05,
+                "error_cm": 3.3261292838865906
+              },
+              {
+                "t": 1.1,
+                "error_cm": 3.106808792811205
+              },
+              {
+                "t": 1.15,
+                "error_cm": 3.4938947372618836
+              },
+              {
+                "t": 1.2,
+                "error_cm": 3.576206084419193
+              },
+              {
+                "t": 1.25,
+                "error_cm": 3.701975012743388
+              },
+              {
+                "t": 1.3,
+                "error_cm": 3.383296339208821
+              },
+              {
+                "t": 1.35,
+                "error_cm": 4.2803812196147994
+              },
+              {
+                "t": 1.4,
+                "error_cm": 4.222796360787593
+              },
+              {
+                "t": 1.45,
+                "error_cm": 4.3557225380434526
+              },
+              {
+                "t": 1.5,
+                "error_cm": 4.567461524652912
+              }
+            ],
+            "predicted_outcome": false,
+            "observed_outcome": false
+          },
+          {
+            "shot_id": "validation-2",
+            "observation_sha256": "832dff81ac2d1a638f5835c29c7b009064249d16fe4174f1bc62a7d95c05e78b",
+            "initialization_end_s": 0.15,
+            "mean_error_cm": 0.9918816319011957,
+            "max_error_cm": 1.5101367479845833,
+            "samples_scored": 27,
+            "forecast_errors": [
+              {
+                "t": 0.2,
+                "error_cm": 0.6449956243181881
+              },
+              {
+                "t": 0.25,
+                "error_cm": 0.6157513584623562
+              },
+              {
+                "t": 0.3,
+                "error_cm": 0.6005351708032575
+              },
+              {
+                "t": 0.35,
+                "error_cm": 0.4624020128086674
+              },
+              {
+                "t": 0.4,
+                "error_cm": 0.1701815613088902
+              },
+              {
+                "t": 0.45,
+                "error_cm": 0.5794443805221032
+              },
+              {
+                "t": 0.5,
+                "error_cm": 0.8092798540054574
+              },
+              {
+                "t": 0.55,
+                "error_cm": 0.6678870977367809
+              },
+              {
+                "t": 0.6,
+                "error_cm": 0.7600031537699676
+              },
+              {
+                "t": 0.65,
+                "error_cm": 0.6839306905209601
+              },
+              {
+                "t": 0.7,
+                "error_cm": 0.6157056690772571
+              },
+              {
+                "t": 0.75,
+                "error_cm": 0.9447502792413629
+              },
+              {
+                "t": 0.8,
+                "error_cm": 1.2958865531704895
+              },
+              {
+                "t": 0.85,
+                "error_cm": 1.2390194196918245
+              },
+              {
+                "t": 0.9,
+                "error_cm": 0.9965870372464788
+              },
+              {
+                "t": 0.95,
+                "error_cm": 1.3194054666226316
+              },
+              {
+                "t": 1.0,
+                "error_cm": 0.9716091337957224
+              },
+              {
+                "t": 1.05,
+                "error_cm": 1.3938134297753793
+              },
+              {
+                "t": 1.1,
+                "error_cm": 1.3748172658628575
+              },
+              {
+                "t": 1.15,
+                "error_cm": 1.0885043008487565
+              },
+              {
+                "t": 1.2,
+                "error_cm": 1.2461204306035834
+              },
+              {
+                "t": 1.25,
+                "error_cm": 1.2844633962850132
+              },
+              {
+                "t": 1.3,
+                "error_cm": 1.5101367479845833
+              },
+              {
+                "t": 1.35,
+                "error_cm": 1.2252114811034385
+              },
+              {
+                "t": 1.4,
+                "error_cm": 1.3486811042973323
+              },
+              {
+                "t": 1.45,
+                "error_cm": 1.4928604205580298
+              },
+              {
+                "t": 1.5,
+                "error_cm": 1.438821020910916
+              }
+            ],
+            "predicted_outcome": true,
+            "observed_outcome": true
+          }
+        ],
+        "verdicts": {
+          "correct": 2,
+          "scored": 2,
+          "accuracy": 1.0
+        },
+        "protocol": "frozen training model; causal same-model rollout fit on first 4 clean observations initializes state; later free-flight samples only"
+      },
+      "test_result": {
+        "mean_error_cm": 1.7635369205532896,
+        "shots": [
+          {
+            "shot_id": "test-1",
+            "observation_sha256": "d0d5411cda84269cc6baf9bc9097aec2f50a542b93f6e9315be897d9e6b09c36",
+            "initialization_end_s": 0.15,
+            "mean_error_cm": 0.6775453845987274,
+            "max_error_cm": 1.133845664647124,
+            "samples_scored": 27,
+            "forecast_errors": [
+              {
+                "t": 0.2,
+                "error_cm": 0.503418557482679
+              },
+              {
+                "t": 0.25,
+                "error_cm": 0.3342791869558973
+              },
+              {
+                "t": 0.3,
+                "error_cm": 0.2946533748212773
+              },
+              {
+                "t": 0.35,
+                "error_cm": 0.26706974564051733
+              },
+              {
+                "t": 0.4,
+                "error_cm": 0.6217442321709454
+              },
+              {
+                "t": 0.45,
+                "error_cm": 1.0497178967628151
+              },
+              {
+                "t": 0.5,
+                "error_cm": 0.5321314908436764
+              },
+              {
+                "t": 0.55,
+                "error_cm": 0.52544643085754
+              },
+              {
+                "t": 0.6,
+                "error_cm": 0.35744841005818034
+              },
+              {
+                "t": 0.65,
+                "error_cm": 0.7603513610748098
+              },
+              {
+                "t": 0.7,
+                "error_cm": 0.6222564333477666
+              },
+              {
+                "t": 0.75,
+                "error_cm": 0.40149611600502316
+              },
+              {
+                "t": 0.8,
+                "error_cm": 0.3776572967589402
+              },
+              {
+                "t": 0.85,
+                "error_cm": 0.7556882658191919
+              },
+              {
+                "t": 0.9,
+                "error_cm": 0.44261840943146946
+              },
+              {
+                "t": 0.95,
+                "error_cm": 0.3885233714705106
+              },
+              {
+                "t": 1.0,
+                "error_cm": 0.7796058747486736
+              },
+              {
+                "t": 1.05,
+                "error_cm": 0.8745369095340514
+              },
+              {
+                "t": 1.1,
+                "error_cm": 0.8233301782971488
+              },
+              {
+                "t": 1.15,
+                "error_cm": 1.1015330867886564
+              },
+              {
+                "t": 1.2,
+                "error_cm": 0.8367811909704055
+              },
+              {
+                "t": 1.25,
+                "error_cm": 1.0968283893374549
+              },
+              {
+                "t": 1.3,
+                "error_cm": 0.9011411125736579
+              },
+              {
+                "t": 1.35,
+                "error_cm": 0.9651840725162724
+              },
+              {
+                "t": 1.4,
+                "error_cm": 0.6853742960268036
+              },
+              {
+                "t": 1.45,
+                "error_cm": 1.133845664647124
+              },
+              {
+                "t": 1.5,
+                "error_cm": 0.8610640292241508
+              }
+            ],
+            "predicted_outcome": false,
+            "observed_outcome": false
+          },
+          {
+            "shot_id": "test-2",
+            "observation_sha256": "cb73370df1e00c54d7fddd180a61003e313e7f3c04f75d58b6765585eabd89e2",
+            "initialization_end_s": 0.15,
+            "mean_error_cm": 2.907213022910719,
+            "max_error_cm": 5.133888517911929,
+            "samples_scored": 27,
+            "forecast_errors": [
+              {
+                "t": 0.2,
+                "error_cm": 0.6192934248788103
+              },
+              {
+                "t": 0.25,
+                "error_cm": 0.8610961553110144
+              },
+              {
+                "t": 0.3,
+                "error_cm": 1.1092981052863053
+              },
+              {
+                "t": 0.35,
+                "error_cm": 1.215288160607059
+              },
+              {
+                "t": 0.4,
+                "error_cm": 1.3309014137660085
+              },
+              {
+                "t": 0.45,
+                "error_cm": 1.544557107413352
+              },
+              {
+                "t": 0.5,
+                "error_cm": 1.4772787838136883
+              },
+              {
+                "t": 0.55,
+                "error_cm": 1.898942883081773
+              },
+              {
+                "t": 0.6,
+                "error_cm": 2.0662979856641313
+              },
+              {
+                "t": 0.65,
+                "error_cm": 2.320815235242699
+              },
+              {
+                "t": 0.7,
+                "error_cm": 2.361221027324644
+              },
+              {
+                "t": 0.75,
+                "error_cm": 2.360517373863783
+              },
+              {
+                "t": 0.8,
+                "error_cm": 3.201180632404008
+              },
+              {
+                "t": 0.85,
+                "error_cm": 3.2799817020555952
+              },
+              {
+                "t": 0.9,
+                "error_cm": 3.062042624329525
+              },
+              {
+                "t": 0.95,
+                "error_cm": 3.4244739880935264
+              },
+              {
+                "t": 1.0,
+                "error_cm": 3.431548211896439
+              },
+              {
+                "t": 1.05,
+                "error_cm": 3.636146213864915
+              },
+              {
+                "t": 1.1,
+                "error_cm": 3.9174696924121073
+              },
+              {
+                "t": 1.15,
+                "error_cm": 3.9798835939146433
+              },
+              {
+                "t": 1.2,
+                "error_cm": 4.107717717269864
+              },
+              {
+                "t": 1.25,
+                "error_cm": 4.117661004476571
+              },
+              {
+                "t": 1.3,
+                "error_cm": 4.284845398680946
+              },
+              {
+                "t": 1.35,
+                "error_cm": 4.77040140659917
+              },
+              {
+                "t": 1.4,
+                "error_cm": 4.362401566211674
+              },
+              {
+                "t": 1.45,
+                "error_cm": 4.61960169221523
+              },
+              {
+                "t": 1.5,
+                "error_cm": 5.133888517911929
+              }
+            ],
+            "predicted_outcome": false,
+            "observed_outcome": false
+          },
+          {
+            "shot_id": "test-3",
+            "observation_sha256": "edfe5d51f90caa8ba8fde70ae16d9f186c7b94af13c9642a675347b580469363",
+            "initialization_end_s": 0.15,
+            "mean_error_cm": 1.7058523541504222,
+            "max_error_cm": 3.1886855792195266,
+            "samples_scored": 27,
+            "forecast_errors": [
+              {
+                "t": 0.2,
+                "error_cm": 0.2816770382178061
+              },
+              {
+                "t": 0.25,
+                "error_cm": 0.38294932174524177
+              },
+              {
+                "t": 0.3,
+                "error_cm": 0.7204165063401282
+              },
+              {
+                "t": 0.35,
+                "error_cm": 0.50876556048868
+              },
+              {
+                "t": 0.4,
+                "error_cm": 0.8159125628018614
+              },
+              {
+                "t": 0.45,
+                "error_cm": 0.920576550966015
+              },
+              {
+                "t": 0.5,
+                "error_cm": 0.8968060578645347
+              },
+              {
+                "t": 0.55,
+                "error_cm": 1.0443614949969644
+              },
+              {
+                "t": 0.6,
+                "error_cm": 1.1525056603577983
+              },
+              {
+                "t": 0.65,
+                "error_cm": 1.1377281789301186
+              },
+              {
+                "t": 0.7,
+                "error_cm": 1.3005858005620325
+              },
+              {
+                "t": 0.75,
+                "error_cm": 1.5721631646871466
+              },
+              {
+                "t": 0.8,
+                "error_cm": 2.1068345737991345
+              },
+              {
+                "t": 0.85,
+                "error_cm": 1.4733476367538836
+              },
+              {
+                "t": 0.9,
+                "error_cm": 1.901818891346331
+              },
+              {
+                "t": 0.95,
+                "error_cm": 2.1573810308340104
+              },
+              {
+                "t": 1.0,
+                "error_cm": 2.0543845386581134
+              },
+              {
+                "t": 1.05,
+                "error_cm": 1.995492123570446
+              },
+              {
+                "t": 1.1,
+                "error_cm": 1.8893983245345118
+              },
+              {
+                "t": 1.15,
+                "error_cm": 2.14234936003687
+              },
+              {
+                "t": 1.2,
+                "error_cm": 2.479255052077473
+              },
+              {
+                "t": 1.25,
+                "error_cm": 2.192858249310165
+              },
+              {
+                "t": 1.3,
+                "error_cm": 2.8249802516406457
+              },
+              {
+                "t": 1.35,
+                "error_cm": 2.6841961498091575
+              },
+              {
+                "t": 1.4,
+                "error_cm": 3.1416903296700305
+              },
+              {
+                "t": 1.45,
+                "error_cm": 3.0908935728427744
+              },
+              {
+                "t": 1.5,
+                "error_cm": 3.1886855792195266
+              }
+            ],
+            "predicted_outcome": false,
+            "observed_outcome": false
+          }
+        ],
+        "verdicts": {
+          "correct": 3,
+          "scored": 3,
+          "accuracy": 1.0
+        },
+        "protocol": "frozen training model; causal same-model rollout fit on first 4 clean observations initializes state; later free-flight samples only"
+      },
+      "status": "independent_synthetic_test_measured"
+    }
+  },
+  "independent_test": {
+    "mean_error_cm": 1.7635369205532896,
+    "shots": [
+      {
+        "shot_id": "test-1",
+        "observation_sha256": "d0d5411cda84269cc6baf9bc9097aec2f50a542b93f6e9315be897d9e6b09c36",
+        "initialization_end_s": 0.15,
+        "mean_error_cm": 0.6775453845987274,
+        "max_error_cm": 1.133845664647124,
+        "samples_scored": 27,
+        "forecast_errors": [
+          {
+            "t": 0.2,
+            "error_cm": 0.503418557482679
+          },
+          {
+            "t": 0.25,
+            "error_cm": 0.3342791869558973
+          },
+          {
+            "t": 0.3,
+            "error_cm": 0.2946533748212773
+          },
+          {
+            "t": 0.35,
+            "error_cm": 0.26706974564051733
+          },
+          {
+            "t": 0.4,
+            "error_cm": 0.6217442321709454
+          },
+          {
+            "t": 0.45,
+            "error_cm": 1.0497178967628151
+          },
+          {
+            "t": 0.5,
+            "error_cm": 0.5321314908436764
+          },
+          {
+            "t": 0.55,
+            "error_cm": 0.52544643085754
+          },
+          {
+            "t": 0.6,
+            "error_cm": 0.35744841005818034
+          },
+          {
+            "t": 0.65,
+            "error_cm": 0.7603513610748098
+          },
+          {
+            "t": 0.7,
+            "error_cm": 0.6222564333477666
+          },
+          {
+            "t": 0.75,
+            "error_cm": 0.40149611600502316
+          },
+          {
+            "t": 0.8,
+            "error_cm": 0.3776572967589402
+          },
+          {
+            "t": 0.85,
+            "error_cm": 0.7556882658191919
+          },
+          {
+            "t": 0.9,
+            "error_cm": 0.44261840943146946
+          },
+          {
+            "t": 0.95,
+            "error_cm": 0.3885233714705106
+          },
+          {
+            "t": 1.0,
+            "error_cm": 0.7796058747486736
+          },
+          {
+            "t": 1.05,
+            "error_cm": 0.8745369095340514
+          },
+          {
+            "t": 1.1,
+            "error_cm": 0.8233301782971488
+          },
+          {
+            "t": 1.15,
+            "error_cm": 1.1015330867886564
+          },
+          {
+            "t": 1.2,
+            "error_cm": 0.8367811909704055
+          },
+          {
+            "t": 1.25,
+            "error_cm": 1.0968283893374549
+          },
+          {
+            "t": 1.3,
+            "error_cm": 0.9011411125736579
+          },
+          {
+            "t": 1.35,
+            "error_cm": 0.9651840725162724
+          },
+          {
+            "t": 1.4,
+            "error_cm": 0.6853742960268036
+          },
+          {
+            "t": 1.45,
+            "error_cm": 1.133845664647124
+          },
+          {
+            "t": 1.5,
+            "error_cm": 0.8610640292241508
+          }
+        ],
+        "predicted_outcome": false,
+        "observed_outcome": false
+      },
+      {
+        "shot_id": "test-2",
+        "observation_sha256": "cb73370df1e00c54d7fddd180a61003e313e7f3c04f75d58b6765585eabd89e2",
+        "initialization_end_s": 0.15,
+        "mean_error_cm": 2.907213022910719,
+        "max_error_cm": 5.133888517911929,
+        "samples_scored": 27,
+        "forecast_errors": [
+          {
+            "t": 0.2,
+            "error_cm": 0.6192934248788103
+          },
+          {
+            "t": 0.25,
+            "error_cm": 0.8610961553110144
+          },
+          {
+            "t": 0.3,
+            "error_cm": 1.1092981052863053
+          },
+          {
+            "t": 0.35,
+            "error_cm": 1.215288160607059
+          },
+          {
+            "t": 0.4,
+            "error_cm": 1.3309014137660085
+          },
+          {
+            "t": 0.45,
+            "error_cm": 1.544557107413352
+          },
+          {
+            "t": 0.5,
+            "error_cm": 1.4772787838136883
+          },
+          {
+            "t": 0.55,
+            "error_cm": 1.898942883081773
+          },
+          {
+            "t": 0.6,
+            "error_cm": 2.0662979856641313
+          },
+          {
+            "t": 0.65,
+            "error_cm": 2.320815235242699
+          },
+          {
+            "t": 0.7,
+            "error_cm": 2.361221027324644
+          },
+          {
+            "t": 0.75,
+            "error_cm": 2.360517373863783
+          },
+          {
+            "t": 0.8,
+            "error_cm": 3.201180632404008
+          },
+          {
+            "t": 0.85,
+            "error_cm": 3.2799817020555952
+          },
+          {
+            "t": 0.9,
+            "error_cm": 3.062042624329525
+          },
+          {
+            "t": 0.95,
+            "error_cm": 3.4244739880935264
+          },
+          {
+            "t": 1.0,
+            "error_cm": 3.431548211896439
+          },
+          {
+            "t": 1.05,
+            "error_cm": 3.636146213864915
+          },
+          {
+            "t": 1.1,
+            "error_cm": 3.9174696924121073
+          },
+          {
+            "t": 1.15,
+            "error_cm": 3.9798835939146433
+          },
+          {
+            "t": 1.2,
+            "error_cm": 4.107717717269864
+          },
+          {
+            "t": 1.25,
+            "error_cm": 4.117661004476571
+          },
+          {
+            "t": 1.3,
+            "error_cm": 4.284845398680946
+          },
+          {
+            "t": 1.35,
+            "error_cm": 4.77040140659917
+          },
+          {
+            "t": 1.4,
+            "error_cm": 4.362401566211674
+          },
+          {
+            "t": 1.45,
+            "error_cm": 4.61960169221523
+          },
+          {
+            "t": 1.5,
+            "error_cm": 5.133888517911929
+          }
+        ],
+        "predicted_outcome": false,
+        "observed_outcome": false
+      },
+      {
+        "shot_id": "test-3",
+        "observation_sha256": "edfe5d51f90caa8ba8fde70ae16d9f186c7b94af13c9642a675347b580469363",
+        "initialization_end_s": 0.15,
+        "mean_error_cm": 1.7058523541504222,
+        "max_error_cm": 3.1886855792195266,
+        "samples_scored": 27,
+        "forecast_errors": [
+          {
+            "t": 0.2,
+            "error_cm": 0.2816770382178061
+          },
+          {
+            "t": 0.25,
+            "error_cm": 0.38294932174524177
+          },
+          {
+            "t": 0.3,
+            "error_cm": 0.7204165063401282
+          },
+          {
+            "t": 0.35,
+            "error_cm": 0.50876556048868
+          },
+          {
+            "t": 0.4,
+            "error_cm": 0.8159125628018614
+          },
+          {
+            "t": 0.45,
+            "error_cm": 0.920576550966015
+          },
+          {
+            "t": 0.5,
+            "error_cm": 0.8968060578645347
+          },
+          {
+            "t": 0.55,
+            "error_cm": 1.0443614949969644
+          },
+          {
+            "t": 0.6,
+            "error_cm": 1.1525056603577983
+          },
+          {
+            "t": 0.65,
+            "error_cm": 1.1377281789301186
+          },
+          {
+            "t": 0.7,
+            "error_cm": 1.3005858005620325
+          },
+          {
+            "t": 0.75,
+            "error_cm": 1.5721631646871466
+          },
+          {
+            "t": 0.8,
+            "error_cm": 2.1068345737991345
+          },
+          {
+            "t": 0.85,
+            "error_cm": 1.4733476367538836
+          },
+          {
+            "t": 0.9,
+            "error_cm": 1.901818891346331
+          },
+          {
+            "t": 0.95,
+            "error_cm": 2.1573810308340104
+          },
+          {
+            "t": 1.0,
+            "error_cm": 2.0543845386581134
+          },
+          {
+            "t": 1.05,
+            "error_cm": 1.995492123570446
+          },
+          {
+            "t": 1.1,
+            "error_cm": 1.8893983245345118
+          },
+          {
+            "t": 1.15,
+            "error_cm": 2.14234936003687
+          },
+          {
+            "t": 1.2,
+            "error_cm": 2.479255052077473
+          },
+          {
+            "t": 1.25,
+            "error_cm": 2.192858249310165
+          },
+          {
+            "t": 1.3,
+            "error_cm": 2.8249802516406457
+          },
+          {
+            "t": 1.35,
+            "error_cm": 2.6841961498091575
+          },
+          {
+            "t": 1.4,
+            "error_cm": 3.1416903296700305
+          },
+          {
+            "t": 1.45,
+            "error_cm": 3.0908935728427744
+          },
+          {
+            "t": 1.5,
+            "error_cm": 3.1886855792195266
+          }
+        ],
+        "predicted_outcome": false,
+        "observed_outcome": false
+      }
+    ],
+    "verdicts": {
+      "correct": 3,
+      "scored": 3,
+      "accuracy": 1.0
+    },
+    "protocol": "frozen training model; causal same-model rollout fit on first 4 clean observations initializes state; later free-flight samples only"
+  },
+  "unfitted_prior_test": {
+    "mean_error_cm": 26.94545124975888,
+    "shots": [
+      {
+        "shot_id": "test-1",
+        "observation_sha256": "d0d5411cda84269cc6baf9bc9097aec2f50a542b93f6e9315be897d9e6b09c36",
+        "initialization_end_s": 0.15,
+        "mean_error_cm": 25.84291108908012,
+        "max_error_cm": 55.5347257271391,
+        "samples_scored": 27,
+        "forecast_errors": [
+          {
+            "t": 0.2,
+            "error_cm": 1.016468180130649
+          },
+          {
+            "t": 0.25,
+            "error_cm": 1.6192640484804601
+          },
+          {
+            "t": 0.3,
+            "error_cm": 2.923134568145213
+          },
+          {
+            "t": 0.35,
+            "error_cm": 4.008038435526362
+          },
+          {
+            "t": 0.4,
+            "error_cm": 5.982852852659448
+          },
+          {
+            "t": 0.45,
+            "error_cm": 7.984252671300078
+          },
+          {
+            "t": 0.5,
+            "error_cm": 9.429344823051963
+          },
+          {
+            "t": 0.55,
+            "error_cm": 10.788373535181671
+          },
+          {
+            "t": 0.6,
+            "error_cm": 13.043793235896214
+          },
+          {
+            "t": 0.65,
+            "error_cm": 15.415680584018169
+          },
+          {
+            "t": 0.7,
+            "error_cm": 17.37672795593454
+          },
+          {
+            "t": 0.75,
+            "error_cm": 19.54246496470059
+          },
+          {
+            "t": 0.8,
+            "error_cm": 22.049655615229906
+          },
+          {
+            "t": 0.85,
+            "error_cm": 24.66492983162058
+          },
+          {
+            "t": 0.9,
+            "error_cm": 26.95588490282773
+          },
+          {
+            "t": 0.95,
+            "error_cm": 29.521565410178592
+          },
+          {
+            "t": 1.0,
+            "error_cm": 32.27495460395601
+          },
+          {
+            "t": 1.05,
+            "error_cm": 34.212934233449154
+          },
+          {
+            "t": 1.1,
+            "error_cm": 36.99513530973554
+          },
+          {
+            "t": 1.15,
+            "error_cm": 39.79287897213714
+          },
+          {
+            "t": 1.2,
+            "error_cm": 41.800530694674606
+          },
+          {
+            "t": 1.25,
+            "error_cm": 44.39840346712295
+          },
+          {
+            "t": 1.3,
+            "error_cm": 47.05610738006135
+          },
+          {
+            "t": 1.35,
+            "error_cm": 48.873364404685226
+          },
+          {
+            "t": 1.4,
+            "error_cm": 51.18439332236655
+          },
+          {
+            "t": 1.45,
+            "error_cm": 53.312739674953455
+          },
+          {
+            "t": 1.5,
+            "error_cm": 55.5347257271391
+          }
+        ],
+        "predicted_outcome": false,
+        "observed_outcome": false
+      },
+      {
+        "shot_id": "test-2",
+        "observation_sha256": "cb73370df1e00c54d7fddd180a61003e313e7f3c04f75d58b6765585eabd89e2",
+        "initialization_end_s": 0.15,
+        "mean_error_cm": 32.91047718133483,
+        "max_error_cm": 73.26320878974676,
+        "samples_scored": 27,
+        "forecast_errors": [
+          {
+            "t": 0.2,
+            "error_cm": 1.1628745297471332
+          },
+          {
+            "t": 0.25,
+            "error_cm": 2.522776940662613
+          },
+          {
+            "t": 0.3,
+            "error_cm": 3.6430203458833286
+          },
+          {
+            "t": 0.35,
+            "error_cm": 4.9406201349060925
+          },
+          {
+            "t": 0.4,
+            "error_cm": 7.191390763203579
+          },
+          {
+            "t": 0.45,
+            "error_cm": 8.954271459389881
+          },
+          {
+            "t": 0.5,
+            "error_cm": 11.505507568034732
+          },
+          {
+            "t": 0.55,
+            "error_cm": 13.82083374675776
+          },
+          {
+            "t": 0.6,
+            "error_cm": 16.424421225701394
+          },
+          {
+            "t": 0.65,
+            "error_cm": 19.065024344631958
+          },
+          {
+            "t": 0.7,
+            "error_cm": 21.64596459044524
+          },
+          {
+            "t": 0.75,
+            "error_cm": 24.35235002036748
+          },
+          {
+            "t": 0.8,
+            "error_cm": 27.49920350748514
+          },
+          {
+            "t": 0.85,
+            "error_cm": 30.381652993559243
+          },
+          {
+            "t": 0.9,
+            "error_cm": 33.9529343305841
+          },
+          {
+            "t": 0.95,
+            "error_cm": 36.9769545568389
+          },
+          {
+            "t": 1.0,
+            "error_cm": 39.942793750260805
+          },
+          {
+            "t": 1.05,
+            "error_cm": 43.41847361062372
+          },
+          {
+            "t": 1.1,
+            "error_cm": 47.201921205270644
+          },
+          {
+            "t": 1.15,
+            "error_cm": 50.21143481016899
+          },
+          {
+            "t": 1.2,
+            "error_cm": 53.626545465398635
+          },
+          {
+            "t": 1.25,
+            "error_cm": 57.03101936415103
+          },
+          {
+            "t": 1.3,
+            "error_cm": 60.10799566645954
+          },
+          {
+            "t": 1.35,
+            "error_cm": 63.174228532476185
+          },
+          {
+            "t": 1.4,
+            "error_cm": 66.795026821681
+          },
+          {
+            "t": 1.45,
+            "error_cm": 69.77043482160452
+          },
+          {
+            "t": 1.5,
+            "error_cm": 73.26320878974676
+          }
+        ],
+        "predicted_outcome": false,
+        "observed_outcome": false
+      },
+      {
+        "shot_id": "test-3",
+        "observation_sha256": "edfe5d51f90caa8ba8fde70ae16d9f186c7b94af13c9642a675347b580469363",
+        "initialization_end_s": 0.15,
+        "mean_error_cm": 22.082965478861688,
+        "max_error_cm": 44.865901065537706,
+        "samples_scored": 27,
+        "forecast_errors": [
+          {
+            "t": 0.2,
+            "error_cm": 0.8673358696571687
+          },
+          {
+            "t": 0.25,
+            "error_cm": 1.6433320490239738
+          },
+          {
+            "t": 0.3,
+            "error_cm": 2.84780710553359
+          },
+          {
+            "t": 0.35,
+            "error_cm": 3.608300327492475
+          },
+          {
+            "t": 0.4,
+            "error_cm": 5.227432527599943
+          },
+          {
+            "t": 0.45,
+            "error_cm": 6.675224952060299
+          },
+          {
+            "t": 0.5,
+            "error_cm": 8.092002091895518
+          },
+          {
+            "t": 0.55,
+            "error_cm": 9.833982673046327
+          },
+          {
+            "t": 0.6,
+            "error_cm": 11.587067584819145
+          },
+          {
+            "t": 0.65,
+            "error_cm": 13.311904146727807
+          },
+          {
+            "t": 0.7,
+            "error_cm": 15.324076011720786
+          },
+          {
+            "t": 0.75,
+            "error_cm": 17.479318851701205
+          },
+          {
+            "t": 0.8,
+            "error_cm": 19.951890560049637
+          },
+          {
+            "t": 0.85,
+            "error_cm": 21.30589254280873
+          },
+          {
+            "t": 0.9,
+            "error_cm": 23.74410878769208
+          },
+          {
+            "t": 0.95,
+            "error_cm": 26.050722475064088
+          },
+          {
+            "t": 1.0,
+            "error_cm": 27.95115393761074
+          },
+          {
+            "t": 1.05,
+            "error_cm": 29.89093871963536
+          },
+          {
+            "t": 1.1,
+            "error_cm": 31.69334010465652
+          },
+          {
+            "t": 1.15,
+            "error_cm": 33.844044002111936
+          },
+          {
+            "t": 1.2,
+            "error_cm": 35.98389325699784
+          },
+          {
+            "t": 1.25,
+            "error_cm": 37.37858568643399
+          },
+          {
+            "t": 1.3,
+            "error_cm": 39.62380310741813
+          },
+          {
+            "t": 1.35,
+            "error_cm": 40.930324757700326
+          },
+          {
+            "t": 1.4,
+            "error_cm": 42.70776139891563
+          },
+          {
+            "t": 1.45,
+            "error_cm": 43.8199233353546
+          },
+          {
+            "t": 1.5,
+            "error_cm": 44.865901065537706
+          }
+        ],
+        "predicted_outcome": true,
+        "observed_outcome": false
+      }
+    ],
+    "verdicts": {
+      "correct": 2,
+      "scored": 3,
+      "accuracy": 0.6666666666666666
+    },
+    "protocol": "frozen training model; causal same-model rollout fit on first 4 clean observations initializes state; later free-flight samples only"
+  },
+  "causal_plus_0_5s": {
+    "shots": [
+      {
+        "mode": "causal",
+        "horizon_s": 0.5,
+        "scheduled": 16,
+        "issued": 15,
+        "rejected": 1,
+        "all_issued_scorable": {
+          "count": 10,
+          "mean_cm": 1.0075704347819874,
+          "max_cm": 1.646103193229625
+        },
+        "supported": {
+          "count": 10,
+          "mean_cm": 1.0075704347819874,
+          "max_cm": 1.646103193229625
+        },
+        "coverage": {
+          "issued_over_scheduled": 0.9375,
+          "supported_over_scheduled": 0.625,
+          "supported_over_issued": 0.6666666666666666
+        },
+        "forecasts": [
+          {
+            "source_t": 0.1,
+            "target_t": 0.6,
+            "predicted_position_m": [
+              1.734098860243801,
+              3.385516983343563,
+              -0.11648684934175339
+            ],
+            "actual_position_m": [
+              1.7352852430943888,
+              3.388769108137233,
+              -0.10825161420802458
+            ],
+            "error_cm": 0.8933247877987749,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.1,
+              "position_m": [
+                -0.7674307581961839,
+                2.4134014029565933,
+                -0.18321236778996927
+              ],
+              "velocity_m_s": [
+                5.259043693363505,
+                4.571428878666529,
+                0.17140644984047484
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.0,
+                  0.05,
+                  0.1
+                ],
+                "latest_observation_t": 0.1,
+                "residual_rms_m": 0.001409234581988595,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.2,
+            "target_t": 0.7,
+            "predicted_position_m": [
+              2.208999692313047,
+              3.286602924281704,
+              -0.08951743584888469
+            ],
+            "actual_position_m": [
+              2.209555823009473,
+              3.2872213733156994,
+              -0.0956957575254726
+            ],
+            "error_cm": 0.6234053199849476,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.2,
+              "position_m": [
+                -0.24798919472449163,
+                2.8159744946994456,
+                -0.1623818274428998
+              ],
+              "velocity_m_s": [
+                5.1374499277417875,
+                3.491831755648612,
+                0.18359284297557146
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2
+                ],
+                "latest_observation_t": 0.2,
+                "residual_rms_m": 0.0014212968438630427,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.3,
+            "target_t": 0.8,
+            "predicted_position_m": [
+              2.685358143831102,
+              3.0877448190625105,
+              -0.0856580270365209
+            ],
+            "actual_position_m": [
+              2.679928217308387,
+              3.0902570935521068,
+              -0.08935675963910562
+            ],
+            "error_cm": 0.7033935457379599,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.3,
+              "position_m": [
+                0.26285491806847067,
+                3.110761855768284,
+                -0.1465272716954641
+              ],
+              "velocity_m_s": [
+                5.047855811994109,
+                2.441085112493298,
+                0.15770628869175518
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3
+                ],
+                "latest_observation_t": 0.3,
+                "residual_rms_m": 0.001129306756964636,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.4,
+            "target_t": 0.9,
+            "predicted_position_m": [
+              3.136241966517569,
+              2.796724638362478,
+              -0.08590393843974786
+            ],
+            "actual_position_m": [
+              3.140590673910474,
+              2.8019222288982992,
+              -0.08136943844741949
+            ],
+            "error_cm": 0.8154010887139431,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.4,
+              "position_m": [
+                0.7597995012209515,
+                3.302478707510254,
+                -0.13309464899948972
+              ],
+              "velocity_m_s": [
+                4.942726343121244,
+                1.4197146831113696,
+                0.1286263650854018
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4
+                ],
+                "latest_observation_t": 0.4,
+                "residual_rms_m": 0.0015282234477940328,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.5,
+            "target_t": 1.0,
+            "predicted_position_m": [
+              3.5877075791111372,
+              2.405484101793381,
+              -0.0750921914639294
+            ],
+            "actual_position_m": [
+              3.5918663521284344,
+              2.4213482705478695,
+              -0.07367856881421621
+            ],
+            "error_cm": 1.646103193229625,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.5,
+              "position_m": [
+                1.2498709795568523,
+                3.390293036838903,
+                -0.11967919676933857
+              ],
+              "velocity_m_s": [
+                4.863998758473534,
+                0.4069496816683264,
+                0.123163563581834
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5
+                ],
+                "latest_observation_t": 0.5,
+                "residual_rms_m": 0.0018428153257807377,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.6,
+            "target_t": 1.1,
+            "predicted_position_m": [
+              4.040556908550604,
+              1.9741802579180012,
+              -0.0743994562138442
+            ],
+            "actual_position_m": [
+              4.033924543586693,
+              1.9617293480701825,
+              -0.06739714399964497
+            ],
+            "error_cm": 1.5749469749745566,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.6,
+              "position_m": [
+                1.7347653211499172,
+                3.38998974809191,
+                -0.10836005127529497
+              ],
+              "velocity_m_s": [
+                4.80698997242433,
+                -0.5084082068355793,
+                0.10091188125675639
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6
+                ],
+                "latest_observation_t": 0.6,
+                "residual_rms_m": 0.0017977680977474468,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.7,
+            "target_t": 1.2,
+            "predicted_position_m": [
+              4.463764989183566,
+              1.4164237423999202,
+              -0.05502633933866098
+            ],
+            "actual_position_m": [
+              4.467898247762165,
+              1.4162836861683767,
+              -0.06346248838077466
+            ],
+            "error_cm": 0.9395320797413922,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.7,
+              "position_m": [
+                2.208897905865111,
+                3.2870650216332606,
+                -0.09538258357734755
+              ],
+              "velocity_m_s": [
+                4.716137835095396,
+                -1.482084545952341,
+                0.11474284494396081
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7
+                ],
+                "latest_observation_t": 0.7,
+                "residual_rms_m": 0.001493008388463831,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.8,
+            "target_t": 1.3,
+            "predicted_position_m": [
+              4.8989423423182386,
+              0.789441600817129,
+              -0.06525521885785122
+            ],
+            "actual_position_m": [
+              4.889835419784042,
+              0.7850049086359769,
+              -0.06268985369646692
+            ],
+            "error_cm": 1.0449946122607467,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.8,
+              "position_m": [
+                2.680659783494663,
+                3.0904112236868526,
+                -0.0885580403261557
+              ],
+              "velocity_m_s": [
+                4.661098074156898,
+                -2.415037839627833,
+                0.07885371624223611
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8
+                ],
+                "latest_observation_t": 0.8,
+                "residual_rms_m": 0.0012945796547492053,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.9,
+            "target_t": 1.4,
+            "predicted_position_m": [
+              5.298187206869022,
+              0.08591450466834247,
+              -0.06891859980404942
+            ],
+            "actual_position_m": [
+              5.304315088612069,
+              0.08556387832639663,
+              -0.06118365467479483
+            ],
+            "error_cm": 0.9874373379663739,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.9,
+              "position_m": [
+                3.138965334934346,
+                2.802113396435571,
+                -0.08231462483541735
+              ],
+              "velocity_m_s": [
+                4.559158242598752,
+                -3.326224268428563,
+                0.05793790109819961
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9
+                ],
+                "latest_observation_t": 0.9,
+                "residual_rms_m": 0.0015089108670120848,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.0,
+            "target_t": 1.5,
+            "predicted_position_m": [
+              5.706641907584079,
+              -0.6950686105096325,
+              -0.059094515487759174
+            ],
+            "actual_position_m": [
+              5.7019672006234465,
+              -0.6884081342647503,
+              -0.06145122798084145
+            ],
+            "error_cm": 0.8471654074115548,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 1.0,
+              "position_m": [
+                3.5929765653031347,
+                2.421997836087224,
+                -0.07470790531316467
+              ],
+              "velocity_m_s": [
+                4.488392817984578,
+                -4.219781146002987,
+                0.06294200654205676
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95,
+                  1.0
+                ],
+                "latest_observation_t": 1.0,
+                "residual_rms_m": 0.0014084577562710693,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.1,
+            "target_t": 1.6,
+            "predicted_position_m": [
+              6.08028788694837,
+              -1.5160301836990069,
+              -0.05198770997715819
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.1,
+              "position_m": [
+                4.033600633995223,
+                1.9624024893664302,
+                -0.06711233406698493
+              ],
+              "velocity_m_s": [
+                4.368312471943645,
+                -5.035163915631352,
+                0.062122842612055876
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.9,
+                  0.95,
+                  1.0,
+                  1.05,
+                  1.1
+                ],
+                "latest_observation_t": 1.1,
+                "residual_rms_m": 0.0015073814277039362,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.2,
+            "target_t": 1.7,
+            "predicted_position_m": [
+              6.459333781100656,
+              -2.4194139410360607,
+              -0.058388356264969
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.2,
+              "position_m": [
+                4.4665913104933255,
+                1.4155708725201124,
+                -0.062839297788494
+              ],
+              "velocity_m_s": [
+                4.27720488319569,
+                -5.8522386689793535,
+                0.039117768708191926
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  1.0,
+                  1.05,
+                  1.1,
+                  1.15,
+                  1.2
+                ],
+                "latest_observation_t": 1.2,
+                "residual_rms_m": 0.001625662416408791,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.3,
+            "target_t": 1.8,
+            "predicted_position_m": [
+              6.825529380418608,
+              -3.3913362421214988,
+              -0.06665318487625452
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.3,
+              "position_m": [
+                4.890264683546999,
+                0.7862546897030035,
+                -0.060847394406257034
+              ],
+              "velocity_m_s": [
+                4.177109276246918,
+                -6.648211780553258,
+                0.016750635829519828
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  1.1,
+                  1.15,
+                  1.2,
+                  1.25,
+                  1.3
+                ],
+                "latest_observation_t": 1.3,
+                "residual_rms_m": 0.0013563060398525991,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.4,
+            "target_t": 1.9,
+            "predicted_position_m": [
+              7.177098563347288,
+              -4.401614231722969,
+              -0.07472263996458496
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.4,
+              "position_m": [
+                5.303228064691054,
+                0.08556342089589399,
+                -0.06047730704671504
+              ],
+              "velocity_m_s": [
+                4.065166081580046,
+                -7.376521718650796,
+                -0.001867333010232864
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  1.2,
+                  1.25,
+                  1.3,
+                  1.35,
+                  1.4
+                ],
+                "latest_observation_t": 1.4,
+                "residual_rms_m": 0.0014210306497357706,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.5,
+            "target_t": 2.0,
+            "predicted_position_m": [
+              7.508087517035995,
+              -5.4599509440893055,
+              -0.07501161473546454
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.5,
+              "position_m": [
+                5.701810144440182,
+                -0.686630476988192,
+                -0.0599628702021383
+              ],
+              "velocity_m_s": [
+                3.936729934891208,
+                -8.057298572434584,
+                -0.0037544569990991773
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  1.3,
+                  1.35,
+                  1.4,
+                  1.45,
+                  1.5
+                ],
+                "latest_observation_t": 1.5,
+                "residual_rms_m": 0.0015432251264525087,
+                "uses_future_observations": false
+              }
+            }
+          }
+        ],
+        "rejections": [
+          {
+            "source_t": 0.0,
+            "reason": "insufficient_causal_history"
+          }
+        ],
+        "independent_test": true,
+        "interpretation": "Diagnostic on this recorded shot; support labels do not remove errors from all-issued statistics.",
+        "shot_id": "test-1"
+      },
+      {
+        "mode": "causal",
+        "horizon_s": 0.5,
+        "scheduled": 16,
+        "issued": 15,
+        "rejected": 1,
+        "all_issued_scorable": {
+          "count": 10,
+          "mean_cm": 1.0431115506586566,
+          "max_cm": 1.4885377172943237
+        },
+        "supported": {
+          "count": 10,
+          "mean_cm": 1.0431115506586566,
+          "max_cm": 1.4885377172943237
+        },
+        "coverage": {
+          "issued_over_scheduled": 0.9375,
+          "supported_over_scheduled": 0.625,
+          "supported_over_issued": 0.6666666666666666
+        },
+        "forecasts": [
+          {
+            "source_t": 0.1,
+            "target_t": 0.6,
+            "predicted_position_m": [
+              1.7839114869315222,
+              3.239334780685963,
+              -0.022128071267866457
+            ],
+            "actual_position_m": [
+              1.7935426774800582,
+              3.240663845642648,
+              -0.03241629559075555
+            ],
+            "error_cm": 1.4155345448253263,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.1,
+              "position_m": [
+                -1.160645812145566,
+                1.980973473209926,
+                0.1200451608144057
+              ],
+              "velocity_m_s": [
+                6.2732796988733375,
+                5.222046379947633,
+                -0.2765907332141718
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.0,
+                  0.05,
+                  0.1
+                ],
+                "latest_observation_t": 0.1,
+                "residual_rms_m": 0.0009336480505407954,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.2,
+            "target_t": 0.7,
+            "predicted_position_m": [
+              2.3472402751129007,
+              3.1877006949739384,
+              -0.05352905669945001
+            ],
+            "actual_position_m": [
+              2.347990899854368,
+              3.1927785201207817,
+              -0.06312240212071714
+            ],
+            "error_cm": 1.0880258365322224,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.2,
+              "position_m": [
+                -0.5396741239385289,
+                2.4452981480822578,
+                0.09205844293395073
+              ],
+              "velocity_m_s": [
+                6.113175647902954,
+                4.094622071036556,
+                -0.2822017051203403
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2
+                ],
+                "latest_observation_t": 0.2,
+                "residual_rms_m": 0.001342581362815617,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.3,
+            "target_t": 0.8,
+            "predicted_position_m": [
+              2.8853041379287214,
+              3.045131256151821,
+              -0.10400080202370861
+            ],
+            "actual_position_m": [
+              2.8959361028007526,
+              3.045744834276186,
+              -0.09876879441438166
+            ],
+            "error_cm": 1.1865456534784486,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.3,
+              "position_m": [
+                0.06160758357588676,
+                2.800159280119953,
+                0.058425309959800976
+              ],
+              "velocity_m_s": [
+                5.951489360920759,
+                3.0214477458237456,
+                -0.31678880432139217
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3
+                ],
+                "latest_observation_t": 0.3,
+                "residual_rms_m": 0.0014870233749747239,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.4,
+            "target_t": 0.9,
+            "predicted_position_m": [
+              3.4287976616964273,
+              2.8068570177671264,
+              -0.12544682698085452
+            ],
+            "actual_position_m": [
+              3.4244396555118795,
+              2.807201284400464,
+              -0.12760554540543742
+            ],
+            "error_cm": 0.4875531012722683,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.4,
+              "position_m": [
+                0.6533581248985889,
+                3.048740189447101,
+                0.029529273783234625
+              ],
+              "velocity_m_s": [
+                5.834007049093987,
+                1.9806485040183728,
+                -0.30014233099759247
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4
+                ],
+                "latest_observation_t": 0.4,
+                "residual_rms_m": 0.0015689696875204092,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.5,
+            "target_t": 1.0,
+            "predicted_position_m": [
+              3.9442876931074835,
+              2.4743077590793012,
+              -0.1523196037785174
+            ],
+            "actual_position_m": [
+              3.948632205677859,
+              2.4833519187541766,
+              -0.15949037285950304
+            ],
+            "error_cm": 1.233254000243313,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.5,
+              "position_m": [
+                1.22831892457822,
+                3.1948340682930803,
+                0.00028894163593684704
+              ],
+              "velocity_m_s": [
+                5.701737006069076,
+                0.9615038216650839,
+                -0.29481441606777675
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5
+                ],
+                "latest_observation_t": 0.5,
+                "residual_rms_m": 0.0014494075287848115,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.6,
+            "target_t": 1.1,
+            "predicted_position_m": [
+              4.45498087942578,
+              2.0615487158874335,
+              -0.19409785723914263
+            ],
+            "actual_position_m": [
+              4.454458469275118,
+              2.0641056492474927,
+              -0.19581935358702104
+            ],
+            "error_cm": 0.31263989267298026,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.6,
+              "position_m": [
+                1.7934157388903829,
+                3.240861059007471,
+                -0.03202737675124898
+              ],
+              "velocity_m_s": [
+                5.590327486308396,
+                -0.016019800240130395,
+                -0.3151723859498002
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6
+                ],
+                "latest_observation_t": 0.6,
+                "residual_rms_m": 0.0012236440779731053,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.7,
+            "target_t": 1.2,
+            "predicted_position_m": [
+              4.961060211944977,
+              1.5684061986968683,
+              -0.22930530388949358
+            ],
+            "actual_position_m": [
+              4.954200462893888,
+              1.566487994630491,
+              -0.2272209357563759
+            ],
+            "error_cm": 0.7421607265177838,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.7,
+              "position_m": [
+                2.348666617453336,
+                3.191542580486503,
+                -0.06401686273702654
+              ],
+              "velocity_m_s": [
+                5.4983624187434,
+                -0.9667311705378698,
+                -0.32280098913989724
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7
+                ],
+                "latest_observation_t": 0.7,
+                "residual_rms_m": 0.0009583082476152838,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.8,
+            "target_t": 1.3,
+            "predicted_position_m": [
+              5.452454681781568,
+              0.9928930699070754,
+              -0.26221327461982696
+            ],
+            "actual_position_m": [
+              5.441513016043006,
+              0.9867169723721543,
+              -0.2586826371869793
+            ],
+            "error_cm": 1.3051039444331756,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.8,
+              "position_m": [
+                2.894181030964133,
+                3.0477166324247817,
+                -0.0962480222052859
+              ],
+              "velocity_m_s": [
+                5.401419572533586,
+                -1.8993408624594184,
+                -0.3254155512673318
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8
+                ],
+                "latest_observation_t": 0.8,
+                "residual_rms_m": 0.0015625302703092582,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.9,
+            "target_t": 1.4,
+            "predicted_position_m": [
+              5.91769413847915,
+              0.3256642392170494,
+              -0.2998453286402243
+            ],
+            "actual_position_m": [
+              5.91170938115384,
+              0.32903507351557704,
+              -0.29035205067207365
+            ],
+            "error_cm": 1.1717600893167242,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.9,
+              "position_m": [
+                3.426181157900075,
+                2.8086291609646596,
+                -0.1295518015609732
+              ],
+              "velocity_m_s": [
+                5.281258801405647,
+                -2.8341303810529483,
+                -0.33617702286837914
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9
+                ],
+                "latest_observation_t": 0.9,
+                "residual_rms_m": 0.0018284741098178727,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.0,
+            "target_t": 1.5,
+            "predicted_position_m": [
+              6.370681571619235,
+              -0.3957623626586603,
+              -0.3158566561953282
+            ],
+            "actual_position_m": [
+              6.372330626298804,
+              -0.4037967891076039,
+              -0.3282785346314218
+            ],
+            "error_cm": 1.4885377172943237,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 1.0,
+              "position_m": [
+                3.947920293289385,
+                2.481816235407087,
+                -0.15957643683888717
+              ],
+              "velocity_m_s": [
+                5.157755048851015,
+                -3.7062917939362943,
+                -0.3076208724887625
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95,
+                  1.0
+                ],
+                "latest_observation_t": 1.0,
+                "residual_rms_m": 0.0013741021744022273,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.1,
+            "target_t": 1.6,
+            "predicted_position_m": [
+              6.80790624273791,
+              -1.1930676960080713,
+              -0.36490283328359746
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.1,
+              "position_m": [
+                4.45562571859859,
+                2.0666218759310837,
+                -0.19481821741413244
+              ],
+              "velocity_m_s": [
+                5.031771464089105,
+                -4.5621967675699775,
+                -0.339221214970883
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.9,
+                  0.95,
+                  1.0,
+                  1.05,
+                  1.1
+                ],
+                "latest_observation_t": 1.1,
+                "residual_rms_m": 0.0014941229280764025,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.2,
+            "target_t": 1.7,
+            "predicted_position_m": [
+              7.2404924385429625,
+              -2.0679883227584273,
+              -0.396424503885365
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.2,
+              "position_m": [
+                4.95455857649225,
+                1.5650743909350695,
+                -0.22771384435301067
+              ],
+              "velocity_m_s": [
+                4.915535095595556,
+                -5.410608583502804,
+                -0.3382305298246855
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  1.0,
+                  1.05,
+                  1.1,
+                  1.15,
+                  1.2
+                ],
+                "latest_observation_t": 1.2,
+                "residual_rms_m": 0.0013980919903250533,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.3,
+            "target_t": 1.8,
+            "predicted_position_m": [
+              7.663658579443232,
+              -2.9800499891936356,
+              -0.4163482829194941
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.3,
+              "position_m": [
+                5.441848219428173,
+                0.9858371488276775,
+                -0.25836128312291157
+              ],
+              "velocity_m_s": [
+                4.8012487985139405,
+                -6.176940194838888,
+                -0.3166259381233093
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  1.1,
+                  1.15,
+                  1.2,
+                  1.25,
+                  1.3
+                ],
+                "latest_observation_t": 1.3,
+                "residual_rms_m": 0.0010907649745519315,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.4,
+            "target_t": 1.9,
+            "predicted_position_m": [
+              8.058202435051955,
+              -3.9561231320042043,
+              -0.4528032136584799
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.4,
+              "position_m": [
+                5.913496168128398,
+                0.33027937538038765,
+                -0.2917809877212273
+              ],
+              "velocity_m_s": [
+                4.656731561661461,
+                -6.923440137011511,
+                -0.32506132587983305
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  1.2,
+                  1.25,
+                  1.3,
+                  1.35,
+                  1.4
+                ],
+                "latest_observation_t": 1.4,
+                "residual_rms_m": 0.0014446689241891639,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.5,
+            "target_t": 2.0,
+            "predicted_position_m": [
+              8.439813976350457,
+              -4.9999436816905165,
+              -0.4914188845364284
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.5,
+              "position_m": [
+                6.371959389558944,
+                -0.40229336617171424,
+                -0.3262528769449346
+              ],
+              "velocity_m_s": [
+                4.511517531639729,
+                -7.657702347028447,
+                -0.3360586566969008
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  1.3,
+                  1.35,
+                  1.4,
+                  1.45,
+                  1.5
+                ],
+                "latest_observation_t": 1.5,
+                "residual_rms_m": 0.0015375773551738118,
+                "uses_future_observations": false
+              }
+            }
+          }
+        ],
+        "rejections": [
+          {
+            "source_t": 0.0,
+            "reason": "insufficient_causal_history"
+          }
+        ],
+        "independent_test": true,
+        "interpretation": "Diagnostic on this recorded shot; support labels do not remove errors from all-issued statistics.",
+        "shot_id": "test-2"
+      },
+      {
+        "mode": "causal",
+        "horizon_s": 0.5,
+        "scheduled": 16,
+        "issued": 15,
+        "rejected": 1,
+        "all_issued_scorable": {
+          "count": 10,
+          "mean_cm": 0.9969488380734605,
+          "max_cm": 2.2992962601425067
+        },
+        "supported": {
+          "count": 10,
+          "mean_cm": 0.9969488380734605,
+          "max_cm": 2.2992962601425067
+        },
+        "coverage": {
+          "issued_over_scheduled": 0.9375,
+          "supported_over_scheduled": 0.625,
+          "supported_over_issued": 0.6666666666666666
+        },
+        "forecasts": [
+          {
+            "source_t": 0.1,
+            "target_t": 0.6,
+            "predicted_position_m": [
+              1.4387679899260857,
+              3.045617817363094,
+              0.1177428527027674
+            ],
+            "actual_position_m": [
+              1.4559078827798289,
+              3.0361049025225118,
+              0.10572599565158454
+            ],
+            "error_cm": 2.2992962601425067,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.1,
+              "position_m": [
+                -0.5765219209506413,
+                2.2639539155744184,
+                -0.05853511562636519
+              ],
+              "velocity_m_s": [
+                4.177867101553946,
+                4.138289815013586,
+                0.40043279835522955
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.0,
+                  0.05,
+                  0.1
+                ],
+                "latest_observation_t": 0.1,
+                "residual_rms_m": 0.0012580123686759114,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.2,
+            "target_t": 0.7,
+            "predicted_position_m": [
+              1.8477846813029501,
+              2.9045598053045047,
+              0.13564760676991625
+            ],
+            "actual_position_m": [
+              1.849118702171237,
+              2.896091361798952,
+              0.13450461921328954
+            ],
+            "error_cm": 0.8648732140514515,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.2,
+              "position_m": [
+                -0.15709368845550226,
+                2.6229195927747386,
+                -0.022657453215555488
+              ],
+              "velocity_m_s": [
+                4.1371759193628765,
+                3.075968561977299,
+                0.3610126861451655
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.0,
+                  0.05,
+                  0.1,
+                  0.15,
+                  0.2
+                ],
+                "latest_observation_t": 0.2,
+                "residual_rms_m": 0.0014713112839499676,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.3,
+            "target_t": 0.8,
+            "predicted_position_m": [
+              2.230452404389946,
+              2.6604936253690132,
+              0.15318870774687143
+            ],
+            "actual_position_m": [
+              2.2331536033183297,
+              2.6575573929205385,
+              0.15849546300380984
+            ],
+            "error_cm": 0.6639246041473398,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.3,
+              "position_m": [
+                0.2525438657466748,
+                2.8753513415716285,
+                0.010212860077800319
+              ],
+              "velocity_m_s": [
+                4.069458234131398,
+                2.0308588574726505,
+                0.3279951772873195
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.1,
+                  0.15,
+                  0.2,
+                  0.25,
+                  0.3
+                ],
+                "latest_observation_t": 0.3,
+                "residual_rms_m": 0.0010429174181251493,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.4,
+            "target_t": 0.9,
+            "predicted_position_m": [
+              2.625527603368706,
+              2.3337910913735334,
+              0.18977895731539687
+            ],
+            "actual_position_m": [
+              2.6203833108387133,
+              2.3347284038994456,
+              0.18446936642422773
+            ],
+            "error_cm": 0.7452117540468419,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.4,
+              "position_m": [
+                0.6603805326260659,
+                3.02727372674247,
+                0.04532135410520083
+              ],
+              "velocity_m_s": [
+                4.04239005139879,
+                1.0272715275711417,
+                0.33102003274226416
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.2,
+                  0.25,
+                  0.3,
+                  0.35,
+                  0.4
+                ],
+                "latest_observation_t": 0.4,
+                "residual_rms_m": 0.0015739850284917079,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.5,
+            "target_t": 1.0,
+            "predicted_position_m": [
+              3.0025967100978086,
+              1.9196473771723572,
+              0.21149415947033973
+            ],
+            "actual_position_m": [
+              2.9927901892781614,
+              1.9212821441818637,
+              0.20883045390480828
+            ],
+            "error_cm": 1.0292504122000017,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.5,
+              "position_m": [
+                1.0611346406355031,
+                3.080139038933754,
+                0.0765516193871167
+              ],
+              "velocity_m_s": [
+                4.000279164982252,
+                0.04559299197097879,
+                0.3116302883178387
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.3,
+                  0.35,
+                  0.4,
+                  0.45,
+                  0.5
+                ],
+                "latest_observation_t": 0.5,
+                "residual_rms_m": 0.0016588691114340576,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.6,
+            "target_t": 1.1,
+            "predicted_position_m": [
+              3.3588793877614687,
+              1.4259664466848054,
+              0.22507160759969286
+            ],
+            "actual_position_m": [
+              3.367374870054142,
+              1.4233908879090902,
+              0.2306617426445196
+            ],
+            "error_cm": 1.049077367078754,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.6,
+              "position_m": [
+                1.455592041583583,
+                3.0364623404410556,
+                0.10541068838603265
+              ],
+              "velocity_m_s": [
+                3.933659749110443,
+                -0.9072012314886927,
+                0.28047864401383854
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.4,
+                  0.45,
+                  0.5,
+                  0.55,
+                  0.6
+                ],
+                "latest_observation_t": 0.6,
+                "residual_rms_m": 0.0010815272630201609,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.7,
+            "target_t": 1.2,
+            "predicted_position_m": [
+              3.722791831082468,
+              0.8410141901196261,
+              0.25265530215041354
+            ],
+            "actual_position_m": [
+              3.722342683925342,
+              0.8382216601652559,
+              0.2511071908677054
+            ],
+            "error_cm": 0.3224376724028622,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.7,
+              "position_m": [
+                1.8478049396333933,
+                2.896609500716832,
+                0.134747469071863
+              ],
+              "velocity_m_s": [
+                3.894049406443272,
+                -1.861269869206334,
+                0.2780829230794365
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.5,
+                  0.55,
+                  0.6,
+                  0.65,
+                  0.7
+                ],
+                "latest_observation_t": 0.7,
+                "residual_rms_m": 0.000697009615225855,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.8,
+            "target_t": 1.3,
+            "predicted_position_m": [
+              4.077735876815681,
+              0.16372041391184194,
+              0.2625354021139683
+            ],
+            "actual_position_m": [
+              4.075656551598951,
+              0.1754920312620764,
+              0.2690851125654947
+            ],
+            "error_cm": 1.3630600698285653,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.8,
+              "position_m": [
+                2.235369986328829,
+                2.658635913612395,
+                0.15949721293223365
+              ],
+              "velocity_m_s": [
+                3.848687529400968,
+                -2.8166147725840207,
+                0.24805656827820383
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.6,
+                  0.65,
+                  0.7,
+                  0.75,
+                  0.8
+                ],
+                "latest_observation_t": 0.8,
+                "residual_rms_m": 0.0012760666567336958,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 0.9,
+            "target_t": 1.4,
+            "predicted_position_m": [
+              4.4235398184650485,
+              -0.5576154465414886,
+              0.2814703050222767
+            ],
+            "actual_position_m": [
+              4.420089449479988,
+              -0.5613957037482148,
+              0.28603907884086865
+            ],
+            "error_cm": 0.6860691283502106,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 0.9,
+              "position_m": [
+                2.6182628882018197,
+                2.33541542699102,
+                0.1846604691059223
+              ],
+              "velocity_m_s": [
+                3.79344198785425,
+                -3.6954628911794085,
+                0.23615161219016056
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.7,
+                  0.75,
+                  0.8,
+                  0.85,
+                  0.9
+                ],
+                "latest_observation_t": 0.9,
+                "residual_rms_m": 0.0018198433722067336,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.0,
+            "target_t": 1.5,
+            "predicted_position_m": [
+              4.759894666312477,
+              -1.3606586596804506,
+              0.3030282623120449
+            ],
+            "actual_position_m": [
+              4.75123186058522,
+              -1.3639993687061938,
+              0.3048562499540247
+            ],
+            "error_cm": 0.9462878984860708,
+            "supported": true,
+            "unsupported_reasons": [],
+            "state": {
+              "t": 1.0,
+              "position_m": [
+                2.993735767573564,
+                1.9209365833534644,
+                0.2090652237975394
+              ],
+              "velocity_m_s": [
+                3.734346944607592,
+                -4.566405904353784,
+                0.2314429917252762
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.8,
+                  0.85,
+                  0.9,
+                  0.95,
+                  1.0
+                ],
+                "latest_observation_t": 1.0,
+                "residual_rms_m": 0.0016965316092887664,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.1,
+            "target_t": 1.6,
+            "predicted_position_m": [
+              5.0913315173383,
+              -2.223057609872004,
+              0.3179025086034962
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.1,
+              "position_m": [
+                3.365886431632889,
+                1.4226086207960889,
+                0.23156422778173338
+              ],
+              "velocity_m_s": [
+                3.6705527196512775,
+                -5.394708614243672,
+                0.21630241642288087
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  0.9,
+                  0.95,
+                  1.0,
+                  1.05,
+                  1.1
+                ],
+                "latest_observation_t": 1.1,
+                "residual_rms_m": 0.0012999993868363841,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.2,
+            "target_t": 1.7,
+            "predicted_position_m": [
+              5.389177875738176,
+              -3.161287951414338,
+              0.3272295101380928
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.2,
+              "position_m": [
+                3.723648238404291,
+                0.8395507250123235,
+                0.25171455692589645
+              ],
+              "velocity_m_s": [
+                3.5636869982045996,
+                -6.213431267584675,
+                0.19397610325185063
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  1.0,
+                  1.05,
+                  1.1,
+                  1.15,
+                  1.2
+                ],
+                "latest_observation_t": 1.2,
+                "residual_rms_m": 0.0016190694484271258,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.3,
+            "target_t": 1.8,
+            "predicted_position_m": [
+              5.683859305048591,
+              -4.156558034558124,
+              0.3349850129006656
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.3,
+              "position_m": [
+                4.0743594873526305,
+                0.17742265040721064,
+                0.2694981491183439
+              ],
+              "velocity_m_s": [
+                3.4632749759970927,
+                -6.992557708102691,
+                0.1730777499883056
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  1.1,
+                  1.15,
+                  1.2,
+                  1.25,
+                  1.3
+                ],
+                "latest_observation_t": 1.3,
+                "residual_rms_m": 0.0015333658723302465,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.4,
+            "target_t": 1.9,
+            "predicted_position_m": [
+              5.992175676065711,
+              -5.202137279467281,
+              0.346439530891141
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.4,
+              "position_m": [
+                4.420727953962096,
+                -0.5605348843361673,
+                0.2868459950774909
+              ],
+              "velocity_m_s": [
+                3.4004414823374605,
+                -7.722804196420127,
+                0.16100782524700327
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  1.2,
+                  1.25,
+                  1.3,
+                  1.35,
+                  1.4
+                ],
+                "latest_observation_t": 1.4,
+                "residual_rms_m": 0.0012976599885901237,
+                "uses_future_observations": false
+              }
+            }
+          },
+          {
+            "source_t": 1.5,
+            "target_t": 2.0,
+            "predicted_position_m": [
+              6.262119367645312,
+              -6.279221797977872,
+              0.3592707212207207
+            ],
+            "actual_position_m": null,
+            "error_cm": null,
+            "supported": false,
+            "unsupported_reasons": [
+              "target_unobserved"
+            ],
+            "state": {
+              "t": 1.5,
+              "position_m": [
+                4.752478069513747,
+                -1.3645998709724942,
+                0.3034471301551921
+              ],
+              "velocity_m_s": [
+                3.2814262435800563,
+                -8.377001953678693,
+                0.15339488748562002
+              ],
+              "track_id": 1,
+              "state_estimation": {
+                "method": "causal-rollout-v3",
+                "sample_times": [
+                  1.3,
+                  1.35,
+                  1.4,
+                  1.45,
+                  1.5
+                ],
+                "latest_observation_t": 1.5,
+                "residual_rms_m": 0.00114364902529423,
+                "uses_future_observations": false
+              }
+            }
+          }
+        ],
+        "rejections": [
+          {
+            "source_t": 0.0,
+            "reason": "insufficient_causal_history"
+          }
+        ],
+        "independent_test": true,
+        "interpretation": "Diagnostic on this recorded shot; support labels do not remove errors from all-issued statistics.",
+        "shot_id": "test-3"
+      }
+    ],
+    "all_issued_scorable_mean_cm": 1.0158769411713682,
+    "all_issued_scorable_max_cm": 2.2992962601425067,
+    "scored": 30,
+    "within_5cm": 30,
+    "scheduled": 48,
+    "issued": 45
+  },
+  "limitations": [
+    "Numerical 3D sensor benchmark, not SAM/video or real-world proof.",
+    "Measurement gate is non-contact; net, rim collision and physical actuation are not validated.",
+    "This new dataset does not replace or repair legacy footage timing/calibration."
+  ]
+}

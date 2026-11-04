@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "claim": "No comparison is measured merely because a baseline implementation exists.",
+  "comparisons": [
+    {
+      "id": "sam_vs_naive_tracking",
+      "status": "partial_synthetic",
+      "source_kind": "synthetic",
+      "dataset_ids": [],
+      "evaluation_split": "independent_test_shots",
+      "metric": "track_continuity",
+      "unit": "fraction",
+      "variants": [
+        {
+          "name": "sam_masks",
+          "value": null
+        },
+        {
+          "name": "naive_tracking",
+          "value": null
+        }
+      ],
+      "evidence": [
+        {
+          "path": "validation/runs/synthetic-perception-comparison-cone-v2.json",
+          "sha256": "c92adf4451fc6e34eb44a32a22ba94e8eb17a4e97fb2fbf7a3a9a140493b6b7e"
+        }
+      ],
+      "reason": "Same-frame SAM versus naive tracking executed on 24 synthetic frames; original physical independent-shot validation remains absent. Full and common-detection cohorts are reported separately."
+    },
+    {
+      "id": "calibrated_vs_prefit_physics",
+      "status": "not_run",
+      "source_kind": "unknown",
+      "dataset_ids": [],
+      "evaluation_split": "independent_test_shots",
+      "metric": "prediction_error",
+      "unit": "cm",
+      "variants": [
+        {
+          "name": "l3_calibrated",
+          "value": null
+        },
+        {
+          "name": "unfitted_prior",
+          "value": null
+        }
+      ],
+      "evidence": [
+        {
+          "path": "validation/runs/ablation-calibrated-vs-prior-2026-11-04.json",
+          "sha256": "d01ae5cd27ed06d8eb195665af1c955b5a1d96e0930a78f150ea796a2056265b"
+        }
+      ],
+      "reason": "Original free-induction versus fully prefitted baseline not executed. See measured_synthetic L3 calibrated versus unfitted-prior supplementary comparison."
+    }
+  ],
+  "supplementary_comparisons": [
+    {
+      "id": "l3_calibrated_vs_unfitted_prior",
+      "status": "measured_synthetic",
+      "source_kind": "synthetic_test_fixtures",
+      "real_world_validation": false,
+      "dataset_ids": [
+        "api-test-20261104"
+      ],
+      "evaluation_split": "independent_test_shots",
+      "metric": "prediction_error",
+      "unit": "cm",
+      "variants": [
+        {
+          "name": "l3_calibrated",
+          "value": 0.8097667875957845
+        },
+        {
+          "name": "unfitted_prior",
+          "value": 6.508548965975863
+        }
+      ],
+      "evidence": [
+        {
+          "path": "validation/runs/ablation-calibrated-vs-prior-2026-11-04.json",
+          "sha256": "d01ae5cd27ed06d8eb195665af1c955b5a1d96e0930a78f150ea796a2056265b"
+        }
+      ],
+      "reason": "Quantitative L3 regression on one independent synthetic test shot. This is not free induction versus a fully prefitted engine."
+    },
+    {
+      "id": "same_sam_responses_tracker_fix",
+      "status": "measured_synthetic",
+      "source_kind": "synthetic_WebGL_video",
+      "real_world_validation": false,
+      "dataset_ids": [
+        "perception/test_shot.mp4"
+      ],
+      "evaluation_split": "same_saved_responses",
+      "metric": "tracked_frames_fraction",
+      "unit": "fraction",
+      "variants": [
+        {
+          "name": "before_association_fix",
+          "value": 0.6
+        },
+        {
+          "name": "after_association_fix",
+          "value": 0.8
+        }
+      ],
+      "evidence": [
+        {
+          "path": "validation/runs/sam-perception-2026-11-04.json",
+          "sha256": "25ad0843fa304cd541ce12779f63a2c955708ee73095c4f6b38aafd17b7d1b1b"
+        }
+      ],
+      "reason": "Same SAM outputs, different association logic. This is not SAM versus a naive tracker baseline."
+    },
+    {
+      "id": "sam_vs_naive_synthetic",
+      "status": "measured_synthetic",
+      "source_kind": "synthetic",
+      "real_world_validation": false,
+      "frame_ids": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        8,
+        9,
+        11,
+        12,
+        14,
+        15,
+        17,
+        18,
+        20,
+        21,
+        23,
+        24,
+        26,
+        27,
+        29,
+        30,
+        32,
+        33,
+        35
+      ],
+      "metric": "centroid_error",
+      "unit": "px",
+      "variants": [
+        {
+          "name": "sam",
+          "value": 0.16255275216809015,
+          "detection_rate": 0.9583333333333334
+        },
+        {
+          "name": "naive",
+          "value": 0.3870514671603497,
+          "detection_rate": 1.0
+        }
+      ],
+      "evidence": [
+        {
+          "path": "validation/runs/synthetic-perception-comparison-cone-v2.json",
+          "sha256": "c92adf4451fc6e34eb44a32a22ba94e8eb17a4e97fb2fbf7a3a9a140493b6b7e"
+        }
+      ],
+      "interpretation": "All-detection means use different detection cohorts. On 23 common frames: SAM 0.163 px versus naive 0.186 px, but 3D SAM 12.60 cm versus naive 6.50 cm. Coordinate-registration correction is not a network improvement; no overall superiority claim."
+    }
+  ]
+}

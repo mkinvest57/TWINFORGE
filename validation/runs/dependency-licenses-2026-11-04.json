@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "inspected_at": "2026-11-04",
+  "scope": "Local installed and vendored license files; no acceptance of provider or hackathon terms implied.",
+  "items": [
+    {
+      "name": "three",
+      "version": "0.186.1",
+      "license_declared": "MIT",
+      "redistributed_runtime": true,
+      "license_path": "assets/vendor/three/LICENSE.txt",
+      "license_sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc"
+    },
+    {
+      "name": "@meta-sam/parser",
+      "version": "0.1.0",
+      "license_declared": "SAM License (2025-11-19), package field SEE LICENSE IN LICENSE",
+      "redistributed_runtime": false,
+      "installed_by": "npm install --prefix perception",
+      "license_path": "docs/third-party/SAM-parser-LICENSE.txt",
+      "license_sha256": "4dea99bfaa016e21bc860d73f344236bd1e5c4977d1a9a8fd32f822b500ae1be"
+    }
+  ],
+  "project_code_license": "Not selected; author decision remains separate."
+}

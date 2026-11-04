@@ -1,0 +1,532 @@
+{
+  "version": 1,
+  "run": {
+    "id": "6ef874e6-0f94-4e6d-bf45-958444d399e6",
+    "recorded_at": "2026-11-04T02:17:04.867Z",
+    "mode": "simulation",
+    "source_commit": "working-tree",
+    "source_sha256": "a14deb7edca75a829a292a2bc34adf7718df9034c80a576bda42a18847c7957f"
+  },
+  "scenes": [
+    {
+      "id": "hoop",
+      "validated": false,
+      "tests": [
+        {
+          "id": "launch",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "14844db5-20a6-4f6c-8410-85f05176aa8a"
+              ]
+            }
+          ],
+          "measurements": {
+            "speed_m_s": 7.800000000000001,
+            "spin_rad_s": 6
+          },
+          "reason": "Measured initial impulse in simulation.",
+          "executed_at": "2026-11-04T02:15:38.502Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "bounce",
+          "status": "not_run",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "7652c164-cca8-49f0-8121-a0c0b437eb08"
+              ]
+            }
+          ],
+          "measurements": {
+            "surfaces": [
+              "rim",
+              "net",
+              "ground"
+            ]
+          },
+          "reason": "Each floor, board and rim bounce requires measured contact evidence; one shot is not assumed to cover all surfaces.",
+          "executed_at": "2026-11-04T02:15:45.613Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "hoop_passage",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "7652c164-cca8-49f0-8121-a0c0b437eb08"
+              ]
+            }
+          ],
+          "measurements": {
+            "scored": true
+          },
+          "reason": "Clearance crossing measured in simulation.",
+          "executed_at": "2026-11-04T02:15:45.613Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "net",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "7652c164-cca8-49f0-8121-a0c0b437eb08"
+              ]
+            }
+          ],
+          "measurements": {
+            "strand_contacts": 466,
+            "max_displacement_m": 0.1480359803741876
+          },
+          "reason": "Coupled sphere/strand contacts and constraint deformation, simulation only.",
+          "executed_at": "2026-11-04T02:15:45.613Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "ghost_ahead",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "7652c164-cca8-49f0-8121-a0c0b437eb08"
+              ]
+            }
+          ],
+          "measurements": {
+            "horizon_s": 0.5,
+            "error_mean_cm": 3.6137433867548925,
+            "samples": 473
+          },
+          "reason": "Future target timestamps and measured errors; 30 cm threshold.",
+          "executed_at": "2026-11-04T02:15:45.613Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "induction",
+          "status": "blocked",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "7652c164-cca8-49f0-8121-a0c0b437eb08"
+              ]
+            }
+          ],
+          "measurements": {},
+          "reason": "L3 known-model calibration; free induction and independent real-world test set have not been demonstrated.",
+          "executed_at": "2026-11-04T02:15:45.613Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "control",
+          "status": "not_run",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "7652c164-cca8-49f0-8121-a0c0b437eb08"
+              ]
+            }
+          ],
+          "measurements": {},
+          "reason": "No feasible control action executed in this run.",
+          "executed_at": "2026-11-04T02:15:45.613Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        }
+      ],
+      "metrics": {
+        "ghost_error_mean_cm": 3.6137433867548925,
+        "verdicts_correct": 1,
+        "verdicts_total": 1,
+        "collisions": 0
+      }
+    },
+    {
+      "id": "multi",
+      "validated": false,
+      "tests": [
+        {
+          "id": "launch",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "565b6c23-dd1f-4a6a-b2d9-31fff9719334"
+              ]
+            }
+          ],
+          "measurements": {
+            "observed_bodies": 7
+          },
+          "reason": "Scene action executed; generated simulation only.",
+          "executed_at": "2026-11-04T02:16:05.308Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "bounce",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "Waiting for measured contact events."
+        },
+        {
+          "id": "hoop_passage",
+          "status": "not_applicable",
+          "evidence": [],
+          "measurements": {},
+          "reason": "This exploratory scene has no hoop, net or controller."
+        },
+        {
+          "id": "net",
+          "status": "not_applicable",
+          "evidence": [],
+          "measurements": {},
+          "reason": "This exploratory scene has no hoop, net or controller."
+        },
+        {
+          "id": "ghost_ahead",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "b201f894-cb3f-4bf1-9668-319512be2387"
+              ]
+            }
+          ],
+          "measurements": {
+            "horizon_s": 0.5,
+            "error_mean_cm": 3.2530958743106925e-11,
+            "error_max_cm": 3.257539656272415e-11
+          },
+          "reason": "Locked future target compared with observed simulated position at the same time.",
+          "executed_at": "2026-11-04T02:16:05.809Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "induction",
+          "status": "blocked",
+          "evidence": [],
+          "measurements": {},
+          "reason": "Only a known model family is calibrated; no independent real experiment or free induction has been validated."
+        },
+        {
+          "id": "control",
+          "status": "not_applicable",
+          "evidence": [],
+          "measurements": {},
+          "reason": "This exploratory scene has no hoop, net or controller."
+        }
+      ],
+      "metrics": {
+        "ghost_error_mean_cm": 3.2530958743106925e-11,
+        "verdicts_correct": null,
+        "verdicts_total": null,
+        "collisions": 0
+      }
+    },
+    {
+      "id": "chaos",
+      "validated": false,
+      "tests": [
+        {
+          "id": "launch",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "62305bd4-d56d-4b3b-b858-c558d53debcb"
+              ]
+            }
+          ],
+          "measurements": {
+            "observed_bodies": 1
+          },
+          "reason": "Scene action executed; generated simulation only.",
+          "executed_at": "2026-11-04T02:16:16.499Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "bounce",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No contact experiment is implemented for this exploratory model."
+        },
+        {
+          "id": "hoop_passage",
+          "status": "not_applicable",
+          "evidence": [],
+          "measurements": {},
+          "reason": "This exploratory scene has no hoop, net or controller."
+        },
+        {
+          "id": "net",
+          "status": "not_applicable",
+          "evidence": [],
+          "measurements": {},
+          "reason": "This exploratory scene has no hoop, net or controller."
+        },
+        {
+          "id": "ghost_ahead",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "8e9ad327-5cba-43a3-9ea4-8f5f9394da7b"
+              ]
+            }
+          ],
+          "measurements": {
+            "horizon_s": 0.5,
+            "error_mean_cm": 0.7234438147332596,
+            "error_max_cm": 0.7234438147332596
+          },
+          "reason": "Locked future target compared with observed simulated position at the same time.",
+          "executed_at": "2026-11-04T02:16:17.000Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "induction",
+          "status": "blocked",
+          "evidence": [],
+          "measurements": {},
+          "reason": "Only a known model family is calibrated; no independent real experiment or free induction has been validated."
+        },
+        {
+          "id": "control",
+          "status": "not_applicable",
+          "evidence": [],
+          "measurements": {},
+          "reason": "This exploratory scene has no hoop, net or controller."
+        }
+      ],
+      "metrics": {
+        "ghost_error_mean_cm": 0.7234438147332596,
+        "verdicts_correct": null,
+        "verdicts_total": null,
+        "collisions": null
+      }
+    },
+    {
+      "id": "liquid",
+      "validated": false,
+      "tests": [
+        {
+          "id": "launch",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "655982a0-2c12-4448-a955-b567bf2332ba"
+              ]
+            }
+          ],
+          "measurements": {
+            "observed_bodies": 1
+          },
+          "reason": "Scene action executed; generated simulation only.",
+          "executed_at": "2026-11-04T02:16:27.115Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "bounce",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No contact experiment is implemented for this exploratory model."
+        },
+        {
+          "id": "hoop_passage",
+          "status": "not_applicable",
+          "evidence": [],
+          "measurements": {},
+          "reason": "This exploratory scene has no hoop, net or controller."
+        },
+        {
+          "id": "net",
+          "status": "not_applicable",
+          "evidence": [],
+          "measurements": {},
+          "reason": "This exploratory scene has no hoop, net or controller."
+        },
+        {
+          "id": "ghost_ahead",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "d2885e61-0fc2-481f-8b28-7e9c197fedcf"
+              ]
+            }
+          ],
+          "measurements": {
+            "horizon_s": 5,
+            "error_mean_cm": 4.796163466380676e-12,
+            "error_max_cm": 4.796163466380676e-12
+          },
+          "reason": "Locked future target compared with observed simulated position at the same time.",
+          "executed_at": "2026-11-04T02:16:33.312Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "induction",
+          "status": "blocked",
+          "evidence": [],
+          "measurements": {},
+          "reason": "Only a known model family is calibrated; no independent real experiment or free induction has been validated."
+        },
+        {
+          "id": "control",
+          "status": "not_applicable",
+          "evidence": [],
+          "measurements": {},
+          "reason": "This exploratory scene has no hoop, net or controller."
+        }
+      ],
+      "metrics": {
+        "ghost_error_mean_cm": 4.796163466380676e-12,
+        "verdicts_correct": null,
+        "verdicts_total": null,
+        "collisions": null
+      }
+    },
+    {
+      "id": "orbit",
+      "validated": false,
+      "tests": [
+        {
+          "id": "launch",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "c7a4e214-3d0c-4179-80a4-a7ff0ba59c28"
+              ]
+            }
+          ],
+          "measurements": {
+            "observed_bodies": 1
+          },
+          "reason": "Scene action executed; generated simulation only.",
+          "executed_at": "2026-11-04T02:16:55.085Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "bounce",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No contact experiment is implemented for this exploratory model."
+        },
+        {
+          "id": "hoop_passage",
+          "status": "not_applicable",
+          "evidence": [],
+          "measurements": {},
+          "reason": "This exploratory scene has no hoop, net or controller."
+        },
+        {
+          "id": "net",
+          "status": "not_applicable",
+          "evidence": [],
+          "measurements": {},
+          "reason": "This exploratory scene has no hoop, net or controller."
+        },
+        {
+          "id": "ghost_ahead",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/6ef874e6-0f94-4e6d-bf45-958444d399e6/twinforge-events-6ef874e6-0f94-4e6d-bf45-958444d399e6.json",
+              "sha256": "58e1b4724524b98daf6ee5c9f41767e9511e68ea5434968be8c7f241c9079d39",
+              "event_ids": [
+                "b3f52916-b971-4bc2-a17f-f950f2840ea1"
+              ]
+            }
+          ],
+          "measurements": {
+            "horizon_s": 0.6,
+            "error_mean_cm": 1.0308706257071522e-11,
+            "error_max_cm": 1.0308706257071522e-11
+          },
+          "reason": "Locked future target compared with observed simulated position at the same time.",
+          "executed_at": "2026-11-04T02:16:55.681Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "induction",
+          "status": "blocked",
+          "evidence": [],
+          "measurements": {},
+          "reason": "Only a known model family is calibrated; no independent real experiment or free induction has been validated."
+        },
+        {
+          "id": "control",
+          "status": "not_applicable",
+          "evidence": [],
+          "measurements": {},
+          "reason": "This exploratory scene has no hoop, net or controller."
+        }
+      ],
+      "metrics": {
+        "ghost_error_mean_cm": 1.0308706257071522e-11,
+        "verdicts_correct": null,
+        "verdicts_total": null,
+        "collisions": null
+      }
+    }
+  ],
+  "level": "L3",
+  "limitations": [
+    "Simulation evidence only. Real video validation and physical control have not been demonstrated.",
+    "Rendered fixture geometry and unmeasured model coefficients are declared priors."
+  ],
+  "persistence": {
+    "count": 39,
+    "persisted_count": 39,
+    "pending": 0,
+    "persistent": true,
+    "backend": "indexeddb",
+    "database": "twinforge.evidence.v3",
+    "error": null,
+    "legacy_archive": "twinforge.evidence.v2 left unchanged"
+  },
+  "session_metrics": {
+    "errorSum": 1709.300621935064,
+    "errorCount": 473,
+    "completedShots": 1,
+    "correctVerdicts": 1,
+    "simulatedEpisodes": 0,
+    "ghost_error_mean_cm": 3.6137433867548925
+  }
+}

@@ -1,0 +1,357 @@
+{
+  "schema_version": "twinforge.mobile-package.v1",
+  "created_at": "2026-11-04T13:17:21.900380+00:00",
+  "scope": "Static camera/3D frontend and mobile review evidence; no Python/backend/provider runtime is shipped in site/.",
+  "static_entry": "site/scan.html",
+  "deployment_url": "https://twinforge-mobile-camera.mkinvest57.chatgpt.site/scan.html",
+  "deployment_audience": "owner-private; ChatGPT owner login required",
+  "deployed_authenticated_app_execution": "not_verified_no_active_browser_login",
+  "physical_phone_or_camera_tested": false,
+  "software_tests": {
+    "python": 87,
+    "javascript": 61,
+    "total": 148,
+    "passed": true,
+    "sources_unchanged": true
+  },
+  "browser_review": "validation/runs/mobile-2026-11-04/browser-review.json",
+  "files": [
+    {
+      "path": "site/assets/calibrated-synthetic-bundle.json",
+      "sha256": "4025e646587dfc3d7980abbfcf4ceb0d0dc5f1cba116072c4015cedae4bb8b8f",
+      "bytes": 40983,
+      "source_path": "output/mobile-site/dist/assets/calibrated-synthetic-bundle.json",
+      "source_sha256": "4025e646587dfc3d7980abbfcf4ceb0d0dc5f1cba116072c4015cedae4bb8b8f",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/assets/example-bundle-baseline-2026-11-04.json",
+      "sha256": "9d4dc8ace96946a60a481ca371821757aa4df5f264eec0e33bc01f7fe15e456b",
+      "bytes": 29733,
+      "source_path": "output/mobile-site/dist/assets/example-bundle-baseline-2026-11-04.json",
+      "source_sha256": "9d4dc8ace96946a60a481ca371821757aa4df5f264eec0e33bc01f7fe15e456b",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/assets/example-bundle.json",
+      "sha256": "1339d1cfd233c11093d719d3205f565ec2ba8bc6973838449a7cd114b7e43d9a",
+      "bytes": 34224,
+      "source_path": "output/mobile-site/dist/assets/example-bundle.json",
+      "source_sha256": "1339d1cfd233c11093d719d3205f565ec2ba8bc6973838449a7cd114b7e43d9a",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/assets/mobile/icon-maskable.svg",
+      "sha256": "4104f1fc77c2369d5373cd3495a9a46c7cb1bab1f2ceaafa2b47c583aae101cd",
+      "bytes": 663,
+      "source_path": "output/mobile-site/dist/assets/mobile/icon-maskable.svg",
+      "source_sha256": "4104f1fc77c2369d5373cd3495a9a46c7cb1bab1f2ceaafa2b47c583aae101cd",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/assets/mobile/icon.svg",
+      "sha256": "fb5c8f9b579d249648b91b93afb9d031e19bad2f1283a671ff95293f3800a922",
+      "bytes": 702,
+      "source_path": "output/mobile-site/dist/assets/mobile/icon.svg",
+      "source_sha256": "fb5c8f9b579d249648b91b93afb9d031e19bad2f1283a671ff95293f3800a922",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/assets/vendor/three/LICENSE.txt",
+      "sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+      "bytes": 1081,
+      "source_path": "output/mobile-site/dist/assets/vendor/three/LICENSE.txt",
+      "source_sha256": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/assets/vendor/three/build/three.core.js",
+      "sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6",
+      "bytes": 1458113,
+      "source_path": "output/mobile-site/dist/assets/vendor/three/build/three.core.js",
+      "source_sha256": "9edde002b066a9a05676a6127f67735b62baf399bdea529f2f7e31657da769e6",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/assets/vendor/three/build/three.module.js",
+      "sha256": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea",
+      "bytes": 662772,
+      "source_path": "output/mobile-site/dist/assets/vendor/three/build/three.module.js",
+      "source_sha256": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/assets/vendor/three/examples/jsm/controls/OrbitControls.js",
+      "sha256": "3d79d07ecb686b4e5d93232eedab255331c1beef711e13164eaa1f68655a5f2b",
+      "bytes": 40755,
+      "source_path": "output/mobile-site/dist/assets/vendor/three/examples/jsm/controls/OrbitControls.js",
+      "source_sha256": "3d79d07ecb686b4e5d93232eedab255331c1beef711e13164eaa1f68655a5f2b",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/assets/vendor/three/examples/jsm/environments/RoomEnvironment.js",
+      "sha256": "55f466192cc84298755a424c5e040345006b2ee1455589b3b54126c2ea4123f4",
+      "bytes": 4960,
+      "source_path": "output/mobile-site/dist/assets/vendor/three/examples/jsm/environments/RoomEnvironment.js",
+      "source_sha256": "55f466192cc84298755a424c5e040345006b2ee1455589b3b54126c2ea4123f4",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/assets/vendor/three/manifest.json",
+      "sha256": "cfcce767cbc40aeb29d1e7f7647563bb3d290a0f37486fc77351dbfca7e7ab6d",
+      "bytes": 886,
+      "source_path": "output/mobile-site/dist/assets/vendor/three/manifest.json",
+      "source_sha256": "cfcce767cbc40aeb29d1e7f7647563bb3d290a0f37486fc77351dbfca7e7ab6d",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/index.html",
+      "sha256": "5f26383b3e012b1391d87f6219c144a56eca4142847e0c0330b3c8abb37ea8a7",
+      "bytes": 129962,
+      "source_path": "output/mobile-site/dist/index.html",
+      "source_sha256": "5f26383b3e012b1391d87f6219c144a56eca4142847e0c0330b3c8abb37ea8a7",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/manifest.webmanifest",
+      "sha256": "7b9c77bd9918a3cb95b6939720deb1543d2087d6ff2e6178884aa6b32ef5d291",
+      "bytes": 646,
+      "source_path": "output/mobile-site/dist/manifest.webmanifest",
+      "source_sha256": "7b9c77bd9918a3cb95b6939720deb1543d2087d6ff2e6178884aa6b32ef5d291",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/scan.html",
+      "sha256": "6e19b5a2a0d6fd97e2e5723198999ad0ec5320099a004f60cbe85e795b043b24",
+      "bytes": 9629,
+      "source_path": "output/mobile-site/dist/scan.html",
+      "source_sha256": "6e19b5a2a0d6fd97e2e5723198999ad0ec5320099a004f60cbe85e795b043b24",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/camera/media.mjs",
+      "sha256": "ee1b8d420804176d6cb9504eaa921d7b53934dd07bf47e41e9eb7488bd4a3c03",
+      "bytes": 2523,
+      "source_path": "output/mobile-site/dist/web/camera/media.mjs",
+      "source_sha256": "ee1b8d420804176d6cb9504eaa921d7b53934dd07bf47e41e9eb7488bd4a3c03",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/camera/prediction.mjs",
+      "sha256": "266bbcaedd6fb82d9b9165c5264c10706b811d27bc0f4ddad1e396c25e4c6eb5",
+      "bytes": 8737,
+      "source_path": "output/mobile-site/dist/web/camera/prediction.mjs",
+      "source_sha256": "266bbcaedd6fb82d9b9165c5264c10706b811d27bc0f4ddad1e396c25e4c6eb5",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/camera/scanner.css",
+      "sha256": "7eb546e00e62e9be11555368e5b3255890b820353664706ad01b8ab88e7e4b5b",
+      "bytes": 13515,
+      "source_path": "output/mobile-site/dist/web/camera/scanner.css",
+      "source_sha256": "7eb546e00e62e9be11555368e5b3255890b820353664706ad01b8ab88e7e4b5b",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/camera/scanner.mjs",
+      "sha256": "f886a27ee2f55674b2b6720c33e46152a8a02c955b32a4c05a53370bf2a3ccaf",
+      "bytes": 20369,
+      "source_path": "output/mobile-site/dist/web/camera/scanner.mjs",
+      "source_sha256": "f886a27ee2f55674b2b6720c33e46152a8a02c955b32a4c05a53370bf2a3ccaf",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/camera/tracker.mjs",
+      "sha256": "c57c9287ae16c73ae76e5db72cb22e7d1698f9ebc37103bdcba24dee88a19e41",
+      "bytes": 11378,
+      "source_path": "output/mobile-site/dist/web/camera/tracker.mjs",
+      "source_sha256": "c57c9287ae16c73ae76e5db72cb22e7d1698f9ebc37103bdcba24dee88a19e41",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/physics/alt-models.mjs",
+      "sha256": "3a758ebc2c8d4ccd9cd46143d7f5e909a792c45c5c8f0f053e2fbbacb45d932d",
+      "bytes": 3110,
+      "source_path": "output/mobile-site/dist/web/physics/alt-models.mjs",
+      "source_sha256": "3a758ebc2c8d4ccd9cd46143d7f5e909a792c45c5c8f0f053e2fbbacb45d932d",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/physics/control.mjs",
+      "sha256": "3a388fa3be48c72acd4c44d026b8c47e79975e74b6605103a830808a5a2c72b4",
+      "bytes": 3039,
+      "source_path": "output/mobile-site/dist/web/physics/control.mjs",
+      "source_sha256": "3a388fa3be48c72acd4c44d026b8c47e79975e74b6605103a830808a5a2c72b4",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/physics/counterfactual.mjs",
+      "sha256": "7a97fa728b20b3e5170723dbc535a3a8a82fd5997f649c3c7040ee0ad72b9507",
+      "bytes": 8027,
+      "source_path": "output/mobile-site/dist/web/physics/counterfactual.mjs",
+      "source_sha256": "7a97fa728b20b3e5170723dbc535a3a8a82fd5997f649c3c7040ee0ad72b9507",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/physics/evaluator.mjs",
+      "sha256": "d464a56ecd90e76ac96c1d3a30a770b4a01d921f0dbad0e6423dbccf2ff88dde",
+      "bytes": 1459,
+      "source_path": "output/mobile-site/dist/web/physics/evaluator.mjs",
+      "source_sha256": "d464a56ecd90e76ac96c1d3a30a770b4a01d921f0dbad0e6423dbccf2ff88dde",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/physics/evidence.mjs",
+      "sha256": "5127ce7a1189ebffa533aee4940a46d1fc3a8aa8c4ac4e8fa2309f009a704ad3",
+      "bytes": 7354,
+      "source_path": "output/mobile-site/dist/web/physics/evidence.mjs",
+      "source_sha256": "5127ce7a1189ebffa533aee4940a46d1fc3a8aa8c4ac4e8fa2309f009a704ad3",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/physics/model.mjs",
+      "sha256": "a42e380b938ad7ed2711d6812abc10ac92643bf95a80230d88414cf26e61ebd6",
+      "bytes": 11114,
+      "source_path": "output/mobile-site/dist/web/physics/model.mjs",
+      "source_sha256": "a42e380b938ad7ed2711d6812abc10ac92643bf95a80230d88414cf26e61ebd6",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/physics/observation-replay.mjs",
+      "sha256": "a01aae66ab527d684df3a8234463cd28ec11e9f29ac034b016ff59cce39c6e91",
+      "bytes": 11217,
+      "source_path": "output/mobile-site/dist/web/physics/observation-replay.mjs",
+      "source_sha256": "a01aae66ab527d684df3a8234463cd28ec11e9f29ac034b016ff59cce39c6e91",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/recording.js",
+      "sha256": "8d8110abe981b201f58ddecf3b38004ae156f2305d93e216a0cc3bcaabf571c3",
+      "bytes": 9313,
+      "source_path": "output/mobile-site/dist/web/recording.js",
+      "source_sha256": "8d8110abe981b201f58ddecf3b38004ae156f2305d93e216a0cc3bcaabf571c3",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/synthetic-capture.mjs",
+      "sha256": "a3a40be7202a1b7e8b24181bdc9489ce19a82384aba778ddbfbb92033b6b09c9",
+      "bytes": 7314,
+      "source_path": "output/mobile-site/dist/web/synthetic-capture.mjs",
+      "source_sha256": "a3a40be7202a1b7e8b24181bdc9489ce19a82384aba778ddbfbb92033b6b09c9",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "site/web/workbench.js",
+      "sha256": "954a3c14f444748aabfe25734ac8a96a3525e032d5d4154de49fef6199575649",
+      "bytes": 16767,
+      "source_path": "output/mobile-site/dist/web/workbench.js",
+      "source_sha256": "954a3c14f444748aabfe25734ac8a96a3525e032d5d4154de49fef6199575649",
+      "kind": "exact static copy"
+    },
+    {
+      "path": "validation/runs/mobile-2026-11-04/browser-review.json",
+      "sha256": "44d39df001b02b9b7931cf103741ddb03acdcfb73ea9622de884110871def67d",
+      "bytes": 5069,
+      "source_path": "validation/runs/mobile-2026-11-04/browser-review.json",
+      "source_sha256": "44d39df001b02b9b7931cf103741ddb03acdcfb73ea9622de884110871def67d",
+      "kind": "mobile review evidence"
+    },
+    {
+      "path": "validation/runs/mobile-2026-11-04/deployment.json",
+      "sha256": "e64d5aa525707e55f6baef25cb7c97b7dfb2ba202f1041bb912fbbdc18257b21",
+      "bytes": 380,
+      "source_path": "validation/runs/mobile-2026-11-04/deployment.json",
+      "source_sha256": "e64d5aa525707e55f6baef25cb7c97b7dfb2ba202f1041bb912fbbdc18257b21",
+      "kind": "mobile review evidence"
+    },
+    {
+      "path": "validation/runs/mobile-2026-11-04/example-export.json",
+      "sha256": "bdbedf7f79a8c35b18977b367a24a820ef85b66c654fedf9cc7de3caaec38f84",
+      "bytes": 1330187,
+      "source_path": "validation/runs/mobile-2026-11-04/example-export.json",
+      "source_sha256": "bdbedf7f79a8c35b18977b367a24a820ef85b66c654fedf9cc7de3caaec38f84",
+      "kind": "mobile review evidence"
+    },
+    {
+      "path": "validation/runs/mobile-2026-11-04/import-export.json",
+      "sha256": "16cdc5d53d7f6a97eab5562c9163af39597ad92b6cfeb77b92e749ffb4582f81",
+      "bytes": 43378,
+      "source_path": "validation/runs/mobile-2026-11-04/import-export.json",
+      "source_sha256": "16cdc5d53d7f6a97eab5562c9163af39597ad92b6cfeb77b92e749ffb4582f81",
+      "kind": "mobile review evidence"
+    },
+    {
+      "path": "validation/runs/mobile-2026-11-04/import-h264.mp4",
+      "sha256": "716143a4d3afbcdc9a902d08bab1046e634af51e97a697bfe81bd62292efe02f",
+      "bytes": 190779,
+      "source_path": "validation/runs/mobile-2026-11-04/import-h264.mp4",
+      "source_sha256": "716143a4d3afbcdc9a902d08bab1046e634af51e97a697bfe81bd62292efe02f",
+      "kind": "mobile review evidence"
+    },
+    {
+      "path": "validation/runs/mobile-2026-11-04/scanner-390.jpg",
+      "sha256": "1859739281443164488a9c49018ded0dd915cf81a28db468672abc5a365f03f5",
+      "bytes": 39450,
+      "source_path": "validation/runs/mobile-2026-11-04/scanner-390.jpg",
+      "source_sha256": "1859739281443164488a9c49018ded0dd915cf81a28db468672abc5a365f03f5",
+      "kind": "mobile review evidence"
+    },
+    {
+      "path": "validation/runs/mobile-2026-11-04/scanner-desktop.jpg",
+      "sha256": "18d6e6a7da926ede3b5ab026f167bb3c9248f1453d2693d93ee1c4ca419fa0b1",
+      "bytes": 80537,
+      "source_path": "validation/runs/mobile-2026-11-04/scanner-desktop.jpg",
+      "source_sha256": "18d6e6a7da926ede3b5ab026f167bb3c9248f1453d2693d93ee1c4ca419fa0b1",
+      "kind": "mobile review evidence"
+    },
+    {
+      "path": "validation/runs/mobile-2026-11-04/scanner-landscape.jpg",
+      "sha256": "3d15faead8f2a408bac7c0d985ba58050ff80181bd24f717bc1d3613e4c588b2",
+      "bytes": 16303,
+      "source_path": "validation/runs/mobile-2026-11-04/scanner-landscape.jpg",
+      "source_sha256": "3d15faead8f2a408bac7c0d985ba58050ff80181bd24f717bc1d3613e4c588b2",
+      "kind": "mobile review evidence"
+    },
+    {
+      "path": "validation/runs/mobile-2026-11-04/workbench-320.jpg",
+      "sha256": "d3eafbc18eee182f3c59bba0fa6c632fbf30e8a8312d06862210070623bf1ce8",
+      "bytes": 34839,
+      "source_path": "validation/runs/mobile-2026-11-04/workbench-320.jpg",
+      "source_sha256": "d3eafbc18eee182f3c59bba0fa6c632fbf30e8a8312d06862210070623bf1ce8",
+      "kind": "mobile review evidence"
+    },
+    {
+      "path": "validation/runs/mobile-static-assets-2026-11-04.json",
+      "sha256": "db1008a7822ebd77780b4d87f08bb76779a62253483cd9917bc2e240758c4459",
+      "bytes": 5211,
+      "source_path": "validation/runs/mobile-static-assets-2026-11-04.json",
+      "source_sha256": "db1008a7822ebd77780b4d87f08bb76779a62253483cd9917bc2e240758c4459",
+      "kind": "mobile review evidence"
+    },
+    {
+      "path": "validation/runs/software-checks-mobile-2026-11-04.json",
+      "sha256": "5b22d98f3346cac289c7885155479abb675d722b4c363c9f9d67d318c0ed77d5",
+      "bytes": 33925,
+      "source_path": "validation/runs/software-checks-mobile-2026-11-04.json",
+      "source_sha256": "5b22d98f3346cac289c7885155479abb675d722b4c363c9f9d67d318c0ed77d5",
+      "kind": "mobile review evidence"
+    },
+    {
+      "path": "docs/MOBILE.md",
+      "sha256": "20aa11ba8f511e8650dcb8601cfb8b8dcb9a143a5ec9cb90d76c2a43a192b052",
+      "bytes": 7866,
+      "source_path": "docs/MOBILE.md",
+      "source_sha256": "abddf10347c30877f0f48121313b29763e8013f510ac01e585da200c3216f398",
+      "kind": "documentation; two local links adapted to site/ packaging"
+    }
+  ],
+  "old_simulation_archive": {
+    "path": "output/twinforge-simulation-review.zip",
+    "sha256": "f6a4c273c004b3f4fad93ab538e7f897383197f0494e9c3b36ba3ce03bb68efb",
+    "unchanged": true
+  },
+  "private_file_count": 0,
+  "credential_pattern_findings": [],
+  "ready_for_local_review": true,
+  "meaning": "Passing local software/browser checks and exact deployed static provenance; not certification of physical-phone operation or authenticated remote runtime."
+}

@@ -1,5 +1,7 @@
 # TwinForge — Meta Global AI Developer Hackathon 2026
 node_modules/
+# Private local uploads, API receipts, cost ledger and job transcripts.
+.twinforge/
 dist/
 .env
 .env.*
@@ -8,6 +10,7 @@ dist/
 .DS_Store
 __pycache__/
 .venv/
+.21st/cache/
 # Never commit API keys
 *api-key*
 *secret*

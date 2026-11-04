@@ -1,0 +1,2952 @@
+{
+  "schema_version": "twinforge.replay-audit.v1",
+  "recorded_at": "2026-11-04T01:55:51.599Z",
+  "protocol": {
+    "version": "causal-rollout-v3",
+    "horizon_s": 0.5,
+    "issue_interval_s": 0.1,
+    "min_samples": 3,
+    "max_samples": 5,
+    "window_s": 0.4,
+    "gap_factor": 1.75,
+    "state_fit_iterations": 6,
+    "diagnostic_threshold_cm": 5
+  },
+  "threshold_definition": "5cm diagnostic mean, declared before final model evaluation; this recording is training data, not independent validation.",
+  "inputs": [
+    {
+      "path": "assets/example-bundle-baseline-2026-11-04.json",
+      "sha256": "9d4dc8ace96946a60a481ca371821757aa4df5f264eec0e33bc01f7fe15e456b"
+    },
+    {
+      "path": "assets/example-bundle.json",
+      "sha256": "1339d1cfd233c11093d719d3205f565ec2ba8bc6973838449a7cd114b7e43d9a"
+    }
+  ],
+  "source_files": [
+    {
+      "path": "index.html",
+      "sha256": "27a07844fa5a297ea3f55a35498ec872e06b7d2bde213bae53a76ffa0663e501"
+    },
+    {
+      "path": "web/physics/observation-replay.mjs",
+      "sha256": "a01aae66ab527d684df3a8234463cd28ec11e9f29ac034b016ff59cce39c6e91"
+    },
+    {
+      "path": "web/physics/model.mjs",
+      "sha256": "4ebbeae6fde1b4abe08ac894cfdbd81e5352fd9efa88f4ff04c74457ef012a06"
+    },
+    {
+      "path": "tests/js/replay-diagnostic.mjs",
+      "sha256": "d6b5d80ba66f74fbff8de60d0e6cd5393f27079d20a0fa41e76d3742a6868695"
+    }
+  ],
+  "raw_frames_identical": true,
+  "raw_frame_count": 35,
+  "raw_frames_sha256": "aeac66d0f16af8e7e812d981a643d999200aeb5d088198f533e5a84df6bddd7e",
+  "historical_browser": {
+    "mean_cm_displayed": 46.7,
+    "last_error_cm_displayed": 87.4,
+    "evidence": "validation/runs/browser-review-2026-11-04.json"
+  },
+  "legacy_60fps_reproduction": {
+    "fps": 60,
+    "summary": {
+      "count": 9,
+      "mean_cm": 46.79007024375463,
+      "last_error_cm": 87.39850921843868,
+      "supported_count": 3,
+      "supported_mean_cm": 41.8079690968296
+    },
+    "forecasts": [
+      {
+        "source_t": 0.016666666666666666,
+        "target_t": 0.5166666666666667,
+        "position_m": [
+          -1.160877647486113,
+          3.988151801296053,
+          0
+        ],
+        "velocity_m_s": [
+          2.2866792392831594,
+          -0.17647484723408047,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 27.73743625156958,
+        "supported": false,
+        "reasons": [
+          "flagged_outlier"
+        ]
+      },
+      {
+        "source_t": 0.13333333333333333,
+        "target_t": 0.6333333333333333,
+        "position_m": [
+          -0.5398864780464474,
+          4.561280889075742,
+          0
+        ],
+        "velocity_m_s": [
+          2.6332512415780576,
+          -0.23843698148537174,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 59.6840191292067,
+        "supported": true,
+        "reasons": []
+      },
+      {
+        "source_t": 0.24999999999999997,
+        "target_t": 0.75,
+        "position_m": [
+          -0.18484712539776052,
+          4.195066259127379,
+          0
+        ],
+        "velocity_m_s": [
+          2.434872010367497,
+          -1.8957519556678153,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 48.95960387916315,
+        "supported": true,
+        "reasons": []
+      },
+      {
+        "source_t": 0.35,
+        "target_t": 0.85,
+        "position_m": [
+          -0.13389203360200344,
+          3.276435650980504,
+          0
+        ],
+        "velocity_m_s": [
+          1.8546798130066293,
+          -4.155103648152039,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 16.780284282118952,
+        "supported": true,
+        "reasons": []
+      },
+      {
+        "source_t": 0.4666666666666666,
+        "target_t": 0.9666666666666666,
+        "position_m": [
+          0.07812837661027262,
+          2.7719851346293893,
+          0
+        ],
+        "velocity_m_s": [
+          1.5493298416927985,
+          -5.33310135325817,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 28.62386264576009,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact"
+        ]
+      },
+      {
+        "source_t": 0.5666666666666668,
+        "target_t": 1.0666666666666669,
+        "position_m": [
+          0.20660227219260388,
+          2.39788874908722,
+          0
+        ],
+        "velocity_m_s": [
+          1.255353938078344,
+          -6.001776052053355,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 29.841780981005563,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "unmodelled_contact_event"
+        ]
+      },
+      {
+        "source_t": 0.6666666666666671,
+        "target_t": 1.166666666666667,
+        "position_m": [
+          0.3398516171916471,
+          1.761349143043998,
+          0
+        ],
+        "velocity_m_s": [
+          1.0284893368161494,
+          -6.98605602910442,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 50.85543886893122,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "unmodelled_contact_event"
+        ]
+      },
+      {
+        "source_t": 0.7666666666666674,
+        "target_t": 1.2666666666666675,
+        "position_m": [
+          0.3596287782167008,
+          0.9216136486856105,
+          0
+        ],
+        "velocity_m_s": [
+          0.6155949019337573,
+          -8.198161594222034,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 71.22969693759765,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "unmodelled_contact_event"
+        ]
+      },
+      {
+        "source_t": 0.8666666666666677,
+        "target_t": 1.3666666666666676,
+        "position_m": [
+          0.5745500298900607,
+          0.5815848573297114,
+          0
+        ],
+        "velocity_m_s": [
+          0.6403940987209041,
+          -8.307484600532987,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 87.39850921843868,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "track_id_change",
+          "unmodelled_contact_event"
+        ]
+      }
+    ]
+  },
+  "legacy_frame_rate_sensitivity": [
+    {
+      "fps": 20,
+      "count": 8,
+      "mean_cm": 55.55936655322074,
+      "last_error_cm": 105.88285974244226,
+      "supported_count": 2,
+      "supported_mean_cm": 41.95386824386025
+    },
+    {
+      "fps": 30,
+      "count": 8,
+      "mean_cm": 48.172594674574704,
+      "last_error_cm": 135.38802816561378,
+      "supported_count": 3,
+      "supported_mean_cm": 23.911891781062135
+    },
+    {
+      "fps": 60,
+      "count": 9,
+      "mean_cm": 46.79007024375463,
+      "last_error_cm": 87.39850921843868,
+      "supported_count": 3,
+      "supported_mean_cm": 41.8079690968296
+    },
+    {
+      "fps": 120,
+      "count": 10,
+      "mean_cm": 55.56175351277601,
+      "last_error_cm": 136.66596667063655,
+      "supported_count": 3,
+      "supported_mean_cm": 36.11705307945362
+    }
+  ],
+  "fixed_grid": {
+    "before": {
+      "summary": {
+        "count": 9,
+        "mean_cm": 44.3188435585219,
+        "last_error_cm": 105.88285974244212,
+        "supported_count": 4,
+        "supported_mean_cm": 18.95303644669185
+      },
+      "forecasts": [
+        {
+          "source_t": 0.1,
+          "target_t": 0.6,
+          "position_m": [
+            -0.6743706050305749,
+            4.389852317647171,
+            0
+          ],
+          "velocity_m_s": [
+            2.6332512415780576,
+            -0.23843698148537174,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "error_cm": 36.859516554290224,
+          "supported": true,
+          "reasons": []
+        },
+        {
+          "source_t": 0.2,
+          "target_t": 0.7,
+          "position_m": [
+            -0.37665435431342287,
+            4.020789150693643,
+            0
+          ],
+          "velocity_m_s": [
+            2.434872010367497,
+            -1.8957519556678153,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "error_cm": 19.3841900892923,
+          "supported": true,
+          "reasons": []
+        },
+        {
+          "source_t": 0.30000000000000004,
+          "target_t": 0.8,
+          "position_m": [
+            -0.2097266434700482,
+            3.7126566205731595,
+            0
+          ],
+          "velocity_m_s": [
+            2.040896106753041,
+            -3.089727859282274,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "error_cm": 12.740037175895525,
+          "supported": true,
+          "reasons": []
+        },
+        {
+          "source_t": 0.4,
+          "target_t": 0.9,
+          "position_m": [
+            0.028905585445616153,
+            3.337745174790026,
+            0
+          ],
+          "velocity_m_s": [
+            1.8546798130066293,
+            -4.155103648152039,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "error_cm": 6.828401967289348,
+          "supported": true,
+          "reasons": []
+        },
+        {
+          "source_t": 0.5,
+          "target_t": 1,
+          "position_m": [
+            0.1764817902648911,
+            2.773591560332201,
+            0
+          ],
+          "velocity_m_s": [
+            1.5493298416927985,
+            -5.33310135325817,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "error_cm": 21.345571661303563,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "unmodelled_contact_event"
+          ]
+        },
+        {
+          "source_t": 0.6000000000000001,
+          "target_t": 1.1,
+          "position_m": [
+            0.17786749020751944,
+            1.8683332700281257,
+            0
+          ],
+          "velocity_m_s": [
+            1.0284893368161494,
+            -6.98605602910442,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "error_cm": 61.814904316863384,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "unmodelled_contact_event"
+          ]
+        },
+        {
+          "source_t": 0.7000000000000001,
+          "target_t": 1.2000000000000002,
+          "position_m": [
+            0.3574601035179046,
+            1.3674771025008754,
+            0
+          ],
+          "velocity_m_s": [
+            0.9095708055482207,
+            -7.6246676183184166,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "error_cm": 67.32026637468115,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "unmodelled_contact_event"
+          ]
+        },
+        {
+          "source_t": 0.8,
+          "target_t": 1.3,
+          "position_m": [
+            0.42685769387935013,
+            0.8277180663562952,
+            0
+          ],
+          "velocity_m_s": [
+            0.6155949019337573,
+            -8.198161594222034,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "error_cm": 66.69384414463947,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "unmodelled_contact_event"
+          ]
+        },
+        {
+          "source_t": 0.9,
+          "target_t": 1.4,
+          "position_m": [
+            0.6426055854456143,
+            0.48404517479003173,
+            0
+          ],
+          "velocity_m_s": [
+            0.6403940987209041,
+            -8.307484600532987,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "error_cm": 105.88285974244212,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "track_id_change",
+            "unmodelled_contact_event"
+          ]
+        }
+      ]
+    },
+    "causal_original_model": {
+      "summary": {
+        "protocol": "causal-rollout-v3",
+        "independent_test": false,
+        "diagnostic_threshold_cm": 5,
+        "scheduled": 31,
+        "issued": 7,
+        "rejected": 24,
+        "scored": 7,
+        "supported": 2,
+        "pending": 0,
+        "unscorable": 0,
+        "all_issued_mean_cm": 67.68439853914452,
+        "supported_mean_cm": 38.82831803087406,
+        "issue_coverage": 0.22580645161290322,
+        "scoring_coverage": 1,
+        "supported_coverage": 0.2857142857142857,
+        "rejection_reasons": {
+          "flagged_outlier": 1,
+          "insufficient_causal_samples": 2,
+          "unmodelled_contact": 21
+        },
+        "unsupported_reasons": {
+          "unmodelled_contact": 5,
+          "unmodelled_contact_event": 5,
+          "track_id_change": 1
+        }
+      },
+      "issued": [
+        {
+          "source_t": 0.30000000000000004,
+          "target_t": 0.8,
+          "position_m": [
+            -0.1395541279146662,
+            4.067445639466649,
+            0
+          ],
+          "velocity_m_s": [
+            2.163274410792206,
+            -2.4874504608459014,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.30000000000000004,
+            "source_t": 0.30000000000000004,
+            "position_m": [
+              -1.5701082027292605,
+              3.971228632928311,
+              0
+            ],
+            "velocity_m_s": [
+              3.56454697873796,
+              2.8938436634966123,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.083,
+              0.167,
+              0.25
+            ],
+            "last_observation_t": 0.25,
+            "cadence_s": 0.083,
+            "fit_residual_mean_m": 0.01409299829587606,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        },
+        {
+          "source_t": 0.4,
+          "target_t": 0.9,
+          "position_m": [
+            0.03126217564989175,
+            3.5795496360144647,
+            0
+          ],
+          "velocity_m_s": [
+            1.8420123618720903,
+            -3.805751775339627,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.4,
+            "source_t": 0.4,
+            "position_m": [
+              -1.238660874704645,
+              4.1424832867229915,
+              0
+            ],
+            "velocity_m_s": [
+              3.243284929817844,
+              1.5755423490028864,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.083,
+              0.167,
+              0.25,
+              0.333
+            ],
+            "last_observation_t": 0.333,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.02241779087483135,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        },
+        {
+          "source_t": 0.5,
+          "target_t": 1,
+          "position_m": [
+            0.1559005057619283,
+            2.7586408030871774,
+            0
+          ],
+          "velocity_m_s": [
+            1.5012595709219057,
+            -5.402535748285727,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.5,
+            "source_t": 0.5,
+            "position_m": [
+              -0.9436461491175165,
+              4.1199664402687555,
+              0
+            ],
+            "velocity_m_s": [
+              2.9025321388676595,
+              -0.021241623943214064,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.167,
+              0.25,
+              0.333,
+              0.417,
+              0.5
+            ],
+            "last_observation_t": 0.5,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.01642303951737588,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        },
+        {
+          "source_t": 0.6000000000000001,
+          "target_t": 1.1,
+          "position_m": [
+            0.25482868339154474,
+            2.059875288834532,
+            0
+          ],
+          "velocity_m_s": [
+            1.1696446437540018,
+            -6.627097568454964,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.6000000000000001,
+            "source_t": 0.6000000000000001,
+            "position_m": [
+              -0.6789105079039484,
+              4.0334818361007265,
+              0
+            ],
+            "velocity_m_s": [
+              2.5709172116997556,
+              -1.245803444112451,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.25,
+              0.333,
+              0.417,
+              0.5,
+              0.583
+            ],
+            "last_observation_t": 0.583,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.008854579459764434,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        },
+        {
+          "source_t": 0.7000000000000001,
+          "target_t": 1.2000000000000002,
+          "position_m": [
+            0.33573310193541406,
+            1.2954860433959916,
+            0
+          ],
+          "velocity_m_s": [
+            0.8604542032713006,
+            -7.77016360654331,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.7000000000000001,
+            "source_t": 0.7000000000000001,
+            "position_m": [
+              -0.4434108691187297,
+              3.8406256097063576,
+              0
+            ],
+            "velocity_m_s": [
+              2.2617267712170572,
+              -2.3888694822007968,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.333,
+              0.417,
+              0.5,
+              0.583,
+              0.667
+            ],
+            "last_observation_t": 0.667,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.004811615039651975,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        },
+        {
+          "source_t": 0.8,
+          "target_t": 1.3,
+          "position_m": [
+            0.4034332326988615,
+            0.4951125943238744,
+            0
+          ],
+          "velocity_m_s": [
+            0.5724260024715807,
+            -8.809057648336125,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.8,
+            "source_t": 0.8,
+            "position_m": [
+              -0.2316966379554247,
+              3.559699181530648,
+              0
+            ],
+            "velocity_m_s": [
+              1.973698570417343,
+              -3.427763523993611,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.417,
+              0.5,
+              0.583,
+              0.667,
+              0.75
+            ],
+            "last_observation_t": 0.75,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.00774942567764691,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        },
+        {
+          "source_t": 0.9,
+          "target_t": 1.4,
+          "position_m": [
+            0.4561891465658537,
+            -0.31409186159849245,
+            0
+          ],
+          "velocity_m_s": [
+            0.3042399662657549,
+            -9.724868250710584,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.9,
+            "source_t": 0.9,
+            "position_m": [
+              -0.04484770598552038,
+              3.20840002679551,
+              0
+            ],
+            "velocity_m_s": [
+              1.7055125342115207,
+              -4.34357412636807,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.5,
+              0.583,
+              0.667,
+              0.75,
+              0.833
+            ],
+            "last_observation_t": 0.833,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.012260435418520791,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        }
+      ],
+      "rejected": [
+        {
+          "accepted": false,
+          "source_t": 0,
+          "reason": "flagged_outlier",
+          "reasons": [
+            "flagged_outlier"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 0.1,
+          "reason": "insufficient_causal_samples",
+          "sample_count": 1,
+          "segment_boundary": "flagged_outlier"
+        },
+        {
+          "accepted": false,
+          "source_t": 0.2,
+          "reason": "insufficient_causal_samples",
+          "sample_count": 2,
+          "segment_boundary": "flagged_outlier"
+        },
+        {
+          "accepted": false,
+          "source_t": 1,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.1,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.2000000000000002,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.3,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.4000000000000001,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.5,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.6,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.7000000000000002,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.8,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.9000000000000001,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.1,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.2,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.3000000000000003,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.4000000000000004,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.5,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.6,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.7,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.8000000000000003,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.9000000000000004,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 3,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        }
+      ],
+      "assessed": [
+        {
+          "source_t": 0.30000000000000004,
+          "target_t": 0.8,
+          "position_m": [
+            -0.1395541279146662,
+            4.067445639466649,
+            0
+          ],
+          "velocity_m_s": [
+            2.163274410792206,
+            -2.4874504608459014,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.30000000000000004,
+            "source_t": 0.30000000000000004,
+            "position_m": [
+              -1.5701082027292605,
+              3.971228632928311,
+              0
+            ],
+            "velocity_m_s": [
+              3.56454697873796,
+              2.8938436634966123,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.083,
+              0.167,
+              0.25
+            ],
+            "last_observation_t": 0.25,
+            "cadence_s": 0.083,
+            "fit_residual_mean_m": 0.01409299829587606,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            -0.22985662650602395,
+            3.586856626506024,
+            0
+          ],
+          "error_cm": 48.89993257973979,
+          "supported": true,
+          "reasons": []
+        },
+        {
+          "source_t": 0.4,
+          "target_t": 0.9,
+          "position_m": [
+            0.03126217564989175,
+            3.5795496360144647,
+            0
+          ],
+          "velocity_m_s": [
+            1.8420123618720903,
+            -3.805751775339627,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.4,
+            "source_t": 0.4,
+            "position_m": [
+              -1.238660874704645,
+              4.1424832867229915,
+              0
+            ],
+            "velocity_m_s": [
+              3.243284929817844,
+              1.5755423490028864,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.083,
+              0.167,
+              0.25,
+              0.333
+            ],
+            "last_observation_t": 0.333,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.02241779087483135,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            -0.0265083333333333,
+            3.297845238095238,
+            0
+          ],
+          "error_cm": 28.756703482008326,
+          "supported": true,
+          "reasons": []
+        },
+        {
+          "source_t": 0.5,
+          "target_t": 1,
+          "position_m": [
+            0.1559005057619283,
+            2.7586408030871774,
+            0
+          ],
+          "velocity_m_s": [
+            1.5012595709219057,
+            -5.402535748285727,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.5,
+            "source_t": 0.5,
+            "position_m": [
+              -0.9436461491175165,
+              4.1199664402687555,
+              0
+            ],
+            "velocity_m_s": [
+              2.9025321388676595,
+              -0.021241623943214064,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.167,
+              0.25,
+              0.333,
+              0.417,
+              0.5
+            ],
+            "last_observation_t": 0.5,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.01642303951737588,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            0.0204,
+            2.9192,
+            0
+          ],
+          "error_cm": 21.009436635718938,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "unmodelled_contact_event"
+          ]
+        },
+        {
+          "source_t": 0.6000000000000001,
+          "target_t": 1.1,
+          "position_m": [
+            0.25482868339154474,
+            2.059875288834532,
+            0
+          ],
+          "velocity_m_s": [
+            1.1696446437540018,
+            -6.627097568454964,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.6000000000000001,
+            "source_t": 0.6000000000000001,
+            "position_m": [
+              -0.6789105079039484,
+              4.0334818361007265,
+              0
+            ],
+            "velocity_m_s": [
+              2.5709172116997556,
+              -1.245803444112451,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.25,
+              0.333,
+              0.417,
+              0.5,
+              0.583
+            ],
+            "last_observation_t": 0.583,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.008854579459764434,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            -0.0008583333333333663,
+            2.460080952380952,
+            0
+          ],
+          "error_cm": 47.49109639251322,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "unmodelled_contact_event"
+          ]
+        },
+        {
+          "source_t": 0.7000000000000001,
+          "target_t": 1.2000000000000002,
+          "position_m": [
+            0.33573310193541406,
+            1.2954860433959916,
+            0
+          ],
+          "velocity_m_s": [
+            0.8604542032713006,
+            -7.77016360654331,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.7000000000000001,
+            "source_t": 0.7000000000000001,
+            "position_m": [
+              -0.4434108691187297,
+              3.8406256097063576,
+              0
+            ],
+            "velocity_m_s": [
+              2.2617267712170572,
+              -2.3888694822007968,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.333,
+              0.417,
+              0.5,
+              0.583,
+              0.667
+            ],
+            "last_observation_t": 0.667,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.004811615039651975,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            -0.0268807228915663,
+            1.9201831325301195,
+            0
+          ],
+          "error_cm": 72.23124248746554,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "unmodelled_contact_event"
+          ]
+        },
+        {
+          "source_t": 0.8,
+          "target_t": 1.3,
+          "position_m": [
+            0.4034332326988615,
+            0.4951125943238744,
+            0
+          ],
+          "velocity_m_s": [
+            0.5724260024715807,
+            -8.809057648336125,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.8,
+            "source_t": 0.8,
+            "position_m": [
+              -0.2316966379554247,
+              3.559699181530648,
+              0
+            ],
+            "velocity_m_s": [
+              1.973698570417343,
+              -3.427763523993611,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.417,
+              0.5,
+              0.583,
+              0.667,
+              0.75
+            ],
+            "last_observation_t": 0.75,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.00774942567764691,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            -0.05392891566265062,
+            1.2899421686746984,
+            0
+          ],
+          "error_cm": 91.70246381731356,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "unmodelled_contact_event"
+          ]
+        },
+        {
+          "source_t": 0.9,
+          "target_t": 1.4,
+          "position_m": [
+            0.4561891465658537,
+            -0.31409186159849245,
+            0
+          ],
+          "velocity_m_s": [
+            0.3042399662657549,
+            -9.724868250710584,
+            0
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.9,
+            "source_t": 0.9,
+            "position_m": [
+              -0.04484770598552038,
+              3.20840002679551,
+              0
+            ],
+            "velocity_m_s": [
+              1.7055125342115207,
+              -4.34357412636807,
+              0
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.5,
+              0.583,
+              0.667,
+              0.75,
+              0.833
+            ],
+            "last_observation_t": 0.833,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.012260435418520791,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            -0.1206547619047618,
+            1.2179059523809521,
+            0
+          ],
+          "error_cm": 163.69991437925228,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "track_id_change",
+            "unmodelled_contact_event"
+          ]
+        }
+      ]
+    },
+    "causal_refined_model": {
+      "summary": {
+        "protocol": "causal-rollout-v3",
+        "independent_test": false,
+        "diagnostic_threshold_cm": 5,
+        "scheduled": 31,
+        "issued": 7,
+        "rejected": 24,
+        "scored": 7,
+        "supported": 2,
+        "pending": 0,
+        "unscorable": 0,
+        "all_issued_mean_cm": 39.16485302319692,
+        "supported_mean_cm": 3.788439558948714,
+        "issue_coverage": 0.22580645161290322,
+        "scoring_coverage": 1,
+        "supported_coverage": 0.2857142857142857,
+        "rejection_reasons": {
+          "flagged_outlier": 1,
+          "insufficient_causal_samples": 2,
+          "unmodelled_contact": 21
+        },
+        "unsupported_reasons": {
+          "unmodelled_contact": 5,
+          "unmodelled_contact_event": 5,
+          "track_id_change": 1
+        }
+      },
+      "issued": [
+        {
+          "source_t": 0.30000000000000004,
+          "target_t": 0.8,
+          "position_m": [
+            -0.2802543711606548,
+            3.6049319309102685,
+            -1.0559810535775847e-8
+          ],
+          "velocity_m_s": [
+            2.1416708932514363,
+            -2.910718251756317,
+            -1.1507861519760323e-8
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.30000000000000004,
+            "source_t": 0.30000000000000004,
+            "position_m": [
+              -1.5925526190615087,
+              3.9264654393439886,
+              -2.9936687255125927e-9
+            ],
+            "velocity_m_s": [
+              3.205977784685605,
+              2.1271437387256995,
+              -1.9509799194628083e-8
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.083,
+              0.167,
+              0.25
+            ],
+            "last_observation_t": 0.25,
+            "cadence_s": 0.083,
+            "fit_residual_mean_m": 0.007543316354541873,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        },
+        {
+          "source_t": 0.4,
+          "target_t": 0.9,
+          "position_m": [
+            -0.043132012783963156,
+            3.2830897789176636,
+            -1.8553082359888484e-8
+          ],
+          "velocity_m_s": [
+            1.9571548695493426,
+            -3.552008269263855,
+            -1.7375211639978337e-8
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.4,
+            "source_t": 0.4,
+            "position_m": [
+              -1.2700170638789232,
+              4.076056898274164,
+              -6.8013635767227985e-9
+            ],
+            "velocity_m_s": [
+              2.958700273347802,
+              0.8769418379102206,
+              -3.0012431018947544e-8
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.083,
+              0.167,
+              0.25,
+              0.333
+            ],
+            "last_observation_t": 0.333,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.0092611853763673,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        },
+        {
+          "source_t": 0.5,
+          "target_t": 1,
+          "position_m": [
+            0.21530162350910104,
+            2.899339560371319,
+            -5.435418939261092e-9
+          ],
+          "velocity_m_s": [
+            1.7979456415800057,
+            -4.060810725462021,
+            -5.148808316709054e-9
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.5,
+            "source_t": 0.5,
+            "position_m": [
+              -0.9494814418910421,
+              4.105519801277239,
+              -1.8157467410327846e-9
+            ],
+            "velocity_m_s": [
+              2.853275962497559,
+              -0.23901624725284482,
+              -9.408328287984663e-9
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.167,
+              0.25,
+              0.333,
+              0.417,
+              0.5
+            ],
+            "last_observation_t": 0.5,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.005287800424428538,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        },
+        {
+          "source_t": 0.6000000000000001,
+          "target_t": 1.1,
+          "position_m": [
+            0.38342362330020263,
+            2.47115223863905,
+            7.578600279679967e-9
+          ],
+          "velocity_m_s": [
+            1.5951659256132833,
+            -4.459811664485953,
+            6.670676248059706e-9
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.6000000000000001,
+            "source_t": 0.6000000000000001,
+            "position_m": [
+              -0.67645713067775,
+              4.029322289892935,
+              2.721354170074602e-9
+            ],
+            "velocity_m_s": [
+              2.648523193340325,
+              -1.2402014460115522,
+              1.2940382869348432e-8
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.25,
+              0.333,
+              0.417,
+              0.5,
+              0.583
+            ],
+            "last_observation_t": 0.583,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.00525406154503847,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        },
+        {
+          "source_t": 0.7000000000000001,
+          "target_t": 1.2000000000000002,
+          "position_m": [
+            0.5101837754886803,
+            1.9895720259332355,
+            1.878626083168081e-8
+          ],
+          "velocity_m_s": [
+            1.392449947737403,
+            -4.773529964943909,
+            1.5288142582397567e-8
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.7000000000000001,
+            "source_t": 0.7000000000000001,
+            "position_m": [
+              -0.4333553521768343,
+              3.8500586760691795,
+              7.283222985155123e-9
+            ],
+            "velocity_m_s": [
+              2.4132864201651056,
+              -2.1654450934929823,
+              3.157944303019518e-8
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.333,
+              0.417,
+              0.5,
+              0.583,
+              0.667
+            ],
+            "last_observation_t": 0.667,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.007739419021765101,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        },
+        {
+          "source_t": 0.8,
+          "target_t": 1.3,
+          "position_m": [
+            0.6105647942751049,
+            1.487807889980093,
+            1.0927529032621518e-8
+          ],
+          "velocity_m_s": [
+            1.2076512075038643,
+            -5.004000976829799,
+            8.224269666091236e-9
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.8,
+            "source_t": 0.8,
+            "position_m": [
+              -0.2167616114800812,
+              3.588327002538241,
+              4.568689523580806e-9
+            ],
+            "velocity_m_s": [
+              2.1578040790979944,
+              -2.9556532061765832,
+              1.796195749042891e-8
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.417,
+              0.5,
+              0.583,
+              0.667,
+              0.75
+            ],
+            "last_observation_t": 0.75,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.004999427206070168,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        },
+        {
+          "source_t": 0.9,
+          "target_t": 1.4,
+          "position_m": [
+            0.6975302024303168,
+            0.9854613024677363,
+            8.27579297104944e-9
+          ],
+          "velocity_m_s": [
+            1.0532630906553373,
+            -5.16486570684273,
+            5.781703595298028e-9
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.9,
+            "source_t": 0.9,
+            "position_m": [
+              -0.025766043835183976,
+              3.2644996764915724,
+              3.7114165167829596e-9
+            ],
+            "velocity_m_s": [
+              1.9107023745535743,
+              -3.581087580280086,
+              1.320039607042187e-8
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.5,
+              0.583,
+              0.667,
+              0.75,
+              0.833
+            ],
+            "last_observation_t": 0.833,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.0047415286769071,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          }
+        }
+      ],
+      "rejected": [
+        {
+          "accepted": false,
+          "source_t": 0,
+          "reason": "flagged_outlier",
+          "reasons": [
+            "flagged_outlier"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 0.1,
+          "reason": "insufficient_causal_samples",
+          "sample_count": 1,
+          "segment_boundary": "flagged_outlier"
+        },
+        {
+          "accepted": false,
+          "source_t": 0.2,
+          "reason": "insufficient_causal_samples",
+          "sample_count": 2,
+          "segment_boundary": "flagged_outlier"
+        },
+        {
+          "accepted": false,
+          "source_t": 1,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.1,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.2000000000000002,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.3,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.4000000000000001,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.5,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.6,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.7000000000000002,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.8,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 1.9000000000000001,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.1,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.2,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.3000000000000003,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.4000000000000004,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.5,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.6,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.7,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.8000000000000003,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 2.9000000000000004,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        },
+        {
+          "accepted": false,
+          "source_t": 3,
+          "reason": "unmodelled_contact",
+          "reasons": [
+            "unmodelled_contact"
+          ]
+        }
+      ],
+      "assessed": [
+        {
+          "source_t": 0.30000000000000004,
+          "target_t": 0.8,
+          "position_m": [
+            -0.2802543711606548,
+            3.6049319309102685,
+            -1.0559810535775847e-8
+          ],
+          "velocity_m_s": [
+            2.1416708932514363,
+            -2.910718251756317,
+            -1.1507861519760323e-8
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.30000000000000004,
+            "source_t": 0.30000000000000004,
+            "position_m": [
+              -1.5925526190615087,
+              3.9264654393439886,
+              -2.9936687255125927e-9
+            ],
+            "velocity_m_s": [
+              3.205977784685605,
+              2.1271437387256995,
+              -1.9509799194628083e-8
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.083,
+              0.167,
+              0.25
+            ],
+            "last_observation_t": 0.25,
+            "cadence_s": 0.083,
+            "fit_residual_mean_m": 0.007543316354541873,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            -0.22985662650602395,
+            3.586856626506024,
+            0
+          ],
+          "error_cm": 5.354109912562114,
+          "supported": true,
+          "reasons": []
+        },
+        {
+          "source_t": 0.4,
+          "target_t": 0.9,
+          "position_m": [
+            -0.043132012783963156,
+            3.2830897789176636,
+            -1.8553082359888484e-8
+          ],
+          "velocity_m_s": [
+            1.9571548695493426,
+            -3.552008269263855,
+            -1.7375211639978337e-8
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.4,
+            "source_t": 0.4,
+            "position_m": [
+              -1.2700170638789232,
+              4.076056898274164,
+              -6.8013635767227985e-9
+            ],
+            "velocity_m_s": [
+              2.958700273347802,
+              0.8769418379102206,
+              -3.0012431018947544e-8
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.083,
+              0.167,
+              0.25,
+              0.333
+            ],
+            "last_observation_t": 0.333,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.0092611853763673,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            -0.0265083333333333,
+            3.297845238095238,
+            0
+          ],
+          "error_cm": 2.2227692053353136,
+          "supported": true,
+          "reasons": []
+        },
+        {
+          "source_t": 0.5,
+          "target_t": 1,
+          "position_m": [
+            0.21530162350910104,
+            2.899339560371319,
+            -5.435418939261092e-9
+          ],
+          "velocity_m_s": [
+            1.7979456415800057,
+            -4.060810725462021,
+            -5.148808316709054e-9
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.5,
+            "source_t": 0.5,
+            "position_m": [
+              -0.9494814418910421,
+              4.105519801277239,
+              -1.8157467410327846e-9
+            ],
+            "velocity_m_s": [
+              2.853275962497559,
+              -0.23901624725284482,
+              -9.408328287984663e-9
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.167,
+              0.25,
+              0.333,
+              0.417,
+              0.5
+            ],
+            "last_observation_t": 0.5,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.005287800424428538,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            0.0204,
+            2.9192,
+            0
+          ],
+          "error_cm": 19.59108978814805,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "unmodelled_contact_event"
+          ]
+        },
+        {
+          "source_t": 0.6000000000000001,
+          "target_t": 1.1,
+          "position_m": [
+            0.38342362330020263,
+            2.47115223863905,
+            7.578600279679967e-9
+          ],
+          "velocity_m_s": [
+            1.5951659256132833,
+            -4.459811664485953,
+            6.670676248059706e-9
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.6000000000000001,
+            "source_t": 0.6000000000000001,
+            "position_m": [
+              -0.67645713067775,
+              4.029322289892935,
+              2.721354170074602e-9
+            ],
+            "velocity_m_s": [
+              2.648523193340325,
+              -1.2402014460115522,
+              1.2940382869348432e-8
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.25,
+              0.333,
+              0.417,
+              0.5,
+              0.583
+            ],
+            "last_observation_t": 0.583,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.00525406154503847,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            -0.0008583333333333663,
+            2.460080952380952,
+            0
+          ],
+          "error_cm": 38.4441407204671,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "unmodelled_contact_event"
+          ]
+        },
+        {
+          "source_t": 0.7000000000000001,
+          "target_t": 1.2000000000000002,
+          "position_m": [
+            0.5101837754886803,
+            1.9895720259332355,
+            1.878626083168081e-8
+          ],
+          "velocity_m_s": [
+            1.392449947737403,
+            -4.773529964943909,
+            1.5288142582397567e-8
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.7000000000000001,
+            "source_t": 0.7000000000000001,
+            "position_m": [
+              -0.4333553521768343,
+              3.8500586760691795,
+              7.283222985155123e-9
+            ],
+            "velocity_m_s": [
+              2.4132864201651056,
+              -2.1654450934929823,
+              3.157944303019518e-8
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.333,
+              0.417,
+              0.5,
+              0.583,
+              0.667
+            ],
+            "last_observation_t": 0.667,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.007739419021765101,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            -0.0268807228915663,
+            1.9201831325301195,
+            0
+          ],
+          "error_cm": 54.15284793509342,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "unmodelled_contact_event"
+          ]
+        },
+        {
+          "source_t": 0.8,
+          "target_t": 1.3,
+          "position_m": [
+            0.6105647942751049,
+            1.487807889980093,
+            1.0927529032621518e-8
+          ],
+          "velocity_m_s": [
+            1.2076512075038643,
+            -5.004000976829799,
+            8.224269666091236e-9
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.8,
+            "source_t": 0.8,
+            "position_m": [
+              -0.2167616114800812,
+              3.588327002538241,
+              4.568689523580806e-9
+            ],
+            "velocity_m_s": [
+              2.1578040790979944,
+              -2.9556532061765832,
+              1.796195749042891e-8
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.417,
+              0.5,
+              0.583,
+              0.667,
+              0.75
+            ],
+            "last_observation_t": 0.75,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.004999427206070168,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            -0.05392891566265062,
+            1.2899421686746984,
+            0
+          ],
+          "error_cm": 69.33272922758385,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "unmodelled_contact_event"
+          ]
+        },
+        {
+          "source_t": 0.9,
+          "target_t": 1.4,
+          "position_m": [
+            0.6975302024303168,
+            0.9854613024677363,
+            8.27579297104944e-9
+          ],
+          "velocity_m_s": [
+            1.0532630906553373,
+            -5.16486570684273,
+            5.781703595298028e-9
+          ],
+          "limitations": [
+            "Replay covers the calibrated free-flight family only.",
+            "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+          ],
+          "initialization": {
+            "accepted": true,
+            "t": 0.9,
+            "source_t": 0.9,
+            "position_m": [
+              -0.025766043835183976,
+              3.2644996764915724,
+              3.7114165167829596e-9
+            ],
+            "velocity_m_s": [
+              1.9107023745535743,
+              -3.581087580280086,
+              1.320039607042187e-8
+            ],
+            "track_id": 1,
+            "used_t": [
+              0.5,
+              0.583,
+              0.667,
+              0.75,
+              0.833
+            ],
+            "last_observation_t": 0.833,
+            "cadence_s": 0.08300000000000002,
+            "fit_residual_mean_m": 0.0047415286769071,
+            "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+          },
+          "observed_position_m": [
+            -0.1206547619047618,
+            1.2179059523809521,
+            0
+          ],
+          "error_cm": 85.05628437318853,
+          "supported": false,
+          "reasons": [
+            "unmodelled_contact",
+            "track_id_change",
+            "unmodelled_contact_event"
+          ]
+        }
+      ]
+    }
+  },
+  "identical_issued_cohort": {
+    "source_times": [
+      0.30000000000000004,
+      0.4,
+      0.5,
+      0.6000000000000001,
+      0.7000000000000001,
+      0.8,
+      0.9
+    ],
+    "before": {
+      "count": 7,
+      "mean_cm": 48.94655505473065,
+      "last_error_cm": 105.88285974244212,
+      "supported_count": 2,
+      "supported_mean_cm": 9.784219571592436
+    },
+    "after": {
+      "count": 7,
+      "mean_cm": 39.16485302319692,
+      "last_error_cm": 85.05628437318853,
+      "supported_count": 2,
+      "supported_mean_cm": 3.788439558948714
+    },
+    "before_forecasts": [
+      {
+        "source_t": 0.30000000000000004,
+        "target_t": 0.8,
+        "position_m": [
+          -0.2097266434700482,
+          3.7126566205731595,
+          0
+        ],
+        "velocity_m_s": [
+          2.040896106753041,
+          -3.089727859282274,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 12.740037175895525,
+        "supported": true,
+        "reasons": []
+      },
+      {
+        "source_t": 0.4,
+        "target_t": 0.9,
+        "position_m": [
+          0.028905585445616153,
+          3.337745174790026,
+          0
+        ],
+        "velocity_m_s": [
+          1.8546798130066293,
+          -4.155103648152039,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 6.828401967289348,
+        "supported": true,
+        "reasons": []
+      },
+      {
+        "source_t": 0.5,
+        "target_t": 1,
+        "position_m": [
+          0.1764817902648911,
+          2.773591560332201,
+          0
+        ],
+        "velocity_m_s": [
+          1.5493298416927985,
+          -5.33310135325817,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 21.345571661303563,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "unmodelled_contact_event"
+        ]
+      },
+      {
+        "source_t": 0.6000000000000001,
+        "target_t": 1.1,
+        "position_m": [
+          0.17786749020751944,
+          1.8683332700281257,
+          0
+        ],
+        "velocity_m_s": [
+          1.0284893368161494,
+          -6.98605602910442,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 61.814904316863384,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "unmodelled_contact_event"
+        ]
+      },
+      {
+        "source_t": 0.7000000000000001,
+        "target_t": 1.2000000000000002,
+        "position_m": [
+          0.3574601035179046,
+          1.3674771025008754,
+          0
+        ],
+        "velocity_m_s": [
+          0.9095708055482207,
+          -7.6246676183184166,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 67.32026637468115,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "unmodelled_contact_event"
+        ]
+      },
+      {
+        "source_t": 0.8,
+        "target_t": 1.3,
+        "position_m": [
+          0.42685769387935013,
+          0.8277180663562952,
+          0
+        ],
+        "velocity_m_s": [
+          0.6155949019337573,
+          -8.198161594222034,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 66.69384414463947,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "unmodelled_contact_event"
+        ]
+      },
+      {
+        "source_t": 0.9,
+        "target_t": 1.4,
+        "position_m": [
+          0.6426055854456143,
+          0.48404517479003173,
+          0
+        ],
+        "velocity_m_s": [
+          0.6403940987209041,
+          -8.307484600532987,
+          0
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "error_cm": 105.88285974244212,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "track_id_change",
+          "unmodelled_contact_event"
+        ]
+      }
+    ],
+    "after_forecasts": [
+      {
+        "source_t": 0.30000000000000004,
+        "target_t": 0.8,
+        "position_m": [
+          -0.2802543711606548,
+          3.6049319309102685,
+          -1.0559810535775847e-8
+        ],
+        "velocity_m_s": [
+          2.1416708932514363,
+          -2.910718251756317,
+          -1.1507861519760323e-8
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "initialization": {
+          "accepted": true,
+          "t": 0.30000000000000004,
+          "source_t": 0.30000000000000004,
+          "position_m": [
+            -1.5925526190615087,
+            3.9264654393439886,
+            -2.9936687255125927e-9
+          ],
+          "velocity_m_s": [
+            3.205977784685605,
+            2.1271437387256995,
+            -1.9509799194628083e-8
+          ],
+          "track_id": 1,
+          "used_t": [
+            0.083,
+            0.167,
+            0.25
+          ],
+          "last_observation_t": 0.25,
+          "cadence_s": 0.083,
+          "fit_residual_mean_m": 0.007543316354541873,
+          "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+        },
+        "observed_position_m": [
+          -0.22985662650602395,
+          3.586856626506024,
+          0
+        ],
+        "error_cm": 5.354109912562114,
+        "supported": true,
+        "reasons": []
+      },
+      {
+        "source_t": 0.4,
+        "target_t": 0.9,
+        "position_m": [
+          -0.043132012783963156,
+          3.2830897789176636,
+          -1.8553082359888484e-8
+        ],
+        "velocity_m_s": [
+          1.9571548695493426,
+          -3.552008269263855,
+          -1.7375211639978337e-8
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "initialization": {
+          "accepted": true,
+          "t": 0.4,
+          "source_t": 0.4,
+          "position_m": [
+            -1.2700170638789232,
+            4.076056898274164,
+            -6.8013635767227985e-9
+          ],
+          "velocity_m_s": [
+            2.958700273347802,
+            0.8769418379102206,
+            -3.0012431018947544e-8
+          ],
+          "track_id": 1,
+          "used_t": [
+            0.083,
+            0.167,
+            0.25,
+            0.333
+          ],
+          "last_observation_t": 0.333,
+          "cadence_s": 0.08300000000000002,
+          "fit_residual_mean_m": 0.0092611853763673,
+          "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+        },
+        "observed_position_m": [
+          -0.0265083333333333,
+          3.297845238095238,
+          0
+        ],
+        "error_cm": 2.2227692053353136,
+        "supported": true,
+        "reasons": []
+      },
+      {
+        "source_t": 0.5,
+        "target_t": 1,
+        "position_m": [
+          0.21530162350910104,
+          2.899339560371319,
+          -5.435418939261092e-9
+        ],
+        "velocity_m_s": [
+          1.7979456415800057,
+          -4.060810725462021,
+          -5.148808316709054e-9
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "initialization": {
+          "accepted": true,
+          "t": 0.5,
+          "source_t": 0.5,
+          "position_m": [
+            -0.9494814418910421,
+            4.105519801277239,
+            -1.8157467410327846e-9
+          ],
+          "velocity_m_s": [
+            2.853275962497559,
+            -0.23901624725284482,
+            -9.408328287984663e-9
+          ],
+          "track_id": 1,
+          "used_t": [
+            0.167,
+            0.25,
+            0.333,
+            0.417,
+            0.5
+          ],
+          "last_observation_t": 0.5,
+          "cadence_s": 0.08300000000000002,
+          "fit_residual_mean_m": 0.005287800424428538,
+          "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+        },
+        "observed_position_m": [
+          0.0204,
+          2.9192,
+          0
+        ],
+        "error_cm": 19.59108978814805,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "unmodelled_contact_event"
+        ]
+      },
+      {
+        "source_t": 0.6000000000000001,
+        "target_t": 1.1,
+        "position_m": [
+          0.38342362330020263,
+          2.47115223863905,
+          7.578600279679967e-9
+        ],
+        "velocity_m_s": [
+          1.5951659256132833,
+          -4.459811664485953,
+          6.670676248059706e-9
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "initialization": {
+          "accepted": true,
+          "t": 0.6000000000000001,
+          "source_t": 0.6000000000000001,
+          "position_m": [
+            -0.67645713067775,
+            4.029322289892935,
+            2.721354170074602e-9
+          ],
+          "velocity_m_s": [
+            2.648523193340325,
+            -1.2402014460115522,
+            1.2940382869348432e-8
+          ],
+          "track_id": 1,
+          "used_t": [
+            0.25,
+            0.333,
+            0.417,
+            0.5,
+            0.583
+          ],
+          "last_observation_t": 0.583,
+          "cadence_s": 0.08300000000000002,
+          "fit_residual_mean_m": 0.00525406154503847,
+          "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+        },
+        "observed_position_m": [
+          -0.0008583333333333663,
+          2.460080952380952,
+          0
+        ],
+        "error_cm": 38.4441407204671,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "unmodelled_contact_event"
+        ]
+      },
+      {
+        "source_t": 0.7000000000000001,
+        "target_t": 1.2000000000000002,
+        "position_m": [
+          0.5101837754886803,
+          1.9895720259332355,
+          1.878626083168081e-8
+        ],
+        "velocity_m_s": [
+          1.392449947737403,
+          -4.773529964943909,
+          1.5288142582397567e-8
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "initialization": {
+          "accepted": true,
+          "t": 0.7000000000000001,
+          "source_t": 0.7000000000000001,
+          "position_m": [
+            -0.4333553521768343,
+            3.8500586760691795,
+            7.283222985155123e-9
+          ],
+          "velocity_m_s": [
+            2.4132864201651056,
+            -2.1654450934929823,
+            3.157944303019518e-8
+          ],
+          "track_id": 1,
+          "used_t": [
+            0.333,
+            0.417,
+            0.5,
+            0.583,
+            0.667
+          ],
+          "last_observation_t": 0.667,
+          "cadence_s": 0.08300000000000002,
+          "fit_residual_mean_m": 0.007739419021765101,
+          "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+        },
+        "observed_position_m": [
+          -0.0268807228915663,
+          1.9201831325301195,
+          0
+        ],
+        "error_cm": 54.15284793509342,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "unmodelled_contact_event"
+        ]
+      },
+      {
+        "source_t": 0.8,
+        "target_t": 1.3,
+        "position_m": [
+          0.6105647942751049,
+          1.487807889980093,
+          1.0927529032621518e-8
+        ],
+        "velocity_m_s": [
+          1.2076512075038643,
+          -5.004000976829799,
+          8.224269666091236e-9
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "initialization": {
+          "accepted": true,
+          "t": 0.8,
+          "source_t": 0.8,
+          "position_m": [
+            -0.2167616114800812,
+            3.588327002538241,
+            4.568689523580806e-9
+          ],
+          "velocity_m_s": [
+            2.1578040790979944,
+            -2.9556532061765832,
+            1.796195749042891e-8
+          ],
+          "track_id": 1,
+          "used_t": [
+            0.417,
+            0.5,
+            0.583,
+            0.667,
+            0.75
+          ],
+          "last_observation_t": 0.75,
+          "cadence_s": 0.08300000000000002,
+          "fit_residual_mean_m": 0.004999427206070168,
+          "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+        },
+        "observed_position_m": [
+          -0.05392891566265062,
+          1.2899421686746984,
+          0
+        ],
+        "error_cm": 69.33272922758385,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "unmodelled_contact_event"
+        ]
+      },
+      {
+        "source_t": 0.9,
+        "target_t": 1.4,
+        "position_m": [
+          0.6975302024303168,
+          0.9854613024677363,
+          8.27579297104944e-9
+        ],
+        "velocity_m_s": [
+          1.0532630906553373,
+          -5.16486570684273,
+          5.781703595298028e-9
+        ],
+        "limitations": [
+          "Replay covers the calibrated free-flight family only.",
+          "Unmeasured restitution/friction/net parameters remain unsupported, not silently filled."
+        ],
+        "initialization": {
+          "accepted": true,
+          "t": 0.9,
+          "source_t": 0.9,
+          "position_m": [
+            -0.025766043835183976,
+            3.2644996764915724,
+            3.7114165167829596e-9
+          ],
+          "velocity_m_s": [
+            1.9107023745535743,
+            -3.581087580280086,
+            1.320039607042187e-8
+          ],
+          "track_id": 1,
+          "used_t": [
+            0.5,
+            0.583,
+            0.667,
+            0.75,
+            0.833
+          ],
+          "last_observation_t": 0.833,
+          "cadence_s": 0.08300000000000002,
+          "fit_residual_mean_m": 0.0047415286769071,
+          "method": "causal prefix rollout least squares; six LM velocity iterations; position offset estimated from past samples only"
+        },
+        "observed_position_m": [
+          -0.1206547619047618,
+          1.2179059523809521,
+          0
+        ],
+        "error_cm": 85.05628437318853,
+        "supported": false,
+        "reasons": [
+          "unmodelled_contact",
+          "track_id_change",
+          "unmodelled_contact_event"
+        ]
+      }
+    ]
+  },
+  "diagnostic_result": {
+    "all_issued_under_threshold": false,
+    "supported_under_threshold": true,
+    "independent_test": false,
+    "held_out_cm": null
+  },
+  "limitations": [
+    "Same original planar synthetic legacy observations; no measured depth or physical rig.",
+    "Model parameters were recalibrated on this same recording. Causal state initialization never reads observations after the issuance time.",
+    "Unsupported contact/ID-gap outcomes remain in the all-issued score. Reasons are based on quality/contact/identity metadata, never numerical prediction error.",
+    "Different source coverage is explicitly separated from the matched issuance cohort; supported-only performance does not certify the entire recording."
+  ]
+}

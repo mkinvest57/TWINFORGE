@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "exported_at": "2026-11-04T01:24:30.390267+00:00",
+  "executed_at": "2026-11-04T01:19:39.530619+00:00",
+  "status": "completed",
+  "provider": "meta-model-api",
+  "model": "muse-spark-1.3",
+  "purpose": "Live connection smoke test about independent evaluation and honest simulation provenance; not a calibration experiment.",
+  "content": "Keeping independent shot-level test data separate prevents calibration decisions from leaking into evaluation and ensures performance estimates remain unbiased. Labeling a synthetic trial as simulation preserves honesty about provenance and prevents modeled outputs from being mistaken for real experimental observations.",
+  "usage": {
+    "prompt_tokens": 57,
+    "completion_tokens": 902,
+    "total_tokens": 959
+  },
+  "cost": {
+    "cost_usd": 0.00390475,
+    "cost_basis": "published_rates"
+  },
+  "receipt": {
+    "request_id": "d29f6d7851f0450d8f740010ca844fdb",
+    "model": "muse-spark-1.3",
+    "request_sha256": "c69c8972aaae6f309bb93d4b0c225d7212a31ff92efbc2d8aef703f38219a2a6"
+  },
+  "source_sha256": "2f4bd352860149555d8ae5aca483bcef995a1d84c46049d14569cefde65ccc64",
+  "redaction": "Only allowlisted status, final answer, token counts and receipt fields exported. No credentials, headers, reasoning text or environment values.",
+  "limits": [
+    "This proves one provider response, not the agent loop or independent physical validation.",
+    "This run used muse-spark-1.3; it does not attest a Muse Spark Open execution."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "reviewed_at": "2026-11-04T01:41:39.270408+00:00",
+  "method": "Direct browser interactions with local HTTP application; no hidden-state injection",
+  "mode": "simulation",
+  "source_sha256": "5bbbce4a2e4140604aa4d3aae859c2ae10898524e62c88bca3a683a21c7ba707",
+  "final_scene_run": "validation/runs/14dede2b-5183-4756-8a26-9fb5e71e81c9/report.json",
+  "checks": {
+    "scene_transitions_clear_errors": true,
+    "orbit_ghost_label_after_liquid": "+0.6s",
+    "example_import": {
+      "accepted": true,
+      "source": "assets/example-bundle.json",
+      "source_kind": "synthetic",
+      "dimensions_observed": 2,
+      "depth_measured": false
+    },
+    "imported_replay": {
+      "complete": true,
+      "last_error_cm_displayed": 87.4,
+      "mean_error_cm_displayed": 46.7,
+      "independent_test": false,
+      "note": "Legacy synthetic observation bundle, deliberately preserves measured poor agreement rather than hiding it."
+    },
+    "console_errors_observed": []
+  },
+  "limitations": [
+    "Browser smoke checks do not validate real-world physics or certify all gauntlet tests.",
+    "Counters and errors are recorded observations, not acceptance criteria waived by this review."
+  ]
+}

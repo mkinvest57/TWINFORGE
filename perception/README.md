@@ -38,10 +38,10 @@ PYTHONPATH=/tmp/w3d-pw:/tmp/samdeps python3 perception/make_test_video.py
 
 ## Result on the test video (generated 2026-10-27, re-sampled at 10 fps)
 
-- 39 frames sampled over the flight segment, ball found on **90%**, FP-02 outliers **2%**.
+- 39 frames sampled over the flight segment, ball found on **35 (90%)**, FP-02 outliers **1/35 (3%)**.
 - **ID 1 stable across the whole flight segment**, from launch to rim crossing
   (Prompt 2 exit criterion: GO on this shot).
 - Events detected: launch, apex @0.5 s, rim_cross_down @1.0 s.
-- After the rim (net, bounces, rolling, Monte-Carlo ghosts in frame), the ID
-  fragments ([1,3,4,5,6] over the full video): reported as-is, never averaged away.
+- After the rim (net, bounces, rolling), the ID
+  fragments ([1,3,4] over the full video): reported as-is, never averaged away.
 - Dataset: [output/trajectories.json](output/trajectories.json) · Report: [output/report.md](output/report.md)

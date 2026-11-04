@@ -37,11 +37,11 @@ class TestInduceFit(unittest.TestCase):
         samples = induce.free_flight_samples(frames)
         self.assertTrue(all(abs(s["p"][0]) < 50 for s in samples))
 
-    def test_held_out_error_small_on_synth(self):
+    def test_same_shot_suffix_is_not_held_out_evidence(self):
         frames = synth()
         samples = induce.free_flight_samples(frames)
-        err = induce.held_out_error(samples, frac=0.6)
-        self.assertLess(err, 12.0)  # cm
+        with self.assertRaisesRegex(ValueError, "independent"):
+            induce.held_out_error(samples, frac=0.6)
 
 
 if __name__ == "__main__":

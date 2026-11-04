@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Twinforge : trajectoire et prévision</title>
+  <rect width="512" height="512" rx="112" fill="#101419"/>
+  <path d="M108 348Q225 70 401 253" fill="none" stroke="#77828c" stroke-width="14" stroke-linecap="round" stroke-dasharray="12 20"/>
+  <path d="M110 356Q165 232 238 209" fill="none" stroke="#ff6b1a" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="238" cy="209" r="38" fill="#ff6b1a"/>
+  <circle cx="364" cy="221" r="36" fill="none" stroke="#37c8d9" stroke-width="10"/>
+  <path d="M322 354h85m-42-42v84" stroke="#37c8d9" stroke-width="12" stroke-linecap="round"/>
+</svg>

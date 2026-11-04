@@ -1,0 +1,17 @@
+{
+  "schema_version": "twinforge.process.api-check.v1",
+  "checked_at": "2026-11-04T13:52:44.796647+00:00",
+  "transport": "actual local HTTP with isolated temporary job storage",
+  "post_status": 202,
+  "job_status": "complete",
+  "progress_phase": "completed",
+  "passed": true,
+  "provider_calls": 0,
+  "selected_family": "sqrt_outflow",
+  "test_mean_error_cm": 0.1011282328038083,
+  "source_sha256": {
+    "server.py": "c2a7b1d9e4c8a16928458e13097df1b1a0cb589c54ac015cefff5ba8355ac7e2",
+    "twinforge_runtime/process_lab.py": "75bc25a81c0a1b1c42251e5bd7caca56b2ad72b7e0be1ed88f5b9430fe21e9bc",
+    "web/process/engine.mjs": "8e0b4162e5a6074f15db754fded4ab2c5ccca926efcea85a7988e4fce866305e"
+  }
+}

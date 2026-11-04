@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "project": {
+    "name": "TWINFORGE — Process Lab",
+    "productType": "Civil process simulation, measured calibration, predictive control and inspectable Meta experiments",
+    "stack": [
+      "HTML",
+      "CSS",
+      "ES modules",
+      "Three.js",
+      "Python HTTP server"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "web/process/lab.css",
+      "web/camera/scanner.css"
+    ],
+    "components": [
+      ".21st/sources.json"
+    ],
+    "assets": [
+      "assets",
+      "assets/vendor/three"
+    ],
+    "instructions": [
+      "docs/SUBMISSION.md"
+    ]
+  },
+  "design": {
+    "colorMode": "dark",
+    "colors": {
+      "background": "#0e1013",
+      "panel": "#16191e",
+      "panelSoft": "#1b1e24",
+      "line": "#2a2e36",
+      "text": "#edece8",
+      "muted": "#a1a8b5",
+      "quiet": "#737d8c",
+      "accent": "#ff7a32",
+      "accentSoft": "#ffb386",
+      "observation": "#52cddd",
+      "prediction": "#ff7a32",
+      "success": "#80d3ac"
+    },
+    "typography": {
+      "sans": "-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif",
+      "mono": "SF Mono, ui-monospace, Menlo, Consolas, monospace"
+    },
+    "spacing": {},
+    "radius": {},
+    "shadows": {},
+    "motion": {},
+    "density": "Focused experiment workspace, concise controls, four measured metrics; responsive navigation and touch controls"
+  },
+  "components": {
+    "installed": [],
+    "preferredPrimitives": [
+      "Native buttons, inputs and accessible segmented tabs",
+      "Existing Three.js renderer with deterministic measurements",
+      "HTML metric cards and canvas chart"
+    ],
+    "patterns": [
+      "Dashboard Sidebar",
+      "Segmented Tabs",
+      "Progress Metric Card",
+      "Vertical Descriptive Stepper"
+    ]
+  },
+  "constraints": {
+    "must": [
+      "At least 44px touch targets and visible keyboard focus.",
+      "Keep synthetic/known-family scope visible.",
+      "Display only actual engine measurements; never copied demo values.",
+      "Identify recorded Meta responses separately from new API calls and local fitting.",
+      "Retain global forecast error and intervention flags alongside any supported subset.",
+      "Keep scanner video on device and require explicit camera access.",
+      "Distinguish image-plane pixels from calibrated physical units."
+    ],
+    "avoid": [
+      "Implying real tank, phone or physical control validation from a simulation.",
+      "Assigning Meta held-out 3-second accuracy to interactive 5-second forecasts.",
+      "Importing a second UI framework for these patterns."
+    ]
+  },
+  "decisions": [
+    "Make the civil two-tank comparison the home page; keep the previous physics workbench available.",
+    "Use the inspected 21st navigation, tabs, metrics and stepper patterns in native HTML/CSS.",
+    "Use orange for forecast/action emphasis, cyan for the controlled tank and quiet neutral reference.",
+    "Preserve the camera scanner as a separate local image-plane tool."
+  ],
+  "evidence": [
+    "Four 21st previews visually inspected during the design pass, with code stored in .21st/cache.",
+    "Source names, registry URLs and hashes recorded in .21st/sources.json.",
+    "Actual CSS tokens read from web/process/lab.css.",
+    "Native adaptation provenance is named in index.html and web/process/lab.css."
+  ],
+  "generatedAt": "2026-11-04T14:07:00.065568+00:00"
+}

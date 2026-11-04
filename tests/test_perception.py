@@ -70,10 +70,14 @@ class TestFP02(unittest.TestCase):
 class TestWorldTransform(unittest.TestCase):
     def test_scale_from_rim(self):
         # 100 px-wide rim = 0.4572 m; rim centre (320,180) at 3.05 m
-        w = sp.world_from_scale((320, 80), rim_centroid=(320, 180), rim_width_px=100)
+        w = sp.world_from_scale((320, 80), rim_centroid=(320, 180), rim_width_px=100, rim_y_m=3.05, rim_diameter_m=.4572)
         self.assertAlmostEqual(w[0], 0.0, places=6)
         self.assertAlmostEqual(w[1], 3.05 + 100 * 0.4572 / 100, places=4)
         self.assertEqual(w[2], 0.0)
+
+    def test_no_guessed_metric_scale(self):
+        with self.assertRaises(ValueError):
+            sp.world_from_scale((320,80),(320,180),100)
 
 
 class TestEvents(unittest.TestCase):

@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-11-04T02:13:54.316148+00:00",
+  "reviewer": "Codex root and deliverables agents",
+  "method": "Root visually inspected all 13 keyframes covering subtitle sections and MPC displays. Deliverables independently inspected the 13-frame contact sheet and GIF preview. Automated complete decode checked 3596 frames for blank rendering/caption pixels.",
+  "sample_times_seconds": [
+    3,
+    12,
+    22,
+    37,
+    46,
+    56,
+    69,
+    84,
+    99,
+    111,
+    124,
+    138,
+    146
+  ],
+  "full_watch": false,
+  "visual_review_complete_for_declared_sample": true,
+  "continuous_subtitles": true,
+  "simulation_labels_visible": true,
+  "numbers_traceable": true,
+  "no_mockup": true,
+  "subtitle_check_limit": "13 caption sections visually sampled; pixel checks on all frames are heuristics, not a semantic full watch.",
+  "source_kind": "simulation",
+  "caption_timing_evidence": "Planned captions in recording.js and sampled video frames. The on-stop precise caption-event timeline was not saved after an HTTP 400 size limit; no reconstructed actual caption timestamps are claimed. Shot, counterfactual and MPC events were recovered from memory and archived with hashes.",
+  "scope_limit": "No physical-camera or actuator validation. Recorded replay is a synthetic 3D sensor dataset, distinct from the SAM video test.",
+  "evidence": [
+    {
+      "path": "output/media/twinforge-demo-current.mp4",
+      "sha256": "ea3caacec0141515ea058ec618dd489daa807b05f111f3674a759fb7103235b4"
+    },
+    {
+      "path": "output/media/twinforge-demo-current.mp4.provenance.json",
+      "sha256": "509c374736d6450401eef264c4050c0e54662c64b83e45b438531413a37b45ac"
+    },
+    {
+      "path": "output/media/review-media-current.json",
+      "sha256": "fa7ff46027b9194f92998e0d21dcf339fd6613d36b2244bb6b633fe6270a6ee8"
+    },
+    {
+      "path": "output/media/review-media-current.jpg",
+      "sha256": "63f960e937ce2d227c0abc15544d0196a1dd966161ce89e8b046cef47f9f304e"
+    },
+    {
+      "path": "output/media/demo-current-preview.png",
+      "sha256": "198dc50000d9453d29ad3f74bc9f56e7cf4d648f37a8a279db2c4701cd443407"
+    },
+    {
+      "path": "output/media/mpc-current-preview.png",
+      "sha256": "4ecbc43034d1e4c150a8cf287fb22486865e6c47bad5898a03f8790e645b7e58"
+    },
+    {
+      "path": "validation/runs/23119d61-07be-492d-a370-9f996c889760/report.json",
+      "sha256": "bc450a32c0b782ba9131390b32aabf96361ba06d55167d3752e81ea68b9d1457"
+    },
+    {
+      "path": "artifacts/simulation-8a28874b4218.webm",
+      "sha256": "659ff7d2af1c86cb399f8a76018101e6ed2dd1e1cc7485128b0a2078d2ea3b92"
+    }
+  ]
+}

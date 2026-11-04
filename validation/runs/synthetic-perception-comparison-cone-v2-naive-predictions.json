@@ -1,0 +1,791 @@
+{
+  "source_kind": "synthetic",
+  "configuration": {
+    "method": "largest_orange_HSV_contour",
+    "hsv_lower": [
+      5,
+      110,
+      60
+    ],
+    "hsv_upper": [
+      25,
+      255,
+      255
+    ],
+    "minimum_area_px": 12,
+    "maximum_image_area_fraction": 0.05,
+    "association_gate_px": 100,
+    "identity_policy": "nearest previous centroid within gate; reset after any missing frame",
+    "threshold_selection": "fixed generic orange-color rule; no tuning or sweep against evaluator truth"
+  },
+  "frames": [
+    {
+      "frame": 0,
+      "t": 0.0,
+      "track_id": 1,
+      "centroid": [
+        142.97743055555554,
+        311.14930555555554
+      ],
+      "position_m": [
+        -1.3791171635053727,
+        0.7122112138124632,
+        0.8162333227505929
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 576.0,
+      "eccentricity": 0.3212258472446707,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.17026645835237542,
+          0.0834794571638921,
+          0.1427272797875573
+        ],
+        "depth_std_m": 0.2294101374717536,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 114,
+        "angular_residual_rms_rad": 0.0007525988452102998,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 2,
+      "t": 0.16666666666666666,
+      "track_id": 1,
+      "centroid": [
+        159.48626817447496,
+        223.891760904685
+      ],
+      "position_m": [
+        -1.1826210647032194,
+        1.5312526244983546,
+        0.7300840970009155
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 619.0,
+      "eccentricity": 0.25756419994622165,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.1535640946611587,
+          0.0482394932819673,
+          0.13811634844197548
+        ],
+        "depth_std_m": 0.20491783485818948,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 112,
+        "angular_residual_rms_rad": 0.0007136427645337398,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 3,
+      "t": 0.25,
+      "track_id": 1,
+      "centroid": [
+        168.88484848484848,
+        190.45
+      ],
+      "position_m": [
+        -1.0281711659199022,
+        1.8407391850620543,
+        0.7418739847936755
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 660.0,
+      "eccentricity": 0.2875186658752909,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.15844687844636077,
+          0.03930034532865722,
+          0.14760958809768826
+        ],
+        "depth_std_m": 0.21255813512901092,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 126,
+        "angular_residual_rms_rad": 0.0009094601168971355,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 5,
+      "t": 0.4166666666666667,
+      "track_id": 1,
+      "centroid": [
+        189.41921397379912,
+        145.39592430858806
+      ],
+      "position_m": [
+        -0.8514040206101319,
+        2.2188008500169367,
+        0.6527808732158147
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 687.0,
+      "eccentricity": 0.19759236530109792,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.13365063635409857,
+          0.02130619336167874,
+          0.13350233377270562
+        ],
+        "depth_std_m": 0.18368339773791806,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 116,
+        "angular_residual_rms_rad": 0.0008185598744656336,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 6,
+      "t": 0.5,
+      "track_id": 1,
+      "centroid": [
+        200.52180028129396,
+        134.59634317862165
+      ],
+      "position_m": [
+        -0.7333568257765339,
+        2.3109355730162564,
+        0.639788464128511
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 711.0,
+      "eccentricity": 0.15946969143224543,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.12744245647307076,
+          0.01775902708358414,
+          0.1318675728021901
+        ],
+        "depth_std_m": 0.17798413370549973,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 120,
+        "angular_residual_rms_rad": 0.0007119043651726039,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 8,
+      "t": 0.6666666666666666,
+      "track_id": 1,
+      "centroid": [
+        224.42634560906515,
+        138.25637393767704
+      ],
+      "position_m": [
+        -0.565083000773746,
+        2.28238316453159,
+        0.5424511281980431
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 706.0,
+      "eccentricity": 0.16931160738632997,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.1205972693748923,
+          0.018604596700812565,
+          0.13417796576785032
+        ],
+        "depth_std_m": 0.17514080348380343,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 124,
+        "angular_residual_rms_rad": 0.0007226164619726301,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 9,
+      "t": 0.75,
+      "track_id": 1,
+      "centroid": [
+        236.71079136690648,
+        152.0244604316547
+      ],
+      "position_m": [
+        -0.4840742155395308,
+        2.171503032463984,
+        0.49118723054481706
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 695.0,
+      "eccentricity": 0.24474429431613376,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.11768855403222635,
+          0.022421335664917198,
+          0.13583008225026041
+        ],
+        "depth_std_m": 0.17482722244296917,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 120,
+        "angular_residual_rms_rad": 0.0007993922817056351,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 11,
+      "t": 0.9166666666666666,
+      "track_id": 1,
+      "centroid": [
+        261.446875,
+        202.959375
+      ],
+      "position_m": [
+        -0.36604094326124814,
+        1.7380265280717326,
+        0.3336195058118592
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 640.0,
+      "eccentricity": 0.2077826609608206,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.11604842119220651,
+          0.03821128126833989,
+          0.14431259296659668
+        ],
+        "depth_std_m": 0.18241735258192673,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 112,
+        "angular_residual_rms_rad": 0.0007965865891616232,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 12,
+      "t": 1.0,
+      "track_id": 1,
+      "centroid": [
+        268.63186813186815,
+        239.1813186813187
+      ],
+      "position_m": [
+        -0.8093279649444263,
+        1.2154761103003646,
+        -0.35548657963082775
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 364.0,
+      "eccentricity": 0.8086362410132718,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.6317898510128945,
+          0.271826545847182,
+          0.8090197034296241
+        ],
+        "depth_std_m": 1.0291523704531917,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 88,
+        "angular_residual_rms_rad": 0.0033470715325770537,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 14,
+      "t": 1.1666666666666667,
+      "track_id": 1,
+      "centroid": [
+        296.9829642248722,
+        328.8143100511073
+      ],
+      "position_m": [
+        -0.10498040658131824,
+        0.6160740004661358,
+        0.20298706045128334
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 587.0,
+      "eccentricity": 0.1265148506483814,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.1124607393832953,
+          0.08193641162432198,
+          0.1567769155384196
+        ],
+        "depth_std_m": 0.20215248225606955,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 110,
+        "angular_residual_rms_rad": 0.0007810394244997437,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 15,
+      "t": 1.25,
+      "track_id": 1,
+      "centroid": [
+        308.2304964539007,
+        379.322695035461
+      ],
+      "position_m": [
+        -0.03983318245434386,
+        0.11348635324494705,
+        0.1264728165594855
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 564.0,
+      "eccentricity": 0.3208459016859297,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.12371521653058115,
+          0.11312705333345101,
+          0.17946050162473265
+        ],
+        "depth_std_m": 0.237081657867318,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 108,
+        "angular_residual_rms_rad": 0.0008844726119841275,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 17,
+      "t": 1.4166666666666667,
+      "track_id": 1,
+      "centroid": [
+        323.4144736842105,
+        317.0625
+      ],
+      "position_m": [
+        0.12802146455583285,
+        0.7540065229940678,
+        0.13453262735852167
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 608.0,
+      "eccentricity": 0.12740135396821037,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.10150831248353447,
+          0.07511387195985157,
+          0.1558066783080186
+        ],
+        "depth_std_m": 0.19333261154698,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 112,
+        "angular_residual_rms_rad": 0.0008036562960324002,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 18,
+      "t": 1.5,
+      "track_id": 1,
+      "centroid": [
+        331.2471728594507,
+        295.8465266558966
+      ],
+      "position_m": [
+        0.18876767987429321,
+        0.9508501309559994,
+        0.10573726208841716
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 619.0,
+      "eccentricity": 0.17242234674371357,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.09787085161357627,
+          0.06697938513985409,
+          0.15459643629118383
+        ],
+        "depth_std_m": 0.1878098023256986,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 112,
+        "angular_residual_rms_rad": 0.0007823182512272525,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 20,
+      "t": 1.6666666666666667,
+      "track_id": 1,
+      "centroid": [
+        347.3333333333333,
+        275.9617224880383
+      ],
+      "position_m": [
+        0.3005591550656468,
+        1.1278728488741787,
+        0.028445452365542856
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 627.0,
+      "eccentricity": 0.08968725036040558,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.09299784963440878,
+          0.060075890608917035,
+          0.15591232517632989
+        ],
+        "depth_std_m": 0.18435670611768037,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 112,
+        "angular_residual_rms_rad": 0.0007436970171329309,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 21,
+      "t": 1.75,
+      "track_id": 1,
+      "centroid": [
+        355.4292452830189,
+        277.1808176100629
+      ],
+      "position_m": [
+        0.3758238064328312,
+        1.1288158837168947,
+        0.021886395367040734
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 636.0,
+      "eccentricity": 0.1513261342760459,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.08979221303052251,
+          0.059687745412039084,
+          0.15522283102152482
+        ],
+        "depth_std_m": 0.18218567931843144,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 112,
+        "angular_residual_rms_rad": 0.0006999564359963914,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 23,
+      "t": 1.9166666666666667,
+      "track_id": 1,
+      "centroid": [
+        371.29245283018867,
+        302.92767295597486
+      ],
+      "position_m": [
+        0.5118957644043944,
+        0.9143061734064362,
+        -0.01652145369286906
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 636.0,
+      "eccentricity": 0.18213576498259262,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.08715265108384337,
+          0.0689699588373808,
+          0.1605629255591447
+        ],
+        "depth_std_m": 0.18825009939525272,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 112,
+        "angular_residual_rms_rad": 0.0008351428200623701,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 24,
+      "t": 2.0,
+      "track_id": 1,
+      "centroid": [
+        379.0517799352751,
+        326.83656957928804
+      ],
+      "position_m": [
+        0.554987034479101,
+        0.6829869712144969,
+        -0.08691397365275133
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 618.0,
+      "eccentricity": 0.2217570103553275,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.08610070951545656,
+          0.07780024622989073,
+          0.1640777955352123
+        ],
+        "depth_std_m": 0.1938520854275553,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 112,
+        "angular_residual_rms_rad": 0.0007743244484669678,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 26,
+      "t": 2.1666666666666665,
+      "track_id": 1,
+      "centroid": [
+        393.3387358184765,
+        387.26256077795784
+      ],
+      "position_m": [
+        0.7014844811378658,
+        0.14716703115614127,
+        -0.10163722814691667
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 617.0,
+      "eccentricity": 0.30132658943981566,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.08348843129605144,
+          0.10058534277529083,
+          0.17015969604967332
+        ],
+        "depth_std_m": 0.20713080011093396,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 114,
+        "angular_residual_rms_rad": 0.0007533097463584588,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 27,
+      "t": 2.25,
+      "track_id": 1,
+      "centroid": [
+        402.1475667189953,
+        365.2087912087912
+      ],
+      "position_m": [
+        0.7834895032209239,
+        0.382970171737369,
+        -0.0893880149886126
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 637.0,
+      "eccentricity": 0.21926437135672389,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.07825837070383931,
+          0.08926595610944131,
+          0.16517341809789915
+        ],
+        "depth_std_m": 0.1962335339875352,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 112,
+        "angular_residual_rms_rad": 0.000817129966228305,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 29,
+      "t": 2.4166666666666665,
+      "track_id": 1,
+      "centroid": [
+        419.62191358024694,
+        342.1975308641975
+      ],
+      "position_m": [
+        0.8981881687215931,
+        0.5910913652192957,
+        -0.17287863769171707
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 648.0,
+      "eccentricity": 0.19541287079244363,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.07323861541887085,
+          0.08074042736986364,
+          0.16637216151408274
+        ],
+        "depth_std_m": 0.19192074909411913,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 114,
+        "angular_residual_rms_rad": 0.0007055034066949411,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 30,
+      "t": 2.5,
+      "track_id": 1,
+      "centroid": [
+        428.18684603886396,
+        342.1718983557549
+      ],
+      "position_m": [
+        0.9857751241111905,
+        0.6220574949921809,
+        -0.14673888218518272
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 669.0,
+      "eccentricity": 0.23359954993263732,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.07160894664121513,
+          0.08137215136995708,
+          0.16906838945743102
+        ],
+        "depth_std_m": 0.19372769620279517,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 118,
+        "angular_residual_rms_rad": 0.0008492004635034865,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 32,
+      "t": 2.6666666666666665,
+      "track_id": 1,
+      "centroid": [
+        444.5843023255814,
+        364.41279069767444
+      ],
+      "position_m": [
+        1.1402024048753843,
+        0.46283512172835195,
+        -0.1427387021638742
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 688.0,
+      "eccentricity": 0.26333272120411133,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.06380992898606216,
+          0.08450953819152886,
+          0.16358314967073953
+        ],
+        "depth_std_m": 0.18800034637874596,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 120,
+        "angular_residual_rms_rad": 0.0007956460301229975,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 33,
+      "t": 2.75,
+      "track_id": 1,
+      "centroid": [
+        451.9530102790015,
+        386.6798825256975
+      ],
+      "position_m": [
+        1.19811409560712,
+        0.2571926723406994,
+        -0.18799029881952833
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 681.0,
+      "eccentricity": 0.30730971132541823,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.06304239628755108,
+          0.09383001902466659,
+          0.16870779000577882
+        ],
+        "depth_std_m": 0.19605390846787568,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 120,
+        "angular_residual_rms_rad": 0.0007421512879845194,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    },
+    {
+      "frame": 35,
+      "t": 2.9166666666666665,
+      "track_id": 1,
+      "centroid": [
+        470.08522727272725,
+        380.15482954545456
+      ],
+      "position_m": [
+        1.3420160948507611,
+        0.34934905932973326,
+        -0.20692585809124076
+      ],
+      "quality": {
+        "missing": false
+      },
+      "area": 704.0,
+      "eccentricity": 0.3373812825026047,
+      "position_uncertainty": {
+        "position_std_m": [
+          0.05705205095348854,
+          0.08932581969917013,
+          0.16728447087344528
+        ],
+        "depth_std_m": 0.19118647822296533,
+        "method": "robust sphere tangent cone + measured diameter",
+        "boundary_points": 120,
+        "angular_residual_rms_rad": 0.0007722819928181147,
+        "pixel_center_offset_px": 0.5,
+        "fit": "unit-ray tangent cone, six Huber iterations"
+      }
+    }
+  ]
+}

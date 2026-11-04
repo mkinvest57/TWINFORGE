@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "profile": "simulation-only",
+  "scope": "Logiciel local L3 et expériences synthétiques indépendantes. Aucun critère physique/historique du PDF n'est réputé satisfait par ce profil.",
+  "excluded_boundaries": [
+    "Captures et mesures réelles, calibration physique d'une caméra, appareil de contrôle/actionnement réel",
+    "Induction libre L1 et reconstruction rétrospective d'horodatages/calibration absents des archives",
+    "Délais historiques, publication du code final, acceptation des règles et envoi au portail",
+    "Exécution réelle de Glimmer sans endpoint/clé ou capacité disque suffisante; adaptateurs et comportement d'absence restent testés"
+  ],
+  "evidence": {
+    "benchmark": {
+      "path": "validation/runs/simulation-benchmark-exact-clock-2026-11-04.json",
+      "sha256": "fa4cd8c9a40753a96dd1ba3296ab0f3a3821071040579b48e34e523bc20bae04"
+    },
+    "independent_3d": {
+      "path": "induction/benchmarks/independent-3d-2026-11-04/benchmark.json",
+      "sha256": "0d9853f0755ea49320e5e9f92491c0085dbd5b593a50e9daca61f72d47a5ee1e"
+    },
+    "legacy_replay": {
+      "path": "induction/current/replay_diagnostic.json",
+      "sha256": "0ccbc8a4985ab69c98ab127adeed39389040d07731d80953be8a42e495d590a1"
+    },
+    "tracking": {
+      "path": "validation/runs/synthetic-perception-comparison-cone-v2.json",
+      "sha256": "c92adf4451fc6e34eb44a32a22ba94e8eb17a4e97fb2fbf7a3a9a140493b6b7e"
+    },
+    "browser": {
+      "path": "validation/gauntlet-report.json",
+      "sha256": "cbb6bced01ab72d1d667aea55a4ccc901d9ccfaee70b61ac1dcfd24325c93950"
+    },
+    "software": {
+      "path": "validation/runs/software-checks-2026-11-04.json",
+      "sha256": "c8f08668f29adc7f66680eb75465c77e024f9d0e20d866e97989ccc56f4943f2"
+    },
+    "media": {
+      "path": "validation/submission.json",
+      "sha256": "8390a9f9da54fb9332ad09fb5c264d7789422e0c966bc3904a932a0a9dc0948e"
+    },
+    "vendor": {
+      "path": "assets/vendor/three/manifest.json",
+      "sha256": "cfcce767cbc40aeb29d1e7f7647563bb3d290a0f37486fc77351dbfca7e7ab6d"
+    }
+  }
+}

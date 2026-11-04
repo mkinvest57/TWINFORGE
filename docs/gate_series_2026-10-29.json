@@ -1,0 +1,356 @@
+{
+  "results": [
+    {
+      "phase": "induction",
+      "idx": 1,
+      "cfg": {
+        "angle": 52,
+        "power": 7.8,
+        "spin": -6,
+        "wind": 0
+      },
+      "locked": {
+        "verdict": "IN ✓",
+        "when": "locked at 01:06:11 · before it lands · induced twin (g=9.30, k=0.0200)",
+        "hud": "VERDICT LOCKED: IN",
+        "prob": "44 % (8/18)"
+      },
+      "scored": true,
+      "correct": true,
+      "done": {
+        "totals": "1 / 1",
+        "shots": "1",
+        "hud": "MADE! — locked verdict CORRECT ✓",
+        "errNow": "0.2 cm",
+        "errAvg": "7.6 cm",
+        "recal": "2",
+        "params": "Gravity g\t9.82 m/s²\t± 0.07\t0.4 cm | Drag k\t0.0085\t± 0.0046\tresidual fit | Floor restitution\t0.56\t± 0.05\tmeasured at bounce | Board restitution\t0.50\t± 0.15\tprior to validate | Induced wind\t0.0 m/s\t± 0.1\tfinite diff."
+      }
+    },
+    {
+      "phase": "induction",
+      "idx": 2,
+      "cfg": {
+        "angle": 52,
+        "power": 7.8,
+        "spin": -6,
+        "wind": 0
+      },
+      "locked": {
+        "verdict": "IN ✓",
+        "when": "locked at 01:06:24 · before it lands · induced twin (g=9.82, k=0.0085)",
+        "hud": "VERDICT LOCKED: IN",
+        "prob": "78 % (14/18)"
+      },
+      "scored": true,
+      "correct": true,
+      "done": {
+        "totals": "2 / 2",
+        "shots": "2",
+        "hud": "MADE! — locked verdict CORRECT ✓",
+        "errNow": "0.7 cm",
+        "errAvg": "9.2 cm",
+        "recal": "3",
+        "params": "Gravity g\t9.82 m/s²\t± 0.07\t0.4 cm | Drag k\t0.0085\t± 0.0046\tresidual fit | Floor restitution\t0.56\t± 0.05\tmeasured at bounce | Board restitution\t0.50\t± 0.15\tprior to validate | Induced wind\t0.0 m/s\t± 0.1\tfinite diff."
+      }
+    },
+    {
+      "phase": "induction",
+      "idx": 3,
+      "cfg": {
+        "angle": 52,
+        "power": 7.8,
+        "spin": -6,
+        "wind": 0
+      },
+      "locked": {
+        "verdict": "IN ✓",
+        "when": "locked at 01:06:37 · before it lands · induced twin (g=9.82, k=0.0085)",
+        "hud": "VERDICT LOCKED: IN",
+        "prob": "78 % (14/18)"
+      },
+      "scored": true,
+      "correct": true,
+      "done": {
+        "totals": "3 / 3",
+        "shots": "3",
+        "hud": "MADE! — locked verdict CORRECT ✓",
+        "errNow": "0.7 cm",
+        "errAvg": "9.2 cm",
+        "recal": "4",
+        "params": "Gravity g\t9.82 m/s²\t± 0.07\t0.4 cm | Drag k\t0.0085\t± 0.0046\tresidual fit | Floor restitution\t0.56\t± 0.05\tmeasured at bounce | Board restitution\t0.50\t± 0.15\tprior to validate | Induced wind\t0.0 m/s\t± 0.1\tfinite diff."
+      }
+    },
+    {
+      "phase": "fresh",
+      "idx": 1,
+      "cfg": {
+        "angle": 52,
+        "power": 7.8,
+        "spin": -6,
+        "wind": 0
+      },
+      "locked": {
+        "verdict": "IN ✓",
+        "when": "locked at 01:06:49 · before it lands · induced twin (g=9.82, k=0.0085)",
+        "hud": "VERDICT LOCKED: IN",
+        "prob": "78 % (14/18)"
+      },
+      "scored": true,
+      "correct": true,
+      "done": {
+        "totals": "4 / 4",
+        "shots": "4",
+        "hud": "MADE! — locked verdict CORRECT ✓",
+        "errNow": "0.7 cm",
+        "errAvg": "9.2 cm",
+        "recal": "5",
+        "params": "Gravity g\t9.82 m/s²\t± 0.07\t0.4 cm | Drag k\t0.0085\t± 0.0046\tresidual fit | Floor restitution\t0.56\t± 0.05\tmeasured at bounce | Board restitution\t0.50\t± 0.15\tprior to validate | Induced wind\t0.0 m/s\t± 0.1\tfinite diff."
+      }
+    },
+    {
+      "phase": "fresh",
+      "idx": 2,
+      "cfg": {
+        "angle": 52,
+        "power": 7.8,
+        "spin": -6,
+        "wind": 0
+      },
+      "locked": {
+        "verdict": "IN ✓",
+        "when": "locked at 01:07:01 · before it lands · induced twin (g=9.82, k=0.0085)",
+        "hud": "VERDICT LOCKED: IN",
+        "prob": "78 % (14/18)"
+      },
+      "scored": true,
+      "correct": true,
+      "done": {
+        "totals": "5 / 5",
+        "shots": "5",
+        "hud": "MADE! — locked verdict CORRECT ✓",
+        "errNow": "0.7 cm",
+        "errAvg": "9.2 cm",
+        "recal": "6",
+        "params": "Gravity g\t9.82 m/s²\t± 0.07\t0.4 cm | Drag k\t0.0085\t± 0.0046\tresidual fit | Floor restitution\t0.56\t± 0.05\tmeasured at bounce | Board restitution\t0.50\t± 0.15\tprior to validate | Induced wind\t0.0 m/s\t± 0.1\tfinite diff."
+      }
+    },
+    {
+      "phase": "fresh",
+      "idx": 3,
+      "cfg": {
+        "angle": 52,
+        "power": 7.8,
+        "spin": -6,
+        "wind": 0
+      },
+      "locked": {
+        "verdict": "IN ✓",
+        "when": "locked at 01:07:12 · before it lands · induced twin (g=9.82, k=0.0085)",
+        "hud": "VERDICT LOCKED: IN",
+        "prob": "78 % (14/18)"
+      },
+      "scored": true,
+      "correct": true,
+      "done": {
+        "totals": "6 / 6",
+        "shots": "6",
+        "hud": "MADE! — locked verdict CORRECT ✓",
+        "errNow": "0.7 cm",
+        "errAvg": "9.2 cm",
+        "recal": "7",
+        "params": "Gravity g\t9.82 m/s²\t± 0.07\t0.4 cm | Drag k\t0.0085\t± 0.0046\tresidual fit | Floor restitution\t0.56\t± 0.05\tmeasured at bounce | Board restitution\t0.50\t± 0.15\tprior to validate | Induced wind\t0.0 m/s\t± 0.1\tfinite diff."
+      }
+    },
+    {
+      "phase": "fresh",
+      "idx": 4,
+      "cfg": {
+        "angle": 52,
+        "power": 7.8,
+        "spin": -6,
+        "wind": 0
+      },
+      "locked": {
+        "verdict": "IN ✓",
+        "when": "locked at 01:07:24 · before it lands · induced twin (g=9.82, k=0.0085)",
+        "hud": "VERDICT LOCKED: IN",
+        "prob": "78 % (14/18)"
+      },
+      "scored": true,
+      "correct": true,
+      "done": {
+        "totals": "7 / 7",
+        "shots": "7",
+        "hud": "MADE! — locked verdict CORRECT ✓",
+        "errNow": "0.7 cm",
+        "errAvg": "9.2 cm",
+        "recal": "8",
+        "params": "Gravity g\t9.82 m/s²\t± 0.07\t0.4 cm | Drag k\t0.0085\t± 0.0046\tresidual fit | Floor restitution\t0.56\t± 0.05\tmeasured at bounce | Board restitution\t0.50\t± 0.15\tprior to validate | Induced wind\t0.0 m/s\t± 0.1\tfinite diff."
+      }
+    },
+    {
+      "phase": "fresh",
+      "idx": 5,
+      "cfg": {
+        "angle": 52,
+        "power": 7.8,
+        "spin": -6,
+        "wind": 0
+      },
+      "locked": {
+        "verdict": "IN ✓",
+        "when": "locked at 01:07:35 · before it lands · induced twin (g=9.82, k=0.0085)",
+        "hud": "VERDICT LOCKED: IN",
+        "prob": "78 % (14/18)"
+      },
+      "scored": true,
+      "correct": true,
+      "done": {
+        "totals": "8 / 8",
+        "shots": "8",
+        "hud": "MADE! — locked verdict CORRECT ✓",
+        "errNow": "0.7 cm",
+        "errAvg": "9.2 cm",
+        "recal": "9",
+        "params": "Gravity g\t9.82 m/s²\t± 0.07\t0.4 cm | Drag k\t0.0085\t± 0.0046\tresidual fit | Floor restitution\t0.56\t± 0.05\tmeasured at bounce | Board restitution\t0.50\t± 0.15\tprior to validate | Induced wind\t0.0 m/s\t± 0.1\tfinite diff."
+      }
+    },
+    {
+      "phase": "fresh",
+      "idx": 6,
+      "cfg": {
+        "angle": 48,
+        "power": 7.4,
+        "spin": -6,
+        "wind": 0
+      },
+      "locked": {
+        "verdict": "OUT ✗",
+        "when": "locked at 01:07:46 · before it lands · induced twin (g=9.82, k=0.0085)",
+        "hud": "VERDICT LOCKED: OUT",
+        "prob": "0 % (0/18)"
+      },
+      "scored": false,
+      "correct": true,
+      "done": {
+        "totals": "9 / 9",
+        "shots": "9",
+        "hud": "MISSED — locked verdict CORRECT ✓",
+        "errNow": "3.1 cm",
+        "errAvg": "9.7 cm",
+        "recal": "10",
+        "params": "Gravity g\t9.81 m/s²\t± 0.07\t0.4 cm | Drag k\t0.0090\t± 0.0047\tresidual fit | Floor restitution\t0.55\t± 0.07\tmeasured at bounce | Board restitution\t0.50\t± 0.15\tprior to validate | Induced wind\t0.0 m/s\t± 0.1\tfinite diff."
+      }
+    },
+    {
+      "phase": "fresh",
+      "idx": 7,
+      "cfg": {
+        "angle": 56,
+        "power": 8.2,
+        "spin": -4,
+        "wind": 0
+      },
+      "locked": {
+        "verdict": "IN ✓",
+        "when": "locked at 01:07:58 · before it lands · induced twin (g=9.81, k=0.0090)",
+        "hud": "VERDICT LOCKED: IN",
+        "prob": "78 % (14/18)"
+      },
+      "scored": false,
+      "correct": false,
+      "done": {
+        "totals": "9 / 10",
+        "shots": "10",
+        "hud": "MISSED — locked verdict WRONG ✗",
+        "errNow": "8.2 cm",
+        "errAvg": "9.8 cm",
+        "recal": "11",
+        "params": "Gravity g\t9.82 m/s²\t± 0.06\t0.6 cm | Drag k\t0.0084\t± 0.0045\tresidual fit | Floor restitution\t0.52\t± 0.02\tmeasured at bounce | Board restitution\t0.50\t± 0.15\tprior to validate | Induced wind\t0.0 m/s\t± 0.1\tfinite diff."
+      }
+    },
+    {
+      "phase": "fresh",
+      "idx": 8,
+      "cfg": {
+        "angle": 45,
+        "power": 8.6,
+        "spin": -8,
+        "wind": 0.8
+      },
+      "locked": {
+        "verdict": "IN ✓",
+        "when": "locked at 01:08:13 · before it lands · induced twin (g=9.82, k=0.0084)",
+        "hud": "VERDICT LOCKED: IN",
+        "prob": "83 % (15/18)"
+      },
+      "scored": false,
+      "correct": false,
+      "done": {
+        "totals": "9 / 10",
+        "shots": "11",
+        "hud": "VERDICT LOCKED: IN",
+        "errNow": "9.0 cm",
+        "errAvg": "19.6 cm",
+        "recal": "14",
+        "params": "Gravity g\t9.85 m/s²\t± 0.08\t0.4 cm | Drag k\t0.0094\t± 0.0048\tresidual fit | Floor restitution\t0.52\t± 0.02\tmeasured at bounce | Board restitution\t0.50\t± 0.15\tprior to validate | Induced wind\t0.8 m/s\t± 0.1\tfinite diff."
+      }
+    },
+    {
+      "phase": "fresh",
+      "idx": 9,
+      "cfg": {
+        "angle": 60,
+        "power": 7.2,
+        "spin": -2,
+        "wind": -0.8
+      },
+      "locked": {
+        "verdict": "OUT ✗",
+        "when": "locked at 01:09:04 · before it lands · induced twin (g=9.85, k=0.0094)",
+        "hud": "VERDICT LOCKED: OUT",
+        "prob": "0 % (0/18)"
+      },
+      "scored": false,
+      "correct": true,
+      "done": {
+        "totals": "10 / 12",
+        "shots": "12",
+        "hud": "MISSED — locked verdict CORRECT ✓",
+        "errNow": "0.7 cm",
+        "errAvg": "7.2 cm",
+        "recal": "16",
+        "params": "Gravity g\t9.77 m/s²\t± 0.06\t1.7 cm | Drag k\t0.0083\t± 0.0045\tresidual fit | Floor restitution\t0.54\t± 0.07\tmeasured at bounce | Board restitution\t0.50\t± 0.15\tprior to validate | Induced wind\t-0.8 m/s\t± 0.1\tfinite diff."
+      }
+    },
+    {
+      "phase": "fresh",
+      "idx": 10,
+      "cfg": {
+        "angle": 50,
+        "power": 9,
+        "spin": -10,
+        "wind": 0
+      },
+      "locked": {
+        "verdict": "OUT ✗",
+        "when": "locked at 01:09:37 · before it lands · induced twin (g=9.77, k=0.0083)",
+        "hud": "VERDICT LOCKED: OUT",
+        "prob": "6 % (1/18)"
+      },
+      "scored": false,
+      "correct": true,
+      "done": {
+        "totals": "11 / 13",
+        "shots": "13",
+        "hud": "MISSED — locked verdict CORRECT ✓",
+        "errNow": "2.4 cm",
+        "errAvg": "8.4 cm",
+        "recal": "18",
+        "params": "Gravity g\t9.90 m/s²\t± 0.07\t0.4 cm | Drag k\t0.0086\t± 0.0046\tresidual fit | Floor restitution\t0.53\t± 0.10\tmeasured at bounce | Board restitution\t0.50\t± 0.15\tprior to validate | Induced wind\t0.0 m/s\t± 0.1\tfinite diff."
+      }
+    }
+  ],
+  "errors": []
+}

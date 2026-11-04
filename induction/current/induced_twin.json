@@ -1,0 +1,241 @@
+{
+  "schema_version": "twinforge.twin.v1",
+  "level": "L3",
+  "status": "L3_unvalidated",
+  "family": "quadratic_drag",
+  "parameters": {
+    "g": {
+      "value": 10.725207356878874,
+      "uncertainty": 0.13347601895966651,
+      "source": "training observations only; initialized by finite differences, refined by integrated trajectory residuals; contacts/outliers excluded",
+      "status": "estimated",
+      "units": "m/s^2"
+    },
+    "drag": {
+      "value": 0.34395040911278807,
+      "uncertainty": 0.03354194574747311,
+      "source": "training observations only; initialized by finite differences, refined by integrated trajectory residuals; contacts/outliers excluded",
+      "status": "estimated",
+      "units": "1/m"
+    },
+    "wind": {
+      "value": [
+        0.6453121223907752,
+        0.0,
+        0.0
+      ],
+      "uncertainty": [
+        0.3535937539674211,
+        null,
+        null
+      ],
+      "source": "training observations only; initialized by finite differences, refined by integrated trajectory residuals; contacts/outliers excluded; vertical acceleration absorbed by g",
+      "status": "estimated",
+      "units": "m/s^2"
+    },
+    "restitution": {
+      "value": null,
+      "uncertainty": null,
+      "source": "no universal material coefficient; see per-surface measurements",
+      "status": "unobserved",
+      "units": "ratio"
+    },
+    "friction": {
+      "value": null,
+      "uncertainty": null,
+      "source": "no independent rolling/sliding observations fitted",
+      "status": "unobserved",
+      "units": "ratio"
+    },
+    "magnus": {
+      "value": null,
+      "uncertainty": null,
+      "source": "spin-induced lift not identifiable without measured spin",
+      "status": "unobserved",
+      "units": null
+    },
+    "spin": {
+      "value": null,
+      "uncertainty": null,
+      "source": "ball spin not reconstructed from a silhouette",
+      "status": "unobserved",
+      "units": "rad/s"
+    }
+  },
+  "restitution_by_surface": {},
+  "numeric": {
+    "g": 10.725207356878874,
+    "drag": 0.34395040911278807,
+    "wind": [
+      0.6453121223907752,
+      0.0,
+      0.0
+    ],
+    "restitution": null,
+    "friction": null,
+    "magnus": null,
+    "spin": null,
+    "restitution_by_surface": {}
+  },
+  "source_fingerprints": [
+    "c24a890f0fb20e9af3abeaf23904b0d4baa1779e82399e99da849fd5d62dd784"
+  ],
+  "train_shot_ids": [
+    "test_shot.mp4"
+  ],
+  "training_identity_keys": [
+    "frames:c24a890f0fb20e9af3abeaf23904b0d4baa1779e82399e99da849fd5d62dd784",
+    "shot:test_shot.mp4",
+    "video_name:test_shot.mp4"
+  ],
+  "calibration_dimensions": 2,
+  "fit": {
+    "initial_acceleration_residual_rms": 1.3805067737826178,
+    "acceleration_residual_rms": 1.3805067737826178,
+    "n_points": 9,
+    "drag_boundary_zero": false,
+    "trajectory_refinement": {
+      "status": "refined_on_training_observations",
+      "method": "bounded_LM_integrated_positions_with_training_Huber_weights",
+      "initial_position_rmse_cm": 7.175030996441648,
+      "final_position_rmse_cm": 1.275971563385719,
+      "segments": 1,
+      "positions": 11,
+      "integrator_step_s": 0.002,
+      "uncertainty": "approximate local least-squares; calibration systematic error not included",
+      "iterations": [
+        {
+          "iteration": 1,
+          "accepted": true,
+          "train_position_rmse_cm": 1.6257711313966896
+        },
+        {
+          "iteration": 2,
+          "accepted": true,
+          "train_position_rmse_cm": 1.2766463922524225
+        },
+        {
+          "iteration": 3,
+          "accepted": false,
+          "train_position_rmse_cm": 1.2766463922524225
+        },
+        {
+          "iteration": 4,
+          "accepted": false,
+          "train_position_rmse_cm": 1.2766463922524225
+        },
+        {
+          "iteration": 5,
+          "accepted": false,
+          "train_position_rmse_cm": 1.2766463922524225
+        },
+        {
+          "iteration": 6,
+          "accepted": false,
+          "train_position_rmse_cm": 1.2766463922524225
+        },
+        {
+          "iteration": 7,
+          "accepted": true,
+          "train_position_rmse_cm": 1.275971563385719
+        },
+        {
+          "iteration": 8,
+          "accepted": false,
+          "train_position_rmse_cm": 1.275971563385719
+        },
+        {
+          "iteration": 9,
+          "accepted": false,
+          "train_position_rmse_cm": 1.275971563385719
+        },
+        {
+          "iteration": 10,
+          "accepted": false,
+          "train_position_rmse_cm": 1.275971563385719
+        },
+        {
+          "iteration": 11,
+          "accepted": false,
+          "train_position_rmse_cm": 1.275971563385719
+        },
+        {
+          "iteration": 12,
+          "accepted": false,
+          "train_position_rmse_cm": 1.275971563385719
+        },
+        {
+          "iteration": 13,
+          "accepted": false,
+          "train_position_rmse_cm": 1.275971563385719
+        },
+        {
+          "iteration": 14,
+          "accepted": false,
+          "train_position_rmse_cm": 1.275971563385719
+        },
+        {
+          "iteration": 15,
+          "accepted": false,
+          "train_position_rmse_cm": 1.275971563385719
+        },
+        {
+          "iteration": 16,
+          "accepted": false,
+          "train_position_rmse_cm": 1.275971563385719
+        },
+        {
+          "iteration": 17,
+          "accepted": false,
+          "train_position_rmse_cm": 1.275971563385719
+        },
+        {
+          "iteration": 18,
+          "accepted": false,
+          "train_position_rmse_cm": 1.275971563385719
+        }
+      ],
+      "uses_validation_or_test": false
+    }
+  },
+  "uncertainty_method": "linear least-squares standard errors; correlated finite differences and calibration systematic error are not included",
+  "simulator": {
+    "family": "quadratic_drag",
+    "module": "induction.simulator",
+    "dimensions": 3,
+    "integrator": "semi_implicit_euler",
+    "max_step_s": 0.002,
+    "validated_regime": "free_flight",
+    "contact_support": [
+      "plane",
+      "sphere",
+      "rim"
+    ],
+    "missing_identification": [
+      "friction",
+      "spin",
+      "net material and geometry"
+    ]
+  },
+  "limitations": [
+    "L3 calibration of predefined families, not autonomous code/physics induction.",
+    "Homography data remain planar even though the integrator uses XYZ vectors.",
+    "Unmeasured contact parameters stay null; contact rollout refuses guessed coefficients.",
+    "Original WebGL clip was assembled from wall-time screenshots encoded at fixed FPS; simulation-time accuracy cannot be reconstructed retrospectively.",
+    "Original monocular scale is an assumed affine projection; centimetre errors are in that legacy assumed plane, not certified real-world distances."
+  ],
+  "created_utc": "2026-11-04T01:55:31.480565+00:00",
+  "validation": {
+    "train_shots": [
+      "test_shot.mp4"
+    ],
+    "validation_shots": [],
+    "test_shots": [],
+    "held_out_cm": null,
+    "selection": "explicit_quadratic_drag_family_refined_on_original_training_observations",
+    "status": "no_independent_test_evidence"
+  },
+  "g": 10.725207356878874,
+  "drag": 0.34395040911278807,
+  "held_out_cm": null
+}

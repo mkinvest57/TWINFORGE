@@ -1,0 +1,417 @@
+{
+  "version": 1,
+  "run": {
+    "id": "23119d61-07be-492d-a370-9f996c889760",
+    "recorded_at": "2026-11-04T02:12:28.820Z",
+    "mode": "simulation",
+    "source_commit": "working-tree",
+    "source_sha256": "0523d4539469a737637acd4c9114e0445db72d1cd6c4783c9f80160c21a47a42"
+  },
+  "scenes": [
+    {
+      "id": "hoop",
+      "validated": false,
+      "tests": [
+        {
+          "id": "launch",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/23119d61-07be-492d-a370-9f996c889760/twinforge-events-23119d61-07be-492d-a370-9f996c889760.json",
+              "sha256": "bee645a3cd42055fafaf5155eb768d793a6c9e1b06b9f761eb341a68ce8f4dba",
+              "event_ids": [
+                "733523fd-f9d3-4c8e-88da-24a63e7ba7f0"
+              ]
+            }
+          ],
+          "measurements": {
+            "speed_m_s": 9.1,
+            "spin_rad_s": 6.5
+          },
+          "reason": "Measured initial impulse in simulation.",
+          "executed_at": "2026-11-04T02:10:28.554Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "bounce",
+          "status": "not_run",
+          "evidence": [
+            {
+              "path": "validation/runs/23119d61-07be-492d-a370-9f996c889760/twinforge-events-23119d61-07be-492d-a370-9f996c889760.json",
+              "sha256": "bee645a3cd42055fafaf5155eb768d793a6c9e1b06b9f761eb341a68ce8f4dba",
+              "event_ids": [
+                "048a99ef-f626-4032-8c47-97177e0d21b1"
+              ]
+            }
+          ],
+          "measurements": {
+            "surfaces": [
+              "wall",
+              "ground"
+            ]
+          },
+          "reason": "Each floor, board and rim bounce requires measured contact evidence; one shot is not assumed to cover all surfaces.",
+          "executed_at": "2026-11-04T02:10:40.678Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "hoop_passage",
+          "status": "fail",
+          "evidence": [
+            {
+              "path": "validation/runs/23119d61-07be-492d-a370-9f996c889760/twinforge-events-23119d61-07be-492d-a370-9f996c889760.json",
+              "sha256": "bee645a3cd42055fafaf5155eb768d793a6c9e1b06b9f761eb341a68ce8f4dba",
+              "event_ids": [
+                "048a99ef-f626-4032-8c47-97177e0d21b1"
+              ]
+            }
+          ],
+          "measurements": {
+            "scored": false
+          },
+          "reason": "This shot did not traverse the hoop.",
+          "executed_at": "2026-11-04T02:10:40.678Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "net",
+          "status": "not_run",
+          "evidence": [
+            {
+              "path": "validation/runs/23119d61-07be-492d-a370-9f996c889760/twinforge-events-23119d61-07be-492d-a370-9f996c889760.json",
+              "sha256": "bee645a3cd42055fafaf5155eb768d793a6c9e1b06b9f761eb341a68ce8f4dba",
+              "event_ids": [
+                "048a99ef-f626-4032-8c47-97177e0d21b1"
+              ]
+            }
+          ],
+          "measurements": {
+            "strand_contacts": 0,
+            "max_displacement_m": 0.0005855347559026008
+          },
+          "reason": "Coupled sphere/strand contacts and constraint deformation, simulation only.",
+          "executed_at": "2026-11-04T02:10:40.678Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "ghost_ahead",
+          "status": "pass",
+          "evidence": [
+            {
+              "path": "validation/runs/23119d61-07be-492d-a370-9f996c889760/twinforge-events-23119d61-07be-492d-a370-9f996c889760.json",
+              "sha256": "bee645a3cd42055fafaf5155eb768d793a6c9e1b06b9f761eb341a68ce8f4dba",
+              "event_ids": [
+                "048a99ef-f626-4032-8c47-97177e0d21b1"
+              ]
+            }
+          ],
+          "measurements": {
+            "horizon_s": 0.5,
+            "error_mean_cm": 1.5819778255232035,
+            "samples": 461
+          },
+          "reason": "Future target timestamps and measured errors; 30 cm threshold.",
+          "executed_at": "2026-11-04T02:10:40.678Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "induction",
+          "status": "blocked",
+          "evidence": [
+            {
+              "path": "validation/runs/23119d61-07be-492d-a370-9f996c889760/twinforge-events-23119d61-07be-492d-a370-9f996c889760.json",
+              "sha256": "bee645a3cd42055fafaf5155eb768d793a6c9e1b06b9f761eb341a68ce8f4dba",
+              "event_ids": [
+                "048a99ef-f626-4032-8c47-97177e0d21b1"
+              ]
+            }
+          ],
+          "measurements": {},
+          "reason": "L3 known-model calibration; free induction and independent real-world test set have not been demonstrated.",
+          "executed_at": "2026-11-04T02:10:40.678Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        },
+        {
+          "id": "control",
+          "status": "not_run",
+          "evidence": [
+            {
+              "path": "validation/runs/23119d61-07be-492d-a370-9f996c889760/twinforge-events-23119d61-07be-492d-a370-9f996c889760.json",
+              "sha256": "bee645a3cd42055fafaf5155eb768d793a6c9e1b06b9f761eb341a68ce8f4dba",
+              "event_ids": [
+                "048a99ef-f626-4032-8c47-97177e0d21b1"
+              ]
+            }
+          ],
+          "measurements": {},
+          "reason": "No feasible control action executed in this run.",
+          "executed_at": "2026-11-04T02:10:40.678Z",
+          "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+        }
+      ],
+      "metrics": {
+        "ghost_error_mean_cm": 1.5819778255232035,
+        "verdicts_correct": 6,
+        "verdicts_total": 7,
+        "collisions": 2
+      }
+    },
+    {
+      "id": "multi",
+      "validated": false,
+      "tests": [
+        {
+          "id": "launch",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "bounce",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "hoop_passage",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "net",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "ghost_ahead",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "induction",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "control",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        }
+      ],
+      "metrics": {
+        "ghost_error_mean_cm": null,
+        "verdicts_correct": 0,
+        "verdicts_total": 0,
+        "collisions": null
+      }
+    },
+    {
+      "id": "chaos",
+      "validated": false,
+      "tests": [
+        {
+          "id": "launch",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "bounce",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "hoop_passage",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "net",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "ghost_ahead",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "induction",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "control",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        }
+      ],
+      "metrics": {
+        "ghost_error_mean_cm": null,
+        "verdicts_correct": 0,
+        "verdicts_total": 0,
+        "collisions": null
+      }
+    },
+    {
+      "id": "liquid",
+      "validated": false,
+      "tests": [
+        {
+          "id": "launch",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "bounce",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "hoop_passage",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "net",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "ghost_ahead",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "induction",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "control",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        }
+      ],
+      "metrics": {
+        "ghost_error_mean_cm": null,
+        "verdicts_correct": 0,
+        "verdicts_total": 0,
+        "collisions": null
+      }
+    },
+    {
+      "id": "orbit",
+      "validated": false,
+      "tests": [
+        {
+          "id": "launch",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "bounce",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "hoop_passage",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "net",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "ghost_ahead",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "induction",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        },
+        {
+          "id": "control",
+          "status": "not_run",
+          "evidence": [],
+          "measurements": {},
+          "reason": "No measured evidence yet."
+        }
+      ],
+      "metrics": {
+        "ghost_error_mean_cm": null,
+        "verdicts_correct": 0,
+        "verdicts_total": 0,
+        "collisions": null
+      }
+    }
+  ],
+  "level": "L3",
+  "limitations": [
+    "Simulation evidence only. Real video validation and physical control have not been demonstrated.",
+    "Rendered fixture geometry and unmeasured model coefficients are declared priors."
+  ],
+  "session_metrics": {
+    "errorSum": 6413.414590927127,
+    "errorCount": 3138,
+    "completedShots": 7,
+    "correctVerdicts": 6,
+    "simulatedEpisodes": 192,
+    "ghost_error_mean_cm": 2.043790500614126
+  }
+}

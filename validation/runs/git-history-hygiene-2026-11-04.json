@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "checked_at": "2026-11-04T02:16:30.999921+00:00",
+  "scope": "Every commit reachable from local refs; tracked non-binary files; two credential pattern families. No secret values included. Not a universal PII or secret detector.",
+  "commit_count": 3,
+  "commits": [
+    "2d0530903fe8410c12ed3fef3bd771331194267c",
+    "bdf959cb8c23867861180bfdf19b51d6ec3898c2",
+    "f671d9dff6800674e8b751eb43ac8dd70cd23aeb"
+  ],
+  "pattern_families": [
+    "private_key",
+    "provider_token"
+  ],
+  "finding_count": 0,
+  "findings": [],
+  "scan_failures": [],
+  "passed": true
+}

@@ -1,0 +1,250 @@
+1
+00:00:00,000 --> 00:00:02,966
+Fermer cette vanne maintenant,
+ou attendre ?
+
+2
+00:00:02,966 --> 00:00:06,000
+Ici, cette décision sépare
+zéro litre débordé
+
+3
+00:00:06,000 --> 00:00:08,225
+de quatre-vingt-dix virgule huit.
+
+4
+00:00:08,225 --> 00:00:09,573
+Dans une simulation.
+
+5
+00:00:09,573 --> 00:00:12,000
+Regardons ce qui fait la différence.
+
+6
+00:00:14,000 --> 00:00:16,620
+Twinforge est un banc d’essais numérique.
+
+7
+00:00:16,620 --> 00:00:18,346
+Deux cuves, le même départ.
+
+8
+00:00:18,346 --> 00:00:21,669
+Après calibration, la référence
+reste vanne ouverte.
+
+9
+00:00:21,669 --> 00:00:23,586
+L’autre reçoit une régulation.
+
+10
+00:00:23,586 --> 00:00:27,485
+Pendant les premières secondes,
+le logiciel observe le niveau
+
+11
+00:00:27,485 --> 00:00:31,000
+et calibre un modèle connu.
+Puis il commence à prévoir.
+
+12
+00:00:32,000 --> 00:00:36,016
+Le trait orange montre le niveau attendu
+dans cinq secondes,
+
+13
+00:00:36,016 --> 00:00:37,890
+si la vanne reste inchangée.
+
+14
+00:00:37,890 --> 00:00:39,295
+Activons le contrôle.
+
+15
+00:00:39,295 --> 00:00:44,583
+Maintenant, augmentons de trente-cinq
+pour cent le débit disponible à l’entrée.
+
+16
+00:00:44,583 --> 00:00:47,461
+La même perturbation
+touche les deux cuves.
+
+17
+00:00:47,461 --> 00:00:49,000
+Observez leurs niveaux.
+
+18
+00:00:51,000 --> 00:00:54,067
+La régulation compare
+des suites de commandes,
+
+19
+00:00:54,067 --> 00:00:56,467
+applique la première, puis recalcule
+
+20
+00:00:56,467 --> 00:00:59,467
+toutes les deux cents millisecondes
+simulées.
+
+21
+00:00:59,467 --> 00:01:03,333
+La cuve contrôlée reste près de sa cible.
+L’autre déborde.
+
+22
+00:01:03,333 --> 00:01:07,200
+Chaque prévision évaluable
+est comparée au niveau observé.
+
+23
+00:01:07,200 --> 00:01:11,000
+Même après une intervention :
+on garde aussi les erreurs,
+
+24
+00:01:11,000 --> 00:01:13,000
+pas seulement la belle courbe.
+
+25
+00:01:15,000 --> 00:01:16,895
+Mais qui choisit le modèle ?
+
+26
+00:01:16,895 --> 00:01:20,212
+Dans la démonstration,
+c’est un ajustement local.
+
+27
+00:01:20,212 --> 00:01:24,003
+Passons à une expérience distincte
+avec Meta Muse Spark.
+
+28
+00:01:24,003 --> 00:01:27,320
+Il reçoit des observations
+synthétiques bruitées,
+
+29
+00:01:27,320 --> 00:01:30,772
+sans les vrais coefficients
+ni les données de test.
+
+30
+00:01:30,772 --> 00:01:32,938
+Il propose des familles connues.
+
+31
+00:01:32,938 --> 00:01:37,000
+Le logiciel ajuste leurs paramètres
+et mesure leurs erreurs.
+
+32
+00:01:39,000 --> 00:01:41,829
+Voici les trois appels
+réellement exécutés.
+
+33
+00:01:41,829 --> 00:01:45,513
+Débit constant : insuffisant.
+Drainage linéaire : mieux.
+
+34
+00:01:45,513 --> 00:01:49,132
+Drainage en racine carrée :
+meilleur sur la validation.
+
+35
+00:01:49,132 --> 00:01:52,355
+Les réponses et les mesures
+restent consultables.
+
+36
+00:01:52,355 --> 00:01:56,566
+Environ vingt secondes, pour un peu plus
+d’un centime de dollar.
+
+37
+00:01:56,566 --> 00:01:59,000
+Vous regardez la session enregistrée.
+
+38
+00:02:01,000 --> 00:02:02,704
+Puis le modèle est figé.
+
+39
+00:02:02,704 --> 00:02:05,117
+Trois épisodes de test distincts :
+
+40
+00:02:05,117 --> 00:02:08,028
+vingt et une prévisions à trois secondes,
+
+41
+00:02:08,028 --> 00:02:11,222
+zéro virgule dix centimètre
+d’erreur moyenne.
+
+42
+00:02:11,222 --> 00:02:15,694
+La référence déterministe atteint
+exactement la même précision.
+
+43
+00:02:15,694 --> 00:02:19,386
+Meta aide à proposer
+et interpréter les hypothèses ;
+
+44
+00:02:19,386 --> 00:02:24,000
+ce test ne démontre aucun gain
+de précision face au solveur seul.
+
+45
+00:02:26,000 --> 00:02:30,404
+Tout est exportable : observations,
+hypothèses, commandes, résultats.
+
+46
+00:02:30,404 --> 00:02:32,766
+Pour préparer un essai de régulation,
+
+47
+00:02:32,766 --> 00:02:36,149
+on peut changer la cible,
+provoquer une perturbation,
+
+48
+00:02:36,149 --> 00:02:37,936
+puis comprendre la décision.
+
+49
+00:02:37,936 --> 00:02:41,447
+Le rapport distingue les expériences
+et leurs horizons.
+
+50
+00:02:41,447 --> 00:02:44,000
+Chaque chiffre garde ainsi son contexte.
+
+51
+00:02:46,000 --> 00:02:48,258
+Aujourd’hui, c’est un banc virtuel.
+
+52
+00:02:48,258 --> 00:02:50,710
+Une installation réelle demande encore
+
+53
+00:02:50,710 --> 00:02:53,871
+des capteurs calibrés
+et des essais indépendants.
+
+54
+00:02:53,871 --> 00:02:56,323
+Twinforge : anticiper, agir, vérifier.
+
+55
+00:02:56,323 --> 00:02:58,000
+À vous de tester la vanne.

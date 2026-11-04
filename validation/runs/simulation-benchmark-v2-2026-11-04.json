@@ -1,0 +1,4337 @@
+{
+  "schema_version": "twinforge.simulation-benchmark.v1",
+  "mode": "simulation",
+  "source_kind": "synthetic",
+  "scientifically_validated": false,
+  "level": "L3_known_family",
+  "started_at": "2026-11-04T01:58:53.339Z",
+  "completed_at": "2026-11-04T01:58:58.201Z",
+  "runtime_seconds": 4.861364042,
+  "seed": 20261104,
+  "split_seeds": {
+    "train": 20271104,
+    "validation": 20281104,
+    "test": 20291104
+  },
+  "thresholds": {
+    "version": 1,
+    "declared_before_first_run": "2026-11-04",
+    "scope": "L3 synthetic known-family experiments. Thresholds are acceptance criteria, never fitted to outcomes.",
+    "minimum_train_episodes": 3,
+    "minimum_validation_episodes": 2,
+    "minimum_test_episodes": 3,
+    "prediction_horizon_seconds": 0.5,
+    "orbit_prediction_horizon_seconds": 0.6,
+    "hoop_mean_error_cm_max": 5,
+    "multi_mean_error_cm_max": 10,
+    "chaos_mean_angle_error_rad_max": 0.15,
+    "liquid_mean_level_error_m_max": 0.01,
+    "orbit_mean_error_cm_max": 2,
+    "active_parameter_relative_error_max": 0.12,
+    "contact_parameter_absolute_error_max": 0.08,
+    "verdict_accuracy_min": 0.8,
+    "minimum_in_and_out_outcomes": 1,
+    "monte_carlo_samples_min": 18,
+    "monte_carlo_brier_max": 0.25,
+    "mpc_test_episodes": 3,
+    "mpc_success_rate_min": 0.6666666666666666,
+    "mpc_corrections_max": 3,
+    "mpc_interval_seconds": 0.12,
+    "mpc_deadline_ms": 120,
+    "mpc_candidate_sequences_min": 24,
+    "forbidden_obstacle_contacts_max": 0,
+    "tank_mass_balance_error_max": 0.000001,
+    "orbit_recalibration_improvement_min": 0.1,
+    "numerical_finite_required": true
+  },
+  "thresholds_sha256": "c14dce152df4a50f2fcca4d7a099a401dadf29f685f1392fe5680f39207ec219",
+  "test_revealed_at": "2026-11-04T01:58:55.813Z",
+  "source_sha256": {
+    "validation/simulation_benchmark.mjs": "935f133721068e232053d575197fb71b0425206cc3fd85fbc61a0dde2b7e4e5c",
+    "validation/fixtures/synthetic-plant.mjs": "80ad09b536e48cd22916b9417193c51decd2ccebf917375c53ce82b5e8b944b9",
+    "validation/simulation-thresholds.json": "c14dce152df4a50f2fcca4d7a099a401dadf29f685f1392fe5680f39207ec219",
+    "web/physics/model.mjs": "4ebbeae6fde1b4abe08ac894cfdbd81e5352fd9efa88f4ff04c74457ef012a06",
+    "web/physics/control.mjs": "2cb1d4e42c9ff3b1aa434811b7a0e52e85942170bfbfd94f755158fb3ab2dbfe",
+    "web/physics/alt-models.mjs": "3a758ebc2c8d4ccd9cd46143d7f5e909a792c45c5c8f0f053e2fbbacb45d932d"
+  },
+  "measurement_contract": {
+    "training": "Only first .45s position/angle/level samples; contact calibration uses separate .7s / 1.1s training episodes. Geometry and orientation-derived spin are observable inputs.",
+    "validation": "Two distinct episode seeds, never used to revise a frozen model.",
+    "test": "Three distinct seeds per scene; test observations requested only after freezing model hashes.",
+    "independence": "Separate initial conditions and seed ranges, shared known simulator family. This is not model-family independence or a real-world test.",
+    "uncertainty": "24 deterministic initial-state perturbations, +/-5mm and +/-0.02m/s; descriptive confidence conditional on those assumptions, not calibrated sensor uncertainty.",
+    "contacts": "Ground, board, rim, net and sphere contacts are permitted task events. Obstacle/planet/wall contacts are forbidden in controlled runs. A deliberate obstacle probe is a positive detector control, excluded from safe-flight counts.",
+    "plant_parameters_revealed_only_after_model_freeze": true,
+    "physical_measurements": false
+  },
+  "scenes": [
+    {
+      "id": "hoop",
+      "family": "quadratic drag, constant gravity/wind, Magnus; restitution/Coulomb contacts; PBD net with fixed material prior",
+      "model": {
+        "at": "2026-11-04T01:58:55.812Z",
+        "sha256": "0a085291a8c22405ddd388a45441e4bcd9257ade6cf3d2f09783836e8f55ca29",
+        "train_prefix_sha256": "98a74a3fee2e61a27cf8689c0c3acbe11c03c2fc6dbe74f51d36ef3c30e44973",
+        "parameters": {
+          "g": 10.02389022232952,
+          "drag": 0.012407379027458355,
+          "windAcceleration": [
+            0.07624643424045936,
+            0,
+            0.028357380945081986
+          ],
+          "windX": 0.635386952003828,
+          "magnusCoefficient": 0.0018833935102283324,
+          "restGround": 0.688375,
+          "restBoard": 0.7199,
+          "restRim": 0.611675,
+          "friction": 0.029699999999999997,
+          "mass": 0.62
+        }
+      },
+      "parameter_errors": [
+        {
+          "key": "g",
+          "estimated": 10.02389022232952,
+          "truth_revealed_after_freeze": 10.023890222329646,
+          "relative_error": 1.2582074703538204e-14
+        },
+        {
+          "key": "drag",
+          "estimated": 0.012407379027458355,
+          "truth_revealed_after_freeze": 0.012407379027456046,
+          "relative_error": 1.8609223925663698e-13
+        },
+        {
+          "key": "magnusCoefficient",
+          "estimated": 0.0018833935102283324,
+          "truth_revealed_after_freeze": 0.0018833935102447867,
+          "relative_error": 8.736509795220877e-12
+        }
+      ],
+      "validation": [
+        {
+          "episode_id": "hoop-validation-20281388-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 1.587608751019851e-14,
+          "endpoint_error": 4.247711631056838e-14,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [
+            {
+              "t": 0.5208333333333334,
+              "type": "net"
+            },
+            {
+              "t": 0.525,
+              "type": "net"
+            }
+          ],
+          "finite": true
+        },
+        {
+          "episode_id": "hoop-validation-20282385-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 1.5130158660720228e-14,
+          "endpoint_error": 4.080651724159263e-14,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        }
+      ],
+      "test": [
+        {
+          "episode_id": "hoop-test-20291388-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 1.4930140561822776e-14,
+          "endpoint_error": 4.101983825240369e-14,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        },
+        {
+          "episode_id": "hoop-test-20292385-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 1.5130158660720228e-14,
+          "endpoint_error": 4.080651724159263e-14,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        },
+        {
+          "episode_id": "hoop-test-20293382-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 1.5104489086472108e-14,
+          "endpoint_error": 4.136216758844986e-14,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        }
+      ],
+      "checks": [
+        {
+          "id": "held_out_prediction",
+          "value": 1.5054929436338368e-12,
+          "operator": "max",
+          "threshold": 5,
+          "unit": "cm",
+          "passed": true
+        },
+        {
+          "id": "finite_predictions",
+          "value": 1,
+          "operator": "min",
+          "threshold": 1,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "active_parameter_identification",
+          "value": 8.736509795220877e-12,
+          "operator": "max",
+          "threshold": 0.12,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "contact_parameter_error",
+          "value": 0.00004881579284556764,
+          "operator": "max",
+          "threshold": 0.08,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "expected_contact_detectors",
+          "value": 5,
+          "operator": "min",
+          "threshold": 5,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "verdict_accuracy",
+          "value": 1,
+          "operator": "min",
+          "threshold": 0.8,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "in_out_outcome_coverage",
+          "value": 1,
+          "operator": "min",
+          "threshold": 1,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "monte_carlo_sample_count",
+          "value": 24,
+          "operator": "min",
+          "threshold": 18,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "monte_carlo_brier",
+          "value": 0,
+          "operator": "max",
+          "threshold": 0.25,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "mpc_success_rate",
+          "value": 1,
+          "operator": "min",
+          "threshold": 0.6666666666666666,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "mpc_max_corrections",
+          "value": 3,
+          "operator": "max",
+          "threshold": 3,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "mpc_forbidden_obstacle_contacts",
+          "value": 0,
+          "operator": "max",
+          "threshold": 0,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "mpc_max_compute_ms",
+          "value": 350.19770900000003,
+          "operator": "max",
+          "threshold": 120,
+          "unit": "ms",
+          "passed": false
+        },
+        {
+          "id": "mpc_candidate_sequences",
+          "value": 32,
+          "operator": "min",
+          "threshold": 24,
+          "unit": "",
+          "passed": true
+        }
+      ],
+      "mean_error": 1.5054929436338368e-12,
+      "unit": "cm",
+      "verdicts": [
+        {
+          "episode_id": "hoop-test-20291388-default",
+          "locked_at_t": 0.025,
+          "predicted_scored": true,
+          "actual_scored": true,
+          "correct": true,
+          "monte_carlo_samples": 24,
+          "probability": 1,
+          "brier": 0,
+          "perturbations": {
+            "position_half_width_m": 0.005,
+            "velocity_half_width_m_s": 0.02
+          },
+          "outcome_revealed_after_prediction": true
+        },
+        {
+          "episode_id": "hoop-test-20292385-default",
+          "locked_at_t": 0.025,
+          "predicted_scored": false,
+          "actual_scored": false,
+          "correct": true,
+          "monte_carlo_samples": 24,
+          "probability": 0,
+          "brier": 0,
+          "perturbations": {
+            "position_half_width_m": 0.005,
+            "velocity_half_width_m_s": 0.02
+          },
+          "outcome_revealed_after_prediction": true
+        },
+        {
+          "episode_id": "hoop-test-20293382-default",
+          "locked_at_t": 0.025,
+          "predicted_scored": true,
+          "actual_scored": true,
+          "correct": true,
+          "monte_carlo_samples": 24,
+          "probability": 1,
+          "brier": 0,
+          "perturbations": {
+            "position_half_width_m": 0.005,
+            "velocity_half_width_m_s": 0.02
+          },
+          "outcome_revealed_after_prediction": true
+        }
+      ],
+      "contact_probes": [
+        {
+          "episode_id": "hoop-test-20311328-ground",
+          "requested": "ground",
+          "expected_contact": "ground",
+          "observed_contacts": [
+            "ground"
+          ],
+          "contact_count": 2,
+          "classification": "permitted task contact",
+          "passed": true
+        },
+        {
+          "episode_id": "hoop-test-20312325-board",
+          "requested": "board",
+          "expected_contact": "board",
+          "observed_contacts": [
+            "board"
+          ],
+          "contact_count": 1,
+          "classification": "permitted task contact",
+          "passed": true
+        },
+        {
+          "episode_id": "hoop-test-20313322-rim",
+          "requested": "rim",
+          "expected_contact": "rim",
+          "observed_contacts": [
+            "rim"
+          ],
+          "contact_count": 2,
+          "classification": "permitted task contact",
+          "passed": true
+        },
+        {
+          "episode_id": "hoop-test-20314319-net",
+          "requested": "net",
+          "expected_contact": "net",
+          "observed_contacts": [
+            "net",
+            "ground"
+          ],
+          "contact_count": 16,
+          "classification": "permitted task contact",
+          "passed": true
+        },
+        {
+          "episode_id": "hoop-test-20315316-obstacle",
+          "requested": "obstacle",
+          "expected_contact": "obstacle:forbidden-box",
+          "observed_contacts": [
+            "obstacle:forbidden-box",
+            "ground"
+          ],
+          "contact_count": 1,
+          "classification": "deliberate positive control of forbidden-collision detector",
+          "passed": true
+        }
+      ],
+      "control": [
+        {
+          "episode_id": "hoop-test-20331268-control",
+          "baseline_scored": false,
+          "scored": true,
+          "corrections": 3,
+          "replans": [
+            {
+              "t": 0.025,
+              "compute_ms": 263.13833399999976,
+              "deadline_ms": 120,
+              "deadline_met": false,
+              "feasible": true,
+              "evaluated": 32,
+              "rejected": 25,
+              "reason": null,
+              "J": 0.5595090082058655,
+              "J_components": {
+                "path_distance": 0.504018209762404,
+                "terminal_distance": 0.00043576103293528634,
+                "impulse_effort": 0.053858780114470955,
+                "obstacle_proximity": 0.0011962572960551828
+              },
+              "before_error_m": 0.3999980579887187,
+              "after_first_action_error_m": 0.0060260616833279984,
+              "candidates": [
+                {
+                  "candidate": 0,
+                  "feasible": true,
+                  "J": 2.4737124878488954,
+                  "terminal_error": 0.3999980579887187
+                },
+                {
+                  "candidate": 1,
+                  "feasible": true,
+                  "J": 0.5595090082058655,
+                  "terminal_error": 0.006026061683327998
+                },
+                {
+                  "candidate": 2,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4708333333333329,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 3,
+                  "feasible": true,
+                  "J": 0.5944716679209785,
+                  "terminal_error": 0.04921242241294035
+                },
+                {
+                  "candidate": 4,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4708333333333329,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 5,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.46666666666666623,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 6,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4624999999999996,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.5208333333333327,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.637499999999999,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 7,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4583333333333329,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 8,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4541666666666663,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 9,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.46666666666666623,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 10,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4624999999999996,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.529166666666666,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 11,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4708333333333329,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 12,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4541666666666663,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.6541666666666656,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 13,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4541666666666663,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 14,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.46666666666666623,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.5333333333333327,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.995833333333331,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 15,
+                  "feasible": true,
+                  "J": 0.6390266874679701,
+                  "terminal_error": 0.07847073119413772
+                },
+                {
+                  "candidate": 16,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4958333333333328,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 17,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4541666666666663,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.4583333333333329,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.4624999999999996,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 18,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4791666666666662,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.529166666666666,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 19,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.44583333333333297,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 20,
+                  "feasible": true,
+                  "J": 7.621042872865848,
+                  "terminal_error": 0.7574940325352981
+                },
+                {
+                  "candidate": 21,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.37083333333333324,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 22,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4791666666666662,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.7249999999999986,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 23,
+                  "feasible": true,
+                  "J": 10.493922261925812,
+                  "terminal_error": 0.8995744075387085
+                },
+                {
+                  "candidate": 24,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.28333333333333355,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 25,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.44583333333333297,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.624999999999999,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 26,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4083333333333331,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.4499999999999996,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.4708333333333329,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 27,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.36249999999999993,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.48333333333333284,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.5374999999999993,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 28,
+                  "feasible": true,
+                  "J": 5.901964103238172,
+                  "terminal_error": 0.6522053012755767
+                },
+                {
+                  "candidate": 29,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4499999999999996,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 30,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4624999999999996,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.6083333333333324,
+                      "type": "board"
+                    },
+                    {
+                      "t": 1.0916666666666641,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 31,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4708333333333329,
+                      "type": "rim"
+                    }
+                  ]
+                }
+              ],
+              "applied_command": {
+                "x": -0.7803055792638798,
+                "y": 0,
+                "z": -0.2536886958469926
+              },
+              "planned_sequence": [
+                {
+                  "x": -0.7803055792638798,
+                  "y": 0,
+                  "z": -0.2536886958469926
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                }
+              ],
+              "only_first_action_executed": true
+            },
+            {
+              "t": 0.14583333333333334,
+              "compute_ms": 234.58520899999985,
+              "deadline_ms": 120,
+              "deadline_met": false,
+              "feasible": true,
+              "evaluated": 32,
+              "rejected": 22,
+              "reason": null,
+              "J": 0.2644087904273859,
+              "J_components": {
+                "path_distance": 0.26345067268838473,
+                "terminal_distance": 1.4087462444325351e-7,
+                "impulse_effort": 0.000021607985104300787,
+                "obstacle_proximity": 0.0009363688792723867
+              },
+              "before_error_m": 0.0060260616833379965,
+              "after_first_action_error_m": 0.0001083492133655699,
+              "candidates": [
+                {
+                  "candidate": 0,
+                  "feasible": true,
+                  "J": 0.2650101486853783,
+                  "terminal_error": 0.0060260616833379965
+                },
+                {
+                  "candidate": 1,
+                  "feasible": true,
+                  "J": 0.2644087904273859,
+                  "terminal_error": 0.00010834921336556991
+                },
+                {
+                  "candidate": 2,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3375,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 3,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3416666666666667,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.9541666666666645,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 4,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3458333333333333,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 5,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3416666666666667,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.4166666666666664,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 6,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3458333333333333,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.5666666666666659,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.8499999999999982,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 7,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3416666666666667,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.46666666666666623,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.6208333333333323,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.733333333333332,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 8,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35416666666666663,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 9,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35416666666666663,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 10,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3416666666666667,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.4708333333333329,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.6333333333333323,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.8291666666666649,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 11,
+                  "feasible": true,
+                  "J": 0.32825768672611216,
+                  "terminal_error": 0.06399568614562487
+                },
+                {
+                  "candidate": 12,
+                  "feasible": true,
+                  "J": 0.28299597823194134,
+                  "terminal_error": 0.03191559236156431
+                },
+                {
+                  "candidate": 13,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3416666666666667,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.44583333333333297,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 14,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.40416666666666645,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 15,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3416666666666667,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 16,
+                  "feasible": true,
+                  "J": 0.5318872689493988,
+                  "terminal_error": 0.08969566320655553
+                },
+                {
+                  "candidate": 17,
+                  "feasible": true,
+                  "J": 2.6462568672624514,
+                  "terminal_error": 0.43124086195234873
+                },
+                {
+                  "candidate": 18,
+                  "feasible": true,
+                  "J": 4.830501877285092,
+                  "terminal_error": 0.6025193728451381
+                },
+                {
+                  "candidate": 19,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3375,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 20,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3375,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.36249999999999993,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 21,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.26666666666666694,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.35,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.5124999999999994,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 22,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 23,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.36249999999999993,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 24,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3458333333333333,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 25,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3458333333333333,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.42916666666666636,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.6041666666666657,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 26,
+                  "feasible": true,
+                  "J": 3.6140142190755475,
+                  "terminal_error": 0.5138486171404552
+                },
+                {
+                  "candidate": 27,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3416666666666667,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 28,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.32500000000000007,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 29,
+                  "feasible": true,
+                  "J": 2.1644499698679898,
+                  "terminal_error": 0.38281984760687443
+                },
+                {
+                  "candidate": 30,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.31666666666666676,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 31,
+                  "feasible": true,
+                  "J": 3.1441251321714767,
+                  "terminal_error": 0.4775677634148079
+                }
+              ],
+              "applied_command": {
+                "x": -0.015625521368378584,
+                "y": 0,
+                "z": -0.005093416905192829
+              },
+              "planned_sequence": [
+                {
+                  "x": -0.015625521368378584,
+                  "y": 0,
+                  "z": -0.005093416905192829
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                }
+              ],
+              "only_first_action_executed": true
+            },
+            {
+              "t": 0.26666666666666666,
+              "compute_ms": 216.95375000000013,
+              "deadline_ms": 120,
+              "deadline_met": false,
+              "feasible": true,
+              "evaluated": 32,
+              "rejected": 19,
+              "reason": null,
+              "J": 0.09517158094343939,
+              "J_components": {
+                "path_distance": 0.09450852632933318,
+                "terminal_distance": 6.900317824840203e-11,
+                "impulse_effort": 1.554032053822504e-8,
+                "obstacle_proximity": 0.0006630390047824822
+              },
+              "before_error_m": 0.00010834921337293278,
+              "after_first_action_error_m": 0.0000023979709869040333,
+              "candidates": [
+                {
+                  "candidate": 0,
+                  "feasible": true,
+                  "J": 0.09517316353799515,
+                  "terminal_error": 0.00010834921337293277
+                },
+                {
+                  "candidate": 1,
+                  "feasible": true,
+                  "J": 0.09517158094343939,
+                  "terminal_error": 0.0000023979709869040333
+                },
+                {
+                  "candidate": 2,
+                  "feasible": true,
+                  "J": 0.12118453809403243,
+                  "terminal_error": 0.043780918756592985
+                },
+                {
+                  "candidate": 3,
+                  "feasible": true,
+                  "J": 0.1565964773930924,
+                  "terminal_error": 0.06768967648441256
+                },
+                {
+                  "candidate": 4,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.241666666666667,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 5,
+                  "feasible": true,
+                  "J": 0.17925156964463165,
+                  "terminal_error": 0.07959988869583128
+                },
+                {
+                  "candidate": 6,
+                  "feasible": true,
+                  "J": 0.14318639190646665,
+                  "terminal_error": 0.058667636865347546
+                },
+                {
+                  "candidate": 7,
+                  "feasible": true,
+                  "J": 0.09696734030268937,
+                  "terminal_error": 0.0037176721432472834
+                },
+                {
+                  "candidate": 8,
+                  "feasible": true,
+                  "J": 0.17334900539865358,
+                  "terminal_error": 0.07599692697091226
+                },
+                {
+                  "candidate": 9,
+                  "feasible": true,
+                  "J": 0.19324953881519263,
+                  "terminal_error": 0.08521721583961324
+                },
+                {
+                  "candidate": 10,
+                  "feasible": true,
+                  "J": 0.1489593124212,
+                  "terminal_error": 0.06301031436051643
+                },
+                {
+                  "candidate": 11,
+                  "feasible": true,
+                  "J": 0.19399854738519876,
+                  "terminal_error": 0.085310598320996
+                },
+                {
+                  "candidate": 12,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.23333333333333364,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 13,
+                  "feasible": true,
+                  "J": 0.1665799121168496,
+                  "terminal_error": 0.0724979738130082
+                },
+                {
+                  "candidate": 14,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.241666666666667,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 15,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.23750000000000032,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 16,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.2208333333333336,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 17,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.21666666666666692,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.3666666666666666,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.8291666666666649,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 18,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.21666666666666692,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 19,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.21250000000000024,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.5249999999999994,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.7833333333333318,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 20,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.23333333333333364,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.2958333333333335,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.5583333333333326,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 21,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.23750000000000032,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 22,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.2208333333333336,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.29166666666666685,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 23,
+                  "feasible": true,
+                  "J": 0.20077498154929163,
+                  "terminal_error": 0.08633822736068449
+                },
+                {
+                  "candidate": 24,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.23750000000000032,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 25,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.21250000000000024,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 26,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.22916666666666696,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.6999999999999987,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 27,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.21666666666666692,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.32500000000000007,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 28,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.2208333333333336,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 29,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.22500000000000028,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 30,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.241666666666667,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 31,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.21666666666666692,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.42916666666666636,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.8458333333333315,
+                      "type": "rim"
+                    }
+                  ]
+                }
+              ],
+              "applied_command": {
+                "x": -0.0004189775552644743,
+                "y": 0,
+                "z": -0.0001367911360886275
+              },
+              "planned_sequence": [
+                {
+                  "x": -0.0004189775552644743,
+                  "y": 0,
+                  "z": -0.0001367911360886275
+                }
+              ],
+              "only_first_action_executed": true
+            }
+          ],
+          "expected_contacts": [],
+          "forbidden_contacts": [],
+          "crossing": {
+            "point": {
+              "x": 0.000002279461014820011,
+              "y": 3.05,
+              "z": 7.445282828401399e-7
+            },
+            "error": 0.0000023979709927422312,
+            "scored": true
+          }
+        },
+        {
+          "episode_id": "hoop-test-20332265-control",
+          "baseline_scored": false,
+          "scored": true,
+          "corrections": 3,
+          "replans": [
+            {
+              "t": 0.025,
+              "compute_ms": 166.90270800000008,
+              "deadline_ms": 120,
+              "deadline_met": false,
+              "feasible": true,
+              "evaluated": 32,
+              "rejected": 17,
+              "reason": null,
+              "J": 0.6007270572679603,
+              "J_components": {
+                "path_distance": 0.5159818450459486,
+                "terminal_distance": 0.0006845364067240732,
+                "impulse_effort": 0.08283501582574836,
+                "obstacle_proximity": 0.0012256599895392782
+              },
+              "before_error_m": 0.49606273834362374,
+              "after_first_action_error_m": 0.00755279422203064,
+              "candidates": [
+                {
+                  "candidate": 0,
+                  "feasible": true,
+                  "J": 3.5458135747691357,
+                  "terminal_error": 0.4960627383436238
+                },
+                {
+                  "candidate": 1,
+                  "feasible": true,
+                  "J": 0.6007270572679603,
+                  "terminal_error": 0.00755279422203064
+                },
+                {
+                  "candidate": 2,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4541666666666663,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 3,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4583333333333329,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 4,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4624999999999996,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 5,
+                  "feasible": true,
+                  "J": 0.6526899340014168,
+                  "terminal_error": 0.044193547466057505
+                },
+                {
+                  "candidate": 6,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4583333333333329,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.6458333333333323,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 7,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.46666666666666623,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 8,
+                  "feasible": true,
+                  "J": 0.6835954019278548,
+                  "terminal_error": 0.0757697536008968
+                },
+                {
+                  "candidate": 9,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4583333333333329,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.708333333333332,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 10,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.48333333333333284,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 11,
+                  "feasible": true,
+                  "J": 0.619320353590989,
+                  "terminal_error": 0.011946662927700979
+                },
+                {
+                  "candidate": 12,
+                  "feasible": true,
+                  "J": 0.6217794680117373,
+                  "terminal_error": 0.03960244396006813
+                },
+                {
+                  "candidate": 13,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4624999999999996,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 14,
+                  "feasible": true,
+                  "J": 0.6552657867667843,
+                  "terminal_error": 0.05105907188487312
+                },
+                {
+                  "candidate": 15,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4791666666666662,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 16,
+                  "feasible": true,
+                  "J": 3.8154378960172153,
+                  "terminal_error": 0.5085507299089138
+                },
+                {
+                  "candidate": 17,
+                  "feasible": true,
+                  "J": 2.9310168701861863,
+                  "terminal_error": 0.4291784885149123
+                },
+                {
+                  "candidate": 18,
+                  "feasible": true,
+                  "J": 5.43866517494355,
+                  "terminal_error": 0.6215407391097182
+                },
+                {
+                  "candidate": 19,
+                  "feasible": true,
+                  "J": 3.207486263667348,
+                  "terminal_error": 0.44701814630289716
+                },
+                {
+                  "candidate": 20,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4624999999999996,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 21,
+                  "feasible": true,
+                  "J": 5.178749357278377,
+                  "terminal_error": 0.607047277296344
+                },
+                {
+                  "candidate": 22,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4541666666666663,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 23,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.5083333333333327,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.5124999999999994,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 24,
+                  "feasible": true,
+                  "J": 10.237455372705474,
+                  "terminal_error": 0.8870288413274642
+                },
+                {
+                  "candidate": 25,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.38749999999999984,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.4791666666666662,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 26,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4583333333333329,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 27,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4583333333333329,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.637499999999999,
+                      "type": "board"
+                    },
+                    {
+                      "t": 1.0708333333333309,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 28,
+                  "feasible": true,
+                  "J": 7.728591041548386,
+                  "terminal_error": 0.7573067597322938
+                },
+                {
+                  "candidate": 29,
+                  "feasible": true,
+                  "J": 5.615464296245561,
+                  "terminal_error": 0.6300201646841416
+                },
+                {
+                  "candidate": 30,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4416666666666663,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 31,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.48333333333333284,
+                      "type": "rim"
+                    }
+                  ]
+                }
+              ],
+              "applied_command": {
+                "x": -0.9854337843920852,
+                "y": 0,
+                "z": -0.2536886958469926
+              },
+              "planned_sequence": [
+                {
+                  "x": -0.9854337843920852,
+                  "y": 0,
+                  "z": -0.2536886958469926
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                }
+              ],
+              "only_first_action_executed": true
+            },
+            {
+              "t": 0.14583333333333334,
+              "compute_ms": 130.73654099999976,
+              "deadline_ms": 120,
+              "deadline_met": false,
+              "feasible": true,
+              "evaluated": 32,
+              "rejected": 16,
+              "reason": null,
+              "J": 0.2694166740436823,
+              "J_components": {
+                "path_distance": 0.26842797917937133,
+                "terminal_distance": 2.2475872155767535e-7,
+                "impulse_effort": 0.000033943954052528165,
+                "obstacle_proximity": 0.0009545261515368348
+              },
+              "before_error_m": 0.007552794222041184,
+              "after_first_action_error_m": 0.0001368572009911777,
+              "candidates": [
+                {
+                  "candidate": 0,
+                  "feasible": true,
+                  "J": 0.27036732536583485,
+                  "terminal_error": 0.007552794222041184
+                },
+                {
+                  "candidate": 1,
+                  "feasible": true,
+                  "J": 0.2694166740436823,
+                  "terminal_error": 0.00013685720099117772
+                },
+                {
+                  "candidate": 2,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3583333333333333,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 3,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 4,
+                  "feasible": true,
+                  "J": 0.2969912204094718,
+                  "terminal_error": 0.026631834029182438
+                },
+                {
+                  "candidate": 5,
+                  "feasible": true,
+                  "J": 0.34996158979447817,
+                  "terminal_error": 0.08217288807224582
+                },
+                {
+                  "candidate": 6,
+                  "feasible": true,
+                  "J": 0.3214478504833358,
+                  "terminal_error": 0.06419049227842696
+                },
+                {
+                  "candidate": 7,
+                  "feasible": true,
+                  "J": 0.28632778350700955,
+                  "terminal_error": 0.03189877314260302
+                },
+                {
+                  "candidate": 8,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3458333333333333,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 9,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3416666666666667,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.41249999999999976,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.9708333333333311,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 10,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3583333333333333,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 11,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35416666666666663,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 12,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3458333333333333,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 13,
+                  "feasible": true,
+                  "J": 0.3037896043145404,
+                  "terminal_error": 0.04004795957123565
+                },
+                {
+                  "candidate": 14,
+                  "feasible": true,
+                  "J": 0.3518234783014167,
+                  "terminal_error": 0.0811833433446027
+                },
+                {
+                  "candidate": 15,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3416666666666667,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.39583333333333315,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 16,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3458333333333333,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.3666666666666666,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 17,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.21666666666666692,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.35416666666666663,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 18,
+                  "feasible": true,
+                  "J": 4.742165750274833,
+                  "terminal_error": 0.5957817208740773
+                },
+                {
+                  "candidate": 19,
+                  "feasible": true,
+                  "J": 5.5827964873631295,
+                  "terminal_error": 0.649961113467595
+                },
+                {
+                  "candidate": 20,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3375,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.9374999999999979,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 21,
+                  "feasible": true,
+                  "J": 2.31108048518383,
+                  "terminal_error": 0.4016076415362428
+                },
+                {
+                  "candidate": 22,
+                  "feasible": true,
+                  "J": 3.168619462014823,
+                  "terminal_error": 0.47642078209757194
+                },
+                {
+                  "candidate": 23,
+                  "feasible": true,
+                  "J": 3.9805764268923007,
+                  "terminal_error": 0.5402793212884138
+                },
+                {
+                  "candidate": 24,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3291666666666667,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 25,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3458333333333333,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 26,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3375,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 27,
+                  "feasible": true,
+                  "J": 3.2881450056067436,
+                  "terminal_error": 0.48202747213429586
+                },
+                {
+                  "candidate": 28,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 29,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35416666666666663,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.4874999999999995,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.529166666666666,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 30,
+                  "feasible": true,
+                  "J": 0.31908079299578146,
+                  "terminal_error": 0.04988818536742729
+                },
+                {
+                  "candidate": 31,
+                  "feasible": true,
+                  "J": 0.508157522748028,
+                  "terminal_error": 0.0883670853196757
+                }
+              ],
+              "applied_command": {
+                "x": -0.019944116986222133,
+                "y": 0,
+                "z": -0.005150885680782268
+              },
+              "planned_sequence": [
+                {
+                  "x": -0.019944116986222133,
+                  "y": 0,
+                  "z": -0.005150885680782268
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                }
+              ],
+              "only_first_action_executed": true
+            },
+            {
+              "t": 0.26666666666666666,
+              "compute_ms": 211.24524999999994,
+              "deadline_ms": 120,
+              "deadline_met": false,
+              "feasible": true,
+              "evaluated": 32,
+              "rejected": 19,
+              "reason": null,
+              "J": 0.09664641923255735,
+              "J_components": {
+                "path_distance": 0.09597400137470052,
+                "terminal_distance": 1.0960489205363589e-10,
+                "impulse_effort": 2.4793837715392302e-8,
+                "obstacle_proximity": 0.0006723929544142098
+              },
+              "before_error_m": 0.00013685720099841918,
+              "after_first_action_error_m": 0.0000030222079684346106,
+              "candidates": [
+                {
+                  "candidate": 0,
+                  "feasible": true,
+                  "J": 0.09664897336601731,
+                  "terminal_error": 0.00013685720099841918
+                },
+                {
+                  "candidate": 1,
+                  "feasible": true,
+                  "J": 0.09664641923255735,
+                  "terminal_error": 0.0000030222079684346106
+                },
+                {
+                  "candidate": 2,
+                  "feasible": true,
+                  "J": 0.15816448071962497,
+                  "terminal_error": 0.06846226975648156
+                },
+                {
+                  "candidate": 3,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.23750000000000032,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 4,
+                  "feasible": true,
+                  "J": 0.1877526609589745,
+                  "terminal_error": 0.08181630872268134
+                },
+                {
+                  "candidate": 5,
+                  "feasible": true,
+                  "J": 0.13300214779072356,
+                  "terminal_error": 0.05094619384706886
+                },
+                {
+                  "candidate": 6,
+                  "feasible": true,
+                  "J": 0.15658571984985484,
+                  "terminal_error": 0.0666763758735013
+                },
+                {
+                  "candidate": 7,
+                  "feasible": true,
+                  "J": 0.13782229673323773,
+                  "terminal_error": 0.05529129927109378
+                },
+                {
+                  "candidate": 8,
+                  "feasible": true,
+                  "J": 0.09752465579095972,
+                  "terminal_error": 0.012626076342959942
+                },
+                {
+                  "candidate": 9,
+                  "feasible": true,
+                  "J": 0.1702496178016912,
+                  "terminal_error": 0.07433985236109274
+                },
+                {
+                  "candidate": 10,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.241666666666667,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 11,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.24583333333333368,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 12,
+                  "feasible": true,
+                  "J": 0.12156172981878126,
+                  "terminal_error": 0.0425425574588857
+                },
+                {
+                  "candidate": 13,
+                  "feasible": true,
+                  "J": 0.15443353257268427,
+                  "terminal_error": 0.06457369751922762
+                },
+                {
+                  "candidate": 14,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.23333333333333364,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 15,
+                  "feasible": true,
+                  "J": 0.18014933652071294,
+                  "terminal_error": 0.07785776159683999
+                },
+                {
+                  "candidate": 16,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.22500000000000028,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 17,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.21250000000000024,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 18,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.241666666666667,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 19,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.24583333333333368,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 20,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.21666666666666692,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 21,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.22500000000000028,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.2958333333333335,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.5208333333333327,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.8499999999999982,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 22,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.23333333333333364,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 23,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.2208333333333336,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.3375,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 24,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.22916666666666696,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 25,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.22500000000000028,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.44583333333333297,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 26,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.22500000000000028,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.3916666666666665,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 27,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.2208333333333336,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.28333333333333355,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.6958333333333321,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 28,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.2208333333333336,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 29,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.2208333333333336,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.2875000000000002,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 30,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.21666666666666692,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.8291666666666649,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 1.212499999999997,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 1.2416666666666636,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 31,
+                  "feasible": true,
+                  "J": 0.11087337299537711,
+                  "terminal_error": 0.0339798582578718
+                }
+              ],
+              "applied_command": {
+                "x": -0.0005389558636034159,
+                "y": 0,
+                "z": -0.0001394616382016931
+              },
+              "planned_sequence": [
+                {
+                  "x": -0.0005389558636034159,
+                  "y": 0,
+                  "z": -0.0001394616382016931
+                }
+              ],
+              "only_first_action_executed": true
+            }
+          ],
+          "expected_contacts": [],
+          "forbidden_contacts": [],
+          "crossing": {
+            "point": {
+              "x": 0.000002925746173005467,
+              "y": 3.05,
+              "z": 7.5746311706864e-7
+            },
+            "error": 0.0000030222079747389117,
+            "scored": true
+          }
+        },
+        {
+          "episode_id": "hoop-test-20333262-control",
+          "baseline_scored": false,
+          "scored": true,
+          "corrections": 3,
+          "replans": [
+            {
+              "t": 0.025,
+              "compute_ms": 343.9258329999998,
+              "deadline_ms": 120,
+              "deadline_met": false,
+              "feasible": true,
+              "evaluated": 32,
+              "rejected": 21,
+              "reason": null,
+              "J": 0.6440389177895169,
+              "J_components": {
+                "path_distance": 0.5013832872248571,
+                "terminal_distance": 0.07882955436301083,
+                "impulse_effort": 0.06265877715722733,
+                "obstacle_proximity": 0.0011672990444215668
+              },
+              "before_error_m": 1.1136922257732276,
+              "after_first_action_error_m": 0.0903411607518228,
+              "candidates": [
+                {
+                  "candidate": 0,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4624999999999996,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 1,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4583333333333329,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 2,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.46666666666666623,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 3,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4624999999999996,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 4,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.46666666666666623,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 5,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4583333333333329,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.5999999999999991,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 6,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4583333333333329,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 1.1124999999999974,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 7,
+                  "feasible": true,
+                  "J": 2.5346940199030232,
+                  "terminal_error": 0.39873729439524724
+                },
+                {
+                  "candidate": 8,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4583333333333329,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 9,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4708333333333329,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 10,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4541666666666663,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 11,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4708333333333329,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 12,
+                  "feasible": true,
+                  "J": 0.6440389177895169,
+                  "terminal_error": 0.0810501667502967
+                },
+                {
+                  "candidate": 13,
+                  "feasible": true,
+                  "J": 2.896335066598946,
+                  "terminal_error": 0.43435318142724855
+                },
+                {
+                  "candidate": 14,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4541666666666663,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.5124999999999994,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 15,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4583333333333329,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 1.0874999999999975,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 16,
+                  "feasible": true,
+                  "J": 3.9580379219336987,
+                  "terminal_error": 0.5145483432360025
+                },
+                {
+                  "candidate": 17,
+                  "feasible": true,
+                  "J": 7.7144795161546815,
+                  "terminal_error": 0.7609198575180366
+                },
+                {
+                  "candidate": 18,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.30833333333333346,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 19,
+                  "feasible": true,
+                  "J": 3.469571813009431,
+                  "terminal_error": 0.4702470125929629
+                },
+                {
+                  "candidate": 20,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3583333333333333,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.4499999999999996,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.5541666666666659,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 21,
+                  "feasible": true,
+                  "J": 0.6692943559255597,
+                  "terminal_error": 0.05844375275726961
+                },
+                {
+                  "candidate": 22,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4791666666666662,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 23,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4791666666666662,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 24,
+                  "feasible": true,
+                  "J": 2.4832834179699725,
+                  "terminal_error": 0.38832319868957094
+                },
+                {
+                  "candidate": 25,
+                  "feasible": true,
+                  "J": 2.7235771038290393,
+                  "terminal_error": 0.4144751803291145
+                },
+                {
+                  "candidate": 26,
+                  "feasible": true,
+                  "J": 2.5818287740929162,
+                  "terminal_error": 0.4001567741233504
+                },
+                {
+                  "candidate": 27,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4791666666666662,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 1.0874999999999975,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 28,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35416666666666663,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.46666666666666623,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 29,
+                  "feasible": true,
+                  "J": 2.6503527042637938,
+                  "terminal_error": 0.4034562990664612
+                },
+                {
+                  "candidate": 30,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4416666666666663,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 31,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.4416666666666663,
+                      "type": "board"
+                    }
+                  ]
+                }
+              ],
+              "applied_command": {
+                "x": -0.7734935442014019,
+                "y": 0.020879313080105932,
+                "z": -0.21351472592073756
+              },
+              "planned_sequence": [
+                {
+                  "x": -0.7734935442014019,
+                  "y": 0.020879313080105932,
+                  "z": -0.21351472592073756
+                },
+                {
+                  "x": 0.16023242150433362,
+                  "y": 0.042167154339607806,
+                  "z": -0.25281044515315443
+                },
+                {
+                  "x": 0.20920602372149008,
+                  "y": 0.055694580842275174,
+                  "z": -0.0261400452000089
+                }
+              ],
+              "only_first_action_executed": true
+            },
+            {
+              "t": 0.14583333333333334,
+              "compute_ms": 350.19770900000003,
+              "deadline_ms": 120,
+              "deadline_met": false,
+              "feasible": true,
+              "evaluated": 32,
+              "rejected": 25,
+              "reason": null,
+              "J": 0.26797532572876426,
+              "J_components": {
+                "path_distance": 0.26187056282583404,
+                "terminal_distance": 0.00033861542761053797,
+                "impulse_effort": 0.004856444822074903,
+                "obstacle_proximity": 0.0009097026532447433
+              },
+              "before_error_m": 0.09034116075182445,
+              "after_first_action_error_m": 0.005312057256927693,
+              "candidates": [
+                {
+                  "candidate": 0,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.36249999999999993,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 1,
+                  "feasible": true,
+                  "J": 0.26797532572876426,
+                  "terminal_error": 0.005312057256927693
+                },
+                {
+                  "candidate": 2,
+                  "feasible": true,
+                  "J": 0.30535852673132874,
+                  "terminal_error": 0.03987399180402661
+                },
+                {
+                  "candidate": 3,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35416666666666663,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 4,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.36249999999999993,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 5,
+                  "feasible": true,
+                  "J": 0.37161259578433736,
+                  "terminal_error": 0.07922486827503125
+                },
+                {
+                  "candidate": 6,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35416666666666663,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.42916666666666636,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 7,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3416666666666667,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 8,
+                  "feasible": true,
+                  "J": 0.3240513862935747,
+                  "terminal_error": 0.05038564083036287
+                },
+                {
+                  "candidate": 9,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3458333333333333,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.4166666666666664,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 10,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3416666666666667,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 11,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3416666666666667,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.5833333333333325,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.8666666666666648,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 1.1666666666666639,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 12,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3583333333333333,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 13,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3458333333333333,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.4166666666666664,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.9624999999999978,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 14,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 15,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3458333333333333,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.9541666666666645,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 16,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3208333333333334,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 17,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.40416666666666645,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 18,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.9583333333333311,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 19,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.27500000000000024,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.33333333333333337,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.49999999999999944,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 20,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.2625000000000003,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.36249999999999993,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.433333333333333,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 21,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3458333333333333,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 22,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3458333333333333,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 23,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3375,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.3999999999999998,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 24,
+                  "feasible": true,
+                  "J": 2.5294400838092495,
+                  "terminal_error": 0.41911630823526547
+                },
+                {
+                  "candidate": 25,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.2625000000000003,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.3375,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 26,
+                  "feasible": true,
+                  "J": 2.842143615503027,
+                  "terminal_error": 0.4533711527648234
+                },
+                {
+                  "candidate": 27,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3375,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 28,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.35,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 29,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3375,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.637499999999999,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 30,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.3583333333333333,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 31,
+                  "feasible": true,
+                  "J": 2.629526739618723,
+                  "terminal_error": 0.4297378533753031
+                }
+              ],
+              "applied_command": {
+                "x": 0.24038016726690978,
+                "y": 0,
+                "z": -0.054064179089936854
+              },
+              "planned_sequence": [
+                {
+                  "x": 0.24038016726690978,
+                  "y": 0,
+                  "z": -0.054064179089936854
+                },
+                {
+                  "x": 0,
+                  "y": 0,
+                  "z": 0
+                }
+              ],
+              "only_first_action_executed": true
+            },
+            {
+              "t": 0.26666666666666666,
+              "compute_ms": 187.65041700000074,
+              "deadline_ms": 120,
+              "deadline_met": false,
+              "feasible": true,
+              "evaluated": 32,
+              "rejected": 14,
+              "reason": null,
+              "J": 0.09570032002733783,
+              "J_components": {
+                "path_distance": 0.09501365389979556,
+                "terminal_distance": 7.221398698518944e-8,
+                "impulse_effort": 0.0000373537271480158,
+                "obstacle_proximity": 0.0006492401864072672
+              },
+              "before_error_m": 0.005312057256923543,
+              "after_first_action_error_m": 0.00007757468819638135,
+              "candidates": [
+                {
+                  "candidate": 0,
+                  "feasible": true,
+                  "J": 0.09597140500096778,
+                  "terminal_error": 0.005312057256923543
+                },
+                {
+                  "candidate": 1,
+                  "feasible": true,
+                  "J": 0.09570032002733783,
+                  "terminal_error": 0.00007757468819638134
+                },
+                {
+                  "candidate": 2,
+                  "feasible": true,
+                  "J": 0.20207432452830557,
+                  "terminal_error": 0.08852620168679227
+                },
+                {
+                  "candidate": 3,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.241666666666667,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 4,
+                  "feasible": true,
+                  "J": 0.20269426685523884,
+                  "terminal_error": 0.08855089384819376
+                },
+                {
+                  "candidate": 5,
+                  "feasible": true,
+                  "J": 0.1618338033009811,
+                  "terminal_error": 0.06974318256586234
+                },
+                {
+                  "candidate": 6,
+                  "feasible": true,
+                  "J": 0.1751241380871297,
+                  "terminal_error": 0.07628402815770713
+                },
+                {
+                  "candidate": 7,
+                  "feasible": true,
+                  "J": 0.14898756103328217,
+                  "terminal_error": 0.06281374308027152
+                },
+                {
+                  "candidate": 8,
+                  "feasible": true,
+                  "J": 0.18373897119291088,
+                  "terminal_error": 0.08069488504432966
+                },
+                {
+                  "candidate": 9,
+                  "feasible": true,
+                  "J": 0.17683015012784783,
+                  "terminal_error": 0.07741435734501978
+                },
+                {
+                  "candidate": 10,
+                  "feasible": true,
+                  "J": 0.17841849026800122,
+                  "terminal_error": 0.07910663186351707
+                },
+                {
+                  "candidate": 11,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.24583333333333368,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 12,
+                  "feasible": true,
+                  "J": 0.15606611217287675,
+                  "terminal_error": 0.06723734817780598
+                },
+                {
+                  "candidate": 13,
+                  "feasible": true,
+                  "J": 0.18175929511734112,
+                  "terminal_error": 0.07977123857709786
+                },
+                {
+                  "candidate": 14,
+                  "feasible": true,
+                  "J": 0.17199807427891525,
+                  "terminal_error": 0.07469505122808658
+                },
+                {
+                  "candidate": 15,
+                  "feasible": true,
+                  "J": 0.1843904213418289,
+                  "terminal_error": 0.08104560965656973
+                },
+                {
+                  "candidate": 16,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.21666666666666692,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.3416666666666667,
+                      "type": "board"
+                    },
+                    {
+                      "t": 0.49166666666666614,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.5958333333333324,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.7249999999999986,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 17,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.22916666666666696,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 18,
+                  "feasible": true,
+                  "J": 0.12722688096905665,
+                  "terminal_error": 0.04953219019950942
+                },
+                {
+                  "candidate": 19,
+                  "feasible": true,
+                  "J": 0.11101179322573447,
+                  "terminal_error": 0.03354031530381171
+                },
+                {
+                  "candidate": 20,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.22916666666666696,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 21,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.22916666666666696,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.2958333333333335,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 22,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.24583333333333368,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 23,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.2208333333333336,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 24,
+                  "feasible": true,
+                  "J": 0.19387915249614845,
+                  "terminal_error": 0.08584068922968394
+                },
+                {
+                  "candidate": 25,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.2208333333333336,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.2791666666666669,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.3583333333333333,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.49999999999999944,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 26,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.22916666666666696,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 27,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.2208333333333336,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.42916666666666636,
+                      "type": "board"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 28,
+                  "feasible": true,
+                  "J": 0.14813207802593004,
+                  "terminal_error": 0.06248083348378111
+                },
+                {
+                  "candidate": 29,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.22916666666666696,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 30,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.23333333333333364,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.29166666666666685,
+                      "type": "rim"
+                    }
+                  ]
+                },
+                {
+                  "candidate": 31,
+                  "feasible": false,
+                  "contacts": [
+                    {
+                      "t": 0.2208333333333336,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 0.8499999999999982,
+                      "type": "rim"
+                    },
+                    {
+                      "t": 1.2708333333333302,
+                      "type": "rim"
+                    }
+                  ]
+                }
+              ],
+              "applied_command": {
+                "x": 0.02104025411090662,
+                "y": 0,
+                "z": -0.004922326309650218
+              },
+              "planned_sequence": [
+                {
+                  "x": 0.02104025411090662,
+                  "y": 0,
+                  "z": -0.004922326309650218
+                }
+              ],
+              "only_first_action_executed": true
+            }
+          ],
+          "expected_contacts": [],
+          "forbidden_contacts": [],
+          "crossing": {
+            "point": {
+              "x": -0.00007555382545365726,
+              "y": 3.05,
+              "z": 0.00001759123951233278
+            },
+            "error": 0.00007757468819313403,
+            "scored": true
+          }
+        }
+      ],
+      "passed": false
+    },
+    {
+      "id": "multi",
+      "family": "equal-mass spheres with restitution and floor friction",
+      "model": {
+        "at": "2026-11-04T01:58:55.812Z",
+        "sha256": "a506face1196db5426c24f8fc9b776205612cf663d2ca15cd670c22df81faa22",
+        "train_prefix_sha256": "f9d33f3915c6ae7e54bdab424c01679eae2f09fab26754ff7c879bb5d3d7611a",
+        "parameters": {
+          "g": 9.357202613156801,
+          "restitution": 0.7004,
+          "friction": 0.12045
+        }
+      },
+      "parameter_errors": [
+        {
+          "key": "g",
+          "estimated": 9.357202613156801,
+          "truth_revealed_after_freeze": 9.357202613144182,
+          "relative_error": 1.3486123480294179e-12
+        }
+      ],
+      "validation": [
+        {
+          "episode_id": "multi-validation-20281459-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 0.000006102818343027804,
+          "endpoint_error": 0.00005168459076304467,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [
+            {
+              "type": "sphere",
+              "bodies": [
+                0,
+                1
+              ],
+              "t": 0.39166666666666666
+            },
+            {
+              "type": "ground",
+              "body": 0,
+              "t": 0.4083333333333333
+            },
+            {
+              "type": "ground",
+              "body": 1,
+              "t": 0.4125
+            }
+          ],
+          "finite": true
+        },
+        {
+          "episode_id": "multi-validation-20282456-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 0.000006611554007123498,
+          "endpoint_error": 0.00005340585652519094,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [
+            {
+              "type": "sphere",
+              "bodies": [
+                0,
+                1
+              ],
+              "t": 0.37916666666666665
+            },
+            {
+              "type": "ground",
+              "body": 0,
+              "t": 0.4041666666666667
+            },
+            {
+              "type": "ground",
+              "body": 1,
+              "t": 0.4041666666666667
+            }
+          ],
+          "finite": true
+        }
+      ],
+      "test": [
+        {
+          "episode_id": "multi-test-20291459-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 0.0000049167271577513165,
+          "endpoint_error": 0.00004674762691577205,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [
+            {
+              "type": "sphere",
+              "bodies": [
+                0,
+                1
+              ],
+              "t": 0.37916666666666665
+            },
+            {
+              "type": "ground",
+              "body": 1,
+              "t": 0.42083333333333334
+            },
+            {
+              "type": "ground",
+              "body": 0,
+              "t": 0.425
+            }
+          ],
+          "finite": true
+        },
+        {
+          "episode_id": "multi-test-20292456-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 0.000004818521241588485,
+          "endpoint_error": 0.00004637096281407298,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [
+            {
+              "type": "sphere",
+              "bodies": [
+                0,
+                1
+              ],
+              "t": 0.3875
+            },
+            {
+              "type": "ground",
+              "body": 0,
+              "t": 0.42083333333333334
+            },
+            {
+              "type": "ground",
+              "body": 1,
+              "t": 0.42916666666666664
+            }
+          ],
+          "finite": true
+        },
+        {
+          "episode_id": "multi-test-20293453-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 0.000005899983585925939,
+          "endpoint_error": 0.0000509554395212905,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [
+            {
+              "type": "sphere",
+              "bodies": [
+                0,
+                1
+              ],
+              "t": 0.4041666666666667
+            },
+            {
+              "type": "ground",
+              "body": 0,
+              "t": 0.4083333333333333
+            },
+            {
+              "type": "ground",
+              "body": 1,
+              "t": 0.425
+            }
+          ],
+          "finite": true
+        }
+      ],
+      "checks": [
+        {
+          "id": "held_out_prediction",
+          "value": 0.000521174399508858,
+          "operator": "max",
+          "threshold": 10,
+          "unit": "cm",
+          "passed": true
+        },
+        {
+          "id": "finite_predictions",
+          "value": 1,
+          "operator": "min",
+          "threshold": 1,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "active_parameter_identification",
+          "value": 1.3486123480294179e-12,
+          "operator": "max",
+          "threshold": 0.12,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "sphere_and_floor_contacts",
+          "value": 2,
+          "operator": "min",
+          "threshold": 2,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "contact_parameter_error",
+          "value": 0.00005085686296224523,
+          "operator": "max",
+          "threshold": 0.08,
+          "unit": "",
+          "passed": true
+        }
+      ],
+      "mean_error": 0.000521174399508858,
+      "unit": "cm",
+      "expected_contacts": [
+        "sphere",
+        "ground"
+      ],
+      "passed": true
+    },
+    {
+      "id": "chaos",
+      "family": "double pendulum with known measured lengths and estimated gravity/mass ratio",
+      "model": {
+        "at": "2026-11-04T01:58:55.812Z",
+        "sha256": "2b8b2f484f2dd83f1879aca794aecebe39aed36abf17a59f5443605d11e17bd3",
+        "train_prefix_sha256": "505fa20aba321ae3797e566514e290714a78becc8d7cf04358b6115692143065",
+        "parameters": {
+          "g": 9.399099531101555,
+          "m2": 0.9482415429023208,
+          "L1": 1.35,
+          "L2": 1.1,
+          "m1": 1
+        }
+      },
+      "parameter_errors": [
+        {
+          "key": "g",
+          "estimated": 9.399099531101555,
+          "truth_revealed_after_freeze": 9.399099931237288,
+          "relative_error": 4.2571707448071616e-8
+        },
+        {
+          "key": "m2",
+          "estimated": 0.9482415429023208,
+          "truth_revealed_after_freeze": 0.9482412518467753,
+          "relative_error": 3.0694250527054926e-7
+        }
+      ],
+      "validation": [
+        {
+          "episode_id": "chaos-validation-20281459-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 1.4252420920106755e-8,
+          "endpoint_error": 4.5878662009264735e-8,
+          "unit": "rad",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        },
+        {
+          "episode_id": "chaos-validation-20282456-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 7.067961100025796e-9,
+          "endpoint_error": 2.5521043813622634e-8,
+          "unit": "rad",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        }
+      ],
+      "test": [
+        {
+          "episode_id": "chaos-test-20291459-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 6.844325538601792e-9,
+          "endpoint_error": 1.4375210196658492e-8,
+          "unit": "rad",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        },
+        {
+          "episode_id": "chaos-test-20292456-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 9.206324268533013e-9,
+          "endpoint_error": 1.3656603052513896e-8,
+          "unit": "rad",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        },
+        {
+          "episode_id": "chaos-test-20293453-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 1.3026822104994944e-8,
+          "endpoint_error": 4.5722956583964986e-8,
+          "unit": "rad",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        }
+      ],
+      "checks": [
+        {
+          "id": "held_out_prediction",
+          "value": 9.692490637376584e-9,
+          "operator": "max",
+          "threshold": 0.15,
+          "unit": "rad",
+          "passed": true
+        },
+        {
+          "id": "finite_predictions",
+          "value": 1,
+          "operator": "min",
+          "threshold": 1,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "active_parameter_identification",
+          "value": 3.0694250527054926e-7,
+          "operator": "max",
+          "threshold": 0.12,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "perturbation_integration_finite",
+          "value": 1,
+          "operator": "min",
+          "threshold": 1,
+          "unit": "",
+          "passed": true
+        }
+      ],
+      "mean_error": 9.692490637376584e-9,
+      "unit": "rad",
+      "perturbation": {
+        "initial_angle_delta_rad": 0.003,
+        "observation_window_seconds": 15,
+        "threshold_rad": 0.4,
+        "predictability_horizon_seconds": 13.5875,
+        "censored": false,
+        "max_divergence_rad": 0.8422814809473563
+      },
+      "passed": true
+    },
+    {
+      "id": "liquid",
+      "family": "uniform tank volume balance, not general fluid simulation",
+      "model": {
+        "at": "2026-11-04T01:58:55.813Z",
+        "sha256": "08ffdb546ec42249df03fc5ddaf6849570dabcd01b923695e6688fecfa9cc8e0",
+        "train_prefix_sha256": "df30ebb570f001846d510de70980bb272442dc06f7f308eee0695c7f6801b059",
+        "parameters": {
+          "brim": 1.4,
+          "bottom": 0,
+          "area": 1.6,
+          "rate": 0.14401331506669335
+        }
+      },
+      "parameter_errors": [
+        {
+          "key": "rate",
+          "estimated": 0.14401331506669335,
+          "truth_revealed_after_freeze": 0.1440133150666952,
+          "relative_error": 1.2912858546349769e-14
+        }
+      ],
+      "validation": [
+        {
+          "episode_id": "liquid-validation-20281530-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 3.3584246494910985e-15,
+          "endpoint_error": 6.661338147750939e-15,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        },
+        {
+          "episode_id": "liquid-validation-20282527-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 6.29126380620922e-17,
+          "endpoint_error": 8.881784197001252e-16,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        }
+      ],
+      "test": [
+        {
+          "episode_id": "liquid-test-20291530-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 0,
+          "endpoint_error": 0,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        },
+        {
+          "episode_id": "liquid-test-20292527-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 3.3584246494910985e-15,
+          "endpoint_error": 6.661338147750939e-15,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        },
+        {
+          "episode_id": "liquid-test-20293524-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.5,
+          "mean_error": 0,
+          "endpoint_error": 0,
+          "unit": "m",
+          "samples": 120,
+          "contacts": [],
+          "finite": true
+        }
+      ],
+      "checks": [
+        {
+          "id": "held_out_prediction",
+          "value": 1.1194748831636996e-15,
+          "operator": "max",
+          "threshold": 0.01,
+          "unit": "m",
+          "passed": true
+        },
+        {
+          "id": "finite_predictions",
+          "value": 1,
+          "operator": "min",
+          "threshold": 1,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "active_parameter_identification",
+          "value": 1.2912858546349769e-14,
+          "operator": "max",
+          "threshold": 0.12,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "mass_balance",
+          "value": 2.398081733190338e-14,
+          "operator": "max",
+          "threshold": 0.000001,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "overflow_exercised",
+          "value": 0.380842608213395,
+          "operator": "min",
+          "threshold": 0.01,
+          "unit": "",
+          "passed": true
+        }
+      ],
+      "mean_error": 1.1194748831636996e-15,
+      "unit": "m",
+      "balance": {
+        "duration_seconds": 2,
+        "initial_volume": 2.16,
+        "final_volume": 2.2399999999999998,
+        "spilled_volume": 0.380842608213395,
+        "identified_inflow_volume": 0.4608426082134187,
+        "mass_balance_error": 2.398081733190338e-14
+      },
+      "passed": true
+    },
+    {
+      "id": "orbit",
+      "family": "central inverse-square acceleration",
+      "model": {
+        "at": "2026-11-04T01:58:55.813Z",
+        "sha256": "bfcf72cde4d76608faa0a68ed3679c6404ed3bc3c4486e4702e77b00ab616411",
+        "train_prefix_sha256": "f069d986e6ea31a8562ada07d456c83da0757d2f56bbacd5fe485429c7e21c42",
+        "parameters": {
+          "mu": 18.756111921736906,
+          "center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      },
+      "parameter_errors": [
+        {
+          "key": "mu",
+          "estimated": 18.756111921736906,
+          "truth_revealed_after_freeze": 18.75611192174256,
+          "relative_error": 3.013613635147501e-13
+        }
+      ],
+      "validation": [
+        {
+          "episode_id": "orbit-validation-20281459-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.6,
+          "mean_error": 4.844052199818331e-14,
+          "endpoint_error": 1.3715029491663652e-13,
+          "unit": "m",
+          "samples": 144,
+          "contacts": [],
+          "finite": true
+        },
+        {
+          "episode_id": "orbit-validation-20282456-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.6,
+          "mean_error": 7.49485247091311e-14,
+          "endpoint_error": 2.1515560796823172e-13,
+          "unit": "m",
+          "samples": 144,
+          "contacts": [],
+          "finite": true
+        }
+      ],
+      "test": [
+        {
+          "episode_id": "orbit-test-20291459-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.6,
+          "mean_error": 4.349124220803702e-14,
+          "endpoint_error": 1.35889302700567e-13,
+          "unit": "m",
+          "samples": 144,
+          "contacts": [],
+          "finite": true
+        },
+        {
+          "episode_id": "orbit-test-20292456-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.6,
+          "mean_error": 3.246148476414113e-14,
+          "endpoint_error": 1.027008506939331e-13,
+          "unit": "m",
+          "samples": 144,
+          "contacts": [],
+          "finite": true
+        },
+        {
+          "episode_id": "orbit-test-20293453-default",
+          "origin_seconds": 0.025,
+          "horizon_seconds": 0.6,
+          "mean_error": 4.065808834487385e-14,
+          "endpoint_error": 1.2065423743578242e-13,
+          "unit": "m",
+          "samples": 144,
+          "contacts": [],
+          "finite": true
+        }
+      ],
+      "checks": [
+        {
+          "id": "held_out_prediction",
+          "value": 3.8870271772350665e-12,
+          "operator": "max",
+          "threshold": 2,
+          "unit": "cm",
+          "passed": true
+        },
+        {
+          "id": "finite_predictions",
+          "value": 1,
+          "operator": "min",
+          "threshold": 1,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "active_parameter_identification",
+          "value": 3.013613635147501e-13,
+          "operator": "max",
+          "threshold": 0.12,
+          "unit": "",
+          "passed": true
+        },
+        {
+          "id": "recalibration_improvement",
+          "value": 0.9999999999896789,
+          "operator": "min",
+          "threshold": 0.1,
+          "unit": "",
+          "passed": true
+        }
+      ],
+      "mean_error": 3.8870271772350665e-12,
+      "unit": "cm",
+      "recalibration": {
+        "injected_parameter_bias_factor": 0.965,
+        "trigger_episode": "orbit-test-20291459-default",
+        "trigger_error_cm": 0.561128114029431,
+        "calibration_prefix_seconds": 0.45,
+        "evaluation_episode": "orbit-test-20371219-default",
+        "before_cm": 0.41732807504351027,
+        "after_cm": 4.307269878785861e-12,
+        "relative_improvement": 0.9999999999896789,
+        "parameters": {
+          "mu": 18.75611192173429,
+          "center": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        }
+      },
+      "passed": true
+    }
+  ],
+  "passed": false,
+  "failures": [
+    {
+      "scene": "hoop",
+      "id": "mpc_max_compute_ms",
+      "value": 350.19770900000003,
+      "operator": "max",
+      "threshold": 120,
+      "unit": "ms",
+      "passed": false
+    }
+  ],
+  "observations": {
+    "path": "simulation-benchmark-v2-2026-11-04.observations.json",
+    "sha256": "33093c45b3fe7afb8618b74a33fec5f80140d92974410435fa31d1558a4cb5c2",
+    "bytes": 1174084
+  }
+}

@@ -1,0 +1,52 @@
+1
+00:00:00,000 --> 00:00:08,000
+Voici TWINFORGE. Le jumeau prédit le tir avant sa retombée. Cette démonstration est une simulation L3.
+
+2
+00:00:08,000 --> 00:00:20,000
+L3 : le système choisit et calibre un moteur physique connu. Il ne prétend pas avoir découvert librement ses équations.
+
+3
+00:00:20,000 --> 00:00:35,000
+Ce tir 3D bruité appartient au test indépendant. Le modèle a été calibré sur d’autres tirs. La vidéo SAM est évaluée séparément.
+
+4
+00:00:35,000 --> 00:00:43,000
+Le fantôme projette le même intégrateur à +0,5 seconde. Le verdict se verrouille avant l’issue du tir.
+
+5
+00:00:43,000 --> 00:00:52,000
+L’erreur compare la position observée au point prédit pour ce même instant. Les paramètres non mesurés restent des priors.
+
+6
+00:00:52,000 --> 00:01:05,000
+18 simulations Monte-Carlo échantillonnent l’incertitude des paramètres. Les chiffres à droite sont ceux de cette exécution.
+
+7
+00:01:05,000 --> 00:01:20,000
+Et si le lancer était 20 % plus fort ? La trajectoire orange rejoue le contrefactuel dans le jumeau.
+
+8
+00:01:20,000 --> 00:01:35,000
+Et si le panier était décalé à gauche ? La scène de référence reste inchangée.
+
+9
+00:01:35,000 --> 00:01:47,000
+Le MPC simule des séquences candidates, compare leur coût et n’exécute que la première correction. Ici, il contrôle la simulation.
+
+10
+00:01:47,000 --> 00:01:59,000
+Chaque correction enregistre le coût, l’horizon, l’écart avant et après, ainsi que l’impulsion appliquée.
+
+11
+00:01:59,000 --> 00:02:15,000
+Cinq familles physiques disposent de tests synthétiques indépendants. Les preuves et leurs limites restent dans le rapport exportable.
+
+12
+00:02:15,000 --> 00:02:23,000
+Tout ce parcours fonctionne sans caméra ni dispositif physique. Les résultats synthétiques ne constituent pas une validation du réel.
+
+13
+00:02:23,000 --> 00:02:30,000
+TWINFORGE · Indie · Push the Frontier. Niveau L3. github.com/mkinvest57/TWINFORGE · démo : mkinvest57.github.io/TWINFORGE
+

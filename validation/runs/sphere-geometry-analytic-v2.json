@@ -1,0 +1,288 @@
+{
+  "schema_version": "twinforge.geometry_benchmark.v1",
+  "source_kind": "analytic_synthetic",
+  "real_world_validation": false,
+  "method": "24 fixed-seed independent pinhole cameras, poses, radii and ranges; binary ray/sphere intersection masks",
+  "evaluation_separation": "Camera and measured sphere diameter only enter reconstruction; sphere centres are evaluator-only.",
+  "configuration_frozen_before_fixture_evaluation": true,
+  "seed": 903117,
+  "cases": [
+    {
+      "case": 0,
+      "camera_focal_px": 492.7526780871727,
+      "radius_m": 0.08288694217194896,
+      "range_m": 3.586351671663588,
+      "pixel_center_offset_px": 0.0,
+      "foreground_pixels": 433,
+      "error_m": 0.011744367621255428,
+      "reported_position_std_norm_m": 0.16085904907326387,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 1,
+      "camera_focal_px": 799.7671788668312,
+      "radius_m": 0.12114227423213658,
+      "range_m": 2.6767318874705177,
+      "pixel_center_offset_px": 0.5,
+      "foreground_pixels": 4118,
+      "error_m": 0.0006424399122444013,
+      "reported_position_std_norm_m": 0.03972637950513604,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 2,
+      "camera_focal_px": 937.4340455535867,
+      "radius_m": 0.06903453804460855,
+      "range_m": 3.691801728846488,
+      "pixel_center_offset_px": 0.0,
+      "foreground_pixels": 1096,
+      "error_m": 0.00040873040173659104,
+      "reported_position_std_norm_m": 0.10830415393855969,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 3,
+      "camera_focal_px": 712.213136451197,
+      "radius_m": 0.1869829196628524,
+      "range_m": 2.916624356749786,
+      "pixel_center_offset_px": 0.5,
+      "foreground_pixels": 7120,
+      "error_m": 0.0003906538915907561,
+      "reported_position_std_norm_m": 0.03490611272208598,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 4,
+      "camera_focal_px": 880.0767222116393,
+      "radius_m": 0.07644974111962215,
+      "range_m": 3.4595857276542734,
+      "pixel_center_offset_px": 0.0,
+      "foreground_pixels": 1170,
+      "error_m": 0.0034880275208728855,
+      "reported_position_std_norm_m": 0.09297191027543916,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 5,
+      "camera_focal_px": 846.1331419039803,
+      "radius_m": 0.11983633749423497,
+      "range_m": 5.198329900788703,
+      "pixel_center_offset_px": 0.5,
+      "foreground_pixels": 1291,
+      "error_m": 0.01292050374521503,
+      "reported_position_std_norm_m": 0.1377199069490084,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 6,
+      "camera_focal_px": 757.6538711319411,
+      "radius_m": 0.14303389464405927,
+      "range_m": 2.424310471485535,
+      "pixel_center_offset_px": 0.0,
+      "foreground_pixels": 6762,
+      "error_m": 0.001152530536397383,
+      "reported_position_std_norm_m": 0.02941605300663766,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 7,
+      "camera_focal_px": 643.5455345741049,
+      "radius_m": 0.18659951453454132,
+      "range_m": 3.400069611784278,
+      "pixel_center_offset_px": 0.5,
+      "foreground_pixels": 4082,
+      "error_m": 0.00040133173727800774,
+      "reported_position_std_norm_m": 0.05145628265995642,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 8,
+      "camera_focal_px": 818.8831143875091,
+      "radius_m": 0.11899165406749329,
+      "range_m": 4.024366126305221,
+      "pixel_center_offset_px": 0.0,
+      "foreground_pixels": 1892,
+      "error_m": 0.0017809016369419,
+      "reported_position_std_norm_m": 0.08672541861525838,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 9,
+      "camera_focal_px": 847.3322767929183,
+      "radius_m": 0.13054666165083106,
+      "range_m": 3.169752439980658,
+      "pixel_center_offset_px": 0.5,
+      "foreground_pixels": 4181,
+      "error_m": 0.0002380539764609188,
+      "reported_position_std_norm_m": 0.04813860908967939,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 10,
+      "camera_focal_px": 776.4135941860166,
+      "radius_m": 0.08293268250284778,
+      "range_m": 2.6000822476979097,
+      "pixel_center_offset_px": 0.0,
+      "foreground_pixels": 2124,
+      "error_m": 0.0017312747095501162,
+      "reported_position_std_norm_m": 0.05488961957657961,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 11,
+      "camera_focal_px": 516.6324336206359,
+      "radius_m": 0.1803355086843218,
+      "range_m": 4.029027431870219,
+      "pixel_center_offset_px": 0.5,
+      "foreground_pixels": 1709,
+      "error_m": 0.0028670469594216565,
+      "reported_position_std_norm_m": 0.09551498765996479,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 12,
+      "camera_focal_px": 702.3785213912344,
+      "radius_m": 0.12885041648629192,
+      "range_m": 4.827838500469078,
+      "pixel_center_offset_px": 0.0,
+      "foreground_pixels": 1120,
+      "error_m": 0.010629610719588983,
+      "reported_position_std_norm_m": 0.13382975536279568,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 13,
+      "camera_focal_px": 662.7264146128156,
+      "radius_m": 0.14906129049897382,
+      "range_m": 4.375759936541135,
+      "pixel_center_offset_px": 0.5,
+      "foreground_pixels": 1515,
+      "error_m": 0.006379296080597926,
+      "reported_position_std_norm_m": 0.10858886184204473,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 14,
+      "camera_focal_px": 652.9820534904511,
+      "radius_m": 0.10005297869529371,
+      "range_m": 5.492823864267182,
+      "pixel_center_offset_px": 0.0,
+      "foreground_pixels": 485,
+      "error_m": 0.02165996086211724,
+      "reported_position_std_norm_m": 0.23504841110261274,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 15,
+      "camera_focal_px": 590.3641192366559,
+      "radius_m": 0.09390957953008139,
+      "range_m": 2.3041341818221235,
+      "pixel_center_offset_px": 0.5,
+      "foreground_pixels": 1948,
+      "error_m": 0.005834212944930068,
+      "reported_position_std_norm_m": 0.05058067680088659,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 16,
+      "camera_focal_px": 591.9731335038163,
+      "radius_m": 0.06657027606514435,
+      "range_m": 6.126357583946734,
+      "pixel_center_offset_px": 0.0,
+      "foreground_pixels": 126,
+      "error_m": 0.013056169850129447,
+      "reported_position_std_norm_m": 0.5147400564142588,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 17,
+      "camera_focal_px": 525.3954400178956,
+      "radius_m": 0.14511243884376016,
+      "range_m": 2.8208600241206128,
+      "pixel_center_offset_px": 0.5,
+      "foreground_pixels": 2273,
+      "error_m": 0.003303766365080163,
+      "reported_position_std_norm_m": 0.05680854158893657,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 18,
+      "camera_focal_px": 814.9494097162352,
+      "radius_m": 0.1447920533268387,
+      "range_m": 5.13724917655232,
+      "pixel_center_offset_px": 0.0,
+      "foreground_pixels": 1725,
+      "error_m": 0.00039178495294502557,
+      "reported_position_std_norm_m": 0.11793181060711505,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 19,
+      "camera_focal_px": 856.0804019743985,
+      "radius_m": 0.11393924754453792,
+      "range_m": 5.347250409985402,
+      "pixel_center_offset_px": 0.5,
+      "foreground_pixels": 1132,
+      "error_m": 0.009402389963569195,
+      "reported_position_std_norm_m": 0.15060622168634602,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 20,
+      "camera_focal_px": 744.2407083919546,
+      "radius_m": 0.14849844012357546,
+      "range_m": 3.8795043942894227,
+      "pixel_center_offset_px": 0.0,
+      "foreground_pixels": 2641,
+      "error_m": 0.0014472451388724745,
+      "reported_position_std_norm_m": 0.07278597284474048,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 21,
+      "camera_focal_px": 526.514245366275,
+      "radius_m": 0.10454313755339699,
+      "range_m": 4.538298068623386,
+      "pixel_center_offset_px": 0.5,
+      "foreground_pixels": 444,
+      "error_m": 0.010134694972925557,
+      "reported_position_std_norm_m": 0.20299953691781714,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 22,
+      "camera_focal_px": 648.7182528784708,
+      "radius_m": 0.10462862138565458,
+      "range_m": 5.005032842317666,
+      "pixel_center_offset_px": 0.0,
+      "foreground_pixels": 579,
+      "error_m": 0.0038699921546584666,
+      "reported_position_std_norm_m": 0.19574523928038645,
+      "inside_reported_std_norm": true
+    },
+    {
+      "case": 23,
+      "camera_focal_px": 688.0620878941613,
+      "radius_m": 0.18826215186433726,
+      "range_m": 3.9493020729808146,
+      "pixel_center_offset_px": 0.5,
+      "foreground_pixels": 3396,
+      "error_m": 0.0012332548974530767,
+      "reported_position_std_norm_m": 0.06626851442962667,
+      "inside_reported_std_norm": true
+    }
+  ],
+  "mean_error_m": 0.005212843397993029,
+  "max_error_m": 0.02165996086211724,
+  "within_reported_std_norm": 24,
+  "limitations": [
+    "Ideal binary masks quantify geometry and rasterization only; no segmentation or calibration bias.",
+    "Conditional uncertainty includes pixel floor, not an empirically calibrated confidence interval."
+  ],
+  "evidence": [
+    {
+      "path": "perception/benchmark_sphere_geometry.py",
+      "sha256": "3eb963da5d346274838df56157ae8a133c5ec451f840830fe83ea7d6ba424d43"
+    }
+  ]
+}

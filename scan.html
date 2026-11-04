@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0e1013">
+  <meta name="description" content="Cadrez un objet, suivez son mouvement et visualisez une prévision à +0,5 seconde, localement sur votre appareil.">
+  <title>TWINFORGE — Caméra & mouvement</title>
+  <link rel="icon" type="image/svg+xml" href="./assets/mobile/icon.svg">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./web/camera/scanner.css">
+</head>
+<body>
+  <a class="skip-link" href="#camera-start">Aller aux commandes caméra</a>
+  <header class="site-header">
+    <a class="brand" href="./scan.html" aria-label="Twinforge, caméra et mouvement"><span class="brand-mark" aria-hidden="true">T</span><span>TWINFORGE<span class="brand-product">CAMÉRA & MOUVEMENT</span></span></a>
+    <a class="atelier-link" href="./index.html">Process Lab <span aria-hidden="true">↗</span></a>
+  </header>
+  <main class="page-shell">
+    <section class="intro" aria-labelledby="page-title">
+      <div><p class="eyebrow"><span class="signal-dot" aria-hidden="true"></span> DU MOUVEMENT AU JUMEAU</p><h1 id="page-title">Cadrez. Sélectionnez. <span>Anticipez.</span></h1><p class="intro-copy">Suivez un objet et voyez sa position estimée à <strong>+0,5 seconde</strong>.</p></div>
+      <p class="local-note"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="3"/><path d="M10 18h4M9 9l2 2 4-4"/></svg><span>Sur votre appareil.<br><strong>Aucune image envoyée.</strong></span></p>
+    </section>
+    <ol class="steps" aria-label="Trois étapes pour commencer">
+      <li><span class="step-number">01</span><span><strong>Cadrez</strong><small>Gardez la caméra immobile.</small></span></li>
+      <li><span class="step-number">02</span><span><strong>Sélectionnez</strong><small>Tracez autour de l’objet.</small></span></li>
+      <li><span class="step-number">03</span><span><strong>Observez</strong><small>Le fantôme indique la suite.</small></span></li>
+    </ol>
+    <div class="scanner-layout">
+      <section class="camera-column" aria-label="Image et suivi de mouvement">
+        <div class="camera-frame">
+          <div class="camera-toolbar"><span class="source-label"><span class="status-dot" aria-hidden="true"></span><span id="camera-source">Aucune source</span></span><span class="coordinate-label">SUIVI EN PIXELS</span></div>
+          <div id="camera-stage" class="camera-stage">
+            <video id="camera-video" playsinline muted aria-label="Image de la caméra ou de la vidéo sélectionnée"></video>
+            <canvas id="camera-overlay" aria-label="Zone de sélection de l’objet et de prévision" aria-describedby="selection-help"></canvas>
+            <div id="camera-empty" class="camera-empty">
+              <div class="viewfinder" aria-hidden="true"><span></span><svg viewBox="0 0 48 48" fill="none"><rect x="9" y="15" width="30" height="23" rx="4"/><path d="m17 15 3-5h8l3 5"/><circle cx="24" cy="26" r="6"/></svg></div>
+              <p>Votre scène, en direct.</p><span>Ouvrez la caméra ou essayez l’exemple.</span>
+            </div>
+          </div>
+          <div class="frame-caption"><span><i class="legend-marker observed" aria-hidden="true"></i>Objet observé</span><span><i class="legend-marker predicted" aria-hidden="true"></i>Fantôme +0,5 s</span><span id="camera-fps" class="frame-rate">— i/s</span></div>
+        </div>
+        <div class="metrics" aria-label="Mesures du suivi">
+          <div class="metric"><span class="metric-label">Prévision</span><output id="camera-forecast" class="metric-value cyan">En attente</output><span class="metric-help">Horizon +0,5 s</span></div>
+          <div class="metric"><span class="metric-label">Confiance du suivi</span><output id="camera-confidence" class="metric-value">—</output><span class="metric-help">Qualité de l’observation</span></div>
+          <div class="metric"><span class="metric-label">Erreur mesurée</span><output id="camera-error" class="metric-value">— px</output><span class="metric-help">Après l’échéance prévue</span></div>
+        </div>
+        <p id="selection-help" class="selection-help"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9V4h5m6 0h5v5m0 6v5h-5M9 20H4v-5"/><path d="M8 8h8v8H8z"/></svg><span>Avec le doigt ou la souris, tracez un rectangle autour d’un seul objet contrasté. Le bouton <strong>« Sélection au centre »</strong> permet aussi de commencer au clavier.</span></p>
+      </section>
+      <aside class="control-panel" aria-labelledby="controls-title">
+        <div class="panel-heading"><h2 id="controls-title">Votre scène</h2><span class="mode-badge">L3 · PIXELS</span></div>
+        <div class="status-message"><span class="status-indicator" aria-hidden="true"></span><p id="camera-status" role="status" aria-live="polite" aria-atomic="true">Prêt. Ouvrez la caméra arrière pour commencer.</p></div>
+        <div class="camera-actions">
+          <button id="camera-start" type="button" class="button primary"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg>Ouvrir la caméra</button>
+          <button id="camera-stop" type="button" class="button" disabled><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>Arrêter</button>
+          <button id="camera-flip" type="button" class="button" disabled><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9a8 8 0 0 1 14-4l2 3M20 4v4h-4M20 15a8 8 0 0 1-14 4l-2-3M4 20v-4h4"/></svg>Changer</button>
+        </div>
+        <p class="helper">La caméra arrière est utilisée en premier. Vous pourrez autoriser son accès au démarrage.</p>
+        <div class="selection-controls">
+          <div class="section-heading"><h3>Objet à suivre</h3><span class="section-index" aria-hidden="true">02</span></div>
+          <p id="camera-selection" class="selection-state">Aucun objet sélectionné.</p>
+          <div class="selection-actions"><button id="camera-center" type="button" class="button" disabled><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 9V4h5m6 0h5v5m0 6v5h-5M9 20H4v-5M12 8v8m-4-4h8"/></svg>Sélection au centre</button><button id="camera-reset" type="button" class="button text-button" disabled>Resélectionner</button></div>
+        </div>
+        <div class="source-options">
+          <div class="section-heading"><h3>Essayer autrement</h3></div>
+          <button id="camera-example" type="button" class="button example-button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m9 5 11 7-11 7V5Z"/><path d="M4 5v14"/></svg>Exemple sans caméra<span class="button-tag">SYNTHÉTIQUE</span></button>
+          <div class="file-control"><input id="camera-file" type="file" accept="video/*" capture="environment"><label for="camera-file" class="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 14v6h14v-6M12 16V4m-4 4 4-4 4 4"/></svg>Choisir ou filmer une vidéo</label></div>
+          <p class="helper">Votre vidéo est lue ici, sur cet appareil.</p>
+        </div>
+        <div class="save-options">
+          <div class="section-heading"><h3>Garder une trace</h3></div>
+          <button id="camera-export" type="button" class="button export-button" disabled><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 14v6h14v-6M12 4v12m-4-4 4 4 4-4"/></svg>Exporter les mesures</button>
+          <button id="camera-record" type="button" class="button text-button record-button" disabled><span class="record-dot" aria-hidden="true"></span>Enregistrer un clip</button>
+          <p id="camera-record-status" class="helper">Facultatif · le clip reste sur votre appareil.</p>
+          <a id="camera-record-download" class="button" hidden download>Télécharger le clip</a>
+        </div>
+      </aside>
+    </div>
+    <section class="scope-note" aria-label="Comprendre les mesures"><span class="scope-mark" aria-hidden="true">L3</span><p>La prévision suit le mouvement <strong>dans l’image</strong>. Les positions et les erreurs sont exprimées en pixels ; ce mode ne reconstruit pas une scène 3D. Un objet masqué ou un déplacement de la caméra peut interrompre le suivi.</p></section>
+  </main>
+  <footer class="site-footer"><span>TWINFORGE <span aria-hidden="true">/</span> OBSERVER · PRÉDIRE · COMPARER</span><a href="./index.html">Ouvrir le Process Lab <span aria-hidden="true">↗</span></a></footer>
+  <div class="mobile-camera-controls" role="group" aria-label="Commandes caméra rapides">
+    <button id="mobile-camera-start" type="button" class="button primary"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="m16 10 5-3v10l-5-3"/></svg>Caméra</button>
+    <button id="mobile-camera-example" type="button" class="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg>Exemple</button>
+    <button id="mobile-camera-stop" type="button" class="button" disabled><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="1"/></svg>Arrêter</button>
+  </div>
+  <noscript><p class="noscript-message">Activez JavaScript pour utiliser la caméra et le suivi local.</p></noscript>
+  <script type="module" src="./web/camera/scanner.mjs"></script>
+</body>
+</html>

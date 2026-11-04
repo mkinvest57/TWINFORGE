@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "exported_at": "2026-11-04T01:31:47.151563+00:00",
+  "executed_at": 1793755703247327,
+  "status": "completed",
+  "tool": "Muse Code CLI",
+  "provider": "meta",
+  "model": "muse-spark-1.3-contributor",
+  "purpose": "Read-only review of current implementation; model advice is not certification.",
+  "final_response": "Yes — design is sound, test 4 remaining risks:\n\n1. **Shot grouping:** verify no trajectory ID appears in two splits. Split-by-shot must be enforced in code, not just intent.\n2. **Validation reuse:** family selection consumes validation. Do not retune thresholds/coefficients on validation afterward; freeze all params before test reveal.\n3. **Test provenance:** assert test split bytes/seed logged before winner frozen, and selection code cannot read test path (fail-closed if file exists early).\n4. **Budget accounting:** unknown-cost calls retaining reservation can over-reserve. Test reservation release/refund path and concurrent-call double spend.\n\nAlso: add null-checks that restitution/friction/spin never default to 0, and label planar homography uncertainty in outputs.",
+  "usage": {
+    "calls": 1,
+    "completed_calls": 1,
+    "failed_calls": 0,
+    "cancelled_calls": 0,
+    "models": [
+      {
+        "model": "muse-spark-1.3-contributor",
+        "input_tokens": 41687,
+        "cached_tokens": 0,
+        "output_tokens": 379,
+        "calls": 1
+      }
+    ]
+  },
+  "source_sha256": "6f7c4ead119cbd186f5a6d710db4f4da41d24a2296203069dcb4cae15230b23a",
+  "redaction": "Only terminal final response, completion, provider/model and usage exported. No input prompts, internal deltas, profiles, credentials, reasoning content or environment."
+}

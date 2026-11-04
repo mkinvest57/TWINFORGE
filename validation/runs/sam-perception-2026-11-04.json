@@ -1,0 +1,152 @@
+{
+  "schema_version": "twinforge.perception_validation.v1",
+  "executed_utc": "2026-11-04T01:32:54.570055+00:00",
+  "source_kind": "synthetic_WebGL_video",
+  "real_world_validation": false,
+  "video": "perception/test_shot.mp4",
+  "video_sha256": "3327e0f5590a8376895f3ac81952c95910cdc220fe02716b6f0a893140265dc5",
+  "same_saved_responses_tracker_ablation": {
+    "source": "first live SAM run (same video, 25 sampled frames)",
+    "before": {
+      "fp01_losses": 12,
+      "fp01_loss_episodes": 3,
+      "fp01_reacquired": 1,
+      "frames": 25,
+      "id_switches": 2,
+      "sampled_frames": 25,
+      "ball_frames_found": 15,
+      "continuity": 0.6,
+      "distinct_ids": [
+        1,
+        3,
+        7
+      ],
+      "fp02_frames": 0
+    },
+    "after": {
+      "fp01_losses": 5,
+      "fp01_loss_episodes": 2,
+      "fp01_reacquired": 2,
+      "frames": 25,
+      "id_switches": 0,
+      "found": 20,
+      "total": 25,
+      "ids": [
+        1
+      ]
+    },
+    "method": "offline replay of exact saved SAM responses with measured mask colors; no new provider call"
+  },
+  "fresh_SAM_run": {
+    "model": "sam-3.1",
+    "sample_fps": 8.0,
+    "tracking": {
+      "fp01_losses": 5,
+      "fp01_loss_episodes": 2,
+      "fp01_reacquired": 2,
+      "frames": 37,
+      "id_switches": 0,
+      "sampled_frames": 37,
+      "ball_frames_found": 32,
+      "continuity": 0.8648648648648649,
+      "distinct_ids": [
+        1
+      ],
+      "fp02_frames": 1
+    },
+    "completion": {
+      "status": "partial",
+      "reason": "provider_unavailable",
+      "message": "Recorded original run ended with HTTP503; no new API call made during recovery",
+      "processed_frames": 37,
+      "expected_sample_frames": 64
+    },
+    "calibration": {
+      "mode": "uncalibrated",
+      "metric": false,
+      "dimensions_observed": 0,
+      "limitations": [
+        "No metric calibration supplied; coordinates remain pixels."
+      ]
+    },
+    "collection_mode": "offline_replay_of_live_SAM_responses_request_hash_verified",
+    "live_successful_requests": 65,
+    "successful_request_cost_usd": 0.1625,
+    "failed_request_retained_reservation_usd": 0.0025,
+    "raw_request_sha256": [
+      "cdfdfc1ead1fc08dd6fd6fff37274cd8486991f527978741f9c66594b2b0d4d8",
+      "a383b6890a289bacad1649f46aa66119c39fce7f4b6bd016b7006a033dde0721",
+      "44b39e4d45bc6361b88053549cecfe983c0eeb5e283b6695892960c5227028aa",
+      "1011eb7159978f435cd37790e0ddb205245b16e13e38ee087291c2068674d35e",
+      "345b4db6f96834b808e2c7c42d42fefab0a44bef65d86fc32f96bed527cd2c19",
+      "cd9c2fe8e9452be9c375ff48b325abd97ec1a62ee1fc818cf5b1095c7a77e95e",
+      "88192243609d89cf753f0234280e1657527c4b345c80d96440f2f5aa3f77b2c5",
+      "9df4938b9b3c1960e0742ef70d5ea05f00f23b3d8f1986ba2f195f9815f07535",
+      "f62ee57cc639804ee52b5f024339cc1ca22e05300c17b12608c5c0e0694836a7",
+      "302a079d92bae5d380f9d43ae178d74cbfd492b9776a8e83d1d587bfe4f34183",
+      "307a00228f0d88595f7c81e4865775ad62db1bf38169a306306922d1e5aae983",
+      "b2ed0251d067a2ea4ea3b726702170cbc47b999359555618d31551d2f3b8931c",
+      "22a4d41f9b1d2ea928a4b0724c98db5edc66659b99874e1ca310027c66743875",
+      "f91d7ccc7765bcf4b44b65e78b468b7eda211366f8ef59a5202d8b21cf0c1241",
+      "078d6e30e19503dbd1a4ee88b7ff8fdadc525d5ad76bb904a9b6bda72d5fe3b9",
+      "76d5b87c8e34f939cd466a71a90456cb4b908be0ef52e709a746e7b6090efd08",
+      "db94229d4a7e8353bb027bc49cffb8d50cf74bc282284ec886bbe1c842a45255",
+      "b95d04622ec1faa781b28f50eb80df85f92e67d54a67e687dc2cee5764cca324",
+      "67644a9b55b895fdfa385eca874ee1b186ddd6b5e224e7a1bc9ad363d787526c",
+      "dd9fe8fbd6c47d180a45621e6f6cbf4f04d4918311739fa5bccd44d55a0415b1",
+      "302a079d92bae5d380f9d43ae178d74cbfd492b9776a8e83d1d587bfe4f34183",
+      "f6ebb2d19e1c7b72781607c9a249d8fa8d25ff3e54a6df23e899aea1775b4275",
+      "28b7df819e9214394156ca349fa7ccc069004e347ce4b82fb589930816fca0ad",
+      "032a55f3b977a299d91ce25704c7c7c272e5478b4b9dc22baa47e8ffdcfd63b9",
+      "0d7c3227142f5e6150155e0cc978beeb16912f9295b7a0c7b39f4b4620aa6abb",
+      "938b6e3f9761409b35bb48fb01cc6c4b40f7456bc99a7b78c979c408b7762f93",
+      "c1971a52e83dbc5d87e7bcd342e0e440d61c94fc6f3e745d93b7440e0b137ec2",
+      "93989523723ac1d282e6d167ee3c692e3d2c2f145a9ac51716e894a8fa07d8f6",
+      "3cdbd27269329662be8fc957727e1b7d98eda991e97c8cbbeaf09dba212ecfb4",
+      "30e59e20bb9a55d68e7cce5c75113cfa69ea31aa282def41d91c7cab9f6bdd37",
+      "807d84cb069df522a9875009a9e62b489398537dc83ee2d1963ba490b93fb35b",
+      "f2d5d4358c1e6445185a76159f4db597e13b1b48efca16a9760fb76af097edb3",
+      "e2f5be3cec454f0648d5aaebf3ccd21501c52de56f8e55e7689eda2210efc4e0",
+      "c904b11b4fcff0d2665ab3a21737e82973273fad334c99e13cb052489ea54064",
+      "a42f0af746643432333771285d9012f09dd1dea4ee48623ac821988eab53bb58",
+      "6412d0f56c9a7a765584d34c2c01aa930cedc825734ba6184ff321466f334d4f",
+      "262eac1bf5a54b9eaa03b03c64da89c61b8f206ca3ac7f4c0904b60b076dea29",
+      "6b8d4d252e6189975b2c20f404cece2b9037dde53119c2867b03a0f0639ab3ca",
+      "add21723d506a56aa324b86163921a3dcfbb3bc0c39abd904b783d6f560ca369",
+      "5616437d6271cad846603f215a15605e870489f3048f60147c87eefe07ef5040",
+      "e2da30c5b7d33c22391a5f022c7894a7ef519efe8573e60863690292a75f879f",
+      "e61edc253b587221d70e117ad0ada68215b5e67e8a0045e8039c289133b4f9b2",
+      "c9eae7739b1b7fe0f4e3f57897696ddf296b4d33933112ff29a9f8f04020ce6f",
+      "4b53676aeadfff9e7e1cb0e6162268c9dc640b3bf3c059e1f78984f851e1d659",
+      "cfb7e3f04013cc7b516e785d3676eb874ef91dd0f6112a4550429a4973fd748c",
+      "5cfabe0fad9fa935d015fd967de338283a3fbf54ae33c30dffa22b6bb71ad9a4",
+      "0686affb6f575cee9c7be859125a7928e46c39b0cfa7cd4005c65138e74f1c8e",
+      "aa7551a714484672d3ea67a1dc8aea1c4123cf89c647e8cb78035a8185eedd38",
+      "1609933393813295ec56847e8c787d68ceec14cef09debd90b068056cd7671d5",
+      "67d0fa37a5d8ae8104567dcb526ce22936c71013df8bebb13fbf4426ac3d3654",
+      "54c7e3e88ccbf73a4b3e6f60bc194acfd0cbbbe596544a7aae0c6742eddba0e8",
+      "0905be5089c3835bd7329b8085291a3f3ff49577f7e69404cc6f45a06dc350dc",
+      "4dd59af775c7afc9bd2eb125d03bab7712308277c9be04dd84b7fecb0fef0aae",
+      "0e117793b2e215567e9bf5c6ce0c50d5d8876953597fd0ede3b050a5b0914915",
+      "34c8334b41ea71d1d22c3858134acc9f3a2a3b62cb0f921071eb345d66cb574a",
+      "302a079d92bae5d380f9d43ae178d74cbfd492b9776a8e83d1d587bfe4f34183",
+      "302a079d92bae5d380f9d43ae178d74cbfd492b9776a8e83d1d587bfe4f34183",
+      "76fa17111dd9c9fa2a97fa73ecc4d9ebf487be0a796038e699ccc5bec59ff753",
+      "fba5b9bde35543c49a58144aeca798c2277302a1d89ff4b4cb6788732558180a",
+      "6a95597069d56331c6dc46ce4d70bf5c0438e3da8dffcc445e96aadcb6dbc1ff",
+      "7c9f7615083e7c6619b979ce86f39e6586854f1746539bba0f11b3f53ff2e953",
+      "411d4e547bd71a037637592e3053c97f1265ed0987194096ee900ee646116733",
+      "1be8a5617266050b81bcc84eb6d82a7e12406f2513bb5f742ba0d97fde051e93",
+      "36f7e4265c64839e0359884efd762c61dee4ced9967a14435d6902e038c42623",
+      "a4cb5b0cf1095c80a9f8ea2d53b9450ec3ba6303d965d27b22e33482576046a7"
+    ],
+    "dataset_sha256": "660e74e425ab371c6933b519dfb99ae3c3b625653cb69475fdec18bc7a7c9bf5",
+    "annotated_video_sha256": "ba75aebdc87d9920051d80d5a845b3df136afe1991dfe513397a0dc8f655729b"
+  },
+  "limitations": [
+    "Fresh run stopped at provider HTTP503 after 37 of 64 planned sampled frames. No second paid run was launched.",
+    "Dataset recovered offline from received raw responses; every replay request matched the original API request SHA256.",
+    "No fiducial/camera calibration was supplied: no metric position or physical parameter is claimed.",
+    "The source video includes cyan prediction spheres; tracked ball association uses its initially observed color, never hidden state."
+  ]
+}

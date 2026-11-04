@@ -1,0 +1,3083 @@
+{
+  "schema_version": "twinforge.bundle.v1",
+  "dataset": {
+    "video": "test_shot.mp4",
+    "sample_fps": 10.0,
+    "model": "sam-3.1",
+    "provider": "Meta Model API /v1/responses",
+    "concepts": [
+      "ball",
+      "vertical hoop",
+      "backboard"
+    ],
+    "statics": {
+      "vertical hoop": {
+        "centroid": [
+          516.0,
+          355.5
+        ],
+        "box": {
+          "x1": 488,
+          "y1": 329,
+          "x2": 544,
+          "y2": 382,
+          "w": 824,
+          "h": 950
+        },
+        "hits": 7,
+        "prompt_used": "basketball hoop"
+      },
+      "backboard": {
+        "centroid": [
+          540.5,
+          285.5
+        ],
+        "box": {
+          "x1": 443,
+          "y1": 218,
+          "x2": 638,
+          "y2": 353,
+          "w": 824,
+          "h": 950
+        },
+        "hits": 7,
+        "prompt_used": "backboard"
+      }
+    },
+    "frames": [
+      {
+        "t": 0.0,
+        "frame": 0,
+        "track_id": 1,
+        "centroid": [
+          183.5,
+          406.0
+        ],
+        "box": {
+          "x1": 161,
+          "y1": 385,
+          "x2": 206,
+          "y2": 427,
+          "w": 824,
+          "h": 950
+        },
+        "area": 1890,
+        "mask": true,
+        "vel_px_s": [
+          473.1,
+          -652.7
+        ],
+        "world_m": [
+          -2.7146,
+          2.6497,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": true
+        },
+        "position_m": [
+          -2.7146,
+          2.6497,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 0.083,
+        "frame": 1,
+        "track_id": 1,
+        "centroid": [
+          221.0,
+          351.5
+        ],
+        "box": {
+          "x1": 200,
+          "y1": 331,
+          "x2": 242,
+          "y2": 372,
+          "w": 824,
+          "h": 950
+        },
+        "area": 1722,
+        "mask": true,
+        "vel_px_s": [
+          472.0,
+          -582.0
+        ],
+        "world_m": [
+          -2.4085,
+          3.0817,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false
+        },
+        "position_m": [
+          -2.4085,
+          3.0817,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 0.167,
+        "frame": 2,
+        "track_id": 1,
+        "centroid": [
+          262.5,
+          297.0
+        ],
+        "box": {
+          "x1": 243,
+          "y1": 277,
+          "x2": 282,
+          "y2": 317,
+          "w": 824,
+          "h": 950
+        },
+        "area": 1560,
+        "mask": true,
+        "vel_px_s": [
+          459.5,
+          -509.0
+        ],
+        "world_m": [
+          -2.0696,
+          3.5137,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false
+        },
+        "position_m": [
+          -2.0696,
+          3.5137,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 0.25,
+        "frame": 3,
+        "track_id": 1,
+        "centroid": [
+          301.5,
+          260.5
+        ],
+        "box": {
+          "x1": 283,
+          "y1": 241,
+          "x2": 320,
+          "y2": 280,
+          "w": 824,
+          "h": 950
+        },
+        "area": 1443,
+        "mask": true,
+        "vel_px_s": [
+          446.1,
+          -383.2
+        ],
+        "world_m": [
+          -1.7512,
+          3.803,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false
+        },
+        "position_m": [
+          -1.7512,
+          3.803,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 0.333,
+        "frame": 4,
+        "track_id": 1,
+        "centroid": [
+          336.5,
+          236.5
+        ],
+        "box": {
+          "x1": 319,
+          "y1": 218,
+          "x2": 354,
+          "y2": 255,
+          "w": 824,
+          "h": 950
+        },
+        "area": 1295,
+        "mask": true,
+        "vel_px_s": [
+          412.9,
+          -222.2
+        ],
+        "world_m": [
+          -1.4655,
+          3.9932,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false
+        },
+        "position_m": [
+          -1.4655,
+          3.9932,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 0.417,
+        "frame": 5,
+        "track_id": 1,
+        "centroid": [
+          370.0,
+          223.5
+        ],
+        "box": {
+          "x1": 353,
+          "y1": 206,
+          "x2": 387,
+          "y2": 241,
+          "w": 824,
+          "h": 950
+        },
+        "area": 1190,
+        "mask": true,
+        "vel_px_s": [
+          376.9,
+          -93.1
+        ],
+        "world_m": [
+          -1.192,
+          4.0962,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false
+        },
+        "position_m": [
+          -1.192,
+          4.0962,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 0.5,
+        "frame": 6,
+        "track_id": 1,
+        "centroid": [
+          400.0,
+          223.0
+        ],
+        "box": {
+          "x1": 383,
+          "y1": 206,
+          "x2": 417,
+          "y2": 240,
+          "w": 824,
+          "h": 950
+        },
+        "area": 1156,
+        "mask": true,
+        "vel_px_s": [
+          345.8,
+          29.9
+        ],
+        "world_m": [
+          -0.9471,
+          4.1002,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false
+        },
+        "position_m": [
+          -0.9471,
+          4.1002,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 0.583,
+        "frame": 7,
+        "track_id": 1,
+        "centroid": [
+          427.0,
+          229.5
+        ],
+        "box": {
+          "x1": 411,
+          "y1": 213,
+          "x2": 443,
+          "y2": 246,
+          "w": 824,
+          "h": 950
+        },
+        "area": 1056,
+        "mask": true,
+        "vel_px_s": [
+          316.8,
+          139.6
+        ],
+        "world_m": [
+          -0.7266,
+          4.0487,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false
+        },
+        "position_m": [
+          -0.7266,
+          4.0487,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 0.667,
+        "frame": 8,
+        "track_id": 1,
+        "centroid": [
+          452.0,
+          246.5
+        ],
+        "box": {
+          "x1": 437,
+          "y1": 231,
+          "x2": 467,
+          "y2": 262,
+          "w": 824,
+          "h": 950
+        },
+        "area": 930,
+        "mask": true,
+        "vel_px_s": [
+          288.3,
+          229.7
+        ],
+        "world_m": [
+          -0.5225,
+          3.9139,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false
+        },
+        "position_m": [
+          -0.5225,
+          3.9139,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 0.75,
+        "frame": 9,
+        "track_id": 1,
+        "centroid": [
+          475.5,
+          270.0
+        ],
+        "box": {
+          "x1": 460,
+          "y1": 255,
+          "x2": 491,
+          "y2": 285,
+          "w": 824,
+          "h": 950
+        },
+        "area": 930,
+        "mask": true,
+        "vel_px_s": [
+          269.5,
+          302.4
+        ],
+        "world_m": [
+          -0.3307,
+          3.7277,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false
+        },
+        "position_m": [
+          -0.3307,
+          3.7277,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 0.833,
+        "frame": 10,
+        "track_id": 1,
+        "centroid": [
+          496.0,
+          299.5
+        ],
+        "box": {
+          "x1": 482,
+          "y1": 285,
+          "x2": 510,
+          "y2": 314,
+          "w": 824,
+          "h": 950
+        },
+        "area": 812,
+        "mask": true,
+        "vel_px_s": [
+          199.7,
+          376.9
+        ],
+        "world_m": [
+          -0.1633,
+          3.4939,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false
+        },
+        "position_m": [
+          -0.1633,
+          3.4939,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 0.917,
+        "frame": 11,
+        "track_id": 1,
+        "centroid": [
+          517.0,
+          330.5
+        ],
+        "box": {
+          "x1": 504,
+          "y1": 317,
+          "x2": 530,
+          "y2": 344,
+          "w": 824,
+          "h": 950
+        },
+        "area": 702,
+        "mask": true,
+        "vel_px_s": [
+          123.1,
+          447.4
+        ],
+        "world_m": [
+          0.0082,
+          3.2481,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false
+        },
+        "position_m": [
+          0.0082,
+          3.2481,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 1.0,
+        "frame": 12,
+        "track_id": 1,
+        "centroid": [
+          518.5,
+          372.0
+        ],
+        "box": {
+          "x1": 504,
+          "y1": 357,
+          "x2": 533,
+          "y2": 387,
+          "w": 824,
+          "h": 950
+        },
+        "area": 870,
+        "mask": true,
+        "vel_px_s": [
+          52.4,
+          519.5
+        ],
+        "world_m": [
+          0.0204,
+          2.9192,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          0.0204,
+          2.9192,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 1.083,
+        "frame": 13,
+        "track_id": 1,
+        "centroid": [
+          516.5,
+          419.0
+        ],
+        "box": {
+          "x1": 503,
+          "y1": 405,
+          "x2": 530,
+          "y2": 433,
+          "w": 824,
+          "h": 950
+        },
+        "area": 756,
+        "mask": true,
+        "vel_px_s": [
+          -16.5,
+          617.1
+        ],
+        "world_m": [
+          0.0041,
+          2.5467,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          0.0041,
+          2.5467,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 1.167,
+        "frame": 14,
+        "track_id": 1,
+        "centroid": [
+          513.5,
+          473.0
+        ],
+        "box": {
+          "x1": 500,
+          "y1": 460,
+          "x2": 527,
+          "y2": 486,
+          "w": 824,
+          "h": 950
+        },
+        "area": 702,
+        "mask": true,
+        "vel_px_s": [
+          -31.5,
+          699.7
+        ],
+        "world_m": [
+          -0.0204,
+          2.1187,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.0204,
+          2.1187,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 1.25,
+        "frame": 15,
+        "track_id": 1,
+        "centroid": [
+          511.5,
+          536.0
+        ],
+        "box": {
+          "x1": 498,
+          "y1": 522,
+          "x2": 525,
+          "y2": 550,
+          "w": 824,
+          "h": 950
+        },
+        "area": 756,
+        "mask": true,
+        "vel_px_s": [
+          -50.9,
+          488.0
+        ],
+        "world_m": [
+          -0.0367,
+          1.6194,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.0367,
+          1.6194,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 1.333,
+        "frame": 16,
+        "track_id": 1,
+        "centroid": [
+          508.0,
+          605.0
+        ],
+        "box": {
+          "x1": 494,
+          "y1": 590,
+          "x2": 522,
+          "y2": 620,
+          "w": 824,
+          "h": 950
+        },
+        "area": 840,
+        "mask": true,
+        "vel_px_s": [
+          -27.0,
+          436.9
+        ],
+        "world_m": [
+          -0.0653,
+          1.0725,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.0653,
+          1.0725,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 1.417,
+        "frame": 17,
+        "track_id": 3,
+        "centroid": [
+          499.5,
+          582.0
+        ],
+        "box": {
+          "x1": 486,
+          "y1": 568,
+          "x2": 513,
+          "y2": 596,
+          "w": 824,
+          "h": 950
+        },
+        "area": 756,
+        "mask": true,
+        "vel_px_s": [
+          -28.5,
+          144.1
+        ],
+        "world_m": [
+          -0.1347,
+          1.2548,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.1347,
+          1.2548,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 1.5,
+        "frame": 18,
+        "track_id": 3,
+        "centroid": [
+          504.5,
+          618.5
+        ],
+        "box": {
+          "x1": 491,
+          "y1": 604,
+          "x2": 518,
+          "y2": 633,
+          "w": 824,
+          "h": 950
+        },
+        "area": 783,
+        "mask": true,
+        "vel_px_s": [
+          -37.4,
+          -133.2
+        ],
+        "world_m": [
+          -0.0939,
+          0.9655,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.0939,
+          0.9655,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 1.583,
+        "frame": 19,
+        "track_id": 4,
+        "centroid": [
+          502.0,
+          584.0
+        ],
+        "box": {
+          "x1": 488,
+          "y1": 570,
+          "x2": 516,
+          "y2": 598,
+          "w": 824,
+          "h": 950
+        },
+        "area": 784,
+        "mask": true,
+        "vel_px_s": [
+          0.0,
+          -138.1
+        ],
+        "world_m": [
+          -0.1143,
+          1.2389,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.1143,
+          1.2389,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 1.667,
+        "frame": 20,
+        "track_id": 4,
+        "centroid": [
+          495.5,
+          560.5
+        ],
+        "box": {
+          "x1": 476,
+          "y1": 550,
+          "x2": 515,
+          "y2": 571,
+          "w": 824,
+          "h": 950
+        },
+        "area": 819,
+        "mask": true,
+        "vel_px_s": [
+          -55.6,
+          18.0
+        ],
+        "world_m": [
+          -0.1674,
+          1.4252,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.1674,
+          1.4252,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 1.75,
+        "frame": 21,
+        "track_id": 4,
+        "centroid": [
+          499.5,
+          536.0
+        ],
+        "box": {
+          "x1": 486,
+          "y1": 522,
+          "x2": 513,
+          "y2": 550,
+          "w": 824,
+          "h": 950
+        },
+        "area": 756,
+        "mask": true,
+        "vel_px_s": [
+          -21.0,
+          -188.6
+        ],
+        "world_m": [
+          -0.1347,
+          1.6194,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.1347,
+          1.6194,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 1.833,
+        "frame": 22,
+        "track_id": 3,
+        "centroid": [
+          486.0,
+          624.5
+        ],
+        "box": {
+          "x1": 472,
+          "y1": 614,
+          "x2": 500,
+          "y2": 635,
+          "w": 824,
+          "h": 950
+        },
+        "area": 588,
+        "mask": true,
+        "vel_px_s": [
+          -7.5,
+          -103.6
+        ],
+        "world_m": [
+          -0.2449,
+          0.9179,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.2449,
+          0.9179,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 1.917,
+        "frame": 23,
+        "track_id": 4,
+        "centroid": [
+          495.0,
+          521.0
+        ],
+        "box": {
+          "x1": 481,
+          "y1": 507,
+          "x2": 509,
+          "y2": 535,
+          "w": 824,
+          "h": 950
+        },
+        "area": 784,
+        "mask": true,
+        "vel_px_s": [
+          -22.5,
+          0.0
+        ],
+        "world_m": [
+          -0.1714,
+          1.7383,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.1714,
+          1.7383,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 2.0,
+        "frame": 24,
+        "track_id": 4,
+        "centroid": [
+          493.0,
+          526.0
+        ],
+        "box": {
+          "x1": 479,
+          "y1": 512,
+          "x2": 507,
+          "y2": 540,
+          "w": 824,
+          "h": 950
+        },
+        "area": 784,
+        "mask": true,
+        "vel_px_s": [
+          -24.0,
+          26.9
+        ],
+        "world_m": [
+          -0.1878,
+          1.6986,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.1878,
+          1.6986,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 2.083,
+        "frame": 25,
+        "track_id": 4,
+        "centroid": [
+          492.0,
+          536.0
+        ],
+        "box": {
+          "x1": 478,
+          "y1": 522,
+          "x2": 506,
+          "y2": 550,
+          "w": 824,
+          "h": 950
+        },
+        "area": 784,
+        "mask": true,
+        "vel_px_s": [
+          -24.0,
+          190.7
+        ],
+        "world_m": [
+          -0.1959,
+          1.6194,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.1959,
+          1.6194,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 2.167,
+        "frame": 26,
+        "track_id": 3,
+        "centroid": [
+          478.0,
+          633.5
+        ],
+        "box": {
+          "x1": 464,
+          "y1": 623,
+          "x2": 492,
+          "y2": 644,
+          "w": 824,
+          "h": 950
+        },
+        "area": 588,
+        "mask": true,
+        "vel_px_s": [
+          -24.0,
+          332.1
+        ],
+        "world_m": [
+          -0.3102,
+          0.8466,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.3102,
+          0.8466,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 2.25,
+        "frame": 27,
+        "track_id": 3,
+        "centroid": [
+          487.0,
+          584.5
+        ],
+        "box": {
+          "x1": 473,
+          "y1": 570,
+          "x2": 501,
+          "y2": 599,
+          "w": 824,
+          "h": 950
+        },
+        "area": 812,
+        "mask": true,
+        "vel_px_s": [
+          -21.0,
+          207.0
+        ],
+        "world_m": [
+          -0.2368,
+          1.235,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.2368,
+          1.235,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 2.417,
+        "frame": 29,
+        "track_id": 4,
+        "centroid": [
+          483.0,
+          664.5
+        ],
+        "box": {
+          "x1": 469,
+          "y1": 653,
+          "x2": 497,
+          "y2": 676,
+          "w": 824,
+          "h": 950
+        },
+        "area": 644,
+        "mask": true,
+        "vel_px_s": [
+          0.0,
+          -12.0
+        ],
+        "world_m": [
+          -0.2694,
+          0.6009,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.2694,
+          0.6009,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 2.583,
+        "frame": 31,
+        "track_id": 4,
+        "centroid": [
+          481.5,
+          639.5
+        ],
+        "box": {
+          "x1": 469,
+          "y1": 626,
+          "x2": 494,
+          "y2": 653,
+          "w": 824,
+          "h": 950
+        },
+        "area": 675,
+        "mask": true,
+        "vel_px_s": [
+          -22.0,
+          79.0
+        ],
+        "world_m": [
+          -0.2817,
+          0.799,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.2817,
+          0.799,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 2.667,
+        "frame": 32,
+        "track_id": 4,
+        "centroid": [
+          478.0,
+          627.5
+        ],
+        "box": {
+          "x1": 464,
+          "y1": 614,
+          "x2": 492,
+          "y2": 641,
+          "w": 824,
+          "h": 950
+        },
+        "area": 756,
+        "mask": true,
+        "vel_px_s": [
+          -21.6,
+          -87.7
+        ],
+        "world_m": [
+          -0.3102,
+          0.8941,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.3102,
+          0.8941,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 2.75,
+        "frame": 33,
+        "track_id": 4,
+        "centroid": [
+          476.0,
+          624.0
+        ],
+        "box": {
+          "x1": 461,
+          "y1": 610,
+          "x2": 491,
+          "y2": 638,
+          "w": 824,
+          "h": 950
+        },
+        "area": 840,
+        "mask": true,
+        "vel_px_s": [
+          -28.4,
+          1.5
+        ],
+        "world_m": [
+          -0.3266,
+          0.9219,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.3266,
+          0.9219,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 2.833,
+        "frame": 34,
+        "track_id": 4,
+        "centroid": [
+          474.0,
+          628.0
+        ],
+        "box": {
+          "x1": 460,
+          "y1": 614,
+          "x2": 488,
+          "y2": 642,
+          "w": 824,
+          "h": 950
+        },
+        "area": 784,
+        "mask": true,
+        "vel_px_s": [
+          -19.5,
+          81.1
+        ],
+        "world_m": [
+          -0.3429,
+          0.8902,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.3429,
+          0.8902,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 2.917,
+        "frame": 35,
+        "track_id": 4,
+        "centroid": [
+          472.0,
+          640.0
+        ],
+        "box": {
+          "x1": 458,
+          "y1": 626,
+          "x2": 486,
+          "y2": 654,
+          "w": 824,
+          "h": 950
+        },
+        "area": 784,
+        "mask": true,
+        "vel_px_s": [
+          -18.0,
+          122.0
+        ],
+        "world_m": [
+          -0.3592,
+          0.7951,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.3592,
+          0.7951,
+          0.0
+        ],
+        "velocity_m_s": null
+      },
+      {
+        "t": 3.0,
+        "frame": 36,
+        "track_id": 4,
+        "centroid": [
+          471.5,
+          654.5
+        ],
+        "box": {
+          "x1": 458,
+          "y1": 647,
+          "x2": 485,
+          "y2": 662,
+          "w": 824,
+          "h": 950
+        },
+        "area": 405,
+        "mask": true,
+        "vel_px_s": [
+          -15.0,
+          158.7
+        ],
+        "world_m": [
+          -0.3633,
+          0.6801,
+          0.0
+        ],
+        "quality": {
+          "fp02_outlier": false,
+          "contact": true
+        },
+        "position_m": [
+          -0.3633,
+          0.6801,
+          0.0
+        ],
+        "velocity_m_s": null
+      }
+    ],
+    "events": [
+      {
+        "t": 0.0,
+        "event": "launch",
+        "detail": "premier mouvement rapide détecté"
+      },
+      {
+        "t": 0.5,
+        "event": "apex",
+        "detail": "sommet du tir (vy pixel s'inverse)"
+      },
+      {
+        "t": 1.0,
+        "event": "rim_cross_down",
+        "detail": "traversée descendante du plan de l'anneau dans son emprise"
+      }
+    ],
+    "tracking": {
+      "fp01_losses": 16,
+      "fp01_reacquired": 12,
+      "sampled_frames": 39,
+      "ball_frames_found": 35
+    },
+    "schema_version": "twinforge.dataset.v1",
+    "provenance": {
+      "kind": "synthetic",
+      "legacy": true,
+      "video_name": "test_shot.mp4",
+      "description": "Historical SAM run on a video rendered from the browser simulation; not a real filmed shot."
+    },
+    "shot_id": "test_shot.mp4",
+    "calibration": {
+      "mode": "legacy_assumed_scale",
+      "metric": true,
+      "dimensions_observed": 2,
+      "limitations": [
+        "Historical pixel-to-metre scale used assumed regulation dimensions; not calibrated real-world 3D."
+      ]
+    },
+    "geometry": {},
+    "observation_sha256": "c24a890f0fb20e9af3abeaf23904b0d4baa1779e82399e99da849fd5d62dd784"
+  },
+  "twin": {
+    "schema_version": "twinforge.twin.v1",
+    "level": "L3",
+    "status": "L3_unvalidated",
+    "family": "gravity",
+    "parameters": {
+      "g": {
+        "value": 10.762588248685041,
+        "uncertainty": 1.0372733436811166,
+        "source": "training observations; local finite differences, contact/outlier neighbourhoods excluded",
+        "status": "estimated",
+        "units": "m/s^2"
+      },
+      "drag": {
+        "value": 0.0,
+        "uncertainty": 0.0,
+        "source": "zero by selected gravity-only family",
+        "status": "model_assumption",
+        "units": "1/m"
+      },
+      "wind": {
+        "value": [
+          -2.802545135891539,
+          0.0,
+          0.0
+        ],
+        "uncertainty": [
+          1.0372733436811166,
+          null,
+          null
+        ],
+        "source": "training observations; local finite differences, contact/outlier neighbourhoods excluded; vertical acceleration absorbed by g",
+        "status": "estimated",
+        "units": "m/s^2"
+      },
+      "restitution": {
+        "value": null,
+        "uncertainty": null,
+        "source": "no universal material coefficient; see per-surface measurements",
+        "status": "unobserved",
+        "units": "ratio"
+      },
+      "friction": {
+        "value": null,
+        "uncertainty": null,
+        "source": "no independent rolling/sliding observations fitted",
+        "status": "unobserved",
+        "units": "ratio"
+      },
+      "magnus": {
+        "value": null,
+        "uncertainty": null,
+        "source": "spin-induced lift not identifiable without measured spin",
+        "status": "unobserved",
+        "units": null
+      },
+      "spin": {
+        "value": null,
+        "uncertainty": null,
+        "source": "ball spin not reconstructed from a silhouette",
+        "status": "unobserved",
+        "units": "rad/s"
+      }
+    },
+    "restitution_by_surface": {},
+    "numeric": {
+      "g": 10.762588248685041,
+      "drag": 0.0,
+      "wind": [
+        -2.802545135891539,
+        0.0,
+        0.0
+      ],
+      "restitution": null,
+      "friction": null,
+      "magnus": null,
+      "spin": null,
+      "restitution_by_surface": {}
+    },
+    "source_fingerprints": [
+      "c24a890f0fb20e9af3abeaf23904b0d4baa1779e82399e99da849fd5d62dd784"
+    ],
+    "train_shot_ids": [
+      "test_shot.mp4"
+    ],
+    "training_identity_keys": [
+      "frames:c24a890f0fb20e9af3abeaf23904b0d4baa1779e82399e99da849fd5d62dd784",
+      "shot:test_shot.mp4",
+      "video_name:test_shot.mp4"
+    ],
+    "calibration_dimensions": 2,
+    "fit": {
+      "acceleration_residual_rms": 2.933852061043847,
+      "n_points": 9,
+      "drag_boundary_zero": false
+    },
+    "uncertainty_method": "linear least-squares standard errors; correlated finite differences and calibration systematic error are not included",
+    "simulator": {
+      "family": "gravity",
+      "module": "induction.simulator",
+      "dimensions": 3,
+      "integrator": "semi_implicit_euler",
+      "max_step_s": 0.002,
+      "validated_regime": "free_flight",
+      "contact_support": [
+        "plane",
+        "sphere",
+        "rim"
+      ],
+      "missing_identification": [
+        "friction",
+        "spin",
+        "net material and geometry"
+      ]
+    },
+    "limitations": [
+      "L3 calibration of predefined families, not autonomous code/physics induction.",
+      "Homography data remain planar even though the integrator uses XYZ vectors.",
+      "Unmeasured contact parameters stay null; contact rollout refuses guessed coefficients.",
+      "No physical control rig is represented by this run.",
+      "No independent validation shot: family selection is not empirically validated.",
+      "No independent test shot: no held-out performance claim."
+    ],
+    "validation": {
+      "train_shots": [
+        "85529b6bf357bcf78123f5d08f7bc9ffb38150613c70b6ef6b4333ed88797081"
+      ],
+      "validation_shots": [],
+      "test_shots": [],
+      "selection": null,
+      "independent_test": null,
+      "validation_result": null,
+      "test_result": null,
+      "family_selection": "preselected_family_no_validation",
+      "status": "no_independent_test_evidence",
+      "held_out_cm": null
+    },
+    "g": 10.762588248685041,
+    "drag": 0.0,
+    "held_out_cm": null
+  },
+  "datasets": {
+    "train": [
+      {
+        "video": "test_shot.mp4",
+        "sample_fps": 10.0,
+        "model": "sam-3.1",
+        "provider": "Meta Model API /v1/responses",
+        "concepts": [
+          "ball",
+          "vertical hoop",
+          "backboard"
+        ],
+        "statics": {
+          "vertical hoop": {
+            "centroid": [
+              516.0,
+              355.5
+            ],
+            "box": {
+              "x1": 488,
+              "y1": 329,
+              "x2": 544,
+              "y2": 382,
+              "w": 824,
+              "h": 950
+            },
+            "hits": 7,
+            "prompt_used": "basketball hoop"
+          },
+          "backboard": {
+            "centroid": [
+              540.5,
+              285.5
+            ],
+            "box": {
+              "x1": 443,
+              "y1": 218,
+              "x2": 638,
+              "y2": 353,
+              "w": 824,
+              "h": 950
+            },
+            "hits": 7,
+            "prompt_used": "backboard"
+          }
+        },
+        "frames": [
+          {
+            "t": 0.0,
+            "frame": 0,
+            "track_id": 1,
+            "centroid": [
+              183.5,
+              406.0
+            ],
+            "box": {
+              "x1": 161,
+              "y1": 385,
+              "x2": 206,
+              "y2": 427,
+              "w": 824,
+              "h": 950
+            },
+            "area": 1890,
+            "mask": true,
+            "vel_px_s": [
+              473.1,
+              -652.7
+            ],
+            "world_m": [
+              -2.7146,
+              2.6497,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": true
+            },
+            "position_m": [
+              -2.7146,
+              2.6497,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 0.083,
+            "frame": 1,
+            "track_id": 1,
+            "centroid": [
+              221.0,
+              351.5
+            ],
+            "box": {
+              "x1": 200,
+              "y1": 331,
+              "x2": 242,
+              "y2": 372,
+              "w": 824,
+              "h": 950
+            },
+            "area": 1722,
+            "mask": true,
+            "vel_px_s": [
+              472.0,
+              -582.0
+            ],
+            "world_m": [
+              -2.4085,
+              3.0817,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false
+            },
+            "position_m": [
+              -2.4085,
+              3.0817,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 0.167,
+            "frame": 2,
+            "track_id": 1,
+            "centroid": [
+              262.5,
+              297.0
+            ],
+            "box": {
+              "x1": 243,
+              "y1": 277,
+              "x2": 282,
+              "y2": 317,
+              "w": 824,
+              "h": 950
+            },
+            "area": 1560,
+            "mask": true,
+            "vel_px_s": [
+              459.5,
+              -509.0
+            ],
+            "world_m": [
+              -2.0696,
+              3.5137,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false
+            },
+            "position_m": [
+              -2.0696,
+              3.5137,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 0.25,
+            "frame": 3,
+            "track_id": 1,
+            "centroid": [
+              301.5,
+              260.5
+            ],
+            "box": {
+              "x1": 283,
+              "y1": 241,
+              "x2": 320,
+              "y2": 280,
+              "w": 824,
+              "h": 950
+            },
+            "area": 1443,
+            "mask": true,
+            "vel_px_s": [
+              446.1,
+              -383.2
+            ],
+            "world_m": [
+              -1.7512,
+              3.803,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false
+            },
+            "position_m": [
+              -1.7512,
+              3.803,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 0.333,
+            "frame": 4,
+            "track_id": 1,
+            "centroid": [
+              336.5,
+              236.5
+            ],
+            "box": {
+              "x1": 319,
+              "y1": 218,
+              "x2": 354,
+              "y2": 255,
+              "w": 824,
+              "h": 950
+            },
+            "area": 1295,
+            "mask": true,
+            "vel_px_s": [
+              412.9,
+              -222.2
+            ],
+            "world_m": [
+              -1.4655,
+              3.9932,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false
+            },
+            "position_m": [
+              -1.4655,
+              3.9932,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 0.417,
+            "frame": 5,
+            "track_id": 1,
+            "centroid": [
+              370.0,
+              223.5
+            ],
+            "box": {
+              "x1": 353,
+              "y1": 206,
+              "x2": 387,
+              "y2": 241,
+              "w": 824,
+              "h": 950
+            },
+            "area": 1190,
+            "mask": true,
+            "vel_px_s": [
+              376.9,
+              -93.1
+            ],
+            "world_m": [
+              -1.192,
+              4.0962,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false
+            },
+            "position_m": [
+              -1.192,
+              4.0962,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 0.5,
+            "frame": 6,
+            "track_id": 1,
+            "centroid": [
+              400.0,
+              223.0
+            ],
+            "box": {
+              "x1": 383,
+              "y1": 206,
+              "x2": 417,
+              "y2": 240,
+              "w": 824,
+              "h": 950
+            },
+            "area": 1156,
+            "mask": true,
+            "vel_px_s": [
+              345.8,
+              29.9
+            ],
+            "world_m": [
+              -0.9471,
+              4.1002,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false
+            },
+            "position_m": [
+              -0.9471,
+              4.1002,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 0.583,
+            "frame": 7,
+            "track_id": 1,
+            "centroid": [
+              427.0,
+              229.5
+            ],
+            "box": {
+              "x1": 411,
+              "y1": 213,
+              "x2": 443,
+              "y2": 246,
+              "w": 824,
+              "h": 950
+            },
+            "area": 1056,
+            "mask": true,
+            "vel_px_s": [
+              316.8,
+              139.6
+            ],
+            "world_m": [
+              -0.7266,
+              4.0487,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false
+            },
+            "position_m": [
+              -0.7266,
+              4.0487,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 0.667,
+            "frame": 8,
+            "track_id": 1,
+            "centroid": [
+              452.0,
+              246.5
+            ],
+            "box": {
+              "x1": 437,
+              "y1": 231,
+              "x2": 467,
+              "y2": 262,
+              "w": 824,
+              "h": 950
+            },
+            "area": 930,
+            "mask": true,
+            "vel_px_s": [
+              288.3,
+              229.7
+            ],
+            "world_m": [
+              -0.5225,
+              3.9139,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false
+            },
+            "position_m": [
+              -0.5225,
+              3.9139,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 0.75,
+            "frame": 9,
+            "track_id": 1,
+            "centroid": [
+              475.5,
+              270.0
+            ],
+            "box": {
+              "x1": 460,
+              "y1": 255,
+              "x2": 491,
+              "y2": 285,
+              "w": 824,
+              "h": 950
+            },
+            "area": 930,
+            "mask": true,
+            "vel_px_s": [
+              269.5,
+              302.4
+            ],
+            "world_m": [
+              -0.3307,
+              3.7277,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false
+            },
+            "position_m": [
+              -0.3307,
+              3.7277,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 0.833,
+            "frame": 10,
+            "track_id": 1,
+            "centroid": [
+              496.0,
+              299.5
+            ],
+            "box": {
+              "x1": 482,
+              "y1": 285,
+              "x2": 510,
+              "y2": 314,
+              "w": 824,
+              "h": 950
+            },
+            "area": 812,
+            "mask": true,
+            "vel_px_s": [
+              199.7,
+              376.9
+            ],
+            "world_m": [
+              -0.1633,
+              3.4939,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false
+            },
+            "position_m": [
+              -0.1633,
+              3.4939,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 0.917,
+            "frame": 11,
+            "track_id": 1,
+            "centroid": [
+              517.0,
+              330.5
+            ],
+            "box": {
+              "x1": 504,
+              "y1": 317,
+              "x2": 530,
+              "y2": 344,
+              "w": 824,
+              "h": 950
+            },
+            "area": 702,
+            "mask": true,
+            "vel_px_s": [
+              123.1,
+              447.4
+            ],
+            "world_m": [
+              0.0082,
+              3.2481,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false
+            },
+            "position_m": [
+              0.0082,
+              3.2481,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 1.0,
+            "frame": 12,
+            "track_id": 1,
+            "centroid": [
+              518.5,
+              372.0
+            ],
+            "box": {
+              "x1": 504,
+              "y1": 357,
+              "x2": 533,
+              "y2": 387,
+              "w": 824,
+              "h": 950
+            },
+            "area": 870,
+            "mask": true,
+            "vel_px_s": [
+              52.4,
+              519.5
+            ],
+            "world_m": [
+              0.0204,
+              2.9192,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              0.0204,
+              2.9192,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 1.083,
+            "frame": 13,
+            "track_id": 1,
+            "centroid": [
+              516.5,
+              419.0
+            ],
+            "box": {
+              "x1": 503,
+              "y1": 405,
+              "x2": 530,
+              "y2": 433,
+              "w": 824,
+              "h": 950
+            },
+            "area": 756,
+            "mask": true,
+            "vel_px_s": [
+              -16.5,
+              617.1
+            ],
+            "world_m": [
+              0.0041,
+              2.5467,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              0.0041,
+              2.5467,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 1.167,
+            "frame": 14,
+            "track_id": 1,
+            "centroid": [
+              513.5,
+              473.0
+            ],
+            "box": {
+              "x1": 500,
+              "y1": 460,
+              "x2": 527,
+              "y2": 486,
+              "w": 824,
+              "h": 950
+            },
+            "area": 702,
+            "mask": true,
+            "vel_px_s": [
+              -31.5,
+              699.7
+            ],
+            "world_m": [
+              -0.0204,
+              2.1187,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.0204,
+              2.1187,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 1.25,
+            "frame": 15,
+            "track_id": 1,
+            "centroid": [
+              511.5,
+              536.0
+            ],
+            "box": {
+              "x1": 498,
+              "y1": 522,
+              "x2": 525,
+              "y2": 550,
+              "w": 824,
+              "h": 950
+            },
+            "area": 756,
+            "mask": true,
+            "vel_px_s": [
+              -50.9,
+              488.0
+            ],
+            "world_m": [
+              -0.0367,
+              1.6194,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.0367,
+              1.6194,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 1.333,
+            "frame": 16,
+            "track_id": 1,
+            "centroid": [
+              508.0,
+              605.0
+            ],
+            "box": {
+              "x1": 494,
+              "y1": 590,
+              "x2": 522,
+              "y2": 620,
+              "w": 824,
+              "h": 950
+            },
+            "area": 840,
+            "mask": true,
+            "vel_px_s": [
+              -27.0,
+              436.9
+            ],
+            "world_m": [
+              -0.0653,
+              1.0725,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.0653,
+              1.0725,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 1.417,
+            "frame": 17,
+            "track_id": 3,
+            "centroid": [
+              499.5,
+              582.0
+            ],
+            "box": {
+              "x1": 486,
+              "y1": 568,
+              "x2": 513,
+              "y2": 596,
+              "w": 824,
+              "h": 950
+            },
+            "area": 756,
+            "mask": true,
+            "vel_px_s": [
+              -28.5,
+              144.1
+            ],
+            "world_m": [
+              -0.1347,
+              1.2548,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.1347,
+              1.2548,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 1.5,
+            "frame": 18,
+            "track_id": 3,
+            "centroid": [
+              504.5,
+              618.5
+            ],
+            "box": {
+              "x1": 491,
+              "y1": 604,
+              "x2": 518,
+              "y2": 633,
+              "w": 824,
+              "h": 950
+            },
+            "area": 783,
+            "mask": true,
+            "vel_px_s": [
+              -37.4,
+              -133.2
+            ],
+            "world_m": [
+              -0.0939,
+              0.9655,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.0939,
+              0.9655,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 1.583,
+            "frame": 19,
+            "track_id": 4,
+            "centroid": [
+              502.0,
+              584.0
+            ],
+            "box": {
+              "x1": 488,
+              "y1": 570,
+              "x2": 516,
+              "y2": 598,
+              "w": 824,
+              "h": 950
+            },
+            "area": 784,
+            "mask": true,
+            "vel_px_s": [
+              0.0,
+              -138.1
+            ],
+            "world_m": [
+              -0.1143,
+              1.2389,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.1143,
+              1.2389,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 1.667,
+            "frame": 20,
+            "track_id": 4,
+            "centroid": [
+              495.5,
+              560.5
+            ],
+            "box": {
+              "x1": 476,
+              "y1": 550,
+              "x2": 515,
+              "y2": 571,
+              "w": 824,
+              "h": 950
+            },
+            "area": 819,
+            "mask": true,
+            "vel_px_s": [
+              -55.6,
+              18.0
+            ],
+            "world_m": [
+              -0.1674,
+              1.4252,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.1674,
+              1.4252,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 1.75,
+            "frame": 21,
+            "track_id": 4,
+            "centroid": [
+              499.5,
+              536.0
+            ],
+            "box": {
+              "x1": 486,
+              "y1": 522,
+              "x2": 513,
+              "y2": 550,
+              "w": 824,
+              "h": 950
+            },
+            "area": 756,
+            "mask": true,
+            "vel_px_s": [
+              -21.0,
+              -188.6
+            ],
+            "world_m": [
+              -0.1347,
+              1.6194,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.1347,
+              1.6194,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 1.833,
+            "frame": 22,
+            "track_id": 3,
+            "centroid": [
+              486.0,
+              624.5
+            ],
+            "box": {
+              "x1": 472,
+              "y1": 614,
+              "x2": 500,
+              "y2": 635,
+              "w": 824,
+              "h": 950
+            },
+            "area": 588,
+            "mask": true,
+            "vel_px_s": [
+              -7.5,
+              -103.6
+            ],
+            "world_m": [
+              -0.2449,
+              0.9179,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.2449,
+              0.9179,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 1.917,
+            "frame": 23,
+            "track_id": 4,
+            "centroid": [
+              495.0,
+              521.0
+            ],
+            "box": {
+              "x1": 481,
+              "y1": 507,
+              "x2": 509,
+              "y2": 535,
+              "w": 824,
+              "h": 950
+            },
+            "area": 784,
+            "mask": true,
+            "vel_px_s": [
+              -22.5,
+              0.0
+            ],
+            "world_m": [
+              -0.1714,
+              1.7383,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.1714,
+              1.7383,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 2.0,
+            "frame": 24,
+            "track_id": 4,
+            "centroid": [
+              493.0,
+              526.0
+            ],
+            "box": {
+              "x1": 479,
+              "y1": 512,
+              "x2": 507,
+              "y2": 540,
+              "w": 824,
+              "h": 950
+            },
+            "area": 784,
+            "mask": true,
+            "vel_px_s": [
+              -24.0,
+              26.9
+            ],
+            "world_m": [
+              -0.1878,
+              1.6986,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.1878,
+              1.6986,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 2.083,
+            "frame": 25,
+            "track_id": 4,
+            "centroid": [
+              492.0,
+              536.0
+            ],
+            "box": {
+              "x1": 478,
+              "y1": 522,
+              "x2": 506,
+              "y2": 550,
+              "w": 824,
+              "h": 950
+            },
+            "area": 784,
+            "mask": true,
+            "vel_px_s": [
+              -24.0,
+              190.7
+            ],
+            "world_m": [
+              -0.1959,
+              1.6194,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.1959,
+              1.6194,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 2.167,
+            "frame": 26,
+            "track_id": 3,
+            "centroid": [
+              478.0,
+              633.5
+            ],
+            "box": {
+              "x1": 464,
+              "y1": 623,
+              "x2": 492,
+              "y2": 644,
+              "w": 824,
+              "h": 950
+            },
+            "area": 588,
+            "mask": true,
+            "vel_px_s": [
+              -24.0,
+              332.1
+            ],
+            "world_m": [
+              -0.3102,
+              0.8466,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.3102,
+              0.8466,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 2.25,
+            "frame": 27,
+            "track_id": 3,
+            "centroid": [
+              487.0,
+              584.5
+            ],
+            "box": {
+              "x1": 473,
+              "y1": 570,
+              "x2": 501,
+              "y2": 599,
+              "w": 824,
+              "h": 950
+            },
+            "area": 812,
+            "mask": true,
+            "vel_px_s": [
+              -21.0,
+              207.0
+            ],
+            "world_m": [
+              -0.2368,
+              1.235,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.2368,
+              1.235,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 2.417,
+            "frame": 29,
+            "track_id": 4,
+            "centroid": [
+              483.0,
+              664.5
+            ],
+            "box": {
+              "x1": 469,
+              "y1": 653,
+              "x2": 497,
+              "y2": 676,
+              "w": 824,
+              "h": 950
+            },
+            "area": 644,
+            "mask": true,
+            "vel_px_s": [
+              0.0,
+              -12.0
+            ],
+            "world_m": [
+              -0.2694,
+              0.6009,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.2694,
+              0.6009,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 2.583,
+            "frame": 31,
+            "track_id": 4,
+            "centroid": [
+              481.5,
+              639.5
+            ],
+            "box": {
+              "x1": 469,
+              "y1": 626,
+              "x2": 494,
+              "y2": 653,
+              "w": 824,
+              "h": 950
+            },
+            "area": 675,
+            "mask": true,
+            "vel_px_s": [
+              -22.0,
+              79.0
+            ],
+            "world_m": [
+              -0.2817,
+              0.799,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.2817,
+              0.799,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 2.667,
+            "frame": 32,
+            "track_id": 4,
+            "centroid": [
+              478.0,
+              627.5
+            ],
+            "box": {
+              "x1": 464,
+              "y1": 614,
+              "x2": 492,
+              "y2": 641,
+              "w": 824,
+              "h": 950
+            },
+            "area": 756,
+            "mask": true,
+            "vel_px_s": [
+              -21.6,
+              -87.7
+            ],
+            "world_m": [
+              -0.3102,
+              0.8941,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.3102,
+              0.8941,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 2.75,
+            "frame": 33,
+            "track_id": 4,
+            "centroid": [
+              476.0,
+              624.0
+            ],
+            "box": {
+              "x1": 461,
+              "y1": 610,
+              "x2": 491,
+              "y2": 638,
+              "w": 824,
+              "h": 950
+            },
+            "area": 840,
+            "mask": true,
+            "vel_px_s": [
+              -28.4,
+              1.5
+            ],
+            "world_m": [
+              -0.3266,
+              0.9219,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.3266,
+              0.9219,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 2.833,
+            "frame": 34,
+            "track_id": 4,
+            "centroid": [
+              474.0,
+              628.0
+            ],
+            "box": {
+              "x1": 460,
+              "y1": 614,
+              "x2": 488,
+              "y2": 642,
+              "w": 824,
+              "h": 950
+            },
+            "area": 784,
+            "mask": true,
+            "vel_px_s": [
+              -19.5,
+              81.1
+            ],
+            "world_m": [
+              -0.3429,
+              0.8902,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.3429,
+              0.8902,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 2.917,
+            "frame": 35,
+            "track_id": 4,
+            "centroid": [
+              472.0,
+              640.0
+            ],
+            "box": {
+              "x1": 458,
+              "y1": 626,
+              "x2": 486,
+              "y2": 654,
+              "w": 824,
+              "h": 950
+            },
+            "area": 784,
+            "mask": true,
+            "vel_px_s": [
+              -18.0,
+              122.0
+            ],
+            "world_m": [
+              -0.3592,
+              0.7951,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.3592,
+              0.7951,
+              0.0
+            ],
+            "velocity_m_s": null
+          },
+          {
+            "t": 3.0,
+            "frame": 36,
+            "track_id": 4,
+            "centroid": [
+              471.5,
+              654.5
+            ],
+            "box": {
+              "x1": 458,
+              "y1": 647,
+              "x2": 485,
+              "y2": 662,
+              "w": 824,
+              "h": 950
+            },
+            "area": 405,
+            "mask": true,
+            "vel_px_s": [
+              -15.0,
+              158.7
+            ],
+            "world_m": [
+              -0.3633,
+              0.6801,
+              0.0
+            ],
+            "quality": {
+              "fp02_outlier": false,
+              "contact": true
+            },
+            "position_m": [
+              -0.3633,
+              0.6801,
+              0.0
+            ],
+            "velocity_m_s": null
+          }
+        ],
+        "events": [
+          {
+            "t": 0.0,
+            "event": "launch",
+            "detail": "premier mouvement rapide détecté"
+          },
+          {
+            "t": 0.5,
+            "event": "apex",
+            "detail": "sommet du tir (vy pixel s'inverse)"
+          },
+          {
+            "t": 1.0,
+            "event": "rim_cross_down",
+            "detail": "traversée descendante du plan de l'anneau dans son emprise"
+          }
+        ],
+        "tracking": {
+          "fp01_losses": 16,
+          "fp01_reacquired": 12,
+          "sampled_frames": 39,
+          "ball_frames_found": 35
+        },
+        "schema_version": "twinforge.dataset.v1",
+        "provenance": {
+          "kind": "synthetic",
+          "legacy": true,
+          "video_name": "test_shot.mp4",
+          "description": "Historical SAM run on a video rendered from the browser simulation; not a real filmed shot."
+        },
+        "shot_id": "test_shot.mp4",
+        "calibration": {
+          "mode": "legacy_assumed_scale",
+          "metric": true,
+          "dimensions_observed": 2,
+          "limitations": [
+            "Historical pixel-to-metre scale used assumed regulation dimensions; not calibrated real-world 3D."
+          ]
+        },
+        "geometry": {},
+        "observation_sha256": "c24a890f0fb20e9af3abeaf23904b0d4baa1779e82399e99da849fd5d62dd784"
+      }
+    ],
+    "validation": [],
+    "test": []
+  },
+  "scientist": {
+    "mode": "Muse L3 selection and calibration",
+    "journal": [
+      {
+        "at": "2026-11-04T01:27:18.956093+00:00",
+        "iteration": 1,
+        "hypothesis": {
+          "family": "gravity",
+          "next_test": "Fit gravity-only to free-flight t=0.167-1.0s, exclude t0 outlier and post-1.0 contacts, check residuals vs 5cm",
+          "reason": "No trials yet. Pre-contact arc 0.167-1.0s with apex 0.5s looks near-parabolic; establish gravity baseline before adding drag."
+        },
+        "parameters": {
+          "g": {
+            "value": 10.762588248685041,
+            "uncertainty": 1.0372733436811166,
+            "source": "training observations; local finite differences, contact/outlier neighbourhoods excluded",
+            "status": "estimated",
+            "units": "m/s^2"
+          },
+          "drag": {
+            "value": 0.0,
+            "uncertainty": 0.0,
+            "source": "zero by selected gravity-only family",
+            "status": "model_assumption",
+            "units": "1/m"
+          },
+          "wind": {
+            "value": [
+              -2.802545135891539,
+              0.0,
+              0.0
+            ],
+            "uncertainty": [
+              1.0372733436811166,
+              null,
+              null
+            ],
+            "source": "training observations; local finite differences, contact/outlier neighbourhoods excluded; vertical acceleration absorbed by g",
+            "status": "estimated",
+            "units": "m/s^2"
+          },
+          "restitution": {
+            "value": null,
+            "uncertainty": null,
+            "source": "no universal material coefficient; see per-surface measurements",
+            "status": "unobserved",
+            "units": "ratio"
+          },
+          "friction": {
+            "value": null,
+            "uncertainty": null,
+            "source": "no independent rolling/sliding observations fitted",
+            "status": "unobserved",
+            "units": "ratio"
+          },
+          "magnus": {
+            "value": null,
+            "uncertainty": null,
+            "source": "spin-induced lift not identifiable without measured spin",
+            "status": "unobserved",
+            "units": null
+          },
+          "spin": {
+            "value": null,
+            "uncertainty": null,
+            "source": "ball spin not reconstructed from a silhouette",
+            "status": "unobserved",
+            "units": "rad/s"
+          }
+        },
+        "validation": null,
+        "provider_receipt": {
+          "request_id": "721e3c09ed784e39a89c0a5eb6b685ed",
+          "model": "muse-spark-1.3",
+          "request_sha256": "4de03e043f391b75c51c9627d29a3abc0c5a3b8705fa543cd4ef9ceb5bc5044d"
+        }
+      }
+    ],
+    "stop_reason": "no_validation_single_preselected_family",
+    "test_revealed_after_selection": false,
+    "budget": {
+      "currency": "USD",
+      "limit_per_scene": 0.5,
+      "scenes": {
+        "hoop": 0.141778
+      },
+      "requests": 50,
+      "last_hash": "77d138ec3b366761ae7dca82010086d8f59cef94e4bda1860b49230a912d0c68"
+    }
+  },
+  "_public_evidence": {
+    "exported_at": "2026-11-04T01:31:47.151563+00:00",
+    "source_sha256": "0181ff833a8ed28734e1d6ad3d7a497310367a6c5f33d857046708a7a04eba79",
+    "source_kind": "synthetic",
+    "redaction": "Absolute project paths, source_path metadata, headers and credential/reasoning fields removed; observed data and measured model values preserved.",
+    "api_calls": [
+      {
+        "executed_at": "2026-11-04T01:27:18.951784+00:00",
+        "model": "muse-spark-1.3",
+        "status": "completed",
+        "usage": {
+          "prompt_tokens": 1294,
+          "completion_tokens": 672,
+          "total_tokens": 1966
+        },
+        "cost": {
+          "cost_usd": 0.0044735,
+          "cost_basis": "published_rates"
+        },
+        "receipt": {
+          "request_id": "721e3c09ed784e39a89c0a5eb6b685ed",
+          "model": "muse-spark-1.3",
+          "request_sha256": "4de03e043f391b75c51c9627d29a3abc0c5a3b8705fa543cd4ef9ceb5bc5044d"
+        }
+      }
+    ],
+    "limits": [
+      "Live L3 calibration of a known family, not free induction.",
+      "No independent real held-out shot is available."
+    ]
+  }
+}

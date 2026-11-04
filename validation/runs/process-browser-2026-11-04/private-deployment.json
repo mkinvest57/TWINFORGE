@@ -1,0 +1,23 @@
+{
+  "deployment": {
+    "id": "appgdep_6aeb3fe364a881919b85e5f4e15e5237",
+    "project_id": "appgprj_6aeb201bbbb88191b56d8dd45accb560",
+    "title": "Twinforge — scanner mobile",
+    "version_id": "appgprj_6aeb201bbbb88191b56d8dd45accb560~appgver_479812aa15f08191a153ad83d2d0a030",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://twinforge-mobile-camera.mkinvest57.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6aeb201bbbb88191b56d8dd45accb560",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-04T14:23:47.042105+00:00"
+  },
+  "source": {
+    "project_id": "appgprj_6aeb201bbbb88191b56d8dd45accb560",
+    "checkout_path": "/Users/brucewayne/Desktop/twinforge/output/mobile-site",
+    "commit_sha": "b8ef147298897027487c2debb43e689576b94441",
+    "archive": "/Users/brucewayne/Desktop/twinforge/output/twinforge-process-release-site.tar.gz"
+  }
+}

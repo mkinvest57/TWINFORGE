@@ -1,0 +1,1589 @@
+{
+  "schema_version": "twinforge.perception_ablation.v1",
+  "executed_utc": "2026-11-04T02:03:43.408349+00:00",
+  "source_kind": "synthetic",
+  "real_world_validation": false,
+  "comparison": "sam_vs_naive_same_frames",
+  "frame_ids": [
+    0,
+    2,
+    3,
+    5,
+    6,
+    8,
+    9,
+    11,
+    12,
+    14,
+    15,
+    17,
+    18,
+    20,
+    21,
+    23,
+    24,
+    26,
+    27,
+    29,
+    30,
+    32,
+    33,
+    35
+  ],
+  "source_video_sha256": "f43b5f6a54de8d91de76ea6056af54a74b77dc4d2d9c72f8fc35a3c4b8efeff1",
+  "ground_truth_sha256": "24361a3193c86483b203ae9b0b75d2d5582a87c7945717fcdcd3ed85eece60e2",
+  "calibration_sha256": "f1a7b87283261710a6f7abd48120d8ec14456a6168692b1bcab0a6ad148daf69",
+  "detector_configuration": {
+    "method": "largest_orange_HSV_contour",
+    "hsv_lower": [
+      5,
+      110,
+      60
+    ],
+    "hsv_upper": [
+      25,
+      255,
+      255
+    ],
+    "minimum_area_px": 12,
+    "maximum_image_area_fraction": 0.05,
+    "association_gate_px": 100,
+    "identity_policy": "nearest previous centroid within gate; reset after any missing frame",
+    "threshold_selection": "fixed generic orange-color rule; no tuning or sweep against evaluator truth"
+  },
+  "evaluation_threshold_px": 10.0,
+  "variants": {
+    "sam": {
+      "mean_centroid_error_px": 0.7841243928957973,
+      "max_centroid_error_px": 0.9339584341126631,
+      "detection_rate": 0.9583333333333334,
+      "detected": 23,
+      "sampled": 24,
+      "missing": 1,
+      "within_10px_count": 23,
+      "within_10px_recall": 0.9583333333333334,
+      "id_switches": 0,
+      "consecutive_same_id_rate": 0.9130434782608695,
+      "world_3d": {
+        "measured_frames": 23,
+        "mean_error_m": 0.12483366286100615,
+        "max_error_m": 0.17774249528289204
+      },
+      "per_frame": [
+        {
+          "frame": 0,
+          "t": 0.0,
+          "track_id": 1,
+          "centroid": [
+            142.88324873096445,
+            311.30287648054144
+          ],
+          "position_m": [
+            -1.3249516797636085,
+            0.7432976660986124,
+            0.8686232799724496
+          ],
+          "centroid_error_px": 0.835078730390819,
+          "position_error_m": 0.11052643491069493,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            143.47453267403236,
+            311.8925711342574
+          ],
+          "truth_position_m": [
+            -1.4,
+            0.7,
+            0.8
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 2,
+          "t": 0.16666666666666666,
+          "track_id": 1,
+          "centroid": [
+            159.3983870967742,
+            224.05967741935484
+          ],
+          "position_m": [
+            -1.1862591075559168,
+            1.534706092129492,
+            0.7342815934522875
+          ],
+          "centroid_error_px": 0.9113831577444125,
+          "position_error_m": 0.050360013951553054,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            159.97173504346225,
+            224.76812035442356
+          ],
+          "truth_position_m": [
+            -1.2184872600824608,
+            1.5177905657379882,
+            0.6994772523893572
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 3,
+          "t": 0.25,
+          "track_id": 1,
+          "centroid": [
+            168.88235294117646,
+            190.5686274509804
+          ],
+          "position_m": [
+            -1.0236075793050872,
+            1.8462635102572498,
+            0.7525105143651709
+          ],
+          "centroid_error_px": 0.7125174492220443,
+          "position_error_m": 0.1486427482877294,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            169.3012669000891,
+            191.14498863155558
+          ],
+          "truth_position_m": [
+            -1.1282690354249394,
+            1.8172468330007083,
+            0.6510281086862
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 5,
+          "t": 0.4166666666666667,
+          "track_id": 1,
+          "centroid": [
+            189.4034090909091,
+            145.52982954545453
+          ],
+          "position_m": [
+            -0.8257947635480214,
+            2.2263231559331804,
+            0.6845579371316921
+          ],
+          "centroid_error_px": 0.7971986608084164,
+          "position_error_m": 0.17774249528289204,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            189.92837640359676,
+            146.12977539751472
+          ],
+          "truth_position_m": [
+            -0.9478274563850053,
+            2.2048961455521785,
+            0.5571165791097545
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 6,
+          "t": 0.5,
+          "track_id": 1,
+          "centroid": [
+            200.53648068669528,
+            134.90128755364807
+          ],
+          "position_m": [
+            -0.7674389614849728,
+            2.3097151888536924,
+            0.6107902702337715
+          ],
+          "centroid_error_px": 0.7858667883785712,
+          "position_error_m": 0.13471182830240674,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            201.1110113250104,
+            135.43747889516123
+          ],
+          "truth_position_m": [
+            -0.8572207749515118,
+            2.295024385599578,
+            0.5114389594473223
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 8,
+          "t": 0.6666666666666666,
+          "track_id": 1,
+          "centroid": [
+            224.20258620689654,
+            138.1867816091954
+          ],
+          "position_m": [
+            -0.606506118175103,
+            2.283102065716034,
+            0.5054670132851107
+          ],
+          "centroid_error_px": 0.7646373539189772,
+          "position_error_m": 0.10823707268829987,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            224.81214980602311,
+            138.64841187426484
+          ],
+          "truth_position_m": [
+            -0.6746031873774214,
+            2.27044130589646,
+            0.42229395135411024
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 9,
+          "t": 0.75,
+          "track_id": 1,
+          "centroid": [
+            236.53,
+            151.99285714285713
+          ],
+          "position_m": [
+            -0.4798323367948001,
+            2.1778596701775874,
+            0.5048851702807808
+          ],
+          "centroid_error_px": 0.7906246215967024,
+          "position_error_m": 0.16406779360735751,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            237.10676752079237,
+            152.53362189691748
+          ],
+          "truth_position_m": [
+            -0.5826322933744783,
+            2.1563575276561475,
+            0.3788372917052553
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 11,
+          "t": 0.9166666666666666,
+          "track_id": 1,
+          "centroid": [
+            261.3692307692308,
+            202.9446153846154
+          ],
+          "position_m": [
+            -0.35497678106102315,
+            1.7468303468354176,
+            0.3555170541770436
+          ],
+          "centroid_error_px": 0.8082505960452367,
+          "position_error_m": 0.07720667085899317,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            261.9087242881224,
+            203.54645902633757
+          ],
+          "truth_position_m": [
+            -0.398105358345159,
+            1.7274666988448693,
+            0.29447735411984016
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 12,
+          "t": 1.0,
+          "track_id": null,
+          "centroid": null,
+          "position_m": null,
+          "centroid_error_px": null,
+          "position_error_m": null,
+          "quality": {
+            "missing": true,
+            "fp02_outlier": false,
+            "mask_decoded": false,
+            "contact": false
+          },
+          "truth_center_px": [
+            274.14035040292134,
+            239.6547960078185
+          ],
+          "truth_position_m": [
+            -0.3059308814161215,
+            1.4146412600366096,
+            0.25373302512198387
+          ],
+          "truth_occlusion": "partial_gray_foreground_panel"
+        },
+        {
+          "frame": 14,
+          "t": 1.1666666666666667,
+          "track_id": 1,
+          "centroid": [
+            297.11092985318106,
+            328.82871125611746
+          ],
+          "position_m": [
+            -0.052599885028879356,
+            0.6594888790596025,
+            0.28230110584223933
+          ],
+          "centroid_error_px": 0.9339584341126631,
+          "position_error_m": 0.1412717753228482,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            297.6428392123614,
+            329.5964031150469
+          ],
+          "truth_position_m": [
+            -0.12272812945291502,
+            0.5992280318152795,
+            0.17549111508169116
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 15,
+          "t": 1.25,
+          "track_id": 1,
+          "centroid": [
+            308.3272425249169,
+            379.343853820598
+          ],
+          "position_m": [
+            0.04308301135549808,
+            0.19541291903925506,
+            0.25434500345810207
+          ],
+          "centroid_error_px": 0.5943396383709815,
+          "position_error_m": 0.15761392679576275,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            308.6991768916716,
+            379.80743168090385
+          ],
+          "truth_position_m": [
+            -0.03207003425835783,
+            0.12,
+            0.13812512006063643
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 17,
+          "t": 1.4166666666666667,
+          "track_id": 1,
+          "centroid": [
+            323.3008,
+            316.936
+          ],
+          "position_m": [
+            0.16584005845737693,
+            0.7899248969693904,
+            0.20315063116088528
+          ],
+          "centroid_error_px": 0.8401737325685827,
+          "position_error_m": 0.1469679500293173,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            323.8429699747158,
+            317.57782834108104
+          ],
+          "truth_position_m": [
+            0.09703366717538436,
+            0.7311527750547469,
+            0.08734434229788991
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 18,
+          "t": 1.5,
+          "track_id": 1,
+          "centroid": [
+            331.30744849445324,
+            295.92868462757525
+          ],
+          "position_m": [
+            0.21448550459643956,
+            0.97373544466722,
+            0.15390571496358518
+          ],
+          "centroid_error_px": 0.7610210476792997,
+          "position_error_m": 0.1133475425895132,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            331.7003633804151,
+            296.5804291537513
+          ],
+          "truth_position_m": [
+            0.16192153031608902,
+            0.9307670484704287,
+            0.06314002239633966
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 20,
+          "t": 1.6666666666666667,
+          "track_id": 1,
+          "centroid": [
+            347.2963525835866,
+            275.73100303951367
+          ],
+          "position_m": [
+            0.3522150432436204,
+            1.1690514307205948,
+            0.12529526194966234
+          ],
+          "centroid_error_px": 0.9042851525847813,
+          "position_error_m": 0.1318526427952624,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            347.7428612932398,
+            276.51736275960945
+          ],
+          "truth_position_m": [
+            0.2930957627383259,
+            1.1230227191887228,
+            0.016799235297314037
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 21,
+          "t": 1.75,
+          "track_id": 1,
+          "centroid": [
+            355.41846153846154,
+            277.26
+          ],
+          "position_m": [
+            0.4009283662756977,
+            1.1505773261132188,
+            0.07428764228703777
+          ],
+          "centroid_error_px": 0.72184037844775,
+          "position_error_m": 0.09598087962834308,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            355.8129561246752,
+            277.8645060408347
+          ],
+          "truth_position_m": [
+            0.3596085443953887,
+            1.1166531048182797,
+            -0.0054252724980961235
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 23,
+          "t": 1.9166666666666667,
+          "track_id": 1,
+          "centroid": [
+            371.1342383107089,
+            302.8446455505279
+          ],
+          "position_m": [
+            0.5493657405267296,
+            0.9514566928666721,
+            0.06545786567501821
+          ],
+          "centroid_error_px": 0.808534871466565,
+          "position_error_m": 0.13602879571274795,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            371.6791242456277,
+            303.4419963321505
+          ],
+          "truth_position_m": [
+            0.4944372030313881,
+            0.9002920564175018,
+            -0.047983171911507805
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 24,
+          "t": 2.0,
+          "track_id": 1,
+          "centroid": [
+            378.9314024390244,
+            326.6006097560976
+          ],
+          "position_m": [
+            0.6109769052127998,
+            0.7431505030803418,
+            0.03352013031738199
+          ],
+          "centroid_error_px": 0.7499053324294845,
+          "position_error_m": 0.12405611896052805,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            379.3048298418113,
+            327.2509250507463
+          ],
+          "truth_position_m": [
+            0.5625025468789431,
+            0.6913436881870639,
+            -0.06824534106797144
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 26,
+          "t": 2.1666666666666665,
+          "track_id": 1,
+          "centroid": [
+            393.3782542113323,
+            386.9387442572741
+          ],
+          "position_m": [
+            0.7570319034142905,
+            0.22514455668033406,
+            0.02312878417241304
+          ],
+          "centroid_error_px": 0.7039693137095567,
+          "position_error_m": 0.1629437914777314,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            393.78626727540984,
+            387.5124150114413
+          ],
+          "truth_position_m": [
+            0.6990753698817449,
+            0.1456531948115451,
+            -0.10676672302577517
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 27,
+          "t": 2.25,
+          "track_id": 1,
+          "centroid": [
+            402.16490166414525,
+            364.9319213313162
+          ],
+          "position_m": [
+            0.8123242854053687,
+            0.4263722047098395,
+            -0.017020245353264407
+          ],
+          "centroid_error_px": 0.8152434706976645,
+          "position_error_m": 0.13467147205479452,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            402.6550636082903,
+            365.58335297395195
+          ],
+          "truth_position_m": [
+            0.7664989865490558,
+            0.3636125786970856,
+            -0.1270096844502712
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 29,
+          "t": 2.4166666666666665,
+          "track_id": 1,
+          "centroid": [
+            419.77185185185186,
+            342.20296296296294
+          ],
+          "position_m": [
+            0.9301172298598765,
+            0.6329197211227071,
+            -0.09127584041833359
+          ],
+          "centroid_error_px": 0.874674209812502,
+          "position_error_m": 0.08910021684359998,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            420.1868923511967,
+            342.9728956595116
+          ],
+          "truth_position_m": [
+            0.9025841611492488,
+            0.5919627555719404,
+            -0.16546010924822568
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 30,
+          "t": 2.5,
+          "track_id": 1,
+          "centroid": [
+            428.31524926686217,
+            342.0865102639296
+          ],
+          "position_m": [
+            0.9969283160302256,
+            0.6423445754581381,
+            -0.11202495265970214
+          ],
+          "centroid_error_px": 0.8057811243782204,
+          "position_error_m": 0.08543720732601275,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            428.7177250313116,
+            342.7845765067999
+          ],
+          "truth_position_m": [
+            0.971501640814627,
+            0.6035013382060692,
+            -0.1837480556525875
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 32,
+          "t": 2.6666666666666665,
+          "track_id": 1,
+          "centroid": [
+            444.4913793103448,
+            364.4597701149425
+          ],
+          "position_m": [
+            1.1463342908485123,
+            0.4794583839519406,
+            -0.11391543591385833
+          ],
+          "centroid_error_px": 0.7105891068650714,
+          "position_error_m": 0.12406458821961944,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            444.91833699084805,
+            365.02778773602006
+          ],
+          "truth_position_m": [
+            1.111170735246155,
+            0.42271156726749964,
+            -0.21848763682636715
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 33,
+          "t": 2.75,
+          "track_id": 1,
+          "centroid": [
+            451.8978723404255,
+            386.5049645390071
+          ],
+          "position_m": [
+            1.2217046094272364,
+            0.30404995570352966,
+            -0.10954707532933838
+          ],
+          "centroid_error_px": 0.8323474768003275,
+          "position_error_m": 0.15035356087905993,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            452.41519425543316,
+            387.15702309342436
+          ],
+          "truth_position_m": [
+            1.1816890912568592,
+            0.23128608145403895,
+            -0.2348880908780154
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 35,
+          "t": 2.9166666666666665,
+          "track_id": 1,
+          "centroid": [
+            470.2577030812325,
+            380.16946778711485
+          ],
+          "position_m": [
+            1.3488882960850657,
+            0.36698584212453866,
+            -0.17859932269132806
+          ],
+          "centroid_error_px": 0.5726403885747064,
+          "position_error_m": 0.10598871927807395,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            470.48479386530744,
+            380.6951547571029
+          ],
+          "truth_position_m": [
+            1.3222022806562221,
+            0.3163409714261127,
+            -0.2677988869653625
+          ],
+          "truth_occlusion": "none"
+        }
+      ]
+    },
+    "naive": {
+      "mean_centroid_error_px": 0.9533436231152154,
+      "max_centroid_error_px": 5.528793512984257,
+      "detection_rate": 1.0,
+      "detected": 24,
+      "sampled": 24,
+      "missing": 0,
+      "within_10px_count": 24,
+      "within_10px_recall": 1.0,
+      "id_switches": 0,
+      "consecutive_same_id_rate": 1.0,
+      "world_3d": {
+        "measured_frames": 24,
+        "mean_error_m": 0.20731608130216214,
+        "max_error_m": 1.8865631448524705
+      },
+      "per_frame": [
+        {
+          "frame": 0,
+          "t": 0.0,
+          "track_id": 1,
+          "centroid": [
+            142.97743055555554,
+            311.14930555555554
+          ],
+          "position_m": [
+            -1.5591284034202069,
+            0.6333598840351855,
+            0.672577858728018
+          ],
+          "centroid_error_px": 0.8941779670049922,
+          "position_error_m": 0.21447413810808286,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            143.47453267403236,
+            311.8925711342574
+          ],
+          "truth_position_m": [
+            -1.4,
+            0.7,
+            0.8
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 2,
+          "t": 0.16666666666666666,
+          "track_id": 1,
+          "centroid": [
+            159.48626817447496,
+            223.891760904685
+          ],
+          "position_m": [
+            -1.3500781327238363,
+            1.4881539536158095,
+            0.586585303112845
+          ],
+          "centroid_error_px": 1.00184028968215,
+          "position_error_m": 0.17589507881703167,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            159.97173504346225,
+            224.76812035442356
+          ],
+          "truth_position_m": [
+            -1.2184872600824608,
+            1.5177905657379882,
+            0.6994772523893572
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 3,
+          "t": 0.25,
+          "track_id": 1,
+          "centroid": [
+            168.88484848484848,
+            190.45
+          ],
+          "position_m": [
+            -1.1688351763929,
+            1.814865730865292,
+            0.6176574220377451
+          ],
+          "centroid_error_px": 0.8101934920394175,
+          "position_error_m": 0.05258216587210053,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            169.3012669000891,
+            191.14498863155558
+          ],
+          "truth_position_m": [
+            -1.1282690354249394,
+            1.8172468330007083,
+            0.6510281086862
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 5,
+          "t": 0.4166666666666667,
+          "track_id": 1,
+          "centroid": [
+            189.41921397379912,
+            145.39592430858806
+          ],
+          "position_m": [
+            -0.9829252988713453,
+            2.2069057000419283,
+            0.5276079446184796
+          ],
+          "centroid_error_px": 0.8931874386914967,
+          "position_error_m": 0.04589832639631717,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            189.92837640359676,
+            146.12977539751472
+          ],
+          "truth_position_m": [
+            -0.9478274563850053,
+            2.2048961455521785,
+            0.5571165791097545
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 6,
+          "t": 0.5,
+          "track_id": 1,
+          "centroid": [
+            200.52180028129396,
+            134.59634317862165
+          ],
+          "position_m": [
+            -0.857765757227182,
+            2.3023589241610525,
+            0.517382235113875
+          ],
+          "centroid_error_px": 1.026975631490818,
+          "position_error_m": 0.009455949832734163,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            201.1110113250104,
+            135.43747889516123
+          ],
+          "truth_position_m": [
+            -0.8572207749515118,
+            2.295024385599578,
+            0.5114389594473223
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 8,
+          "t": 0.6666666666666666,
+          "track_id": 1,
+          "centroid": [
+            224.42634560906515,
+            138.25637393767704
+          ],
+          "position_m": [
+            -0.6873559818192332,
+            2.272439971783984,
+            0.4126662421942493
+          ],
+          "centroid_error_px": 0.5500351098924475,
+          "position_error_m": 0.016103453513825115,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            224.81214980602311,
+            138.64841187426484
+          ],
+          "truth_position_m": [
+            -0.6746031873774214,
+            2.27044130589646,
+            0.42229395135411024
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 9,
+          "t": 0.75,
+          "track_id": 1,
+          "centroid": [
+            236.71079136690648,
+            152.0244604316547
+          ],
+          "position_m": [
+            -0.6087253444697707,
+            2.1568724302876037,
+            0.3534435342243052
+          ],
+          "centroid_error_px": 0.6450135751709583,
+          "position_error_m": 0.036413669949384796,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            237.10676752079237,
+            152.53362189691748
+          ],
+          "truth_position_m": [
+            -0.5826322933744783,
+            2.1563575276561475,
+            0.3788372917052553
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 11,
+          "t": 0.9166666666666666,
+          "track_id": 1,
+          "centroid": [
+            261.446875,
+            202.959375
+          ],
+          "position_m": [
+            -0.49105984187134055,
+            1.705415180076226,
+            0.1843033396127618
+          ],
+          "centroid_error_px": 0.7469755142706782,
+          "position_error_m": 0.14582564575625542,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            261.9087242881224,
+            203.54645902633757
+          ],
+          "truth_position_m": [
+            -0.398105358345159,
+            1.7274666988448693,
+            0.29447735411984016
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 12,
+          "t": 1.0,
+          "track_id": 1,
+          "centroid": [
+            268.63186813186815,
+            239.1813186813187
+          ],
+          "position_m": [
+            -1.4710245551669585,
+            0.9604765953332317,
+            -1.1588573925986978
+          ],
+          "centroid_error_px": 5.528793512984257,
+          "position_error_m": 1.8865631448524705,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            274.14035040292134,
+            239.6547960078185
+          ],
+          "truth_position_m": [
+            -0.3059308814161215,
+            1.4146412600366096,
+            0.25373302512198387
+          ],
+          "truth_occlusion": "partial_gray_foreground_panel"
+        },
+        {
+          "frame": 14,
+          "t": 1.1666666666666667,
+          "track_id": 1,
+          "centroid": [
+            296.9829642248722,
+            328.8143100511073
+          ],
+          "position_m": [
+            -0.2315814443683557,
+            0.532306910297081,
+            0.0322461162655685
+          ],
+          "centroid_error_px": 1.0232812710962012,
+          "position_error_m": 0.19195470913516183,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            297.6428392123614,
+            329.5964031150469
+          ],
+          "truth_position_m": [
+            -0.12272812945291502,
+            0.5992280318152795,
+            0.17549111508169116
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 15,
+          "t": 1.25,
+          "track_id": 1,
+          "centroid": [
+            308.2304964539007,
+            379.322695035461
+          ],
+          "position_m": [
+            -0.14493213684128126,
+            0.025514883271739563,
+            -0.01994719413888113
+          ],
+          "centroid_error_px": 0.6742632780927077,
+          "position_error_m": 0.21599108314692608,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            308.6991768916716,
+            379.80743168090385
+          ],
+          "truth_position_m": [
+            -0.03207003425835783,
+            0.12,
+            0.13812512006063643
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 17,
+          "t": 1.4166666666666667,
+          "track_id": 1,
+          "centroid": [
+            323.4144736842105,
+            317.0625
+          ],
+          "position_m": [
+            0.029147238399286568,
+            0.6889778928898265,
+            -0.011331749769762922
+          ],
+          "centroid_error_px": 0.6702032304444124,
+          "position_error_m": 0.12698133344449103,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            323.8429699747158,
+            317.57782834108104
+          ],
+          "truth_position_m": [
+            0.09703366717538436,
+            0.7311527750547469,
+            0.08734434229788991
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 18,
+          "t": 1.5,
+          "track_id": 1,
+          "centroid": [
+            331.2471728594507,
+            295.8465266558966
+          ],
+          "position_m": [
+            0.0813093716429405,
+            0.8858927655568318,
+            -0.058633049338218335
+          ],
+          "centroid_error_px": 0.8625511721917826,
+          "position_error_m": 0.15277664216962034,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            331.7003633804151,
+            296.5804291537513
+          ],
+          "truth_position_m": [
+            0.16192153031608902,
+            0.9307670484704287,
+            0.06314002239633966
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 20,
+          "t": 1.6666666666666667,
+          "track_id": 1,
+          "centroid": [
+            347.3333333333333,
+            275.9617224880383
+          ],
+          "position_m": [
+            0.20778377630370892,
+            1.0764090091856895,
+            -0.12172161691436045
+          ],
+          "centroid_error_px": 0.6902530415266994,
+          "position_error_m": 0.1692306103726974,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            347.7428612932398,
+            276.51736275960945
+          ],
+          "truth_position_m": [
+            0.2930957627383259,
+            1.1230227191887228,
+            0.016799235297314037
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 21,
+          "t": 1.75,
+          "track_id": 1,
+          "centroid": [
+            355.4292452830189,
+            277.1808176100629
+          ],
+          "position_m": [
+            0.2828379440706943,
+            1.0749901784064242,
+            -0.13388606494067723
+          ],
+          "centroid_error_px": 0.7840050257338179,
+          "position_error_m": 0.15534381129092192,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            355.8129561246752,
+            277.8645060408347
+          ],
+          "truth_position_m": [
+            0.3596085443953887,
+            1.1166531048182797,
+            -0.0054252724980961235
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 23,
+          "t": 1.9166666666666667,
+          "track_id": 1,
+          "centroid": [
+            371.29245283018867,
+            302.92767295597486
+          ],
+          "position_m": [
+            0.419709340895253,
+            0.8490367491788926,
+            -0.18147373823189294
+          ],
+          "centroid_error_px": 0.6434619792950685,
+          "position_error_m": 0.16134153586754582,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            371.6791242456277,
+            303.4419963321505
+          ],
+          "truth_position_m": [
+            0.4944372030313881,
+            0.9002920564175018,
+            -0.047983171911507805
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 24,
+          "t": 2.0,
+          "track_id": 1,
+          "centroid": [
+            379.0517799352751,
+            326.83656957928804
+          ],
+          "position_m": [
+            0.455374002748155,
+            0.6009343968062986,
+            -0.27222734523709935
+          ],
+          "centroid_error_px": 0.48551489361847544,
+          "position_error_m": 0.24750560187682313,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            379.3048298418113,
+            327.2509250507463
+          ],
+          "truth_position_m": [
+            0.5625025468789431,
+            0.6913436881870639,
+            -0.06824534106797144
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 26,
+          "t": 2.1666666666666665,
+          "track_id": 1,
+          "centroid": [
+            393.3387358184765,
+            387.26256077795784
+          ],
+          "position_m": [
+            0.6258423217000875,
+            0.0632782103980567,
+            -0.25090991092799175
+          ],
+          "centroid_error_px": 0.5125539414876182,
+          "position_error_m": 0.18145516256561325,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            393.78626727540984,
+            387.5124150114413
+          ],
+          "truth_position_m": [
+            0.6990753698817449,
+            0.1456531948115451,
+            -0.10676672302577517
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 27,
+          "t": 2.25,
+          "track_id": 1,
+          "centroid": [
+            402.1475667189953,
+            365.2087912087912
+          ],
+          "position_m": [
+            0.6962558425349901,
+            0.2909905348817512,
+            -0.26895384338508066
+          ],
+          "centroid_error_px": 0.6307532073358378,
+          "position_error_m": 0.17423032108277703,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            402.6550636082903,
+            365.58335297395195
+          ],
+          "truth_position_m": [
+            0.7664989865490558,
+            0.3636125786970856,
+            -0.1270096844502712
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 29,
+          "t": 2.4166666666666665,
+          "track_id": 1,
+          "centroid": [
+            419.62191358024694,
+            342.1975308641975
+          ],
+          "position_m": [
+            0.8243238960141634,
+            0.5172417930213817,
+            -0.3364102857576663
+          ],
+          "centroid_error_px": 0.95937040679624,
+          "position_error_m": 0.20231622325484616,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            420.1868923511967,
+            342.9728956595116
+          ],
+          "truth_position_m": [
+            0.9025841611492488,
+            0.5919627555719404,
+            -0.16546010924822568
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 30,
+          "t": 2.5,
+          "track_id": 1,
+          "centroid": [
+            428.18684603886396,
+            342.1718983557549
+          ],
+          "position_m": [
+            0.9280491878791657,
+            0.563971696696953,
+            -0.2777947845924684
+          ],
+          "centroid_error_px": 0.8106830585316186,
+          "position_error_m": 0.11088505511672507,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            428.7177250313116,
+            342.7845765067999
+          ],
+          "truth_position_m": [
+            0.971501640814627,
+            0.6035013382060692,
+            -0.1837480556525875
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 32,
+          "t": 2.6666666666666665,
+          "track_id": 1,
+          "centroid": [
+            444.5843023255814,
+            364.41279069767444
+          ],
+          "position_m": [
+            1.0923350642849987,
+            0.40651907142375876,
+            -0.2601823415346267
+          ],
+          "centroid_error_px": 0.6998574960473617,
+          "position_error_m": 0.04853275000363647,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            444.91833699084805,
+            365.02778773602006
+          ],
+          "truth_position_m": [
+            1.111170735246155,
+            0.42271156726749964,
+            -0.21848763682636715
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 33,
+          "t": 2.75,
+          "track_id": 1,
+          "centroid": [
+            451.9530102790015,
+            386.6798825256975
+          ],
+          "position_m": [
+            1.1355947710501941,
+            0.1709440999233811,
+            -0.3517616191130202
+          ],
+          "centroid_error_px": 0.6642869481187287,
+          "position_error_m": 0.13937454104842562,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            452.41519425543316,
+            387.15702309342436
+          ],
+          "truth_position_m": [
+            1.1816890912568592,
+            0.23128608145403895,
+            -0.2348880908780154
+          ],
+          "truth_occlusion": "none"
+        },
+        {
+          "frame": 35,
+          "t": 2.9166666666666665,
+          "track_id": 1,
+          "centroid": [
+            470.08522727272725,
+            380.15482954545456
+          ],
+          "position_m": [
+            1.2867176615879092,
+            0.2691576893183427,
+            -0.36585257743827526
+          ],
+          "centroid_error_px": 0.672015473221384,
+          "position_error_m": 0.11445499777747786,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            470.48479386530744,
+            380.6951547571029
+          ],
+          "truth_position_m": [
+            1.3222022806562221,
+            0.3163409714261127,
+            -0.2677988869653625
+          ],
+          "truth_occlusion": "none"
+        }
+      ]
+    }
+  },
+  "paired_detected_frames": {
+    "count": 23,
+    "sam_mean_px": 0.7841243928957973,
+    "naive_mean_px": 0.7544110192078658
+  },
+  "paired_3d_frames": {
+    "count": 23,
+    "sam_mean_m": 0.12483366286100615,
+    "naive_mean_m": 0.13430533940867045
+  },
+  "data_separation": {
+    "truth_loaded_after_predictions_frozen": true,
+    "sam_observation_frames_sha256": "59956d59d0f90cb59468f7b97c404528484c42ec2b7587ef4c98cde48340729e",
+    "naive_predictions_sha256": "c7b7fe7396b087d3692fa2b296cd46d63b99774efbdc6d9d12428c74b636a91d",
+    "new_api_requests": 0
+  },
+  "limitations": [
+    "One deterministic synthetic video, not real-world generalization.",
+    "HSV baseline is specialized to an orange ball; SAM is prompted by concept.",
+    "Largest-contour baseline resets its identity after a missing frame; ID statistics must be read with that declared policy.",
+    "3D uses the same declared camera/diameter reconstruction for both; reported errors include silhouette/depth estimation.",
+    "Missing detections are counted explicitly and never assigned zero error."
+  ],
+  "evidence": [
+    {
+      "path": "artifacts/synthetic-synthetic-1793757544998-20261104.mp4",
+      "sha256": "f43b5f6a54de8d91de76ea6056af54a74b77dc4d2d9c72f8fc35a3c4b8efeff1"
+    },
+    {
+      "path": "perception/compare_tracking.py",
+      "sha256": "2799e3fcb9188c18840de5c09657d7d96539ef5e75bb111c5d4dfc38d6ab891d"
+    },
+    {
+      "path": "validation/runs/synthetic-perception-comparison-naive-predictions.json",
+      "sha256": "c7b7fe7396b087d3692fa2b296cd46d63b99774efbdc6d9d12428c74b636a91d"
+    }
+  ]
+}

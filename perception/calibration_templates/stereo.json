@@ -1,0 +1,11 @@
+{
+  "example_only": true,
+  "mode": "stereo",
+  "measurement_note": "Replace P=K[R|t] for two synchronized, lens-undistorted cameras. Matrices must use the same world frame, metres, Y up.",
+  "projection_left": [[800, 0, 320, 0], [0, -800, 240, 0], [0, 0, 1, 0]],
+  "projection_right": [[800, 0, 320, -320], [0, -800, 240, 0], [0, 0, 1, 0]],
+  "secondary_time_offset_s": 0.0,
+  "sync_tolerance_s": 0.025,
+  "max_reprojection_error_px": 3.0,
+  "pixel_uncertainty": 1.0
+}

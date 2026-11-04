@@ -1,0 +1,27 @@
+{
+  "scope": "Encoded footage checks; sampled frames reviewed separately",
+  "video": "output/media/twinforge-demo.mp4",
+  "sha256": "df4076c09ee813fa1e74b003498152c09dbb2822148f7510f5dc80ec6d07c6b9",
+  "fps": 24.0,
+  "decoded_frames": 3598,
+  "reported_frames": 3598,
+  "duration_seconds": 149.91666666666666,
+  "blank_scene_frames": [],
+  "frames_without_bright_caption_pixels": [],
+  "sample_times_s": [
+    0.3,
+    9,
+    21,
+    36,
+    44,
+    54,
+    67,
+    81,
+    97,
+    109,
+    121,
+    136,
+    146
+  ],
+  "contact_sheet": "output/media/review-contact-sheet.jpg"
+}

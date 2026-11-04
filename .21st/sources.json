@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "project": "TWINFORGE — Process Lab",
+  "updated_at": "2026-11-04T14:07:00.065568+00:00",
+  "usage": "Interface patterns adapted to the existing native HTML/CSS/ES module project. No React runtime or copied sample metrics introduced.",
+  "sources": [
+    {
+      "id": 14941,
+      "component_id": 8609,
+      "name": "Dashboard Sidebar",
+      "registry_url": "https://21st.dev/r/arunjdass/dashboard-sidebar",
+      "author_handle": "arunjdass",
+      "preview_url": "https://cdn.21st.dev/arunjdass/dashboard-sidebar/default/preview.1781812420625.png",
+      "cache_path": ".21st/cache/14941.json",
+      "cache_sha256": "8fb4e53546128d6b957e8b88856f03d53696aadd780fe19e15cd6842c5c7ce46",
+      "component_code_sha256": "d979307a7be56b7870204b080bc667ecde83cf162c3cc9f8f6bdcf2f7d767772",
+      "inspection": {
+        "preview": "Visually inspected in browser during the project design pass",
+        "code": "Source code fetched and inspected before native adaptation"
+      },
+      "adapted_pattern": "Navigation latérale, cadre de travail et hiérarchie discrète du dashboard.",
+      "implementation_files": [
+        "index.html",
+        "web/process/lab.css"
+      ],
+      "react_component_installed": false,
+      "imported_demo_metrics": false
+    },
+    {
+      "id": 26923,
+      "component_id": 13555,
+      "name": "Segmented Tabs",
+      "registry_url": "https://21st.dev/r/micka_design/tabs-base",
+      "author_handle": "micka_design",
+      "preview_url": "https://cdn.21st.dev/micka_design/tabs-base/default/preview.1788999297881-b99c1e0b-ad79-4500-a71e-7768ca4020e7.png",
+      "cache_path": ".21st/cache/26923.json",
+      "cache_sha256": "2cd04b40f14add29aa160cc55233d7404240ab3864daa79f2f8a47fd42230f8a",
+      "component_code_sha256": "d087ec9d043d6b91f748e411555fbf5dfc0b70ff0b76fd0e151ed962ee860b82",
+      "inspection": {
+        "preview": "Visually inspected in browser during the project design pass",
+        "code": "Source code fetched and inspected before native adaptation"
+      },
+      "adapted_pattern": "Onglets segmentés Expérience / Meta / Preuves avec état sélectionné accessible.",
+      "implementation_files": [
+        "index.html",
+        "web/process/lab.css"
+      ],
+      "react_component_installed": false,
+      "imported_demo_metrics": false
+    },
+    {
+      "id": 15024,
+      "component_id": 8617,
+      "name": "Progress Metric Card",
+      "registry_url": "https://21st.dev/r/makviesainte/progress-metric-card",
+      "author_handle": "makviesainte",
+      "preview_url": "https://cdn.21st.dev/makviesainte/progress-metric-card/default/preview.1782062854405.png",
+      "cache_path": ".21st/cache/15024.json",
+      "cache_sha256": "5f095d607061e27161f4bec98f37e18eabba9d6d95dddeae9ba3f355959d02c0",
+      "component_code_sha256": "8ddb7afb9b402ba91fe2d34f4b601ec4206a17e39ea9457a4d86c63b612119bc",
+      "inspection": {
+        "preview": "Visually inspected in browser during the project design pass",
+        "code": "Source code fetched and inspected before native adaptation"
+      },
+      "adapted_pattern": "Cartes de métriques avec valeur réelle, contexte de comparaison et mini-graphe.",
+      "implementation_files": [
+        "index.html",
+        "web/process/lab.css"
+      ],
+      "react_component_installed": false,
+      "imported_demo_metrics": false
+    },
+    {
+      "id": 29866,
+      "component_id": 16126,
+      "name": "Vertical Descriptive Stepper",
+      "registry_url": "https://21st.dev/r/sean0205/c-stepper-13",
+      "author_handle": "sean0205",
+      "preview_url": "https://cdn.21st.dev/sean0205/c-stepper-13/default/preview.1790130403442-0b57faa8-e8cd-4124-9ed5-2d610daf4859.png",
+      "cache_path": ".21st/cache/29866.json",
+      "cache_sha256": "2365911d1329d754f1a3b269836a3fe1b3f69bfc8c578f56685f5c121600fd5e",
+      "component_code_sha256": "b700d9742b8bf5e722b8b5e14fe6dfa9e5a2276cf9543635eb5b41e4643f4171",
+      "inspection": {
+        "preview": "Visually inspected in browser during the project design pass",
+        "code": "Source code fetched and inspected before native adaptation"
+      },
+      "adapted_pattern": "Étapes verticales des hypothèses, validation et modèle gelé.",
+      "implementation_files": [
+        "index.html",
+        "web/process/lab.css"
+      ],
+      "react_component_installed": false,
+      "imported_demo_metrics": false
+    }
+  ],
+  "licensing_note": "This is provenance for inspected source patterns, not a declaration of upstream license terms. No project license is chosen here."
+}

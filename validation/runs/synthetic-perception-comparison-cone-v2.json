@@ -1,0 +1,2278 @@
+{
+  "schema_version": "twinforge.perception_ablation.v1",
+  "executed_utc": "2026-11-04T02:11:50.944111+00:00",
+  "source_kind": "synthetic",
+  "real_world_validation": false,
+  "comparison": "sam_vs_naive_same_frames",
+  "frame_ids": [
+    0,
+    2,
+    3,
+    5,
+    6,
+    8,
+    9,
+    11,
+    12,
+    14,
+    15,
+    17,
+    18,
+    20,
+    21,
+    23,
+    24,
+    26,
+    27,
+    29,
+    30,
+    32,
+    33,
+    35
+  ],
+  "source_video_sha256": "f43b5f6a54de8d91de76ea6056af54a74b77dc4d2d9c72f8fc35a3c4b8efeff1",
+  "ground_truth_sha256": "24361a3193c86483b203ae9b0b75d2d5582a87c7945717fcdcd3ed85eece60e2",
+  "calibration_sha256": "9a85b1777884b67f86b2cec8b90492cc4698646aad8f4a19a272a477686ab731",
+  "pixel_comparison_convention": {
+    "offset_added_to_raster_centroid_px": 0.5,
+    "truth": "declared camera image coordinates"
+  },
+  "reconstruction_method": "robust tangent cone on binary-mask half-pixel crossings; measured diameter and declared camera",
+  "detector_configuration": {
+    "method": "largest_orange_HSV_contour",
+    "hsv_lower": [
+      5,
+      110,
+      60
+    ],
+    "hsv_upper": [
+      25,
+      255,
+      255
+    ],
+    "minimum_area_px": 12,
+    "maximum_image_area_fraction": 0.05,
+    "association_gate_px": 100,
+    "identity_policy": "nearest previous centroid within gate; reset after any missing frame",
+    "threshold_selection": "fixed generic orange-color rule; no tuning or sweep against evaluator truth"
+  },
+  "evaluation_threshold_px": 10.0,
+  "variants": {
+    "sam": {
+      "mean_centroid_error_px": 0.16255275216809015,
+      "max_centroid_error_px": 0.29131290296913603,
+      "detection_rate": 0.9583333333333334,
+      "detected": 23,
+      "sampled": 24,
+      "missing": 1,
+      "within_10px_count": 23,
+      "within_10px_recall": 0.9583333333333334,
+      "id_switches": 0,
+      "consecutive_same_id_rate": 0.9130434782608695,
+      "world_3d": {
+        "measured_frames": 23,
+        "mean_error_m": 0.12597502543485434,
+        "max_error_m": 0.18151735550782083,
+        "mean_signed_range_bias_m": -0.12596333776645086,
+        "mean_reported_depth_std_m": 0.1877203137047044,
+        "uncertainty_interpretation": "conditional pixel/diameter error propagation, not an empirically calibrated confidence interval"
+      },
+      "per_frame": [
+        {
+          "frame": 0,
+          "t": 0.0,
+          "track_id": 1,
+          "centroid": [
+            142.88324873096445,
+            311.30287648054144
+          ],
+          "position_m": [
+            -1.3221397860776625,
+            0.7382210533265976,
+            0.864823397574229
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.16571010178071485,
+              0.08132076099266614,
+              0.13887552435427494
+            ],
+            "depth_std_m": 0.22317388177394734,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 110,
+            "angular_residual_rms_rad": 0.00040260572259602956,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.12797612733339989,
+          "position_error_m": 0.10828266113507426,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            143.47453267403236,
+            311.8925711342574
+          ],
+          "truth_position_m": [
+            -1.4,
+            0.7,
+            0.8
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.10827707825876143
+        },
+        {
+          "frame": 2,
+          "t": 0.16666666666666666,
+          "track_id": 1,
+          "centroid": [
+            159.3983870967742,
+            224.05967741935484
+          ],
+          "position_m": [
+            -1.1797179436470664,
+            1.5309148021353174,
+            0.7340658829292268
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.15332542025979584,
+              0.04821125961031138,
+              0.13785042101410408
+            ],
+            "depth_std_m": 0.20457084287761473,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 110,
+            "angular_residual_rms_rad": 0.00035835064599306515,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.22097144264228774,
+          "position_error_m": 0.053588047552642945,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            159.97173504346225,
+            224.76812035442356
+          ],
+          "truth_position_m": [
+            -1.2184872600824608,
+            1.5177905657379882,
+            0.6994772523893572
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.053560698577673094
+        },
+        {
+          "frame": 3,
+          "t": 0.25,
+          "track_id": 1,
+          "centroid": [
+            168.88235294117646,
+            190.5686274509804
+          ],
+          "position_m": [
+            -1.0179683421699988,
+            1.8421390316888668,
+            0.7516880303010427
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.14222193236959957,
+              0.03531683749442756,
+              0.1324832180454867
+            ],
+            "depth_std_m": 0.19077388389090558,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 114,
+            "angular_residual_rms_rad": 0.00036720536846178393,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.11138211686827443,
+          "position_error_m": 0.15138786050260947,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            169.3012669000891,
+            191.14498863155558
+          ],
+          "truth_position_m": [
+            -1.1282690354249394,
+            1.8172468330007083,
+            0.6510281086862
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.15138164930904985
+        },
+        {
+          "frame": 5,
+          "t": 0.4166666666666667,
+          "track_id": 1,
+          "centroid": [
+            189.4034090909091,
+            145.52982954545453
+          ],
+          "position_m": [
+            -0.8196911625362038,
+            2.222122919095532,
+            0.6845248944684164
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.13137602084300407,
+              0.02100449522858438,
+              0.13122791130132308
+            ],
+            "depth_std_m": 0.18050803845221097,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 120,
+            "angular_residual_rms_rad": 0.00042642308608444626,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.10301718326027232,
+          "position_error_m": 0.18151735550782083,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            189.92837640359676,
+            146.12977539751472
+          ],
+          "truth_position_m": [
+            -0.9478274563850053,
+            2.2048961455521785,
+            0.5571165791097545
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.18151658959522088
+        },
+        {
+          "frame": 6,
+          "t": 0.5,
+          "track_id": 1,
+          "centroid": [
+            200.53648068669528,
+            134.90128755364807
+          ],
+          "position_m": [
+            -0.7637705099725771,
+            2.3052634279044177,
+            0.608349973362456
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.12961334571487657,
+              0.018111977404560477,
+              0.13411274249210323
+            ],
+            "depth_std_m": 0.1810713186424678,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 118,
+            "angular_residual_rms_rad": 0.0003946947495541686,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.08285305817035325,
+          "position_error_m": 0.1350167938814007,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            201.1110113250104,
+            135.43747889516123
+          ],
+          "truth_position_m": [
+            -0.8572207749515118,
+            2.295024385599578,
+            0.5114389594473223
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.1350167239963609
+        },
+        {
+          "frame": 8,
+          "t": 0.6666666666666666,
+          "track_id": 1,
+          "centroid": [
+            224.20258620689654,
+            138.1867816091954
+          ],
+          "position_m": [
+            -0.5930997275786241,
+            2.2798194736252335,
+            0.5137463478648399
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.12253160070765495,
+              0.018841659350494408,
+              0.13624408484280964
+            ],
+            "depth_std_m": 0.17793122988813054,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 118,
+            "angular_residual_rms_rad": 0.00043677016915299994,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.11608797875839985,
+          "position_error_m": 0.12285888171670331,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            224.81214980602311,
+            138.64841187426484
+          ],
+          "truth_position_m": [
+            -0.6746031873774214,
+            2.27044130589646,
+            0.42229395135411024
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.1228562343603361
+        },
+        {
+          "frame": 9,
+          "t": 0.75,
+          "track_id": 1,
+          "centroid": [
+            236.53,
+            151.99285714285713
+          ],
+          "position_m": [
+            -0.47517635813022174,
+            2.1736635716684196,
+            0.5037396736261646
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.11702190552495166,
+              0.022278295636503704,
+              0.13498198230905664
+            ],
+            "depth_std_m": 0.1737596666608144,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 120,
+            "angular_residual_rms_rad": 0.0004010024647321066,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.08691960321013933,
+          "position_error_m": 0.16567100587637304,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            237.10676752079237,
+            152.53362189691748
+          ],
+          "truth_position_m": [
+            -0.5826322933744783,
+            2.1563575276561475,
+            0.3788372917052553
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.16567085279127092
+        },
+        {
+          "frame": 11,
+          "t": 0.9166666666666666,
+          "track_id": 1,
+          "centroid": [
+            261.3692307692308,
+            202.9446153846154
+          ],
+          "position_m": [
+            -0.3469425220907283,
+            1.7437391988547706,
+            0.3585639520784625
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.11466053061379407,
+              0.03777451103988852,
+              0.14254474774781217
+            ],
+            "depth_std_m": 0.18016890081682263,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 116,
+            "angular_residual_rms_rad": 0.0004005782288068359,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.10923307829443908,
+          "position_error_m": 0.08360336182283593,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            261.9087242881224,
+            203.54645902633757
+          ],
+          "truth_position_m": [
+            -0.398105358345159,
+            1.7274666988448693,
+            0.29447735411984016
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.08360037882519222
+        },
+        {
+          "frame": 12,
+          "t": 1.0,
+          "track_id": null,
+          "centroid": null,
+          "position_m": null,
+          "position_uncertainty": null,
+          "centroid_error_px": null,
+          "position_error_m": null,
+          "quality": {
+            "missing": true,
+            "fp02_outlier": false,
+            "mask_decoded": false,
+            "contact": false
+          },
+          "truth_center_px": [
+            274.14035040292134,
+            239.6547960078185
+          ],
+          "truth_position_m": [
+            -0.3059308814161215,
+            1.4146412600366096,
+            0.25373302512198387
+          ],
+          "truth_occlusion": "partial_gray_foreground_panel"
+        },
+        {
+          "frame": 14,
+          "t": 1.1666666666666667,
+          "track_id": 1,
+          "centroid": [
+            297.11092985318106,
+            328.82871125611746
+          ],
+          "position_m": [
+            -0.043288066326048646,
+            0.6592887845772251,
+            0.28805617549535345
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.10786419538856287,
+              0.07865056057159894,
+              0.15040302828381455
+            ],
+            "depth_std_m": 0.19379083479466627,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.00043559361251281593,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.2695869776906745,
+          "position_error_m": 0.15029607605610834,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            297.6428392123614,
+            329.5964031150469
+          ],
+          "truth_position_m": [
+            -0.12272812945291502,
+            0.5992280318152795,
+            0.17549111508169116
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.1502728747356965
+        },
+        {
+          "frame": 15,
+          "t": 1.25,
+          "track_id": 1,
+          "centroid": [
+            308.3272425249169,
+            379.343853820598
+          ],
+          "position_m": [
+            0.051819792023898525,
+            0.1958473931198954,
+            0.2590391133437082
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.1076824090129429,
+              0.09852077500362857,
+              0.1562178344287002
+            ],
+            "depth_std_m": 0.2061563215320568,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.0004552113794887683,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.13314420257160942,
+          "position_error_m": 0.16556123872576525,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            308.6991768916716,
+            379.80743168090385
+          ],
+          "truth_position_m": [
+            -0.03207003425835783,
+            0.12,
+            0.13812512006063643
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.16555527519876012
+        },
+        {
+          "frame": 17,
+          "t": 1.4166666666666667,
+          "track_id": 1,
+          "centroid": [
+            323.3008,
+            316.936
+          ],
+          "position_m": [
+            0.16471283190651365,
+            0.7823294246725268,
+            0.19325793655113266
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.0987645155765509,
+              0.0730415175817646,
+              0.15150888033092957
+            ],
+            "depth_std_m": 0.18793036807392005,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.0005777757511038677,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.14796481034806874,
+          "position_error_m": 0.1357100152989634,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            323.8429699747158,
+            317.57782834108104
+          ],
+          "truth_position_m": [
+            0.09703366717538436,
+            0.7311527750547469,
+            0.08734434229788991
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.13569994950653808
+        },
+        {
+          "frame": 18,
+          "t": 1.5,
+          "track_id": 1,
+          "centroid": [
+            331.30744849445324,
+            295.92868462757525
+          ],
+          "position_m": [
+            0.2156522052162626,
+            0.9679037591698609,
+            0.1479722655040181
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.09592918003940827,
+              0.06569829693941151,
+              0.15153758436064133
+            ],
+            "depth_std_m": 0.18403787558196033,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.0005213388835999975,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.18572458876775783,
+          "position_error_m": 0.10706367347275977,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            331.7003633804151,
+            296.5804291537513
+          ],
+          "truth_position_m": [
+            0.16192153031608902,
+            0.9307670484704287,
+            0.06314002239633966
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.10705076203508046
+        },
+        {
+          "frame": 20,
+          "t": 1.6666666666666667,
+          "track_id": 1,
+          "centroid": [
+            347.2963525835866,
+            275.73100303951367
+          ],
+          "position_m": [
+            0.35901653510553144,
+            1.1670719317778266,
+            0.12896136628148547
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.08877316007536433,
+              0.05729701436802841,
+              0.1487424843866295
+            ],
+            "depth_std_m": 0.17574583272944666,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 116,
+            "angular_residual_rms_rad": 0.00047895871604877244,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.29131290296913603,
+          "position_error_m": 0.13735437738244613,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            347.7428612932398,
+            276.51736275960945
+          ],
+          "truth_position_m": [
+            0.2930957627383259,
+            1.1230227191887228,
+            0.016799235297314037
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.13732923123036755
+        },
+        {
+          "frame": 21,
+          "t": 1.75,
+          "track_id": 1,
+          "centroid": [
+            355.41846153846154,
+            277.26
+          ],
+          "position_m": [
+            0.4034495426615745,
+            1.146067635325793,
+            0.07069986088043745
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.0878071073493009,
+              0.05840698886514099,
+              0.15175429560133874
+            ],
+            "depth_std_m": 0.1780662632315648,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.0004728701445213729,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.14850220506502107,
+          "position_error_m": 0.0926406156383509,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            355.8129561246752,
+            277.8645060408347
+          ],
+          "truth_position_m": [
+            0.3596085443953887,
+            1.1166531048182797,
+            -0.0054252724980961235
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.09263007087644315
+        },
+        {
+          "frame": 23,
+          "t": 1.9166666666666667,
+          "track_id": 1,
+          "centroid": [
+            371.1342383107089,
+            302.8446455505279
+          ],
+          "position_m": [
+            0.5543278850276576,
+            0.9486482664965641,
+            0.06629990120928575
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.08252587016330316,
+              0.06528187136383225,
+              0.151876747552596
+            ],
+            "depth_std_m": 0.17799345211619988,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 116,
+            "angular_residual_rms_rad": 0.00035860254513653646,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.10720038169738236,
+          "position_error_m": 0.13778910568372718,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            371.6791242456277,
+            303.4419963321505
+          ],
+          "truth_position_m": [
+            0.4944372030313881,
+            0.9002920564175018,
+            -0.047983171911507805
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.13778311328045323
+        },
+        {
+          "frame": 24,
+          "t": 2.0,
+          "track_id": 1,
+          "centroid": [
+            378.9314024390244,
+            326.6006097560976
+          ],
+          "position_m": [
+            0.6171233515960117,
+            0.7415755765185652,
+            0.036683662209010315
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.08147227040679832,
+              0.0735316036555718,
+              0.1550740280866235
+            ],
+            "depth_std_m": 0.1830660769354375,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 118,
+            "angular_residual_rms_rad": 0.0004340296845519736,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.19650778653935283,
+          "position_error_m": 0.12851758884288722,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            379.3048298418113,
+            327.2509250507463
+          ],
+          "truth_position_m": [
+            0.5625025468789431,
+            0.6913436881870639,
+            -0.06824534106797144
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.1285038729631438
+        },
+        {
+          "frame": 26,
+          "t": 2.1666666666666665,
+          "track_id": 1,
+          "centroid": [
+            393.3782542113323,
+            386.9387442572741
+          ],
+          "position_m": [
+            0.7605880343824496,
+            0.22160402269976798,
+            0.021529842471996297
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.07896653961458097,
+              0.09501931874349812,
+              0.1608444797102955
+            ],
+            "depth_std_m": 0.19558580919035104,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 116,
+            "angular_residual_rms_rad": 0.00037617431701351766,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.11785150147525296,
+          "position_error_m": 0.16128343023821967,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            393.78626727540984,
+            387.5124150114413
+          ],
+          "truth_position_m": [
+            0.6990753698817449,
+            0.1456531948115451,
+            -0.10676672302577517
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.16127742555829094
+        },
+        {
+          "frame": 27,
+          "t": 2.25,
+          "track_id": 1,
+          "centroid": [
+            402.16490166414525,
+            364.9319213313162
+          ],
+          "position_m": [
+            0.8155143669231717,
+            0.42233647304535626,
+            -0.019525642793203346
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.07584275331364218,
+              0.08640832318499192,
+              0.15999312375506888
+            ],
+            "depth_std_m": 0.1899594644603282,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 116,
+            "angular_residual_rms_rad": 0.000361573990699584,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.15175088050608918,
+          "position_error_m": 0.1319235479040206,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            402.6550636082903,
+            365.58335297395195
+          ],
+          "truth_position_m": [
+            0.7664989865490558,
+            0.3636125786970856,
+            -0.1270096844502712
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.13190960990545797
+        },
+        {
+          "frame": 29,
+          "t": 2.4166666666666665,
+          "track_id": 1,
+          "centroid": [
+            419.77185185185186,
+            342.20296296296294
+          ],
+          "position_m": [
+            0.9360494752852118,
+            0.6319087182554455,
+            -0.08683048016445927
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.07047636271784466,
+              0.0777279880360838,
+              0.16009580190288336
+            ],
+            "depth_std_m": 0.18456616391637698,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 118,
+            "angular_residual_rms_rad": 0.0004322427617846778,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.2829872389660092,
+          "position_error_m": 0.09433040737101343,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            420.1868923511967,
+            342.9728956595116
+          ],
+          "truth_position_m": [
+            0.9025841611492488,
+            0.5919627555719404,
+            -0.16546010924822568
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.0942943496907862
+        },
+        {
+          "frame": 30,
+          "t": 2.5,
+          "track_id": 1,
+          "centroid": [
+            428.31524926686217,
+            342.0865102639296
+          ],
+          "position_m": [
+            1.0027388136353501,
+            0.6413734898297769,
+            -0.10760290721154053
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.0679803701201324,
+              0.07724745055336672,
+              0.16053375988544905
+            ],
+            "depth_std_m": 0.18387859519550004,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 118,
+            "angular_residual_rms_rad": 0.0004021973693964608,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.22077412231618845,
+          "position_error_m": 0.0905988105084714,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            428.7177250313116,
+            342.7845765067999
+          ],
+          "truth_position_m": [
+            0.971501640814627,
+            0.6035013382060692,
+            -0.1837480556525875
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.090574953814345
+        },
+        {
+          "frame": 32,
+          "t": 2.6666666666666665,
+          "track_id": 1,
+          "centroid": [
+            444.4913793103448,
+            364.4597701149425
+          ],
+          "position_m": [
+            1.1466033225070817,
+            0.47184780228850487,
+            -0.12354818883957819
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.06331199365375784,
+              0.08383096036623057,
+              0.16220734071925774
+            ],
+            "depth_std_m": 0.18641649414572348,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 120,
+            "angular_residual_rms_rad": 0.0004103252214701959,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.09980770117841502,
+          "position_error_m": 0.11262032061790116,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            444.91833699084805,
+            365.02778773602006
+          ],
+          "truth_position_m": [
+            1.111170735246155,
+            0.42271156726749964,
+            -0.21848763682636715
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.11261408066877365
+        },
+        {
+          "frame": 33,
+          "t": 2.75,
+          "track_id": 1,
+          "centroid": [
+            451.8978723404255,
+            386.5049645390071
+          ],
+          "position_m": [
+            1.2252008678035773,
+            0.3008061803690496,
+            -0.11078920904594458
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.060976023170052865,
+              0.09063581165077815,
+              0.16300829860180457
+            ],
+            "depth_std_m": 0.18932311156384132,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 120,
+            "angular_residual_rms_rad": 0.0004289318635096371,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.15304199655974177,
+          "position_error_m": 0.14875097083170474,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            452.41519425543316,
+            387.15702309342436
+          ],
+          "truth_position_m": [
+            1.1816890912568592,
+            0.23128608145403895,
+            -0.2348880908780154
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.14873710807359508
+        },
+        {
+          "frame": 35,
+          "t": 2.9166666666666665,
+          "track_id": 1,
+          "centroid": [
+            470.2577030812325,
+            380.16946778711485
+          ],
+          "position_m": [
+            1.3511780879159134,
+            0.36229451082475084,
+            -0.1825833666245691
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.05640930652996631,
+              0.08836979036275461,
+              0.16549050278479735
+            ],
+            "depth_std_m": 0.1890927887379138,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 120,
+            "angular_residual_rms_rad": 0.00039019835244572757,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.2741154146778082,
+          "position_error_m": 0.10105943843385012,
+          "quality": {
+            "missing": false,
+            "fp02_outlier": false,
+            "mask_decoded": true,
+            "contact": false
+          },
+          "truth_center_px": [
+            470.48479386530744,
+            380.6951547571029
+          ],
+          "truth_position_m": [
+            1.3222022806562221,
+            0.3163409714261127,
+            -0.2677988869653625
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.10104388537677256
+        }
+      ]
+    },
+    "naive": {
+      "mean_centroid_error_px": 0.3870514671603497,
+      "max_centroid_error_px": 5.008552496646489,
+      "detection_rate": 1.0,
+      "detected": 24,
+      "sampled": 24,
+      "missing": 0,
+      "within_10px_count": 24,
+      "within_10px_recall": 1.0,
+      "id_switches": 0,
+      "consecutive_same_id_rate": 1.0,
+      "world_3d": {
+        "measured_frames": 24,
+        "mean_error_m": 0.09624301282415418,
+        "max_error_m": 0.8149993296864948,
+        "mean_signed_range_bias_m": -0.024510402844154473,
+        "mean_reported_depth_std_m": 0.22930691769100914,
+        "uncertainty_interpretation": "conditional pixel/diameter error propagation, not an empirically calibrated confidence interval"
+      },
+      "per_frame": [
+        {
+          "frame": 0,
+          "t": 0.0,
+          "track_id": 1,
+          "centroid": [
+            142.97743055555554,
+            311.14930555555554
+          ],
+          "position_m": [
+            -1.3791171635053727,
+            0.7122112138124632,
+            0.8162333227505929
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.17026645835237542,
+              0.0834794571638921,
+              0.1427272797875573
+            ],
+            "depth_std_m": 0.2294101374717536,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 114,
+            "angular_residual_rms_rad": 0.0007525988452102998,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.24328283847917243,
+          "position_error_m": 0.02913292588052121,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            143.47453267403236,
+            311.8925711342574
+          ],
+          "truth_position_m": [
+            -1.4,
+            0.7,
+            0.8
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.029020589332725777
+        },
+        {
+          "frame": 2,
+          "t": 0.16666666666666666,
+          "track_id": 1,
+          "centroid": [
+            159.48626817447496,
+            223.891760904685
+          ],
+          "position_m": [
+            -1.1826210647032194,
+            1.5312526244983546,
+            0.7300840970009155
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.1535640946611587,
+              0.0482394932819673,
+              0.13811634844197548
+            ],
+            "depth_std_m": 0.20491783485818948,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.0007136427645337398,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.37663994385162297,
+          "position_error_m": 0.049034578963477904,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            159.97173504346225,
+            224.76812035442356
+          ],
+          "truth_position_m": [
+            -1.2184872600824608,
+            1.5177905657379882,
+            0.6994772523893572
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.04892469489601492
+        },
+        {
+          "frame": 3,
+          "t": 0.25,
+          "track_id": 1,
+          "centroid": [
+            168.88484848484848,
+            190.45
+          ],
+          "position_m": [
+            -1.0281711659199022,
+            1.8407391850620543,
+            0.7418739847936755
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.15844687844636077,
+              0.03930034532865722,
+              0.14760958809768826
+            ],
+            "depth_std_m": 0.21255813512901092,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 126,
+            "angular_residual_rms_rad": 0.0009094601168971355,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.21214723129659085,
+          "position_error_m": 0.13720221314015482,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            169.3012669000891,
+            191.14498863155558
+          ],
+          "truth_position_m": [
+            -1.1282690354249394,
+            1.8172468330007083,
+            0.6510281086862
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.13718748639612777
+        },
+        {
+          "frame": 5,
+          "t": 0.4166666666666667,
+          "track_id": 1,
+          "centroid": [
+            189.41921397379912,
+            145.39592430858806
+          ],
+          "position_m": [
+            -0.8514040206101319,
+            2.2188008500169367,
+            0.6527808732158147
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.13365063635409857,
+              0.02130619336167874,
+              0.13350233377270562
+            ],
+            "depth_std_m": 0.18368339773791806,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 116,
+            "angular_residual_rms_rad": 0.0008185598744656336,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.23403051491628052,
+          "position_error_m": 0.13653745617849405,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            189.92837640359676,
+            146.12977539751472
+          ],
+          "truth_position_m": [
+            -0.9478274563850053,
+            2.2048961455521785,
+            0.5571165791097545
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.13653126297777973
+        },
+        {
+          "frame": 6,
+          "t": 0.5,
+          "track_id": 1,
+          "centroid": [
+            200.52180028129396,
+            134.59634317862165
+          ],
+          "position_m": [
+            -0.7333568257765339,
+            2.3109355730162564,
+            0.639788464128511
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.12744245647307076,
+              0.01775902708358414,
+              0.1318675728021901
+            ],
+            "depth_std_m": 0.17798413370549973,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 120,
+            "angular_residual_rms_rad": 0.0007119043651726039,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.35260769620067806,
+          "position_error_m": 0.179078304498721,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            201.1110113250104,
+            135.43747889516123
+          ],
+          "truth_position_m": [
+            -0.8572207749515118,
+            2.295024385599578,
+            0.5114389594473223
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.17906448121641194
+        },
+        {
+          "frame": 8,
+          "t": 0.6666666666666666,
+          "track_id": 1,
+          "centroid": [
+            224.42634560906515,
+            138.25637393767704
+          ],
+          "position_m": [
+            -0.565083000773746,
+            2.28238316453159,
+            0.5424511281980431
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.1205972693748923,
+              0.018604596700812565,
+              0.13417796576785032
+            ],
+            "depth_std_m": 0.17514080348380343,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 124,
+            "angular_residual_rms_rad": 0.0007226164619726301,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.15715116470658458,
+          "position_error_m": 0.1630184848674207,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            224.81214980602311,
+            138.64841187426484
+          ],
+          "truth_position_m": [
+            -0.6746031873774214,
+            2.27044130589646,
+            0.42229395135411024
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.16300564718548483
+        },
+        {
+          "frame": 9,
+          "t": 0.75,
+          "track_id": 1,
+          "centroid": [
+            236.71079136690648,
+            152.0244604316547
+          ],
+          "position_m": [
+            -0.4840742155395308,
+            2.171503032463984,
+            0.49118723054481706
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.11768855403222635,
+              0.022421335664917198,
+              0.13583008225026041
+            ],
+            "depth_std_m": 0.17482722244296917,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 120,
+            "angular_residual_rms_rad": 0.0007993922817056351,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.10442649570933582,
+          "position_error_m": 0.15021847349662767,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            237.10676752079237,
+            152.53362189691748
+          ],
+          "truth_position_m": [
+            -0.5826322933744783,
+            2.1563575276561475,
+            0.3788372917052553
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.1502121987565026
+        },
+        {
+          "frame": 11,
+          "t": 0.9166666666666666,
+          "track_id": 1,
+          "centroid": [
+            261.446875,
+            202.959375
+          ],
+          "position_m": [
+            -0.36604094326124814,
+            1.7380265280717326,
+            0.3336195058118592
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.11604842119220651,
+              0.03821128126833989,
+              0.14431259296659668
+            ],
+            "depth_std_m": 0.18241735258192673,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.0007965865891616232,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.09507420501865296,
+          "position_error_m": 0.05168892286607328,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            261.9087242881224,
+            203.54645902633757
+          ],
+          "truth_position_m": [
+            -0.398105358345159,
+            1.7274666988448693,
+            0.29447735411984016
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.0516762922260634
+        },
+        {
+          "frame": 12,
+          "t": 1.0,
+          "track_id": 1,
+          "centroid": [
+            268.63186813186815,
+            239.1813186813187
+          ],
+          "position_m": [
+            -0.8093279649444263,
+            1.2154761103003646,
+            -0.35548657963082775
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.6317898510128945,
+              0.271826545847182,
+              0.8090197034296241
+            ],
+            "depth_std_m": 1.0291523704531917,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 88,
+            "angular_residual_rms_rad": 0.0033470715325770537,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 5.008552496646489,
+          "position_error_m": 0.8149993296864948,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            274.14035040292134,
+            239.6547960078185
+          ],
+          "truth_position_m": [
+            -0.3059308814161215,
+            1.4146412600366096,
+            0.25373302512198387
+          ],
+          "truth_occlusion": "partial_gray_foreground_panel",
+          "range_bias_m": 0.8145717967633006
+        },
+        {
+          "frame": 14,
+          "t": 1.1666666666666667,
+          "track_id": 1,
+          "centroid": [
+            296.9829642248722,
+            328.8143100511073
+          ],
+          "position_m": [
+            -0.10498040658131824,
+            0.6160740004661358,
+            0.20298706045128334
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.1124607393832953,
+              0.08193641162432198,
+              0.1567769155384196
+            ],
+            "depth_std_m": 0.20215248225606955,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 110,
+            "angular_residual_rms_rad": 0.0007810394244997437,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.32424760345680853,
+          "position_error_m": 0.03680754458912235,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            297.6428392123614,
+            329.5964031150469
+          ],
+          "truth_position_m": [
+            -0.12272812945291502,
+            0.5992280318152795,
+            0.17549111508169116
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.03665595665525778
+        },
+        {
+          "frame": 15,
+          "t": 1.25,
+          "track_id": 1,
+          "centroid": [
+            308.2304964539007,
+            379.322695035461
+          ],
+          "position_m": [
+            -0.03983318245434386,
+            0.11348635324494705,
+            0.1264728165594855
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.12371521653058115,
+              0.11312705333345101,
+              0.17946050162473265
+            ],
+            "depth_std_m": 0.237081657867318,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 108,
+            "angular_residual_rms_rad": 0.0008844726119841275,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.0348408520354957,
+          "position_error_m": 0.015442481693218456,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            308.6991768916716,
+            379.80743168090385
+          ],
+          "truth_position_m": [
+            -0.03207003425835783,
+            0.12,
+            0.13812512006063643
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": 0.01543066503057755
+        },
+        {
+          "frame": 17,
+          "t": 1.4166666666666667,
+          "track_id": 1,
+          "centroid": [
+            323.4144736842105,
+            317.0625
+          ],
+          "position_m": [
+            0.12802146455583285,
+            0.7540065229940678,
+            0.13453262735852167
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.10150831248353447,
+              0.07511387195985157,
+              0.1558066783080186
+            ],
+            "depth_std_m": 0.19333261154698,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.0008036562960324002,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.0731282333425486,
+          "position_error_m": 0.06090378993403603,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            323.8429699747158,
+            317.57782834108104
+          ],
+          "truth_position_m": [
+            0.09703366717538436,
+            0.7311527750547469,
+            0.08734434229788991
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.060897795247369935
+        },
+        {
+          "frame": 18,
+          "t": 1.5,
+          "track_id": 1,
+          "centroid": [
+            331.2471728594507,
+            295.8465266558966
+          ],
+          "position_m": [
+            0.18876767987429321,
+            0.9508501309559994,
+            0.10573726208841716
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.09787085161357627,
+              0.06697938513985409,
+              0.15459643629118383
+            ],
+            "depth_std_m": 0.1878098023256986,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.0007823182512272525,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.23854036520107685,
+          "position_error_m": 0.05420858582925776,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            331.7003633804151,
+            296.5804291537513
+          ],
+          "truth_position_m": [
+            0.16192153031608902,
+            0.9307670484704287,
+            0.06314002239633966
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.0541665240020377
+        },
+        {
+          "frame": 20,
+          "t": 1.6666666666666667,
+          "track_id": 1,
+          "centroid": [
+            347.3333333333333,
+            275.9617224880383
+          ],
+          "position_m": [
+            0.3005591550656468,
+            1.1278728488741787,
+            0.028445452365542856
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.09299784963440878,
+              0.060075890608917035,
+              0.15591232517632989
+            ],
+            "depth_std_m": 0.18435670611768037,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.0007436970171329309,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.10621219261081694,
+          "position_error_m": 0.014658115670083856,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            347.7428612932398,
+            276.51736275960945
+          ],
+          "truth_position_m": [
+            0.2930957627383259,
+            1.1230227191887228,
+            0.016799235297314037
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.014640910701497312
+        },
+        {
+          "frame": 21,
+          "t": 1.75,
+          "track_id": 1,
+          "centroid": [
+            355.4292452830189,
+            277.1808176100629
+          ],
+          "position_m": [
+            0.3758238064328312,
+            1.1288158837168947,
+            0.021886395367040734
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.08979221303052251,
+              0.059687745412039084,
+              0.15522283102152482
+            ],
+            "depth_std_m": 0.18218567931843144,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.0006999564359963914,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.21740425006814887,
+          "position_error_m": 0.03401169085851314,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            355.8129561246752,
+            277.8645060408347
+          ],
+          "truth_position_m": [
+            0.3596085443953887,
+            1.1166531048182797,
+            -0.0054252724980961235
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.03395174789662203
+        },
+        {
+          "frame": 23,
+          "t": 1.9166666666666667,
+          "track_id": 1,
+          "centroid": [
+            371.29245283018867,
+            302.92767295597486
+          ],
+          "position_m": [
+            0.5118957644043944,
+            0.9143061734064362,
+            -0.01652145369286906
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.08715265108384337,
+              0.0689699588373808,
+              0.1605629255591447
+            ],
+            "depth_std_m": 0.18825009939525272,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.0008351428200623701,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.11423015006408287,
+          "position_error_m": 0.03861394247501275,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            371.6791242456277,
+            303.4419963321505
+          ],
+          "truth_position_m": [
+            0.4944372030313881,
+            0.9002920564175018,
+            -0.047983171911507805
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.038599330213465954
+        },
+        {
+          "frame": 24,
+          "t": 2.0,
+          "track_id": 1,
+          "centroid": [
+            379.0517799352751,
+            326.83656957928804
+          ],
+          "position_m": [
+            0.554987034479101,
+            0.6829869712144969,
+            -0.08691397365275133
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.08610070951545656,
+              0.07780024622989073,
+              0.1640777955352123
+            ],
+            "depth_std_m": 0.1938520854275553,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.0007743244484669678,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.26137967390544736,
+          "position_error_m": 0.02179072022162817,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            379.3048298418113,
+            327.2509250507463
+          ],
+          "truth_position_m": [
+            0.5625025468789431,
+            0.6913436881870639,
+            -0.06824534106797144
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": 0.021714274028004077
+        },
+        {
+          "frame": 26,
+          "t": 2.1666666666666665,
+          "track_id": 1,
+          "centroid": [
+            393.3387358184765,
+            387.26256077795784
+          ],
+          "position_m": [
+            0.7014844811378658,
+            0.14716703115614127,
+            -0.10163722814691667
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.08348843129605144,
+              0.10058534277529083,
+              0.17015969604967332
+            ],
+            "depth_std_m": 0.20713080011093396,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 114,
+            "angular_residual_rms_rad": 0.0007533097463584588,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.25558922613773055,
+          "position_error_m": 0.005865768085666542,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            393.78626727540984,
+            387.5124150114413
+          ],
+          "truth_position_m": [
+            0.6990753698817449,
+            0.1456531948115451,
+            -0.10676672302577517
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.005722847256201646
+        },
+        {
+          "frame": 27,
+          "t": 2.25,
+          "track_id": 1,
+          "centroid": [
+            402.1475667189953,
+            365.2087912087912
+          ],
+          "position_m": [
+            0.7834895032209239,
+            0.382970171737369,
+            -0.0893880149886126
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.07825837070383931,
+              0.08926595610944131,
+              0.16517341809789915
+            ],
+            "depth_std_m": 0.1962335339875352,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 112,
+            "angular_residual_rms_rad": 0.000817129966228305,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.12566206312441716,
+          "position_error_m": 0.045593684630358115,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            402.6550636082903,
+            365.58335297395195
+          ],
+          "truth_position_m": [
+            0.7664989865490558,
+            0.3636125786970856,
+            -0.1270096844502712
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.04559117762922682
+        },
+        {
+          "frame": 29,
+          "t": 2.4166666666666665,
+          "track_id": 1,
+          "centroid": [
+            419.62191358024694,
+            342.1975308641975
+          ],
+          "position_m": [
+            0.8981881687215931,
+            0.5910913652192957,
+            -0.17287863769171707
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.07323861541887085,
+              0.08074042736986364,
+              0.16637216151408274
+            ],
+            "depth_std_m": 0.19192074909411913,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 114,
+            "angular_residual_rms_rad": 0.0007055034066949411,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.2829275723087349,
+          "position_error_m": 0.008667100716939827,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            420.1868923511967,
+            342.9728956595116
+          ],
+          "truth_position_m": [
+            0.9025841611492488,
+            0.5919627555719404,
+            -0.16546010924822568
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": 0.008186947241783038
+        },
+        {
+          "frame": 30,
+          "t": 2.5,
+          "track_id": 1,
+          "centroid": [
+            428.18684603886396,
+            342.1718983557549
+          ],
+          "position_m": [
+            0.9857751241111905,
+            0.6220574949921809,
+            -0.14673888218518272
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.07160894664121513,
+              0.08137215136995708,
+              0.16906838945743102
+            ],
+            "depth_std_m": 0.19372769620279517,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 118,
+            "angular_residual_rms_rad": 0.0008492004635034865,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.1168326919038859,
+          "position_error_m": 0.04379203353155108,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            428.7177250313116,
+            342.7845765067999
+          ],
+          "truth_position_m": [
+            0.971501640814627,
+            0.6035013382060692,
+            -0.1837480556525875
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.04376679409251949
+        },
+        {
+          "frame": 32,
+          "t": 2.6666666666666665,
+          "track_id": 1,
+          "centroid": [
+            444.5843023255814,
+            364.41279069767444
+          ],
+          "position_m": [
+            1.1402024048753843,
+            0.46283512172835195,
+            -0.1427387021638742
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.06380992898606216,
+              0.08450953819152886,
+              0.16358314967073953
+            ],
+            "depth_std_m": 0.18800034637874596,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 120,
+            "angular_residual_rms_rad": 0.0007956460301229975,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.20191288012759245,
+          "position_error_m": 0.09050214675098221,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            444.91833699084805,
+            365.02778773602006
+          ],
+          "truth_position_m": [
+            1.111170735246155,
+            0.42271156726749964,
+            -0.21848763682636715
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.09048423957422003
+        },
+        {
+          "frame": 33,
+          "t": 2.75,
+          "track_id": 1,
+          "centroid": [
+            451.9530102790015,
+            386.6798825256975
+          ],
+          "position_m": [
+            1.19811409560712,
+            0.2571926723406994,
+            -0.18799029881952833
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.06304239628755108,
+              0.09383001902466659,
+              0.16870779000577882
+            ],
+            "depth_std_m": 0.19605390846787568,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 120,
+            "angular_residual_rms_rad": 0.0007421512879845194,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.04418829349919408,
+          "position_error_m": 0.056038693054317176,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            452.41519425543316,
+            387.15702309342436
+          ],
+          "truth_position_m": [
+            1.1816890912568592,
+            0.23128608145403895,
+            -0.2348880908780154
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.056036601376420414
+        },
+        {
+          "frame": 35,
+          "t": 2.9166666666666665,
+          "track_id": 1,
+          "centroid": [
+            470.08522727272725,
+            380.15482954545456
+          ],
+          "position_m": [
+            1.3420160948507611,
+            0.34934905932973326,
+            -0.20692585809124076
+          ],
+          "position_uncertainty": {
+            "position_std_m": [
+              0.05705205095348854,
+              0.08932581969917013,
+              0.16728447087344528
+            ],
+            "depth_std_m": 0.19118647822296533,
+            "method": "robust sphere tangent cone + measured diameter",
+            "boundary_points": 120,
+            "angular_residual_rms_rad": 0.0007722819928181147,
+            "pixel_center_offset_px": 0.5,
+            "fit": "unit-ray tangent cone, six Huber iterations"
+          },
+          "centroid_error_px": 0.10822657723700571,
+          "position_error_m": 0.07202532016102751,
+          "quality": {
+            "missing": false
+          },
+          "truth_center_px": [
+            470.48479386530744,
+            380.6951547571029
+          ],
+          "truth_position_m": [
+            1.3222022806562221,
+            0.3163409714261127,
+            -0.2677988869653625
+          ],
+          "truth_occlusion": "none",
+          "range_bias_m": -0.07201677369142256
+        }
+      ]
+    }
+  },
+  "reconstruction_revision": {
+    "baseline_report": {
+      "path": "validation/runs/synthetic-perception-comparison.json",
+      "sha256": "550e74acf444f54fd0675649454df1b55faf85e07a6b34fb1b3c86d3cf68028b"
+    },
+    "same_sam_centroids_ids_missing_frames": true,
+    "same_video_and_sampled_frame_ids": true,
+    "changes": [
+      "Declared WebGL image-edge convention adds 0.5 to raster index-centre coordinates.",
+      "Sphere centre/range are fitted jointly from the unit-ray tangent cone, including off-axis perspective.",
+      "Both masks use half-pixel binary boundary crossings; foreground contour centres shrink the naive radius."
+    ],
+    "sam_3d_mean_error_m_before": 0.12483366286100615,
+    "sam_3d_mean_error_m_after": 0.12597502543485434,
+    "naive_3d_mean_error_m_before": 0.20731608130216214,
+    "naive_3d_mean_error_m_after": 0.09624301282415418,
+    "interpretation": "SAM depth does not improve on this clip; its small mean regression is preserved. Centroid error changes through coordinate registration, not improved segmentation. No correction was fitted to evaluator truth."
+  },
+  "paired_detected_frames": {
+    "count": 23,
+    "sam_mean_px": 0.16255275216809015,
+    "naive_mean_px": 0.18611663979138715
+  },
+  "paired_3d_frames": {
+    "count": 23,
+    "sam_mean_m": 0.12597502543485434,
+    "naive_mean_m": 0.06499273817796546
+  },
+  "data_separation": {
+    "truth_loaded_after_predictions_frozen": true,
+    "sam_observation_frames_sha256": "59872d4fedffc808f56bb04adc329ee1ee7a53d8820ebb944a334283a92edab2",
+    "naive_predictions_sha256": "f5360ab04ff17047a95773bca330462fefff1bfdd0dba55fcd1e49f600fbb06a",
+    "new_api_requests": 0
+  },
+  "limitations": [
+    "One deterministic synthetic video, not real-world generalization.",
+    "Original report and script are preserved; +0.5 px registration follows declared WebGL convention, not truth fitting.",
+    "HSV baseline is specialized to an orange ball; SAM is prompted by concept.",
+    "Largest-contour baseline resets its identity after a missing frame; ID statistics must be read with that declared policy.",
+    "3D uses the same declared camera/diameter reconstruction for both; reported errors include silhouette/depth estimation.",
+    "Missing detections are counted explicitly and never assigned zero error."
+  ],
+  "evidence": [
+    {
+      "path": "artifacts/synthetic-synthetic-1793757544998-20261104.mp4",
+      "sha256": "f43b5f6a54de8d91de76ea6056af54a74b77dc4d2d9c72f8fc35a3c4b8efeff1"
+    },
+    {
+      "path": "perception/compare_tracking_v2.py",
+      "sha256": "020e2c797972f4713540121cfc1222fd4a2e41023ebce79150f66d011d467785"
+    },
+    {
+      "path": "validation/runs/synthetic-perception-comparison-cone-v2-naive-predictions.json",
+      "sha256": "f5360ab04ff17047a95773bca330462fefff1bfdd0dba55fcd1e49f600fbb06a"
+    }
+  ]
+}

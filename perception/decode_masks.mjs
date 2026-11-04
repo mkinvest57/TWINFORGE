@@ -1,38 +1,24 @@
 #!/usr/bin/env node
-/** TWINFORGE — optional SAM 3.1 mask decoding via @meta-sam/parser.
- * Usage : npm install (dans perception/) puis
- *   node decode_masks.mjs sam_output.txt
- * Reads SAM structured text (records <|box|><|mask|>) et affiche, par masque,
- * raster centroid + area in pixels. Without the package, the Python pipeline
- * falls back to box centroids (documented in the report).
- */
-import { readFileSync } from 'node:fs';
-
-let parser;
-try {
-  parser = await import('@meta-sam/parser');
-} catch {
-  console.error('@meta-sam/parser not found — run `npm install` in perception/. Pipeline fallback: box centroids.');
-  process.exit(2);
+/** Decode actual SAM rasters. stdin or filename -> deterministic JSON masks. */
+import {readFileSync} from 'node:fs';
+import {parseImageStream, decodeMaskToRaster, decodeMaskToSVGPath, recordsOfKind} from '@meta-sam/parser';
+const text=readFileSync(process.argv[2] && process.argv[2]!=='-' ? process.argv[2] : 0,'utf8');
+async function* events(){
+  yield {type:'response.output_text.done',item_id:'m1',output_index:0,content_index:0,text};
+  yield {type:'response.completed'};
 }
-const { parseImageStream, decodeMaskToRaster, recordsOfKind } = parser;
-
-const text = readFileSync(process.argv[2], 'utf8');
-async function* events() {
-  yield { type: 'response.output_text.done', item_id: 'm1', output_index: 0, content_index: 0, text };
-  yield { type: 'response.completed' };
-}
-const parsed = parseImageStream(events());
-const result = await parsed.finalResult;
-const out = [];
-for (const rec of recordsOfKind(result.records, 'mask')) {
-  const raster = decodeMaskToRaster(rec.mask); // Uint8Array 0/1, taille = bounds
-  const w = rec.bounds.right - rec.bounds.left, h = rec.bounds.bottom - rec.bounds.top;
-  let area = 0, sx = 0, sy = 0;
-  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
-    if (raster[y * w + x]) { area++; sx += x; sy += y; }
+const parsed=parseImageStream(events());
+for await(const _snapshot of parsed){} // consume before finalResult
+const result=await parsed.finalResult;
+if(result.diagnostics.some(d=>d.severity==='error')) throw new Error(JSON.stringify(result.diagnostics));
+const masks=recordsOfKind(result.records,'mask').map(rec=>{
+  const raster=decodeMaskToRaster(rec.mask), polygons=[];
+  let polygon=[];
+  for(const token of decodeMaskToSVGPath(rec.mask).matchAll(/([MLZ])([^MLZ]*)/g)){
+    if(token[1]==='Z'){if(polygon.length)polygons.push(polygon);polygon=[];}
+    else{const n=token[2].trim().split(/[ ,]+/).map(Number);polygon.push([n[0]+rec.bounds.left,n[1]+rec.bounds.top]);}
   }
-  out.push({ object_id: rec.objectId, bounds: rec.bounds, area_px: area,
-             centroid_image: area ? [+(rec.bounds.left + sx / area).toFixed(1), +(rec.bounds.top + sy / area).toFixed(1)] : null });
-}
-console.log(JSON.stringify(out, null, 1));
+  return {object_id:String(rec.objectId),bounds:rec.bounds,width:rec.mask.width,height:rec.mask.height,
+    raster_base64:Buffer.from(raster).toString('base64'),polygons};
+});
+process.stdout.write(JSON.stringify({masks,diagnostics:result.diagnostics,outcome:result.outcome}));

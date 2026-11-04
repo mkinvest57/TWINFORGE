@@ -1,51 +1,37 @@
-# TWINFORGE EXTREME — Demo video script (~2:30, subtitled, muted-proof)
+# Script de la démonstration enregistrée — 2 min 30 — L3
 
-Rules: every shot is real-time 3D from the live demo (no mockups); every number
-on screen is the real measured number, traceable in the repo logs; the ghost is
-always AHEAD of the ball. Record V1 on Oct 30, hero take on Nov 3 morning.
+La capture actuelle enregistre le rendu WebGL exécuté, avec sous-titres et compteurs issus de l’interface. Elle est étiquetée **L3 · SIMULATION · MOTEUR CONNU CALIBRÉ**. Le canvas de composition ajoute les textes à la capture du rendu; il ne simule ni ne remplace la scène physique WebGL. Aucun tir filmé réel ni contrôle matériel n’est présenté.
 
-## 0:00–0:08 — The anchor
-A real shot at the vertical hoop, no intro slide. As the ball leaves the hand,
-the verdict is already on screen.
-On-screen voice/text: "This is TWINFORGE. This ball was just shot at this hoop.
-My system already claims whether it goes in — because it built the simulator of
-this scene by watching it. Let's check."
+Les timings ci-dessous sont le script prévu par `web/recording.js`. Les événements de tirs et de corrections disposent de leurs horodatages exportés; la disponibilité du journal propre aux sous-titres est précisée pour chaque prise. Le fichier `docs/DEMO_SUBTITLES_FR.srt` reproduit ces textes; la capture les incruste déjà, donc la conversion utilise `--already-captioned`.
 
-## 0:08–0:35 — The twin appears
-Split view real / twin. SAM 3.1 names ball, hoop and backboard — including
-through the rim occlusion (FP-01 named on screen). Quick cuts on the induction
-journal and the falling error.
-If the project is on the L3 fallback, the on-screen sentence says: "the agent
-picks and calibrates a known engine" — honesty is in the script, not a footnote.
+Pour la prise actuelle `simulation-8a28874b4218.webm`, l’enregistrement de fin a rencontré une limite de taille HTTP. La vidéo a été sauvegardée, puis les événements de tirs, contrefactuels et corrections ont été récupérés depuis la mémoire du navigateur et archivés. Le journal exact des changements de sous-titres de cette prise n’a pas été conservé : les temps du tableau restent les temps **prévus**, confirmés seulement par les échantillons visuels disponibles. Aucun horaire effectif manquant n’est inventé.
 
-## 0:35–1:05 — THE ghost moment
-A new shot in the 3D scene: the ghost ball — projected +0.5s into the future,
-"GHOST · +0.5s" tag visible — flies ahead of the real one, the verdict checks
-out, error counter in centimetres visible. Then Monte-Carlo: 18 ghosts,
-uncertainty cone, live make probability. Chain two or three correct predictions:
-this sequence must survive alone if a judge stops at 90 seconds.
+| Temps prévu | Sous-titre incrusté |
+|---|---|
+| 0:00–0:08 | Voici TWINFORGE. Le jumeau prédit le tir avant sa retombée. Cette démonstration est une simulation L3. |
+| 0:08–0:20 | L3 : le système choisit et calibre un moteur physique connu. Il ne prétend pas avoir découvert librement ses équations. |
+| 0:20–0:35 | Ce tir 3D bruité appartient au test indépendant. Le modèle a été calibré sur d’autres tirs. La vidéo SAM est évaluée séparément. |
+| 0:35–0:43 | Le fantôme projette le même intégrateur à +0,5 seconde. Le verdict se verrouille avant l’issue du tir. |
+| 0:43–0:52 | L’erreur compare la position observée au point prédit pour ce même instant. Les paramètres non mesurés restent des priors. |
+| 0:52–1:05 | 18 simulations Monte-Carlo échantillonnent l’incertitude des paramètres. Les chiffres à droite sont ceux de cette exécution. |
+| 1:05–1:20 | Et si le lancer était 20 % plus fort ? La trajectoire orange rejoue le contrefactuel dans le jumeau. |
+| 1:20–1:35 | Et si le panier était décalé à gauche ? La scène de référence reste inchangée. |
+| 1:35–1:47 | Le MPC simule des séquences candidates, compare leur coût et n’exécute que la première correction. Ici, il contrôle la simulation. |
+| 1:47–1:59 | Chaque correction enregistre le coût, l’horizon, l’écart avant et après, ainsi que l’impulsion appliquée. |
+| 1:59–2:15 | Cinq familles physiques disposent de tests synthétiques indépendants. Les preuves et leurs limites restent dans le rapport exportable. |
+| 2:15–2:23 | Tout ce parcours fonctionne sans caméra ni dispositif physique. Les résultats synthétiques ne constituent pas une validation du réel. |
+| 2:23–2:30 | TWINFORGE · Indie · Push the Frontier. Niveau L3. github.com/mkinvest57/TWINFORGE · démo : mkinvest57.github.io/TWINFORGE |
 
-## 1:05–1:35 — Counterfactuals
-"What if I shot 20% harder?" then "What if the hoop moved left?" — diff on the
-twin, instant replay, verdict flips, then verification with a real shot.
+## Ce qui est mesuré à l’écran
 
-## 1:35–2:05 — Escalation and control
-Only the layers that actually held: chaotic with its measured horizon, liquid
-with its measured horizon, multi-body, orbit with its ghost placed back ahead
-at every recalibration, then MPC control: policy learned in the twin,
-corrections logged with numbers on screen (predicted error before → after, Δv),
-first contact with the real, zero collisions. Every cut layer is named here in
-one sentence, with its failure point (FP-03 / FP-04 / FP-05).
+Le panneau reprend le verdict verrouillé, l’erreur instantanée, la moyenne de session, les verdicts corrects et la probabilité Monte-Carlo du parcours en cours. Pendant le contrôle, il reprend aussi le coût J, l’horizon et Δv de la dernière correction enregistrée. Les chiffres ne sont pas inscrits en dur dans le montage; leur preuve est le journal de cette capture. Aucun chiffre historique 8,4 cm n’est annoncé comme moyenne de session.
 
-## 2:05–2:30 — Impact + close
-"Every lab bench, every classroom, every pilot line is a system nobody has a
-simulator for. TWINFORGE gives each of them theirs, from a phone video.
-Shoot the ball. Get its simulator. Predict the shot — then control reality."
-Final card: project name, Indie track, Push the Frontier theme, Meta models
-used (SAM 3.1, Muse Spark / Wonder, Muse Image, Muse Glimmer, Muse Code),
-repo + live demo links, level actually reached (L1 / L2 / L3).
+Les échecs restent visibles. Le chargement du nouvel exemple est explicitement un capteur numérique 3D bruité, évalué sur un tir distinct des données d’ajustement. Sa vidéo n’est pas présentée comme une sortie SAM. Les valeurs de contacts non observées restent des priors; aucune performance de tir réel n’en est déduite. Aucun résultat attendu, y compris 1,016 cm du benchmark séparé, n’est écrit en dur dans les compteurs de cette capture.
 
-## Forbidden
-No simulated or pre-recorded core presented as live. No fallback dressed as
-induction. No market/storytelling opener. No identifiable person without consent.
-Every displayed number must match the repo and the logs.
+## Livrables et revue
+
+Vidéo de démonstration : `output/media/twinforge-demo-current.mp4`. GIF du fantôme : `output/media/ghost-current.gif`. Leur provenance est conservée à côté du média final; les originaux restent dans `artifacts/`. Se référer à `validation/submission.json` pour l’existence et le statut de revue effectifs. Ces chemins ne constituent pas, à eux seuls, une attestation de revue.
+
+Visionner la vidéo entière en muet : rendu visible, sous-titres lisibles et continus, compteurs cohérents, étiquettes de simulation et liens finaux. Ne pas affirmer de revue intégrale à partir de quelques captures. Toute valeur affichée doit être reliée aux événements du parcours.
+
+La structure suit l’ancre, la calibration, le fantôme, les contrefactuels, le contrôle et la fermeture. Les séquences réelles et la validation physique demandées par le PDF sont absentes : la démonstration L3 ne prétend donc pas satisfaire intégralement le prompt 6. La capture historique `docs/demo_capture.webm` dure 27,33 s (métadonnées vérifiées le 4 novembre); elle n’est ni cette vidéo ni une V1 complète conforme.

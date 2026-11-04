@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Twinforge</title>
+  <rect width="512" height="512" fill="#101419"/>
+  <path d="M147 321Q234 125 370 246" fill="none" stroke="#77828c" stroke-width="11" stroke-linecap="round" stroke-dasharray="9 16"/>
+  <path d="M147 323Q188 231 241 215" fill="none" stroke="#ff6b1a" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="241" cy="215" r="30" fill="#ff6b1a"/>
+  <circle cx="337" cy="225" r="28" fill="none" stroke="#37c8d9" stroke-width="8"/>
+  <path d="M304 324h63m-31-31v62" stroke="#37c8d9" stroke-width="9" stroke-linecap="round"/>
+</svg>

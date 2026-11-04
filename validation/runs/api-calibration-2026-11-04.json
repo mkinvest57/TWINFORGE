@@ -1,0 +1,47 @@
+{
+  "schema_version": "twinforge.api_validation.v1",
+  "executed_utc": "2026-11-04T01:32:06.591223+00:00",
+  "source_kind": "synthetic_test_fixtures",
+  "real_world_validation": false,
+  "protocol": "HTTP POST /api/jobs/calibrate -> asynchronous fitting -> GET job -> calibrated bundle; separate train, validation and test shots; no provider calls",
+  "successful_job": {
+    "id": "27208bb393bc4135944377717519718b",
+    "status": "complete",
+    "level": "L3",
+    "family": "quadratic_drag",
+    "validation_mean_error_cm": 0.7978834201086082,
+    "independent_test_mean_error_cm": 0.8097667875957845,
+    "independent_test_shots": 1,
+    "parameters_applied": {
+      "g": 9.707750946505776,
+      "drag": 0.04850114500374325,
+      "wind": [
+        0.170014448358005,
+        0.0,
+        -0.10408424284634113
+      ],
+      "restitution": null,
+      "friction": null,
+      "magnus": null,
+      "spin": null,
+      "restitution_by_surface": {}
+    },
+    "parameter_output_matches_applied_model": true,
+    "stop_reason": "all_families_tested"
+  },
+  "overlap_job": {
+    "id": "3a12fd86bdcf405c84ff6c7b62e463df",
+    "status": "failed",
+    "reason": "Repeated shot or source across splits: independent validation/test required"
+  },
+  "train_only_job": {
+    "id": "466cee1220314389943e0f2cc6b4974b",
+    "status": "complete",
+    "held_out_cm": null
+  },
+  "provider_requests_delta": 0,
+  "limitations": [
+    "Synthetic numerical/API regression only. No live physical shot or sim-to-real proof.",
+    "No independent performance claim is emitted when test data are absent."
+  ]
+}

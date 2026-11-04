@@ -1,0 +1,159 @@
+{
+  "schema_version": "twinforge.ablation.v1",
+  "executed_utc": "2026-11-04T01:32:54.559359+00:00",
+  "source_kind": "synthetic_test_fixtures",
+  "real_world_validation": false,
+  "comparison": "calibrated_known_family_vs_unfitted_prior",
+  "protocol": "Same independent test shot and same observed initialization prefix, same 3D integrator. Calibrated family selected using a separate validation shot; baseline parameters fixed in advance.",
+  "fixture_generator": "tests/test_induction_evidence.py:shot",
+  "fixture_arguments": {
+    "train": {
+      "name": "api-train-20261104",
+      "drag": 0.05,
+      "vx": 4.7
+    },
+    "validation": {
+      "name": "api-validation-20261104",
+      "drag": 0.05,
+      "vx": 6.1
+    },
+    "test": {
+      "name": "api-test-20261104",
+      "drag": 0.05,
+      "vx": 3.2
+    }
+  },
+  "train_fingerprints": [
+    "acd60bdec2da5c10dacf19050ae4674449ed5fc2025f52a2e25b6a04c93501bc"
+  ],
+  "test_fingerprint": "910357989b7c85fed4e3cc08d3aa6f32c6efac0c5c2c8b835ef59362662d743e",
+  "calibrated": {
+    "family": "quadratic_drag",
+    "parameters": {
+      "g": 9.707750946505776,
+      "drag": 0.04850114500374325,
+      "wind": [
+        0.170014448358005,
+        0.0,
+        -0.10408424284634113
+      ],
+      "restitution": null,
+      "friction": null,
+      "magnus": null,
+      "spin": null,
+      "restitution_by_surface": {}
+    },
+    "mean_error_cm": 0.8097667875957845
+  },
+  "unfitted_prior": {
+    "parameters": {
+      "g": 9.3,
+      "drag": 0.02,
+      "wind": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "restitution": null,
+      "friction": null,
+      "magnus": null,
+      "spin": null,
+      "restitution_by_surface": {}
+    },
+    "mean_error_cm": 6.508548965975863,
+    "scores": {
+      "mean_error_cm": 6.508548965975863,
+      "shots": [
+        {
+          "shot_id": "api-test-20261104",
+          "observation_sha256": "910357989b7c85fed4e3cc08d3aa6f32c6efac0c5c2c8b835ef59362662d743e",
+          "initialization_end_s": 0.15,
+          "mean_error_cm": 6.508548965975863,
+          "max_error_cm": 16.256865831351107,
+          "samples_scored": 15,
+          "forecast_errors": [
+            {
+              "t": 0.2,
+              "error_cm": 0.03377042879594032
+            },
+            {
+              "t": 0.25,
+              "error_cm": 0.29928209994144506
+            },
+            {
+              "t": 0.3,
+              "error_cm": 0.7759209651582415
+            },
+            {
+              "t": 0.35000000000000003,
+              "error_cm": 1.4352432404208342
+            },
+            {
+              "t": 0.4,
+              "error_cm": 2.255359111849132
+            },
+            {
+              "t": 0.45,
+              "error_cm": 3.218266629048273
+            },
+            {
+              "t": 0.5,
+              "error_cm": 4.309129924268692
+            },
+            {
+              "t": 0.55,
+              "error_cm": 5.515515918833993
+            },
+            {
+              "t": 0.6,
+              "error_cm": 6.826521563680264
+            },
+            {
+              "t": 0.65,
+              "error_cm": 8.231837540485877
+            },
+            {
+              "t": 0.7000000000000001,
+              "error_cm": 9.720855654097202
+            },
+            {
+              "t": 0.75,
+              "error_cm": 11.281936685207604
+            },
+            {
+              "t": 0.8,
+              "error_cm": 12.901910520525764
+            },
+            {
+              "t": 0.85,
+              "error_cm": 14.565818375973578
+            },
+            {
+              "t": 0.9,
+              "error_cm": 16.256865831351107
+            }
+          ],
+          "predicted_outcome": null,
+          "observed_outcome": null
+        }
+      ],
+      "verdicts": {
+        "correct": 0,
+        "scored": 0,
+        "accuracy": null
+      },
+      "protocol": "frozen training model; first 4 clean observations initialize state; later free-flight samples only"
+    }
+  },
+  "error_reduction_cm": 5.698782178380078,
+  "relative_error_reduction": 0.8755841291463078,
+  "source_code_sha256": {
+    "induction/induce.py": "257a11430d294b419ee7eb3275f206693548c0c41fc87cea01e140fe265aeb25",
+    "induction/simulator.py": "1cf72eb2cce727c89db7842a0c999a0047b1141c545ca8aea32fb2e1f0843674",
+    "tests/test_induction_evidence.py": "1629c8dab2938f54adeaf13a83ceeb73adb726e2d03b8076ad5172c1c09c3f73"
+  },
+  "limitations": [
+    "Synthetic numerical ablation only; not a real-world gauntlet pass.",
+    "This measures calibrated L3 versus explicit unfitted priors, not free induction versus a fully prefitted engine."
+  ]
+}
