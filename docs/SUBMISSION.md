@@ -6,13 +6,13 @@
 
 Prévoir le niveau d’une cuve, tester une commande et mesurer ce qui change. TWINFORGE est un banc virtuel pour préparer des essais de régulation : calibration de modèles connus, prévision explicite, contrôle prédictif et preuves exportables.
 
-Deux cuves simulées commencent dans le même état. La référence garde sa vanne ouverte; l’autre peut être régulée. Une hausse identique du débit d’arrivée expose les effets sur le niveau et le débordement. Le cas d’usage est civil : prototypage de procédés et préparation d’essais. Aucun équipement physique n’est commandé.
+Deux cuves simulées commencent dans le même état. La référence garde sa vanne ouverte; l’autre peut être régulée. Une hausse identique du débit disponible expose les effets sur le niveau et le débordement. Le cas d’usage est civil : prototypage de procédés et préparation d’essais. Aucun équipement physique n’est commandé.
 
 ## Démonstration locale mesurée
 
 La page principale ajuste localement une famille de bilan de volume connue. Elle prévoit le niveau à **+5 s sous hypothèse de vanne inchangée**; les interventions ultérieures restent signalées dans les erreurs. Le MPC cherche des séquences sur **3 s**, applique la première commande et recalcule toutes les **200 ms simulées, soit 5 Hz**.
 
-Le [parcours guidé](../validation/runs/process-guided-2026-11-04.json) termine sa calibration à 4 s, active le contrôle à 11 s, applique une hausse d’entrée de 35 % dans les deux branches à 18 s, et s’arrête à 40 s. Résultat déterministe du moteur : **0 L débordé avec contrôle, contre 90,803 L pour la référence; niveau final de 1,049 m**. Le chiffre provient de cette expérience précise, pas du scénario précédent de 35 secondes.
+Le [parcours guidé](../validation/runs/process-guided-2026-11-04.json) termine sa calibration à 4 s, active le contrôle à 11 s, applique une hausse du débit disponible de 35 % dans les deux branches à 18 s, et s’arrête à 40 s. Résultat déterministe du moteur : **0 L débordé avec contrôle, contre 90,803 L pour la référence; niveau final de 1,049 m**. Le chiffre provient de cette expérience précise, pas du scénario précédent de 35 secondes.
 
 **Toutes les 63 prévisions évaluées donnent 9,148 cm d’erreur moyenne**, sur 73 émises avec 10 en attente. 52 scores traversent une intervention; 11 sans intervention donnent 1,595 cm. Ce sous-ensemble ne remplace pas la moyenne globale. La capture navigateur doit être rattachée à son export effectif : un rapport moteur ne prouve pas à lui seul qu’un montage vidéo a été revu.
 
@@ -48,7 +48,7 @@ Les [résultats historiques](archive/SUBMISSION_PRE_PROCESS_2026-11-04.md) reste
 
 Les trois commits initiaux datent du **27 octobre 2026**. Le 4 novembre ajoute les corrections et preuves, la caméra locale, puis le procédé civil : moteur, calibration/contrôle, boucle Spark instrumentée et interface. Les réponses et expériences portent leur date réelle. Les archives des 27–29 octobre et les échéances passées ne sont pas réécrites.
 
-Le [dépôt](https://github.com/mkinvest57/TWINFORGE) est public. Lors de la dernière vérification avant publication de Process Lab, `main` pointait encore sur `2d0530903fe8410c12ed3fef3bd771331194267c` du 27 octobre; [GitHub Pages](https://mkinvest57.github.io/TWINFORGE/) servait exactement cet ancien HTML. La nouvelle révision doit être publiée puis vérifiée sans connexion. L’aperçu Sites était privé au propriétaire; le succès de déploiement seul ne garantit pas l’accès du jury.
+Le [dépôt](https://github.com/mkinvest57/TWINFORGE) et le [Process Lab](https://mkinvest57.github.io/TWINFORGE/) sont publics. Le déploiement du commit `276e6801a3b5a08a6a12ccb77fb04c4c989a4998` a réussi le 4 novembre; neuf fichiers essentiels ont été téléchargés sans connexion et correspondent aux sources locales. La [preuve de publication](../validation/runs/process-browser-2026-11-04/public-deployment.json) conserve le workflow et les hashes. Le jury peut exécuter les simulations, utiliser le suivi vidéo local et consulter le journal Meta. Les nouvelles études utilisant un fournisseur nécessitent le serveur Python local; les clés ne sont jamais publiées. L’aperçu Sites reste privé au propriétaire.
 
 La vidéo de **trois minutes** doit montrer les contributions de la période autorisée avec un lien accessible. Le [storyboard](VIDEO_3MIN_STORYBOARD.json) et les voix [FR](VOICEOVER_3MIN_FR.txt) / [EN](VOICEOVER_3MIN_EN.txt) décrivent le montage préparé; ils ne prouvent pas encore son rendu. La capture historique de 149,83 secondes et son script restent archivés.
 

@@ -4,7 +4,7 @@ La page [scan.html](../scan.html) constitue un parcours mobile distinct du labor
 
 ## Ouvrir la page
 
-Sur téléphone : [ouvrir la caméra Twinforge en HTTPS](https://twinforge-mobile-camera.mkinvest57.chatgpt.site/scan.html), puis se connecter avec le même compte ChatGPT que le propriétaire du projet si la page le demande. L’aperçu est **privé**. Sa [preuve de déploiement](../validation/runs/mobile-2026-11-04/deployment.json) identifie la version hébergée; la page de connexion HTTPS a été vérifiée, mais l’exécution distante après connexion n’a pas pu être vérifiée dans la session de test sans authentification.
+Sur téléphone : [ouvrir la caméra Twinforge en HTTPS](https://mkinvest57.github.io/TWINFORGE/scan.html). Cette version est publique et ne demande pas de compte ChatGPT. La [preuve de publication du 4 novembre](../validation/runs/process-browser-2026-11-04/public-deployment.json) vérifie son HTML sans cookie ni authentification. L’ancien aperçu Sites conserve son accès privé au propriétaire.
 
 Sur la machine de développement :
 
@@ -47,14 +47,14 @@ Lorsqu’un enregistrement vidéo est proposé, le format doit être choisi parm
 
 Les tests mobiles vérifient leur propre version des sources : accès aux fichiers statiques, permissions, arrêt des pistes, suivi/prédiction, export et absence d’appel fournisseur. Un flux caméra synthétique utilisé par l’automatisation n’est pas annoncé comme un essai sur téléphone réel.
 
-La suite finale de cette version passe **148 tests : 87 Python et 61 JavaScript**, avec hashes des sources stables. Le [relevé mobile](../validation/runs/software-checks-mobile-2026-11-04.json) est distinct de l’ancien relevé de simulation. Le [manifeste statique](../validation/runs/mobile-static-assets-2026-11-04.json) identifie les copies exactes des 29 fichiers destinés à l’hébergement; il ne contient ni backend ni clé.
+La livraison mobile précédant Process Lab a passé **148 tests : 87 Python et 61 JavaScript**, avec hashes des sources alors stables. Ce [relevé historique mobile](../validation/runs/software-checks-mobile-2026-11-04.json) reste archivé. La version Process Lab passe désormais [192 tests](../validation/runs/software-checks-process-release-2026-11-04.json). L’ancien [manifeste statique](../validation/runs/mobile-static-assets-2026-11-04.json) décrit les 29 fichiers de cette livraison mobile initiale, sans backend ni clé.
 
 La [revue navigateur](../validation/runs/mobile-2026-11-04/browser-review.json) mesure le parcours local sur des tailles de fenêtre de 320, 390, 844 et 1 280 pixels, sans débordement horizontal. Le suivi continue après rotation. L’exemple synthétique exporté comprend 839 observations, 400 prévisions émises et 396 évaluées, avec **1,631 pixel d’erreur moyenne** dans l’image d’analyse réduite. Ce chiffre n’est ni une mesure réelle ni un score en centimètres. L’import H.264 a été vérifié comme parcours fonctionnel; un format vidéo non pris en charge produit une erreur visible. Aucun téléphone physique ni caméra réelle n’a été utilisé pour cette revue.
 
 Créer un relevé logiciel distinct après stabilisation :
 
 ```bash
-.venv/bin/python validation/run_checks.py --out validation/runs/software-checks-mobile-2026-11-04.json
+.venv/bin/python validation/run_checks.py --out validation/runs/software-checks-mobile-current.json
 ```
 
 L’inventaire inclut `scan.html`, le manifeste, les SVG et les styles, en plus des sources Python/JavaScript. Le rapport garde les commandes, sorties et hashes avant/après. Il ne certifie pas à lui seul une permission caméra sur Safari/iPhone ou Chrome/Android physique.

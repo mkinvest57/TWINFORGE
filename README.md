@@ -6,7 +6,7 @@ Un banc d’essais virtuel pour comprendre et réguler un procédé simple. Deux
 
 **Modèles physiques connus, capteurs synthétiques, commandes simulées.** Le projet ne revendique ni découverte autonome de lois ni validation d’une installation réelle. Il utilise un bilan de volume de réservoir, pas une CFD.
 
-[Process Lab](index.html) · [Expérience Meta et reçus](assets/process-meta-session.json) · [Dossier concours](docs/SUBMISSION.md) · [Atelier 3D conservé](workbench.html) · [Caméra mobile](scan.html)
+[Essayer le Process Lab](https://mkinvest57.github.io/TWINFORGE/) · [Expérience Meta et reçus](assets/process-meta-session.json) · [Dossier concours](docs/SUBMISSION.md) · [Atelier 3D conservé](workbench.html) · [Caméra mobile](https://mkinvest57.github.io/TWINFORGE/scan.html)
 
 ## Le parcours guidé
 
@@ -14,7 +14,7 @@ La calibration locale dure quatre secondes. Elle estime les paramètres à parti
 
 Le MPC compare des séquences sur trois secondes, applique leur première commande et recalcule toutes les **200 ms de temps simulé — 5 Hz**. Cela ne constitue pas une garantie de temps réel sur matériel.
 
-Le [scénario déterministe mesuré](validation/runs/process-guided-2026-11-04.json) démarre à `t=0`, termine la calibration à `t=4 s`, active le contrôle à `t=11 s`, augmente le débit d’arrivée de **35 % dans les deux branches à `t=18 s`**, puis s’arrête à `t=40 s` : **0 litre débordé côté contrôlé contre 90,803 litres pour la référence**, niveau final contrôlé de **1,049 m**. Ce relevé provient du moteur local, pas d’un essai physique.
+Le [scénario déterministe mesuré](validation/runs/process-guided-2026-11-04.json) démarre à `t=0`, termine la calibration à `t=4 s`, active le contrôle à `t=11 s`, augmente le débit disponible de **35 % dans les deux branches à `t=18 s`**, puis s’arrête à `t=40 s` : **0 litre débordé côté contrôlé contre 90,803 litres pour la référence**, niveau final contrôlé de **1,049 m**. Ce relevé provient du moteur local, pas d’un essai physique.
 
 Les erreurs restent visibles : **9,148 cm moyens sur les 63 prévisions évaluées**, 73 émises et 10 encore en attente. Parmi les scores, 52 traversent une intervention qui change l’hypothèse de vanne constante. Les 11 sans intervention donnent 1,595 cm; ce sous-ensemble ne remplace pas la moyenne globale.
 
@@ -59,8 +59,10 @@ Le mode `--use-models` autorise au plus trois hypothèses, avec un plafond suppl
 
 ## Publication et archives
 
-Lors de la vérification du 4 novembre **avant publication de Process Lab**, le [dépôt public](https://github.com/mkinvest57/TWINFORGE) et [GitHub Pages](https://mkinvest57.github.io/TWINFORGE/) servaient encore la version du 27 octobre. L’[aperçu HTTPS](https://twinforge-mobile-camera.mkinvest57.chatgpt.site/) était privé. Une publication confirmée et une vérification sans connexion doivent précéder leur présentation comme liens de cette nouvelle version.
+Le [Process Lab public](https://mkinvest57.github.io/TWINFORGE/) et le [dépôt](https://github.com/mkinvest57/TWINFORGE) sont à jour. Le déploiement du 4 novembre a réussi; neuf fichiers essentiels ont été relus sans cookie ni authentification et correspondent aux sources locales. La [preuve de publication](validation/runs/process-browser-2026-11-04/public-deployment.json) conserve les hashes et le workflow. Le site public exécute le laboratoire, la caméra locale et la consultation du journal Meta; de nouveaux appels aux modèles nécessitent le serveur Python local. L’aperçu Sites conserve son accès privé au propriétaire.
+
+**192 tests passent** (107 Python, 85 JavaScript). Les [vérifications logicielles](validation/runs/software-checks-process-release-2026-11-04.json) et le [parcours navigateur](validation/runs/process-browser-2026-11-04/browser-review.json) couvrent notamment le scénario guidé, les exports, l’étude gratuite et les vues de 320 à 1440 pixels. Une émulation de téléphone ne constitue pas un test sur un appareil physique.
 
 L’atelier initial reste dans `workbench.html`; [ses mesures et limites](docs/archive/README_PRE_PROCESS_2026-11-04.md) restent archivées. La [caméra mobile](docs/MOBILE.md) suit et prévoit dans le plan de l’image, localement, sans Meta ni envoi d’images; aucun test de caméra physique n’est revendiqué. Le [profil PDF historique](docs/PROMPT_COMPLIANCE.md) reste incomplet pour ses exigences physiques et historiques; les anciens hashes et paquets ne sont pas réécrits.
 
-[Voix française de trois minutes](docs/VOICEOVER_3MIN_FR.txt) · [English voiceover](docs/VOICEOVER_3MIN_EN.txt) · [Storyboard](docs/VIDEO_3MIN_STORYBOARD.json) · [Licences tierces](docs/THIRD_PARTY.md)
+[Voix française de trois minutes](docs/VOICEOVER_3MIN_FR.txt) · [English voiceover](docs/VOICEOVER_3MIN_EN.txt) · [Storyboard](docs/VIDEO_3MIN_STORYBOARD.json) · [Sous-titres FR à recaler sur la voix](docs/PROCESS_DEMO_SUBTITLES_FR.srt) · [Licences tierces](docs/THIRD_PARTY.md)

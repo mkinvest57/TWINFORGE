@@ -22,7 +22,9 @@
     "guide_from_meta_switches_to_experiment": true,
     "scanner_navigation_and_synthetic_pixel_tracking": true,
     "legacy_pendulum_route": true,
-    "resize_3d_intrinsic_growth_fixed": true
+    "resize_3d_intrinsic_growth_fixed": true,
+    "reduced_motion_emulated_and_restored": true,
+    "reduced_motion_tab_transition_seconds": 0
   },
   "guided_snapshot": {
     "t": 40,

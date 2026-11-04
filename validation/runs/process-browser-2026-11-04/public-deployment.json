@@ -1,0 +1,102 @@
+{
+  "verified_at": "2026-11-04T14:29:50.872240+00:00",
+  "url": "https://mkinvest57.github.io/TWINFORGE/",
+  "repository": "https://github.com/mkinvest57/TWINFORGE",
+  "source_commit": "276e6801a3b5a08a6a12ccb77fb04c4c989a4998",
+  "deployment_workflow": "https://github.com/mkinvest57/TWINFORGE/actions/runs/41847779534",
+  "workflow_conclusion": "success",
+  "requests_sent_cookies_or_auth": false,
+  "checks": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "9167effd638104645d7e7ffb525e14fb7f609785ccc14f3760daed8833c5c644",
+      "matches_local": true,
+      "anonymous": true
+    },
+    {
+      "path": "scan.html",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "d1fbc012177f6d347d4866cb7aaceca6162733d656676c0ba197af0eb46f67e7",
+      "matches_local": true,
+      "anonymous": true
+    },
+    {
+      "path": "workbench.html",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "1cd3d3ea9ddf62de3718290d2f0cfddbfb088ccbbc79651a3ab7bf5d4247b498",
+      "matches_local": true,
+      "anonymous": true
+    },
+    {
+      "path": "web/process/lab.css",
+      "status": 200,
+      "content_type": "text/css; charset=utf-8",
+      "sha256": "18423ed04ee196f211d4e823125179af1312074721ce80a06deaa2ac18e151c9",
+      "matches_local": true,
+      "anonymous": true
+    },
+    {
+      "path": "web/process/lab.mjs",
+      "status": 200,
+      "content_type": "text/javascript; charset=utf-8",
+      "sha256": "fc68ce66d6c53346981e6ddf031140947dcf9416771bfae1dd892749be0cb2d9",
+      "matches_local": true,
+      "anonymous": true
+    },
+    {
+      "path": "web/process/engine.mjs",
+      "status": 200,
+      "content_type": "text/javascript; charset=utf-8",
+      "sha256": "bdcd18d4499e609f73c9d27457544744ea5e9d6ba9526d1bacb24722c60aa40c",
+      "matches_local": true,
+      "anonymous": true
+    },
+    {
+      "path": "web/process/scene.mjs",
+      "status": 200,
+      "content_type": "text/javascript; charset=utf-8",
+      "sha256": "ed9aad6e00f97a24fee63597015176a1ea436295c9f450acb9eaf6a08dd64be0",
+      "matches_local": true,
+      "anonymous": true
+    },
+    {
+      "path": "web/process/report-view.mjs",
+      "status": 200,
+      "content_type": "text/javascript; charset=utf-8",
+      "sha256": "e2a96056f84a2e72d3f0bbab09bcb303a7815a5053b6706b720e748e3620d605",
+      "matches_local": true,
+      "anonymous": true
+    },
+    {
+      "path": "assets/process-meta-session.json",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "sha256": "69026d013667a9e2d8ddce49887fa4dad2abde60d1f4d6279d98bd31045ff9eb",
+      "matches_local": true,
+      "anonymous": true
+    }
+  ],
+  "passed": true,
+  "scope": "Public static app and recorded Meta evidence; fresh provider calls require local Python backend.",
+  "browser_verified_at": "2026-11-04T14:33:58.815568+00:00",
+  "browser": {
+    "guided_run_seconds": 40,
+    "matches_local_evidence": true,
+    "overflow_litres": 0,
+    "baseline_overflow_litres": 90.802996322119,
+    "global_error_cm": 9.148405187168652,
+    "recorded_meta_journal_visible": true,
+    "fresh_provider_controls_disabled_on_static_host": true,
+    "public_origin_console_errors_or_warnings": [],
+    "public_scanner_synthetic_tracking": true,
+    "physical_phone_or_camera_tested": false,
+    "screenshots": [
+      "public-demo.jpg",
+      "public-meta.jpg"
+    ]
+  }
+}
