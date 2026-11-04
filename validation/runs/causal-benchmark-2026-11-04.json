@@ -1,0 +1,4997 @@
+{
+  "schema": "twinforge.causal.benchmark.v1",
+  "started_at": "2026-11-04T17:05:04.986Z",
+  "completed_at": "2026-11-04T17:05:08.679Z",
+  "source_sha256": {
+    "web/causal/engine.mjs": "ff7d00a37a118b42179cb5314d6056f66ab93e30d22027600250ddd01b239a09",
+    "tests/js/causal-engine.test.mjs": "7547f35fa445cd25e99786b9f53c1a188f0d6afac97521b5515b585e47f7b644",
+    "validation/causal_benchmark.mjs": "eb7cf0184712edb5477a3ee2df3764b5b44d4491272c7c0d23c29bfe0d1e7390"
+  },
+  "source_changed_during_run": false,
+  "passed": true,
+  "scope": "Synthetic, same-model causal planning. These results are not real-video validation, learned physics, held-out forecast accuracy, or safety certification. Initial positions, masses and contact coefficients are supplied. Each intervention is a single idealized instantaneous velocity change.",
+  "prediction_protocol": "Every counterfactual trajectory is computed and frozen at simulation time zero, before any playback. Both worlds use identical initial conditions except for the stated action. The displayed playback is a visualization of these frozen trajectories.",
+  "robustness_protocol": "Diagnostic evaluation of the chosen nominal action with lead-carrier speed scaled by 0.95, 1 and 1.05. The nominal optimizer does not optimize these extra checks. A failure remains visible.",
+  "deadline_protocol": "Search at nine delays from 0 to 2 seconds in 0.25-second increments. Last successful tested delay is not a continuous feasibility boundary.",
+  "results": [
+    {
+      "scenario": {
+        "id": "cascade",
+        "title": "Réaction en chaîne",
+        "description": "Un chariot percute une file de charges. Le dernier transporteur porte un équipement fragile.",
+        "challenge": "Couper la chaîne avant le premier contact.",
+        "seed": 20261104,
+        "perturbation": 1,
+        "horizonS": 12,
+        "arena": {
+          "width": 16,
+          "depth": 10
+        },
+        "bodies": [
+          {
+            "id": "carrier",
+            "kind": "carrier",
+            "label": "A · transporteur",
+            "x": -6,
+            "z": -0.1134698685153853,
+            "vx": 4.4,
+            "vz": 0,
+            "radius": 0.58,
+            "mass": 45,
+            "color": "#f6a66a"
+          },
+          {
+            "id": "relay-a",
+            "kind": "cargo",
+            "label": "B · charge",
+            "x": -2.65,
+            "z": -0.0966088583774399,
+            "vx": 0,
+            "vz": 0,
+            "radius": 0.62,
+            "mass": 28,
+            "color": "#8b9dad"
+          },
+          {
+            "id": "relay-b",
+            "kind": "cargo",
+            "label": "C · charge",
+            "x": 0.45,
+            "z": 0.12562321712030097,
+            "vx": 0,
+            "vz": 0,
+            "radius": 0.62,
+            "mass": 24,
+            "color": "#91a69c"
+          },
+          {
+            "id": "protected",
+            "kind": "fragile",
+            "label": "D · équipement fragile",
+            "x": 3.6,
+            "z": 0.23240635416354052,
+            "vx": 0,
+            "vz": 0,
+            "radius": 0.7,
+            "mass": 15,
+            "color": "#72ddca"
+          },
+          {
+            "id": "parked",
+            "kind": "cargo",
+            "label": "E · charge arrêtée",
+            "x": 1.8,
+            "z": -2.7020406135707162,
+            "vx": 0,
+            "vz": 0,
+            "radius": 0.65,
+            "mass": 35,
+            "color": "#667381"
+          }
+        ],
+        "controlBodyId": "carrier",
+        "protectedBodyId": "protected",
+        "physics": {
+          "dragPerS": 0.035,
+          "restitution": 0.72,
+          "wallRestitution": 0.3
+        },
+        "dangerThresholdJ": 8,
+        "modelDisclosure": {
+          "source": "supplied_initial_state_and_contact_law",
+          "geometry": "planar circular collision envelopes",
+          "integrator": "exact linear-drag free flight + discrete frictionless impulses, fixed 240 Hz",
+          "intervention": "one instantaneous bounded velocity change; actuator dynamics not modeled",
+          "realWorldValidation": false,
+          "metaPoweredPhysics": false
+        }
+      },
+      "action_delay_s": 0.25,
+      "candidate_count": 37,
+      "objective": "Among evaluated actions below the protected-impact energy threshold, minimize applied impulse. If none succeeds, minimize protected-impact energy, then impulse.",
+      "best_action": {
+        "id": "steer:0.20@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.2
+      },
+      "baseline": {
+        "metrics": {
+          "protectedImpactEnergyJ": 116.56200059920455,
+          "protectedImpactSumJ": 216.08359599579538,
+          "maxProtectedImpulseNs": 76.87453044005973,
+          "protectedCollisionCount": 5,
+          "totalCollisions": 11,
+          "firstProtectedImpactS": 1.362499999999996,
+          "controlImpulseNs": 0,
+          "controlEnergyChangeJ": 0,
+          "thresholdJ": 8,
+          "safe": false,
+          "initialEnergyJ": 435.6000000000001,
+          "finalEnergyJ": 5.460841394471957,
+          "initialMomentum": {
+            "x": 198.00000000000003,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -31.332506856238872,
+            "z": -11.922371517258822
+          }
+        },
+        "events": [
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "relay-a"
+            ],
+            "impulseNs": 128.36546273202433,
+            "energyJ": 161.34733887092702,
+            "x": -3.2420958182389485,
+            "z": -0.10501832070908013,
+            "timeS": 0.49583333333333246
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-a",
+              "relay-b"
+            ],
+            "impulseNs": 99.38304020922767,
+            "energyJ": 129.17299736502574,
+            "x": -0.1570542221987769,
+            "z": 0.027952878990809428,
+            "timeS": 0.908333333333331
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-b",
+              "protected"
+            ],
+            "impulseNs": 61.72902397407922,
+            "energyJ": 69.76764074373227,
+            "x": 2.948983540721578,
+            "z": 0.32755887970335223,
+            "timeS": 1.362499999999996
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "protected"
+            ],
+            "impulseNs": 76.87453044005973,
+            "energyJ": 116.56200059920455,
+            "x": 7.3,
+            "z": -0.30960277108044765,
+            "timeS": 2.2875000000000028
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-a",
+              "parked"
+            ],
+            "impulseNs": 7.172762930362607,
+            "energyJ": 0.55898549468904,
+            "x": 1.9211703758886127,
+            "z": -2.0789509766422514,
+            "timeS": 3.8249999999999975
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-a",
+              "protected"
+            ],
+            "impulseNs": 33.36249866127998,
+            "energyJ": 19.259695406352236,
+            "x": 3.7053474970029314,
+            "z": -1.7027968659992063,
+            "timeS": 4.887499999999945
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 40.584515897081126,
+            "energyJ": 20.30452330621832,
+            "x": 7.38,
+            "z": 3.930882874906217,
+            "timeS": 5.029166666666604
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 27.48115236881871,
+            "energyJ": 9.30983401772966,
+            "x": 7.183384416576023,
+            "z": 4.38,
+            "timeS": 5.537499999999908
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "protected"
+            ],
+            "impulseNs": 20.233786270785032,
+            "energyJ": 8.075071141061319,
+            "x": 7.3,
+            "z": -3.435727852473743,
+            "timeS": 7.587499999999792
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "protected"
+            ],
+            "impulseNs": 11.07487412777495,
+            "energyJ": 2.4191881054449493,
+            "x": 6.850035999156632,
+            "z": -4.3,
+            "timeS": 9.070833333333042
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 63.046479362110446,
+            "energyJ": 26.13319237315594,
+            "x": 7.42,
+            "z": -0.42357909183820924,
+            "timeS": 9.404166666666356
+          }
+        ]
+      },
+      "intervention": {
+        "metrics": {
+          "protectedImpactEnergyJ": 0,
+          "protectedImpactSumJ": 0,
+          "maxProtectedImpulseNs": 0,
+          "protectedCollisionCount": 0,
+          "totalCollisions": 11,
+          "firstProtectedImpactS": null,
+          "controlImpulseNs": 39.18961921118314,
+          "controlEnergyChangeJ": -7.993605777301127e-14,
+          "thresholdJ": 8,
+          "safe": true,
+          "initialEnergyJ": 435.6000000000001,
+          "finalEnergyJ": 8.159276582336027,
+          "initialMomentum": {
+            "x": 198.00000000000003,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -20.40119386699634,
+            "z": -7.753782088423691
+          }
+        },
+        "events": [
+          {
+            "type": "intervention",
+            "bodyIds": [
+              "carrier"
+            ],
+            "kind": "steer",
+            "amount": 0.2,
+            "impulseNs": 39.18961921118314,
+            "energyJ": -7.993605777301127e-14,
+            "x": -4.904798494192765,
+            "z": -0.1134698685153853,
+            "timeS": 0.25
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "relay-a"
+            ],
+            "impulseNs": 119.61616036457796,
+            "energyJ": 140.1022599204476,
+            "x": -3.2354671418832006,
+            "z": 0.004404830212949122,
+            "timeS": 0.5041666666666658
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-a",
+              "relay-b"
+            ],
+            "impulseNs": 74.33249321003366,
+            "energyJ": 72.26110207240411,
+            "x": -0.09666283919293503,
+            "z": -0.15843084104758065,
+            "timeS": 0.9833333333333307
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-a",
+              "parked"
+            ],
+            "impulseNs": 66.95484196718424,
+            "energyJ": 48.707020403953315,
+            "x": 1.2802964202666665,
+            "z": -2.3377201747960417,
+            "timeS": 1.7833333333333279
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "parked"
+            ],
+            "impulseNs": 47.33898216291355,
+            "energyJ": 18.943188776167773,
+            "x": 4.1511907632464355,
+            "z": -4.35,
+            "timeS": 3.3249999999999993
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 78.1746850981442,
+            "energyJ": 75.33630905071509,
+            "x": 7.38,
+            "z": 3.7307603962445426,
+            "timeS": 3.6249999999999982
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 67.84084145531092,
+            "energyJ": 30.258907096414422,
+            "x": 1.5012782370422046,
+            "z": 4.42,
+            "timeS": 4.004166666666662
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 39.91021782283398,
+            "energyJ": 19.63542266600166,
+            "x": 7.0043522254467625,
+            "z": 4.38,
+            "timeS": 4.129166666666655
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "parked"
+            ],
+            "impulseNs": 62.43341153447377,
+            "energyJ": 32.94954248379511,
+            "x": 7.35,
+            "z": -3.6770633483565445,
+            "timeS": 5.566666666666573
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "relay-b"
+            ],
+            "impulseNs": 54.20782140168771,
+            "energyJ": 31.72943601538428,
+            "x": 4.9969964652030106,
+            "z": 3.681637298878205,
+            "timeS": 6.104166666666543
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-a"
+            ],
+            "impulseNs": 15.574853939162546,
+            "energyJ": 2.5631453426272937,
+            "x": -0.2892322726892451,
+            "z": -4.38,
+            "timeS": 6.920833333333163
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 46.89902289113494,
+            "energyJ": 27.11437805896448,
+            "x": 7.38,
+            "z": 3.0919136038859723,
+            "timeS": 7.270833333333143
+          }
+        ]
+      },
+      "candidates": [
+        {
+          "id": "steer:0.20@0.25",
+          "action": {
+            "id": "steer:0.20@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.2
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 11,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 39.18961921118314,
+            "controlEnergyChangeJ": -7.993605777301127e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 8.159276582336027,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -20.40119386699634,
+              "z": -7.753782088423691
+            }
+          }
+        },
+        {
+          "id": "steer:0.24@0.25",
+          "action": {
+            "id": "steer:0.24@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.24
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 12,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 46.993040768899974,
+            "controlEnergyChangeJ": -7.993605777301127e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 14.339003291278715,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -12.76014561501039,
+              "z": -15.490818210796998
+            }
+          }
+        },
+        {
+          "id": "steer:0.28@0.25",
+          "action": {
+            "id": "steer:0.28@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.28
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 12,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 54.77766573687478,
+            "controlEnergyChangeJ": -7.993605777301127e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 19.97825424750082,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -26.323415843697575,
+              "z": -31.574585513232066
+            }
+          }
+        },
+        {
+          "id": "steer:0.32@0.25",
+          "action": {
+            "id": "steer:0.32@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.32
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 3.6082005420948815,
+            "protectedImpactSumJ": 5.554885925486498,
+            "maxProtectedImpulseNs": 15.49762113629068,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 13,
+            "firstProtectedImpactS": 4.574999999999963,
+            "controlImpulseNs": 62.540380368913944,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 10.582587035550015,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -21.116545631747965,
+              "z": 4.034212824743058
+            }
+          }
+        },
+        {
+          "id": "steer:-0.32@0.25",
+          "action": {
+            "id": "steer:-0.32@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.32
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 4.564491902149546,
+            "protectedImpactSumJ": 9.43798142419232,
+            "maxProtectedImpulseNs": 15.789144962470045,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 16,
+            "firstProtectedImpactS": 2.1500000000000012,
+            "controlImpulseNs": 62.540380368913944,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 12.506153484375577,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -0.21399422765800935,
+              "z": 31.10434131038373
+            }
+          }
+        },
+        {
+          "id": "brake:0.70@0.25",
+          "action": {
+            "id": "brake:0.70@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.7000000000000001
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 7.207388063285846,
+            "protectedImpactSumJ": 12.388003382071684,
+            "maxProtectedImpulseNs": 19.115820014024834,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 4,
+            "firstProtectedImpactS": 4.133333333333321,
+            "controlImpulseNs": 137.3925403398471,
+            "controlEnergyChangeJ": -389.51941560868994,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 4.937191361350749,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 22.595653560734547,
+              "z": -3.3306690738754696e-15
+            }
+          }
+        },
+        {
+          "id": "brake:0.75@0.25",
+          "action": {
+            "id": "brake:0.75@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.75
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 4.431407863738146,
+            "protectedImpactSumJ": 7.824301095651741,
+            "maxProtectedImpulseNs": 14.989075311423449,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 4,
+            "firstProtectedImpactS": 4.97499999999994,
+            "controlImpulseNs": 147.20629322126473,
+            "controlEnergyChangeJ": -401.29060673972174,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 3.4267258677430945,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 18.82654648125469,
+              "z": 1.4654943925052066e-14
+            }
+          }
+        },
+        {
+          "id": "brake:0.80@0.25",
+          "action": {
+            "id": "brake:0.80@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.8
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 1.980763534460292,
+            "protectedImpactSumJ": 1.980763534460292,
+            "maxProtectedImpulseNs": 10.401086487934283,
+            "protectedCollisionCount": 1,
+            "totalCollisions": 3,
+            "firstProtectedImpactS": 6.2874999999998655,
+            "controlImpulseNs": 157.02004610268241,
+            "controlEnergyChangeJ": -410.92158130147516,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 4.348326968754898,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 26.01905406467313,
+              "z": 1.0436096431476471e-14
+            }
+          }
+        },
+        {
+          "id": "brake:0.85@0.25",
+          "action": {
+            "id": "brake:0.85@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.8500000000000001
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0.9462083148038525,
+            "protectedImpactSumJ": 0.9462083148038525,
+            "maxProtectedImpulseNs": 7.188789578459443,
+            "protectedCollisionCount": 1,
+            "totalCollisions": 3,
+            "firstProtectedImpactS": 8.620833333333067,
+            "controlImpulseNs": 166.83379898410007,
+            "controlEnergyChangeJ": -418.4123392939499,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 2.445978553812223,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 19.51429054850479,
+              "z": 3.552713678800501e-15
+            }
+          }
+        },
+        {
+          "id": "brake:0.90@0.25",
+          "action": {
+            "id": "brake:0.90@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.9
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 2,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 176.6475518655177,
+            "controlEnergyChangeJ": -423.76288071714623,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 1.2469670321805721,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 13.009527032336589,
+              "z": 1.9984014443252818e-15
+            }
+          }
+        },
+        {
+          "id": "steer:-0.36@0.25",
+          "action": {
+            "id": "steer:-0.36@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.36
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 8.485268178096002,
+            "protectedImpactSumJ": 11.991535417416763,
+            "maxProtectedImpulseNs": 22.14453924895535,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 17,
+            "firstProtectedImpactS": 5.204166666666594,
+            "controlImpulseNs": 70.27807968266619,
+            "controlEnergyChangeJ": -1.5987211554602254e-13,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 11.766270009597546,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -20.796273033087147,
+              "z": 22.719348223824657
+            }
+          }
+        },
+        {
+          "id": "brake:0.65@0.25",
+          "action": {
+            "id": "brake:0.65@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.65
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 10.641614253028209,
+            "protectedImpactSumJ": 17.980172526246424,
+            "maxProtectedImpulseNs": 23.22778169840009,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 5,
+            "firstProtectedImpactS": 3.545833333333331,
+            "controlImpulseNs": 127.57878745842945,
+            "controlEnergyChangeJ": -375.6080079083796,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 6.713846673538411,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 26.37567349645946,
+              "z": -2.1760371282653068e-14
+            }
+          }
+        },
+        {
+          "id": "brake:0.60@0.25",
+          "action": {
+            "id": "brake:0.60@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.6000000000000001
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 14.760601220581531,
+            "protectedImpactSumJ": 24.640958809696833,
+            "maxProtectedImpulseNs": 27.35621468484782,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 5,
+            "firstProtectedImpactS": 3.1124999999999994,
+            "controlImpulseNs": 117.76503457701182,
+            "controlEnergyChangeJ": -359.55638363879075,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 8.768635617462161,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 30.143153435147468,
+              "z": -1.6431300764452317e-14
+            }
+          }
+        },
+        {
+          "id": "steer:-0.28@0.25",
+          "action": {
+            "id": "steer:-0.28@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.28
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 18.81711937861931,
+            "protectedImpactSumJ": 42.49582053590615,
+            "maxProtectedImpulseNs": 30.887342917382828,
+            "protectedCollisionCount": 4,
+            "totalCollisions": 17,
+            "firstProtectedImpactS": 1.7624999999999946,
+            "controlImpulseNs": 54.77766573687478,
+            "controlEnergyChangeJ": -7.993605777301127e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 9.099910145223316,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -14.204583630611513,
+              "z": 10.785768841601152
+            }
+          }
+        },
+        {
+          "id": "brake:0.55@0.25",
+          "action": {
+            "id": "brake:0.55@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.55
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 19.58437984511267,
+            "protectedImpactSumJ": 34.824106593398746,
+            "maxProtectedImpulseNs": 31.51076098965578,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 6,
+            "firstProtectedImpactS": 2.7791666666666672,
+            "controlImpulseNs": 107.95128169559415,
+            "controlEnergyChangeJ": -341.36454279992336,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 9.928142750426122,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 33.8936389291512,
+              "z": -2.1316282072803006e-14
+            }
+          }
+        },
+        {
+          "id": "steer:0.36@0.25",
+          "action": {
+            "id": "steer:0.36@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.36
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 19.90559950640689,
+            "protectedImpactSumJ": 41.979722698216484,
+            "maxProtectedImpulseNs": 31.76812702969486,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 12,
+            "firstProtectedImpactS": 2.5041666666666678,
+            "controlImpulseNs": 70.27807968266619,
+            "controlEnergyChangeJ": -1.5987211554602254e-13,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 10.382959773537753,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -33.61406931585869,
+              "z": -16.61775677960709
+            }
+          }
+        },
+        {
+          "id": "steer:0.16@0.25",
+          "action": {
+            "id": "steer:0.16@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.16
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 21.235043086022113,
+            "protectedImpactSumJ": 68.07187355569044,
+            "maxProtectedImpulseNs": 36.321574591135835,
+            "protectedCollisionCount": 4,
+            "totalCollisions": 15,
+            "firstProtectedImpactS": 1.6208333333333285,
+            "controlImpulseNs": 31.370522328303124,
+            "controlEnergyChangeJ": -7.993605777301127e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 10.044186925352433,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -37.59502493602827,
+              "z": -10.348344345116164
+            }
+          }
+        },
+        {
+          "id": "brake:0.50@0.25",
+          "action": {
+            "id": "brake:0.50@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.5
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 25.043165397266563,
+            "protectedImpactSumJ": 44.44666165813022,
+            "maxProtectedImpulseNs": 35.63268844251602,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 7,
+            "firstProtectedImpactS": 2.5166666666666684,
+            "controlImpulseNs": 98.13752881417649,
+            "controlEnergyChangeJ": -321.0324853917774,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 9.43610746466125,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 21.782520025502635,
+              "z": -1.6431300764452317e-14
+            }
+          }
+        },
+        {
+          "id": "brake:0.45@0.25",
+          "action": {
+            "id": "brake:0.45@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.45
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 31.182216913330983,
+            "protectedImpactSumJ": 55.258933729578075,
+            "maxProtectedImpulseNs": 39.76101605223238,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 8,
+            "firstProtectedImpactS": 2.3041666666666685,
+            "controlImpulseNs": 88.32377593275883,
+            "controlEnergyChangeJ": -298.560211414353,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 9.807409415599452,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 23.9562487242111,
+              "z": -11.999729182054887
+            }
+          }
+        },
+        {
+          "id": "brake:0.40@0.25",
+          "action": {
+            "id": "brake:0.40@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.4
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 37.90818799305208,
+            "protectedImpactSumJ": 67.0732862891209,
+            "maxProtectedImpulseNs": 43.83999465382883,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 8,
+            "firstProtectedImpactS": 2.129166666666667,
+            "controlImpulseNs": 78.51002305134121,
+            "controlEnergyChangeJ": -273.9477208676501,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 11.706978715181231,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 26.14580707162674,
+              "z": -13.172550369498584
+            }
+          }
+        },
+        {
+          "id": "steer:0.12@0.25",
+          "action": {
+            "id": "steer:0.12@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.12
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 40.909283279680615,
+            "protectedImpactSumJ": 113.97364249655463,
+            "maxProtectedImpulseNs": 45.54229531193841,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 15,
+            "firstProtectedImpactS": 1.495833333333329,
+            "controlImpulseNs": 23.538877654759844,
+            "controlEnergyChangeJ": -7.993605777301127e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 7.573936573094063,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -29.315903118675326,
+              "z": -19.206041654852992
+            }
+          }
+        },
+        {
+          "id": "brake:0.35@0.25",
+          "action": {
+            "id": "brake:0.35@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.35000000000000003
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 45.384156514170435,
+            "protectedImpactSumJ": 80.23341496022029,
+            "maxProtectedImpulseNs": 47.968497321350824,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 8,
+            "firstProtectedImpactS": 1.9791666666666605,
+            "controlImpulseNs": 68.69627016992358,
+            "controlEnergyChangeJ": -247.19501375166868,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 13.73931807300199,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 28.324768004247627,
+              "z": -14.266476331371813
+            }
+          }
+        },
+        {
+          "id": "steer:-0.24@0.25",
+          "action": {
+            "id": "steer:-0.24@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.24
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 49.66154024183541,
+            "protectedImpactSumJ": 103.59774550931361,
+            "maxProtectedImpulseNs": 50.17808376433934,
+            "protectedCollisionCount": 6,
+            "totalCollisions": 16,
+            "firstProtectedImpactS": 1.5833333333333286,
+            "controlImpulseNs": 46.993040768899974,
+            "controlEnergyChangeJ": -7.993605777301127e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 20.647784081209355,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -10.905442022801646,
+              "z": 18.47306946153973
+            }
+          }
+        },
+        {
+          "id": "brake:0.30@0.25",
+          "action": {
+            "id": "brake:0.30@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.30000000000000004
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 53.710279390932584,
+            "protectedImpactSumJ": 98.0906134886387,
+            "maxProtectedImpulseNs": 52.18343765142616,
+            "protectedCollisionCount": 4,
+            "totalCollisions": 9,
+            "firstProtectedImpactS": 1.8499999999999943,
+            "controlImpulseNs": 58.88251728850591,
+            "controlEnergyChangeJ": -218.30209006640865,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 13.152146167285402,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 18.19904477038159,
+              "z": -15.227816599733124
+            }
+          }
+        },
+        {
+          "id": "brake:0.25@0.25",
+          "action": {
+            "id": "brake:0.25@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.25
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 62.394067145808926,
+            "protectedImpactSumJ": 113.8613955100826,
+            "maxProtectedImpulseNs": 56.24392593242858,
+            "protectedCollisionCount": 4,
+            "totalCollisions": 9,
+            "firstProtectedImpactS": 1.7416666666666614,
+            "controlImpulseNs": 49.06876440708826,
+            "controlEnergyChangeJ": -187.26894981187021,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 15.258878116492939,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 19.718105178613715,
+              "z": -16.435784487527044
+            }
+          }
+        },
+        {
+          "id": "steer:0.08@0.25",
+          "action": {
+            "id": "steer:0.08@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.08
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 69.07890078992814,
+            "protectedImpactSumJ": 146.5270306074093,
+            "maxProtectedImpulseNs": 59.1802354680121,
+            "protectedCollisionCount": 4,
+            "totalCollisions": 14,
+            "firstProtectedImpactS": 1.4291666666666625,
+            "controlImpulseNs": 15.697817744002174,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 8.21175836602991,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -0.7008358922117481,
+              "z": -14.734646738031516
+            }
+          }
+        },
+        {
+          "id": "brake:0.20@0.25",
+          "action": {
+            "id": "brake:0.20@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.2
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 71.79004024284681,
+            "protectedImpactSumJ": 132.46684225017387,
+            "maxProtectedImpulseNs": 60.33038239819414,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 10,
+            "firstProtectedImpactS": 1.6458333333333284,
+            "controlImpulseNs": 39.25501152567059,
+            "controlEnergyChangeJ": -154.09559298805314,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 16.17707390876393,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 21.161480653307823,
+              "z": -9.167961258356444
+            }
+          }
+        },
+        {
+          "id": "steer:-0.20@0.25",
+          "action": {
+            "id": "steer:-0.20@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.2
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 78.35367804775433,
+            "protectedImpactSumJ": 156.7615342358049,
+            "maxProtectedImpulseNs": 63.02802136368509,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 15,
+            "firstProtectedImpactS": 1.4874999999999956,
+            "controlImpulseNs": 39.18961921118314,
+            "controlEnergyChangeJ": -7.993605777301127e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 13.413769628926886,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -23.68912874002997,
+              "z": 32.70951622673806
+            }
+          }
+        },
+        {
+          "id": "brake:0.15@0.25",
+          "action": {
+            "id": "brake:0.15@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.15000000000000002
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 82.02879206490236,
+            "protectedImpactSumJ": 151.57189099533858,
+            "maxProtectedImpulseNs": 64.4892220273322,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 11,
+            "firstProtectedImpactS": 1.5624999999999953,
+            "controlImpulseNs": 29.44125864425296,
+            "controlEnergyChangeJ": -118.78201959495772,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 3.9438559308155945,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -26.613632297189707,
+              "z": -10.085249536444561
+            }
+          }
+        },
+        {
+          "id": "brake:0.10@0.25",
+          "action": {
+            "id": "brake:0.10@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.1
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 93.00879985076163,
+            "protectedImpactSumJ": 172.01343884729042,
+            "maxProtectedImpulseNs": 68.66983437022121,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 11,
+            "firstProtectedImpactS": 1.4874999999999956,
+            "controlImpulseNs": 19.627505762835295,
+            "controlEnergyChangeJ": -81.32822963258361,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 4.439817957912258,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -28.30941906611918,
+              "z": -10.989033117961117
+            }
+          }
+        },
+        {
+          "id": "steer:0.04@0.25",
+          "action": {
+            "id": "steer:0.04@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.04
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 95.64830621702552,
+            "protectedImpactSumJ": 169.84449508085046,
+            "maxProtectedImpulseNs": 69.63741182154313,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 11,
+            "firstProtectedImpactS": 1.387499999999996,
+            "controlImpulseNs": 7.850478915448349,
+            "controlEnergyChangeJ": -7.993605777301127e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 10.413734691602803,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -11.577598281322018,
+              "z": 15.069925458658602
+            }
+          }
+        },
+        {
+          "id": "steer:-0.16@0.25",
+          "action": {
+            "id": "steer:-0.16@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.16
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 104.60927319707069,
+            "protectedImpactSumJ": 169.24466319387744,
+            "maxProtectedImpulseNs": 72.82643854460744,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 12,
+            "firstProtectedImpactS": 1.4208333333333292,
+            "controlImpulseNs": 31.370522328303124,
+            "controlEnergyChangeJ": -7.993605777301127e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 8.487956956574129,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -2.860839244254996,
+              "z": -7.247316145109123
+            }
+          }
+        },
+        {
+          "id": "brake:0.05@0.25",
+          "action": {
+            "id": "brake:0.05@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.05
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 104.61063870126036,
+            "protectedImpactSumJ": 193.63116279943023,
+            "maxProtectedImpulseNs": 72.82691385850357,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 11,
+            "firstProtectedImpactS": 1.4208333333333292,
+            "controlImpulseNs": 9.813752881417667,
+            "controlEnergyChangeJ": -41.73422310093112,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 4.977713797061153,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -29.96529814935978,
+              "z": -11.928849591784783
+            }
+          }
+        },
+        {
+          "id": "none",
+          "action": {
+            "id": "none",
+            "kind": "none",
+            "bodyId": "carrier",
+            "atS": 0,
+            "amount": 0
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "protectedImpactSumJ": 216.08359599579538,
+            "maxProtectedImpulseNs": 76.87453044005973,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 11,
+            "firstProtectedImpactS": 1.362499999999996,
+            "controlImpulseNs": 0,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 5.460841394471957,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -31.332506856238872,
+              "z": -11.922371517258822
+            }
+          }
+        },
+        {
+          "id": "steer:-0.12@0.25",
+          "action": {
+            "id": "steer:-0.12@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.12
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 121.16401554361452,
+            "protectedImpactSumJ": 204.65014119661888,
+            "maxProtectedImpulseNs": 78.37739207233969,
+            "protectedCollisionCount": 4,
+            "totalCollisions": 13,
+            "firstProtectedImpactS": 1.387499999999996,
+            "controlImpulseNs": 23.538877654759844,
+            "controlEnergyChangeJ": -7.993605777301127e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 6.384148539878317,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -1.6940007999751252,
+              "z": -10.843344061668967
+            }
+          }
+        },
+        {
+          "id": "steer:-0.04@0.25",
+          "action": {
+            "id": "steer:-0.04@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.04
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 128.35066719077443,
+            "protectedImpactSumJ": 234.3800228256934,
+            "maxProtectedImpulseNs": 80.66832604295358,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 12,
+            "firstProtectedImpactS": 1.3541666666666627,
+            "controlImpulseNs": 7.850478915448349,
+            "controlEnergyChangeJ": -7.993605777301127e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 5.7543144056653315,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -27.714863706853368,
+              "z": -6.970845793552762
+            }
+          }
+        },
+        {
+          "id": "steer:-0.08@0.25",
+          "action": {
+            "id": "steer:-0.08@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.08
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 130.09521671652135,
+            "protectedImpactSumJ": 246.25532996636917,
+            "maxProtectedImpulseNs": 81.21469994728561,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 12,
+            "firstProtectedImpactS": 1.362499999999996,
+            "controlImpulseNs": 15.697817744002174,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 435.6000000000001,
+            "finalEnergyJ": 7.898842326263709,
+            "initialMomentum": {
+              "x": 198.00000000000003,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 14.807313387932172,
+              "z": -2.397815199226467
+            }
+          }
+        }
+      ],
+      "deadline": {
+        "stepS": 0.25,
+        "maxDelayS": 2,
+        "lastSafeDelayS": 0.25,
+        "rows": [
+          {
+            "delayS": 0,
+            "safe": true,
+            "bestCandidateId": "steer:0.12@0.00",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 23.74574656586006
+          },
+          {
+            "delayS": 0.25,
+            "safe": true,
+            "bestCandidateId": "steer:0.20@0.25",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 39.18961921118314
+          },
+          {
+            "delayS": 0.5,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 0.75,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1.25,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1.5,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1.75,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 2,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          }
+        ],
+        "scope": "Last safe delay among a 0.25-second grid and the stated discrete intervention set; not a continuous guarantee."
+      },
+      "speed_sensitivity": {
+        "kind": "lead_carrier_speed_only",
+        "checks": [
+          {
+            "speedFactor": 0.95,
+            "safe": true,
+            "protectedImpactEnergyJ": 0
+          },
+          {
+            "speedFactor": 1,
+            "safe": true,
+            "protectedImpactEnergyJ": 0
+          },
+          {
+            "speedFactor": 1.05,
+            "safe": true,
+            "protectedImpactEnergyJ": 5.069170543591718
+          }
+        ],
+        "safeCount": 3,
+        "total": 3,
+        "scope": "Three simulated speed checks only; no probabilistic or physical guarantee."
+      },
+      "integration_convergence": {
+        "coarse_dt_s": 0.004166666666666667,
+        "fine_dt_s": 0.0020833333333333333,
+        "fine_baseline_metrics": {
+          "protectedImpactEnergyJ": 116.77684568178007,
+          "protectedImpactSumJ": 216.37340529422576,
+          "maxProtectedImpulseNs": 76.94534473290928,
+          "protectedCollisionCount": 5,
+          "totalCollisions": 11,
+          "firstProtectedImpactS": 1.3604166666666688,
+          "controlImpulseNs": 0,
+          "controlEnergyChangeJ": 0,
+          "thresholdJ": 8,
+          "safe": false,
+          "initialEnergyJ": 435.6000000000001,
+          "finalEnergyJ": 5.497721556907185,
+          "initialMomentum": {
+            "x": 198.00000000000003,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -31.47226885238796,
+            "z": -12.346924265458043
+          }
+        },
+        "fine_intervention_metrics": {
+          "protectedImpactEnergyJ": 0,
+          "protectedImpactSumJ": 0,
+          "maxProtectedImpulseNs": 0,
+          "protectedCollisionCount": 0,
+          "totalCollisions": 11,
+          "firstProtectedImpactS": null,
+          "controlImpulseNs": 39.18961921118343,
+          "controlEnergyChangeJ": 7.993605777301127e-14,
+          "thresholdJ": 8,
+          "safe": true,
+          "initialEnergyJ": 435.6000000000001,
+          "finalEnergyJ": 7.998892964078582,
+          "initialMomentum": {
+            "x": 198.00000000000003,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -20.68530349286994,
+            "z": -7.753782088426007
+          }
+        },
+        "relative_baseline_peak_energy_change": 0.001839791795378515
+      }
+    },
+    {
+      "scenario": {
+        "id": "crossing",
+        "title": "Intersection aveugle",
+        "description": "Deux transporteurs convergent. Le choc peut dévier une charge vers un équipement fragile.",
+        "challenge": "Choisir entre freiner et dévier, avant le croisement.",
+        "seed": 20261104,
+        "perturbation": 1,
+        "horizonS": 12,
+        "arena": {
+          "width": 16,
+          "depth": 10
+        },
+        "bodies": [
+          {
+            "id": "carrier",
+            "kind": "carrier",
+            "label": "A · transporteur",
+            "x": -6,
+            "z": -1.1934698685153853,
+            "vx": 4.2,
+            "vz": 0.12,
+            "radius": 0.58,
+            "mass": 38,
+            "color": "#f6a66a"
+          },
+          {
+            "id": "crossing",
+            "kind": "cargo",
+            "label": "B · charge transversale",
+            "x": -0.8,
+            "z": -3.81660885837744,
+            "vx": 0,
+            "vz": 2.65,
+            "radius": 0.62,
+            "mass": 32,
+            "color": "#8b9dad"
+          },
+          {
+            "id": "protected",
+            "kind": "fragile",
+            "label": "C · équipement fragile",
+            "x": 3.9,
+            "z": 1.205623217120301,
+            "vx": 0,
+            "vz": 0,
+            "radius": 0.72,
+            "mass": 16,
+            "color": "#72ddca"
+          },
+          {
+            "id": "parked",
+            "kind": "cargo",
+            "label": "D · charge arrêtée",
+            "x": 3.4,
+            "z": -2.3875936458364593,
+            "vx": 0,
+            "vz": 0,
+            "radius": 0.64,
+            "mass": 30,
+            "color": "#667381"
+          }
+        ],
+        "controlBodyId": "carrier",
+        "protectedBodyId": "protected",
+        "physics": {
+          "dragPerS": 0.035,
+          "restitution": 0.72,
+          "wallRestitution": 0.3
+        },
+        "dangerThresholdJ": 8,
+        "modelDisclosure": {
+          "source": "supplied_initial_state_and_contact_law",
+          "geometry": "planar circular collision envelopes",
+          "integrator": "exact linear-drag free flight + discrete frictionless impulses, fixed 240 Hz",
+          "intervention": "one instantaneous bounded velocity change; actuator dynamics not modeled",
+          "realWorldValidation": false,
+          "metaPoweredPhysics": false
+        }
+      },
+      "action_delay_s": 0.25,
+      "candidate_count": 37,
+      "objective": "Among evaluated actions below the protected-impact energy threshold, minimize applied impulse. If none succeeds, minimize protected-impact energy, then impulse.",
+      "best_action": {
+        "id": "steer:0.12@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.12
+      },
+      "baseline": {
+        "metrics": {
+          "protectedImpactEnergyJ": 112.75521726692799,
+          "protectedImpactSumJ": 271.91386891327335,
+          "maxProtectedImpulseNs": 78.08842519730736,
+          "protectedCollisionCount": 3,
+          "totalCollisions": 8,
+          "firstProtectedImpactS": 1.8833333333333275,
+          "controlImpulseNs": 0,
+          "controlEnergyChangeJ": 0,
+          "thresholdJ": 8,
+          "safe": false,
+          "initialEnergyJ": 447.79359999999997,
+          "finalEnergyJ": 11.69895649148513,
+          "initialMomentum": {
+            "x": 159.6,
+            "z": 89.36
+          },
+          "finalMomentum": {
+            "x": -9.948815352186983,
+            "z": -25.416284206022716
+          }
+        },
+        "events": [
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "crossing"
+            ],
+            "impulseNs": 131.74151717117562,
+            "energyJ": 168.85848823246786,
+            "x": -1.386646815772251,
+            "z": -1.17751182110718,
+            "timeS": 0.9749999999999974
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "crossing",
+              "protected"
+            ],
+            "impulseNs": 77.66793907459937,
+            "energyJ": 95.58020319412014,
+            "x": 3.3678191750356214,
+            "z": 0.8034319976836647,
+            "timeS": 1.8833333333333275
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "protected"
+            ],
+            "impulseNs": 78.08842519730736,
+            "energyJ": 112.75521726692799,
+            "x": 7.28,
+            "z": 3.764964202560168,
+            "timeS": 2.7708333333333335
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "protected"
+            ],
+            "impulseNs": 58.63721081613911,
+            "energyJ": 63.57844845222524,
+            "x": 7.074177237606905,
+            "z": 4.28,
+            "timeS": 2.954166666666667
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "crossing"
+            ],
+            "impulseNs": 76.41882829093164,
+            "energyJ": 53.992578747770835,
+            "x": 7.38,
+            "z": 1.2070603762294467,
+            "timeS": 4.258333333333314
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 24.701529594882853,
+            "energyJ": 4.750588323940155,
+            "x": 3.1078713839860983,
+            "z": 4.42,
+            "timeS": 10.279166666666306
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "crossing"
+            ],
+            "impulseNs": 21.921230661801125,
+            "energyJ": 4.675277994238346,
+            "x": 3.7549959438721148,
+            "z": 3.7475269880839357,
+            "timeS": 11.14999999999959
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 18.473876098153063,
+            "energyJ": 2.657148069837364,
+            "x": 3.574384040065063,
+            "z": 4.42,
+            "timeS": 11.491666666666237
+          }
+        ]
+      },
+      "intervention": {
+        "metrics": {
+          "protectedImpactEnergyJ": 3.464221836424809,
+          "protectedImpactSumJ": 3.464221836424809,
+          "maxProtectedImpulseNs": 15.191519027227399,
+          "protectedCollisionCount": 1,
+          "totalCollisions": 5,
+          "firstProtectedImpactS": 7.820833333333112,
+          "controlImpulseNs": 18.981504801186983,
+          "controlEnergyChangeJ": -2.6137078612542552e-14,
+          "thresholdJ": 8,
+          "safe": true,
+          "initialEnergyJ": 447.79359999999997,
+          "finalEnergyJ": 18.06382183229905,
+          "initialMomentum": {
+            "x": 159.6,
+            "z": 89.36
+          },
+          "finalMomentum": {
+            "x": -3.561255826161492,
+            "z": -21.373721680910084
+          }
+        },
+        "events": [
+          {
+            "type": "intervention",
+            "bodyIds": [
+              "carrier"
+            ],
+            "kind": "steer",
+            "amount": 0.12,
+            "impulseNs": 18.981504801186983,
+            "energyJ": -2.6137078612542552e-14,
+            "x": -4.954580380820368,
+            "z": -1.1636007365388246,
+            "timeS": 0.25
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "crossing"
+            ],
+            "impulseNs": 133.34211361389146,
+            "energyJ": 172.98651337074145,
+            "x": -1.344191494259215,
+            "z": -0.9533172128998173,
+            "timeS": 1.004166666666664
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "crossing"
+            ],
+            "impulseNs": 145.76577475747226,
+            "energyJ": 196.44657073452416,
+            "x": 7.38,
+            "z": 0.5853624710637129,
+            "timeS": 3.249999999999999
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 92.78949570901902,
+            "energyJ": 67.03433909945545,
+            "x": 0.15386478714309623,
+            "z": 4.42,
+            "timeS": 3.6124999999999976
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "protected"
+            ],
+            "impulseNs": 15.191519027227399,
+            "energyJ": 3.464221836424809,
+            "x": 3.4912595914476854,
+            "z": 1.7101505845815925,
+            "timeS": 7.820833333333112
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "crossing"
+            ],
+            "impulseNs": 26.30466746759033,
+            "energyJ": 6.397332938059404,
+            "x": 2.164242699410176,
+            "z": 4.38,
+            "timeS": 8.69999999999973
+          }
+        ]
+      },
+      "candidates": [
+        {
+          "id": "steer:0.12@0.25",
+          "action": {
+            "id": "steer:0.12@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.12
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 3.464221836424809,
+            "protectedImpactSumJ": 3.464221836424809,
+            "maxProtectedImpulseNs": 15.191519027227399,
+            "protectedCollisionCount": 1,
+            "totalCollisions": 5,
+            "firstProtectedImpactS": 7.820833333333112,
+            "controlImpulseNs": 18.981504801186983,
+            "controlEnergyChangeJ": -2.6137078612542552e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 18.06382183229905,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -3.561255826161492,
+              "z": -21.373721680910084
+            }
+          }
+        },
+        {
+          "id": "steer:-0.12@0.25",
+          "action": {
+            "id": "steer:-0.12@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.12
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 7.371739324155177,
+            "protectedImpactSumJ": 20.67067718709496,
+            "maxProtectedImpulseNs": 22.160693095593288,
+            "protectedCollisionCount": 4,
+            "totalCollisions": 11,
+            "firstProtectedImpactS": 2.0666666666666638,
+            "controlImpulseNs": 18.981504801186983,
+            "controlEnergyChangeJ": -9.363863850975207e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 14.855900622033241,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -26.849105844983864,
+              "z": -8.243674150836164
+            }
+          }
+        },
+        {
+          "id": "brake:0.15@0.25",
+          "action": {
+            "id": "brake:0.15@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.15000000000000002
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 3.9072136620268916,
+            "protectedImpactSumJ": 3.9072136620268916,
+            "maxProtectedImpulseNs": 15.7033166078102,
+            "protectedCollisionCount": 1,
+            "totalCollisions": 6,
+            "firstProtectedImpactS": 6.891666666666498,
+            "controlImpulseNs": 23.741123111529117,
+            "controlEnergyChangeJ": -91.46804510561813,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 14.415046693559809,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": 5.557136766184554,
+              "z": -22.724995780285276
+            }
+          }
+        },
+        {
+          "id": "steer:-0.16@0.25",
+          "action": {
+            "id": "steer:-0.16@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.16
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 6,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 25.29686117256403,
+            "controlEnergyChangeJ": -1.611401984069616e-13,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 13.249058733267471,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -31.200781293957018,
+              "z": -12.590575051139435
+            }
+          }
+        },
+        {
+          "id": "steer:-0.20@0.25",
+          "action": {
+            "id": "steer:-0.20@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.2
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 7,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 31.60209913675903,
+            "controlEnergyChangeJ": 4.1364481284666965e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 11.166654555391222,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -31.01088014826785,
+              "z": -11.34617589798323
+            }
+          }
+        },
+        {
+          "id": "brake:0.20@0.25",
+          "action": {
+            "id": "brake:0.20@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.2
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 5,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 31.654830815372144,
+            "controlEnergyChangeJ": -118.66124770458562,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 12.853790241263408,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -15.26602808301897,
+              "z": -30.27074419820299
+            }
+          }
+        },
+        {
+          "id": "steer:-0.24@0.25",
+          "action": {
+            "id": "steer:-0.24@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.24
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 1.7201737099955097,
+            "protectedImpactSumJ": 1.7201737099955097,
+            "maxProtectedImpulseNs": 10.704946654112476,
+            "protectedCollisionCount": 1,
+            "totalCollisions": 8,
+            "firstProtectedImpactS": 11.61666666666623,
+            "controlImpulseNs": 37.89469668265503,
+            "controlEnergyChangeJ": 4.1364481284666965e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 15.684083149310226,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -24.075140143976466,
+              "z": -10.110366151798065
+            }
+          }
+        },
+        {
+          "id": "steer:0.24@0.25",
+          "action": {
+            "id": "steer:0.24@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.24
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 4.633649346854111,
+            "protectedImpactSumJ": 8.169466444642955,
+            "maxProtectedImpulseNs": 17.5695216343971,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 6,
+            "firstProtectedImpactS": 4.945833333333275,
+            "controlImpulseNs": 37.89469668265504,
+            "controlEnergyChangeJ": -2.6137078612542552e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 13.389029625153475,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -28.886766598739367,
+              "z": -19.551536704164594
+            }
+          }
+        },
+        {
+          "id": "brake:0.25@0.25",
+          "action": {
+            "id": "brake:0.25@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.25
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0.8172676370129467,
+            "protectedImpactSumJ": 0.8172676370129467,
+            "maxProtectedImpulseNs": 7.181909981560209,
+            "protectedCollisionCount": 1,
+            "totalCollisions": 9,
+            "firstProtectedImpactS": 5.016666666666604,
+            "controlImpulseNs": 39.568538519215195,
+            "controlEnergyChangeJ": -144.20637741876732,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 6.895880653800793,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -11.953963546982552,
+              "z": -14.125334883940495
+            }
+          }
+        },
+        {
+          "id": "steer:0.28@0.25",
+          "action": {
+            "id": "steer:0.28@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.28
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0.37818079755997475,
+            "protectedImpactSumJ": 0.37818079755997475,
+            "maxProtectedImpulseNs": 4.885483414364487,
+            "protectedCollisionCount": 1,
+            "totalCollisions": 5,
+            "firstProtectedImpactS": 10.04166666666632,
+            "controlImpulseNs": 44.17213685513387,
+            "controlEnergyChangeJ": -2.6137078612542552e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 15.01605563462165,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -29.985829596417293,
+              "z": -22.89079461375764
+            }
+          }
+        },
+        {
+          "id": "steer:-0.28@0.25",
+          "action": {
+            "id": "steer:-0.28@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.28
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 2.2784293345350495,
+            "protectedImpactSumJ": 3.7769036239545786,
+            "maxProtectedImpulseNs": 11.860498128659424,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 8,
+            "firstProtectedImpactS": 11.087499999999594,
+            "controlImpulseNs": 44.172136855133864,
+            "controlEnergyChangeJ": 4.1364481284666965e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 14.361470362792858,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -30.482628646091097,
+              "z": -8.885122844552518
+            }
+          }
+        },
+        {
+          "id": "brake:0.30@0.25",
+          "action": {
+            "id": "brake:0.30@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.30000000000000004
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 2,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 47.48224622305825,
+            "controlEnergyChangeJ": -168.10343424816307,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 10.804427904067477,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -22.021581212918793,
+              "z": -14.617977647243675
+            }
+          }
+        },
+        {
+          "id": "steer:-0.32@0.25",
+          "action": {
+            "id": "steer:-0.32@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.32
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 4,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 50.43190876182461,
+            "controlEnergyChangeJ": -2.6137078612542552e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 15.44341728898455,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -30.14512337931933,
+              "z": -7.6724061041669405
+            }
+          }
+        },
+        {
+          "id": "steer:0.32@0.25",
+          "action": {
+            "id": "steer:0.32@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.32
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 1.5554416888832545,
+            "protectedImpactSumJ": 1.5554416888832545,
+            "maxProtectedImpulseNs": 10.179471289796695,
+            "protectedCollisionCount": 1,
+            "totalCollisions": 6,
+            "firstProtectedImpactS": 9.124999999999705,
+            "controlImpulseNs": 50.43190876182461,
+            "controlEnergyChangeJ": -9.363863850975207e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 12.576211435147098,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -29.579633333484693,
+              "z": -23.18622157877522
+            }
+          }
+        },
+        {
+          "id": "brake:0.35@0.25",
+          "action": {
+            "id": "brake:0.35@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.35000000000000003
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 2,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 55.39595392690129,
+            "controlEnergyChangeJ": -190.3524181927729,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 9.917450572498588,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -20.448611126281666,
+              "z": -14.767784322161498
+            }
+          }
+        },
+        {
+          "id": "steer:-0.36@0.25",
+          "action": {
+            "id": "steer:-0.36@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.36
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 5,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 56.671508577427105,
+            "controlEnergyChangeJ": -2.6137078612542552e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 13.126682068651895,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -29.759392345757586,
+              "z": -6.474156018726658
+            }
+          }
+        },
+        {
+          "id": "steer:0.36@0.25",
+          "action": {
+            "id": "steer:0.36@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.36
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 4.9314024519284425,
+            "protectedImpactSumJ": 12.078516058135087,
+            "maxProtectedImpulseNs": 17.64180550928435,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 9,
+            "firstProtectedImpactS": 4.245833333333315,
+            "controlImpulseNs": 56.671508577427105,
+            "controlEnergyChangeJ": -9.363863850975207e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 11.724582515228569,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -16.86332266970968,
+              "z": -33.50398398462297
+            }
+          }
+        },
+        {
+          "id": "brake:0.40@0.25",
+          "action": {
+            "id": "brake:0.40@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.4
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 2,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 63.309661630744316,
+            "controlEnergyChangeJ": -210.95332925259677,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 9.09617526549045,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -18.875641039644727,
+              "z": -14.91759099707932
+            }
+          }
+        },
+        {
+          "id": "brake:0.45@0.25",
+          "action": {
+            "id": "brake:0.45@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.45
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 2,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 71.22336933458735,
+            "controlEnergyChangeJ": -229.9061674276347,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 8.340601983042884,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -17.302670953007624,
+              "z": -15.067397671997128
+            }
+          }
+        },
+        {
+          "id": "brake:0.50@0.25",
+          "action": {
+            "id": "brake:0.50@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.5
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 2,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 79.13707703843038,
+            "controlEnergyChangeJ": -247.21093271788683,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 7.650730725155998,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -15.729700866370566,
+              "z": -15.217204346914938
+            }
+          }
+        },
+        {
+          "id": "brake:0.55@0.25",
+          "action": {
+            "id": "brake:0.55@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.55
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 2,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 87.05078474227342,
+            "controlEnergyChangeJ": -262.867625123353,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 7.026561491829773,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -14.156730779733524,
+              "z": -15.367011021832758
+            }
+          }
+        },
+        {
+          "id": "brake:0.60@0.25",
+          "action": {
+            "id": "brake:0.60@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.6000000000000001
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 2,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 94.96449244611648,
+            "controlEnergyChangeJ": -276.87624464403325,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 6.468094283064208,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -12.5837606930965,
+              "z": -15.516817696750572
+            }
+          }
+        },
+        {
+          "id": "brake:0.65@0.25",
+          "action": {
+            "id": "brake:0.65@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.65
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 2,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 102.87820014995953,
+            "controlEnergyChangeJ": -289.23679127992756,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 5.975329098859267,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -11.010790606459368,
+              "z": -15.666624371668384
+            }
+          }
+        },
+        {
+          "id": "brake:0.70@0.25",
+          "action": {
+            "id": "brake:0.70@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.7000000000000001
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 1,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 110.79190785380256,
+            "controlEnergyChangeJ": -299.949265031036,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 17.39854884997315,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": 31.459401732741167,
+              "z": -15.816431046586207
+            }
+          }
+        },
+        {
+          "id": "brake:0.75@0.25",
+          "action": {
+            "id": "brake:0.75@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.75
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 1,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 118.70561555764557,
+            "controlEnergyChangeJ": -309.01366589735846,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 13.416267936602335,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": 26.216168110617645,
+              "z": -15.966237721504015
+            }
+          }
+        },
+        {
+          "id": "brake:0.80@0.25",
+          "action": {
+            "id": "brake:0.80@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.8
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 1,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 126.61932326148863,
+            "controlEnergyChangeJ": -316.42999387889506,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 10.158038098389838,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": 20.972934488494097,
+              "z": -16.116044396421835
+            }
+          }
+        },
+        {
+          "id": "brake:0.85@0.25",
+          "action": {
+            "id": "brake:0.85@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.8500000000000001
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 1,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 134.53303096533168,
+            "controlEnergyChangeJ": -322.1982489756458,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 7.623859335335689,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": 15.729700866370575,
+              "z": -16.26585107133965
+            }
+          }
+        },
+        {
+          "id": "brake:0.90@0.25",
+          "action": {
+            "id": "brake:0.90@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.9
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 2,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 142.4467386691747,
+            "controlEnergyChangeJ": -326.3184311876105,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 4.326062342334912,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": 10.48646724424706,
+              "z": -16.41565774625745
+            }
+          }
+        },
+        {
+          "id": "steer:0.16@0.25",
+          "action": {
+            "id": "steer:0.16@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.16
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 10.26004909388802,
+            "protectedImpactSumJ": 21.42034096017135,
+            "maxProtectedImpulseNs": 23.55553979422811,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 8,
+            "firstProtectedImpactS": 5.720833333333231,
+            "controlImpulseNs": 25.29686117256403,
+            "controlEnergyChangeJ": -2.6137078612542552e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 4.359049209694167,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -19.001520101312703,
+              "z": 15.721451938800215
+            }
+          }
+        },
+        {
+          "id": "steer:0.20@0.25",
+          "action": {
+            "id": "steer:0.20@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.2
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 12.787741366230524,
+            "protectedImpactSumJ": 19.30964503464552,
+            "maxProtectedImpulseNs": 28.408920310956372,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 7,
+            "firstProtectedImpactS": 5.5499999999999075,
+            "controlImpulseNs": 31.60209913675903,
+            "controlEnergyChangeJ": -2.6137078612542552e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 14.342622298601878,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -19.06870354156807,
+              "z": -14.111825639685371
+            }
+          }
+        },
+        {
+          "id": "steer:0.08@0.25",
+          "action": {
+            "id": "steer:0.08@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.08
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 50.732375564121135,
+            "protectedImpactSumJ": 90.94542562149964,
+            "maxProtectedImpulseNs": 52.379450841982596,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 7,
+            "firstProtectedImpactS": 2.0666666666666638,
+            "controlImpulseNs": 12.658556080972822,
+            "controlEnergyChangeJ": 4.1364481284666965e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 17.191929856923746,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -8.005351438854294,
+              "z": -26.321306035103543
+            }
+          }
+        },
+        {
+          "id": "brake:0.10@0.25",
+          "action": {
+            "id": "brake:0.10@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.1
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 76.1784729302457,
+            "protectedImpactSumJ": 131.88490583054593,
+            "maxProtectedImpulseNs": 64.18513703395583,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 9,
+            "firstProtectedImpactS": 2.05833333333333,
+            "controlImpulseNs": 15.827415407686072,
+            "controlEnergyChangeJ": -62.62676962186465,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 11.256594162248303,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -2.3868592806074833,
+              "z": -7.998724221518928
+            }
+          }
+        },
+        {
+          "id": "steer:0.04@0.25",
+          "action": {
+            "id": "steer:0.04@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.04
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 77.02781612685133,
+            "protectedImpactSumJ": 196.94479365981067,
+            "maxProtectedImpulseNs": 65.94460212980802,
+            "protectedCollisionCount": 4,
+            "totalCollisions": 8,
+            "firstProtectedImpactS": 1.949999999999994,
+            "controlImpulseNs": 6.330544107104767,
+            "controlEnergyChangeJ": -2.6137078612542552e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 13.536883613595304,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -10.228136811790941,
+              "z": -23.299450041125795
+            }
+          }
+        },
+        {
+          "id": "none",
+          "action": {
+            "id": "none",
+            "kind": "none",
+            "bodyId": "carrier",
+            "atS": 0,
+            "amount": 0
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 112.75521726692799,
+            "protectedImpactSumJ": 271.91386891327335,
+            "maxProtectedImpulseNs": 78.08842519730736,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 8,
+            "firstProtectedImpactS": 1.8833333333333275,
+            "controlImpulseNs": 0,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 11.69895649148513,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -9.948815352186983,
+              "z": -25.416284206022716
+            }
+          }
+        },
+        {
+          "id": "steer:-0.08@0.25",
+          "action": {
+            "id": "steer:-0.08@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.08
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 140.74363088417007,
+            "protectedImpactSumJ": 216.54108181831268,
+            "maxProtectedImpulseNs": 87.24342702012524,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 7,
+            "firstProtectedImpactS": 1.8916666666666608,
+            "controlImpulseNs": 12.658556080972822,
+            "controlEnergyChangeJ": -2.6137078612542552e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 18.08512340688991,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": -0.48948711215954077,
+              "z": -6.777864601658767
+            }
+          }
+        },
+        {
+          "id": "brake:0.05@0.25",
+          "action": {
+            "id": "brake:0.05@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.05
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 154.81524043413566,
+            "protectedImpactSumJ": 331.2290703772388,
+            "maxProtectedImpulseNs": 91.50086449142465,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 8,
+            "firstProtectedImpactS": 1.9291666666666607,
+            "controlImpulseNs": 7.913707703843044,
+            "controlEnergyChangeJ": -32.137421253325314,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 6.905558305704761,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": 10.946144111906499,
+              "z": -3.83255652458441
+            }
+          }
+        },
+        {
+          "id": "steer:-0.04@0.25",
+          "action": {
+            "id": "steer:-0.04@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.04
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 163.68293840814505,
+            "protectedImpactSumJ": 364.69691859303,
+            "maxProtectedImpulseNs": 94.08492604616579,
+            "protectedCollisionCount": 7,
+            "totalCollisions": 9,
+            "firstProtectedImpactS": 1.8624999999999943,
+            "controlImpulseNs": 6.330544107104768,
+            "controlEnergyChangeJ": 4.1364481284666965e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 447.79359999999997,
+            "finalEnergyJ": 8.859564028508279,
+            "initialMomentum": {
+              "x": 159.6,
+              "z": 89.36
+            },
+            "finalMomentum": {
+              "x": 9.330223060573752,
+              "z": -8.503436529591198
+            }
+          }
+        }
+      ],
+      "deadline": {
+        "stepS": 0.25,
+        "maxDelayS": 2,
+        "lastSafeDelayS": 0.75,
+        "rows": [
+          {
+            "delayS": 0,
+            "safe": true,
+            "bestCandidateId": "steer:0.08@0.00",
+            "protectedImpactEnergyJ": 5.559914529553378,
+            "controlImpulseNs": 12.769804448502452
+          },
+          {
+            "delayS": 0.25,
+            "safe": true,
+            "bestCandidateId": "steer:0.12@0.25",
+            "protectedImpactEnergyJ": 3.464221836424809,
+            "controlImpulseNs": 18.981504801186983
+          },
+          {
+            "delayS": 0.5,
+            "safe": true,
+            "bestCandidateId": "steer:-0.20@0.50",
+            "protectedImpactEnergyJ": 3.852985247117482,
+            "controlImpulseNs": 31.326787016385385
+          },
+          {
+            "delayS": 0.75,
+            "safe": true,
+            "bestCandidateId": "brake:0.30@0.75",
+            "protectedImpactEnergyJ": 2.2664564158893614,
+            "controlImpulseNs": 46.6585354054874
+          },
+          {
+            "delayS": 1,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 112.75521726692799,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1.25,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 112.75521726692799,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1.5,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 112.75521726692799,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1.75,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 112.75521726692799,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 2,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 112.75521726692799,
+            "controlImpulseNs": 0
+          }
+        ],
+        "scope": "Last safe delay among a 0.25-second grid and the stated discrete intervention set; not a continuous guarantee."
+      },
+      "speed_sensitivity": {
+        "kind": "lead_carrier_speed_only",
+        "checks": [
+          {
+            "speedFactor": 0.95,
+            "safe": false,
+            "protectedImpactEnergyJ": 60.072097713474584
+          },
+          {
+            "speedFactor": 1,
+            "safe": true,
+            "protectedImpactEnergyJ": 3.464221836424809
+          },
+          {
+            "speedFactor": 1.05,
+            "safe": false,
+            "protectedImpactEnergyJ": 19.14352519588464
+          }
+        ],
+        "safeCount": 1,
+        "total": 3,
+        "scope": "Three simulated speed checks only; no probabilistic or physical guarantee."
+      },
+      "integration_convergence": {
+        "coarse_dt_s": 0.004166666666666667,
+        "fine_dt_s": 0.0020833333333333333,
+        "fine_baseline_metrics": {
+          "protectedImpactEnergyJ": 110.17212855563665,
+          "protectedImpactSumJ": 269.92453454306786,
+          "maxProtectedImpulseNs": 77.39115776950318,
+          "protectedCollisionCount": 3,
+          "totalCollisions": 7,
+          "firstProtectedImpactS": 1.8833333333333366,
+          "controlImpulseNs": 0,
+          "controlEnergyChangeJ": 0,
+          "thresholdJ": 8,
+          "safe": false,
+          "initialEnergyJ": 447.79359999999997,
+          "finalEnergyJ": 14.839707098728967,
+          "initialMomentum": {
+            "x": 159.6,
+            "z": 89.36
+          },
+          "finalMomentum": {
+            "x": -10.025607105326776,
+            "z": -8.047629201111059
+          }
+        },
+        "fine_intervention_metrics": {
+          "protectedImpactEnergyJ": 3.466249869803442,
+          "protectedImpactSumJ": 3.466249869803442,
+          "maxProtectedImpulseNs": 15.195965105073503,
+          "protectedCollisionCount": 1,
+          "totalCollisions": 5,
+          "firstProtectedImpactS": 7.818749999999672,
+          "controlImpulseNs": 18.981504801187093,
+          "controlEnergyChangeJ": 3.7870748204049676e-14,
+          "thresholdJ": 8,
+          "safe": true,
+          "initialEnergyJ": 447.79359999999997,
+          "finalEnergyJ": 18.063274544124333,
+          "initialMomentum": {
+            "x": 159.6,
+            "z": 89.36
+          },
+          "finalMomentum": {
+            "x": -3.5612558261627516,
+            "z": -21.37372168091659
+          }
+        },
+        "relative_baseline_peak_energy_change": 0.02344593632850513
+      }
+    },
+    {
+      "scenario": {
+        "id": "bottleneck",
+        "title": "Passage critique",
+        "description": "Une charge en mouvement traverse un passage entre deux équipements. Une déviation trop forte crée un autre impact.",
+        "challenge": "Trouver la plus petite correction qui protège la charge.",
+        "seed": 20261104,
+        "perturbation": 1,
+        "horizonS": 12,
+        "arena": {
+          "width": 16,
+          "depth": 10
+        },
+        "bodies": [
+          {
+            "id": "carrier",
+            "kind": "carrier",
+            "label": "A · transporteur",
+            "x": -6,
+            "z": 0.5865301314846146,
+            "vx": 4.2,
+            "vz": 0,
+            "radius": 0.59,
+            "mass": 40,
+            "color": "#f6a66a"
+          },
+          {
+            "id": "gate-a",
+            "kind": "cargo",
+            "label": "B · charge arrêtée",
+            "x": -1,
+            "z": -1.13660885837744,
+            "vx": 0,
+            "vz": 0,
+            "radius": 0.72,
+            "mass": 65,
+            "color": "#667381"
+          },
+          {
+            "id": "gate-b",
+            "kind": "cargo",
+            "label": "C · charge arrêtée",
+            "x": -0.8,
+            "z": 2.125623217120301,
+            "vx": 0,
+            "vz": 0,
+            "radius": 0.72,
+            "mass": 65,
+            "color": "#8b9dad"
+          },
+          {
+            "id": "protected",
+            "kind": "fragile",
+            "label": "D · équipement fragile",
+            "x": 3.6,
+            "z": 0.8624063541635405,
+            "vx": 0,
+            "vz": 0,
+            "radius": 0.72,
+            "mass": 14,
+            "color": "#72ddca"
+          }
+        ],
+        "controlBodyId": "carrier",
+        "protectedBodyId": "protected",
+        "physics": {
+          "dragPerS": 0.035,
+          "restitution": 0.72,
+          "wallRestitution": 0.3
+        },
+        "dangerThresholdJ": 8,
+        "modelDisclosure": {
+          "source": "supplied_initial_state_and_contact_law",
+          "geometry": "planar circular collision envelopes",
+          "integrator": "exact linear-drag free flight + discrete frictionless impulses, fixed 240 Hz",
+          "intervention": "one instantaneous bounded velocity change; actuator dynamics not modeled",
+          "realWorldValidation": false,
+          "metaPoweredPhysics": false
+        }
+      },
+      "action_delay_s": 0.25,
+      "candidate_count": 37,
+      "objective": "Among evaluated actions below the protected-impact energy threshold, minimize applied impulse. If none succeeds, minimize protected-impact energy, then impulse.",
+      "best_action": {
+        "id": "steer:0.08@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.08
+      },
+      "baseline": {
+        "metrics": {
+          "protectedImpactEnergyJ": 149.9257799379881,
+          "protectedImpactSumJ": 236.5344894389374,
+          "maxProtectedImpulseNs": 84.22878312468723,
+          "protectedCollisionCount": 5,
+          "totalCollisions": 6,
+          "firstProtectedImpactS": 2.054166666666663,
+          "controlImpulseNs": 0,
+          "controlEnergyChangeJ": 0,
+          "thresholdJ": 8,
+          "safe": false,
+          "initialEnergyJ": 352.8,
+          "finalEnergyJ": 10.212414530703949,
+          "initialMomentum": {
+            "x": 168,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -33.11515971867496,
+            "z": -23.49240434540214
+          }
+        },
+        "events": [
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "protected"
+            ],
+            "impulseNs": 68.14244750269498,
+            "energyJ": 75.67532588486152,
+            "x": 2.963545018110355,
+            "z": 0.7247310423328626,
+            "timeS": 2.054166666666663
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "protected"
+            ],
+            "impulseNs": 84.22878312468723,
+            "energyJ": 149.9257799379881,
+            "x": 7.28,
+            "z": 1.6625465034243005,
+            "timeS": 2.841666666666667
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 107.40769706304971,
+            "energyJ": 85.3285013934013,
+            "x": 7.41,
+            "z": -0.23044050707413913,
+            "timeS": 4.4166666666666385
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "protected"
+            ],
+            "impulseNs": 16.550510557091137,
+            "energyJ": 5.788660179636204,
+            "x": 3.6451798270975475,
+            "z": 4.28,
+            "timeS": 5.587499999999905
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "gate-b",
+              "protected"
+            ],
+            "impulseNs": 13.351305544341724,
+            "energyJ": 2.6154491400406576,
+            "x": -0.5118882580498737,
+            "z": 2.784999057659613,
+            "timeS": 8.833333333333055
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "protected"
+            ],
+            "impulseNs": 10.940075854680641,
+            "energyJ": 2.529274296410954,
+            "x": -1.2104156426804835,
+            "z": 4.28,
+            "timeS": 10.191666666666311
+          }
+        ]
+      },
+      "intervention": {
+        "metrics": {
+          "protectedImpactEnergyJ": 0,
+          "protectedImpactSumJ": 0,
+          "maxProtectedImpulseNs": 0,
+          "protectedCollisionCount": 0,
+          "totalCollisions": 4,
+          "firstProtectedImpactS": null,
+          "controlImpulseNs": 13.319360510062461,
+          "controlEnergyChangeJ": 0,
+          "thresholdJ": 8,
+          "safe": true,
+          "initialEnergyJ": 352.8,
+          "finalEnergyJ": 14.540186927479274,
+          "initialMomentum": {
+            "x": 168,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -14.282696661712901,
+            "z": -2.6463878546581636
+          }
+        },
+        "events": [
+          {
+            "type": "intervention",
+            "bodyIds": [
+              "carrier"
+            ],
+            "kind": "steer",
+            "amount": 0.08,
+            "impulseNs": 13.319360510062461,
+            "energyJ": 0,
+            "x": -4.954580380820368,
+            "z": 0.5865301314846146,
+            "timeS": 0.25
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "gate-b"
+            ],
+            "impulseNs": 66.88741523281863,
+            "energyJ": 30.536403723646558,
+            "x": -1.0055313116336337,
+            "z": 1.5056143496177248,
+            "timeS": 1.1666666666666634
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "gate-b"
+            ],
+            "impulseNs": 76.16410198167542,
+            "energyJ": 26.404052938894186,
+            "x": -0.0851314807037105,
+            "z": 4.28,
+            "timeS": 3.462499999999999
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 165.92846815580805,
+            "energyJ": 203.6409507731731,
+            "x": 7.41,
+            "z": -2.240732201464744,
+            "timeS": 3.7499999999999973
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 56.14669007317222,
+            "energyJ": 23.31694383263947,
+            "x": 5.613033033241569,
+            "z": -4.41,
+            "timeS": 5.691666666666566
+          }
+        ]
+      },
+      "candidates": [
+        {
+          "id": "steer:0.08@0.25",
+          "action": {
+            "id": "steer:0.08@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.08
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 4,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 13.319360510062461,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 14.540186927479274,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -14.282696661712901,
+              "z": -2.6463878546581636
+            }
+          }
+        },
+        {
+          "id": "steer:0.12@0.25",
+          "action": {
+            "id": "steer:0.12@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.12
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 4,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 19.972381040402308,
+            "controlEnergyChangeJ": -7.105427357601002e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 21.954416144894072,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 15.754556079255547,
+              "z": -3.9642888646476173
+            }
+          }
+        },
+        {
+          "id": "steer:0.16@0.25",
+          "action": {
+            "id": "steer:0.16@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.16
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 7,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 26.617412884620858,
+            "controlEnergyChangeJ": -7.105427357601002e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 11.890434551153831,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -46.56350078989533,
+              "z": -5.275847858123537
+            }
+          }
+        },
+        {
+          "id": "steer:-0.16@0.25",
+          "action": {
+            "id": "steer:-0.16@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.16
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0.3712104347267362,
+            "protectedImpactSumJ": 0.3712104347267362,
+            "maxProtectedImpulseNs": 4.7725519691543035,
+            "protectedCollisionCount": 1,
+            "totalCollisions": 5,
+            "firstProtectedImpactS": 9.874999999999662,
+            "controlImpulseNs": 26.617412884620858,
+            "controlEnergyChangeJ": -7.105427357601002e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 18.067452595958017,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 4.856786705633335,
+              "z": 5.275847858123672
+            }
+          }
+        },
+        {
+          "id": "steer:0.20@0.25",
+          "action": {
+            "id": "steer:0.20@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.2
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 6.806748977890577,
+            "protectedImpactSumJ": 22.821950541440827,
+            "maxProtectedImpulseNs": 21.413107753659688,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 10,
+            "firstProtectedImpactS": 4.341666666666643,
+            "controlImpulseNs": 33.251798118579664,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 11.550009685327492,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 5.06292662027149,
+              "z": -4.639861873758486
+            }
+          }
+        },
+        {
+          "id": "steer:0.24@0.25",
+          "action": {
+            "id": "steer:0.24@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.24
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 2.214410291346495,
+            "protectedImpactSumJ": 3.693375552939221,
+            "maxProtectedImpulseNs": 11.656539076153148,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 7,
+            "firstProtectedImpactS": 10.545833333332958,
+            "controlImpulseNs": 39.87288307664243,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 10.63554340826978,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -5.699796349609845,
+              "z": -1.4896393242775847
+            }
+          }
+        },
+        {
+          "id": "steer:-0.24@0.25",
+          "action": {
+            "id": "steer:-0.24@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.24
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 2.407753481293306,
+            "protectedImpactSumJ": 5.765024115378797,
+            "maxProtectedImpulseNs": 12.15476560017837,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 10,
+            "firstProtectedImpactS": 4.641666666666626,
+            "controlImpulseNs": 39.87288307664243,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 7.959347347377373,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -21.783495666993574,
+              "z": -10.450413564241645
+            }
+          }
+        },
+        {
+          "id": "steer:-0.28@0.25",
+          "action": {
+            "id": "steer:-0.28@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.28
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 5,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 46.478019413105905,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 13.346381430125579,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 2.9938978413873603,
+              "z": 0.1738348000277501
+            }
+          }
+        },
+        {
+          "id": "steer:0.28@0.25",
+          "action": {
+            "id": "steer:0.28@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.28
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 1.7100608301973903,
+            "protectedImpactSumJ": 1.7100608301973903,
+            "maxProtectedImpulseNs": 10.795838396099995,
+            "protectedCollisionCount": 1,
+            "totalCollisions": 6,
+            "firstProtectedImpactS": 9.995833333332989,
+            "controlImpulseNs": 46.478019413105905,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 9.956825025464791,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -20.722957452386883,
+              "z": -8.167534206056272
+            }
+          }
+        },
+        {
+          "id": "steer:-0.32@0.25",
+          "action": {
+            "id": "steer:-0.32@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.32
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 5,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 53.06456516150278,
+            "controlEnergyChangeJ": -7.105427357601002e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 12.020836221418305,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -13.510916455175717,
+              "z": 10.17809421348748
+            }
+          }
+        },
+        {
+          "id": "steer:0.32@0.25",
+          "action": {
+            "id": "steer:0.32@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.32
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0.8050675339146641,
+            "protectedImpactSumJ": 0.8050675339146641,
+            "maxProtectedImpulseNs": 7.407416282029103,
+            "protectedCollisionCount": 1,
+            "totalCollisions": 5,
+            "firstProtectedImpactS": 10.362499999999635,
+            "controlImpulseNs": 53.06456516150278,
+            "controlEnergyChangeJ": -7.105427357601002e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 11.645792648008197,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -32.59443523055344,
+              "z": -29.6814797826223
+            }
+          }
+        },
+        {
+          "id": "steer:-0.36@0.25",
+          "action": {
+            "id": "steer:-0.36@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.36
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 4,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 59.62988579135317,
+            "controlEnergyChangeJ": -7.105427357601002e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 13.445452716446878,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -26.592051981240253,
+              "z": 37.27828552012593
+            }
+          }
+        },
+        {
+          "id": "steer:0.36@0.25",
+          "action": {
+            "id": "steer:0.36@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.36
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 3,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 59.62988579135317,
+            "controlEnergyChangeJ": -7.105427357601002e-14,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 10.247340771666652,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -40.603073040773985,
+              "z": -12.3757908801572
+            }
+          }
+        },
+        {
+          "id": "brake:0.75@0.25",
+          "action": {
+            "id": "brake:0.75@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.75
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 3.0624980054369693,
+            "protectedImpactSumJ": 3.0624980054369693,
+            "maxProtectedImpulseNs": 13.708138560722954,
+            "protectedCollisionCount": 1,
+            "totalCollisions": 1,
+            "firstProtectedImpactS": 8.26666666666642,
+            "controlImpulseNs": 124.90230939986108,
+            "controlEnergyChangeJ": -325.0122269462215,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 8.383509085606962,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 27.5959664322291,
+              "z": 7.549516567451064e-15
+            }
+          }
+        },
+        {
+          "id": "brake:0.80@0.25",
+          "action": {
+            "id": "brake:0.80@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.8
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 1.6554527210115648,
+            "protectedImpactSumJ": 1.6554527210115648,
+            "maxProtectedImpulseNs": 10.078571225736798,
+            "protectedCollisionCount": 1,
+            "totalCollisions": 1,
+            "firstProtectedImpactS": 10.679166666666283,
+            "controlImpulseNs": 133.22913002651853,
+            "controlEnergyChangeJ": -332.81252039293076,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 5.365441673964023,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 22.076773145783278,
+              "z": 5.329070518200751e-15
+            }
+          }
+        },
+        {
+          "id": "brake:0.85@0.25",
+          "action": {
+            "id": "brake:0.85@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.8500000000000001
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 0,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 141.55595065317593,
+            "controlEnergyChangeJ": -338.87941529592695,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 3.4269181349792137,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 16.557579859337448,
+              "z": 0
+            }
+          }
+        },
+        {
+          "id": "brake:0.90@0.25",
+          "action": {
+            "id": "brake:0.90@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.9
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 0,
+            "protectedImpactSumJ": 0,
+            "maxProtectedImpulseNs": 0,
+            "protectedCollisionCount": 0,
+            "totalCollisions": 0,
+            "firstProtectedImpactS": null,
+            "controlImpulseNs": 149.88277127983332,
+            "controlEnergyChangeJ": -343.2129116552099,
+            "thresholdJ": 8,
+            "safe": true,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 1.5230747266574276,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 11.03838657289163,
+              "z": 0
+            }
+          }
+        },
+        {
+          "id": "brake:0.70@0.25",
+          "action": {
+            "id": "brake:0.70@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.7000000000000001
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 8.188657536964323,
+            "protectedImpactSumJ": 13.086141792801492,
+            "maxProtectedImpulseNs": 19.684696458141076,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 2,
+            "firstProtectedImpactS": 6.766666666666505,
+            "controlImpulseNs": 116.57548877320369,
+            "controlEnergyChangeJ": -315.478534955799,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 5.60376478177672,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 14.774648560629844,
+              "z": 1.3322676295501878e-15
+            }
+          }
+        },
+        {
+          "id": "brake:0.65@0.25",
+          "action": {
+            "id": "brake:0.65@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.65
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 12.4783980690101,
+            "protectedImpactSumJ": 19.64367598542723,
+            "maxProtectedImpulseNs": 24.299748900463104,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 2,
+            "firstProtectedImpactS": 5.737499999999897,
+            "controlImpulseNs": 108.2486681465463,
+            "controlEnergyChangeJ": -304.2114444216633,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 7.623732623217311,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 17.233191774997856,
+              "z": -4.440892098500626e-16
+            }
+          }
+        },
+        {
+          "id": "brake:0.60@0.25",
+          "action": {
+            "id": "brake:0.60@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.6000000000000001
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 17.66261527379484,
+            "protectedImpactSumJ": 27.522379087551986,
+            "maxProtectedImpulseNs": 28.91011855312897,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 2,
+            "firstProtectedImpactS": 4.991666666666606,
+            "controlImpulseNs": 99.92184751988889,
+            "controlEnergyChangeJ": -291.2109553438145,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 9.958973129037647,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": 19.696439904898263,
+              "z": 0
+            }
+          }
+        },
+        {
+          "id": "brake:0.55@0.25",
+          "action": {
+            "id": "brake:0.55@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.55
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 23.74142364354173,
+            "protectedImpactSumJ": 36.72402309589346,
+            "maxProtectedImpulseNs": 33.517818646391575,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 3,
+            "firstProtectedImpactS": 4.424999999999971,
+            "controlImpulseNs": 91.59502689323148,
+            "controlEnergyChangeJ": -276.4770677222524,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 3.361456035794163,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -14.901821873403719,
+              "z": 1.0658141036401503e-14
+            }
+          }
+        },
+        {
+          "id": "brake:0.50@0.25",
+          "action": {
+            "id": "brake:0.50@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.5
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 30.72689373587165,
+            "protectedImpactSumJ": 47.26243818091354,
+            "maxProtectedImpulseNs": 38.13130749897578,
+            "protectedCollisionCount": 2,
+            "totalCollisions": 3,
+            "firstProtectedImpactS": 3.979166666666663,
+            "controlImpulseNs": 83.26820626657407,
+            "controlEnergyChangeJ": -260.00978155697715,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 4.150582345456638,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -16.557579859337398,
+              "z": -6.217248937900877e-15
+            }
+          }
+        },
+        {
+          "id": "steer:-0.08@0.25",
+          "action": {
+            "id": "steer:-0.08@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.08
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 38.47279946541733,
+            "protectedImpactSumJ": 107.46480745475907,
+            "maxProtectedImpulseNs": 47.13143357532786,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 5,
+            "firstProtectedImpactS": 2.1416666666666675,
+            "controlImpulseNs": 13.319360510062461,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 12.920681574545696,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -33.009247712059015,
+              "z": 2.6463878546581725
+            }
+          }
+        },
+        {
+          "id": "brake:0.45@0.25",
+          "action": {
+            "id": "brake:0.45@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.45
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 38.588273448562305,
+            "protectedImpactSumJ": 60.31608773961415,
+            "maxProtectedImpulseNs": 42.73168730094762,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 4,
+            "firstProtectedImpactS": 3.6208333333333313,
+            "controlImpulseNs": 74.94138563991666,
+            "controlEnergyChangeJ": -241.80909684798877,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 4.008868330857212,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -18.21333784527115,
+              "z": -7.281182291645688
+            }
+          }
+        },
+        {
+          "id": "steer:-0.20@0.25",
+          "action": {
+            "id": "steer:-0.20@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.2
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 45.86327441489786,
+            "protectedImpactSumJ": 89.33981179350144,
+            "maxProtectedImpulseNs": 46.58594364519159,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 12,
+            "firstProtectedImpactS": 2.820833333333334,
+            "controlImpulseNs": 33.251798118579664,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 8.374789396441443,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -34.288481266478335,
+              "z": -12.599564267885684
+            }
+          }
+        },
+        {
+          "id": "brake:0.40@0.25",
+          "action": {
+            "id": "brake:0.40@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.4
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 47.3537256082562,
+            "protectedImpactSumJ": 73.83404136753497,
+            "maxProtectedImpulseNs": 47.3368598006108,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 4,
+            "firstProtectedImpactS": 3.3249999999999993,
+            "controlImpulseNs": 66.61456501325927,
+            "controlEnergyChangeJ": -221.87501359528721,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 4.772001250436773,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -19.869095831204945,
+              "z": -7.95287793165685
+            }
+          }
+        },
+        {
+          "id": "brake:0.35@0.25",
+          "action": {
+            "id": "brake:0.35@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.35000000000000003
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 57.046282004754325,
+            "protectedImpactSumJ": 88.74915695424718,
+            "maxProtectedImpulseNs": 51.95603973038144,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 4,
+            "firstProtectedImpactS": 3.0749999999999993,
+            "controlImpulseNs": 58.287744386601865,
+            "controlEnergyChangeJ": -200.2075317988725,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 5.59795714456737,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -21.5248538171386,
+              "z": -8.595281176443054
+            }
+          }
+        },
+        {
+          "id": "brake:0.30@0.25",
+          "action": {
+            "id": "brake:0.30@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.30000000000000004
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 67.65316150801746,
+            "protectedImpactSumJ": 105.04890352073546,
+            "maxProtectedImpulseNs": 56.58045247750663,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 4,
+            "firstProtectedImpactS": 2.862500000000001,
+            "controlImpulseNs": 49.96092375994445,
+            "controlEnergyChangeJ": -176.80665145874454,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 6.489542204733871,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -23.18061180307245,
+              "z": -9.235673892984828
+            }
+          }
+        },
+        {
+          "id": "brake:0.25@0.25",
+          "action": {
+            "id": "brake:0.25@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.25
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 79.04259829036074,
+            "protectedImpactSumJ": 122.61025399883032,
+            "maxProtectedImpulseNs": 61.15795738168395,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 4,
+            "firstProtectedImpactS": 2.6833333333333345,
+            "controlImpulseNs": 41.63410313328704,
+            "controlEnergyChangeJ": -151.6723725749034,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 7.457360344187395,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -24.836369789006167,
+              "z": -9.948847865106915
+            }
+          }
+        },
+        {
+          "id": "brake:0.20@0.25",
+          "action": {
+            "id": "brake:0.20@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.2
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 91.41488650016323,
+            "protectedImpactSumJ": 143.05161480620157,
+            "maxProtectedImpulseNs": 65.77045255422624,
+            "protectedCollisionCount": 4,
+            "totalCollisions": 5,
+            "firstProtectedImpactS": 2.525000000000002,
+            "controlImpulseNs": 33.30728250662961,
+            "controlEnergyChangeJ": -124.804695147349,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 7.8226779536940425,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -26.49212777493996,
+              "z": -10.611512282835694
+            }
+          }
+        },
+        {
+          "id": "steer:-0.04@0.25",
+          "action": {
+            "id": "steer:-0.04@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.04
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 101.18486283000372,
+            "protectedImpactSumJ": 189.52181831500002,
+            "maxProtectedImpulseNs": 69.19586482670606,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 7,
+            "firstProtectedImpactS": 2.0833333333333313,
+            "controlImpulseNs": 6.661012413107694,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 10.449120834183312,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -33.08867112299521,
+              "z": 1.3242531886338407
+            }
+          }
+        },
+        {
+          "id": "brake:0.15@0.25",
+          "action": {
+            "id": "brake:0.15@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.15000000000000002
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 104.81496008441384,
+            "protectedImpactSumJ": 163.74943560184747,
+            "maxProtectedImpulseNs": 70.42615928186389,
+            "protectedCollisionCount": 4,
+            "totalCollisions": 5,
+            "firstProtectedImpactS": 2.3833333333333355,
+            "controlImpulseNs": 24.980461879972218,
+            "controlEnergyChangeJ": -96.20361917608157,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 8.851750638827633,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -28.14788576087372,
+              "z": -11.203330729158285
+            }
+          }
+        },
+        {
+          "id": "brake:0.10@0.25",
+          "action": {
+            "id": "brake:0.10@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.1
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 118.87813117782127,
+            "protectedImpactSumJ": 187.64814325174132,
+            "maxProtectedImpulseNs": 75.00208775317192,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 6,
+            "firstProtectedImpactS": 2.2625000000000033,
+            "controlImpulseNs": 16.653641253314806,
+            "controlEnergyChangeJ": -65.86914466110088,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 8.24297069797422,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -29.803643746807403,
+              "z": -21.220646662079773
+            }
+          }
+        },
+        {
+          "id": "steer:-0.12@0.25",
+          "action": {
+            "id": "steer:-0.12@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": -0.12
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 127.63570483766168,
+            "protectedImpactSumJ": 192.0259635898375,
+            "maxProtectedImpulseNs": 77.71564548350705,
+            "protectedCollisionCount": 3,
+            "totalCollisions": 7,
+            "firstProtectedImpactS": 2.1375000000000006,
+            "controlImpulseNs": 19.972381040402308,
+            "controlEnergyChangeJ": -7.105427357601002e-14,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 12.347454098525214,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -22.377635892402914,
+              "z": -2.1073155665046084
+            }
+          }
+        },
+        {
+          "id": "brake:0.05@0.25",
+          "action": {
+            "id": "brake:0.05@0.25",
+            "kind": "brake",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.05
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 133.8459082161019,
+            "protectedImpactSumJ": 211.42502925530667,
+            "maxProtectedImpulseNs": 79.58384494849405,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 6,
+            "firstProtectedImpactS": 2.154166666666668,
+            "controlImpulseNs": 8.326820626657412,
+            "controlEnergyChangeJ": -33.80127160240708,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 9.133260518514916,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -31.459401732741178,
+              "z": -22.5365012591083
+            }
+          }
+        },
+        {
+          "id": "none",
+          "action": {
+            "id": "none",
+            "kind": "none",
+            "bodyId": "carrier",
+            "atS": 0,
+            "amount": 0
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 149.9257799379881,
+            "protectedImpactSumJ": 236.5344894389374,
+            "maxProtectedImpulseNs": 84.22878312468723,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 6,
+            "firstProtectedImpactS": 2.054166666666663,
+            "controlImpulseNs": 0,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 10.212414530703949,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -33.11515971867496,
+              "z": -23.49240434540214
+            }
+          }
+        },
+        {
+          "id": "steer:0.04@0.25",
+          "action": {
+            "id": "steer:0.04@0.25",
+            "kind": "steer",
+            "bodyId": "carrier",
+            "atS": 0.25,
+            "amount": 0.04
+          },
+          "metrics": {
+            "protectedImpactEnergyJ": 164.31206138917616,
+            "protectedImpactSumJ": 355.999321609207,
+            "maxProtectedImpulseNs": 88.17735959380852,
+            "protectedCollisionCount": 5,
+            "totalCollisions": 7,
+            "firstProtectedImpactS": 2.0499999999999963,
+            "controlImpulseNs": 6.661012413107694,
+            "controlEnergyChangeJ": 0,
+            "thresholdJ": 8,
+            "safe": false,
+            "initialEnergyJ": 352.8,
+            "finalEnergyJ": 3.5703869001717163,
+            "initialMomentum": {
+              "x": 168,
+              "z": 0
+            },
+            "finalMomentum": {
+              "x": -13.918079245286423,
+              "z": -1.3242531886338291
+            }
+          }
+        }
+      ],
+      "deadline": {
+        "stepS": 0.25,
+        "maxDelayS": 2,
+        "lastSafeDelayS": 2,
+        "rows": [
+          {
+            "delayS": 0,
+            "safe": true,
+            "bestCandidateId": "steer:0.08@0.00",
+            "protectedImpactEnergyJ": 0.4788699154042674,
+            "controlImpulseNs": 13.436416286709079
+          },
+          {
+            "delayS": 0.25,
+            "safe": true,
+            "bestCandidateId": "steer:0.08@0.25",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 13.319360510062461
+          },
+          {
+            "delayS": 0.5,
+            "safe": true,
+            "bestCandidateId": "steer:0.12@0.50",
+            "protectedImpactEnergyJ": 0.8153061775997794,
+            "controlImpulseNs": 19.798385048890857
+          },
+          {
+            "delayS": 0.75,
+            "safe": true,
+            "bestCandidateId": "steer:0.16@0.75",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 26.155660278692867
+          },
+          {
+            "delayS": 1,
+            "safe": true,
+            "bestCandidateId": "steer:-0.20@1.00",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 32.39029511345866
+          },
+          {
+            "delayS": 1.25,
+            "safe": true,
+            "bestCandidateId": "steer:-0.24@1.25",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 38.50147186061017
+          },
+          {
+            "delayS": 1.5,
+            "safe": true,
+            "bestCandidateId": "steer:-0.32@1.50",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 50.793042306312046
+          },
+          {
+            "delayS": 1.75,
+            "safe": true,
+            "bestCandidateId": "brake:0.75@1.75",
+            "protectedImpactEnergyJ": 7.320282262546064,
+            "controlImpulseNs": 118.51409598390487
+          },
+          {
+            "delayS": 2,
+            "safe": true,
+            "bestCandidateId": "brake:0.75@2.00",
+            "protectedImpactEnergyJ": 7.7798221221791275,
+            "controlImpulseNs": 117.48162130814694
+          }
+        ],
+        "scope": "Last safe delay among a 0.25-second grid and the stated discrete intervention set; not a continuous guarantee."
+      },
+      "speed_sensitivity": {
+        "kind": "lead_carrier_speed_only",
+        "checks": [
+          {
+            "speedFactor": 0.95,
+            "safe": true,
+            "protectedImpactEnergyJ": 0
+          },
+          {
+            "speedFactor": 1,
+            "safe": true,
+            "protectedImpactEnergyJ": 0
+          },
+          {
+            "speedFactor": 1.05,
+            "safe": true,
+            "protectedImpactEnergyJ": 0
+          }
+        ],
+        "safeCount": 3,
+        "total": 3,
+        "scope": "Three simulated speed checks only; no probabilistic or physical guarantee."
+      },
+      "integration_convergence": {
+        "coarse_dt_s": 0.004166666666666667,
+        "fine_dt_s": 0.0020833333333333333,
+        "fine_baseline_metrics": {
+          "protectedImpactEnergyJ": 149.9476457085887,
+          "protectedImpactSumJ": 236.57327051086696,
+          "maxProtectedImpulseNs": 84.23492503071643,
+          "protectedCollisionCount": 5,
+          "totalCollisions": 6,
+          "firstProtectedImpactS": 2.0541666666666663,
+          "controlImpulseNs": 0,
+          "controlEnergyChangeJ": 0,
+          "thresholdJ": 8,
+          "safe": false,
+          "initialEnergyJ": 352.8,
+          "finalEnergyJ": 10.204112743258815,
+          "initialMomentum": {
+            "x": 168,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -33.11515971868472,
+            "z": -23.506178597646635
+          }
+        },
+        "fine_intervention_metrics": {
+          "protectedImpactEnergyJ": 0,
+          "protectedImpactSumJ": 0,
+          "maxProtectedImpulseNs": 0,
+          "protectedCollisionCount": 0,
+          "totalCollisions": 4,
+          "firstProtectedImpactS": null,
+          "controlImpulseNs": 13.319360510062538,
+          "controlEnergyChangeJ": 7.105427357601002e-14,
+          "thresholdJ": 8,
+          "safe": true,
+          "initialEnergyJ": 352.8,
+          "finalEnergyJ": 14.617291945384626,
+          "initialMomentum": {
+            "x": 168,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -13.68287742673329,
+            "z": -2.6463878546589843
+          }
+        },
+        "relative_baseline_peak_energy_change": 0.00014582270029838988
+      }
+    }
+  ]
+}

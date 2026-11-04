@@ -1,0 +1,42 @@
+{
+  "checked_at": "2026-11-04T17:15:41.452562+00:00",
+  "method": "Real browser via Codex computer-use; local HTTP server and exported UI evidence. No physical camera or device test.",
+  "viewport_widths_without_horizontal_overflow": [
+    320,
+    390,
+    768,
+    1280
+  ],
+  "touch_targets": "Primary controls >=44px; 15px checkbox contained in a 44px label target.",
+  "checks": {
+    "initial_paused": true,
+    "synchronized_12s_replay": true,
+    "cascade_ui_export_matches_engine_metrics": true,
+    "late_050s_reports_no_passing_action": true,
+    "crossing_nominal_robustness_1_of_3_visible": true,
+    "meta_recorded_three_proposals_displayed": true,
+    "meta_selected_command_replay_4_56449_j": true,
+    "free_backend_job_via_ui_zero_model_calls": true,
+    "secondary_evidence_export": true,
+    "rapid_scenario_delay_changes_cancel_stale_worker": true,
+    "console_errors_warnings_final_local": []
+  },
+  "files": {
+    "index.html": "6628d6712ad94afe30459d1527ffd6fb117319a8290519e43b2779d7769476c6",
+    "scan.html": "dd1ff806c146843fa43a089b02596eb388e397ef032f54af88abb8a9d78817ea",
+    "workbench.html": "aa928a88544253558e3808c39e1bd93c18c68a5881d623e2cf49f9765f8af56a",
+    "server.py": "32df8dc7dbaafc188ee3f0d108677c932234ef2862d5b685c8b1e5a963e9e81a",
+    "web/causal/engine.mjs": "ff7d00a37a118b42179cb5314d6056f66ab93e30d22027600250ddd01b239a09",
+    "web/causal/lab.css": "a37d8ad57b87f6a1c0828ec7e78c7cda98ae812bdf0e6fdb5e8de0909881d58f",
+    "web/causal/lab.mjs": "9568c8ee3992107da2e817b33a62613ee9a29494231d762aadfd1b440e6e3c96",
+    "web/causal/scene.mjs": "9f219f1462c9f50f5eb1657c509c0be9fe771fc3a009edf27b34fd441235af74",
+    "web/causal/worker.mjs": "6c22ce3b6417a2116e2e062ed9bc899033e8e57642a094b2cbeb88eeb0efbebb",
+    "assets/causal-meta-session.json": "0bd106566a3343f03a3f8f25abe9a15c6fdc64de5a867d5a90e8ab602a6093fa"
+  },
+  "limitations": [
+    "Same-model synthetic counterfactuals, not independent prediction accuracy.",
+    "No physical phone/camera/hardware validation.",
+    "Context-loss fallback code reviewed; not forced in browser.",
+    "Local initial screenshot desktop-first predates compact final layout; use desktop-1280/mobile-390 or final public captures."
+  ]
+}

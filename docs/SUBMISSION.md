@@ -1,57 +1,76 @@
-# TWINFORGE — Process Lab
+# TWINFORGE — Une décision. Deux futurs.
 
-**Dossier préparatoire, non soumis.** Track proposé : Indie, à confirmer selon le profil du participant; thème proposé : Push the Frontier. Contributions nouvelles du 4 novembre 2026 après l’atelier initial du 27 octobre, conservé dans `workbench.html`.
+**Dossier préparatoire, non soumis.** Track proposé : Indie, sous réserve de l’éligibilité du participant. Thème proposé : Push the Frontier. La nouvelle présentation est un laboratoire civil d’intervention sur des chaînes de collisions.
 
-## Pitch et usage
+## Pitch
 
-Prévoir le niveau d’une cuve, tester une commande et mesurer ce qui change. TWINFORGE est un banc virtuel pour préparer des essais de régulation : calibration de modèles connus, prévision explicite, contrôle prédictif et preuves exportables.
+Voir arriver un incident ne suffit pas. Il faut choisir où agir, mesurer ce que ce geste change et savoir quand il est trop tard. Twinforge laisse un modèle proposer une intervention, en calcule les conséquences, conserve les échecs et compare le résultat à une recherche numérique explicite.
 
-Deux cuves simulées commencent dans le même état. La référence garde sa vanne ouverte; l’autre peut être régulée. Une hausse identique du débit disponible expose les effets sur le niveau et le débordement. Le cas d’usage est civil : prototypage de procédés et préparation d’essais. Aucun équipement physique n’est commandé.
+Dans la démo, un transporteur met plusieurs charges en mouvement. L’utilisateur dispose d’une seule commande bornée : freiner ou dévier le premier transporteur. Deux branches partagent exactement le même état initial. Les trajectoires sont calculées avant la lecture, puis affichées côte à côte, avec un curseur temporel commun et les données exportables.
 
-## Démonstration locale mesurée
+La valeur explorée est la préparation de décisions dans un environnement simulé : proposer, tester, comprendre et comparer des interventions avant des essais plus coûteux. Aucune économie réelle, aucun client industriel et aucune validation de sécurité ne sont revendiqués.
 
-La page principale ajuste localement une famille de bilan de volume connue. Elle prévoit le niveau à **+5 s sous hypothèse de vanne inchangée**; les interventions ultérieures restent signalées dans les erreurs. Le MPC cherche des séquences sur **3 s**, applique la première commande et recalcule toutes les **200 ms simulées, soit 5 Hz**.
+## Trois épreuves et leurs résultats
 
-Le [parcours guidé](../validation/runs/process-guided-2026-11-04.json) termine sa calibration à 4 s, active le contrôle à 11 s, applique une hausse du débit disponible de 35 % dans les deux branches à 18 s, et s’arrête à 40 s. Résultat déterministe du moteur : **0 L débordé avec contrôle, contre 90,803 L pour la référence; niveau final de 1,049 m**. Le chiffre provient de cette expérience précise, pas du scénario précédent de 35 secondes.
+La recherche compare 37 commandes sur 12 secondes simulées. Les conditions nominales sont la graine `20261104`, la vitesse à 100 % et une intervention à 0,25 s.
 
-**Toutes les 63 prévisions évaluées donnent 9,148 cm d’erreur moyenne**, sur 73 émises avec 10 en attente. 52 scores traversent une intervention; 11 sans intervention donnent 1,595 cm. Ce sous-ensemble ne remplace pas la moyenne globale. La capture navigateur doit être rattachée à son export effectif : un rapport moteur ne prouve pas à lui seul qu’un montage vidéo a été revu.
+| Épreuve | Pic sur la charge protégée, sans action | Pic avec le choix local | Essais de vitesse 95/100/105 % réussis |
+|---|---:|---:|---:|
+| Réaction en chaîne | 116,562 J | 0 J | 3 / 3 |
+| Intersection aveugle | 112,755 J | 3,464 J | 1 / 3 |
+| Passage critique | 149,926 J | 0 J | 3 / 3 |
 
-Le périmètre est **L3, familles connues, observations synthétiques**. Le moteur est un bilan de volume de réservoir homogène, pas une découverte autonome de lois, une CFD ou une validation d’installation réelle.
+Le critère est un **seuil expérimental arbitraire de 8 J**, fixé avant le calcul. Il porte uniquement sur le pic d’énergie cinétique normale relative des contacts de la charge protégée. Il ne certifie pas l’absence d’accident ou de dommage ailleurs dans la scène.
 
-## Contribution Meta démontrée
+Parmi les candidats sous le seuil, la recherche minimise l’impulsion de commande. Si aucun candidat ne passe, elle retient le plus petit pic et signale l’échec. Les trois variations de vitesse évaluent ensuite le choix nominal : elles ne sont pas utilisées pour optimiser la commande et ne constituent pas une probabilité de sécurité.
 
-Une expérience séparée a réellement appelé **Muse Spark 1.3 trois fois**, le 4 novembre. La [session publique](../assets/process-meta-session.json) conserve réponses finales, hashes de requête, usages, coûts et durées.
+La cascade offre un test lisible de l’urgence : une commande réussit à 0,25 s; aucune des 37 actions ne passe le critère à 0,50 s. Les retards testés sont espacés de 0,25 s, entre 0 et 2 s. Le « dernier retard testé viable » est un résultat de grille, pas une frontière mathématique exacte.
 
-1. Spark propose un débit constant. Le logiciel ajuste sur trois épisodes d’entraînement puis mesure deux épisodes de validation : **1,9627 cm** moyens.
-2. Spark interprète la sur-prévision et propose un drainage linéaire : **0,9260 cm** après fit et validation.
-3. Spark propose le drainage en racine carrée, dernière famille du protocole d’exploration annoncé : **0,09448 cm**.
+[Benchmark complet](../validation/runs/causal-benchmark-2026-11-04.json) · [Revue du moteur](../validation/runs/causal-engine-review-2026-11-04.json)
 
-Le sélecteur numérique retient l’erreur moyenne de validation minimale, gèle le modèle puis ouvre trois épisodes de test distincts. **21 prévisions à trois secondes : 0,10113 cm moyens, 0,23082 cm maximum**, avec capteur synthétique bruité à 1 mm. Géométrie et futures commandes planifiées sont fournies; ni les futurs niveaux ni les vrais coefficients n’entrent dans le fit ou les messages à Spark.
+## Contribution Meta attestée
 
-La session dure **19,65 s** et coûte **0,0130775 USD**, selon les usages et tarifs consignés. Son plafond annoncé était 0,12 USD, sous le plafond persistant de 0,50 USD de la scène `liquid`; le ledger `hoop` est conservé.
+Une session de **Muse Spark 1.3**, terminée le **4 novembre 2026 à 17:06:58 UTC**, contient trois appels réels. Spark reçoit l’état initial, les masses, les coefficients et les 37 actions disponibles. Il ne reçoit pas les scores de la recherche exhaustive. Après chaque proposition, le solveur retourne les contacts et les métriques calculés; l’appel suivant peut corriger son choix.
 
-**La référence déterministe donne le même modèle et les mêmes scores.** Spark choisit l’ordre des familles et commente les résidus; le logiciel ajuste, mesure, sélectionne et pilote. Aucun gain de précision sur le solveur seul n’est revendiqué. Une remarque de Spark sur le maximum d’erreur est conservée avec [sa clarification](../assets/process-meta-review.json) : le critère global était la moyenne. Aucun nouvel appel n’a été lancé pour améliorer la réponse enregistrée.
+1. Déviation de −0,16 rad à 0,25 s : **104,609 J**, échec.
+2. Déviation de −0,36 rad à 0,25 s : **8,485 J**, encore au-dessus du seuil.
+3. Déviation de −0,32 rad à 0,25 s : **4,564 J**, sous le seuil; effort **62,540 N·s**.
 
-La calibration locale, la boucle Meta et leurs horizons de cinq et trois secondes sont identifiés séparément. La relecture des réponses enregistrées n’est jamais annoncée comme un nouvel appel direct.
+Le sélecteur retient la meilleure des trois propositions effectivement vérifiées. La session dure **37,8556 s** et coûte **0,028276 USD**, selon les usages consignés. Le plafond était de 0,12 USD pour l’étude, sous le plafond persistant de 0,50 USD de la scène `causal`.
 
-## Attributions complémentaires
+**La recherche exhaustive locale trouve un meilleur résultat : 0 J et 39,190 N·s, avec +0,20 rad.** Cette comparaison reste affichée. Le projet démontre ici une boucle de raisonnement révisable et vérifiable, pas un avantage de performance du modèle sur la recherche locale.
 
-- SAM 3.1 : segmentation réellement exécutée sur une vidéo synthétique de l’atelier historique; pas le capteur de niveau de Process Lab.
-- Muse Code CLI : revue en lecture seule avec `muse-spark-1.3-contributor`, sans preuve que ce modèle a construit le projet.
-- Muse Image 1.0 : illustration générée conservée, sans valeur de preuve physique.
-- Wonder et Glimmer : aucune exécution attestée; configuration et adaptateurs ne prouvent pas une utilisation.
-- Mobile : suivi et prévision 2D locaux, sans Meta ni transmission d’images; tests navigateur, pas caméra physique.
+[Réponses originales et reçus](../assets/causal-meta-session.json) · [Rapport original](../validation/runs/causal-meta-live-2026-11-04.json)
 
-Les [résultats historiques](archive/SUBMISSION_PRE_PROCESS_2026-11-04.md) restent distincts : benchmark 3D à 1,016 cm, reconstruction SAM à 12,60 cm et rejeu ancien à 39,165 cm. Aucun ne devient une mesure de la nouvelle cuve.
+Le site public relit cette session enregistrée; ce n’est pas un nouvel appel direct. L’application peut vérifier et rejouer la proposition retenue avec le même moteur. Une nouvelle étude nécessite le serveur Python local et la configuration privée du fournisseur. Les sorties du modèle sont des identifiants issus d’une liste bornée, jamais du code exécuté.
 
-## Dates et accès du jury
+## Portée technique
 
-Les trois commits initiaux datent du **27 octobre 2026**. Le 4 novembre ajoute les corrections et preuves, la caméra locale, puis le procédé civil : moteur, calibration/contrôle, boucle Spark instrumentée et interface. Les réponses et expériences portent leur date réelle. Les archives des 27–29 octobre et les échéances passées ne sont pas réécrites.
+- Positions, vitesses, masses et coefficients **fournis**, sans reconstruction par caméra.
+- Corps rigides circulaires dans un plan; vue 3D fidèle aux enveloppes de contact.
+- Amortissement linéaire, impulsions de contact sans frottement tangent, pas de 1/240 s.
+- Une seule intervention instantanée : freinage de 0 à 90 %, ou rotation de vitesse bornée à ±0,36 rad.
+- Branches et prévisions figées avant lecture; données et événements exportables.
+- Vérification à un pas deux fois plus fin : admissibilité conservée pour les trois choix nominaux, variation des pics de référence inférieure à 3 %.
 
-Le [dépôt](https://github.com/mkinvest57/TWINFORGE) et le [Process Lab](https://mkinvest57.github.io/TWINFORGE/) sont publics. Le déploiement du commit `276e6801a3b5a08a6a12ccb77fb04c4c989a4998` a réussi le 4 novembre; neuf fichiers essentiels ont été téléchargés sans connexion et correspondent aux sources locales. La [preuve de publication](../validation/runs/process-browser-2026-11-04/public-deployment.json) conserve le workflow et les hashes. Le jury peut exécuter les simulations, utiliser le suivi vidéo local et consulter le journal Meta. Les nouvelles études utilisant un fournisseur nécessitent le serveur Python local; les clés ne sont jamais publiées. L’aperçu Sites reste privé au propriétaire.
+Les trajectoires et leur visualisation viennent du **même modèle connu**. Il ne faut pas annoncer une erreur de prévision indépendante ou une découverte autonome de lois. Les actionneurs, les incertitudes de perception et les risques industriels réels restent hors du périmètre validé.
 
-La vidéo de **trois minutes** doit montrer les contributions de la période autorisée avec un lien accessible. Le [storyboard](VIDEO_3MIN_STORYBOARD.json) et les voix [FR](VOICEOVER_3MIN_FR.txt) / [EN](VOICEOVER_3MIN_EN.txt) décrivent le montage préparé; ils ne prouvent pas encore son rendu. La capture historique de 149,83 secondes et son script restent archivés.
+La caméra mobile demeure un outil distinct de suivi et d’extrapolation 2D en pixels, local, sans envoi d’images. Le nouvel entrepôt n’est pas reconstruit depuis ce flux. L’atelier historique du pendule conserve ses diagnostics séparés.
 
-Avant l’envoi : vérifier les liens sans connexion, revoir la vidéo effectivement produite, rattacher ses chiffres à l’export, confirmer licences/règles/track/thème puis conserver le reçu du portail. Échéance communiquée par le guide officiel vérifié : **4 novembre 21 h EST, soit 5 novembre 03 h à Paris**. Ce dossier n’est pas une confirmation de soumission.
+## Présentation de trois minutes
 
-Le profil PDF historique reste strict et incomplet : une nouvelle expérience logicielle ne remplace pas une acquisition physique ni une conformité rétroactive à tous ses prompts.
+L’ouverture pose une décision concrète, puis montre les deux branches. Le montage révèle ensuite le délai d’action et les trois propositions Meta : premier échec, résultat presque admissible, révision qui passe le critère. La comparaison avec la recherche locale et le test de sensibilité restent visibles.
+
+[Voix FR](VOICEOVER_3MIN_FR.txt) · [Voix EN](VOICEOVER_3MIN_EN.txt) · [Storyboard de 180 s](VIDEO_3MIN_STORYBOARD.json) · [Sous-titres FR à recaler](CAUSAL_DEMO_SUBTITLES_FR.srt)
+
+Ces documents sont des livrables de préparation. Aucune nouvelle voix synthétisée ni vidéo finale n’est attestée par leur seule présence. Le montage doit conserver les libellés « simulation » et « session enregistrée », et montrer les valeurs réellement issues de l’export de sa capture.
+
+## Accès et règles
+
+[Dépôt public](https://github.com/mkinvest57/TWINFORGE) · [Démo publique](https://mkinvest57.github.io/TWINFORGE/) · [Guide officiel](https://cerebralvalley.ai/e/meta-ai-developer-hackathon/details)
+
+La version statique donne accès aux simulations et au journal enregistré; elle n’expose aucune clé. La validation finale des liens publics et du parcours navigateur doit correspondre au déploiement de cette refonte, et non aux captures de la version précédente.
+
+Le guide consulté donne l’échéance du **4 novembre à 21 h EST, soit le 5 novembre à 03 h à Paris**. Le dossier ne constitue pas une soumission ni un reçu du portail. L’éligibilité du track, les informations d’équipe, la vidéo effectivement rendue et l’envoi final restent à confirmer par le participant.
+
+Les étapes précédentes sont archivées : [atelier initial](archive/SUBMISSION_PRE_PROCESS_2026-11-04.md), [version intermédiaire](archive/SUBMISSION_PROCESS_2026-11-04.md). Leurs mesures ne décrivent pas la nouvelle scène. Le [profil du PDF](PROMPT_COMPLIANCE.md) reste strict sur ses exigences physiques et historiques; les archives du 27–29 octobre ne sont pas réécrites.

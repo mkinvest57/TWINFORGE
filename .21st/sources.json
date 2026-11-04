@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "project": "TWINFORGE — Process Lab",
+  "project": "TWINFORGE — Une décision. Deux futurs.",
   "updated_at": "2026-11-04T14:07:00.065568+00:00",
   "usage": "Interface patterns adapted to the existing native HTML/CSS/ES module project. No React runtime or copied sample metrics introduced.",
   "sources": [
@@ -21,10 +21,15 @@
       "adapted_pattern": "Navigation latérale, cadre de travail et hiérarchie discrète du dashboard.",
       "implementation_files": [
         "index.html",
-        "web/process/lab.css"
+        "web/causal/lab.css"
       ],
       "react_component_installed": false,
-      "imported_demo_metrics": false
+      "imported_demo_metrics": false,
+      "previous_implementation_files": [
+        "index.html (Process Lab, superseded)",
+        "web/process/lab.css"
+      ],
+      "status": "active native adaptation in causal lab"
     },
     {
       "id": 26923,
@@ -43,10 +48,15 @@
       "adapted_pattern": "Onglets segmentés Expérience / Meta / Preuves avec état sélectionné accessible.",
       "implementation_files": [
         "index.html",
-        "web/process/lab.css"
+        "web/causal/lab.css"
       ],
       "react_component_installed": false,
-      "imported_demo_metrics": false
+      "imported_demo_metrics": false,
+      "previous_implementation_files": [
+        "index.html (Process Lab, superseded)",
+        "web/process/lab.css"
+      ],
+      "status": "active native adaptation in causal lab"
     },
     {
       "id": 15024,
@@ -65,10 +75,15 @@
       "adapted_pattern": "Cartes de métriques avec valeur réelle, contexte de comparaison et mini-graphe.",
       "implementation_files": [
         "index.html",
-        "web/process/lab.css"
+        "web/causal/lab.css"
       ],
       "react_component_installed": false,
-      "imported_demo_metrics": false
+      "imported_demo_metrics": false,
+      "previous_implementation_files": [
+        "index.html (Process Lab, superseded)",
+        "web/process/lab.css"
+      ],
+      "status": "active native adaptation in causal lab"
     },
     {
       "id": 29866,
@@ -87,10 +102,15 @@
       "adapted_pattern": "Étapes verticales des hypothèses, validation et modèle gelé.",
       "implementation_files": [
         "index.html",
-        "web/process/lab.css"
+        "web/causal/lab.css"
       ],
       "react_component_installed": false,
-      "imported_demo_metrics": false
+      "imported_demo_metrics": false,
+      "previous_implementation_files": [
+        "index.html (Process Lab, superseded)",
+        "web/process/lab.css"
+      ],
+      "status": "active native adaptation in causal lab"
     }
   ],
   "licensing_note": "This is provenance for inspected source patterns, not a declaration of upstream license terms. No project license is chosen here."

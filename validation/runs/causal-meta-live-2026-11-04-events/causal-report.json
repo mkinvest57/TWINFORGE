@@ -1,0 +1,1560 @@
+{
+  "schema_version": "twinforge.causal.meta.v1",
+  "started_at": "2026-11-04T17:06:20.425700+00:00",
+  "source_kind": "synthetic",
+  "mode": "known-model counterfactual intervention",
+  "options": {
+    "scenario_id": "cascade",
+    "seed": 20261104,
+    "perturbation": 1.0,
+    "action_delay_s": 0.25,
+    "max_iterations": 3,
+    "budget_cap_usd": 0.12,
+    "use_models": true
+  },
+  "journal": [
+    {
+      "iteration": 1,
+      "receipt": {
+        "request_id": "11033260f1f248c88d31873358606a8d",
+        "model": "muse-spark-1.3",
+        "request_sha256": "9e8ee33dd908454164b5f757961d7c18fcbe230aae126e83d09a5776296c5597",
+        "executed_at": "2026-11-04T17:06:20.846149+00:00",
+        "duration_seconds": 14.565087167,
+        "usage": {
+          "completion_tokens": 1121,
+          "prompt_tokens": 2500,
+          "total_tokens": 3621,
+          "completion_tokens_details": {
+            "reasoning_tokens": 1022
+          },
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "finish_reason": "stop"
+      },
+      "raw_response": "{\"candidate_id\": \"steer:-0.16@0.25\", \"expected_effect\": \"Décaler la trajectoire vers le bas pour rendre le choc avec B oblique et dissiper l'énergie avant D.\", \"reason\": \"Un léger braquage négatif écarte le transporteur de l'axe B-C-D, transforme les impacts frontaux en contacts rasants et réduit l'énergie transmise au fragile.\"}",
+      "context_sha256": "addd6b5090a274ca1cb2aa55b7ef62dbe252e6bd10a8d26155d48f2b66f156b1",
+      "proposal": {
+        "candidate_id": "steer:-0.16@0.25",
+        "expected_effect": "Décaler la trajectoire vers le bas pour rendre le choc avec B oblique et dissiper l'énergie avant D.",
+        "reason": "Un léger braquage négatif écarte le transporteur de l'axe B-C-D, transforme les impacts frontaux en contacts rasants et réduit l'énergie transmise au fragile."
+      },
+      "verification": {
+        "action": {
+          "id": "steer:-0.16@0.25",
+          "kind": "steer",
+          "bodyId": "carrier",
+          "atS": 0.25,
+          "amount": -0.16
+        },
+        "metrics": {
+          "protectedImpactEnergyJ": 104.60927319707069,
+          "protectedImpactSumJ": 169.24466319387744,
+          "maxProtectedImpulseNs": 72.82643854460744,
+          "protectedCollisionCount": 3,
+          "totalCollisions": 12,
+          "firstProtectedImpactS": 1.4208333333333292,
+          "controlImpulseNs": 31.370522328303124,
+          "controlEnergyChangeJ": -7.993605777301127e-14,
+          "thresholdJ": 8,
+          "safe": false,
+          "initialEnergyJ": 435.6000000000001,
+          "finalEnergyJ": 8.487956956574129,
+          "initialMomentum": {
+            "x": 198.00000000000003,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -2.860839244254996,
+            "z": -7.247316145109123
+          }
+        },
+        "events": [
+          {
+            "type": "intervention",
+            "bodyIds": [
+              "carrier"
+            ],
+            "kind": "steer",
+            "amount": -0.16,
+            "impulseNs": 31.370522328303124,
+            "energyJ": -7.993605777301127e-14,
+            "x": -4.904798494192765,
+            "z": -0.1134698685153853,
+            "timeS": 0.25
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "relay-a"
+            ],
+            "impulseNs": 121.87965340272947,
+            "energyJ": 145.45472934889878,
+            "x": -3.2412884599078353,
+            "z": -0.19148774166214105,
+            "timeS": 0.4999999999999991
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-a",
+              "relay-b"
+            ],
+            "impulseNs": 92.94974387687289,
+            "energyJ": 112.99092809990148,
+            "x": -0.1662561967695375,
+            "z": 0.16429659054943876,
+            "timeS": 0.9374999999999976
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-b",
+              "protected"
+            ],
+            "impulseNs": 58.81971970716807,
+            "energyJ": 63.34628028606059,
+            "x": 2.953197673977785,
+            "z": 0.12092444217431511,
+            "timeS": 1.4208333333333292
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "protected"
+            ],
+            "impulseNs": 72.82643854460744,
+            "energyJ": 104.60927319707069,
+            "x": 7.3,
+            "z": 0.8714725908002622,
+            "timeS": 2.395833333333336
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 56.93072814292792,
+            "energyJ": 21.309058559394902,
+            "x": 2.0648921123363584,
+            "z": -4.42,
+            "timeS": 4.462499999999969
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 37.6723810135429,
+            "energyJ": 17.495171242967793,
+            "x": 7.38,
+            "z": -2.392481686656926,
+            "timeS": 5.345833333333252
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-a",
+              "protected"
+            ],
+            "impulseNs": 8.631351481862069,
+            "energyJ": 1.2891097107461678,
+            "x": 3.522983883614538,
+            "z": 3.5065136979160387,
+            "timeS": 5.729166666666564
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-a"
+            ],
+            "impulseNs": 37.33541558699157,
+            "energyJ": 14.728796038180192,
+            "x": 3.440622425200513,
+            "z": 4.38,
+            "timeS": 5.987499999999883
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "relay-b"
+            ],
+            "impulseNs": 47.21372722950087,
+            "energyJ": 24.069940627976166,
+            "x": 6.176945350758716,
+            "z": -3.5276795150107,
+            "timeS": 7.129166666666484
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 48.13603866797966,
+            "energyJ": 28.563587507954058,
+            "x": 7.38,
+            "z": -3.396445070216143,
+            "timeS": 7.533333333333128
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "relay-b"
+            ],
+            "impulseNs": 18.437959623125863,
+            "energyJ": 3.670829092336158,
+            "x": 6.45908543733063,
+            "z": -3.550672087077291,
+            "timeS": 8.26666666666642
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 9.029012331748897,
+            "energyJ": 1.0049687338125448,
+            "x": 7.38,
+            "z": -3.304118257904963,
+            "timeS": 9.39999999999969
+          }
+        ]
+      }
+    },
+    {
+      "iteration": 2,
+      "receipt": {
+        "request_id": "2e565a69640d4ef282d6ee1498fd8b37",
+        "model": "muse-spark-1.3",
+        "request_sha256": "2b343c6a76dff1760ddc44e8b92b387b3cd7c272da62835c8f4dd48a955d6ffd",
+        "executed_at": "2026-11-04T17:06:35.588363+00:00",
+        "duration_seconds": 12.764316959,
+        "usage": {
+          "completion_tokens": 1371,
+          "prompt_tokens": 3524,
+          "total_tokens": 4895,
+          "completion_tokens_details": {
+            "reasoning_tokens": 1262
+          },
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "finish_reason": "stop"
+      },
+      "raw_response": "{\"candidate_id\": \"steer:-0.36@0.25\",\"expected_effect\": \"Décaler la trajectoire vers -z pour ne faire qu'effleurer B, casser la chaîne vers C puis D et rester sous le seuil.\",\"reason\": \"L'essai à -0,16 garde un choc frontal A-B puis cascade jusqu'à D. Une rotation négative maximale excentrerait l'impact A-B, réduisant l'énergie normale transmise vers C et D.\"}",
+      "context_sha256": "8993ede9b473f7d6b127fbe2dff6e58814a06514e326cc9b8d347a1508f32baf",
+      "proposal": {
+        "candidate_id": "steer:-0.36@0.25",
+        "expected_effect": "Décaler la trajectoire vers -z pour ne faire qu'effleurer B, casser la chaîne vers C puis D et rester sous le seuil.",
+        "reason": "L'essai à -0,16 garde un choc frontal A-B puis cascade jusqu'à D. Une rotation négative maximale excentrerait l'impact A-B, réduisant l'énergie normale transmise vers C et D."
+      },
+      "verification": {
+        "action": {
+          "id": "steer:-0.36@0.25",
+          "kind": "steer",
+          "bodyId": "carrier",
+          "atS": 0.25,
+          "amount": -0.36
+        },
+        "metrics": {
+          "protectedImpactEnergyJ": 8.485268178096002,
+          "protectedImpactSumJ": 11.991535417416763,
+          "maxProtectedImpulseNs": 22.14453924895535,
+          "protectedCollisionCount": 2,
+          "totalCollisions": 17,
+          "firstProtectedImpactS": 5.204166666666594,
+          "controlImpulseNs": 70.27807968266619,
+          "controlEnergyChangeJ": -1.5987211554602254e-13,
+          "thresholdJ": 8,
+          "safe": false,
+          "initialEnergyJ": 435.6000000000001,
+          "finalEnergyJ": 11.766270009597546,
+          "initialMomentum": {
+            "x": 198.00000000000003,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -20.796273033087147,
+            "z": 22.719348223824657
+          }
+        },
+        "events": [
+          {
+            "type": "intervention",
+            "bodyIds": [
+              "carrier"
+            ],
+            "kind": "steer",
+            "amount": -0.36,
+            "impulseNs": 70.27807968266619,
+            "energyJ": -1.5987211554602254e-13,
+            "x": -4.904798494192765,
+            "z": -0.1134698685153853,
+            "timeS": 0.25
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "relay-a"
+            ],
+            "impulseNs": 94.06186373872453,
+            "energyJ": 86.63484140534109,
+            "x": -3.2011164923178606,
+            "z": -0.321289515576946,
+            "timeS": 0.5333333333333323
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-a",
+              "relay-b"
+            ],
+            "impulseNs": 45.78584982024077,
+            "energyJ": 27.416356582005942,
+            "x": -0.09178788006128819,
+            "z": 0.4254920285665705,
+            "timeS": 1.1874999999999967
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 127.22377872142957,
+            "energyJ": 106.4161069832957,
+            "x": -0.22276555355183283,
+            "z": -4.42,
+            "timeS": 2.2625000000000033
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-a"
+            ],
+            "impulseNs": 69.28523719066156,
+            "energyJ": 50.72320469744539,
+            "x": 2.2618528942615646,
+            "z": 4.38,
+            "timeS": 3.045833333333333
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "parked"
+            ],
+            "impulseNs": 39.74697957839983,
+            "energyJ": 13.562220553415687,
+            "x": 1.6188422129309719,
+            "z": -3.2876036095027663,
+            "timeS": 3.1124999999999994
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "protected",
+              "parked"
+            ],
+            "impulseNs": 14.759124669740322,
+            "energyJ": 3.5062672393207617,
+            "x": 3.03931804507151,
+            "z": -0.1393985680478939,
+            "timeS": 5.204166666666594
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 44.50769516567175,
+            "energyJ": 24.419809282055724,
+            "x": 7.38,
+            "z": -3.711279230790209,
+            "timeS": 5.6749999999999
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 11.197407765827963,
+            "energyJ": 0.8243388604485494,
+            "x": 5.747661208134845,
+            "z": -4.42,
+            "timeS": 5.829166666666558
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "relay-b"
+            ],
+            "impulseNs": 56.29510394878283,
+            "energyJ": 34.2199756803124,
+            "x": 6.656180888911617,
+            "z": -4.208979687881644,
+            "timeS": 6.058333333333212
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 20.899365445454123,
+            "energyJ": 2.871686232890479,
+            "x": 6.102101131315495,
+            "z": -4.42,
+            "timeS": 6.09583333333321
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 55.69256656033018,
+            "energyJ": 38.235477934871874,
+            "x": 7.38,
+            "z": -4.010226079962913,
+            "timeS": 6.149999999999873
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "relay-b"
+            ],
+            "impulseNs": 22.594174856371477,
+            "energyJ": 5.512281864599601,
+            "x": 6.733906030087062,
+            "z": -4.2041880112944385,
+            "timeS": 6.299999999999865
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 11.083126637608878,
+            "energyJ": 1.5142467463668075,
+            "x": 7.38,
+            "z": -3.943128131316153,
+            "timeS": 6.520833333333186
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-a"
+            ],
+            "impulseNs": 48.38150538226156,
+            "energyJ": 24.73341148619827,
+            "x": 7.38,
+            "z": 2.442230453332038,
+            "timeS": 6.658333333333178
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 3.2430890590081307,
+            "energyJ": 0.06914941909702985,
+            "x": 6.105583132083628,
+            "z": -4.42,
+            "timeS": 6.687499999999843
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-a",
+              "protected"
+            ],
+            "impulseNs": 22.14453924895535,
+            "energyJ": 8.485268178096002,
+            "x": 6.2866471080757975,
+            "z": 1.731059975648785,
+            "timeS": 7.808333333333112
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-a"
+            ],
+            "impulseNs": 13.578188140245976,
+            "energyJ": 1.948089530557021,
+            "x": 7.38,
+            "z": 1.5148227616953942,
+            "timeS": 8.99166666666638
+          }
+        ]
+      }
+    },
+    {
+      "iteration": 3,
+      "receipt": {
+        "request_id": "56814c9f6fe84eb99542d0c3fe946ad2",
+        "model": "muse-spark-1.3",
+        "request_sha256": "64dc507cbde0ccbfcf1eb47eb54894ce4abb6920b12032c1e3ccfe45fc45f859",
+        "executed_at": "2026-11-04T17:06:48.426366+00:00",
+        "duration_seconds": 9.782115167,
+        "usage": {
+          "completion_tokens": 960,
+          "prompt_tokens": 4860,
+          "total_tokens": 5820,
+          "completion_tokens_details": {
+            "reasoning_tokens": 862
+          },
+          "prompt_tokens_details": {
+            "cached_tokens": 0
+          }
+        },
+        "finish_reason": "stop"
+      },
+      "raw_response": "{\"candidate_id\": \"steer:-0.32@0.25\", \"expected_effect\": \"Cascade désalignée et dissipée au mur, choc résiduel sur D atténué sous le seuil.\", \"reason\": \"Braquage vers le bas rend le choc A-B oblique, réduit le transfert vers C puis D fragile et envoie le porteur vers mur et charge arrêtée pour dissiper l'énergie.\"}",
+      "context_sha256": "0d426ebcefc7d071018252630fd9b800be1ade5d8c84df9fb1959aad6ae5566a",
+      "proposal": {
+        "candidate_id": "steer:-0.32@0.25",
+        "expected_effect": "Cascade désalignée et dissipée au mur, choc résiduel sur D atténué sous le seuil.",
+        "reason": "Braquage vers le bas rend le choc A-B oblique, réduit le transfert vers C puis D fragile et envoie le porteur vers mur et charge arrêtée pour dissiper l'énergie."
+      },
+      "verification": {
+        "action": {
+          "id": "steer:-0.32@0.25",
+          "kind": "steer",
+          "bodyId": "carrier",
+          "atS": 0.25,
+          "amount": -0.32
+        },
+        "metrics": {
+          "protectedImpactEnergyJ": 4.564491902149546,
+          "protectedImpactSumJ": 9.43798142419232,
+          "maxProtectedImpulseNs": 15.789144962470045,
+          "protectedCollisionCount": 3,
+          "totalCollisions": 16,
+          "firstProtectedImpactS": 2.1500000000000012,
+          "controlImpulseNs": 62.540380368913944,
+          "controlEnergyChangeJ": 0,
+          "thresholdJ": 8,
+          "safe": true,
+          "initialEnergyJ": 435.6000000000001,
+          "finalEnergyJ": 12.506153484375577,
+          "initialMomentum": {
+            "x": 198.00000000000003,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -0.21399422765800935,
+            "z": 31.10434131038373
+          }
+        },
+        "events": [
+          {
+            "type": "intervention",
+            "bodyIds": [
+              "carrier"
+            ],
+            "kind": "steer",
+            "amount": -0.32,
+            "impulseNs": 62.540380368913944,
+            "energyJ": 0,
+            "x": -4.904798494192765,
+            "z": -0.1134698685153853,
+            "timeS": 0.25
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "relay-a"
+            ],
+            "impulseNs": 101.58976064787085,
+            "energyJ": 101.0567436172992,
+            "x": -3.209563695387355,
+            "z": -0.29234068365393806,
+            "timeS": 0.524999999999999
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-a",
+              "relay-b"
+            ],
+            "impulseNs": 59.39829629715992,
+            "energyJ": 46.14186646001903,
+            "x": -0.12160499542187062,
+            "z": 0.35656863256678945,
+            "timeS": 1.099999999999997
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-b",
+              "protected"
+            ],
+            "impulseNs": 9.344544885209876,
+            "energyJ": 1.5987903771916792,
+            "x": 3.209491557816052,
+            "z": -0.29953382237853804,
+            "timeS": 2.1500000000000012
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 115.04634344032095,
+            "energyJ": 87.01946836941671,
+            "x": -0.09391169624317673,
+            "z": -4.42,
+            "timeS": 2.4583333333333357
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-a"
+            ],
+            "impulseNs": 66.82796739832385,
+            "energyJ": 47.18910848046741,
+            "x": 1.9823075487816313,
+            "z": 4.38,
+            "timeS": 3.0958333333333337
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "parked"
+            ],
+            "impulseNs": 32.193289807133986,
+            "energyJ": 8.897198044469487,
+            "x": 1.6647968726782663,
+            "z": -3.3007233430907,
+            "timeS": 3.3541666666666656
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 56.84180906082442,
+            "energyJ": 39.82977388199237,
+            "x": 7.38,
+            "z": -3.611272105638609,
+            "timeS": 4.549999999999964
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 33.7964736598713,
+            "energyJ": 14.080394869851757,
+            "x": 6.999837537729933,
+            "z": -4.38,
+            "timeS": 5.254166666666591
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-a",
+              "protected"
+            ],
+            "impulseNs": 13.75686784770554,
+            "energyJ": 3.2746991448510943,
+            "x": 4.855173090322801,
+            "z": 2.4654297144718633,
+            "timeS": 5.483333333333245
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "relay-b"
+            ],
+            "impulseNs": 53.80306904165408,
+            "energyJ": 31.25737799379305,
+            "x": 6.069834001429303,
+            "z": -4.191316978837996,
+            "timeS": 5.887499999999888
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-b"
+            ],
+            "impulseNs": 52.872866599125956,
+            "energyJ": 34.46178528610661,
+            "x": 7.38,
+            "z": -4.021763641359677,
+            "timeS": 6.304166666666531
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 8.054946459317453,
+            "energyJ": 0.42657569008856516,
+            "x": 5.901823967681011,
+            "z": -4.42,
+            "timeS": 7.399999999999802
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "carrier",
+              "relay-b"
+            ],
+            "impulseNs": 9.40946344007872,
+            "energyJ": 0.9560226113656105,
+            "x": 6.360611463200028,
+            "z": -4.009699201029906,
+            "timeS": 7.466666666666465
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "relay-a"
+            ],
+            "impulseNs": 42.866677154967746,
+            "energyJ": 19.416230032842705,
+            "x": 7.38,
+            "z": 3.079097071343769,
+            "timeS": 7.4791666666664645
+          },
+          {
+            "type": "wall",
+            "bodyIds": [
+              "carrier"
+            ],
+            "impulseNs": 5.8926182612151825,
+            "energyJ": 0.2282902693780844,
+            "x": 5.923910956261737,
+            "z": -4.42,
+            "timeS": 7.49583333333313
+          },
+          {
+            "type": "collision",
+            "bodyIds": [
+              "relay-b",
+              "protected"
+            ],
+            "impulseNs": 15.789144962470045,
+            "energyJ": 4.564491902149546,
+            "x": 5.939817396715084,
+            "z": -1.0369883228890342,
+            "timeS": 10.795833333332943
+          }
+        ]
+      }
+    }
+  ],
+  "provider_calls": 3,
+  "scope": "Supplied initial states and contact law. Same-model replay, not independent prediction accuracy or hardware validation.",
+  "model_role": "Propose a bounded intervention from geometry, then revise using measured outcomes. Numerical solver owns outcomes; exhaustive search is a separate baseline.",
+  "source_sha256": {
+    "web/causal/engine.mjs": "ff7d00a37a118b42179cb5314d6056f66ab93e30d22027600250ddd01b239a09",
+    "validation/causal_bridge.mjs": "2001481eaa2eaa3c80e2365a30250765933d48ca676a03f42dff9437fdc4e856",
+    "twinforge_runtime/causal_lab.py": "fe8d92800d6eb28b0654457d43818b7e3699ad014d34ef76c19f8f96971c05b5"
+  },
+  "initial_state_sha256": "6b111b09e539b14603d3c26c1f3a8f966afb4ffa36bae654fcfd2f9aa73a7a68",
+  "initial_context": {
+    "scenario_id": "cascade",
+    "description": "Un chariot percute une file de charges. Le dernier transporteur porte un équipement fragile.",
+    "arena": {
+      "width": 16,
+      "depth": 10
+    },
+    "bodies": [
+      {
+        "id": "carrier",
+        "kind": "carrier",
+        "label": "A · transporteur",
+        "x": -6,
+        "z": -0.1134698685153853,
+        "vx": 4.4,
+        "vz": 0,
+        "radius": 0.58,
+        "mass": 45,
+        "color": "#f6a66a"
+      },
+      {
+        "id": "relay-a",
+        "kind": "cargo",
+        "label": "B · charge",
+        "x": -2.65,
+        "z": -0.0966088583774399,
+        "vx": 0,
+        "vz": 0,
+        "radius": 0.62,
+        "mass": 28,
+        "color": "#8b9dad"
+      },
+      {
+        "id": "relay-b",
+        "kind": "cargo",
+        "label": "C · charge",
+        "x": 0.45,
+        "z": 0.12562321712030097,
+        "vx": 0,
+        "vz": 0,
+        "radius": 0.62,
+        "mass": 24,
+        "color": "#91a69c"
+      },
+      {
+        "id": "protected",
+        "kind": "fragile",
+        "label": "D · équipement fragile",
+        "x": 3.6,
+        "z": 0.23240635416354052,
+        "vx": 0,
+        "vz": 0,
+        "radius": 0.7,
+        "mass": 15,
+        "color": "#72ddca"
+      },
+      {
+        "id": "parked",
+        "kind": "cargo",
+        "label": "E · charge arrêtée",
+        "x": 1.8,
+        "z": -2.7020406135707162,
+        "vx": 0,
+        "vz": 0,
+        "radius": 0.65,
+        "mass": 35,
+        "color": "#667381"
+      }
+    ],
+    "physics": {
+      "dragPerS": 0.035,
+      "restitution": 0.72,
+      "wallRestitution": 0.3
+    },
+    "horizon_s": 12,
+    "control_body_id": "carrier",
+    "protected_body_id": "protected",
+    "damage_threshold_j": 8,
+    "available_actions": [
+      {
+        "id": "none",
+        "kind": "none",
+        "bodyId": "carrier",
+        "atS": 0,
+        "amount": 0
+      },
+      {
+        "id": "brake:0.05@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.05
+      },
+      {
+        "id": "brake:0.10@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.1
+      },
+      {
+        "id": "brake:0.15@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.15000000000000002
+      },
+      {
+        "id": "brake:0.20@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.2
+      },
+      {
+        "id": "brake:0.25@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.25
+      },
+      {
+        "id": "brake:0.30@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.30000000000000004
+      },
+      {
+        "id": "brake:0.35@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.35000000000000003
+      },
+      {
+        "id": "brake:0.40@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.4
+      },
+      {
+        "id": "brake:0.45@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.45
+      },
+      {
+        "id": "brake:0.50@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.5
+      },
+      {
+        "id": "brake:0.55@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.55
+      },
+      {
+        "id": "brake:0.60@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.6000000000000001
+      },
+      {
+        "id": "brake:0.65@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.65
+      },
+      {
+        "id": "brake:0.70@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.7000000000000001
+      },
+      {
+        "id": "brake:0.75@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.75
+      },
+      {
+        "id": "brake:0.80@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.8
+      },
+      {
+        "id": "brake:0.85@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.8500000000000001
+      },
+      {
+        "id": "brake:0.90@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.9
+      },
+      {
+        "id": "steer:-0.36@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.36
+      },
+      {
+        "id": "steer:-0.32@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.32
+      },
+      {
+        "id": "steer:-0.28@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.28
+      },
+      {
+        "id": "steer:-0.24@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.24
+      },
+      {
+        "id": "steer:-0.20@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.2
+      },
+      {
+        "id": "steer:-0.16@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.16
+      },
+      {
+        "id": "steer:-0.12@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.12
+      },
+      {
+        "id": "steer:-0.08@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.08
+      },
+      {
+        "id": "steer:-0.04@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.04
+      },
+      {
+        "id": "steer:0.04@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.04
+      },
+      {
+        "id": "steer:0.08@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.08
+      },
+      {
+        "id": "steer:0.12@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.12
+      },
+      {
+        "id": "steer:0.16@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.16
+      },
+      {
+        "id": "steer:0.20@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.2
+      },
+      {
+        "id": "steer:0.24@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.24
+      },
+      {
+        "id": "steer:0.28@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.28
+      },
+      {
+        "id": "steer:0.32@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.32
+      },
+      {
+        "id": "steer:0.36@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.36
+      }
+    ],
+    "objective": "Keep maximum protected-cargo relative normal contact energy <= threshold, then minimize applied control impulse (N.s).",
+    "scope": {
+      "source": "supplied_initial_state_and_contact_law",
+      "geometry": "planar circular collision envelopes",
+      "integrator": "exact linear-drag free flight + discrete frictionless impulses, fixed 240 Hz",
+      "intervention": "one instantaneous bounded velocity change; actuator dynamics not modeled",
+      "realWorldValidation": false,
+      "metaPoweredPhysics": false
+    }
+  },
+  "baseline": {
+    "metrics": {
+      "protectedImpactEnergyJ": 116.56200059920455,
+      "protectedImpactSumJ": 216.08359599579538,
+      "maxProtectedImpulseNs": 76.87453044005973,
+      "protectedCollisionCount": 5,
+      "totalCollisions": 11,
+      "firstProtectedImpactS": 1.362499999999996,
+      "controlImpulseNs": 0,
+      "controlEnergyChangeJ": 0,
+      "thresholdJ": 8,
+      "safe": false,
+      "initialEnergyJ": 435.6000000000001,
+      "finalEnergyJ": 5.460841394471957,
+      "initialMomentum": {
+        "x": 198.00000000000003,
+        "z": 0
+      },
+      "finalMomentum": {
+        "x": -31.332506856238872,
+        "z": -11.922371517258822
+      }
+    },
+    "events": [
+      {
+        "type": "collision",
+        "bodyIds": [
+          "carrier",
+          "relay-a"
+        ],
+        "impulseNs": 128.36546273202433,
+        "energyJ": 161.34733887092702,
+        "x": -3.2420958182389485,
+        "z": -0.10501832070908013,
+        "timeS": 0.49583333333333246
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "relay-a",
+          "relay-b"
+        ],
+        "impulseNs": 99.38304020922767,
+        "energyJ": 129.17299736502574,
+        "x": -0.1570542221987769,
+        "z": 0.027952878990809428,
+        "timeS": 0.908333333333331
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "relay-b",
+          "protected"
+        ],
+        "impulseNs": 61.72902397407922,
+        "energyJ": 69.76764074373227,
+        "x": 2.948983540721578,
+        "z": 0.32755887970335223,
+        "timeS": 1.362499999999996
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "protected"
+        ],
+        "impulseNs": 76.87453044005973,
+        "energyJ": 116.56200059920455,
+        "x": 7.3,
+        "z": -0.30960277108044765,
+        "timeS": 2.2875000000000028
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "relay-a",
+          "parked"
+        ],
+        "impulseNs": 7.172762930362607,
+        "energyJ": 0.55898549468904,
+        "x": 1.9211703758886127,
+        "z": -2.0789509766422514,
+        "timeS": 3.8249999999999975
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "relay-a",
+          "protected"
+        ],
+        "impulseNs": 33.36249866127998,
+        "energyJ": 19.259695406352236,
+        "x": 3.7053474970029314,
+        "z": -1.7027968659992063,
+        "timeS": 4.887499999999945
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "relay-b"
+        ],
+        "impulseNs": 40.584515897081126,
+        "energyJ": 20.30452330621832,
+        "x": 7.38,
+        "z": 3.930882874906217,
+        "timeS": 5.029166666666604
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "relay-b"
+        ],
+        "impulseNs": 27.48115236881871,
+        "energyJ": 9.30983401772966,
+        "x": 7.183384416576023,
+        "z": 4.38,
+        "timeS": 5.537499999999908
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "protected"
+        ],
+        "impulseNs": 20.233786270785032,
+        "energyJ": 8.075071141061319,
+        "x": 7.3,
+        "z": -3.435727852473743,
+        "timeS": 7.587499999999792
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "protected"
+        ],
+        "impulseNs": 11.07487412777495,
+        "energyJ": 2.4191881054449493,
+        "x": 6.850035999156632,
+        "z": -4.3,
+        "timeS": 9.070833333333042
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "carrier"
+        ],
+        "impulseNs": 63.046479362110446,
+        "energyJ": 26.13319237315594,
+        "x": 7.42,
+        "z": -0.42357909183820924,
+        "timeS": 9.404166666666356
+      }
+    ]
+  },
+  "exhaustive_reference": {
+    "action": {
+      "id": "steer:0.20@0.25",
+      "kind": "steer",
+      "bodyId": "carrier",
+      "atS": 0.25,
+      "amount": 0.2
+    },
+    "metrics": {
+      "protectedImpactEnergyJ": 0,
+      "protectedImpactSumJ": 0,
+      "maxProtectedImpulseNs": 0,
+      "protectedCollisionCount": 0,
+      "totalCollisions": 11,
+      "firstProtectedImpactS": null,
+      "controlImpulseNs": 39.18961921118314,
+      "controlEnergyChangeJ": -7.993605777301127e-14,
+      "thresholdJ": 8,
+      "safe": true,
+      "initialEnergyJ": 435.6000000000001,
+      "finalEnergyJ": 8.159276582336027,
+      "initialMomentum": {
+        "x": 198.00000000000003,
+        "z": 0
+      },
+      "finalMomentum": {
+        "x": -20.40119386699634,
+        "z": -7.753782088423691
+      }
+    },
+    "candidates_tested": 37,
+    "robustness": {
+      "kind": "lead_carrier_speed_only",
+      "checks": [
+        {
+          "speedFactor": 0.95,
+          "safe": true,
+          "protectedImpactEnergyJ": 0
+        },
+        {
+          "speedFactor": 1,
+          "safe": true,
+          "protectedImpactEnergyJ": 0
+        },
+        {
+          "speedFactor": 1.05,
+          "safe": true,
+          "protectedImpactEnergyJ": 5.069170543591718
+        }
+      ],
+      "safeCount": 3,
+      "total": 3,
+      "scope": "Three simulated speed checks only; no probabilistic or physical guarantee."
+    }
+  },
+  "selected": {
+    "action": {
+      "id": "steer:-0.32@0.25",
+      "kind": "steer",
+      "bodyId": "carrier",
+      "atS": 0.25,
+      "amount": -0.32
+    },
+    "metrics": {
+      "protectedImpactEnergyJ": 4.564491902149546,
+      "protectedImpactSumJ": 9.43798142419232,
+      "maxProtectedImpulseNs": 15.789144962470045,
+      "protectedCollisionCount": 3,
+      "totalCollisions": 16,
+      "firstProtectedImpactS": 2.1500000000000012,
+      "controlImpulseNs": 62.540380368913944,
+      "controlEnergyChangeJ": 0,
+      "thresholdJ": 8,
+      "safe": true,
+      "initialEnergyJ": 435.6000000000001,
+      "finalEnergyJ": 12.506153484375577,
+      "initialMomentum": {
+        "x": 198.00000000000003,
+        "z": 0
+      },
+      "finalMomentum": {
+        "x": -0.21399422765800935,
+        "z": 31.10434131038373
+      }
+    },
+    "events": [
+      {
+        "type": "intervention",
+        "bodyIds": [
+          "carrier"
+        ],
+        "kind": "steer",
+        "amount": -0.32,
+        "impulseNs": 62.540380368913944,
+        "energyJ": 0,
+        "x": -4.904798494192765,
+        "z": -0.1134698685153853,
+        "timeS": 0.25
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "carrier",
+          "relay-a"
+        ],
+        "impulseNs": 101.58976064787085,
+        "energyJ": 101.0567436172992,
+        "x": -3.209563695387355,
+        "z": -0.29234068365393806,
+        "timeS": 0.524999999999999
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "relay-a",
+          "relay-b"
+        ],
+        "impulseNs": 59.39829629715992,
+        "energyJ": 46.14186646001903,
+        "x": -0.12160499542187062,
+        "z": 0.35656863256678945,
+        "timeS": 1.099999999999997
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "relay-b",
+          "protected"
+        ],
+        "impulseNs": 9.344544885209876,
+        "energyJ": 1.5987903771916792,
+        "x": 3.209491557816052,
+        "z": -0.29953382237853804,
+        "timeS": 2.1500000000000012
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "carrier"
+        ],
+        "impulseNs": 115.04634344032095,
+        "energyJ": 87.01946836941671,
+        "x": -0.09391169624317673,
+        "z": -4.42,
+        "timeS": 2.4583333333333357
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "relay-a"
+        ],
+        "impulseNs": 66.82796739832385,
+        "energyJ": 47.18910848046741,
+        "x": 1.9823075487816313,
+        "z": 4.38,
+        "timeS": 3.0958333333333337
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "carrier",
+          "parked"
+        ],
+        "impulseNs": 32.193289807133986,
+        "energyJ": 8.897198044469487,
+        "x": 1.6647968726782663,
+        "z": -3.3007233430907,
+        "timeS": 3.3541666666666656
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "relay-b"
+        ],
+        "impulseNs": 56.84180906082442,
+        "energyJ": 39.82977388199237,
+        "x": 7.38,
+        "z": -3.611272105638609,
+        "timeS": 4.549999999999964
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "relay-b"
+        ],
+        "impulseNs": 33.7964736598713,
+        "energyJ": 14.080394869851757,
+        "x": 6.999837537729933,
+        "z": -4.38,
+        "timeS": 5.254166666666591
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "relay-a",
+          "protected"
+        ],
+        "impulseNs": 13.75686784770554,
+        "energyJ": 3.2746991448510943,
+        "x": 4.855173090322801,
+        "z": 2.4654297144718633,
+        "timeS": 5.483333333333245
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "carrier",
+          "relay-b"
+        ],
+        "impulseNs": 53.80306904165408,
+        "energyJ": 31.25737799379305,
+        "x": 6.069834001429303,
+        "z": -4.191316978837996,
+        "timeS": 5.887499999999888
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "relay-b"
+        ],
+        "impulseNs": 52.872866599125956,
+        "energyJ": 34.46178528610661,
+        "x": 7.38,
+        "z": -4.021763641359677,
+        "timeS": 6.304166666666531
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "carrier"
+        ],
+        "impulseNs": 8.054946459317453,
+        "energyJ": 0.42657569008856516,
+        "x": 5.901823967681011,
+        "z": -4.42,
+        "timeS": 7.399999999999802
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "carrier",
+          "relay-b"
+        ],
+        "impulseNs": 9.40946344007872,
+        "energyJ": 0.9560226113656105,
+        "x": 6.360611463200028,
+        "z": -4.009699201029906,
+        "timeS": 7.466666666666465
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "relay-a"
+        ],
+        "impulseNs": 42.866677154967746,
+        "energyJ": 19.416230032842705,
+        "x": 7.38,
+        "z": 3.079097071343769,
+        "timeS": 7.4791666666664645
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "carrier"
+        ],
+        "impulseNs": 5.8926182612151825,
+        "energyJ": 0.2282902693780844,
+        "x": 5.923910956261737,
+        "z": -4.42,
+        "timeS": 7.49583333333313
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "relay-b",
+          "protected"
+        ],
+        "impulseNs": 15.789144962470045,
+        "energyJ": 4.564491902149546,
+        "x": 5.939817396715084,
+        "z": -1.0369883228890342,
+        "timeS": 10.795833333332943
+      }
+    ]
+  },
+  "status": "complete",
+  "selection_origin": "numerical ranking among the model's verified proposals",
+  "charged_usd": 0.028276,
+  "cost_basis": "Provider usage; failed calls retain reserved upper bound when billing is unknown",
+  "duration_seconds": 37.855568333,
+  "completed_at": "2026-11-04T17:06:58.281692+00:00",
+  "report_sha256": "21924f2f1dda4ae38c748d35d980f290198c4b21d60d62ff48957a4408e79a4f"
+}

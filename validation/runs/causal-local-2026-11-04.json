@@ -1,0 +1,643 @@
+{
+  "schema_version": "twinforge.causal.meta.v1",
+  "started_at": "2026-11-04T17:05:30.135273+00:00",
+  "source_kind": "synthetic",
+  "mode": "known-model counterfactual intervention",
+  "options": {
+    "scenario_id": "cascade",
+    "seed": 20261104,
+    "perturbation": 1.0,
+    "action_delay_s": 0.25,
+    "max_iterations": 3,
+    "budget_cap_usd": 0.12,
+    "use_models": false
+  },
+  "journal": [],
+  "provider_calls": 0,
+  "scope": "Supplied initial states and contact law. Same-model replay, not independent prediction accuracy or hardware validation.",
+  "model_role": "Propose a bounded intervention from geometry, then revise using measured outcomes. Numerical solver owns outcomes; exhaustive search is a separate baseline.",
+  "source_sha256": {
+    "web/causal/engine.mjs": "ff7d00a37a118b42179cb5314d6056f66ab93e30d22027600250ddd01b239a09",
+    "validation/causal_bridge.mjs": "2001481eaa2eaa3c80e2365a30250765933d48ca676a03f42dff9437fdc4e856",
+    "twinforge_runtime/causal_lab.py": "e2a61d0a60e2b23cb9c886d81e1795d7b765399746fc5da833e8d781fce93a36"
+  },
+  "initial_state_sha256": "6b111b09e539b14603d3c26c1f3a8f966afb4ffa36bae654fcfd2f9aa73a7a68",
+  "initial_context": {
+    "scenario_id": "cascade",
+    "description": "Un chariot percute une file de charges. Le dernier transporteur porte un équipement fragile.",
+    "arena": {
+      "width": 16,
+      "depth": 10
+    },
+    "bodies": [
+      {
+        "id": "carrier",
+        "kind": "carrier",
+        "label": "A · transporteur",
+        "x": -6,
+        "z": -0.1134698685153853,
+        "vx": 4.4,
+        "vz": 0,
+        "radius": 0.58,
+        "mass": 45,
+        "color": "#f6a66a"
+      },
+      {
+        "id": "relay-a",
+        "kind": "cargo",
+        "label": "B · charge",
+        "x": -2.65,
+        "z": -0.0966088583774399,
+        "vx": 0,
+        "vz": 0,
+        "radius": 0.62,
+        "mass": 28,
+        "color": "#8b9dad"
+      },
+      {
+        "id": "relay-b",
+        "kind": "cargo",
+        "label": "C · charge",
+        "x": 0.45,
+        "z": 0.12562321712030097,
+        "vx": 0,
+        "vz": 0,
+        "radius": 0.62,
+        "mass": 24,
+        "color": "#91a69c"
+      },
+      {
+        "id": "protected",
+        "kind": "fragile",
+        "label": "D · équipement fragile",
+        "x": 3.6,
+        "z": 0.23240635416354052,
+        "vx": 0,
+        "vz": 0,
+        "radius": 0.7,
+        "mass": 15,
+        "color": "#72ddca"
+      },
+      {
+        "id": "parked",
+        "kind": "cargo",
+        "label": "E · charge arrêtée",
+        "x": 1.8,
+        "z": -2.7020406135707162,
+        "vx": 0,
+        "vz": 0,
+        "radius": 0.65,
+        "mass": 35,
+        "color": "#667381"
+      }
+    ],
+    "physics": {
+      "dragPerS": 0.035,
+      "restitution": 0.72,
+      "wallRestitution": 0.3
+    },
+    "horizon_s": 12,
+    "control_body_id": "carrier",
+    "protected_body_id": "protected",
+    "damage_threshold_j": 8,
+    "available_actions": [
+      {
+        "id": "none",
+        "kind": "none",
+        "bodyId": "carrier",
+        "atS": 0,
+        "amount": 0
+      },
+      {
+        "id": "brake:0.05@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.05
+      },
+      {
+        "id": "brake:0.10@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.1
+      },
+      {
+        "id": "brake:0.15@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.15000000000000002
+      },
+      {
+        "id": "brake:0.20@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.2
+      },
+      {
+        "id": "brake:0.25@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.25
+      },
+      {
+        "id": "brake:0.30@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.30000000000000004
+      },
+      {
+        "id": "brake:0.35@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.35000000000000003
+      },
+      {
+        "id": "brake:0.40@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.4
+      },
+      {
+        "id": "brake:0.45@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.45
+      },
+      {
+        "id": "brake:0.50@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.5
+      },
+      {
+        "id": "brake:0.55@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.55
+      },
+      {
+        "id": "brake:0.60@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.6000000000000001
+      },
+      {
+        "id": "brake:0.65@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.65
+      },
+      {
+        "id": "brake:0.70@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.7000000000000001
+      },
+      {
+        "id": "brake:0.75@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.75
+      },
+      {
+        "id": "brake:0.80@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.8
+      },
+      {
+        "id": "brake:0.85@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.8500000000000001
+      },
+      {
+        "id": "brake:0.90@0.25",
+        "kind": "brake",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.9
+      },
+      {
+        "id": "steer:-0.36@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.36
+      },
+      {
+        "id": "steer:-0.32@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.32
+      },
+      {
+        "id": "steer:-0.28@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.28
+      },
+      {
+        "id": "steer:-0.24@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.24
+      },
+      {
+        "id": "steer:-0.20@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.2
+      },
+      {
+        "id": "steer:-0.16@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.16
+      },
+      {
+        "id": "steer:-0.12@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.12
+      },
+      {
+        "id": "steer:-0.08@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.08
+      },
+      {
+        "id": "steer:-0.04@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.04
+      },
+      {
+        "id": "steer:0.04@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.04
+      },
+      {
+        "id": "steer:0.08@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.08
+      },
+      {
+        "id": "steer:0.12@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.12
+      },
+      {
+        "id": "steer:0.16@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.16
+      },
+      {
+        "id": "steer:0.20@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.2
+      },
+      {
+        "id": "steer:0.24@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.24
+      },
+      {
+        "id": "steer:0.28@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.28
+      },
+      {
+        "id": "steer:0.32@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.32
+      },
+      {
+        "id": "steer:0.36@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.36
+      }
+    ],
+    "objective": "Keep maximum protected-cargo relative normal contact energy <= threshold, then minimize applied control impulse (N.s).",
+    "scope": {
+      "source": "supplied_initial_state_and_contact_law",
+      "geometry": "planar circular collision envelopes",
+      "integrator": "exact linear-drag free flight + discrete frictionless impulses, fixed 240 Hz",
+      "intervention": "one instantaneous bounded velocity change; actuator dynamics not modeled",
+      "realWorldValidation": false,
+      "metaPoweredPhysics": false
+    }
+  },
+  "baseline": {
+    "metrics": {
+      "protectedImpactEnergyJ": 116.56200059920455,
+      "protectedImpactSumJ": 216.08359599579538,
+      "maxProtectedImpulseNs": 76.87453044005973,
+      "protectedCollisionCount": 5,
+      "totalCollisions": 11,
+      "firstProtectedImpactS": 1.362499999999996,
+      "controlImpulseNs": 0,
+      "controlEnergyChangeJ": 0,
+      "thresholdJ": 8,
+      "safe": false,
+      "initialEnergyJ": 435.6000000000001,
+      "finalEnergyJ": 5.460841394471957,
+      "initialMomentum": {
+        "x": 198.00000000000003,
+        "z": 0
+      },
+      "finalMomentum": {
+        "x": -31.332506856238872,
+        "z": -11.922371517258822
+      }
+    },
+    "events": [
+      {
+        "type": "collision",
+        "bodyIds": [
+          "carrier",
+          "relay-a"
+        ],
+        "impulseNs": 128.36546273202433,
+        "energyJ": 161.34733887092702,
+        "x": -3.2420958182389485,
+        "z": -0.10501832070908013,
+        "timeS": 0.49583333333333246
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "relay-a",
+          "relay-b"
+        ],
+        "impulseNs": 99.38304020922767,
+        "energyJ": 129.17299736502574,
+        "x": -0.1570542221987769,
+        "z": 0.027952878990809428,
+        "timeS": 0.908333333333331
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "relay-b",
+          "protected"
+        ],
+        "impulseNs": 61.72902397407922,
+        "energyJ": 69.76764074373227,
+        "x": 2.948983540721578,
+        "z": 0.32755887970335223,
+        "timeS": 1.362499999999996
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "protected"
+        ],
+        "impulseNs": 76.87453044005973,
+        "energyJ": 116.56200059920455,
+        "x": 7.3,
+        "z": -0.30960277108044765,
+        "timeS": 2.2875000000000028
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "relay-a",
+          "parked"
+        ],
+        "impulseNs": 7.172762930362607,
+        "energyJ": 0.55898549468904,
+        "x": 1.9211703758886127,
+        "z": -2.0789509766422514,
+        "timeS": 3.8249999999999975
+      },
+      {
+        "type": "collision",
+        "bodyIds": [
+          "relay-a",
+          "protected"
+        ],
+        "impulseNs": 33.36249866127998,
+        "energyJ": 19.259695406352236,
+        "x": 3.7053474970029314,
+        "z": -1.7027968659992063,
+        "timeS": 4.887499999999945
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "relay-b"
+        ],
+        "impulseNs": 40.584515897081126,
+        "energyJ": 20.30452330621832,
+        "x": 7.38,
+        "z": 3.930882874906217,
+        "timeS": 5.029166666666604
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "relay-b"
+        ],
+        "impulseNs": 27.48115236881871,
+        "energyJ": 9.30983401772966,
+        "x": 7.183384416576023,
+        "z": 4.38,
+        "timeS": 5.537499999999908
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "protected"
+        ],
+        "impulseNs": 20.233786270785032,
+        "energyJ": 8.075071141061319,
+        "x": 7.3,
+        "z": -3.435727852473743,
+        "timeS": 7.587499999999792
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "protected"
+        ],
+        "impulseNs": 11.07487412777495,
+        "energyJ": 2.4191881054449493,
+        "x": 6.850035999156632,
+        "z": -4.3,
+        "timeS": 9.070833333333042
+      },
+      {
+        "type": "wall",
+        "bodyIds": [
+          "carrier"
+        ],
+        "impulseNs": 63.046479362110446,
+        "energyJ": 26.13319237315594,
+        "x": 7.42,
+        "z": -0.42357909183820924,
+        "timeS": 9.404166666666356
+      }
+    ]
+  },
+  "exhaustive_reference": {
+    "action": {
+      "id": "steer:0.20@0.25",
+      "kind": "steer",
+      "bodyId": "carrier",
+      "atS": 0.25,
+      "amount": 0.2
+    },
+    "metrics": {
+      "protectedImpactEnergyJ": 0,
+      "protectedImpactSumJ": 0,
+      "maxProtectedImpulseNs": 0,
+      "protectedCollisionCount": 0,
+      "totalCollisions": 11,
+      "firstProtectedImpactS": null,
+      "controlImpulseNs": 39.18961921118314,
+      "controlEnergyChangeJ": -7.993605777301127e-14,
+      "thresholdJ": 8,
+      "safe": true,
+      "initialEnergyJ": 435.6000000000001,
+      "finalEnergyJ": 8.159276582336027,
+      "initialMomentum": {
+        "x": 198.00000000000003,
+        "z": 0
+      },
+      "finalMomentum": {
+        "x": -20.40119386699634,
+        "z": -7.753782088423691
+      }
+    },
+    "candidates_tested": 37,
+    "robustness": {
+      "kind": "lead_carrier_speed_only",
+      "checks": [
+        {
+          "speedFactor": 0.95,
+          "safe": true,
+          "protectedImpactEnergyJ": 0
+        },
+        {
+          "speedFactor": 1,
+          "safe": true,
+          "protectedImpactEnergyJ": 0
+        },
+        {
+          "speedFactor": 1.05,
+          "safe": true,
+          "protectedImpactEnergyJ": 5.069170543591718
+        }
+      ],
+      "safeCount": 3,
+      "total": 3,
+      "scope": "Three simulated speed checks only; no probabilistic or physical guarantee."
+    }
+  },
+  "selected": {
+    "action": {
+      "id": "steer:0.20@0.25",
+      "kind": "steer",
+      "bodyId": "carrier",
+      "atS": 0.25,
+      "amount": 0.2
+    },
+    "metrics": {
+      "protectedImpactEnergyJ": 0,
+      "protectedImpactSumJ": 0,
+      "maxProtectedImpulseNs": 0,
+      "protectedCollisionCount": 0,
+      "totalCollisions": 11,
+      "firstProtectedImpactS": null,
+      "controlImpulseNs": 39.18961921118314,
+      "controlEnergyChangeJ": -7.993605777301127e-14,
+      "thresholdJ": 8,
+      "safe": true,
+      "initialEnergyJ": 435.6000000000001,
+      "finalEnergyJ": 8.159276582336027,
+      "initialMomentum": {
+        "x": 198.00000000000003,
+        "z": 0
+      },
+      "finalMomentum": {
+        "x": -20.40119386699634,
+        "z": -7.753782088423691
+      }
+    },
+    "candidates_tested": 37,
+    "robustness": {
+      "kind": "lead_carrier_speed_only",
+      "checks": [
+        {
+          "speedFactor": 0.95,
+          "safe": true,
+          "protectedImpactEnergyJ": 0
+        },
+        {
+          "speedFactor": 1,
+          "safe": true,
+          "protectedImpactEnergyJ": 0
+        },
+        {
+          "speedFactor": 1.05,
+          "safe": true,
+          "protectedImpactEnergyJ": 5.069170543591718
+        }
+      ],
+      "safeCount": 3,
+      "total": 3,
+      "scope": "Three simulated speed checks only; no probabilistic or physical guarantee."
+    }
+  },
+  "status": "complete",
+  "selection_origin": "local exhaustive search; no model call",
+  "charged_usd": 0.0,
+  "cost_basis": "No provider call",
+  "duration_seconds": 0.319633292,
+  "completed_at": "2026-11-04T17:05:30.455769+00:00",
+  "report_sha256": "d731ff27b0792462e7e46c2c7d985ca754cbc6998887f9e418863724334b5fdd"
+}

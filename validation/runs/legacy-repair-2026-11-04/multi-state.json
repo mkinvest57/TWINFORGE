@@ -1,0 +1,18 @@
+{
+  "result": {
+    "type": "object",
+    "value": {
+      "mean_error_cm": 1.6614060766873056,
+      "measurements": 6,
+      "model": {
+        "friction": 0.10000000000000007,
+        "g": 9.80999999999958,
+        "restitution": 0.5800000000000013,
+        "source": "gravity from positions; contact response from observed velocities"
+      },
+      "pendulum": null,
+      "running": false,
+      "time_s": 3.000000000000044
+    }
+  }
+}

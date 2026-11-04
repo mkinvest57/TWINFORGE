@@ -1,0 +1,66 @@
+{
+  "schema_version": "twinforge.legacy-repair.v1",
+  "recorded_at": "2026-11-04T17:14:49.915444+00:00",
+  "mode": "synthetic_browser_repair_audit",
+  "physical_validation": false,
+  "source_sha256": {
+    "workbench.html": "aa928a88544253558e3808c39e1bd93c18c68a5881d623e2cf49f9765f8af56a",
+    "web/workbench.js": "2b415cb38da65ac5898ffb98a2890cb0982169301821fb9ab926b14a4031a4ac",
+    "web/physics/alt-models.mjs": "1ee9d536ef414abb22348d595cfe3f7210a965e85fa3df4739f212cec3e57721",
+    "web/physics/evaluator.mjs": "2ec6d52a5a026de4f07581973f57bd0cb48e3eac22dbc91c4839a604c42c8e7a",
+    "tests/js/pendulum-forecast.test.mjs": "4c7def49c596d47768d0960ce57950b18da2ac57595dc41e02b4ccdf07e815b0",
+    "tests/js/legacy-scenes.test.mjs": "1d5b3b548e03d4f1b0744241ee8aa2476c834d1dfb7755b6e261c084fe6a9761"
+  },
+  "fixes": [
+    "Retired water/orbit from entry routes and selectors, removed their rendered scene construction.",
+    "Replaced deliberately divergent purple copy by observed cyan tail and current-source orange future path.",
+    "RK4 interactive pendulum, immutable evaluation forecasts every 0.5 s with frozen model parameters.",
+    "Pause, resume, reset and no simulation before launch.",
+    "Removed solid decorative objects absent from contact physics.",
+    "Seven-body fixture now creates actual sphere contacts and stops assessments after settling.",
+    "Gravity estimated from collision-free positions; collision response estimated from observed velocities.",
+    "Public static hosting disables unavailable backend actions; malformed narrator select repaired."
+  ],
+  "numerical_energy_check": {
+    "seconds": 20,
+    "step_seconds": 0.004166666666666667,
+    "initial_energy_J": 21.397308322067385,
+    "old_max_absolute_drift_J": 9.131514305923798,
+    "new_max_absolute_drift_J": 0.00012543606031556465
+  },
+  "tests_added": 8,
+  "console_errors_or_warnings_in_final_browser_runs": [],
+  "cases": {
+    "pendulum": {
+      "scored": 65,
+      "issued": 66,
+      "mean_error_cm": 0.21671407652768673,
+      "maximum_error_cm": 11.776935907564335,
+      "initial_prior_error_cm": 11.776935907564335,
+      "last_target_s": 32.49999999999851,
+      "all_scored_forecasts_preserved": true,
+      "recorded_source_sha256": "fd27bcbf48bce5e396ba3d06a05361d2874aa12c60b6fda419a7924d574eb1a4",
+      "recorded_source_matches_final": false,
+      "raw_evidence": "pendulum-evidence.json",
+      "raw_sha256": "5e9676c7d66b91926e11df195cf976ba467cb2d71db454423c231991018759d2",
+      "source_note": "Browser evidence captured before the final multi-body gravity-filter-only correction; the pendulum algorithm, rendering and controls were unchanged.",
+      "tail_attachment_error_m": 0.0,
+      "future_path_attachment_error_m": 3.725304197324921e-08,
+      "pause_confirmed": true
+    },
+    "multi": {
+      "scored": 6,
+      "issued": 6,
+      "mean_error_cm": 1.6614060766873056,
+      "maximum_error_cm": 13.377304784239502,
+      "initial_prior_error_cm": 9.968436460118912,
+      "last_target_s": 3.000000000000019,
+      "all_scored_forecasts_preserved": true,
+      "recorded_source_sha256": "aa928a88544253558e3808c39e1bd93c18c68a5881d623e2cf49f9765f8af56a",
+      "recorded_source_matches_final": true,
+      "raw_evidence": "multi-evidence.json",
+      "raw_sha256": "30d41000b52e8abe0dbecfbd120528824d43af4c0262dddef4e3db499df0397a",
+      "automatic_stop_s": 3.000000000000044
+    }
+  }
+}

@@ -21,6 +21,7 @@ from twinforge_runtime.scientist import calibrate
 from twinforge_runtime.narration import narrate_local
 from twinforge_runtime.synthetic_capture import build_capture
 from twinforge_runtime.process_lab import run_job as run_process_job, validate_options as validate_process_options, specification as process_specification
+from twinforge_runtime.causal_lab import run_job as run_causal_job, validate_options as validate_causal_options
 
 ROOT = Path(__file__).resolve().parent
 load_env()
@@ -242,7 +243,10 @@ class Handler(BaseHTTPRequestHandler):
                 (folder / (upload_id + '.json')).write_text(json.dumps({'stored_name': stored, 'original_name': original}))
                 return self._json(201, {'upload_id': upload_id, 'bytes': len(data), 'filename': original})
             # Large legacy journals can be recovered; ordinary inputs stay bounded.
-            body = self._read_json(128 * 1024 * 1024 if path == '/api/evidence' else (4096 if path == '/api/jobs/process' else MAX_JSON))
+            body = self._read_json(128 * 1024 * 1024 if path == '/api/evidence' else (4096 if path in {'/api/jobs/process', '/api/jobs/causal'} else MAX_JSON))
+            if path == '/api/jobs/causal':
+                options = validate_causal_options(body)
+                return self._json(202, JOBS.start(lambda folder: run_causal_job(options, folder)))
             if path == '/api/jobs/process':
                 options = validate_process_options(body)
                 return self._json(202, JOBS.start(lambda folder: run_process_job(options, folder)))

@@ -1,0 +1,2005 @@
+{
+  "report": {
+    "version": 1,
+    "run": {
+      "id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+      "recorded_at": "2026-11-04T17:12:32.920Z",
+      "mode": "simulation",
+      "source_commit": "working-tree",
+      "source_path": "workbench.html",
+      "source_sha256": "aa928a88544253558e3808c39e1bd93c18c68a5881d623e2cf49f9765f8af56a"
+    },
+    "scenes": [
+      {
+        "id": "hoop",
+        "validated": false,
+        "tests": [
+          {
+            "id": "launch",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "bounce",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "hoop_passage",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "net",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "ghost_ahead",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "induction",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "control",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          }
+        ],
+        "metrics": {
+          "ghost_error_mean_cm": null,
+          "verdicts_correct": 0,
+          "verdicts_total": 0,
+          "collisions": null
+        }
+      },
+      {
+        "id": "multi",
+        "validated": false,
+        "tests": [
+          {
+            "id": "launch",
+            "status": "pass",
+            "evidence": [
+              {
+                "path": "twinforge-events-a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce.json",
+                "sha256": "ec8687e30540fc7461e28c5e6715e83e7eda15c13586f34db1b49b739411a940",
+                "event_ids": [
+                  "a5006960-b0d1-4062-a772-462e6240fa97"
+                ]
+              }
+            ],
+            "measurements": {
+              "observed_bodies": 7
+            },
+            "reason": "Scene action executed; generated simulation only.",
+            "executed_at": "2026-11-04T17:12:20.975Z",
+            "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+          },
+          {
+            "id": "bounce",
+            "status": "pass",
+            "evidence": [
+              {
+                "path": "twinforge-events-a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce.json",
+                "sha256": "ec8687e30540fc7461e28c5e6715e83e7eda15c13586f34db1b49b739411a940",
+                "event_ids": [
+                  "790d6d56-ad1e-4bf9-b925-5ee6edc604f7"
+                ]
+              }
+            ],
+            "measurements": {
+              "ground_contacts": 48
+            },
+            "reason": "Contact velocities recorded in the generated scene.",
+            "executed_at": "2026-11-04T17:12:23.969Z",
+            "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+          },
+          {
+            "id": "hoop_passage",
+            "status": "not_applicable",
+            "evidence": [],
+            "measurements": {},
+            "reason": "This exploratory scene has no hoop, net or controller."
+          },
+          {
+            "id": "net",
+            "status": "not_applicable",
+            "evidence": [],
+            "measurements": {},
+            "reason": "This exploratory scene has no hoop, net or controller."
+          },
+          {
+            "id": "ghost_ahead",
+            "status": "pass",
+            "evidence": [
+              {
+                "path": "twinforge-events-a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce.json",
+                "sha256": "ec8687e30540fc7461e28c5e6715e83e7eda15c13586f34db1b49b739411a940",
+                "event_ids": [
+                  "790d6d56-ad1e-4bf9-b925-5ee6edc604f7"
+                ]
+              }
+            ],
+            "measurements": {
+              "horizon_s": 0.5,
+              "error_mean_cm": 2.157004733557447e-13,
+              "error_max_cm": 6.217248937900877e-13
+            },
+            "reason": "Locked future target compared with observed simulated position at the same time.",
+            "executed_at": "2026-11-04T17:12:23.969Z",
+            "method": "browser simulation, shared parametric integrator; raw event IDs identify the measurement"
+          },
+          {
+            "id": "induction",
+            "status": "blocked",
+            "evidence": [],
+            "measurements": {},
+            "reason": "Only a known model family is calibrated; no independent real experiment or free induction has been validated."
+          },
+          {
+            "id": "control",
+            "status": "not_applicable",
+            "evidence": [],
+            "measurements": {},
+            "reason": "This exploratory scene has no hoop, net or controller."
+          }
+        ],
+        "metrics": {
+          "ghost_error_mean_cm": 2.157004733557447e-13,
+          "verdicts_correct": null,
+          "verdicts_total": null,
+          "collisions": 75
+        }
+      },
+      {
+        "id": "chaos",
+        "validated": false,
+        "tests": [
+          {
+            "id": "launch",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "bounce",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "hoop_passage",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "net",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "ghost_ahead",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "induction",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "control",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          }
+        ],
+        "metrics": {
+          "ghost_error_mean_cm": null,
+          "verdicts_correct": 0,
+          "verdicts_total": 0,
+          "collisions": null
+        }
+      },
+      {
+        "id": "liquid",
+        "validated": false,
+        "tests": [
+          {
+            "id": "launch",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "bounce",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "hoop_passage",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "net",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "ghost_ahead",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "induction",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "control",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          }
+        ],
+        "metrics": {
+          "ghost_error_mean_cm": null,
+          "verdicts_correct": 0,
+          "verdicts_total": 0,
+          "collisions": null
+        }
+      },
+      {
+        "id": "orbit",
+        "validated": false,
+        "tests": [
+          {
+            "id": "launch",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "bounce",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "hoop_passage",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "net",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "ghost_ahead",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "induction",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          },
+          {
+            "id": "control",
+            "status": "not_run",
+            "evidence": [],
+            "measurements": {},
+            "reason": "No measured evidence yet."
+          }
+        ],
+        "metrics": {
+          "ghost_error_mean_cm": null,
+          "verdicts_correct": 0,
+          "verdicts_total": 0,
+          "collisions": null
+        }
+      }
+    ],
+    "level": "L3",
+    "limitations": [
+      "Simulation evidence only. Real video validation and physical control have not been demonstrated.",
+      "Rendered fixture geometry and unmeasured model coefficients are declared priors."
+    ],
+    "persistence": {
+      "count": 20,
+      "persisted_count": 20,
+      "pending": 0,
+      "persistent": true,
+      "backend": "indexeddb",
+      "database": "twinforge.evidence.v3",
+      "error": null,
+      "legacy_archive": "twinforge.evidence.v2 left unchanged"
+    },
+    "session_metrics": {
+      "errorSum": 0,
+      "errorCount": 0,
+      "completedShots": 0,
+      "correctVerdicts": 0,
+      "simulatedEpisodes": 0,
+      "ghost_error_mean_cm": null
+    }
+  },
+  "events": {
+    "schema_version": "twinforge.events.v1",
+    "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+    "scope": "current run plus explicitly referenced evidence only",
+    "records": [
+      {
+        "id": "67cf2909-9591-4ce4-be71-c19ad1330c5c",
+        "recorded_at": "2026-11-04T17:12:17.859Z",
+        "type": "journal",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "channel": "ind-log",
+          "message": "L3 simulation ready. A known model is calibrated from generated position observations. Unobserved contact coefficients remain priors; real data must be imported separately.",
+          "mode": "simulation",
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce"
+        }
+      },
+      {
+        "id": "67debe20-9085-4350-96f9-2b1d6f3deb38",
+        "recorded_at": "2026-11-04T17:12:17.864Z",
+        "type": "journal",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "channel": "ind-log",
+          "message": "Gauntlet → Collisions — 7 sphères · chocs entre corps et sol · paramètres estimés depuis les observations",
+          "mode": "simulation",
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce"
+        }
+      },
+      {
+        "id": "a5006960-b0d1-4062-a772-462e6240fa97",
+        "recorded_at": "2026-11-04T17:12:20.975Z",
+        "type": "scene_started",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+          "scene": "multi",
+          "mode": "simulation",
+          "positions": [
+            [
+              -0.02,
+              0.7,
+              1.6
+            ],
+            [
+              0.02,
+              1.02,
+              1.6
+            ],
+            [
+              -0.02,
+              1.3399999999999999,
+              1.6
+            ],
+            [
+              0.02,
+              1.66,
+              1.6
+            ],
+            [
+              -0.02,
+              1.98,
+              1.6
+            ],
+            [
+              0.02,
+              2.3,
+              1.6
+            ],
+            [
+              -0.02,
+              2.62,
+              1.6
+            ]
+          ]
+        }
+      },
+      {
+        "id": "7301262d-4f27-48c6-a04d-aa861ce33c66",
+        "recorded_at": "2026-11-04T17:12:20.975Z",
+        "type": "journal",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "channel": "ind-log",
+          "message": "Multi-body: cascade released — 7 bodies, sphere/sphere and floor collisions, uniform restitution.",
+          "mode": "simulation",
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce"
+        }
+      },
+      {
+        "id": "f5dfaa98-c29d-4d04-aa96-7e67acb6babd",
+        "recorded_at": "2026-11-04T17:12:20.975Z",
+        "type": "scene_prediction_issued",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+          "scene": "multi",
+          "source_t": 0,
+          "target_t": 0.5,
+          "predicted": [
+            [
+              -0.09415346899504251,
+              0.14,
+              1.6
+            ],
+            [
+              0.2623489091253495,
+              0.2985974924068715,
+              1.6
+            ],
+            [
+              -0.15084931220286493,
+              0.4496403127745479,
+              1.6
+            ],
+            [
+              0.07563763190026393,
+              0.6619563447949848,
+              1.6
+            ],
+            [
+              -0.043010849379443605,
+              0.9435826557447174,
+              1.6
+            ],
+            [
+              0.026244678733960483,
+              1.2384779537090331,
+              1.6
+            ],
+            [
+              -0.02,
+              1.523437500000002,
+              1.6
+            ]
+          ],
+          "model": {
+            "g": 8.7,
+            "restitution": 0.5,
+            "friction": 0.12,
+            "source": "unmeasured prior"
+          }
+        }
+      },
+      {
+        "id": "2bd95703-e660-46ec-988e-7677cd9eb5b7",
+        "recorded_at": "2026-11-04T17:12:20.975Z",
+        "type": "journal",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "channel": "ind-log",
+          "message": "Prédiction verrouillée (action scène) · scène multi · +0.5s · positions des 7 corps à +0.5 s · 6 contact(s) corps/corps prévu(s) dans la fenêtre.",
+          "mode": "simulation",
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce"
+        }
+      },
+      {
+        "id": "75387e07-8f16-48f1-ab7e-e2365cea7929",
+        "recorded_at": "2026-11-04T17:12:21.474Z",
+        "type": "scene_prediction_measured",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+          "scene": "multi",
+          "mode": "simulation",
+          "issued_at": "2026-11-04T17:12:20.975Z",
+          "source_t": 0,
+          "target_t": 0.5,
+          "horizon_s": 0.5,
+          "predicted": [
+            [
+              -0.09415346899504251,
+              0.14,
+              1.6
+            ],
+            [
+              0.2623489091253495,
+              0.2985974924068715,
+              1.6
+            ],
+            [
+              -0.15084931220286493,
+              0.4496403127745479,
+              1.6
+            ],
+            [
+              0.07563763190026393,
+              0.6619563447949848,
+              1.6
+            ],
+            [
+              -0.043010849379443605,
+              0.9435826557447174,
+              1.6
+            ],
+            [
+              0.026244678733960483,
+              1.2384779537090331,
+              1.6
+            ],
+            [
+              -0.02,
+              1.523437500000002,
+              1.6
+            ]
+          ],
+          "observed": [
+            [
+              -0.10677506736097979,
+              0.15044212428043113,
+              1.6
+            ],
+            [
+              0.32930422219742167,
+              0.18278637730791172,
+              1.6
+            ],
+            [
+              -0.21360378768914434,
+              0.42005890970980103,
+              1.6
+            ],
+            [
+              0.10526664555722264,
+              0.5322468108681176,
+              1.6
+            ],
+            [
+              -0.06893217265394516,
+              0.8212110838266224,
+              1.6
+            ],
+            [
+              0.043508809422643804,
+              1.1214214655666976,
+              1.6
+            ],
+            [
+              -0.026699642220199823,
+              1.421859077947524,
+              1.6
+            ]
+          ],
+          "error_mean_cm": 9.968436460118912,
+          "error_max_cm": 13.377304784239502,
+          "contacts": [
+            {
+              "t": 0.3375,
+              "type": "ground",
+              "body": 0,
+              "normal_speed_before": -3.2700000000000067,
+              "normal_speed_after": 1.9203075000000038
+            },
+            {
+              "t": 0.3458333333333333,
+              "type": "sphere",
+              "bodies": [
+                0,
+                1
+              ]
+            },
+            {
+              "t": 0.35416666666666663,
+              "type": "ground",
+              "body": 0,
+              "normal_speed_before": -2.2467089216126017,
+              "normal_speed_after": 1.326798674535309
+            },
+            {
+              "t": 0.3583333333333333,
+              "type": "sphere",
+              "bodies": [
+                1,
+                2
+              ]
+            },
+            {
+              "t": 0.36249999999999993,
+              "type": "sphere",
+              "bodies": [
+                0,
+                1
+              ]
+            },
+            {
+              "t": 0.37083333333333324,
+              "type": "ground",
+              "body": 0,
+              "normal_speed_before": -1.3977168036355374,
+              "normal_speed_after": 0.8343832461086116
+            },
+            {
+              "t": 0.3749999999999999,
+              "type": "sphere",
+              "bodies": [
+                2,
+                3
+              ]
+            },
+            {
+              "t": 0.37916666666666654,
+              "type": "sphere",
+              "bodies": [
+                1,
+                2
+              ]
+            },
+            {
+              "t": 0.39583333333333315,
+              "type": "sphere",
+              "bodies": [
+                3,
+                4
+              ]
+            },
+            {
+              "t": 0.42083333333333306,
+              "type": "sphere",
+              "bodies": [
+                4,
+                5
+              ]
+            },
+            {
+              "t": 0.4583333333333329,
+              "type": "sphere",
+              "bodies": [
+                5,
+                6
+              ]
+            },
+            {
+              "t": 0.49166666666666614,
+              "type": "sphere",
+              "bodies": [
+                0,
+                2
+              ]
+            }
+          ],
+          "model": {
+            "g": 8.7,
+            "restitution": 0.5,
+            "friction": 0.12,
+            "source": "unmeasured prior"
+          }
+        }
+      },
+      {
+        "id": "8cc156af-9b19-4479-9f00-d69136efd088",
+        "recorded_at": "2026-11-04T17:12:21.474Z",
+        "type": "journal",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "channel": "ind-log",
+          "message": "Fantôme multi mesuré à t+0.5s : erreur position 9.97 cm, max 13.38 cm (comparée à l'observation au temps cible, pas à la position courante).",
+          "mode": "simulation",
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce"
+        }
+      },
+      {
+        "id": "a40c7ec4-3163-466f-90e1-9814be5adf5b",
+        "recorded_at": "2026-11-04T17:12:21.474Z",
+        "type": "scene_prediction_issued",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+          "scene": "multi",
+          "source_t": 0.49999999999999944,
+          "target_t": 0.9999999999999994,
+          "predicted": [
+            [
+              -0.7399607193488352,
+              0.14237517010713135,
+              1.6
+            ],
+            [
+              1.5658947400487886,
+              0.14362356010022703,
+              1.6
+            ],
+            [
+              -1.5148693420218242,
+              0.15716540071061863,
+              1.6
+            ],
+            [
+              0.8651278767422212,
+              0.15784069725810976,
+              1.6
+            ],
+            [
+              -1.1393954193991118,
+              0.1753739366609279,
+              1.6
+            ],
+            [
+              1.1111363398762362,
+              0.33575762586040864,
+              1.6
+            ],
+            [
+              0.3513003599411269,
+              0.23570034143702445,
+              1.6
+            ]
+          ],
+          "model": {
+            "g": 9.80999999999952,
+            "restitution": 0.5800000000000008,
+            "friction": 0.10000000000000016,
+            "source": "finite differences of simulated observations"
+          }
+        }
+      },
+      {
+        "id": "c94e261e-dddd-4859-b1ed-247a56a3916a",
+        "recorded_at": "2026-11-04T17:12:21.980Z",
+        "type": "scene_prediction_measured",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+          "scene": "multi",
+          "mode": "simulation",
+          "issued_at": "2026-11-04T17:12:21.474Z",
+          "source_t": 0.49999999999999944,
+          "target_t": 0.9999999999999994,
+          "horizon_s": 0.5,
+          "predicted": [
+            [
+              -0.7399607193488352,
+              0.14237517010713135,
+              1.6
+            ],
+            [
+              1.5658947400487886,
+              0.14362356010022703,
+              1.6
+            ],
+            [
+              -1.5148693420218242,
+              0.15716540071061863,
+              1.6
+            ],
+            [
+              0.8651278767422212,
+              0.15784069725810976,
+              1.6
+            ],
+            [
+              -1.1393954193991118,
+              0.1753739366609279,
+              1.6
+            ],
+            [
+              1.1111363398762362,
+              0.33575762586040864,
+              1.6
+            ],
+            [
+              0.3513003599411269,
+              0.23570034143702445,
+              1.6
+            ]
+          ],
+          "observed": [
+            [
+              -0.7399607193488176,
+              0.14237517010713183,
+              1.6
+            ],
+            [
+              1.5658947400487744,
+              0.14362356010022703,
+              1.6
+            ],
+            [
+              -1.5148693420218335,
+              0.157165400710619,
+              1.6
+            ],
+            [
+              0.8651278767422024,
+              0.157840697258122,
+              1.6
+            ],
+            [
+              -1.1393954193991294,
+              0.17537393666093087,
+              1.6
+            ],
+            [
+              1.1111363398762484,
+              0.33575762586037394,
+              1.6
+            ],
+            [
+              0.35130035994114717,
+              0.23570034143704438,
+              1.6
+            ]
+          ],
+          "error_mean_cm": 2.0955694646068894e-12,
+          "error_max_cm": 3.678111241024896e-12,
+          "contacts": [
+            {
+              "t": 0.5083333333333327,
+              "type": "ground",
+              "body": 0,
+              "normal_speed_before": -1.9740492010617332,
+              "normal_speed_after": 1.1686560366158052
+            },
+            {
+              "t": 0.516666666666666,
+              "type": "ground",
+              "body": 1,
+              "normal_speed_before": -2.659452899111537,
+              "normal_speed_after": 1.5661901814846915
+            },
+            {
+              "t": 0.5208333333333327,
+              "type": "sphere",
+              "bodies": [
+                0,
+                2
+              ]
+            },
+            {
+              "t": 0.5499999999999993,
+              "type": "sphere",
+              "bodies": [
+                0,
+                3
+              ]
+            },
+            {
+              "t": 0.5666666666666659,
+              "type": "ground",
+              "body": 0,
+              "normal_speed_before": -1.1415470805528194,
+              "normal_speed_after": 0.6858048067206352
+            },
+            {
+              "t": 0.5666666666666659,
+              "type": "sphere",
+              "bodies": [
+                1,
+                3
+              ]
+            },
+            {
+              "t": 0.5833333333333325,
+              "type": "sphere",
+              "bodies": [
+                0,
+                4
+              ]
+            },
+            {
+              "t": 0.5874999999999991,
+              "type": "ground",
+              "body": 0,
+              "normal_speed_before": -4.0437715273597705,
+              "normal_speed_after": -0.08574390293343992
+            },
+            {
+              "t": 0.5874999999999991,
+              "type": "sphere",
+              "bodies": [
+                0,
+                4
+              ]
+            },
+            {
+              "t": 0.5916666666666658,
+              "type": "ground",
+              "body": 3,
+              "normal_speed_before": -4.079106641696562,
+              "normal_speed_after": 2.3895893521840055
+            },
+            {
+              "t": 0.5958333333333324,
+              "type": "sphere",
+              "bodies": [
+                4,
+                5
+              ]
+            },
+            {
+              "t": 0.6083333333333324,
+              "type": "ground",
+              "body": 0,
+              "normal_speed_before": 0,
+              "normal_speed_after": -1.039013388036279
+            },
+            {
+              "t": 0.6083333333333324,
+              "type": "sphere",
+              "bodies": [
+                0,
+                4
+              ]
+            },
+            {
+              "t": 0.612499999999999,
+              "type": "ground",
+              "body": 0,
+              "normal_speed_before": -1.039013388036279,
+              "normal_speed_after": -0.06267994032401547
+            },
+            {
+              "t": 0.612499999999999,
+              "type": "sphere",
+              "bodies": [
+                0,
+                4
+              ]
+            },
+            {
+              "t": 0.637499999999999,
+              "type": "sphere",
+              "bodies": [
+                3,
+                5
+              ]
+            },
+            {
+              "t": 0.6791666666666655,
+              "type": "ground",
+              "body": 3,
+              "normal_speed_before": -2.6247485990777224,
+              "normal_speed_after": 1.546061687465079
+            },
+            {
+              "t": 0.6833333333333321,
+              "type": "ground",
+              "body": 2,
+              "normal_speed_before": -2.3189565651707573,
+              "normal_speed_after": 1.3687023077990392
+            },
+            {
+              "t": 0.708333333333332,
+              "type": "ground",
+              "body": 0,
+              "normal_speed_before": 0,
+              "normal_speed_after": -3.635647016969439
+            },
+            {
+              "t": 0.708333333333332,
+              "type": "sphere",
+              "bodies": [
+                0,
+                6
+              ]
+            },
+            {
+              "t": 0.7124999999999987,
+              "type": "ground",
+              "body": 0,
+              "normal_speed_before": -3.635647016969439,
+              "normal_speed_after": 0.8961754506381063
+            },
+            {
+              "t": 0.7124999999999987,
+              "type": "sphere",
+              "bodies": [
+                0,
+                6
+              ]
+            },
+            {
+              "t": 0.7666666666666652,
+              "type": "sphere",
+              "bodies": [
+                2,
+                4
+              ]
+            },
+            {
+              "t": 0.7833333333333318,
+              "type": "sphere",
+              "bodies": [
+                3,
+                6
+              ]
+            },
+            {
+              "t": 0.7916666666666651,
+              "type": "sphere",
+              "bodies": [
+                0,
+                4
+              ]
+            },
+            {
+              "t": 0.816666666666665,
+              "type": "ground",
+              "body": 1,
+              "normal_speed_before": -1.444188281726395,
+              "normal_speed_after": 0.861336703401309
+            },
+            {
+              "t": 0.8416666666666649,
+              "type": "ground",
+              "body": 6,
+              "normal_speed_before": -2.3754796708208095,
+              "normal_speed_after": 1.4014857090760695
+            },
+            {
+              "t": 0.8458333333333315,
+              "type": "ground",
+              "body": 0,
+              "normal_speed_before": -0.9083613458783812,
+              "normal_speed_after": 0.5505570806094611
+            },
+            {
+              "t": 0.8624999999999982,
+              "type": "sphere",
+              "bodies": [
+                3,
+                5
+              ]
+            },
+            {
+              "t": 0.8916666666666647,
+              "type": "ground",
+              "body": 2,
+              "normal_speed_before": -1.1837152632989756,
+              "normal_speed_after": 0.7102623527134058
+            },
+            {
+              "t": 0.9499999999999978,
+              "type": "ground",
+              "body": 3,
+              "normal_speed_before": -1.6748277220131709,
+              "normal_speed_after": 0.995107578767639
+            },
+            {
+              "t": 0.9541666666666645,
+              "type": "ground",
+              "body": 0,
+              "normal_speed_before": -0.47131791939053885,
+              "normal_speed_after": 0.29707189324651256
+            },
+            {
+              "t": 0.9624999999999978,
+              "type": "ground",
+              "body": 4,
+              "normal_speed_before": -1.9378835821117628,
+              "normal_speed_after": 1.1476799776248223
+            },
+            {
+              "t": 0.9749999999999978,
+              "type": "sphere",
+              "bodies": [
+                3,
+                5
+              ]
+            },
+            {
+              "t": 0.9916666666666644,
+              "type": "ground",
+              "body": 1,
+              "normal_speed_before": -0.8145382965986909,
+              "normal_speed_after": 0.4961397120272407
+            }
+          ],
+          "model": {
+            "g": 9.80999999999952,
+            "restitution": 0.5800000000000008,
+            "friction": 0.10000000000000016,
+            "source": "finite differences of simulated observations"
+          }
+        }
+      },
+      {
+        "id": "b07aaaba-1b39-485c-be99-eb3c96d32a20",
+        "recorded_at": "2026-11-04T17:12:21.980Z",
+        "type": "journal",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "channel": "ind-log",
+          "message": "Fantôme multi mesuré à t+0.5s : erreur position 0.00 cm, max 0.00 cm (comparée à l'observation au temps cible, pas à la position courante).",
+          "mode": "simulation",
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce"
+        }
+      },
+      {
+        "id": "cd3e2bc6-76dd-40f0-a18b-f3f21ff8bd24",
+        "recorded_at": "2026-11-04T17:12:21.981Z",
+        "type": "scene_prediction_issued",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+          "scene": "multi",
+          "source_t": 0.9999999999999977,
+          "target_t": 1.4999999999999978,
+          "predicted": [
+            [
+              -1.3161374947813922,
+              0.14,
+              1.6
+            ],
+            [
+              2.7467078830351364,
+              0.14,
+              1.6
+            ],
+            [
+              -2.7661089120229656,
+              0.14,
+              1.6
+            ],
+            [
+              1.2745174701600743,
+              0.14,
+              1.6
+            ],
+            [
+              -2.1606272977405934,
+              0.14,
+              1.6
+            ],
+            [
+              2.424209482294514,
+              0.1706904767956256,
+              1.6
+            ],
+            [
+              0.6697770988639418,
+              0.14,
+              1.6
+            ]
+          ],
+          "model": {
+            "g": 9.809999999999581,
+            "restitution": 0.5800000000000012,
+            "friction": 0.10000000000000016,
+            "source": "gravity from positions; contact response from observed velocities"
+          }
+        }
+      },
+      {
+        "id": "716e5b97-9b19-4c35-8ef4-d7e900313770",
+        "recorded_at": "2026-11-04T17:12:22.475Z",
+        "type": "scene_prediction_measured",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+          "scene": "multi",
+          "mode": "simulation",
+          "issued_at": "2026-11-04T17:12:21.981Z",
+          "source_t": 0.9999999999999977,
+          "target_t": 1.4999999999999978,
+          "horizon_s": 0.5,
+          "predicted": [
+            [
+              -1.3161374947813922,
+              0.14,
+              1.6
+            ],
+            [
+              2.7467078830351364,
+              0.14,
+              1.6
+            ],
+            [
+              -2.7661089120229656,
+              0.14,
+              1.6
+            ],
+            [
+              1.2745174701600743,
+              0.14,
+              1.6
+            ],
+            [
+              -2.1606272977405934,
+              0.14,
+              1.6
+            ],
+            [
+              2.424209482294514,
+              0.1706904767956256,
+              1.6
+            ],
+            [
+              0.6697770988639418,
+              0.14,
+              1.6
+            ]
+          ],
+          "observed": [
+            [
+              -1.3161374947813842,
+              0.14,
+              1.6
+            ],
+            [
+              2.7467078830351292,
+              0.14,
+              1.6
+            ],
+            [
+              -2.7661089120229576,
+              0.14,
+              1.6
+            ],
+            [
+              1.2745174701600681,
+              0.14,
+              1.6
+            ],
+            [
+              -2.1606272977405854,
+              0.14,
+              1.6
+            ],
+            [
+              2.4242094822945095,
+              0.170690476795629,
+              1.6
+            ],
+            [
+              0.6697770988639359,
+              0.14,
+              1.6
+            ]
+          ],
+          "error_mean_cm": 6.967467720745454e-13,
+          "error_max_cm": 7.993605777301127e-13,
+          "contacts": [
+            {
+              "t": 1.0124999999999977,
+              "type": "ground",
+              "body": 0,
+              "normal_speed_before": -0.2343031067534874,
+              "normal_speed_after": 0.15960330191702268
+            },
+            {
+              "t": 1.033333333333331,
+              "type": "ground",
+              "body": 2,
+              "normal_speed_before": -0.6386126472865942,
+              "normal_speed_after": 0.3941028354262246
+            },
+            {
+              "t": 1.0416666666666643,
+              "type": "ground",
+              "body": 3,
+              "normal_speed_before": -0.58716376920498,
+              "normal_speed_after": 0.3642624861388884
+            },
+            {
+              "t": 1.0916666666666641,
+              "type": "ground",
+              "body": 1,
+              "normal_speed_before": -0.4439852879727592,
+              "normal_speed_after": 0.2812189670242003
+            },
+            {
+              "t": 1.1124999999999974,
+              "type": "ground",
+              "body": 2,
+              "normal_speed_before": -0.34164716457377536,
+              "normal_speed_after": 0.2218628554527897
+            },
+            {
+              "t": 1.1124999999999974,
+              "type": "ground",
+              "body": 3,
+              "normal_speed_before": -0.2897375138611116,
+              "normal_speed_after": 0.1917552580394447
+            },
+            {
+              "t": 1.1124999999999974,
+              "type": "ground",
+              "body": 5,
+              "normal_speed_before": -2.305448484950559,
+              "normal_speed_after": 1.3608676212713242
+            },
+            {
+              "t": 1.1249999999999973,
+              "type": "ground",
+              "body": 6,
+              "normal_speed_before": -1.3371392909239304,
+              "normal_speed_after": 0.7992482887358795
+            },
+            {
+              "t": 1.1458333333333306,
+              "type": "ground",
+              "body": 1,
+              "normal_speed_before": -0.20928103297579967,
+              "normal_speed_after": 0.1450904991259638
+            },
+            {
+              "t": 1.1499999999999972,
+              "type": "ground",
+              "body": 3,
+              "normal_speed_before": -0.13524474196055528,
+              "normal_speed_after": 0
+            },
+            {
+              "t": 1.154166666666664,
+              "type": "ground",
+              "body": 2,
+              "normal_speed_before": -0.1460121445472103,
+              "normal_speed_after": 0
+            },
+            {
+              "t": 1.1749999999999972,
+              "type": "ground",
+              "body": 1,
+              "normal_speed_before": -0.10015950087403619,
+              "normal_speed_after": 0
+            },
+            {
+              "t": 1.1958333333333304,
+              "type": "ground",
+              "body": 4,
+              "normal_speed_before": -1.1004450223751776,
+              "normal_speed_after": 0.6619656129776029
+            },
+            {
+              "t": 1.2083333333333304,
+              "type": "ground",
+              "body": 1,
+              "normal_speed_before": 0,
+              "normal_speed_after": -0.15800278431795942
+            },
+            {
+              "t": 1.2083333333333304,
+              "type": "sphere",
+              "bodies": [
+                1,
+                5
+              ]
+            },
+            {
+              "t": 1.212499999999997,
+              "type": "ground",
+              "body": 1,
+              "normal_speed_before": -0.15800278431795942,
+              "normal_speed_after": 0
+            },
+            {
+              "t": 1.2874999999999968,
+              "type": "ground",
+              "body": 6,
+              "normal_speed_before": -0.7540017112641204,
+              "normal_speed_after": 0.4610284925331898
+            },
+            {
+              "t": 1.3291666666666633,
+              "type": "ground",
+              "body": 4,
+              "normal_speed_before": -0.605159387022397,
+              "normal_speed_after": 0.37469994447299027
+            },
+            {
+              "t": 1.3541666666666632,
+              "type": "ground",
+              "body": 1,
+              "normal_speed_before": 0,
+              "normal_speed_after": -0.04417561814216449
+            },
+            {
+              "t": 1.3541666666666632,
+              "type": "sphere",
+              "bodies": [
+                1,
+                5
+              ]
+            },
+            {
+              "t": 1.379166666666663,
+              "type": "ground",
+              "body": 6,
+              "normal_speed_before": -0.39734650746681016,
+              "normal_speed_after": 0.25416847433074985
+            },
+            {
+              "t": 1.404166666666663,
+              "type": "ground",
+              "body": 4,
+              "normal_speed_before": -0.3201750555270097,
+              "normal_speed_after": 0.20940903220566562
+            },
+            {
+              "t": 1.4124999999999963,
+              "type": "ground",
+              "body": 5,
+              "normal_speed_before": -1.3390789762685515,
+              "normal_speed_after": 0.8003733062357599
+            },
+            {
+              "t": 1.429166666666663,
+              "type": "ground",
+              "body": 6,
+              "normal_speed_before": -0.19545652566925012,
+              "normal_speed_after": 0
+            },
+            {
+              "t": 1.4458333333333295,
+              "type": "ground",
+              "body": 4,
+              "normal_speed_before": -0.15846596779433436,
+              "normal_speed_after": 0
+            }
+          ],
+          "model": {
+            "g": 9.809999999999581,
+            "restitution": 0.5800000000000012,
+            "friction": 0.10000000000000016,
+            "source": "gravity from positions; contact response from observed velocities"
+          }
+        }
+      },
+      {
+        "id": "07dbbfbd-5408-4157-bf00-6919170612d5",
+        "recorded_at": "2026-11-04T17:12:22.475Z",
+        "type": "journal",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "channel": "ind-log",
+          "message": "Fantôme multi mesuré à t+0.5s : erreur position 0.00 cm, max 0.00 cm (comparée à l'observation au temps cible, pas à la position courante).",
+          "mode": "simulation",
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce"
+        }
+      },
+      {
+        "id": "b3984a3d-e70d-45af-a8d7-b6e27d0b2365",
+        "recorded_at": "2026-11-04T17:12:22.476Z",
+        "type": "scene_prediction_issued",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+          "scene": "multi",
+          "source_t": 1.499999999999996,
+          "target_t": 1.999999999999996,
+          "predicted": [
+            [
+              -1.5049517578193352,
+              0.14,
+              1.6
+            ],
+            [
+              3.714870574649625,
+              0.14,
+              1.6
+            ],
+            [
+              -3.6338405468688157,
+              0.14,
+              1.6
+            ],
+            [
+              1.3366174633552366,
+              0.14,
+              1.6
+            ],
+            [
+              -2.8438350645924237,
+              0.14,
+              1.6
+            ],
+            [
+              3.282323966079594,
+              0.14,
+              1.6
+            ],
+            [
+              0.7041645883872937,
+              0.14,
+              1.6
+            ]
+          ],
+          "model": {
+            "g": 9.809999999999581,
+            "restitution": 0.5800000000000007,
+            "friction": 0.10000000000000005,
+            "source": "gravity from positions; contact response from observed velocities"
+          }
+        }
+      },
+      {
+        "id": "825a9101-0909-4106-8699-4f84dd833f27",
+        "recorded_at": "2026-11-04T17:12:22.981Z",
+        "type": "scene_prediction_measured",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+          "scene": "multi",
+          "mode": "simulation",
+          "issued_at": "2026-11-04T17:12:22.476Z",
+          "source_t": 1.499999999999996,
+          "target_t": 1.999999999999996,
+          "horizon_s": 0.5,
+          "predicted": [
+            [
+              -1.5049517578193352,
+              0.14,
+              1.6
+            ],
+            [
+              3.714870574649625,
+              0.14,
+              1.6
+            ],
+            [
+              -3.6338405468688157,
+              0.14,
+              1.6
+            ],
+            [
+              1.3366174633552366,
+              0.14,
+              1.6
+            ],
+            [
+              -2.8438350645924237,
+              0.14,
+              1.6
+            ],
+            [
+              3.282323966079594,
+              0.14,
+              1.6
+            ],
+            [
+              0.7041645883872937,
+              0.14,
+              1.6
+            ]
+          ],
+          "observed": [
+            [
+              -1.5049517578193272,
+              0.14,
+              1.6
+            ],
+            [
+              3.714870574649613,
+              0.14,
+              1.6
+            ],
+            [
+              -3.633840546868807,
+              0.14,
+              1.6
+            ],
+            [
+              1.336617463355234,
+              0.14,
+              1.6
+            ],
+            [
+              -2.843835064592415,
+              0.14,
+              1.6
+            ],
+            [
+              3.282323966079588,
+              0.14,
+              1.6
+            ],
+            [
+              0.7041645883872925,
+              0.14,
+              1.6
+            ]
+          ],
+          "error_mean_cm": 6.772360450213455e-13,
+          "error_max_cm": 1.199040866595169e-12,
+          "contacts": [
+            {
+              "t": 1.5749999999999957,
+              "type": "ground",
+              "body": 5,
+              "normal_speed_before": -0.75287669376424,
+              "normal_speed_after": 0.4603759823832592
+            },
+            {
+              "t": 1.666666666666662,
+              "type": "ground",
+              "body": 5,
+              "normal_speed_before": -0.3979990176167407,
+              "normal_speed_after": 0.2545469302177096
+            },
+            {
+              "t": 1.716666666666662,
+              "type": "ground",
+              "body": 5,
+              "normal_speed_before": -0.1950780697822904,
+              "normal_speed_after": 0
+            }
+          ],
+          "model": {
+            "g": 9.809999999999581,
+            "restitution": 0.5800000000000007,
+            "friction": 0.10000000000000005,
+            "source": "gravity from positions; contact response from observed velocities"
+          }
+        }
+      },
+      {
+        "id": "d796d899-45cf-46c8-aca3-3ba635a56721",
+        "recorded_at": "2026-11-04T17:12:22.982Z",
+        "type": "scene_prediction_issued",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+          "scene": "multi",
+          "source_t": 1.9999999999999942,
+          "target_t": 2.4999999999999942,
+          "predicted": [
+            [
+              -1.5049517578193272,
+              0.14,
+              1.6
+            ],
+            [
+              4.295538266264105,
+              0.14,
+              1.6
+            ],
+            [
+              -4.114077181714665,
+              0.14,
+              1.6
+            ],
+            [
+              1.336617463355234,
+              0.14,
+              1.6
+            ],
+            [
+              -3.1395478314442515,
+              0.14,
+              1.6
+            ],
+            [
+              3.760984135157447,
+              0.14,
+              1.6
+            ],
+            [
+              0.7041645883872925,
+              0.14,
+              1.6
+            ]
+          ],
+          "model": {
+            "g": 9.809999999999581,
+            "restitution": 0.5800000000000013,
+            "friction": 0.10000000000000007,
+            "source": "gravity from positions; contact response from observed velocities"
+          }
+        }
+      },
+      {
+        "id": "93c878a6-ceb4-4746-9b23-c1ae44a234a2",
+        "recorded_at": "2026-11-04T17:12:23.475Z",
+        "type": "scene_prediction_measured",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+          "scene": "multi",
+          "mode": "simulation",
+          "issued_at": "2026-11-04T17:12:22.982Z",
+          "source_t": 1.9999999999999942,
+          "target_t": 2.4999999999999942,
+          "horizon_s": 0.5,
+          "predicted": [
+            [
+              -1.5049517578193272,
+              0.14,
+              1.6
+            ],
+            [
+              4.295538266264105,
+              0.14,
+              1.6
+            ],
+            [
+              -4.114077181714665,
+              0.14,
+              1.6
+            ],
+            [
+              1.336617463355234,
+              0.14,
+              1.6
+            ],
+            [
+              -3.1395478314442515,
+              0.14,
+              1.6
+            ],
+            [
+              3.760984135157447,
+              0.14,
+              1.6
+            ],
+            [
+              0.7041645883872925,
+              0.14,
+              1.6
+            ]
+          ],
+          "observed": [
+            [
+              -1.5049517578193272,
+              0.14,
+              1.6
+            ],
+            [
+              4.295538266264077,
+              0.14,
+              1.6
+            ],
+            [
+              -4.114077181714641,
+              0.14,
+              1.6
+            ],
+            [
+              1.336617463355234,
+              0.14,
+              1.6
+            ],
+            [
+              -3.1395478314442387,
+              0.14,
+              1.6
+            ],
+            [
+              3.760984135157425,
+              0.14,
+              1.6
+            ],
+            [
+              0.7041645883872925,
+              0.14,
+              1.6
+            ]
+          ],
+          "error_mean_cm": 1.2371056560108887e-12,
+          "error_max_cm": 2.7533531010703882e-12,
+          "contacts": [],
+          "model": {
+            "g": 9.809999999999581,
+            "restitution": 0.5800000000000013,
+            "friction": 0.10000000000000007,
+            "source": "gravity from positions; contact response from observed velocities"
+          }
+        }
+      },
+      {
+        "id": "846b7d7f-fcf8-46ce-a59f-a8dbc8d635fd",
+        "recorded_at": "2026-11-04T17:12:23.476Z",
+        "type": "scene_prediction_issued",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+          "scene": "multi",
+          "source_t": 2.500000000000019,
+          "target_t": 3.000000000000019,
+          "predicted": [
+            [
+              -1.5049517578193272,
+              0.14,
+              1.6
+            ],
+            [
+              4.4887109578785855,
+              0.14,
+              1.6
+            ],
+            [
+              -4.219982043704497,
+              0.14,
+              1.6
+            ],
+            [
+              1.336617463355234,
+              0.14,
+              1.6
+            ],
+            [
+              -3.152960969271399,
+              0.14,
+              1.6
+            ],
+            [
+              3.8657269924812003,
+              0.14,
+              1.6
+            ],
+            [
+              0.7041645883872925,
+              0.14,
+              1.6
+            ]
+          ],
+          "model": {
+            "g": 9.809999999999581,
+            "restitution": 0.5800000000000013,
+            "friction": 0.10000000000000007,
+            "source": "gravity from positions; contact response from observed velocities"
+          }
+        }
+      },
+      {
+        "id": "790d6d56-ad1e-4bf9-b925-5ee6edc604f7",
+        "recorded_at": "2026-11-04T17:12:23.969Z",
+        "type": "scene_prediction_measured",
+        "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+        "data": {
+          "run_id": "a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce",
+          "scene": "multi",
+          "mode": "simulation",
+          "issued_at": "2026-11-04T17:12:23.476Z",
+          "source_t": 2.500000000000019,
+          "target_t": 3.000000000000019,
+          "horizon_s": 0.5,
+          "predicted": [
+            [
+              -1.5049517578193272,
+              0.14,
+              1.6
+            ],
+            [
+              4.4887109578785855,
+              0.14,
+              1.6
+            ],
+            [
+              -4.219982043704497,
+              0.14,
+              1.6
+            ],
+            [
+              1.336617463355234,
+              0.14,
+              1.6
+            ],
+            [
+              -3.152960969271399,
+              0.14,
+              1.6
+            ],
+            [
+              3.8657269924812003,
+              0.14,
+              1.6
+            ],
+            [
+              0.7041645883872925,
+              0.14,
+              1.6
+            ]
+          ],
+          "observed": [
+            [
+              -1.5049517578193272,
+              0.14,
+              1.6
+            ],
+            [
+              4.488710957878579,
+              0.14,
+              1.6
+            ],
+            [
+              -4.219982043704493,
+              0.14,
+              1.6
+            ],
+            [
+              1.336617463355234,
+              0.14,
+              1.6
+            ],
+            [
+              -3.152960969271398,
+              0.14,
+              1.6
+            ],
+            [
+              3.865726992481196,
+              0.14,
+              1.6
+            ],
+            [
+              0.7041645883872925,
+              0.14,
+              1.6
+            ]
+          ],
+          "error_mean_cm": 2.157004733557447e-13,
+          "error_max_cm": 6.217248937900877e-13,
+          "contacts": [],
+          "model": {
+            "g": 9.809999999999581,
+            "restitution": 0.5800000000000013,
+            "friction": 0.10000000000000007,
+            "source": "gravity from positions; contact response from observed velocities"
+          }
+        }
+      }
+    ]
+  },
+  "files": [
+    {
+      "name": "twinforge-events-a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce.json",
+      "content": "{\n  \"schema_version\": \"twinforge.events.v1\",\n  \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n  \"scope\": \"current run plus explicitly referenced evidence only\",\n  \"records\": [\n    {\n      \"id\": \"67cf2909-9591-4ce4-be71-c19ad1330c5c\",\n      \"recorded_at\": \"2026-11-04T17:12:17.859Z\",\n      \"type\": \"journal\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"channel\": \"ind-log\",\n        \"message\": \"L3 simulation ready. A known model is calibrated from generated position observations. Unobserved contact coefficients remain priors; real data must be imported separately.\",\n        \"mode\": \"simulation\",\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\"\n      }\n    },\n    {\n      \"id\": \"67debe20-9085-4350-96f9-2b1d6f3deb38\",\n      \"recorded_at\": \"2026-11-04T17:12:17.864Z\",\n      \"type\": \"journal\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"channel\": \"ind-log\",\n        \"message\": \"Gauntlet → Collisions — 7 sphères · chocs entre corps et sol · paramètres estimés depuis les observations\",\n        \"mode\": \"simulation\",\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\"\n      }\n    },\n    {\n      \"id\": \"a5006960-b0d1-4062-a772-462e6240fa97\",\n      \"recorded_at\": \"2026-11-04T17:12:20.975Z\",\n      \"type\": \"scene_started\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n        \"scene\": \"multi\",\n        \"mode\": \"simulation\",\n        \"positions\": [\n          [\n            -0.02,\n            0.7,\n            1.6\n          ],\n          [\n            0.02,\n            1.02,\n            1.6\n          ],\n          [\n            -0.02,\n            1.3399999999999999,\n            1.6\n          ],\n          [\n            0.02,\n            1.66,\n            1.6\n          ],\n          [\n            -0.02,\n            1.98,\n            1.6\n          ],\n          [\n            0.02,\n            2.3,\n            1.6\n          ],\n          [\n            -0.02,\n            2.62,\n            1.6\n          ]\n        ]\n      }\n    },\n    {\n      \"id\": \"7301262d-4f27-48c6-a04d-aa861ce33c66\",\n      \"recorded_at\": \"2026-11-04T17:12:20.975Z\",\n      \"type\": \"journal\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"channel\": \"ind-log\",\n        \"message\": \"Multi-body: cascade released — 7 bodies, sphere/sphere and floor collisions, uniform restitution.\",\n        \"mode\": \"simulation\",\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\"\n      }\n    },\n    {\n      \"id\": \"f5dfaa98-c29d-4d04-aa96-7e67acb6babd\",\n      \"recorded_at\": \"2026-11-04T17:12:20.975Z\",\n      \"type\": \"scene_prediction_issued\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n        \"scene\": \"multi\",\n        \"source_t\": 0,\n        \"target_t\": 0.5,\n        \"predicted\": [\n          [\n            -0.09415346899504251,\n            0.14,\n            1.6\n          ],\n          [\n            0.2623489091253495,\n            0.2985974924068715,\n            1.6\n          ],\n          [\n            -0.15084931220286493,\n            0.4496403127745479,\n            1.6\n          ],\n          [\n            0.07563763190026393,\n            0.6619563447949848,\n            1.6\n          ],\n          [\n            -0.043010849379443605,\n            0.9435826557447174,\n            1.6\n          ],\n          [\n            0.026244678733960483,\n            1.2384779537090331,\n            1.6\n          ],\n          [\n            -0.02,\n            1.523437500000002,\n            1.6\n          ]\n        ],\n        \"model\": {\n          \"g\": 8.7,\n          \"restitution\": 0.5,\n          \"friction\": 0.12,\n          \"source\": \"unmeasured prior\"\n        }\n      }\n    },\n    {\n      \"id\": \"2bd95703-e660-46ec-988e-7677cd9eb5b7\",\n      \"recorded_at\": \"2026-11-04T17:12:20.975Z\",\n      \"type\": \"journal\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"channel\": \"ind-log\",\n        \"message\": \"Prédiction verrouillée (action scène) · scène multi · +0.5s · positions des 7 corps à +0.5 s · 6 contact(s) corps/corps prévu(s) dans la fenêtre.\",\n        \"mode\": \"simulation\",\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\"\n      }\n    },\n    {\n      \"id\": \"75387e07-8f16-48f1-ab7e-e2365cea7929\",\n      \"recorded_at\": \"2026-11-04T17:12:21.474Z\",\n      \"type\": \"scene_prediction_measured\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n        \"scene\": \"multi\",\n        \"mode\": \"simulation\",\n        \"issued_at\": \"2026-11-04T17:12:20.975Z\",\n        \"source_t\": 0,\n        \"target_t\": 0.5,\n        \"horizon_s\": 0.5,\n        \"predicted\": [\n          [\n            -0.09415346899504251,\n            0.14,\n            1.6\n          ],\n          [\n            0.2623489091253495,\n            0.2985974924068715,\n            1.6\n          ],\n          [\n            -0.15084931220286493,\n            0.4496403127745479,\n            1.6\n          ],\n          [\n            0.07563763190026393,\n            0.6619563447949848,\n            1.6\n          ],\n          [\n            -0.043010849379443605,\n            0.9435826557447174,\n            1.6\n          ],\n          [\n            0.026244678733960483,\n            1.2384779537090331,\n            1.6\n          ],\n          [\n            -0.02,\n            1.523437500000002,\n            1.6\n          ]\n        ],\n        \"observed\": [\n          [\n            -0.10677506736097979,\n            0.15044212428043113,\n            1.6\n          ],\n          [\n            0.32930422219742167,\n            0.18278637730791172,\n            1.6\n          ],\n          [\n            -0.21360378768914434,\n            0.42005890970980103,\n            1.6\n          ],\n          [\n            0.10526664555722264,\n            0.5322468108681176,\n            1.6\n          ],\n          [\n            -0.06893217265394516,\n            0.8212110838266224,\n            1.6\n          ],\n          [\n            0.043508809422643804,\n            1.1214214655666976,\n            1.6\n          ],\n          [\n            -0.026699642220199823,\n            1.421859077947524,\n            1.6\n          ]\n        ],\n        \"error_mean_cm\": 9.968436460118912,\n        \"error_max_cm\": 13.377304784239502,\n        \"contacts\": [\n          {\n            \"t\": 0.3375,\n            \"type\": \"ground\",\n            \"body\": 0,\n            \"normal_speed_before\": -3.2700000000000067,\n            \"normal_speed_after\": 1.9203075000000038\n          },\n          {\n            \"t\": 0.3458333333333333,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              0,\n              1\n            ]\n          },\n          {\n            \"t\": 0.35416666666666663,\n            \"type\": \"ground\",\n            \"body\": 0,\n            \"normal_speed_before\": -2.2467089216126017,\n            \"normal_speed_after\": 1.326798674535309\n          },\n          {\n            \"t\": 0.3583333333333333,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              1,\n              2\n            ]\n          },\n          {\n            \"t\": 0.36249999999999993,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              0,\n              1\n            ]\n          },\n          {\n            \"t\": 0.37083333333333324,\n            \"type\": \"ground\",\n            \"body\": 0,\n            \"normal_speed_before\": -1.3977168036355374,\n            \"normal_speed_after\": 0.8343832461086116\n          },\n          {\n            \"t\": 0.3749999999999999,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              2,\n              3\n            ]\n          },\n          {\n            \"t\": 0.37916666666666654,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              1,\n              2\n            ]\n          },\n          {\n            \"t\": 0.39583333333333315,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              3,\n              4\n            ]\n          },\n          {\n            \"t\": 0.42083333333333306,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              4,\n              5\n            ]\n          },\n          {\n            \"t\": 0.4583333333333329,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              5,\n              6\n            ]\n          },\n          {\n            \"t\": 0.49166666666666614,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              0,\n              2\n            ]\n          }\n        ],\n        \"model\": {\n          \"g\": 8.7,\n          \"restitution\": 0.5,\n          \"friction\": 0.12,\n          \"source\": \"unmeasured prior\"\n        }\n      }\n    },\n    {\n      \"id\": \"8cc156af-9b19-4479-9f00-d69136efd088\",\n      \"recorded_at\": \"2026-11-04T17:12:21.474Z\",\n      \"type\": \"journal\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"channel\": \"ind-log\",\n        \"message\": \"Fantôme multi mesuré à t+0.5s : erreur position 9.97 cm, max 13.38 cm (comparée à l'observation au temps cible, pas à la position courante).\",\n        \"mode\": \"simulation\",\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\"\n      }\n    },\n    {\n      \"id\": \"a40c7ec4-3163-466f-90e1-9814be5adf5b\",\n      \"recorded_at\": \"2026-11-04T17:12:21.474Z\",\n      \"type\": \"scene_prediction_issued\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n        \"scene\": \"multi\",\n        \"source_t\": 0.49999999999999944,\n        \"target_t\": 0.9999999999999994,\n        \"predicted\": [\n          [\n            -0.7399607193488352,\n            0.14237517010713135,\n            1.6\n          ],\n          [\n            1.5658947400487886,\n            0.14362356010022703,\n            1.6\n          ],\n          [\n            -1.5148693420218242,\n            0.15716540071061863,\n            1.6\n          ],\n          [\n            0.8651278767422212,\n            0.15784069725810976,\n            1.6\n          ],\n          [\n            -1.1393954193991118,\n            0.1753739366609279,\n            1.6\n          ],\n          [\n            1.1111363398762362,\n            0.33575762586040864,\n            1.6\n          ],\n          [\n            0.3513003599411269,\n            0.23570034143702445,\n            1.6\n          ]\n        ],\n        \"model\": {\n          \"g\": 9.80999999999952,\n          \"restitution\": 0.5800000000000008,\n          \"friction\": 0.10000000000000016,\n          \"source\": \"finite differences of simulated observations\"\n        }\n      }\n    },\n    {\n      \"id\": \"c94e261e-dddd-4859-b1ed-247a56a3916a\",\n      \"recorded_at\": \"2026-11-04T17:12:21.980Z\",\n      \"type\": \"scene_prediction_measured\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n        \"scene\": \"multi\",\n        \"mode\": \"simulation\",\n        \"issued_at\": \"2026-11-04T17:12:21.474Z\",\n        \"source_t\": 0.49999999999999944,\n        \"target_t\": 0.9999999999999994,\n        \"horizon_s\": 0.5,\n        \"predicted\": [\n          [\n            -0.7399607193488352,\n            0.14237517010713135,\n            1.6\n          ],\n          [\n            1.5658947400487886,\n            0.14362356010022703,\n            1.6\n          ],\n          [\n            -1.5148693420218242,\n            0.15716540071061863,\n            1.6\n          ],\n          [\n            0.8651278767422212,\n            0.15784069725810976,\n            1.6\n          ],\n          [\n            -1.1393954193991118,\n            0.1753739366609279,\n            1.6\n          ],\n          [\n            1.1111363398762362,\n            0.33575762586040864,\n            1.6\n          ],\n          [\n            0.3513003599411269,\n            0.23570034143702445,\n            1.6\n          ]\n        ],\n        \"observed\": [\n          [\n            -0.7399607193488176,\n            0.14237517010713183,\n            1.6\n          ],\n          [\n            1.5658947400487744,\n            0.14362356010022703,\n            1.6\n          ],\n          [\n            -1.5148693420218335,\n            0.157165400710619,\n            1.6\n          ],\n          [\n            0.8651278767422024,\n            0.157840697258122,\n            1.6\n          ],\n          [\n            -1.1393954193991294,\n            0.17537393666093087,\n            1.6\n          ],\n          [\n            1.1111363398762484,\n            0.33575762586037394,\n            1.6\n          ],\n          [\n            0.35130035994114717,\n            0.23570034143704438,\n            1.6\n          ]\n        ],\n        \"error_mean_cm\": 2.0955694646068894e-12,\n        \"error_max_cm\": 3.678111241024896e-12,\n        \"contacts\": [\n          {\n            \"t\": 0.5083333333333327,\n            \"type\": \"ground\",\n            \"body\": 0,\n            \"normal_speed_before\": -1.9740492010617332,\n            \"normal_speed_after\": 1.1686560366158052\n          },\n          {\n            \"t\": 0.516666666666666,\n            \"type\": \"ground\",\n            \"body\": 1,\n            \"normal_speed_before\": -2.659452899111537,\n            \"normal_speed_after\": 1.5661901814846915\n          },\n          {\n            \"t\": 0.5208333333333327,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              0,\n              2\n            ]\n          },\n          {\n            \"t\": 0.5499999999999993,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              0,\n              3\n            ]\n          },\n          {\n            \"t\": 0.5666666666666659,\n            \"type\": \"ground\",\n            \"body\": 0,\n            \"normal_speed_before\": -1.1415470805528194,\n            \"normal_speed_after\": 0.6858048067206352\n          },\n          {\n            \"t\": 0.5666666666666659,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              1,\n              3\n            ]\n          },\n          {\n            \"t\": 0.5833333333333325,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              0,\n              4\n            ]\n          },\n          {\n            \"t\": 0.5874999999999991,\n            \"type\": \"ground\",\n            \"body\": 0,\n            \"normal_speed_before\": -4.0437715273597705,\n            \"normal_speed_after\": -0.08574390293343992\n          },\n          {\n            \"t\": 0.5874999999999991,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              0,\n              4\n            ]\n          },\n          {\n            \"t\": 0.5916666666666658,\n            \"type\": \"ground\",\n            \"body\": 3,\n            \"normal_speed_before\": -4.079106641696562,\n            \"normal_speed_after\": 2.3895893521840055\n          },\n          {\n            \"t\": 0.5958333333333324,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              4,\n              5\n            ]\n          },\n          {\n            \"t\": 0.6083333333333324,\n            \"type\": \"ground\",\n            \"body\": 0,\n            \"normal_speed_before\": 0,\n            \"normal_speed_after\": -1.039013388036279\n          },\n          {\n            \"t\": 0.6083333333333324,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              0,\n              4\n            ]\n          },\n          {\n            \"t\": 0.612499999999999,\n            \"type\": \"ground\",\n            \"body\": 0,\n            \"normal_speed_before\": -1.039013388036279,\n            \"normal_speed_after\": -0.06267994032401547\n          },\n          {\n            \"t\": 0.612499999999999,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              0,\n              4\n            ]\n          },\n          {\n            \"t\": 0.637499999999999,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              3,\n              5\n            ]\n          },\n          {\n            \"t\": 0.6791666666666655,\n            \"type\": \"ground\",\n            \"body\": 3,\n            \"normal_speed_before\": -2.6247485990777224,\n            \"normal_speed_after\": 1.546061687465079\n          },\n          {\n            \"t\": 0.6833333333333321,\n            \"type\": \"ground\",\n            \"body\": 2,\n            \"normal_speed_before\": -2.3189565651707573,\n            \"normal_speed_after\": 1.3687023077990392\n          },\n          {\n            \"t\": 0.708333333333332,\n            \"type\": \"ground\",\n            \"body\": 0,\n            \"normal_speed_before\": 0,\n            \"normal_speed_after\": -3.635647016969439\n          },\n          {\n            \"t\": 0.708333333333332,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              0,\n              6\n            ]\n          },\n          {\n            \"t\": 0.7124999999999987,\n            \"type\": \"ground\",\n            \"body\": 0,\n            \"normal_speed_before\": -3.635647016969439,\n            \"normal_speed_after\": 0.8961754506381063\n          },\n          {\n            \"t\": 0.7124999999999987,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              0,\n              6\n            ]\n          },\n          {\n            \"t\": 0.7666666666666652,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              2,\n              4\n            ]\n          },\n          {\n            \"t\": 0.7833333333333318,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              3,\n              6\n            ]\n          },\n          {\n            \"t\": 0.7916666666666651,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              0,\n              4\n            ]\n          },\n          {\n            \"t\": 0.816666666666665,\n            \"type\": \"ground\",\n            \"body\": 1,\n            \"normal_speed_before\": -1.444188281726395,\n            \"normal_speed_after\": 0.861336703401309\n          },\n          {\n            \"t\": 0.8416666666666649,\n            \"type\": \"ground\",\n            \"body\": 6,\n            \"normal_speed_before\": -2.3754796708208095,\n            \"normal_speed_after\": 1.4014857090760695\n          },\n          {\n            \"t\": 0.8458333333333315,\n            \"type\": \"ground\",\n            \"body\": 0,\n            \"normal_speed_before\": -0.9083613458783812,\n            \"normal_speed_after\": 0.5505570806094611\n          },\n          {\n            \"t\": 0.8624999999999982,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              3,\n              5\n            ]\n          },\n          {\n            \"t\": 0.8916666666666647,\n            \"type\": \"ground\",\n            \"body\": 2,\n            \"normal_speed_before\": -1.1837152632989756,\n            \"normal_speed_after\": 0.7102623527134058\n          },\n          {\n            \"t\": 0.9499999999999978,\n            \"type\": \"ground\",\n            \"body\": 3,\n            \"normal_speed_before\": -1.6748277220131709,\n            \"normal_speed_after\": 0.995107578767639\n          },\n          {\n            \"t\": 0.9541666666666645,\n            \"type\": \"ground\",\n            \"body\": 0,\n            \"normal_speed_before\": -0.47131791939053885,\n            \"normal_speed_after\": 0.29707189324651256\n          },\n          {\n            \"t\": 0.9624999999999978,\n            \"type\": \"ground\",\n            \"body\": 4,\n            \"normal_speed_before\": -1.9378835821117628,\n            \"normal_speed_after\": 1.1476799776248223\n          },\n          {\n            \"t\": 0.9749999999999978,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              3,\n              5\n            ]\n          },\n          {\n            \"t\": 0.9916666666666644,\n            \"type\": \"ground\",\n            \"body\": 1,\n            \"normal_speed_before\": -0.8145382965986909,\n            \"normal_speed_after\": 0.4961397120272407\n          }\n        ],\n        \"model\": {\n          \"g\": 9.80999999999952,\n          \"restitution\": 0.5800000000000008,\n          \"friction\": 0.10000000000000016,\n          \"source\": \"finite differences of simulated observations\"\n        }\n      }\n    },\n    {\n      \"id\": \"b07aaaba-1b39-485c-be99-eb3c96d32a20\",\n      \"recorded_at\": \"2026-11-04T17:12:21.980Z\",\n      \"type\": \"journal\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"channel\": \"ind-log\",\n        \"message\": \"Fantôme multi mesuré à t+0.5s : erreur position 0.00 cm, max 0.00 cm (comparée à l'observation au temps cible, pas à la position courante).\",\n        \"mode\": \"simulation\",\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\"\n      }\n    },\n    {\n      \"id\": \"cd3e2bc6-76dd-40f0-a18b-f3f21ff8bd24\",\n      \"recorded_at\": \"2026-11-04T17:12:21.981Z\",\n      \"type\": \"scene_prediction_issued\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n        \"scene\": \"multi\",\n        \"source_t\": 0.9999999999999977,\n        \"target_t\": 1.4999999999999978,\n        \"predicted\": [\n          [\n            -1.3161374947813922,\n            0.14,\n            1.6\n          ],\n          [\n            2.7467078830351364,\n            0.14,\n            1.6\n          ],\n          [\n            -2.7661089120229656,\n            0.14,\n            1.6\n          ],\n          [\n            1.2745174701600743,\n            0.14,\n            1.6\n          ],\n          [\n            -2.1606272977405934,\n            0.14,\n            1.6\n          ],\n          [\n            2.424209482294514,\n            0.1706904767956256,\n            1.6\n          ],\n          [\n            0.6697770988639418,\n            0.14,\n            1.6\n          ]\n        ],\n        \"model\": {\n          \"g\": 9.809999999999581,\n          \"restitution\": 0.5800000000000012,\n          \"friction\": 0.10000000000000016,\n          \"source\": \"gravity from positions; contact response from observed velocities\"\n        }\n      }\n    },\n    {\n      \"id\": \"716e5b97-9b19-4c35-8ef4-d7e900313770\",\n      \"recorded_at\": \"2026-11-04T17:12:22.475Z\",\n      \"type\": \"scene_prediction_measured\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n        \"scene\": \"multi\",\n        \"mode\": \"simulation\",\n        \"issued_at\": \"2026-11-04T17:12:21.981Z\",\n        \"source_t\": 0.9999999999999977,\n        \"target_t\": 1.4999999999999978,\n        \"horizon_s\": 0.5,\n        \"predicted\": [\n          [\n            -1.3161374947813922,\n            0.14,\n            1.6\n          ],\n          [\n            2.7467078830351364,\n            0.14,\n            1.6\n          ],\n          [\n            -2.7661089120229656,\n            0.14,\n            1.6\n          ],\n          [\n            1.2745174701600743,\n            0.14,\n            1.6\n          ],\n          [\n            -2.1606272977405934,\n            0.14,\n            1.6\n          ],\n          [\n            2.424209482294514,\n            0.1706904767956256,\n            1.6\n          ],\n          [\n            0.6697770988639418,\n            0.14,\n            1.6\n          ]\n        ],\n        \"observed\": [\n          [\n            -1.3161374947813842,\n            0.14,\n            1.6\n          ],\n          [\n            2.7467078830351292,\n            0.14,\n            1.6\n          ],\n          [\n            -2.7661089120229576,\n            0.14,\n            1.6\n          ],\n          [\n            1.2745174701600681,\n            0.14,\n            1.6\n          ],\n          [\n            -2.1606272977405854,\n            0.14,\n            1.6\n          ],\n          [\n            2.4242094822945095,\n            0.170690476795629,\n            1.6\n          ],\n          [\n            0.6697770988639359,\n            0.14,\n            1.6\n          ]\n        ],\n        \"error_mean_cm\": 6.967467720745454e-13,\n        \"error_max_cm\": 7.993605777301127e-13,\n        \"contacts\": [\n          {\n            \"t\": 1.0124999999999977,\n            \"type\": \"ground\",\n            \"body\": 0,\n            \"normal_speed_before\": -0.2343031067534874,\n            \"normal_speed_after\": 0.15960330191702268\n          },\n          {\n            \"t\": 1.033333333333331,\n            \"type\": \"ground\",\n            \"body\": 2,\n            \"normal_speed_before\": -0.6386126472865942,\n            \"normal_speed_after\": 0.3941028354262246\n          },\n          {\n            \"t\": 1.0416666666666643,\n            \"type\": \"ground\",\n            \"body\": 3,\n            \"normal_speed_before\": -0.58716376920498,\n            \"normal_speed_after\": 0.3642624861388884\n          },\n          {\n            \"t\": 1.0916666666666641,\n            \"type\": \"ground\",\n            \"body\": 1,\n            \"normal_speed_before\": -0.4439852879727592,\n            \"normal_speed_after\": 0.2812189670242003\n          },\n          {\n            \"t\": 1.1124999999999974,\n            \"type\": \"ground\",\n            \"body\": 2,\n            \"normal_speed_before\": -0.34164716457377536,\n            \"normal_speed_after\": 0.2218628554527897\n          },\n          {\n            \"t\": 1.1124999999999974,\n            \"type\": \"ground\",\n            \"body\": 3,\n            \"normal_speed_before\": -0.2897375138611116,\n            \"normal_speed_after\": 0.1917552580394447\n          },\n          {\n            \"t\": 1.1124999999999974,\n            \"type\": \"ground\",\n            \"body\": 5,\n            \"normal_speed_before\": -2.305448484950559,\n            \"normal_speed_after\": 1.3608676212713242\n          },\n          {\n            \"t\": 1.1249999999999973,\n            \"type\": \"ground\",\n            \"body\": 6,\n            \"normal_speed_before\": -1.3371392909239304,\n            \"normal_speed_after\": 0.7992482887358795\n          },\n          {\n            \"t\": 1.1458333333333306,\n            \"type\": \"ground\",\n            \"body\": 1,\n            \"normal_speed_before\": -0.20928103297579967,\n            \"normal_speed_after\": 0.1450904991259638\n          },\n          {\n            \"t\": 1.1499999999999972,\n            \"type\": \"ground\",\n            \"body\": 3,\n            \"normal_speed_before\": -0.13524474196055528,\n            \"normal_speed_after\": 0\n          },\n          {\n            \"t\": 1.154166666666664,\n            \"type\": \"ground\",\n            \"body\": 2,\n            \"normal_speed_before\": -0.1460121445472103,\n            \"normal_speed_after\": 0\n          },\n          {\n            \"t\": 1.1749999999999972,\n            \"type\": \"ground\",\n            \"body\": 1,\n            \"normal_speed_before\": -0.10015950087403619,\n            \"normal_speed_after\": 0\n          },\n          {\n            \"t\": 1.1958333333333304,\n            \"type\": \"ground\",\n            \"body\": 4,\n            \"normal_speed_before\": -1.1004450223751776,\n            \"normal_speed_after\": 0.6619656129776029\n          },\n          {\n            \"t\": 1.2083333333333304,\n            \"type\": \"ground\",\n            \"body\": 1,\n            \"normal_speed_before\": 0,\n            \"normal_speed_after\": -0.15800278431795942\n          },\n          {\n            \"t\": 1.2083333333333304,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              1,\n              5\n            ]\n          },\n          {\n            \"t\": 1.212499999999997,\n            \"type\": \"ground\",\n            \"body\": 1,\n            \"normal_speed_before\": -0.15800278431795942,\n            \"normal_speed_after\": 0\n          },\n          {\n            \"t\": 1.2874999999999968,\n            \"type\": \"ground\",\n            \"body\": 6,\n            \"normal_speed_before\": -0.7540017112641204,\n            \"normal_speed_after\": 0.4610284925331898\n          },\n          {\n            \"t\": 1.3291666666666633,\n            \"type\": \"ground\",\n            \"body\": 4,\n            \"normal_speed_before\": -0.605159387022397,\n            \"normal_speed_after\": 0.37469994447299027\n          },\n          {\n            \"t\": 1.3541666666666632,\n            \"type\": \"ground\",\n            \"body\": 1,\n            \"normal_speed_before\": 0,\n            \"normal_speed_after\": -0.04417561814216449\n          },\n          {\n            \"t\": 1.3541666666666632,\n            \"type\": \"sphere\",\n            \"bodies\": [\n              1,\n              5\n            ]\n          },\n          {\n            \"t\": 1.379166666666663,\n            \"type\": \"ground\",\n            \"body\": 6,\n            \"normal_speed_before\": -0.39734650746681016,\n            \"normal_speed_after\": 0.25416847433074985\n          },\n          {\n            \"t\": 1.404166666666663,\n            \"type\": \"ground\",\n            \"body\": 4,\n            \"normal_speed_before\": -0.3201750555270097,\n            \"normal_speed_after\": 0.20940903220566562\n          },\n          {\n            \"t\": 1.4124999999999963,\n            \"type\": \"ground\",\n            \"body\": 5,\n            \"normal_speed_before\": -1.3390789762685515,\n            \"normal_speed_after\": 0.8003733062357599\n          },\n          {\n            \"t\": 1.429166666666663,\n            \"type\": \"ground\",\n            \"body\": 6,\n            \"normal_speed_before\": -0.19545652566925012,\n            \"normal_speed_after\": 0\n          },\n          {\n            \"t\": 1.4458333333333295,\n            \"type\": \"ground\",\n            \"body\": 4,\n            \"normal_speed_before\": -0.15846596779433436,\n            \"normal_speed_after\": 0\n          }\n        ],\n        \"model\": {\n          \"g\": 9.809999999999581,\n          \"restitution\": 0.5800000000000012,\n          \"friction\": 0.10000000000000016,\n          \"source\": \"gravity from positions; contact response from observed velocities\"\n        }\n      }\n    },\n    {\n      \"id\": \"07dbbfbd-5408-4157-bf00-6919170612d5\",\n      \"recorded_at\": \"2026-11-04T17:12:22.475Z\",\n      \"type\": \"journal\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"channel\": \"ind-log\",\n        \"message\": \"Fantôme multi mesuré à t+0.5s : erreur position 0.00 cm, max 0.00 cm (comparée à l'observation au temps cible, pas à la position courante).\",\n        \"mode\": \"simulation\",\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\"\n      }\n    },\n    {\n      \"id\": \"b3984a3d-e70d-45af-a8d7-b6e27d0b2365\",\n      \"recorded_at\": \"2026-11-04T17:12:22.476Z\",\n      \"type\": \"scene_prediction_issued\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n        \"scene\": \"multi\",\n        \"source_t\": 1.499999999999996,\n        \"target_t\": 1.999999999999996,\n        \"predicted\": [\n          [\n            -1.5049517578193352,\n            0.14,\n            1.6\n          ],\n          [\n            3.714870574649625,\n            0.14,\n            1.6\n          ],\n          [\n            -3.6338405468688157,\n            0.14,\n            1.6\n          ],\n          [\n            1.3366174633552366,\n            0.14,\n            1.6\n          ],\n          [\n            -2.8438350645924237,\n            0.14,\n            1.6\n          ],\n          [\n            3.282323966079594,\n            0.14,\n            1.6\n          ],\n          [\n            0.7041645883872937,\n            0.14,\n            1.6\n          ]\n        ],\n        \"model\": {\n          \"g\": 9.809999999999581,\n          \"restitution\": 0.5800000000000007,\n          \"friction\": 0.10000000000000005,\n          \"source\": \"gravity from positions; contact response from observed velocities\"\n        }\n      }\n    },\n    {\n      \"id\": \"825a9101-0909-4106-8699-4f84dd833f27\",\n      \"recorded_at\": \"2026-11-04T17:12:22.981Z\",\n      \"type\": \"scene_prediction_measured\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n        \"scene\": \"multi\",\n        \"mode\": \"simulation\",\n        \"issued_at\": \"2026-11-04T17:12:22.476Z\",\n        \"source_t\": 1.499999999999996,\n        \"target_t\": 1.999999999999996,\n        \"horizon_s\": 0.5,\n        \"predicted\": [\n          [\n            -1.5049517578193352,\n            0.14,\n            1.6\n          ],\n          [\n            3.714870574649625,\n            0.14,\n            1.6\n          ],\n          [\n            -3.6338405468688157,\n            0.14,\n            1.6\n          ],\n          [\n            1.3366174633552366,\n            0.14,\n            1.6\n          ],\n          [\n            -2.8438350645924237,\n            0.14,\n            1.6\n          ],\n          [\n            3.282323966079594,\n            0.14,\n            1.6\n          ],\n          [\n            0.7041645883872937,\n            0.14,\n            1.6\n          ]\n        ],\n        \"observed\": [\n          [\n            -1.5049517578193272,\n            0.14,\n            1.6\n          ],\n          [\n            3.714870574649613,\n            0.14,\n            1.6\n          ],\n          [\n            -3.633840546868807,\n            0.14,\n            1.6\n          ],\n          [\n            1.336617463355234,\n            0.14,\n            1.6\n          ],\n          [\n            -2.843835064592415,\n            0.14,\n            1.6\n          ],\n          [\n            3.282323966079588,\n            0.14,\n            1.6\n          ],\n          [\n            0.7041645883872925,\n            0.14,\n            1.6\n          ]\n        ],\n        \"error_mean_cm\": 6.772360450213455e-13,\n        \"error_max_cm\": 1.199040866595169e-12,\n        \"contacts\": [\n          {\n            \"t\": 1.5749999999999957,\n            \"type\": \"ground\",\n            \"body\": 5,\n            \"normal_speed_before\": -0.75287669376424,\n            \"normal_speed_after\": 0.4603759823832592\n          },\n          {\n            \"t\": 1.666666666666662,\n            \"type\": \"ground\",\n            \"body\": 5,\n            \"normal_speed_before\": -0.3979990176167407,\n            \"normal_speed_after\": 0.2545469302177096\n          },\n          {\n            \"t\": 1.716666666666662,\n            \"type\": \"ground\",\n            \"body\": 5,\n            \"normal_speed_before\": -0.1950780697822904,\n            \"normal_speed_after\": 0\n          }\n        ],\n        \"model\": {\n          \"g\": 9.809999999999581,\n          \"restitution\": 0.5800000000000007,\n          \"friction\": 0.10000000000000005,\n          \"source\": \"gravity from positions; contact response from observed velocities\"\n        }\n      }\n    },\n    {\n      \"id\": \"d796d899-45cf-46c8-aca3-3ba635a56721\",\n      \"recorded_at\": \"2026-11-04T17:12:22.982Z\",\n      \"type\": \"scene_prediction_issued\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n        \"scene\": \"multi\",\n        \"source_t\": 1.9999999999999942,\n        \"target_t\": 2.4999999999999942,\n        \"predicted\": [\n          [\n            -1.5049517578193272,\n            0.14,\n            1.6\n          ],\n          [\n            4.295538266264105,\n            0.14,\n            1.6\n          ],\n          [\n            -4.114077181714665,\n            0.14,\n            1.6\n          ],\n          [\n            1.336617463355234,\n            0.14,\n            1.6\n          ],\n          [\n            -3.1395478314442515,\n            0.14,\n            1.6\n          ],\n          [\n            3.760984135157447,\n            0.14,\n            1.6\n          ],\n          [\n            0.7041645883872925,\n            0.14,\n            1.6\n          ]\n        ],\n        \"model\": {\n          \"g\": 9.809999999999581,\n          \"restitution\": 0.5800000000000013,\n          \"friction\": 0.10000000000000007,\n          \"source\": \"gravity from positions; contact response from observed velocities\"\n        }\n      }\n    },\n    {\n      \"id\": \"93c878a6-ceb4-4746-9b23-c1ae44a234a2\",\n      \"recorded_at\": \"2026-11-04T17:12:23.475Z\",\n      \"type\": \"scene_prediction_measured\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n        \"scene\": \"multi\",\n        \"mode\": \"simulation\",\n        \"issued_at\": \"2026-11-04T17:12:22.982Z\",\n        \"source_t\": 1.9999999999999942,\n        \"target_t\": 2.4999999999999942,\n        \"horizon_s\": 0.5,\n        \"predicted\": [\n          [\n            -1.5049517578193272,\n            0.14,\n            1.6\n          ],\n          [\n            4.295538266264105,\n            0.14,\n            1.6\n          ],\n          [\n            -4.114077181714665,\n            0.14,\n            1.6\n          ],\n          [\n            1.336617463355234,\n            0.14,\n            1.6\n          ],\n          [\n            -3.1395478314442515,\n            0.14,\n            1.6\n          ],\n          [\n            3.760984135157447,\n            0.14,\n            1.6\n          ],\n          [\n            0.7041645883872925,\n            0.14,\n            1.6\n          ]\n        ],\n        \"observed\": [\n          [\n            -1.5049517578193272,\n            0.14,\n            1.6\n          ],\n          [\n            4.295538266264077,\n            0.14,\n            1.6\n          ],\n          [\n            -4.114077181714641,\n            0.14,\n            1.6\n          ],\n          [\n            1.336617463355234,\n            0.14,\n            1.6\n          ],\n          [\n            -3.1395478314442387,\n            0.14,\n            1.6\n          ],\n          [\n            3.760984135157425,\n            0.14,\n            1.6\n          ],\n          [\n            0.7041645883872925,\n            0.14,\n            1.6\n          ]\n        ],\n        \"error_mean_cm\": 1.2371056560108887e-12,\n        \"error_max_cm\": 2.7533531010703882e-12,\n        \"contacts\": [],\n        \"model\": {\n          \"g\": 9.809999999999581,\n          \"restitution\": 0.5800000000000013,\n          \"friction\": 0.10000000000000007,\n          \"source\": \"gravity from positions; contact response from observed velocities\"\n        }\n      }\n    },\n    {\n      \"id\": \"846b7d7f-fcf8-46ce-a59f-a8dbc8d635fd\",\n      \"recorded_at\": \"2026-11-04T17:12:23.476Z\",\n      \"type\": \"scene_prediction_issued\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n        \"scene\": \"multi\",\n        \"source_t\": 2.500000000000019,\n        \"target_t\": 3.000000000000019,\n        \"predicted\": [\n          [\n            -1.5049517578193272,\n            0.14,\n            1.6\n          ],\n          [\n            4.4887109578785855,\n            0.14,\n            1.6\n          ],\n          [\n            -4.219982043704497,\n            0.14,\n            1.6\n          ],\n          [\n            1.336617463355234,\n            0.14,\n            1.6\n          ],\n          [\n            -3.152960969271399,\n            0.14,\n            1.6\n          ],\n          [\n            3.8657269924812003,\n            0.14,\n            1.6\n          ],\n          [\n            0.7041645883872925,\n            0.14,\n            1.6\n          ]\n        ],\n        \"model\": {\n          \"g\": 9.809999999999581,\n          \"restitution\": 0.5800000000000013,\n          \"friction\": 0.10000000000000007,\n          \"source\": \"gravity from positions; contact response from observed velocities\"\n        }\n      }\n    },\n    {\n      \"id\": \"790d6d56-ad1e-4bf9-b925-5ee6edc604f7\",\n      \"recorded_at\": \"2026-11-04T17:12:23.969Z\",\n      \"type\": \"scene_prediction_measured\",\n      \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n      \"data\": {\n        \"run_id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n        \"scene\": \"multi\",\n        \"mode\": \"simulation\",\n        \"issued_at\": \"2026-11-04T17:12:23.476Z\",\n        \"source_t\": 2.500000000000019,\n        \"target_t\": 3.000000000000019,\n        \"horizon_s\": 0.5,\n        \"predicted\": [\n          [\n            -1.5049517578193272,\n            0.14,\n            1.6\n          ],\n          [\n            4.4887109578785855,\n            0.14,\n            1.6\n          ],\n          [\n            -4.219982043704497,\n            0.14,\n            1.6\n          ],\n          [\n            1.336617463355234,\n            0.14,\n            1.6\n          ],\n          [\n            -3.152960969271399,\n            0.14,\n            1.6\n          ],\n          [\n            3.8657269924812003,\n            0.14,\n            1.6\n          ],\n          [\n            0.7041645883872925,\n            0.14,\n            1.6\n          ]\n        ],\n        \"observed\": [\n          [\n            -1.5049517578193272,\n            0.14,\n            1.6\n          ],\n          [\n            4.488710957878579,\n            0.14,\n            1.6\n          ],\n          [\n            -4.219982043704493,\n            0.14,\n            1.6\n          ],\n          [\n            1.336617463355234,\n            0.14,\n            1.6\n          ],\n          [\n            -3.152960969271398,\n            0.14,\n            1.6\n          ],\n          [\n            3.865726992481196,\n            0.14,\n            1.6\n          ],\n          [\n            0.7041645883872925,\n            0.14,\n            1.6\n          ]\n        ],\n        \"error_mean_cm\": 2.157004733557447e-13,\n        \"error_max_cm\": 6.217248937900877e-13,\n        \"contacts\": [],\n        \"model\": {\n          \"g\": 9.809999999999581,\n          \"restitution\": 0.5800000000000013,\n          \"friction\": 0.10000000000000007,\n          \"source\": \"gravity from positions; contact response from observed velocities\"\n        }\n      }\n    }\n  ]\n}"
+    },
+    {
+      "name": "twinforge-gauntlet-a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce.json",
+      "content": "{\n  \"version\": 1,\n  \"run\": {\n    \"id\": \"a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce\",\n    \"recorded_at\": \"2026-11-04T17:12:32.920Z\",\n    \"mode\": \"simulation\",\n    \"source_commit\": \"working-tree\",\n    \"source_path\": \"workbench.html\",\n    \"source_sha256\": \"aa928a88544253558e3808c39e1bd93c18c68a5881d623e2cf49f9765f8af56a\"\n  },\n  \"scenes\": [\n    {\n      \"id\": \"hoop\",\n      \"validated\": false,\n      \"tests\": [\n        {\n          \"id\": \"launch\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"bounce\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"hoop_passage\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"net\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"ghost_ahead\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"induction\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"control\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        }\n      ],\n      \"metrics\": {\n        \"ghost_error_mean_cm\": null,\n        \"verdicts_correct\": 0,\n        \"verdicts_total\": 0,\n        \"collisions\": null\n      }\n    },\n    {\n      \"id\": \"multi\",\n      \"validated\": false,\n      \"tests\": [\n        {\n          \"id\": \"launch\",\n          \"status\": \"pass\",\n          \"evidence\": [\n            {\n              \"path\": \"twinforge-events-a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce.json\",\n              \"sha256\": \"ec8687e30540fc7461e28c5e6715e83e7eda15c13586f34db1b49b739411a940\",\n              \"event_ids\": [\n                \"a5006960-b0d1-4062-a772-462e6240fa97\"\n              ]\n            }\n          ],\n          \"measurements\": {\n            \"observed_bodies\": 7\n          },\n          \"reason\": \"Scene action executed; generated simulation only.\",\n          \"executed_at\": \"2026-11-04T17:12:20.975Z\",\n          \"method\": \"browser simulation, shared parametric integrator; raw event IDs identify the measurement\"\n        },\n        {\n          \"id\": \"bounce\",\n          \"status\": \"pass\",\n          \"evidence\": [\n            {\n              \"path\": \"twinforge-events-a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce.json\",\n              \"sha256\": \"ec8687e30540fc7461e28c5e6715e83e7eda15c13586f34db1b49b739411a940\",\n              \"event_ids\": [\n                \"790d6d56-ad1e-4bf9-b925-5ee6edc604f7\"\n              ]\n            }\n          ],\n          \"measurements\": {\n            \"ground_contacts\": 48\n          },\n          \"reason\": \"Contact velocities recorded in the generated scene.\",\n          \"executed_at\": \"2026-11-04T17:12:23.969Z\",\n          \"method\": \"browser simulation, shared parametric integrator; raw event IDs identify the measurement\"\n        },\n        {\n          \"id\": \"hoop_passage\",\n          \"status\": \"not_applicable\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"This exploratory scene has no hoop, net or controller.\"\n        },\n        {\n          \"id\": \"net\",\n          \"status\": \"not_applicable\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"This exploratory scene has no hoop, net or controller.\"\n        },\n        {\n          \"id\": \"ghost_ahead\",\n          \"status\": \"pass\",\n          \"evidence\": [\n            {\n              \"path\": \"twinforge-events-a406c2b5-dc22-4bc1-8ba5-7ebd8bd177ce.json\",\n              \"sha256\": \"ec8687e30540fc7461e28c5e6715e83e7eda15c13586f34db1b49b739411a940\",\n              \"event_ids\": [\n                \"790d6d56-ad1e-4bf9-b925-5ee6edc604f7\"\n              ]\n            }\n          ],\n          \"measurements\": {\n            \"horizon_s\": 0.5,\n            \"error_mean_cm\": 2.157004733557447e-13,\n            \"error_max_cm\": 6.217248937900877e-13\n          },\n          \"reason\": \"Locked future target compared with observed simulated position at the same time.\",\n          \"executed_at\": \"2026-11-04T17:12:23.969Z\",\n          \"method\": \"browser simulation, shared parametric integrator; raw event IDs identify the measurement\"\n        },\n        {\n          \"id\": \"induction\",\n          \"status\": \"blocked\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"Only a known model family is calibrated; no independent real experiment or free induction has been validated.\"\n        },\n        {\n          \"id\": \"control\",\n          \"status\": \"not_applicable\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"This exploratory scene has no hoop, net or controller.\"\n        }\n      ],\n      \"metrics\": {\n        \"ghost_error_mean_cm\": 2.157004733557447e-13,\n        \"verdicts_correct\": null,\n        \"verdicts_total\": null,\n        \"collisions\": 75\n      }\n    },\n    {\n      \"id\": \"chaos\",\n      \"validated\": false,\n      \"tests\": [\n        {\n          \"id\": \"launch\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"bounce\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"hoop_passage\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"net\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"ghost_ahead\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"induction\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"control\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        }\n      ],\n      \"metrics\": {\n        \"ghost_error_mean_cm\": null,\n        \"verdicts_correct\": 0,\n        \"verdicts_total\": 0,\n        \"collisions\": null\n      }\n    },\n    {\n      \"id\": \"liquid\",\n      \"validated\": false,\n      \"tests\": [\n        {\n          \"id\": \"launch\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"bounce\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"hoop_passage\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"net\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"ghost_ahead\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"induction\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"control\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        }\n      ],\n      \"metrics\": {\n        \"ghost_error_mean_cm\": null,\n        \"verdicts_correct\": 0,\n        \"verdicts_total\": 0,\n        \"collisions\": null\n      }\n    },\n    {\n      \"id\": \"orbit\",\n      \"validated\": false,\n      \"tests\": [\n        {\n          \"id\": \"launch\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"bounce\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"hoop_passage\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"net\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"ghost_ahead\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"induction\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        },\n        {\n          \"id\": \"control\",\n          \"status\": \"not_run\",\n          \"evidence\": [],\n          \"measurements\": {},\n          \"reason\": \"No measured evidence yet.\"\n        }\n      ],\n      \"metrics\": {\n        \"ghost_error_mean_cm\": null,\n        \"verdicts_correct\": 0,\n        \"verdicts_total\": 0,\n        \"collisions\": null\n      }\n    }\n  ],\n  \"level\": \"L3\",\n  \"limitations\": [\n    \"Simulation evidence only. Real video validation and physical control have not been demonstrated.\",\n    \"Rendered fixture geometry and unmeasured model coefficients are declared priors.\"\n  ],\n  \"persistence\": {\n    \"count\": 20,\n    \"persisted_count\": 20,\n    \"pending\": 0,\n    \"persistent\": true,\n    \"backend\": \"indexeddb\",\n    \"database\": \"twinforge.evidence.v3\",\n    \"error\": null,\n    \"legacy_archive\": \"twinforge.evidence.v2 left unchanged\"\n  },\n  \"session_metrics\": {\n    \"errorSum\": 0,\n    \"errorCount\": 0,\n    \"completedShots\": 0,\n    \"correctVerdicts\": 0,\n    \"simulatedEpisodes\": 0,\n    \"ghost_error_mean_cm\": null\n  }\n}"
+    }
+  ],
+  "imported_source": null
+}

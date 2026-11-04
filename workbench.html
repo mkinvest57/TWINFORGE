@@ -4,8 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <link rel="icon" href="data:,">
-<title>TWINFORGE EXTREME — Predictive Digital Twin</title>
+<title>Twinforge — Bancs d’essai techniques</title>
 <style>
+  [hidden]{display:none!important}
   :root{
     --bg:#0e1013; --panel:#16181d; --panel2:#1c1f26; --line:#2a2e38;
     --txt:#e8e6e1; --dim:#9aa0ad; --accent:#ff6b1a; --ok:#3ecf6e; --bad:#ff4545;
@@ -108,13 +109,13 @@
 </style>
 </head>
 <body>
-<nav class="mobile-camera-entry" aria-label="Laboratoire"><a href="./index.html">← Retour au Process Lab</a></nav>
+<nav class="mobile-camera-entry" aria-label="Laboratoire"><a href="./index.html">← Retour à Twinforge</a></nav>
 <div id="app">
   <aside class="panel left"><div class="pad">
-    <h1>TWINFORGE <span class="x">EXTREME</span></h1>
-    <a class="camera-entry" href="./index.html">← Process Lab</a>
+    <h1>TWINFORGE <span class="x">LAB</span></h1>
+    <a class="camera-entry" href="./index.html">← Twinforge</a>
     <a class="camera-entry" href="./scan.html">Scanner avec ma caméra <small>Sur téléphone · suivi local · prévision du mouvement</small></a>
-    <p class="pitch">Shoot a ball at a vertical hoop. Get its simulator. Predict whether it goes in — before the ball lands.</p>
+    <p class="pitch">Banc d’essai technique : tirs, collisions et pendule. La démonstration principale se trouve dans Twinforge.</p>
     <p class="sub">L3 · Known-model calibration · Predictive ghost +0.5s · Simulation control</p>
     <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">
       <span class="badge hot">INDIE · PUSH THE FRONTIER</span><span class="badge">SAM 3.1</span><span class="badge">MUSE SPARK</span><span class="badge" id="mode-badge">DEMO MODE — LOCAL PHYSICS</span>
@@ -129,7 +130,7 @@
     </div>
 
     <div class="sec"><h2>LAUNCH</h2>
-      <label class="ctl">Shot angle <output id="o-angle">52°</output></label>
+      <div id="shot-settings"><label class="ctl">Shot angle <output id="o-angle">52°</output></label>
       <input type="range" id="in-angle" min="35" max="75" step="0.5" value="52">
       <label class="ctl">Power <output id="o-power">7.8 m/s</output></label>
       <input type="range" id="in-power" min="5" max="12" step="0.1" value="7.8">
@@ -137,9 +138,10 @@
       <input type="range" id="in-spin" min="-14" max="14" step="0.5" value="-6">
       <label class="ctl">Lateral wind (scene) <output id="o-wind">0.0 m/s</output></label>
       <input type="range" id="in-wind" min="-3" max="3" step="0.1" value="0">
-      <div class="row" style="margin-top:12px">
+      </div><div class="row" style="margin-top:12px">
         <button class="primary" id="btn-shoot">SHOOT THE BALL</button>
         <button id="btn-reset">Reset</button>
+        <button id="btn-alt-pause" hidden disabled>Pause</button>
         <button id="btn-view">Reset view</button>
       </div>
       <div class="row" style="margin-top:8px">
@@ -154,7 +156,7 @@
       <p class="hint">Plant, ghost and controller use one integrator. Prediction receives estimated parameters and declared priors; the plant is a simulation.</p>
     </div>
 
-    <div class="sec"><h2>COUNTERFACTUAL — NATURAL LANGUAGE</h2>
+    <div class="sec" id="hoop-counterfactual"><h2>COUNTERFACTUAL — NATURAL LANGUAGE</h2>
       <input type="text" id="in-cf" placeholder="E.g.: shoot 20% harder · double the wind · move the hoop left">
       <div class="row" style="margin-top:8px">
         <button id="btn-cf" style="flex:1">Replay in the twin</button>
@@ -167,17 +169,15 @@
       </div>
     </div>
 
-    <div class="sec"><h2>MAIN SCENE</h2>
+    <div class="sec"><h2>EXPÉRIENCES TECHNIQUES</h2>
       <div class="row scene-btns">
-        <button data-scene="hoop" class="on" style="flex:1">1 · Hoop — the demo</button>
+        <button data-scene="hoop" class="on" style="flex:1">Tir balistique</button>
       </div>
       <details style="margin-top:8px">
-        <summary style="cursor:pointer;color:var(--dim);font-size:12px">Other explorations (not in the demo)</summary>
+        <summary style="cursor:pointer;color:var(--dim);font-size:12px">Autres bancs d’essai</summary>
         <div class="row scene-btns" style="margin-top:8px">
-          <button data-scene="multi">2 · Multi-body</button>
-          <button data-scene="chaos">3 · Chaotic</button>
-          <button data-scene="liquid">4 · Liquid</button>
-          <button data-scene="orbit">5 · Orbit</button>
+          <button data-scene="multi">Collisions</button>
+          <button data-scene="chaos">Double pendule</button>
         </div>
       </details>
       <p class="hint" id="scene-hint">Scene 1 — vertical hoop shot. Full checklist in the right panel.</p>
@@ -214,15 +214,15 @@
         <tr><td>Induced wind</td><td>—</td><td>—</td><td>—</td></tr>
       </tbody></table>
       <p class="hint">Known-model fit from simulated position observations. Unmeasured coefficients remain explicit priors. Held-out values here are within-shot diagnostics; real generalization needs separate recorded shots.</p>
-      <div class="stat-grid" style="margin-top:10px">
+      <div class="stat-grid" id="scene-stats" style="margin-top:10px">
         <div class="stat"><div class="k">MAKE PROBABILITY (MONTE-CARLO)</div><div class="v" id="st-prob">—</div></div>
         <div class="stat"><div class="k">CORRECT VERDICTS</div><div class="v" id="st-verdicts">0 / 0</div></div>
         <div class="stat"><div class="k">SHOTS</div><div class="v" id="st-shots">0</div></div>
-        <div class="stat"><div class="k">CHAOTIC HORIZON</div><div class="v" id="st-horizon">—</div></div>
+        <div class="stat"><div class="k">SENSIBILITÉ INITIALE · 0,003 RAD</div><div class="v" id="st-horizon">—</div></div>
       </div>
     </div>
 
-    <div class="sec"><h2><b>3</b> · PREDICT — COUNTERFACTUAL BEFORE / AFTER</h2>
+    <div class="sec" id="hoop-comparison"><h2><b>3</b> · PREDICT — COUNTERFACTUAL BEFORE / AFTER</h2>
       <div class="stat-grid">
         <div class="stat"><div class="k">BEFORE (CURRENT TWIN)</div><div class="v" id="cf-before" style="font-size:14px">—</div></div>
         <div class="stat"><div class="k">AFTER (DIFF APPLIED)</div><div class="v" id="cf-after" style="font-size:14px">—</div></div>
@@ -230,7 +230,7 @@
       <p class="hint" id="cf-diff">No diff applied. Try 'shoot 20% harder'.</p>
     </div>
 
-    <div class="sec"><h2><b>4</b> · SIMULATION MPC — REPLAN EVERY 120 ms</h2>
+    <div class="sec" id="hoop-control"><h2><b>4</b> · SIMULATION MPC — REPLAN EVERY 120 ms</h2>
       <div class="log" id="mpc-log"><span class="t">—</span> MPC off. Enable 'MPC (120 ms)' then shoot: each correction logs horizon, predicted error before → after, applied Δv. Budget: 3 per flight.</div>
     </div>
 
@@ -254,7 +254,7 @@
       <p class="hint" style="margin-top:0">
         <b style="color:var(--txt)">FP-01</b> rim occlusion → re-acquisition by predicted trajectory ·
         <b style="color:var(--txt)">FP-02</b> blur at apex → outliers excluded from fit ·
-        <b style="color:var(--txt)">FP-03/04/05</b> escalation (chaotic / liquid / multi-body) ·
+        <b style="color:var(--txt)">FP-03/05</b> bancs d’essai (pendule / collisions) ·
         <b style="color:var(--txt)">FP-06</b> free induction not demonstrated → current L3 addendum; the historical Oct 29 record is preserved.
       </p>
     </div>
@@ -273,7 +273,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { stepPhysics as integratePhysics, cloneBody, cloneModel, rollout, crossingBetween, createNet, validateModel, PHYSICS_DT } from './web/physics/model.mjs';
 import { createEvaluator } from './web/physics/evaluator.mjs';
 import { planMPC } from './web/physics/control.mjs';
-import { pendulumAcceleration, stepOrbitState, stepSpheres, accelerationFromPositions, estimateOrbitMu, median } from './web/physics/alt-models.mjs';
+import { pendulumAcceleration, forecastPendulum, multiBodyFixture, estimateMultiGravity, stepOrbitState, stepSpheres, accelerationFromPositions, estimateOrbitMu, median } from './web/physics/alt-models.mjs';
 import { observedModel,interpolateObservation,createObservationReplay,advanceObservationReplay,replaySummary } from './web/physics/observation-replay.mjs';
 import { parseCounterfactual } from './web/physics/counterfactual.mjs';
 import { createBrowserEvidenceStore, selectEvidenceForRun, emptySceneEvidence, setSceneTest } from './web/physics/evidence.mjs';
@@ -290,6 +290,7 @@ let importedBundle = null, importedTrajectory = null, importedReplay = null, cou
 let observationVisibility = null;
 let shotEvidence = null;
 let lastMpcCorrection = null;
+const localModelService = /^https?:$/.test(location.protocol) && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 const REAL_WORLD_LIMIT = 'Simulation evidence only. Real video validation and physical control have not been demonstrated.';
 
 /* Rendering layout is an explicit scene prior; evaluator coefficients stay in evaluator.mjs. */
@@ -336,12 +337,13 @@ let observed = []; // simulated sensor observations {t,p,contact}; no SAM claim
 let predictedTrail = []; // timestamped predicted points for real-vs-predicted error
 /* Prédiction des scènes gauntlet (simulation) : même contrat que le basket —
    prévision émise à sourceT, comparée à l'observation à targetT, jamais à la position courante. */
+let altRunning = false, altErrorSum = 0, altErrorCount = 0;
 let altClock = 0, altGhostTimer = 0, altFrameDt = 0, altPrevPositions = [], altAcc = 0;
 const altModels={multi:{g:8.7,restitution:0.5,friction:0.12,source:'unmeasured prior'},chaos:{g:8.8,source:'unmeasured prior'},orbit:{mu:2,source:'unmeasured prior'}};
 const altSamples={multi:[],chaos:[],orbit:[]},altEstimates={multi:[],chaos:[],orbit:[]};
 let altContacts=[];
 let altPred = null; // {scene, modelId, issuedAt, sourceT, targetT, horizon, predicted, label, evaluated}
-let multiGhosts = [], chaosGhost = null, liquidTrail = null, liquidMarker = null;
+let multiGhosts = [], chaosGhost = null, chaosForecastLine = null, liquidTrail = null, liquidMarker = null;
 let liquidOverflowMeasured = null; // {t} quand l'eau atteint réellement la ligne rouge
 const ALT_HORIZON = { multi: 0.5, chaos: 0.5, liquid: 5, orbit: 0.6 };
 /* Eau : un robinet remplit un bac transparent. Le niveau monte, une ligne rouge
@@ -701,6 +703,13 @@ function induceFromObserved(){
   return true;
 }
 function updateParamTable(){
+  if(ui.scene==='chaos'||ui.scene==='multi'){
+    const p=altModels[ui.scene],entries=[['Gravité g',fmt(p.g,3)+' m/s²',p.source]];
+    if(ui.scene==='multi')entries.push(['Restitution',fmt(p.restitution,3),p.source],['Frottement',fmt(p.friction,3),p.source]);
+    else entries.push(['Longueurs',`${fmt(pendulum.L1)} / ${fmt(pendulum.L2)} m`,'géométrie déclarée'],['Masse relative','1 : 1','hypothèse du modèle']);
+    $('param-body').replaceChildren(...entries.map(values=>{const tr=document.createElement('tr');for(const v of [values[0],values[1],'—',values[2]]){const td=document.createElement('td');td.textContent=v;tr.appendChild(td);}return tr;}));
+    return;
+  }
   const rows = [
     ['Gravity g', fmt(induced.g) + ' m/s²', '± ' + fmt(induced.unc.g), induced.heldOut !== null ? fmt(induced.heldOut,1) + ' cm' : '—'],
     ['Drag k', fmt(induced.drag, 4), '± ' + fmt(induced.unc.drag, 4), induced.fitted ? 'residual fit' : 'prior'],
@@ -720,12 +729,12 @@ function abortShot(reason){
   S.flying=false;ballState.active=false;shotEvidence=null;
 }
 function sceneGhostLabel(name){
-  return name==='liquid'?'NIVEAU PRÉVU DANS 5 s':name==='orbit'?'GHOST · +0.6s':name==='chaos'?'FANTÔME · +0,5 s (le seul)':'GHOST · +0.5s';
+  return name==='liquid'?'NIVEAU PRÉVU DANS 5 s':name==='orbit'?'GHOST · +0.6s':name==='chaos'?'APERÇU · +0,5 s':'GHOST · +0.5s';
 }
 function resetSceneReadout(name=ui.scene){
   $('ghost-tag').textContent=sceneGhostLabel(name);$('ghost-tag').style.display='none';
   $('err-now').textContent='—';$('err-now').classList.remove('bad');$('err-avg').textContent='—';
-  $('err-average-label').textContent=name==='hoop'?'session avg':'scene avg';
+  $('err-average-label').textContent=name==='hoop'?'session avg':'moyenne des prévisions figées';
 }
 function resetBall(){
   resetSceneReadout();
@@ -743,23 +752,27 @@ function resetBall(){
 }
 function playSceneAction(){
   resetSceneReadout();
-  altPred=null;
+  altPred=null;altClock=0;altAcc=0;altRunning=true;altErrorSum=0;altErrorCount=0;
+  $('btn-alt-pause').disabled=false;$('btn-alt-pause').textContent='Pause';
   altContacts=[];if(altSamples[ui.scene])altSamples[ui.scene]=[];
+  if(altEstimates[ui.scene])altEstimates[ui.scene]=[];
+  if(ui.scene==='chaos')altModels.chaos={g:8.8,source:'unmeasured prior'};
+  if(ui.scene==='multi')altModels.multi={g:8.7,restitution:.5,friction:.12,source:'unmeasured prior'};
   const row=sceneEvidence[ui.scene];
   const start=evidence.append('scene_started',{run_id:runId,scene:ui.scene,mode:'simulation',positions:altRealPositions(ui.scene).map(p=>p.toArray())});
   setSceneTest(row,'launch','pass',{evidence:[start.id],measurements:{observed_bodies:altRealPositions(ui.scene).length},reason:'Scene action executed; generated simulation only.'});
   for(const test of ['hoop_passage','net','control'])setSceneTest(row,test,'not_applicable',{reason:'This exploratory scene has no hoop, net or controller.'});
   setSceneTest(row,'induction','blocked',{reason:'Only a known model family is calibrated; no independent real experiment or free induction has been validated.'});
-  setSceneTest(row,'bounce','not_run',{reason:ui.scene==='multi'?'Waiting for measured contact events.':'No contact experiment is implemented for this exploratory model.'});
+  setSceneTest(row,'bounce',ui.scene==='multi'?'not_run':'not_applicable',{reason:ui.scene==='multi'?'Waiting for measured contact events.':'The ideal linked pendulum has no collision surfaces.'});
   if (ui.scene === 'multi'){
-    multiBodies.forEach((b, i) => { b.p.set(-1.2 + i*0.4, 2.6 + (i%3)*0.65, 1.2 + (i%2)*0.5); b.v.set(0.4 - i*0.08, 0, -0.3); });
+    multiBodies.forEach((b,i)=>{const initial=multiBodyFixture()[i];b.p.copy(initial.p);b.v.copy(initial.v);});
     logTo($('ind-log'), 'Multi-body: cascade released — 7 bodies, sphere/sphere and floor collisions, uniform restitution.');
   } else if (ui.scene === 'chaos' && pendulum){
-    pendulum.th1 = 2.1 + Math.random()*0.35; pendulum.th2 = 2.7 + Math.random()*0.3; pendulum.w1 = 0; pendulum.w2 = 0;
+    pendulum.th1 = 2.25; pendulum.th2 = 2.85; pendulum.w1 = 0; pendulum.w2 = 0;
     pendulum.th1b = pendulum.th1 + 0.003; pendulum.th2b = pendulum.th2; pendulum.w1b = 0; pendulum.w2b = 0; pendulum.t = 0; pendulum.horizon = null;
     pendulum.shadowPts = [];
     $('st-horizon').textContent = 'mesure… 0,0 s';
-    logTo($('ind-log'), 'Chaos: pendule relancé. Sphère orange = seule prédiction (+0,5 s). Trait violet = copie perturbée de 0,003 rad, uniquement pour mesurer l’horizon — ce n’est pas un deuxième fantôme.');
+    logTo($('ind-log'), 'Pendule relancé. Trace cyan = positions observées, attachées à la masse. Courbe orange = aperçu calculé depuis la position courante jusqu’à +0,5 s. Une prévision distincte est figée toutes les 0,5 s pour mesurer l’erreur sans la réécrire.');
   } else if (ui.scene === 'liquid' && liquidPts){
     fillState = { level: 0.34, rate: 0.17, running: true, obsStart: altClock, levelStart: 0.34, inducedRate: null, t: 0 };
     liquidOverflowMeasured = null;
@@ -1017,17 +1030,13 @@ function buildGauntletScenes(){
       ? new THREE.Mesh(new THREE.SphereGeometry(0.14, 22, 16), new THREE.MeshStandardMaterial({ color: cols[i%5], roughness: 0.45 }))
       : new THREE.Mesh(new THREE.BoxGeometry(0.26, 0.26, 0.26), new THREE.MeshStandardMaterial({ color: cols[i%5], roughness: 0.55 }));
     mesh.castShadow = true; gMulti.add(mesh);
-    multiBodies.push({ mesh, p: new THREE.Vector3(-1.2 + i*0.4, 2.6 + (i%3)*0.65, 1.2 + (i%2)*0.5), v: new THREE.Vector3(0.4 - i*0.08, 0, -0.3), r: 0.14 });
+    const initial=multiBodyFixture()[i];multiBodies.push({mesh,p:new THREE.Vector3().copy(initial.p),v:new THREE.Vector3().copy(initial.v),r:initial.r});
   }
   multiGhosts = multiBodies.map(b => {
     const gm = new THREE.Mesh(new THREE.SphereGeometry(b.r * 0.92, 14, 10),
       new THREE.MeshBasicMaterial({ color: 0x37c8d9, transparent: true, opacity: 0.35, depthWrite: false }));
     gm.visible = false; gMulti.add(gm); return gm;
   });
-  for (let stp = 0; stp < 3; stp++){
-    const stepBox = new THREE.Mesh(new THREE.BoxGeometry(1.0 - stp*0.18, 0.22 + stp*0.22, 1.2), new THREE.MeshStandardMaterial({ color: 0x39404e, roughness: 0.5, metalness: 0.6 }));
-    stepBox.position.set(-1.1 + stp * 1.05, (0.22 + stp*0.22)/2, 2.6); stepBox.castShadow = true; stepBox.receiveShadow = true; gMulti.add(stepBox);
-  }
 
   // 3 · chaotique : 3D double pendulum (bars + masses)
   gChaos = new THREE.Group(); gChaos.visible = false; scene.add(gChaos);
@@ -1038,106 +1047,30 @@ function buildGauntletScenes(){
   const b2 = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.9, 0.05), barMat.clone()); b2.castShadow = true;
   const m1 = new THREE.Mesh(new THREE.SphereGeometry(0.13, 20, 14), new THREE.MeshStandardMaterial({ color: 0xff6b1a, roughness: 0.4 })); m1.castShadow = true;
   const m2 = new THREE.Mesh(new THREE.SphereGeometry(0.11, 20, 14), new THREE.MeshStandardMaterial({ color: 0x37c8d9, roughness: 0.4 })); m2.castShadow = true;
-  // UN SEUL fantôme sphérique (orange, prédiction +0,5 s). La copie perturbée
-  // n'est PAS un fantôme : c'est un simple trait violet qui montre sa trajectoire.
+  // Cyan is the measured tail, orange the rolling future. No second hidden trace.
   const shadowTrail = new THREE.Line(new THREE.BufferGeometry(),
-    new THREE.LineBasicMaterial({ color: 0xb78cff, transparent: true, opacity: 0.85 }));
+    new THREE.LineBasicMaterial({ color: 0x37c8d9, transparent: true, opacity: 0.70 }));
   chaosGhost = new THREE.Mesh(new THREE.SphereGeometry(0.13, 16, 12),
     new THREE.MeshBasicMaterial({ color: 0xffb38a, transparent: true, opacity: 0.65, depthWrite: false }));
   chaosGhost.visible = false;
-  gChaos.add(b1, b2, m1, m2, shadowTrail, chaosGhost);
+  chaosForecastLine = new THREE.Line(new THREE.BufferGeometry(),new THREE.LineBasicMaterial({color:0xffb38a,transparent:true,opacity:.85}));
+  chaosForecastLine.visible=false;
+  gChaos.add(b1, b2, m1, m2, shadowTrail, chaosGhost, chaosForecastLine);
   pendulum = { th1: 2.25, th2: 2.85, w1: 0, w2: 0, th1b: 2.25 + 0.003, th2b: 2.85, w1b: 0, w2b: 0, t: 0, horizon: null, b1, b2, m1, m2, shadowTrail, shadowPts: [], pivot: new THREE.Vector3(0, 3.6, 1.6), L1: 1.05, L2: 0.9 };
   const stand = new THREE.Mesh(new THREE.BoxGeometry(0.12, 3.6, 0.12), barMat);
   stand.position.set(0, 1.8, 1.6); gChaos.add(stand);
 
-  // 4 · liquide : glass tank + 3D particles
-  gLiquid = new THREE.Group(); gLiquid.visible = false; scene.add(gLiquid);
-  const tankMat = new THREE.MeshPhysicalMaterial({ color: 0xcfe6f2, roughness: 0.05, transmission: 0.92, transparent: true, opacity: 0.30, thickness: 0.04 });
-  const tank = new THREE.Mesh(new THREE.BoxGeometry(2.2, 1.7, 1.4), tankMat);
-  tank.position.set(0, 0.95, 1.6); gLiquid.add(tank);
-  const tankEdges = new THREE.LineSegments(new THREE.EdgesGeometry(tank.geometry), new THREE.LineBasicMaterial({ color: 0x9fb4c4 }));
-  tankEdges.position.copy(tank.position); gLiquid.add(tankEdges);
-  const N = 240, lPos = new Float32Array(N*3), lVel = [];
-  for (let i=0;i<N;i++){
-    lPos[i*3] = (Math.random()-0.5)*1.85; lPos[i*3+1] = 0.30 + Math.random()*0.55; lPos[i*3+2] = 1.6 + (Math.random()-0.5)*1.05;
-    lVel.push(new THREE.Vector3());
-  }
-  liquidPts = new THREE.InstancedMesh(new THREE.SphereGeometry(0.02, 8, 6), new THREE.MeshStandardMaterial({ color: 0xbfe6f7, roughness: 0.3, transparent: true, opacity: 0.55 }), N);
-  liquidPts.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-  liquidPts.userData = { vel: lVel, N, pos: lPos, rest: new Float32Array(lPos), dummy: new THREE.Object3D() };
-  gLiquid.add(liquidPts);
-  // LE volume d'eau : un bloc bleu dont la hauteur EST le niveau (mis à jour chaque frame)
-  waterBody = new THREE.Mesh(new THREE.BoxGeometry(2.02, 1, 1.22),
-    new THREE.MeshStandardMaterial({ color: 0x1f7fc4, roughness: 0.08 }));
-  waterBody.renderOrder = 2; gLiquid.add(waterBody);
-  // surface de l'eau (grille souple, petites ondulations sous le robinet)
-  {
-    const segX = 16, segZ = 8, verts = [], idx = [];
-    for (let r = 0; r <= segZ; r++) for (let i = 0; i <= segX; i++) verts.push(-1.01 + i * (2.02 / segX), 0.34, 0.99 + r * (1.22 / segZ));
-    for (let r = 0; r < segZ; r++) for (let i = 0; i < segX; i++){ const a = r * (segX + 1) + i, b = a + 1, c = a + segX + 1, d = c + 1; idx.push(a, c, b, b, c, d); }
-    const wg = new THREE.BufferGeometry();
-    wg.setAttribute('position', new THREE.Float32BufferAttribute(verts, 3));
-    wg.setIndex(idx); wg.computeVertexNormals();
-    waterSurf = new THREE.Mesh(wg, new THREE.MeshStandardMaterial({ color: 0x8fd8f7, roughness: 0.05, transparent: true, opacity: 0.85, side: THREE.DoubleSide, depthWrite: false }));
-    waterSurf.renderOrder = 3; waterSurf.userData = { segX, segZ }; gLiquid.add(waterSurf);
-  }
-  // robinet au-dessus du bac + jet d'eau quand le remplissage tourne
-  const pipeMat = new THREE.MeshStandardMaterial({ color: 0x9aa3ad, roughness: 0.3, metalness: 0.8 });
-  const pipeH = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.95, 12), pipeMat);
-  pipeH.rotation.z = Math.PI/2; pipeH.position.set(-1.12, 2.38, 1.6); gLiquid.add(pipeH);
-  const pipeV = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.34, 12), pipeMat);
-  pipeV.position.set(-0.68, 2.22, 1.6); gLiquid.add(pipeV);
-  fillStream = new THREE.InstancedMesh(new THREE.SphereGeometry(0.016, 6, 5),
-    new THREE.MeshBasicMaterial({ color: 0xbfe6f7, transparent: true, opacity: 0.85 }), 60);
-  fillStream.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-  fillStream.userData = { dummy: new THREE.Object3D(), phase: Array.from({ length: 60 }, () => Math.random()) };
-  fillStream.visible = false; gLiquid.add(fillStream);
-  // graduations + LIGNE ROUGE = niveau d'alerte à atteindre
-  for (let i = 0; i < 6; i++){
-    const tick = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.012, 0.012), new THREE.MeshBasicMaterial({ color: 0xf2f0ea }));
-    tick.position.set(1.06, 0.45 + i * 0.22, 2.22); gLiquid.add(tick);
-  }
-  const alert = new THREE.Mesh(new THREE.BoxGeometry(2.06, 0.028, 0.03),
-    new THREE.MeshBasicMaterial({ color: 0xff3b30 }));
-  alert.position.set(0, TANK_ALERT, 2.22); gLiquid.add(alert);
-  // plan orange FIXE = niveau prédit dans 5 s ; ligne pointillée = son bord avant
-  liquidMarker = new THREE.Mesh(new THREE.BoxGeometry(2.02, 0.02, 1.22),
-    new THREE.MeshBasicMaterial({ color: 0xff6b1a }));
-  liquidMarker.visible = false; liquidMarker.renderOrder = 4; gLiquid.add(liquidMarker);
-  liquidTrail = new THREE.Line(new THREE.BufferGeometry(),
-    new THREE.LineDashedMaterial({ color: 0xff6b1a, dashSize: 0.07, gapSize: 0.05, transparent: true, opacity: 1 }));
-  liquidTrail.visible = false; gLiquid.add(liquidTrail);
+  // Water and orbit are retired from the interactive presentation. Empty groups keep
+  // archive visibility restoration compatible without building their old scenes.
+  gLiquid = new THREE.Group();gLiquid.visible=false;scene.add(gLiquid);
+  gOrbit = new THREE.Group();gOrbit.visible=false;scene.add(gOrbit);
 
-  // 5 · orbite : textured planet + satellite + starfield
-  gOrbit = new THREE.Group(); gOrbit.visible = false; scene.add(gOrbit);
-  const pc = document.createElement('canvas'); pc.width = 512; pc.height = 256;
-  const px = pc.getContext('2d');
-  px.fillStyle = '#274b73'; px.fillRect(0,0,512,256);
-  for (let i=0;i<46;i++){ px.fillStyle = `rgba(${60+Math.random()*60|0},${130+Math.random()*60|0},${70+Math.random()*40|0},.85)`; px.beginPath(); px.ellipse(Math.random()*512, Math.random()*256, 14+Math.random()*42, 8+Math.random()*22, Math.random()*3, 0, 7); px.fill(); }
-  px.fillStyle = 'rgba(240,246,255,.9)'; px.fillRect(0,0,512,20); px.fillRect(0,236,512,20);
-  const planetTex = new THREE.CanvasTexture(pc); planetTex.colorSpace = THREE.SRGBColorSpace;
-  const planet = new THREE.Mesh(new THREE.SphereGeometry(0.85, 40, 28), new THREE.MeshStandardMaterial({ map: planetTex, roughness: 0.75 }));
-  planet.position.set(0, 2.1, 1.4); planet.castShadow = true; gOrbit.add(planet);
-  const starGeo = new THREE.BufferGeometry(); const starPos = new Float32Array(700*3);
-  for (let i=0;i<700;i++){ const r = 16 + Math.random()*18, th = Math.random()*Math.PI*2, ph = Math.acos(2*Math.random()-1); starPos[i*3] = r*Math.sin(ph)*Math.cos(th); starPos[i*3+1] = r*Math.cos(ph)*0.6 + 2; starPos[i*3+2] = r*Math.sin(ph)*Math.sin(th); }
-  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-  gOrbit.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: 0xcfd9ff, size: 0.09 })));
-  const sat = new THREE.Mesh(new THREE.SphereGeometry(0.11, 18, 12), new THREE.MeshStandardMaterial({ color: 0xd8dbe0, metalness: 0.85, roughness: 0.25, emissive: 0x222222 }));
-  sat.castShadow = true; gOrbit.add(sat);
-  const satGhost = new THREE.Mesh(new THREE.SphereGeometry(0.11, 16, 12), new THREE.MeshBasicMaterial({ color: 0x37c8d9, transparent: true, opacity: 0.5 }));
-  gOrbit.add(satGhost);
-  const trailGeo = new THREE.BufferGeometry();
-  const trail = new THREE.Line(trailGeo, new THREE.LineBasicMaterial({ color: 0xffb38a, transparent: true, opacity: 0.7 }));
-  gOrbit.add(trail);
-  orbitGroup = { planet, sat, satGhost, trail, center: new THREE.Vector3(0, 2.1, 1.4), laps: 0, lastAngle: 0, recal: 0 };
-  satState = { p: new THREE.Vector3(2.35, 2.1, 1.4), v: new THREE.Vector3(0, 0, 1.05), trail: [] };
 }
 function stepPendulum(P, dt){
-  // même pendulumAccel que le fantôme, même pas DT : aucune divergence d'intégrateur
-  const [a1, a2] = evaluator.pendulumAcceleration(P.th1, P.th2, P.w1, P.w2, P.L1, P.L2);
-  P.w1 += a1*dt; P.w2 += a2*dt; P.th1 += P.w1*dt; P.th2 += P.w2*dt;
-  const [b1, b2] = evaluator.pendulumAcceleration(P.th1b, P.th2b, P.w1b, P.w2b, P.L1, P.L2);
-  P.w1b += b1*dt; P.w2b += b2*dt; P.th1b += P.w1b*dt; P.th2b += P.w2b*dt;
+  evaluator.advancePendulum(P,P,dt);
+  const perturbed={th1:P.th1b,th2:P.th2b,w1:P.w1b,w2:P.w2b};
+  evaluator.advancePendulum(perturbed,P,dt);
+  P.th1b=perturbed.th1;P.th2b=perturbed.th2;P.w1b=perturbed.w1;P.w2b=perturbed.w2;
   P.t += dt;
   if (P.horizon === null && ((P.t*2)|0) !== (P._lastUi||-1)){ P._lastUi = (P.t*2)|0; const stH = $('st-horizon'); if (stH && ui.scene === 'chaos') stH.textContent = `measuring… ${fmt(P.t,1)} s · divergence ${fmt(Math.abs(P.th1-P.th1b),3)} rad`; }
   if (P.horizon === null && Math.abs(P.th1 - P.th1b) > 0.4){ P.horizon = P.t; $('st-horizon').innerHTML = fmt(P.horizon,1) + ' <small>s</small>'; logTo($('ind-log'), `Chaotic: measured predictability horizon = ${fmt(P.horizon,2)} s (divergence > 0.4 rad from a 0.003 rad perturbation). This measures sensitivity to initial conditions, not an independently validated forecast horizon.`); renderGauntletCheck(); }
@@ -1163,15 +1096,7 @@ function observeAltParameters(name){
   if(samples.length>3)samples.shift();if(samples.length<3)return;
   const [a,b,c]=samples;let estimate=null;
   if(name==='orbit')estimate=estimateOrbitMu(a,b,c,orbitGroup.center.toArray());
-  if(name==='multi'){
-    const gs=[];
-    for(let i=0;i<multiBodies.length;i++){
-      if([a,b,c].some(o=>o.positions[i][1]<multiBodies[i].r+0.12))continue;
-      if(multiBodies.some((body,j)=>j!==i&&body.p.distanceTo(multiBodies[i].p)<0.45))continue;
-      const accel=accelerationFromPositions({t:a.t,p:a.positions[i]},{t:b.t,p:b.positions[i]},{t:c.t,p:c.positions[i]});if(accel&&accel[1]<0)gs.push(-accel[1]);
-    }
-    estimate=median(gs);
-  }
+  if(name==='multi')estimate=estimateMultiGravity(samples,multiBodies);
   if(name==='chaos'){
     const acc=accelerationFromPositions(a,b,c),h=c.t-a.t,w1=(c.p[0]-a.p[0])/h,w2=(c.p[1]-a.p[1])/h;
     const zero=pendulumAcceleration(...b.p,w1,w2,pendulum.L1,pendulum.L2,{g:0}),one=pendulumAcceleration(...b.p,w1,w2,pendulum.L1,pendulum.L2,{g:1}),values=[];
@@ -1216,12 +1141,9 @@ function forecastAlt(sceneName){
       text: `positions des 7 corps à +${fmt(h,1)} s · ${collisions} contact(s) corps/corps prévu(s) dans la fenêtre` };
   }
   if (sceneName === 'chaos' && pendulum){
-    let { th1, th2, w1, w2 } = pendulum;
-    const N = Math.round(h / DT);
-    for (let s = 0; s < N; s++){ const [a1, a2] = pendulumAccel(th1, th2, w1, w2, pendulum.L1, pendulum.L2); w1 += a1*DT; w2 += a2*DT; th1 += w1*DT; th2 += w2*DT; }
-    const pos = pendulumM2(th1, th2, pendulum);
-    const horizonTxt = pendulum.horizon !== null ? `horizon mesuré ${fmt(pendulum.horizon,1)} s` : 'horizon pas encore atteint';
-    return { positions: [pos], collisions: 0, text: `masse 2 à +${fmt(h,1)} s · prévision court terme seulement (${horizonTxt})` };
+    const prediction=forecastPendulum(pendulum,{...altModels.chaos,L1:pendulum.L1,L2:pendulum.L2},{horizon:h,dt:DT});
+    const path=prediction.path.map(p=>pendulumM2(p.th1,p.th2,pendulum)),pos=path.at(-1);
+    return {positions:[pos],path,collisions:0,text:`masse 2 à +${fmt(h,1)} s · gravité estimée ${fmt(altModels.chaos.g,3)} m/s² · aperçu courant, mesures figées séparément`};
   }
   if (sceneName === 'liquid' && liquidPts){
     const rate = fillState.inducedRate;
@@ -1255,7 +1177,7 @@ function showAltGhosts(){
   if (!ui.ghost) return;
   const f = forecastAlt(ui.scene); if (!f) return;
   if (ui.scene === 'multi') multiGhosts.forEach((gm, i) => { if (f.positions[i]){ gm.position.copy(f.positions[i]); gm.visible = true; } });
-  if (ui.scene === 'chaos' && chaosGhost && f.positions[0]){ chaosGhost.position.copy(f.positions[0]); chaosGhost.visible = true; }
+  if (ui.scene === 'chaos' && chaosGhost && f.positions[0]){ chaosGhost.position.copy(f.positions[0]); chaosGhost.visible = true; chaosForecastLine.geometry.dispose();chaosForecastLine.geometry=new THREE.BufferGeometry().setFromPoints(f.path);chaosForecastLine.visible=true; }
   if (ui.scene === 'liquid' && f.positions[0]){
     // plan orange FIXE : une fois verrouillé, il ne bouge plus — la surface doit le rattraper
     const target = (altPred && altPred.scene === 'liquid') ? altPred.predicted[0] : f.positions[0];
@@ -1273,14 +1195,18 @@ function hideAltGhosts(){
   if (liquidTrail) liquidTrail.visible = false;
   if (liquidMarker) liquidMarker.visible = false;
   if (chaosGhost) chaosGhost.visible = false;
+  if (chaosForecastLine) chaosForecastLine.visible = false;
   $('ghost-tag').style.display = 'none';
 }
-function lockAltPrediction(reason){
+function lockAltPrediction(reason,{announce=true}={}){
   const f = forecastAlt(ui.scene); if (!f) return;
   const h = f.horizon || ALT_HORIZON[ui.scene] || 0.5;
-  altPred = { scene: ui.scene, modelId: 'sim-twin-' + ui.scene + '-v1', issuedAt: new Date(), sourceT: altClock,
-    targetT: altClock + h, horizon: h, predicted: f.positions, label: f.text, evaluated: false,
+  altPred = { scene: ui.scene, modelId: 'sim-twin-' + ui.scene + (ui.scene==='chaos'?'-rk4-v2':'-v2'), issuedAt: new Date(), sourceT: altClock,
+    targetT: altClock + h, horizon: h, predicted: f.positions.map(p=>p.clone()), label: f.text, evaluated: false, model:structuredClone(altModels[ui.scene]||{}),
     fillPred: (f.fillOverflowDt !== null && f.fillOverflowDt !== undefined) ? { overflowDt: f.fillOverflowDt } : null };
+  evidence.append('scene_prediction_issued',{run_id:runId,scene:ui.scene,source_t:altPred.sourceT,target_t:altPred.targetT,predicted:altPred.predicted.map(p=>p.toArray()),model:altPred.model});
+  updateParamTable();
+  if(!announce)return;
   const big = $('verdict-big'), hud = $('hud-verdict');
   big.textContent = 'PRÉDICTION VERROUILLÉE'; big.className = 'big wait';
   hud.textContent = (ui.scene === 'liquid')
@@ -1290,7 +1216,7 @@ function lockAltPrediction(reason){
   $('hud-sub').textContent = ui.scene === 'liquid'
     ? 'plan orange FIXE = niveau prévu dans 5 s · la surface bleue doit le rattraper · ligne rouge = niveau d’alerte'
     : ui.scene === 'chaos'
-    ? 'sphère orange = prédiction +0,5 s · trait violet = copie perturbée (horizon seulement)'
+    ? 'cyan : trajectoire observée · orange : aperçu +0,5 s · erreur : prévisions figées'
     : `fantôme projeté +${fmt(h,1)}s · erreur mesurée quand la cible est atteinte`;
   $('err-now').textContent = '—';$('err-avg').textContent='—';
   logTo($('ind-log'), `Prédiction verrouillée (${reason}) · scène ${ui.scene} · +${fmt(h,1)}s · ${f.text}.`);
@@ -1308,14 +1234,15 @@ function evaluateAltPrediction(){
   altPred.predicted.forEach((p, i) => { if (real[i]){ const e = p.distanceTo(real[i]) * 100; sum += e; mx = Math.max(mx, e); } });
   const mean = sum / Math.max(1, Math.min(altPred.predicted.length, real.length));
   altPred.evaluated = true;
-  const result=evidence.append('scene_prediction_measured',{run_id:runId,scene:altPred.scene,mode:'simulation',issued_at:altPred.issuedAt.toISOString(),source_t:altPred.sourceT,target_t:altPred.targetT,horizon_s:altPred.horizon,predicted:altPred.predicted.map(p=>p.toArray()),observed:real.map(p=>p.toArray()),error_mean_cm:mean,error_max_cm:mx,contacts:altContacts,model:altModels[altPred.scene]||{rate:fillState.inducedRate}});
+  const result=evidence.append('scene_prediction_measured',{run_id:runId,scene:altPred.scene,mode:'simulation',issued_at:altPred.issuedAt.toISOString(),source_t:altPred.sourceT,target_t:altPred.targetT,horizon_s:altPred.horizon,predicted:altPred.predicted.map(p=>p.toArray()),observed:real.map(p=>p.toArray()),error_mean_cm:mean,error_max_cm:mx,contacts:altContacts.filter(c=>c.t>altPred.sourceT&&c.t<=altPred.targetT+1e-8),model:altPred.model});
   const checks=sceneEvidence[altPred.scene];
   setSceneTest(checks,'ghost_ahead',mean<=30?'pass':'fail',{evidence:[result.id],measurements:{horizon_s:altPred.horizon,error_mean_cm:mean,error_max_cm:mx},reason:'Locked future target compared with observed simulated position at the same time.'});
   if(altPred.scene==='multi'&&altContacts.some(c=>c.type==='ground'))setSceneTest(checks,'bounce','pass',{evidence:[result.id],measurements:{ground_contacts:altContacts.filter(c=>c.type==='ground').length},reason:'Contact velocities recorded in the generated scene.'});
   checks.metrics={ghost_error_mean_cm:mean,verdicts_correct:null,verdicts_total:null,collisions:altPred.scene==='multi'?altContacts.length:null};
 
+  altErrorSum+=mean;altErrorCount++;
   $('err-now').textContent = fmt(mean, 2) + ' cm';
-  $('err-avg').textContent = fmt(mean, 2) + ' cm (scène)';
+  $('err-avg').textContent = fmt(altErrorSum/altErrorCount, 2) + ` cm (${altErrorCount} mesures)`;
   const big = $('verdict-big'), hud = $('hud-verdict');
   big.textContent = 'PRÉDICTION MESURÉE'; big.className = 'big ' + (mean < 30 ? 'ok' : 'bad');
   hud.textContent = `ERREUR FANTÔME +${fmt(altPred.horizon,1)}s : ${fmt(mean,2)} cm (max ${fmt(mx,2)})`;
@@ -1325,17 +1252,24 @@ function evaluateAltPrediction(){
     entryTxt = ` · à l'instant prévu, la surface réelle est à ${fmt(mean,2)} cm du plan orange`;
   }
   $('verdict-when').textContent = `cible t+${fmt(altPred.horizon,1)}s atteinte · erreur position ${fmt(mean,2)} cm · max ${fmt(mx,2)} cm${entryTxt} · modèle ${altPred.modelId} · simulation, paramètres estimés ou priors déclarés; aucune validation réelle revendiquée`;
-  logTo($('ind-log'), `Fantôme ${altPred.scene} mesuré à t+${fmt(altPred.horizon,1)}s : erreur position ${fmt(mean,2)} cm, max ${fmt(mx,2)} cm${entryTxt} (comparée à l'observation au temps cible, pas à la position courante).`);
+  if(altErrorCount<=3||altErrorCount%10===0)logTo($('ind-log'), `Fantôme ${altPred.scene} mesuré à t+${fmt(altPred.horizon,1)}s : erreur position ${fmt(mean,2)} cm, max ${fmt(mx,2)} cm${entryTxt} (comparée à l'observation au temps cible, pas à la position courante).`);
   renderGauntletCheck();
 }
 const SCENE_INFO = {
   hoop: 'Scene 1 — basketball simulation · L3 calibration · forecast + simulation MPC',
-  multi: 'Scene 2 — sphere collision simulation · gravity calibrated · restitution/friction priors',
-  chaos: 'Scene 3 — Chaos · pendule double · sphère orange = prédiction +0,5 s · trait violet = copie perturbée de 0,003 rad (horizon, pas un fantôme)',
+  multi: 'Collisions — 7 sphères · chocs entre corps et sol · paramètres estimés depuis les observations',
+  chaos: 'Pendule — cyan : trajet observé · orange : aperçu futur +0,5 s · erreur mesurée sur des prévisions figées',
   liquid: 'Scene 4 — modèle de bilan de volume (pas un solveur de fluide) · le robinet remplit le bac · après 1,2 s d’observation de la montée, prédiction : le niveau exact dans 5 s (plan orange à rattraper) et l’arrivée à la ligne rouge',
   orbit: 'Scene 5 — orbit simulation · μ estimated from positions · forecast +0.6s',
 };
 function setScene(name){
+  if(!['hoop','multi','chaos'].includes(name))name='hoop';
+  altRunning=false;altPred=null;altErrorSum=0;altErrorCount=0;
+  if(name!=='hoop')sceneEvidence[name]=emptySceneEvidence(name);
+  if(altSamples[name])altSamples[name]=[];
+  if(altEstimates[name])altEstimates[name]=[];
+  if(name==='chaos')altModels.chaos={g:8.8,source:'unmeasured prior'};
+  if(name==='multi')altModels.multi={g:8.7,restitution:.5,friction:.12,source:'unmeasured prior'};
   if(name!==ui.scene)abortShot('scene changed before completion');
   restoreSimulationVisibility();
   ui.scene = name;
@@ -1343,6 +1277,17 @@ function setScene(name){
   document.querySelectorAll('[data-scene]').forEach(b => b.classList.toggle('on', b.dataset.scene === name));
   $('scene-hint').textContent = SCENE_INFO[name];
   const isHoop = name === 'hoop';
+  $('btn-alt-pause').hidden=isHoop;$('btn-alt-pause').disabled=true;$('btn-alt-pause').textContent='Pause';
+  for(const id of ['in-angle','in-power','in-spin','in-wind','btn-challenge','tg-mc','tg-mpc','in-cf','btn-cf','btn-advisor'])$(id).disabled=!isHoop;
+  document.querySelectorAll('.cf-chip').forEach(b=>b.disabled=!isHoop);
+  $('btn-advisor').disabled=!isHoop||!localModelService;
+  $('tg-ghost').textContent=isHoop?'Ghost +0.5s':'Aperçu +0,5 s';
+  for(const id of ['shot-settings','hoop-counterfactual','hoop-comparison','hoop-control','chart-wrap','tg-mc','tg-mpc'])$(id).hidden=!isHoop;
+  $('btn-challenge').parentElement.hidden=!isHoop;$('btn-challenge').parentElement.nextElementSibling.hidden=!isHoop;
+  [...$('scene-stats').children].forEach((stat,i)=>stat.hidden=i===3?name!=='chaos':!isHoop);
+  $('sam-ball').textContent=isHoop?'ball · simulated sensor':name==='chaos'?'2 masses · angles observés':'7 sphères · positions observées';
+  $('sam-hoop').hidden=!isHoop;$('sam-board').hidden=!isHoop;
+  $('err-average-label').textContent=isHoop?'session avg':'moyenne des prévisions figées';
   hoopGroup.visible = isHoop; ball.visible = isHoop; if (courtProps) courtProps.visible = isHoop;
   ghostBall.visible = false; arcLine.visible = false;if(mcCone)mcCone.visible=false;
   mcGroup.children.forEach(m => m.visible = false);
@@ -1359,7 +1304,7 @@ function setScene(name){
     : isHoop ? 'ghost projected +0.5s ahead of the ball · verdict locked before it lands'
     : SCENE_INFO[name].split('—')[1].trim();
   if (name !== 'chaos' && !(pendulum && pendulum.horizon !== null)) $('st-horizon').textContent = '—';
-  const shootLabels = { hoop: 'SHOOT THE BALL', multi: 'DROP THE CASCADE', chaos: 'RELAUNCH THE PENDULUM', liquid: 'OPEN THE TAP', orbit: "RELAUNCH THE ORBIT" };
+  const shootLabels = { hoop: 'SHOOT THE BALL', multi: 'LANCER LES COLLISIONS', chaos: 'LANCER LE PENDULE', liquid: 'OPEN THE TAP', orbit: "RELAUNCH THE ORBIT" };
   $('btn-shoot').textContent = shootLabels[name];
   $('btn-shoot-float').textContent = shootLabels[name];
   if (!isHoop){
@@ -1369,12 +1314,12 @@ function setScene(name){
     $('verdict-when').textContent = name === 'liquid'
       ? 'Cliquez OPEN THE TAP : le bac se remplit. Après 1,2 s d’observation de la montée, la prédiction se verrouille : le niveau exact dans 5 s (plan orange fixe) et l’arrivée à la ligne rouge (simulation).'
       : name === 'chaos'
-      ? 'Sphère orange = le seul fantôme (prédiction +0,5 s). Trait violet = copie perturbée de 0,003 rad pour mesurer l’horizon, ce n’est pas un fantôme. Lancez le pendule pour verrouiller la prédiction.'
+      ? 'Lancez le pendule. Le trait cyan suit exactement la masse observée. La courbe orange part de sa position courante et montre les 0,5 prochaines secondes. Les erreurs comparent séparément les prévisions figées à leur instant cible.'
       : 'appuyez sur le bouton d’action : la prédiction +' + fmt(ALT_HORIZON[name] || 0.5, 1) + 's sera verrouillée puis mesurée au temps cible (simulation)';
     $('hud-sub').textContent = name === 'liquid'
       ? 'plan orange FIXE = niveau prévu dans 5 s · la surface bleue doit le rattraper · ligne rouge = niveau d’alerte'
       : name === 'chaos'
-      ? 'sphère orange = prédiction +0,5 s · trait violet = copie perturbée (horizon seulement)'
+      ? 'cyan : trajectoire observée · orange : aperçu +0,5 s · erreur : prévisions figées'
       : 'fantôme projeté +' + fmt(ALT_HORIZON[name] || 0.5, 1) + 's · prédiction verrouillée à l’action · erreur affichée à la cible';
     showAltGhosts();
   } else if (S.lockedVerdict !== null && S.lockedAt){
@@ -1383,7 +1328,7 @@ function setScene(name){
     $('verdict-big').textContent = 'WAITING'; $('verdict-big').className = 'big wait';
     $('verdict-when').textContent = 'no verdict yet';
   }
-  renderGauntletCheck();
+  updateParamTable();renderGauntletCheck();
   logTo($('ind-log'), `Gauntlet → ${SCENE_INFO[name]}`);
 }
 function renderGauntletCheck(){
@@ -1404,7 +1349,8 @@ function renderEvidenceStatus(status){
 async function checkApiStatus(){
   const localHttp = /^https?:$/.test(location.protocol) && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
   if (!localHttp){
-    $('api-status').textContent = 'Hosted simulation. Import JSON locally; model services require the local server.';
+    $('api-status').textContent = 'Version publique : simulation et import JSON disponibles. Les appels Meta nécessitent le serveur local.';
+    $('btn-advisor').disabled=true;$('btn-advisor').title='Nécessite le serveur local Meta.';
     return;
   }
   try {
@@ -1429,7 +1375,7 @@ async function askAdvisor(){
     if (!r.ok) throw new Error(d.error || ('HTTP ' + r.status));
     out.innerHTML = '';
     const head = document.createElement('div');
-    head.innerHTML = `<span class="t">live</span> <b>${d.provider}</b> · ${d.model}`;
+    head.textContent = `live · ${d.provider} · ${d.model}`;
     out.appendChild(head);
     const body = document.createElement('div');
     body.style.whiteSpace = 'pre-wrap'; body.style.marginTop = '6px';
@@ -1540,7 +1486,7 @@ function runValidation(){
 }
 function downloadJson(name,content){const link=document.createElement('a'),url=URL.createObjectURL(new Blob([content],{type:'application/json'}));link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 window.Twinforge=Object.freeze({importObservationBundle,exportEvidence,runValidation,exportLocalArchives:options=>evidence.exportArchive(options),
-  status:()=>({level:'L3',mode:'simulation',last_mpc:lastMpcCorrection?structuredClone(lastMpcCorrection):null,replay_summary:importedReplay?.run?replaySummary(importedReplay.run):null,source:importedBundle?sourceStatus(importedBundle):{kind:'synthetic',dimension:3},session_metrics:{...sessionMetrics},evidence:evidence.status()}),
+  status:()=>({level:'L3',mode:'simulation',scene:ui.scene,alt:{running:altRunning,time_s:altClock,measurements:altErrorCount,mean_error_cm:altErrorCount?altErrorSum/altErrorCount:null,model:structuredClone(altModels[ui.scene]||{}),pendulum:ui.scene==='chaos'?{position:pendulum.m2.position.toArray(),trace_end:pendulum.shadowPts.at(-1)?.toArray()||null,forecast_start:chaosForecastLine?.geometry?.attributes?.position?Array.from(chaosForecastLine.geometry.attributes.position.array.slice(0,3)):null}:null},last_mpc:lastMpcCorrection?structuredClone(lastMpcCorrection):null,replay_summary:importedReplay?.run?replaySummary(importedReplay.run):null,source:importedBundle?sourceStatus(importedBundle):{kind:'synthetic',dimension:3},session_metrics:{...sessionMetrics},evidence:evidence.status()}),
   clearImportedObservation(){restoreSimulationVisibility();importedBundle=null;importedReplay=null;$('replay-observations').hidden=true;if(importedTrajectory){scene.remove(importedTrajectory);importedTrajectory=null;}setScene('hoop');camera.position.set(4.4,2.7,8.8);controls.target.set(0,1.95,1.7);$('mode-badge').textContent='L3 · SIMULATION';}
 });
 
@@ -1556,6 +1502,7 @@ function bindUI(){
   };
   ['in-angle','in-power','in-spin','in-wind'].forEach(id => $(id).addEventListener('input', sync)); sync();
   $('btn-shoot').addEventListener('click', shoot);
+  $('btn-alt-pause').addEventListener('click',()=>{altRunning=!altRunning;$('btn-alt-pause').textContent=altRunning?'Pause':'Reprendre';});
   $('btn-shoot-float').addEventListener('click', shoot);
   $('btn-challenge').addEventListener('click', () => {
     if (ui.scene !== 'hoop') setScene('hoop');
@@ -1567,7 +1514,7 @@ function bindUI(){
     shoot();
   });
   $('btn-view').addEventListener('click', () => { camera.position.set(4.4, 2.7, 8.8); controls.target.set(0, 1.95, 1.7); logTo($('ind-log'), 'Camera back to the default view (orbit bounded to the gym).'); });
-  $('btn-reset').addEventListener('click', () => { resetBall(); S.hoopOffsetX = 0; hoopGroup.position.x = 0; $('hud-verdict').textContent = 'READY — SHOOT THE BALL'; $('hud-verdict').className = 'wait'; $('verdict-big').textContent = 'WAITING'; $('verdict-big').className = 'big wait'; logTo($('ind-log'), 'Scene reset — hoop centred, ball back at the shooter.'); });
+  $('btn-reset').addEventListener('click', () => { if(ui.scene!=='hoop'){setScene(ui.scene);return;} resetBall(); S.hoopOffsetX = 0; hoopGroup.position.x = 0; $('hud-verdict').textContent = 'READY — SHOOT THE BALL'; $('hud-verdict').className = 'wait'; $('verdict-big').textContent = 'WAITING'; $('verdict-big').className = 'big wait'; logTo($('ind-log'), 'Scene reset — hoop centred, ball back at the shooter.'); });
   const tg = (id, key, label) => $(id).addEventListener('click', () => { ui[key] = !ui[key]; $(id).classList.toggle('on', ui[key]); if (key==='mpc') renderGauntletCheck(); if (!ui.ghost){ ghostBall.visible=false; ghostLine.visible=false; arcLine.visible=false; $('ghost-tag').style.display='none'; hideAltGhosts(); if (orbitGroup) orbitGroup.satGhost.visible = false; $('err-now').textContent = 'off'; } else if (ui.scene !== 'hoop'){ showAltGhosts(); if (orbitGroup) orbitGroup.satGhost.visible = true; } if(key==='mc'&&!ui.mc){mcGroup.children.forEach(m=>m.visible=false);if(mcCone)mcCone.visible=false;}if(!ui.ghost&&mcCone)mcCone.visible=false; });
   tg('tg-ghost', 'ghost'); tg('tg-mc', 'mc'); tg('tg-mpc', 'mpc');
   $('btn-cf').addEventListener('click', () => applyCounterfactual($('in-cf').value));
@@ -1595,6 +1542,7 @@ function drawChart(){
 
 /* ---------- escalation scenes: simulation steps ---------- */
 function updateAltScenes(dt){
+  if(!altRunning)dt=0;
   altGhostTimer += dt;
   /* Pas fixe DT avec accumulateur : le temps physique == altClock, comme le fantôme.
      Avant, le réel avançait en pas de frame variables (dt/3, dt) contre un fantôme en DT,
@@ -1605,7 +1553,14 @@ function updateAltScenes(dt){
     altPrevPositions = altRealPositions(ui.scene); altFrameDt = DT;
     if(ui.scene==='multi'){
       const before=multiBodies.map(b=>b.v.clone()),contacts=evaluator.advanceSpheres(multiBodies,DT);
-      for(const contact of contacts){const event={t:altClock+DT,...contact};if(contact.type==='ground'){event.normal_speed_before=before[contact.body].y;event.normal_speed_after=multiBodies[contact.body].v.y;}altContacts.push(event);}
+      for(const contact of contacts){if(contact.type==='ground'&&before[contact.body].y>=-.1&&multiBodies[contact.body].v.y===0)continue;const event={t:altClock+DT,...contact};if(contact.type==='ground'){
+        const a=before[contact.body],b=multiBodies[contact.body].v;
+        event.normal_speed_before=a.y;event.normal_speed_after=b.y;
+        if(a.y<-.5&&b.y>.1&&!contacts.some(c=>c.type==='sphere'&&c.bodies.includes(contact.body))){const incoming=-(a.y-altModels.multi.g*DT),rest=b.y/incoming;
+          // Contact velocities are observations; no evaluator coefficient is read.
+          if(rest>=0&&rest<=1){altModels.multi.restitution=rest;const tangent=Math.hypot(a.x,a.z),after=Math.hypot(b.x,b.z);if(after>1e-5&&tangent>after)altModels.multi.friction=(tangent-after)/((1+rest)*incoming);altModels.multi.source='gravity from positions; contact response from observed velocities';}
+        }
+      }altContacts.push(event);}
     }
     else if(ui.scene==='orbit')stepOrbit(DT);
     else if (ui.scene === 'chaos' && pendulum) stepPendulum(pendulum, DT);
@@ -1632,7 +1587,12 @@ function updateAltScenes(dt){
     }
     altClock += DT; altAcc -= DT; steps++;
     observeAltParameters(ui.scene);
-    if (altPred && !altPred.evaluated && altClock >= altPred.targetT) evaluateAltPrediction();
+    if (altPred && !altPred.evaluated && altClock+1e-9 >= altPred.targetT){
+      evaluateAltPrediction();
+      const settled=ui.scene==='multi'&&altClock>2&&multiBodies.every(b=>b.p.y<=b.r+.002&&b.v.length()<.02);
+      if(settled||ui.scene==='multi'&&altClock>=10){altRunning=false;altAcc=0;$('btn-alt-pause').textContent='Terminé';$('btn-alt-pause').disabled=true;}
+      else if(['multi','chaos'].includes(ui.scene))lockAltPrediction('cadence fixe',{announce:false});
+    }
   }
   if (ui.scene === 'multi'){
     for (const b of multiBodies){
@@ -1649,8 +1609,8 @@ function updateAltScenes(dt){
     const placeBar = (bar, ax, ay, bx, by) => { bar.position.set((ax+bx)/2, (ay+by)/2, pv.z); bar.rotation.z = Math.atan2(by-ay, bx-ax) + Math.PI/2; };
     placeBar(P.b1, pv.x, pv.y, x1, y1); placeBar(P.b2, x1, y1, x2, y2);
     P.m1.position.set(x1, y1, pv.z); P.m2.position.set(x2, y2, pv.z);
-    // copie perturbée : un trait, jamais une deuxième sphère fantôme
-    P.shadowPts.push(new THREE.Vector3(gx2, gy2, pv.z));
+    // The observed tail ends at the rendered mass; a perturbed simulation is never drawn.
+    if(altRunning)P.shadowPts.push(new THREE.Vector3(x2, y2, pv.z));
     if (P.shadowPts.length > 240) P.shadowPts.shift();
     P.shadowTrail.geometry.dispose();
     P.shadowTrail.geometry = new THREE.BufferGeometry().setFromPoints(P.shadowPts);
@@ -1691,7 +1651,7 @@ function updateAltScenes(dt){
   }
   // fantôme roulant + mesure de la prédiction verrouillée quand la cible est atteinte
   if (!ui.ghost){ hideAltGhosts(); }
-  else if (altGhostTimer > 0.12){
+  else if (['chaos','multi'].includes(ui.scene)||altGhostTimer > 0.12){
     altGhostTimer = 0; showAltGhosts();
     if (ALT_HORIZON[ui.scene]){
       const f = forecastAlt(ui.scene);
@@ -1757,7 +1717,7 @@ function animate(){
   renderer.render(scene, camera);
 }
 
-try { init(); const entryScene=new URLSearchParams(location.search).get('scene'); if(['multi','chaos','liquid','orbit'].includes(entryScene))setScene(entryScene); animate(); bootedFlag = true; }
+try { init(); const entryScene=new URLSearchParams(location.search).get('scene'); if(['multi','chaos'].includes(entryScene))setScene(entryScene); animate(); bootedFlag = true; }
 catch(e){ showError(e); throw e; }
 </script>
 <script type="module" src="./web/workbench.js"></script>

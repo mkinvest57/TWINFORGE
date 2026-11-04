@@ -1,43 +1,56 @@
-Prévoir le niveau d’une cuve. Tester une commande. Mesurer ce qui change.
+# TWINFORGE — Une décision. Deux futurs.
 
-# TWINFORGE — Process Lab
+Un chariot déclenche une chaîne de collisions. Vous pouvez agir une seule fois : freiner, dévier, ou attendre. Twinforge calcule les conséquences de chaque commande, cherche la plus petite intervention admissible et montre les deux futurs côte à côte.
 
-Un banc d’essais virtuel pour comprendre et réguler un procédé simple. Deux cuves simulées partent du même état : la référence garde sa vanne ouverte, l’autre peut être pilotée par un contrôleur prédictif. Une perturbation identique permet de comparer niveaux, commandes et volumes débordés.
+[Ouvrir la démo](https://mkinvest57.github.io/TWINFORGE/) · [Journal Meta vérifiable](assets/causal-meta-session.json) · [Dossier concours](docs/SUBMISSION.md) · [Caméra mobile](https://mkinvest57.github.io/TWINFORGE/scan.html)
 
-**Modèles physiques connus, capteurs synthétiques, commandes simulées.** Le projet ne revendique ni découverte autonome de lois ni validation d’une installation réelle. Il utilise un bilan de volume de réservoir, pas une CFD.
+## Une décision dont on peut vérifier les conséquences
 
-[Essayer le Process Lab](https://mkinvest57.github.io/TWINFORGE/) · [Expérience Meta et reçus](assets/process-meta-session.json) · [Dossier concours](docs/SUBMISSION.md) · [Atelier 3D conservé](workbench.html) · [Caméra mobile](https://mkinvest57.github.io/TWINFORGE/scan.html)
+Trois épreuves civiles : réaction en chaîne, intersection aveugle et passage critique. La page compare **37 commandes** sur un horizon de **12 secondes simulées**. L’utilisateur peut choisir une autre commande, changer la vitesse initiale, retarder l’intervention, relire les branches au même instant et exporter les données.
 
-## Le parcours guidé
+Les trajectoires sont calculées et figées **avant le rejeu**. Le curseur lit ces données; il ne dessine pas une prévision réajustée sur la position suivante. Les deux branches partagent l’état initial et le modèle physique; seule la commande change.
 
-La calibration locale dure quatre secondes. Elle estime les paramètres à partir du niveau observé, de la vanne appliquée et de la section connue; les coefficients du simulateur ne sont pas transmis au fit. Le fantôme prédit **cinq secondes à l’avance sous hypothèse de vanne inchangée**. Les interventions ultérieures sont signalées.
+Le scénario `cascade`, graine `20261104`, vitesse `100 %`, action à `0,25 s` donne :
 
-Le MPC compare des séquences sur trois secondes, applique leur première commande et recalcule toutes les **200 ms de temps simulé — 5 Hz**. Cela ne constitue pas une garantie de temps réel sur matériel.
+| Choix | Choc maximal sur la charge protégée | Impulsion de commande |
+|---|---:|---:|
+| Ne rien changer | 116,562 J | 0 N·s |
+| Meilleure commande parmi les 37 testées : déviation +0,20 rad | **0 J** | **39,190 N·s** |
+| Proposition Meta retenue : déviation −0,32 rad | **4,564 J** | **62,540 N·s** |
 
-Le [scénario déterministe mesuré](validation/runs/process-guided-2026-11-04.json) démarre à `t=0`, termine la calibration à `t=4 s`, active le contrôle à `t=11 s`, augmente le débit disponible de **35 % dans les deux branches à `t=18 s`**, puis s’arrête à `t=40 s` : **0 litre débordé côté contrôlé contre 90,803 litres pour la référence**, niveau final contrôlé de **1,049 m**. Ce relevé provient du moteur local, pas d’un essai physique.
+Le seuil de **8 J** est un critère arbitraire de cette expérience, fixé avant le calcul. Ce n’est pas un seuil industriel de dommage ou une certification de sécurité. Le score mesure l’énergie cinétique normale relative avant contact, maximale parmi les contacts impliquant la charge protégée; il ne signifie pas « zéro collision dans tout l’entrepôt ».
 
-Les erreurs restent visibles : **9,148 cm moyens sur les 63 prévisions évaluées**, 73 émises et 10 encore en attente. Parmi les scores, 52 traversent une intervention qui change l’hypothèse de vanne constante. Les 11 sans intervention donnent 1,595 cm; ce sous-ensemble ne remplace pas la moyenne globale.
+Dans cette cascade, la grille des retards trouve une commande admissible à `0,25 s`, mais aucune à `0,50 s`. La recherche couvre neuf retards de `0` à `2 s` par pas de `0,25 s` : elle ne prouve pas une frontière continue exacte.
 
-## Ce que Meta a réellement fait
+La sensibilité reste visible. La commande nominale est réévaluée avec la vitesse du chariot à `95 %`, `100 %` et `105 %`. La cascade passe les trois essais; le meilleur choix nominal de l’intersection n’en passe qu’un. Trois essais ne sont ni une probabilité de succès ni une garantie physique.
 
-L’expérience Meta est **distincte de la calibration locale de la démo**. Le 4 novembre, Muse Spark 1.3 a réellement exécuté trois appels : débit constant, drainage linéaire, puis drainage en racine carrée. Après chaque proposition, le logiciel ajuste sur trois épisodes d’entraînement et mesure deux épisodes de validation. Spark reçoit ces résidus, jamais les vrais coefficients ni les observations de test.
+[Benchmark reproductible des trois épreuves](validation/runs/causal-benchmark-2026-11-04.json) · [Revue du moteur](validation/runs/causal-engine-review-2026-11-04.json)
 
-| Mesure | Résultat |
-|---|---:|
-| Validation : constant → linéaire → racine carrée | 1,963 → 0,926 → 0,0945 cm moyens |
-| Test après gel du modèle | **0,1011 cm moyens; 0,2308 cm maximum** |
-| Test indépendant | 21 prévisions à **3 s**, sur 3 épisodes; bruit capteur de 1 mm |
-| Session attestée | 3 appels, 19,65 s, **0,0130775 USD** |
+## Meta propose, la physique vérifie
 
-Le seuil moyen de 1 cm était fixé avant les essais. Les futures commandes de vanne sont un plan déclaré avant chaque épisode; les futurs niveaux ne servent pas à prédire. **La référence déterministe atteint exactement le même modèle et la même précision.** Meta ordonne et commente les hypothèses; aucun gain de précision sur le solveur seul n’est revendiqué. Les 0,1011 cm à trois secondes ne sont pas l’erreur du parcours interactif à cinq secondes avec interventions.
+Une session réelle de **Muse Spark 1.3**, exécutée le 4 novembre 2026, a produit trois propositions. Spark reçoit la géométrie, les paramètres et le menu d’actions admissibles. Après chaque appel, le solveur mesure la proposition; seul cet historique est transmis à l’appel suivant. Les scores de la recherche exhaustive ne lui sont pas montrés.
 
-[Session et reçus](assets/process-meta-session.json) · [Revue d’attribution](assets/process-meta-review.json) · [Référence déterministe](validation/runs/process-baseline-final-2026-11-04.json)
+| Appel | Proposition à 0,25 s | Choc maximal mesuré | Critère 8 J |
+|---|---|---:|---|
+| 1 | Dévier de −0,16 rad | 104,609 J | Échec |
+| 2 | Dévier de −0,36 rad | 8,485 J | Échec |
+| 3 | Dévier de −0,32 rad | 4,564 J | Réussi dans ce modèle |
 
-Muse Code a effectué une [revue en lecture seule](validation/runs/muse-code-review-2026-11-04.json), avec `muse-spark-1.3-contributor`; ce n’est pas une preuve de construction du projet par ce modèle. SAM 3.1 et Muse Image ont des preuves séparées dans l’atelier historique : segmentation de vidéo synthétique et illustration. Ils ne sont pas le capteur de Process Lab. Aucune exécution Wonder ou Glimmer n’est attestée.
+**3 appels, 37,86 secondes, 0,028276 USD** selon les usages conservés. Les réponses originales, reçus, hashes et évaluations sont dans le [journal public](assets/causal-meta-session.json). L’interface identifie sa relecture comme une session enregistrée; les nouvelles études passent par le serveur Python local.
 
-## Lancer
+La recherche exhaustive locale fait mieux sur ce petit espace de 37 actions : moins de choc et moins d’effort. Le résultat démontré est une boucle de **proposition, contradiction numérique et révision**, pas une supériorité de Meta sur le solveur. Le simulateur calcule les conséquences; Meta ne produit pas les chiffres affichés.
 
-Python 3.9+ et Node.js. La simulation et la relecture des réponses enregistrées fonctionnent sans clé. Les nouveaux appels Meta nécessitent le serveur local et sa configuration privée; les clés restent hors des fichiers statiques.
+## Modèle et limites
+
+Les positions, vitesses, masses et coefficients sont fournis. Des corps rigides circulaires se déplacent dans un plan; la vue 3D représente leurs enveloppes de contact. Le moteur utilise un amortissement linéaire, des impulsions de collision sans frottement tangent et un pas de calcul de `1/240 s`. Une commande est un changement instantané et borné de vitesse ou de direction; la dynamique d’un actionneur réel n’est pas modélisée.
+
+C’est une comparaison contrefactuelle dans **un modèle connu**. Elle ne démontre ni apprentissage de lois à partir d’une vidéo, ni précision prédictive indépendante, ni contrôle d’un robot physique. La caméra mobile est un outil distinct de suivi et d’extrapolation **2D en pixels**; elle ne reconstruit pas ces scènes industrielles.
+
+Les contrôles du moteur couvrent conservation d’énergie et de quantité de mouvement lors d’un contact élastique, restitution, solution analytique de l’amortissement, séparation des corps, bornes des commandes, métriques issues des contacts et immutabilité des trajectoires. Le pas divisé par deux conserve l’admissibilité des trois commandes sélectionnées; la variation des pics d’énergie de référence reste sous 3 % sur ces trois cas.
+
+## Lancer et vérifier
+
+Python 3.9+ et Node.js. La simulation, la recherche locale et la relecture du journal fonctionnent sans clé. Les clés nécessaires à de nouveaux appels Meta restent côté serveur.
 
 ```bash
 python3 -m venv .venv
@@ -45,24 +58,31 @@ python3 -m venv .venv
 .venv/bin/python server.py
 ```
 
-Ouvrir `http://localhost:8000`. Le serveur reste limité à la machine locale.
+Ouvrir `http://localhost:8000`. Le serveur écoute uniquement sur la machine locale.
 
 ```bash
-# Référence gratuite, aucun appel de modèle
-.venv/bin/python -m twinforge_runtime.process_lab --out output/process-baseline.json
+# Recherche numérique gratuite : aucun appel de modèle
+.venv/bin/python -m twinforge_runtime.causal_lab --out output/causal-local.json
 
-# Nouveau relevé logiciel pour la version courante
-.venv/bin/python validation/run_checks.py --out validation/runs/software-checks-process-current.json
+# Benchmark de physique et des trois scénarios
+node validation/causal_benchmark.mjs output/causal-benchmark.json
+
+# Vérifications complètes pour les sources courantes
+.venv/bin/python validation/run_checks.py --out output/software-checks-causal.json
 ```
 
-Le mode `--use-models` autorise au plus trois hypothèses, avec un plafond supplémentaire de **0,12 USD/run** et le plafond persistant de **0,50 USD/scène**. La scène `liquid` conserve ses dépenses; le ledger historique `hoop` reste intact. Un échec payant reste enregistré, sans nouvel essai automatique. Le [parcours HTTP local](validation/runs/process-api-check-2026-11-04.json) est vérifié.
+Pour une nouvelle étude payante, cocher l’option Meta de l’interface ou ajouter `--models` à la commande de l’étude. Maximum trois propositions, **plafond de 0,12 USD par étude**, sous le plafond persistant de **0,50 USD pour la scène `causal`**. Une erreur ne déclenche pas de nouvel essai automatique. Les garde-fous HTTP refusent les origines externes, les hôtes non locaux, les champs inconnus et les corps JSON trop grands.
 
-## Publication et archives
+## Vérifications de cette refonte
 
-Le [Process Lab public](https://mkinvest57.github.io/TWINFORGE/) et le [dépôt](https://github.com/mkinvest57/TWINFORGE) sont à jour. Le déploiement du 4 novembre a réussi; neuf fichiers essentiels ont été relus sans cookie ni authentification et correspondent aux sources locales. La [preuve de publication](validation/runs/process-browser-2026-11-04/public-deployment.json) conserve les hashes et le workflow. Le site public exécute le laboratoire, la caméra locale et la consultation du journal Meta; de nouveaux appels aux modèles nécessitent le serveur Python local. L’aperçu Sites conserve son accès privé au propriétaire.
+**221 tests passent : 114 Python et 107 JavaScript.** Le [rapport complet](validation/runs/software-checks-causal-release-2026-11-04.json) couvre les sources de la livraison. Le [parcours navigateur](validation/runs/causal-browser-2026-11-04/browser-review.json) vérifie la lecture, les échecs, les exports, la session Meta enregistrée, une nouvelle étude gratuite et les largeurs 320, 390, 768 et 1280 pixels. Les [corrections de l’atelier](validation/runs/legacy-repair-2026-11-04/) ont leurs propres preuves.
 
-**192 tests passent** (107 Python, 85 JavaScript). Les [vérifications logicielles](validation/runs/software-checks-process-release-2026-11-04.json) et le [parcours navigateur](validation/runs/process-browser-2026-11-04/browser-review.json) couvrent notamment le scénario guidé, les exports, l’étude gratuite et les vues de 320 à 1440 pixels. Une émulation de téléphone ne constitue pas un test sur un appareil physique.
+## Périmètre de la présentation
 
-L’atelier initial reste dans `workbench.html`; [ses mesures et limites](docs/archive/README_PRE_PROCESS_2026-11-04.md) restent archivées. La [caméra mobile](docs/MOBILE.md) suit et prévoit dans le plan de l’image, localement, sans Meta ni envoi d’images; aucun test de caméra physique n’est revendiqué. Le [profil PDF historique](docs/PROMPT_COMPLIANCE.md) reste incomplet pour ses exigences physiques et historiques; les anciens hashes et paquets ne sont pas réécrits.
+Le laboratoire causal remplace la cuve en page d’accueil. La cuve et l’orbite ne font plus partie du parcours de présentation. Les essais historiques et leurs preuves restent archivés; ils ne deviennent pas des résultats de cette nouvelle expérience. L’atelier du pendule et la caméra gardent leur portée propre.
 
-[Voix française de trois minutes](docs/VOICEOVER_3MIN_FR.txt) · [English voiceover](docs/VOICEOVER_3MIN_EN.txt) · [Storyboard](docs/VIDEO_3MIN_STORYBOARD.json) · [Sous-titres FR à recaler sur la voix](docs/PROCESS_DEMO_SUBTITLES_FR.srt) · [Licences tierces](docs/THIRD_PARTY.md)
+[Script FR de trois minutes](docs/VOICEOVER_3MIN_FR.txt) · [English script](docs/VOICEOVER_3MIN_EN.txt) · [Storyboard](docs/VIDEO_3MIN_STORYBOARD.json) · [Sous-titres FR provisoires](docs/CAUSAL_DEMO_SUBTITLES_FR.srt)
+
+Ces fichiers préparent le montage. Ils ne prouvent pas encore la production de la voix ni le rendu d’une nouvelle vidéo finale. Le [dossier PDF historique](docs/PROMPT_COMPLIANCE.md) conserve ses exigences et ses lacunes; une expérience logicielle ne remplace pas rétroactivement ses exigences physiques.
+
+[Historique de la première version](docs/archive/README_PRE_PROCESS_2026-11-04.md) · [Version intermédiaire archivée](docs/archive/README_PROCESS_2026-11-04.md) · [Licences](docs/THIRD_PARTY.md)

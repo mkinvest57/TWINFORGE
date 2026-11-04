@@ -1,0 +1,17 @@
+Close this valve now, or wait? Here, that choice separates zero overflow from ninety point eight liters. In a simulation. Let’s see what makes the difference.
+
+Twinforge is a virtual test bench. Two tanks, the same starting point. After calibration, the reference keeps its valve open. The other gets a controller. During the first few seconds, the software observes the level and fits a known model. Then it starts predicting.
+
+The orange line shows the expected level five seconds ahead, if the valve stays unchanged. Turn on control. Now increase the available inlet flow by thirty-five percent. Both tanks face the same disturbance. Watch what happens to their levels.
+
+The controller compares sequences of actions, applies the first command, then recalculates every two hundred milliseconds of simulated time. The controlled tank stays near its target. The other overflows. Every forecast we can assess is compared with an observation. Even after an intervention: the errors stay visible alongside the curve.
+
+But who chooses the model? In the demo, a local fitting routine does the calibration. Let’s open a separate experiment with Meta Muse Spark. It receives noisy synthetic observations, without the true coefficients or test data. It proposes known model families. The software fits their parameters and measures their errors.
+
+These are the three calls that actually ran. Constant inflow: insufficient. Linear drainage: better. Square-root drainage: best on validation. You can inspect the responses and measurements. About twenty seconds, for just over one US cent. What you’re watching is the recorded session.
+
+Then the model is frozen. Three separate test episodes: twenty-one predictions, three seconds ahead, with a mean error of zero point one centimeters. The deterministic baseline achieves exactly the same accuracy. Meta helps propose and interpret hypotheses; this experiment shows no accuracy gain over the numerical solver alone.
+
+Everything is exportable: observations, hypotheses, commands, results. To prepare a control experiment, change the target, introduce a disturbance, then inspect the decision. The report keeps the experiments and their forecast horizons separate. Each number retains the context that makes it useful.
+
+Today, this is a virtual test bench. A real installation still needs calibrated sensors and independent physical trials. Twinforge: anticipate, act, verify. Now try the valve for yourself.

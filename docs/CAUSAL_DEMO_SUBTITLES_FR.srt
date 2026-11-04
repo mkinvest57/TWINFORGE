@@ -1,0 +1,176 @@
+1
+00:00:00,000 --> 00:00:05,310
+Vous avez un seul geste. Freiner, dévier…
+ou ne rien faire. Quelle décision protège
+
+2
+00:00:05,310 --> 00:00:10,621
+cette charge ? Regardez les deux futurs.
+Même départ. Une seule différence : votre
+
+3
+00:00:10,621 --> 00:00:11,000
+intervention.
+
+4
+00:00:13,000 --> 00:00:17,800
+Twinforge explore les conséquences avant
+de rejouer la scène. Ici, un transporteur
+
+5
+00:00:17,800 --> 00:00:23,400
+frappe une charge, qui en frappe une
+autre. Sans action, le choc maximal sur
+
+6
+00:00:23,400 --> 00:00:27,800
+l’équipement fragile atteint cent seize
+joules et demi. Avec la commande
+
+7
+00:00:27,800 --> 00:00:31,000
+sélectionnée, aucun contact ne l’atteint
+dans cet essai.
+
+8
+00:00:33,000 --> 00:00:37,533
+Ce résultat ne vient pas d’une animation
+choisie à l’avance. Trente-sept commandes
+
+9
+00:00:37,533 --> 00:00:41,311
+sont calculées. Freinages, déviations,
+absence d’action. Le logiciel cherche le
+
+10
+00:00:41,311 --> 00:00:46,222
+plus petit effort parmi celles qui
+respectent le seuil fixé pour cet essai.
+
+11
+00:00:46,222 --> 00:00:50,000
+Vous pouvez choisir une mauvaise commande
+et voir la différence.
+
+12
+00:00:52,000 --> 00:00:56,941
+Maintenant, retardons ce geste. À un quart
+de seconde, une solution existe. À une
+
+13
+00:00:56,941 --> 00:01:01,176
+demi-seconde, aucune des commandes testées
+ne protège la charge selon notre critère.
+
+14
+00:01:01,176 --> 00:01:05,765
+La collision a déjà transmis le mouvement.
+Twinforge montre aussi les décisions qui
+
+15
+00:01:05,765 --> 00:01:10,000
+arrivent trop tard. La limite affichée
+appartient à cette grille de tests.
+
+16
+00:01:12,000 --> 00:01:18,154
+Et Meta, dans tout ça ? Muse Spark reçoit
+la scène et les commandes possibles. Il
+
+17
+00:01:18,154 --> 00:01:23,154
+propose un geste, avec une explication. Le
+simulateur calcule ce qui se passe
+
+18
+00:01:23,154 --> 00:01:28,154
+vraiment dans le modèle. Puis Spark reçoit
+ces résultats pour réviser sa proposition.
+
+19
+00:01:28,154 --> 00:01:32,000
+Il ne voit pas les réponses de la
+recherche exhaustive.
+
+20
+00:01:34,000 --> 00:01:38,375
+Voici les trois appels réellement
+exécutés. Première proposition : cent
+
+21
+00:01:38,375 --> 00:01:43,625
+quatre joules, échec. Deuxième : huit
+virgule cinq, encore trop. Troisième :
+
+22
+00:01:43,625 --> 00:01:50,188
+quatre virgule six, sous le seuil de huit
+joules. Les deux échecs restent dans le
+
+23
+00:01:50,188 --> 00:01:55,000
+journal. Environ trente-huit secondes,
+pour moins de trois centimes de dollar.
+
+24
+00:01:57,000 --> 00:02:03,064
+La recherche locale fait mieux sur ce
+petit problème : zéro joule sur la charge,
+
+25
+00:02:03,064 --> 00:02:07,915
+avec moins d’effort. Nous affichons cette
+comparaison. L’intérêt de Meta ici, c’est
+
+26
+00:02:07,915 --> 00:02:12,362
+une proposition que l’on peut contredire,
+mesurer et améliorer. Une bonne
+
+27
+00:02:12,362 --> 00:02:16,000
+explication ne remplace jamais la
+vérification de ses conséquences.
+
+28
+00:02:18,000 --> 00:02:21,600
+Changeons d’épreuve. Dans l’intersection,
+la meilleure commande nominale échoue
+
+29
+00:02:21,600 --> 00:02:28,400
+quand la vitesse varie de cinq pour cent.
+Le test le montre : un essai réussi sur
+
+30
+00:02:28,400 --> 00:02:32,800
+trois. Vous pouvez changer la vitesse,
+examiner les trajectoires, puis exporter
+
+31
+00:02:32,800 --> 00:02:37,200
+les états, les commandes et chaque
+collision. Les contre-exemples font partie
+
+32
+00:02:37,200 --> 00:02:38,000
+du résultat.
+
+33
+00:02:40,000 --> 00:02:45,143
+Aujourd’hui, les états et les lois sont
+fournis. C’est un laboratoire numérique,
+
+34
+00:02:45,143 --> 00:02:51,143
+pas encore un robot validé dans le monde
+réel. L’ambition : tester une décision
+
+35
+00:02:51,143 --> 00:02:55,857
+avant d’en subir les conséquences.
+Twinforge. Une décision. Deux futurs. À
+
+36
+00:02:55,857 --> 00:02:58,000
+vous de trouver le geste.

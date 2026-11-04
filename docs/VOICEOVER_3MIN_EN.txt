@@ -1,17 +1,17 @@
-Close this valve now, or wait? Here, that choice separates zero overflow from ninety point eight liters. In a simulation. Let’s see what makes the difference.
+You get one move. Brake, turn… or do nothing. Which decision protects this cargo? Watch both futures. Same starting point. One difference: your intervention.
 
-Twinforge is a virtual test bench. Two tanks, the same starting point. After calibration, the reference keeps its valve open. The other gets a controller. During the first few seconds, the software observes the level and fits a known model. Then it starts predicting.
+Twinforge explores the consequences before replaying the scene. Here, one carrier hits a load, which hits another. Without intervention, the largest impact involving the protected equipment reaches one hundred sixteen and a half joules. With the selected command, no contact reaches that equipment in this experiment.
 
-The orange line shows the expected level five seconds ahead, if the valve stays unchanged. Turn on control. Now increase the available inlet flow by thirty-five percent. Both tanks face the same disturbance. Watch what happens to their levels.
+This result is not a hand-picked animation. The software calculates thirty-seven commands: braking, steering, and doing nothing. It looks for the smallest control effort among those meeting the threshold set for this experiment. You can choose a bad command and inspect what changes.
 
-The controller compares sequences of actions, applies the first command, then recalculates every two hundred milliseconds of simulated time. The controlled tank stays near its target. The other overflows. Every forecast we can assess is compared with an observation. Even after an intervention: the errors stay visible alongside the curve.
+Now delay the move. At a quarter of a second, there is a solution. At half a second, none of the tested commands protects the cargo under our criterion. The collision has already transferred motion. Twinforge also shows when a decision comes too late. This boundary belongs to the tested time grid.
 
-But who chooses the model? In the demo, a local fitting routine does the calibration. Let’s open a separate experiment with Meta Muse Spark. It receives noisy synthetic observations, without the true coefficients or test data. It proposes known model families. The software fits their parameters and measures their errors.
+Where does Meta fit? Muse Spark receives the scene and the allowed commands. It proposes a move and explains why. The simulator calculates what actually happens in the model. Spark then receives those measurements and revises its proposal. It does not see the exhaustive search results.
 
-These are the three calls that actually ran. Constant inflow: insufficient. Linear drainage: better. Square-root drainage: best on validation. You can inspect the responses and measurements. About twenty seconds, for just over one US cent. What you’re watching is the recorded session.
+These are the three calls that actually ran. First proposal: one hundred four joules. Failure. Second: eight point five. Still too high. Third: four point six, below the eight-joule threshold. Both failures stay in the journal. About thirty-eight seconds, for less than three US cents.
 
-Then the model is frozen. Three separate test episodes: twenty-one predictions, three seconds ahead, with a mean error of zero point one centimeters. The deterministic baseline achieves exactly the same accuracy. Meta helps propose and interpret hypotheses; this experiment shows no accuracy gain over the numerical solver alone.
+The local search does better on this small problem: zero joules on the protected cargo, using less control effort. We show that comparison. Meta’s contribution here is a proposal we can challenge, measure, and revise. A persuasive explanation never replaces checking its consequences.
 
-Everything is exportable: observations, hypotheses, commands, results. To prepare a control experiment, change the target, introduce a disturbance, then inspect the decision. The report keeps the experiments and their forecast horizons separate. Each number retains the context that makes it useful.
+Change the challenge. At the intersection, the best nominal command fails when speed changes by five percent. The test shows it: one successful check out of three. Change the speed, inspect the trajectories, then export the states, commands, and every collision. Counterexamples are part of the result.
 
-Today, this is a virtual test bench. A real installation still needs calibrated sensors and independent physical trials. Twinforge: anticipate, act, verify. Now try the valve for yourself.
+Today, the initial states and physical laws are supplied. This is a numerical laboratory, not yet a robot validated in the real world. The ambition: test a decision before facing its consequences. Twinforge. One decision. Two futures. Now find the move that makes the difference.

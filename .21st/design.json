@@ -1,8 +1,8 @@
 {
   "version": 1,
   "project": {
-    "name": "TWINFORGE — Process Lab",
-    "productType": "Civil process simulation, measured calibration, predictive control and inspectable Meta experiments",
+    "name": "TWINFORGE — Une décision. Deux futurs.",
+    "productType": "Civil counterfactual collision intervention lab with explicit Meta proposal verification",
     "stack": [
       "HTML",
       "CSS",
@@ -13,7 +13,7 @@
   },
   "sources": {
     "tokens": [
-      "web/process/lab.css",
+      "web/causal/lab.css",
       "web/camera/scanner.css"
     ],
     "components": [
@@ -51,7 +51,7 @@
     "radius": {},
     "shadows": {},
     "motion": {},
-    "density": "Focused experiment workspace, concise controls, four measured metrics; responsive navigation and touch controls"
+    "density": "One primary synchronized comparison, bounded controls and measured consequences; compact desktop and stacked phone scene"
   },
   "components": {
     "installed": [],
@@ -70,24 +70,25 @@
   "constraints": {
     "must": [
       "At least 44px touch targets and visible keyboard focus.",
-      "Keep synthetic/known-family scope visible.",
-      "Display only actual engine measurements; never copied demo values.",
-      "Identify recorded Meta responses separately from new API calls and local fitting.",
-      "Retain global forecast error and intervention flags alongside any supported subset.",
-      "Keep scanner video on device and require explicit camera access.",
-      "Distinguish image-plane pixels from calibrated physical units."
+      "Only calculated metrics and geometry; freeze paths before replay.",
+      "State that initial state and known planar contact law are supplied.",
+      "Identify the arbitrary experiment threshold and instantaneous actuator assumption.",
+      "Show failed proposals, sensitivity failures and absence of a passing tested action.",
+      "No independent accuracy claim for same-model replay.",
+      "Keep local scanner frames on device and separate pixels from physical units."
     ],
     "avoid": [
-      "Implying real tank, phone or physical control validation from a simulation.",
-      "Assigning Meta held-out 3-second accuracy to interactive 5-second forecasts.",
-      "Importing a second UI framework for these patterns."
+      "Claiming real robotic control or reconstruction from synthetic inputs.",
+      "Presenting deterministic search as a Meta model invocation.",
+      "Keeping water/orbit in the main product."
     ]
   },
   "decisions": [
-    "Make the civil two-tank comparison the home page; keep the previous physics workbench available.",
-    "Use the inspected 21st navigation, tabs, metrics and stepper patterns in native HTML/CSS.",
-    "Use orange for forecast/action emphasis, cyan for the controlled tank and quiet neutral reference.",
-    "Preserve the camera scanner as a separate local image-plane tool."
+    "User rejected the water-tank main example and orbit. They are removed from the public presentation; historical source and evidence remain archived.",
+    "Use the four previously retrieved 21st source patterns as native HTML/CSS primitives, composed around two synchronized causal branches.",
+    "Civil industrial scenario: compare 37 one-command interventions, show a discrete intervention-time limit and three speed sensitivity checks.",
+    "Keep model proposals, numerical verification, local exhaustive-search baseline and recorded/new provider sessions distinct.",
+    "Retain the mobile camera tool as local image-plane tracking, separate from supplied-state 3D simulation."
   ],
   "evidence": [
     "Four 21st previews visually inspected during the design pass, with code stored in .21st/cache.",

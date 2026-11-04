@@ -1,4 +1,5 @@
 /* Observation → calibration → 3D replay. Model results never become ground truth. */
+const localService = /^https?:$/.test(location.protocol) && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
 const splits = { train: [], validation: [], test: [] };
 let lastBundle = null;
 let lastCapture = null;
@@ -13,8 +14,8 @@ section.innerHTML = `
 <input id="wb-bundle" type="file" accept="application/json,.json">
 <div class="row" style="margin-top:8px"><button id="wb-example">Charger le tir 3D calibré</button><button id="wb-clear">Retour à la simulation</button></div>
 <button id="wb-legacy" style="margin-top:8px">Inspecter l’ancien clip approximatif</button>
-<details style="margin-top:10px"><summary>Vérifier les cinq scènes sans caméra</summary>
-<p class="hint">Expériences reproductibles avec tirs synthétiques distincts, perturbations et obstacles. Les paramètres du système simulé servent à l’évaluation séparée. Aucun appel payant.</p>
+<details style="margin-top:10px"><summary>Contrôles historiques du moteur</summary>
+<p class="hint">Archive technique de cinq familles, y compris cuve et orbite retirées de la présentation. Expériences reproductibles avec tirs synthétiques distincts, perturbations et obstacles. Les paramètres du système simulé servent à l’évaluation séparée. Aucun appel payant.</p>
 <label class="ctl" for="wb-seed">Graine de l’expérience</label><input id="wb-seed" type="number" min="0" max="4294967295" step="1" value="20261104">
 <button id="wb-simulation">Exécuter les expériences</button>
 <div id="wb-simulation-result" class="log" role="status" aria-live="polite" style="margin-top:8px">Aucune expérience exécutée dans cette session.</div>
@@ -41,7 +42,7 @@ section.innerHTML = `
 <div class="row" style="margin-top:10px"><button id="wb-export">Exporter le jumeau</button><button id="wb-evidence">Exporter les preuves</button></div>
 <button id="wb-archives" style="margin-top:8px">Exporter les journaux archivés</button>
 <div class="row" style="margin-top:8px"><button id="wb-validate">Exécuter les contrôles</button><button id="wb-narrate">Résumer les anomalies</button></div>
-<label class="ctl" for="wb-narrator">Rédaction du résumé</label><select id="wb-narrator"><option value="local">Calcul local · sans modèle ni clé</option value="glimmer">Muse Glimmer · endpoint configuré requis</option></select>
+<label class="ctl" for="wb-narrator">Rédaction du résumé</label><select id="wb-narrator"><option value="local">Calcul local · sans modèle ni clé</option><option value="glimmer">Muse Glimmer · endpoint configuré requis</option></select>
 <p class="hint" id="wb-budget"></p>
 <div id="wb-status" class="log" role="status" aria-live="polite" style="margin-top:8px">Import JSON disponible. Vérification du serveur…</div>
 <details style="margin-top:10px"><summary>Illustration contrefactuelle · Muse Image</summary>
@@ -109,6 +110,7 @@ function perceptionSummary(dataset){
   return `${c.status==='complete'?'Traitement terminé':'Traitement partiel'} : ${c.processed_frames??'—'}/${c.expected_sample_frames??'—'} images traitées, ${t.ball_frames_found??'—'} détections, ${t.id_switches??'—'} changements d’ID. Qualité du dataset : ${dataset.status||'non évaluée'}.`;
 }
 async function refreshBudget() {
+  if(!localService)return;
   try {
     const response = await fetch('/api/status');
     if (!response.ok) return;
@@ -201,6 +203,7 @@ $('wb-evidence').onclick = e => action(e.currentTarget, async () => {
   if (!window.Twinforge?.exportEvidence) throw Error('Scène indisponible.');
   const evidence = await window.Twinforge.exportEvidence();
   download('twinforge-evidence.json', evidence);
+  if(!localService){status('Preuves exportées dans le navigateur.');return;}
   try { const result = await request('/api/evidence', { evidence }); status('Preuves exportées et sauvegardées : ' + result.path); }
   catch { status('Preuves exportées dans le navigateur. Serveur local absent : aucune copie serveur.'); }
 });
@@ -224,5 +227,9 @@ $('wb-image').onclick = e => action(e.currentTarget, async () => {
   const result = await job('/api/jobs/image', { prompt: $('wb-image-prompt').value });
   $('wb-image-result').src = result.image_data_url; $('wb-figure').hidden = false; status(result.label);
 });
+if(!localService){
+  for(const id of ['wb-generate','wb-perceive-generated','wb-simulation','wb-calibrate','wb-perceive','wb-narrate','wb-image']){const button=$(id);button.disabled=true;button.title='Nécessite le serveur Python local.';}
+  $('wb-budget').textContent='Version publique : import, replay et exports disponibles. Les traitements serveur et les appels Meta sont désactivés ici.';
+}
 status('Import JSON disponible. Mode L3 : sélection et calibration d’un moteur connu.');
 refreshBudget();

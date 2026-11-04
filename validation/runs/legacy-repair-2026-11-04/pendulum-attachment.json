@@ -1,0 +1,32 @@
+{
+  "result": {
+    "type": "object",
+    "value": {
+      "mean_error_cm": 0.21671407652768673,
+      "measurements": 65,
+      "model": {
+        "g": 9.810438225724546,
+        "source": "finite differences of simulated observations"
+      },
+      "pendulum": {
+        "forecast_start": [
+          1.7565913200378418,
+          2.8367085456848145,
+          1.600000023841858
+        ],
+        "position": [
+          1.7565913486517146,
+          2.836708544909422,
+          1.6
+        ],
+        "trace_end": [
+          1.7565913486517146,
+          2.836708544909422,
+          1.6
+        ]
+      },
+      "running": false,
+      "time_s": 32.72916666666575
+    }
+  }
+}

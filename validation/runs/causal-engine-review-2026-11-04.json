@@ -1,0 +1,487 @@
+{
+  "schema": "twinforge.causal.engine-review.v1",
+  "source_sha256": {
+    "web/causal/engine.mjs": "ff7d00a37a118b42179cb5314d6056f66ab93e30d22027600250ddd01b239a09",
+    "tests/js/causal-engine.test.mjs": "7547f35fa445cd25e99786b9f53c1a188f0d6afac97521b5515b585e47f7b644",
+    "validation/causal_benchmark.mjs": "eb7cf0184712edb5477a3ee2df3764b5b44d4491272c7c0d23c29bfe0d1e7390"
+  },
+  "software_tests": {
+    "path": "tests/js/causal-engine.test.mjs",
+    "passed": 14,
+    "failed": 0
+  },
+  "source_changed_during_benchmark": false,
+  "scope": "Synthetic, same-model causal planning. These results are not real-video validation, learned physics, held-out forecast accuracy, or safety certification. Initial positions, masses and contact coefficients are supplied. Each intervention is a single idealized instantaneous velocity change.",
+  "deadline_protocol": "Search at nine delays from 0 to 2 seconds in 0.25-second increments. Last successful tested delay is not a continuous feasibility boundary.",
+  "robustness_protocol": "Diagnostic evaluation of the chosen nominal action with lead-carrier speed scaled by 0.95, 1 and 1.05. The nominal optimizer does not optimize these extra checks. A failure remains visible.",
+  "scenarios": [
+    {
+      "id": "cascade",
+      "baseline_peak_j": 116.56200059920455,
+      "selected_peak_j": 0,
+      "selected_action": {
+        "id": "steer:0.20@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.2
+      },
+      "candidate_count": 37,
+      "deadline": {
+        "stepS": 0.25,
+        "maxDelayS": 2,
+        "lastSafeDelayS": 0.25,
+        "rows": [
+          {
+            "delayS": 0,
+            "safe": true,
+            "bestCandidateId": "steer:0.12@0.00",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 23.74574656586006
+          },
+          {
+            "delayS": 0.25,
+            "safe": true,
+            "bestCandidateId": "steer:0.20@0.25",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 39.18961921118314
+          },
+          {
+            "delayS": 0.5,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 0.75,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1.25,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1.5,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1.75,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 2,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 116.56200059920455,
+            "controlImpulseNs": 0
+          }
+        ],
+        "scope": "Last safe delay among a 0.25-second grid and the stated discrete intervention set; not a continuous guarantee."
+      },
+      "speed_sensitivity": {
+        "kind": "lead_carrier_speed_only",
+        "checks": [
+          {
+            "speedFactor": 0.95,
+            "safe": true,
+            "protectedImpactEnergyJ": 0
+          },
+          {
+            "speedFactor": 1,
+            "safe": true,
+            "protectedImpactEnergyJ": 0
+          },
+          {
+            "speedFactor": 1.05,
+            "safe": true,
+            "protectedImpactEnergyJ": 5.069170543591718
+          }
+        ],
+        "safeCount": 3,
+        "total": 3,
+        "scope": "Three simulated speed checks only; no probabilistic or physical guarantee."
+      },
+      "integration_convergence": {
+        "coarse_dt_s": 0.004166666666666667,
+        "fine_dt_s": 0.0020833333333333333,
+        "fine_baseline_metrics": {
+          "protectedImpactEnergyJ": 116.77684568178007,
+          "protectedImpactSumJ": 216.37340529422576,
+          "maxProtectedImpulseNs": 76.94534473290928,
+          "protectedCollisionCount": 5,
+          "totalCollisions": 11,
+          "firstProtectedImpactS": 1.3604166666666688,
+          "controlImpulseNs": 0,
+          "controlEnergyChangeJ": 0,
+          "thresholdJ": 8,
+          "safe": false,
+          "initialEnergyJ": 435.6000000000001,
+          "finalEnergyJ": 5.497721556907185,
+          "initialMomentum": {
+            "x": 198.00000000000003,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -31.47226885238796,
+            "z": -12.346924265458043
+          }
+        },
+        "fine_intervention_metrics": {
+          "protectedImpactEnergyJ": 0,
+          "protectedImpactSumJ": 0,
+          "maxProtectedImpulseNs": 0,
+          "protectedCollisionCount": 0,
+          "totalCollisions": 11,
+          "firstProtectedImpactS": null,
+          "controlImpulseNs": 39.18961921118343,
+          "controlEnergyChangeJ": 7.993605777301127e-14,
+          "thresholdJ": 8,
+          "safe": true,
+          "initialEnergyJ": 435.6000000000001,
+          "finalEnergyJ": 7.998892964078582,
+          "initialMomentum": {
+            "x": 198.00000000000003,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -20.68530349286994,
+            "z": -7.753782088426007
+          }
+        },
+        "relative_baseline_peak_energy_change": 0.001839791795378515
+      }
+    },
+    {
+      "id": "crossing",
+      "baseline_peak_j": 112.75521726692799,
+      "selected_peak_j": 3.464221836424809,
+      "selected_action": {
+        "id": "steer:0.12@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.12
+      },
+      "candidate_count": 37,
+      "deadline": {
+        "stepS": 0.25,
+        "maxDelayS": 2,
+        "lastSafeDelayS": 0.75,
+        "rows": [
+          {
+            "delayS": 0,
+            "safe": true,
+            "bestCandidateId": "steer:0.08@0.00",
+            "protectedImpactEnergyJ": 5.559914529553378,
+            "controlImpulseNs": 12.769804448502452
+          },
+          {
+            "delayS": 0.25,
+            "safe": true,
+            "bestCandidateId": "steer:0.12@0.25",
+            "protectedImpactEnergyJ": 3.464221836424809,
+            "controlImpulseNs": 18.981504801186983
+          },
+          {
+            "delayS": 0.5,
+            "safe": true,
+            "bestCandidateId": "steer:-0.20@0.50",
+            "protectedImpactEnergyJ": 3.852985247117482,
+            "controlImpulseNs": 31.326787016385385
+          },
+          {
+            "delayS": 0.75,
+            "safe": true,
+            "bestCandidateId": "brake:0.30@0.75",
+            "protectedImpactEnergyJ": 2.2664564158893614,
+            "controlImpulseNs": 46.6585354054874
+          },
+          {
+            "delayS": 1,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 112.75521726692799,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1.25,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 112.75521726692799,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1.5,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 112.75521726692799,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 1.75,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 112.75521726692799,
+            "controlImpulseNs": 0
+          },
+          {
+            "delayS": 2,
+            "safe": false,
+            "bestCandidateId": "none",
+            "protectedImpactEnergyJ": 112.75521726692799,
+            "controlImpulseNs": 0
+          }
+        ],
+        "scope": "Last safe delay among a 0.25-second grid and the stated discrete intervention set; not a continuous guarantee."
+      },
+      "speed_sensitivity": {
+        "kind": "lead_carrier_speed_only",
+        "checks": [
+          {
+            "speedFactor": 0.95,
+            "safe": false,
+            "protectedImpactEnergyJ": 60.072097713474584
+          },
+          {
+            "speedFactor": 1,
+            "safe": true,
+            "protectedImpactEnergyJ": 3.464221836424809
+          },
+          {
+            "speedFactor": 1.05,
+            "safe": false,
+            "protectedImpactEnergyJ": 19.14352519588464
+          }
+        ],
+        "safeCount": 1,
+        "total": 3,
+        "scope": "Three simulated speed checks only; no probabilistic or physical guarantee."
+      },
+      "integration_convergence": {
+        "coarse_dt_s": 0.004166666666666667,
+        "fine_dt_s": 0.0020833333333333333,
+        "fine_baseline_metrics": {
+          "protectedImpactEnergyJ": 110.17212855563665,
+          "protectedImpactSumJ": 269.92453454306786,
+          "maxProtectedImpulseNs": 77.39115776950318,
+          "protectedCollisionCount": 3,
+          "totalCollisions": 7,
+          "firstProtectedImpactS": 1.8833333333333366,
+          "controlImpulseNs": 0,
+          "controlEnergyChangeJ": 0,
+          "thresholdJ": 8,
+          "safe": false,
+          "initialEnergyJ": 447.79359999999997,
+          "finalEnergyJ": 14.839707098728967,
+          "initialMomentum": {
+            "x": 159.6,
+            "z": 89.36
+          },
+          "finalMomentum": {
+            "x": -10.025607105326776,
+            "z": -8.047629201111059
+          }
+        },
+        "fine_intervention_metrics": {
+          "protectedImpactEnergyJ": 3.466249869803442,
+          "protectedImpactSumJ": 3.466249869803442,
+          "maxProtectedImpulseNs": 15.195965105073503,
+          "protectedCollisionCount": 1,
+          "totalCollisions": 5,
+          "firstProtectedImpactS": 7.818749999999672,
+          "controlImpulseNs": 18.981504801187093,
+          "controlEnergyChangeJ": 3.7870748204049676e-14,
+          "thresholdJ": 8,
+          "safe": true,
+          "initialEnergyJ": 447.79359999999997,
+          "finalEnergyJ": 18.063274544124333,
+          "initialMomentum": {
+            "x": 159.6,
+            "z": 89.36
+          },
+          "finalMomentum": {
+            "x": -3.5612558261627516,
+            "z": -21.37372168091659
+          }
+        },
+        "relative_baseline_peak_energy_change": 0.02344593632850513
+      }
+    },
+    {
+      "id": "bottleneck",
+      "baseline_peak_j": 149.9257799379881,
+      "selected_peak_j": 0,
+      "selected_action": {
+        "id": "steer:0.08@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": 0.08
+      },
+      "candidate_count": 37,
+      "deadline": {
+        "stepS": 0.25,
+        "maxDelayS": 2,
+        "lastSafeDelayS": 2,
+        "rows": [
+          {
+            "delayS": 0,
+            "safe": true,
+            "bestCandidateId": "steer:0.08@0.00",
+            "protectedImpactEnergyJ": 0.4788699154042674,
+            "controlImpulseNs": 13.436416286709079
+          },
+          {
+            "delayS": 0.25,
+            "safe": true,
+            "bestCandidateId": "steer:0.08@0.25",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 13.319360510062461
+          },
+          {
+            "delayS": 0.5,
+            "safe": true,
+            "bestCandidateId": "steer:0.12@0.50",
+            "protectedImpactEnergyJ": 0.8153061775997794,
+            "controlImpulseNs": 19.798385048890857
+          },
+          {
+            "delayS": 0.75,
+            "safe": true,
+            "bestCandidateId": "steer:0.16@0.75",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 26.155660278692867
+          },
+          {
+            "delayS": 1,
+            "safe": true,
+            "bestCandidateId": "steer:-0.20@1.00",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 32.39029511345866
+          },
+          {
+            "delayS": 1.25,
+            "safe": true,
+            "bestCandidateId": "steer:-0.24@1.25",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 38.50147186061017
+          },
+          {
+            "delayS": 1.5,
+            "safe": true,
+            "bestCandidateId": "steer:-0.32@1.50",
+            "protectedImpactEnergyJ": 0,
+            "controlImpulseNs": 50.793042306312046
+          },
+          {
+            "delayS": 1.75,
+            "safe": true,
+            "bestCandidateId": "brake:0.75@1.75",
+            "protectedImpactEnergyJ": 7.320282262546064,
+            "controlImpulseNs": 118.51409598390487
+          },
+          {
+            "delayS": 2,
+            "safe": true,
+            "bestCandidateId": "brake:0.75@2.00",
+            "protectedImpactEnergyJ": 7.7798221221791275,
+            "controlImpulseNs": 117.48162130814694
+          }
+        ],
+        "scope": "Last safe delay among a 0.25-second grid and the stated discrete intervention set; not a continuous guarantee."
+      },
+      "speed_sensitivity": {
+        "kind": "lead_carrier_speed_only",
+        "checks": [
+          {
+            "speedFactor": 0.95,
+            "safe": true,
+            "protectedImpactEnergyJ": 0
+          },
+          {
+            "speedFactor": 1,
+            "safe": true,
+            "protectedImpactEnergyJ": 0
+          },
+          {
+            "speedFactor": 1.05,
+            "safe": true,
+            "protectedImpactEnergyJ": 0
+          }
+        ],
+        "safeCount": 3,
+        "total": 3,
+        "scope": "Three simulated speed checks only; no probabilistic or physical guarantee."
+      },
+      "integration_convergence": {
+        "coarse_dt_s": 0.004166666666666667,
+        "fine_dt_s": 0.0020833333333333333,
+        "fine_baseline_metrics": {
+          "protectedImpactEnergyJ": 149.9476457085887,
+          "protectedImpactSumJ": 236.57327051086696,
+          "maxProtectedImpulseNs": 84.23492503071643,
+          "protectedCollisionCount": 5,
+          "totalCollisions": 6,
+          "firstProtectedImpactS": 2.0541666666666663,
+          "controlImpulseNs": 0,
+          "controlEnergyChangeJ": 0,
+          "thresholdJ": 8,
+          "safe": false,
+          "initialEnergyJ": 352.8,
+          "finalEnergyJ": 10.204112743258815,
+          "initialMomentum": {
+            "x": 168,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -33.11515971868472,
+            "z": -23.506178597646635
+          }
+        },
+        "fine_intervention_metrics": {
+          "protectedImpactEnergyJ": 0,
+          "protectedImpactSumJ": 0,
+          "maxProtectedImpulseNs": 0,
+          "protectedCollisionCount": 0,
+          "totalCollisions": 4,
+          "firstProtectedImpactS": null,
+          "controlImpulseNs": 13.319360510062538,
+          "controlEnergyChangeJ": 7.105427357601002e-14,
+          "thresholdJ": 8,
+          "safe": true,
+          "initialEnergyJ": 352.8,
+          "finalEnergyJ": 14.617291945384626,
+          "initialMomentum": {
+            "x": 168,
+            "z": 0
+          },
+          "finalMomentum": {
+            "x": -13.68287742673329,
+            "z": -2.6463878546589843
+          }
+        },
+        "relative_baseline_peak_energy_change": 0.00014582270029838988
+      }
+    }
+  ]
+}

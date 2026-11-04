@@ -1,17 +1,17 @@
-Fermer cette vanne maintenant, ou attendre ? Ici, cette décision sépare zéro litre débordé de quatre-vingt-dix virgule huit. Dans une simulation. Regardons ce qui fait la différence.
+Vous avez un seul geste. Freiner, dévier… ou ne rien faire. Quelle décision protège cette charge ? Regardez les deux futurs. Même départ. Une seule différence : votre intervention.
 
-Twinforge est un banc d’essais numérique. Deux cuves, le même départ. Après calibration, la référence reste vanne ouverte. L’autre reçoit une régulation. Pendant les premières secondes, le logiciel observe le niveau et calibre un modèle connu. Puis il commence à prévoir.
+Twinforge explore les conséquences avant de rejouer la scène. Ici, un transporteur frappe une charge, qui en frappe une autre. Sans action, le choc maximal sur l’équipement fragile atteint cent seize joules et demi. Avec la commande sélectionnée, aucun contact ne l’atteint dans cet essai.
 
-Le trait orange montre le niveau attendu dans cinq secondes, si la vanne reste inchangée. Activons le contrôle. Maintenant, augmentons de trente-cinq pour cent le débit disponible à l’entrée. La même perturbation touche les deux cuves. Observez leurs niveaux.
+Ce résultat ne vient pas d’une animation choisie à l’avance. Trente-sept commandes sont calculées. Freinages, déviations, absence d’action. Le logiciel cherche le plus petit effort parmi celles qui respectent le seuil fixé pour cet essai. Vous pouvez choisir une mauvaise commande et voir la différence.
 
-La régulation compare des suites de commandes, applique la première, puis recalcule toutes les deux cents millisecondes simulées. La cuve contrôlée reste près de sa cible. L’autre déborde. Chaque prévision évaluable est comparée au niveau observé. Même après une intervention : on garde aussi les erreurs, pas seulement la belle courbe.
+Maintenant, retardons ce geste. À un quart de seconde, une solution existe. À une demi-seconde, aucune des commandes testées ne protège la charge selon notre critère. La collision a déjà transmis le mouvement. Twinforge montre aussi les décisions qui arrivent trop tard. La limite affichée appartient à cette grille de tests.
 
-Mais qui choisit le modèle ? Dans la démonstration, c’est un ajustement local. Passons à une expérience distincte avec Meta Muse Spark. Il reçoit des observations synthétiques bruitées, sans les vrais coefficients ni les données de test. Il propose des familles connues. Le logiciel ajuste leurs paramètres et mesure leurs erreurs.
+Et Meta, dans tout ça ? Muse Spark reçoit la scène et les commandes possibles. Il propose un geste, avec une explication. Le simulateur calcule ce qui se passe vraiment dans le modèle. Puis Spark reçoit ces résultats pour réviser sa proposition. Il ne voit pas les réponses de la recherche exhaustive.
 
-Voici les trois appels réellement exécutés. Débit constant : insuffisant. Drainage linéaire : mieux. Drainage en racine carrée : meilleur sur la validation. Les réponses et les mesures restent consultables. Environ vingt secondes, pour un peu plus d’un centime de dollar. Vous regardez la session enregistrée.
+Voici les trois appels réellement exécutés. Première proposition : cent quatre joules, échec. Deuxième : huit virgule cinq, encore trop. Troisième : quatre virgule six, sous le seuil de huit joules. Les deux échecs restent dans le journal. Environ trente-huit secondes, pour moins de trois centimes de dollar.
 
-Puis le modèle est figé. Trois épisodes de test distincts : vingt et une prévisions à trois secondes, zéro virgule dix centimètre d’erreur moyenne. La référence déterministe atteint exactement la même précision. Meta aide à proposer et interpréter les hypothèses ; ce test ne démontre aucun gain de précision face au solveur seul.
+La recherche locale fait mieux sur ce petit problème : zéro joule sur la charge, avec moins d’effort. Nous affichons cette comparaison. L’intérêt de Meta ici, c’est une proposition que l’on peut contredire, mesurer et améliorer. Une bonne explication ne remplace jamais la vérification de ses conséquences.
 
-Tout est exportable : observations, hypothèses, commandes, résultats. Pour préparer un essai de régulation, on peut changer la cible, provoquer une perturbation, puis comprendre la décision. Le rapport distingue les expériences et leurs horizons. Chaque chiffre garde ainsi son contexte.
+Changeons d’épreuve. Dans l’intersection, la meilleure commande nominale échoue quand la vitesse varie de cinq pour cent. Le test le montre : un essai réussi sur trois. Vous pouvez changer la vitesse, examiner les trajectoires, puis exporter les états, les commandes et chaque collision. Les contre-exemples font partie du résultat.
 
-Aujourd’hui, c’est un banc virtuel. Une installation réelle demande encore des capteurs calibrés et des essais indépendants. Twinforge : anticiper, agir, vérifier. À vous de tester la vanne.
+Aujourd’hui, les états et les lois sont fournis. C’est un laboratoire numérique, pas encore un robot validé dans le monde réel. L’ambition : tester une décision avant d’en subir les conséquences. Twinforge. Une décision. Deux futurs. À vous de trouver le geste.

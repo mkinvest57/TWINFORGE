@@ -1,0 +1,246 @@
+{
+  "schema_version": "twinforge.video-storyboard.v3",
+  "updated_at": "2026-11-04T14:21:22.482744+00:00",
+  "purpose": "Montage civil préparé de 180 secondes; ce document ne prouve ni synthèse vocale ni rendu vidéo final.",
+  "duration_seconds": 180,
+  "word_counts": {
+    "fr": 376,
+    "en": 368
+  },
+  "voice_timing_note": "Cible : environ 138 mots/minute en français, 163 secondes parlées et 17 secondes de respiration réparties dans le montage. Les versions FR et EN sont alternatives. Mesurer chaque audio synthétisé et ajuster les pauses et coupes après écoute; exporter au plus 180 secondes. Ne pas accélérer la voix pour conserver un générique.",
+  "voice_direction": {
+    "fr": "Voix française posée, curieuse, précise; phrases brèves au début. Ne pas adopter un ton de bande-annonce. Marquer la question, puis le silence devant les résultats.",
+    "en": "Calm, curious, direct voice; leave room for the result to register. Avoid a trailer delivery.",
+    "sound": "Musique instrumentale discrète, sous la voix; deux brèves respirations audibles au résultat et à la comparaison. Aucun son prétendant provenir d’un équipement réel."
+  },
+  "editorial_choice": "Résultat annoncé tôt puis mécanisme révélé. Une question visuelle traverse le film; les preuves Meta apportent une seconde progression. Les limites et la référence égale restent dans le récit, les détails de mesure dans les légendes.",
+  "main_experiment": {
+    "capture_status": "Export navigateur du parcours guidé vérifié identique aux chiffres moteur; capture vidéo finale et montage encore à revoir.",
+    "protocol": "t0 start; calibration ends t4; control on t11; available inlet capacity qin×1.35 at t18 in both branches; stop t40. Effective inflow remains qin×valve.",
+    "engine_evidence": "validation/runs/process-guided-2026-11-04.json",
+    "local_model": "known sqrt_outflow family, deterministic fit; no Meta call in main calibration",
+    "forecast_horizon_s": 5,
+    "control_interval_s": 0.2,
+    "test_claim": "0 L versus 90.802996322119 L overflow at t40 matches both engine report and browser export; this is one synthetic scenario, not physical savings.",
+    "browser_export": "validation/runs/process-browser-2026-11-04/guided-export.json",
+    "global_error": {
+      "mean_cm": 9.148405187168652,
+      "assessed": 63,
+      "issued": 73,
+      "pending": 10,
+      "assessed_with_intervention": 52,
+      "supported_without_intervention": 11,
+      "supported_mean_cm": 1.5947004397455506,
+      "display_rule": "63 means all assessed, not 63 supported. Global average remains primary; supported subset does not replace it."
+    }
+  },
+  "meta_experiment": {
+    "evidence": "assets/process-meta-session.json",
+    "playback_label": "recorded real session, not a new live call",
+    "model": "muse-spark-1.3",
+    "provider_calls": 3,
+    "forecast_horizon_s": 3,
+    "baseline_same_accuracy": true,
+    "duration_seconds": 19.647306375,
+    "cost_usd": 0.0130775,
+    "test_predictions": 21,
+    "test_mean_error_cm": 0.1011282328038083,
+    "test_max_error_cm": 0.23081654409853325,
+    "known_future_inputs": "Preprogrammed valve commands, not future levels",
+    "known_families_only": true
+  },
+  "evidence": [
+    {
+      "path": "validation/runs/process-guided-2026-11-04.json",
+      "sha256": "29bccf36b4c0be20fa776582259b071709405f1bb3095b431fe4665b96d58bfb"
+    },
+    {
+      "path": "validation/runs/process-meta-live-2026-11-04.json",
+      "sha256": "69026d013667a9e2d8ddce49887fa4dad2abde60d1f4d6279d98bd31045ff9eb"
+    },
+    {
+      "path": "validation/runs/process-meta-review-2026-11-04.json",
+      "sha256": "eb10415fc370ea99e8cde752add26eee20a2c5970f4fd71d7527fe94769b05d3"
+    },
+    {
+      "path": "validation/runs/process-baseline-final-2026-11-04.json",
+      "sha256": "2383a914e380ee25cdcfb302ae78d24211a93491ce819bee257eefbb07d1c65d"
+    },
+    {
+      "path": "validation/runs/process-browser-2026-11-04/guided-export.json",
+      "sha256": "b6127fdaaf504c2b7303ac0de1baa72bc519f2e3e1502b993e6c73d9c3d372ec"
+    },
+    {
+      "path": "assets/process-meta-session.json",
+      "sha256": "69026d013667a9e2d8ddce49887fa4dad2abde60d1f4d6279d98bd31045ff9eb"
+    }
+  ],
+  "segments": [
+    {
+      "start_seconds": 0,
+      "end_seconds": 14,
+      "voice_target_seconds": 12,
+      "breathing_room_seconds": 2,
+      "title": "La question, puis sa conséquence",
+      "shot": "Ouvrir sur un vrai arrêt sur image de la vanne avant l’intervention. Afficher la question. Couper vers le résultat final du parcours guidé à t=40 s, avec les deux volumes issus du même export. Laisser deux secondes pour lire. Le libellé SIMULATION reste visible; ce résultat est un aperçu de la fin, pas un événement déjà arrivé à t=0.",
+      "on_screen": [
+        "Fermer maintenant, ou attendre ?",
+        "Résultat à 40 s · 0 L / 90,8 L débordés",
+        "SIMULATION · RÉSULTAT DE CET ESSAI"
+      ],
+      "editing_note": "Question → réponse visuelle en moins de quatorze secondes. Pas de logo animé avant le problème.",
+      "fr": "Fermer cette vanne maintenant, ou attendre ? Ici, cette décision sépare zéro litre débordé de quatre-vingt-dix virgule huit. Dans une simulation. Regardons ce qui fait la différence.",
+      "en": "Close this valve now, or wait? Here, that choice separates zero overflow from ninety point eight liters. In a simulation. Let’s see what makes the difference."
+    },
+    {
+      "start_seconds": 14,
+      "end_seconds": 32,
+      "voice_target_seconds": 17,
+      "breathing_room_seconds": 1,
+      "title": "Revenir au point de départ",
+      "shot": "Retour explicite au début du même parcours : t=0. Montrer la cuve pilotée et la référence, puis la calibration locale t=0–4 et l’apparition effective du premier trait de prévision. Conserver l’horloge du moteur. Un arrêt sur image identifié peut prolonger la lecture; ne pas inventer de niveau prédit avant sa première émission.",
+      "on_screen": [
+        "RETOUR AU DÉBUT",
+        "Même état initial · comparaison depuis t=4 s",
+        "Après calibration : référence à vanne ouverte",
+        "Calibration locale · famille physique connue"
+      ],
+      "editing_note": "Un plan large, puis un seul recadrage sur le niveau. Éviter une visite de toutes les cartes.",
+      "fr": "Twinforge est un banc d’essais numérique. Deux cuves, le même départ. Après calibration, la référence reste vanne ouverte. L’autre reçoit une régulation. Pendant les premières secondes, le logiciel observe le niveau et calibre un modèle connu. Puis il commence à prévoir.",
+      "en": "Twinforge is a virtual test bench. Two tanks, the same starting point. After calibration, the reference keeps its valve open. The other gets a controller. During the first few seconds, the software observes the level and fits a known model. Then it starts predicting."
+    },
+    {
+      "start_seconds": 32,
+      "end_seconds": 51,
+      "voice_target_seconds": 17,
+      "breathing_room_seconds": 2,
+      "title": "Donner cinq secondes d’avance",
+      "shot": "Recadrer le trait orange à partir d’une vraie prévision. Faire lire son hypothèse de vanne inchangée. Synchroniser la vraie activation à t=11 avec « Activons le contrôle », puis la perturbation à t=18 avec « augmentons ». Les plans peuvent être coupés ou figés avec indication; l’horloge simulée reste exacte. Aucun appel Meta dans cette calibration.",
+      "on_screen": [
+        "PRÉVISION +5 S · VANNE INCHANGÉE",
+        "+35 % de débit disponible à l’entrée",
+        "Le débit effectif dépend encore de la vanne"
+      ],
+      "editing_note": "Après « Observez leurs niveaux », laisser deux secondes à l’image. Faire monter la tension par les deux trajectoires, sans alarme sonore fictive.",
+      "fr": "Le trait orange montre le niveau attendu dans cinq secondes, si la vanne reste inchangée. Activons le contrôle. Maintenant, augmentons de trente-cinq pour cent le débit disponible à l’entrée. La même perturbation touche les deux cuves. Observez leurs niveaux.",
+      "en": "The orange line shows the expected level five seconds ahead, if the valve stays unchanged. Turn on control. Now increase the available inlet flow by thirty-five percent. Both tanks face the same disturbance. Watch what happens to their levels."
+    },
+    {
+      "start_seconds": 51,
+      "end_seconds": 75,
+      "voice_target_seconds": 22,
+      "breathing_room_seconds": 2,
+      "title": "Laisser le résultat parler, puis garder les erreurs",
+      "shot": "Poursuivre le parcours t=18–40, idéalement sans accélération pendant ces 22 secondes. Montrer la vraie vanne qui module le débit, la référence qui déborde, puis le compteur final. Terminer par un recadrage de la moyenne globale ou une surimpression factuelle reliée à cet export. Ne pas remplacer la moyenne par le sous-ensemble sans intervention.",
+      "on_screen": [
+        "Commande recalculée toutes les 200 ms simulées",
+        "63 prévisions évaluées · erreur moyenne globale 9,148 cm",
+        "73 émises · 10 en attente · 52 évaluées après intervention"
+      ],
+      "editing_note": "Musique en retrait pendant le résultat. La carte d’erreur reste au moins six secondes. La régulation a un horizon de 3 s; le trait de prévision reste à +5 s.",
+      "fr": "La régulation compare des suites de commandes, applique la première, puis recalcule toutes les deux cents millisecondes simulées. La cuve contrôlée reste près de sa cible. L’autre déborde. Chaque prévision évaluable est comparée au niveau observé. Même après une intervention : on garde aussi les erreurs, pas seulement la belle courbe.",
+      "en": "The controller compares sequences of actions, applies the first command, then recalculates every two hundred milliseconds of simulated time. The controlled tank stays near its target. The other overflows. Every forecast we can assess is compared with an observation. Even after an intervention: the errors stay visible alongside the curve."
+    },
+    {
+      "start_seconds": 75,
+      "end_seconds": 99,
+      "voice_target_seconds": 22,
+      "breathing_room_seconds": 2,
+      "title": "Ouvrir la boîte du modèle",
+      "shot": "Passer à l’onglet Meta et annoncer clairement une expérience distincte. Montrer le rôle de chaque acteur à partir du rapport : observations synthétiques → famille proposée par Spark → ajustement et mesure numériques. Faire apparaître les trois ensembles séparés. Une seule animation de surlignage suffit; aucun faux terminal.",
+      "on_screen": [
+        "EXPÉRIENCE META DISTINCTE · SESSION ENREGISTRÉE",
+        "Spark propose des familles connues; le logiciel ajuste et mesure",
+        "3 épisodes d’entraînement · 2 de validation · 3 de test"
+      ],
+      "editing_note": "La question « Mais qui choisit le modèle ? » relance l’attention. Ne pas laisser entendre que Spark vient de piloter les cuves du premier essai.",
+      "fr": "Mais qui choisit le modèle ? Dans la démonstration, c’est un ajustement local. Passons à une expérience distincte avec Meta Muse Spark. Il reçoit des observations synthétiques bruitées, sans les vrais coefficients ni les données de test. Il propose des familles connues. Le logiciel ajuste leurs paramètres et mesure leurs erreurs.",
+      "en": "But who chooses the model? In the demo, a local fitting routine does the calibration. Let’s open a separate experiment with Meta Muse Spark. It receives noisy synthetic observations, without the true coefficients or test data. It proposes known model families. The software fits their parameters and measures their errors."
+    },
+    {
+      "start_seconds": 99,
+      "end_seconds": 121,
+      "voice_target_seconds": 20,
+      "breathing_room_seconds": 2,
+      "title": "Trois hypothèses, trois mesures",
+      "shot": "Montrer successivement les trois réponses attestées, dans leur ordre réel, et la baisse des erreurs de validation. Garder la source « session enregistrée ». Finir sur les trois reçus, la durée et le coût; ne pas cliquer un nouveau lancement pour illustrer une relecture.",
+      "on_screen": [
+        "Débit constant → drainage linéaire → racine carrée",
+        "Validation moyenne : 1,963 → 0,926 → 0,0945 cm",
+        "3 appels réels · 19,65 s · 0,0130775 USD"
+      ],
+      "editing_note": "Trois coupes sur trois phrases courtes; aucune animation de raisonnement inventée. Les réponses conservées ne sont pas réécrites pour le film.",
+      "fr": "Voici les trois appels réellement exécutés. Débit constant : insuffisant. Drainage linéaire : mieux. Drainage en racine carrée : meilleur sur la validation. Les réponses et les mesures restent consultables. Environ vingt secondes, pour un peu plus d’un centime de dollar. Vous regardez la session enregistrée.",
+      "en": "These are the three calls that actually ran. Constant inflow: insufficient. Linear drainage: better. Square-root drainage: best on validation. You can inspect the responses and measurements. About twenty seconds, for just over one US cent. What you’re watching is the recorded session."
+    },
+    {
+      "start_seconds": 121,
+      "end_seconds": 146,
+      "voice_target_seconds": 23,
+      "breathing_room_seconds": 2,
+      "title": "Tester ce qui n’a pas servi à choisir",
+      "shot": "Montrer le modèle gelé avant d’ouvrir les trois épisodes de test. Afficher le résultat dans une carte unique, avec l’horizon et l’origine synthétique accolés. Comparer immédiatement au solveur déterministe : mêmes chiffres, même modèle. L’écran de cette expérience ne remplace jamais les 9,148 cm du parcours interactif.",
+      "on_screen": [
+        "TEST DISTINCT · +3 S · 21 PRÉVISIONS",
+        "Erreur moyenne 0,1011 cm · maximum 0,2308 cm",
+        "Même précision que la référence déterministe",
+        "Capteur synthétique bruité à 1 mm · commandes futures planifiées connues"
+      ],
+      "editing_note": "Le chiffre apparaît, puis la comparaison. Laisser deux secondes pour lire « même précision »; l’apport démontré est l’exploration et l’interprétation des familles.",
+      "fr": "Puis le modèle est figé. Trois épisodes de test distincts : vingt et une prévisions à trois secondes, zéro virgule dix centimètre d’erreur moyenne. La référence déterministe atteint exactement la même précision. Meta aide à proposer et interpréter les hypothèses ; ce test ne démontre aucun gain de précision face au solveur seul.",
+      "en": "Then the model is frozen. Three separate test episodes: twenty-one predictions, three seconds ahead, with a mean error of zero point one centimeters. The deterministic baseline achieves exactly the same accuracy. Meta helps propose and interpret hypotheses; this experiment shows no accuracy gain over the numerical solver alone."
+    },
+    {
+      "start_seconds": 146,
+      "end_seconds": 166,
+      "voice_target_seconds": 18,
+      "breathing_room_seconds": 2,
+      "title": "Transformer la démo en outil",
+      "shot": "Exporter le vrai rapport depuis l’interface. Afficher brièvement ses observations, actions et hypothèses. Montrer la commande de cible et le bouton de perturbation; si une nouvelle action est exécutée, l’identifier comme nouvel essai et ne pas lui attribuer les chiffres du guide. Finir sur la correspondance entre une action et son entrée dans le journal.",
+      "on_screen": [
+        "Changer la cible · perturber · comparer",
+        "Observations, hypothèses et décisions exportables"
+      ],
+      "editing_note": "Montrer une opération utile, pas un défilement de JSON illisible. Le rapport est une pièce consultable; le film n’a pas à en lire tous les champs.",
+      "fr": "Tout est exportable : observations, hypothèses, commandes, résultats. Pour préparer un essai de régulation, on peut changer la cible, provoquer une perturbation, puis comprendre la décision. Le rapport distingue les expériences et leurs horizons. Chaque chiffre garde ainsi son contexte.",
+      "en": "Everything is exportable: observations, hypotheses, commands, results. To prepare a control experiment, change the target, introduce a disturbance, then inspect the decision. The report keeps the experiments and their forecast horizons separate. Each number retains the context that makes it useful."
+    },
+    {
+      "start_seconds": 166,
+      "end_seconds": 180,
+      "voice_target_seconds": 12,
+      "breathing_room_seconds": 2,
+      "title": "Rendre la main",
+      "shot": "Retour aux deux cuves, puis une carte finale sobre avec le lien démo et le dépôt effectivement vérifiés sans connexion. Garder « Banc virtuel · modèles connus » lisible. Les deux dernières secondes restent sans voix. Aucun plan d’usine, d’actionneur ou de capteur réel ne suggère une validation physique inexistante.",
+      "on_screen": [
+        "BANC VIRTUEL · MODÈLES CONNUS",
+        "ANTICIPER. AGIR. VÉRIFIER.",
+        "Démo et preuves : liens finaux vérifiés"
+      ],
+      "editing_note": "Fin sur une invitation à essayer, sans résumé de toutes les fonctionnalités ni apparition du sport ou du scanner.",
+      "fr": "Aujourd’hui, c’est un banc virtuel. Une installation réelle demande encore des capteurs calibrés et des essais indépendants. Twinforge : anticiper, agir, vérifier. À vous de tester la vanne.",
+      "en": "Today, this is a virtual test bench. A real installation still needs calibrated sensors and independent physical trials. Twinforge: anticipate, act, verify. Now try the valve for yourself."
+    }
+  ],
+  "review_requirements": [
+    "Verify the final capture and its export actually match the scripted 40-second scenario.",
+    "Keep simulation/known-family labels visible.",
+    "Do not assign the Meta 3-second score to the interactive 5-second forecasts.",
+    "Do not attribute the deterministic fit/control or code authorship to Muse.",
+    "Keep all forecast errors and intervention flags available; no replacing 9.148 cm with the supported subset.",
+    "Verify final repository, demo and video links without authentication.",
+    "No claim of real tank, physical actuator, phone camera, free law discovery, or Meta accuracy gain.",
+    "Review the final rendered audio/video and record method honestly; scripts are not completed media.",
+    "Keep a visible distinction between the early flash-forward at t40 and the restart at t0; preserve truthful simulation timestamps.",
+    "Say +35 percent available inlet capacity, not +35 percent effective flow in the controlled branch.",
+    "63 assessed predictions are not 63 supported predictions; 11 are without intervening action, 52 span an intervention.",
+    "Show the main global error clearly; Meta test accuracy belongs only to its separate 3-second experiment.",
+    "Recalibrate PROCESS_DEMO_SUBTITLES_FR.srt against the generated voice and inspect line breaks on the rendered video; its provisional timing is not an audio/video synchronization claim. Preserve the 180-second limit and do not substitute the archived DEMO_SUBTITLES_FR.srt."
+  ],
+  "outputs": {
+    "voiceover_fr": "docs/VOICEOVER_3MIN_FR.txt",
+    "voiceover_en": "docs/VOICEOVER_3MIN_EN.txt",
+    "subtitles_fr": "docs/PROCESS_DEMO_SUBTITLES_FR.srt"
+  },
+  "subtitle_timing_note": "PROCESS_DEMO_SUBTITLES_FR.srt est un minutage éditorial provisoire, réparti sur les 163 secondes de voix visées. Les 17 secondes de respiration des neuf séquences restent sans sous-titres. Recaler les entrées, sorties et découpes sur la voix IA réellement générée, puis revoir le rendu final avant export. Au maximum deux lignes de 42 caractères par cue; aucune mention de ce statut dans le texte des sous-titres. DEMO_SUBTITLES_FR.srt reste une archive inchangée."
+}
