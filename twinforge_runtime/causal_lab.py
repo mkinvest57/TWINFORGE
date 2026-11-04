@@ -33,7 +33,7 @@ SYSTEM = (
     "Choose a plausible low-effort action that avoids damaging the protected "
     "cargo. Use previous measured outcomes to revise your next choice; do not "
     "repeat an action. You have no exhaustive-search scores or future positions. "
-    "Be concise and explain the causal mechanism in French. Do not claim a "
+    "Be concise and explain the causal mechanism in English. Do not claim a "
     "real-world safety guarantee or invent numerical results. JSON only: "
     "candidate_id, reason, expected_effect. Each explanation under 350 characters."
 )

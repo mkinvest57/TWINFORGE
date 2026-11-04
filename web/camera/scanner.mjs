@@ -1,7 +1,14 @@
 import {createTracker} from './tracker.mjs';
 import {forecast,assessForecast} from './prediction.mjs';
-import {CameraSession,cameraErrorMessage,recordingMime,imageRect,pointInImage} from './media.mjs';
+import {CameraSession,recordingMime,imageRect,pointInImage} from './media.mjs';
 
+const cameraErrorMessage=error=>({
+  NotAllowedError:'Camera access was denied. Allow it in your browser settings, then try again.',
+  NotFoundError:'No camera found. You can import a video instead.',
+  NotReadableError:'The camera is busy or unavailable. Close other camera apps.',
+  OverconstrainedError:'This camera does not support the requested settings.',
+  SecurityError:'Camera access is blocked. Open this page over HTTPS.',
+})[error?.name]||'Could not open the camera. Try again or import a video.';
 const $=id=>document.getElementById(id);
 const video=$('camera-video'),overlay=$('camera-overlay'),stage=$('camera-stage');
 const ctx=overlay.getContext('2d'),sample=document.createElement('canvas'),sampleCtx=sample.getContext('2d',{willReadFrequently:true});
@@ -28,25 +35,25 @@ function buttons(){
 function showImage(){if(matchMedia('(max-width: 859px)').matches)stage.scrollIntoView({block:'start',behavior:'instant'});}
 function clearMeasurement(){
   tracker.reset();selected=false;result=null;prediction=null;observations=[];predictions=[];assessments=[];lastIssue=-Infinity;
-  text('camera-selection','Aucun objet sélectionné');text('camera-forecast','En attente');text('camera-confidence','—');text('camera-error','—');
+  text('camera-selection','No object selected');text('camera-forecast','Waiting');text('camera-confidence','—');text('camera-error','—');
   sessionId=crypto.randomUUID?.()||String(Date.now());draw();
 }
 function stopRecorder(){
   clearTimeout(recordTimer);
   if(recorder?.state==='recording')recorder.stop();
 }
-function stopSource(message='Caméra arrêtée. Les mesures restent exportables.'){
+function stopSource(message='Camera stopped. Your measurements can still be exported.'){
   sourceGeneration++;running=false;cancelAnimationFrame(loopId);if(videoLoop&&video.cancelVideoFrameCallback)video.cancelVideoFrameCallback(loopId);
   $('camera-start').disabled=false;
   stopRecorder();camera.stop();video.pause();video.srcObject=null;video.removeAttribute('src');video.load();
   if(sourceURL)URL.revokeObjectURL(sourceURL);sourceURL=null;source=null;lastFrameTime=-1;
   selected=false;prediction=null;result=null;selectionStart=selectionEnd=null;tracker.reset();video.hidden=false;video.controls=false;overlay.style.pointerEvents='';frame=null;
-  text('camera-source','Aucune source active');text('camera-selection','Capture arrêtée');text('camera-forecast','En attente');text('camera-confidence','—');text('camera-fps','— i/s');
+  text('camera-source','No active source');text('camera-selection','Capture stopped');text('camera-forecast','Waiting');text('camera-confidence','—');text('camera-fps','— fps');
   if(message)status(message);buttons();draw();
 }
 function newSource(kind){
   source=kind;sessionSource=kind;lastFrameTime=-1;lastProcess=0;clearMeasurement();
-  text('camera-source',kind==='camera'?'Caméra · traitement local':kind==='example'?'Exemple synthétique · traitement des pixels':'Vidéo importée · traitement local');
+  text('camera-source',kind==='camera'?'Camera · on-device processing':kind==='example'?'Synthetic example · pixel tracking':'Imported video · on-device processing');
 }
 function resize(){
   const bounds=stage.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);
@@ -74,7 +81,7 @@ function draw(){
       if(p.x>=r.x&&p.x<=r.x+r.width&&p.y>=r.y&&p.y<=r.y+r.height){
         ctx.strokeStyle='#37c8d9';ctx.setLineDash([6,5]);ctx.beginPath();ctx.moveTo(from.x,from.y);ctx.lineTo(p.x,p.y);ctx.stroke();ctx.setLineDash([]);
         ctx.fillStyle='#37c8d94d';ctx.beginPath();ctx.arc(p.x,p.y,12,0,Math.PI*2);ctx.fill();ctx.stroke();
-        ctx.font='600 13px system-ui';ctx.fillStyle='#37c8d9';ctx.fillText('+0,5 s',clamp(p.x+16,8,bounds.width-60),clamp(p.y-15,18,bounds.height-12));
+        ctx.font='600 13px system-ui';ctx.fillStyle='#37c8d9';ctx.fillText('+0.5 s',clamp(p.x+16,8,bounds.width-60),clamp(p.y-15,18,bounds.height-12));
       }
     }
   }
@@ -104,30 +111,30 @@ function capturePixels(){
 }
 function processFrame(t,wallTime){
   const pixels=capturePixels();if(!pixels)return;
-  if(frame&&(frame.width!==pixels.width||frame.height!==pixels.height)){clearMeasurement();status('Format de la caméra modifié. Sélectionnez à nouveau l’objet.');}
+  if(frame&&(frame.width!==pixels.width||frame.height!==pixels.height)){clearMeasurement();status('Camera format changed. Select the object again.');}
   frame=pixels;
   if(t<=lastFrameTime){if(t<lastFrameTime-.01){clearMeasurement();lastFrameTime=-1;}else{draw();return;}}
-  text('camera-fps',lastFrameTime>=0?Math.round(1/(t-lastFrameTime))+' images/s':'—');lastFrameTime=t;
+  text('camera-fps',lastFrameTime>=0?Math.round(1/(t-lastFrameTime))+' fps':'—');lastFrameTime=t;
   if(selected){
     result=tracker.update(frame,t);
     observations.push({t,point:result.point,box:result.box,confidence:result.confidence,status:result.status,trackId:result.trackId,reason:result.reason});
-    if(observations.length>=1800){stopSource('Session de mesures complète. La caméra est arrêtée. Exportez vos mesures puis ouvrez une nouvelle source.');return;}
+    if(observations.length>=1800){stopSource('Measurement session complete. Export your results, then open a new source.');return;}
     if(result.status==='tracking'){
       prediction=forecast(observations,{sourceTime:t,horizon:.5});
-      text('camera-selection','Objet suivi');text('camera-confidence',Math.round((result.confidence||0)*100)+' %');
+      text('camera-selection','Tracking object');text('camera-confidence',Math.round((result.confidence||0)*100)+' %');
       if(prediction.status==='predicted'){
         const outside=prediction.point.x<0||prediction.point.y<0||prediction.point.x>frame.width||prediction.point.y>frame.height;
-        text('camera-forecast',outside?'Hors champ à +0,5 s':'+0,5 s');
-        status(outside?'La trajectoire prévue sort de l’image. Gardez le téléphone immobile.':'Suivi actif. Le repère cyan indique la position prévue à +0,5 seconde.');
+        text('camera-forecast',outside?'Outside frame at +0.5 s':'+0.5 s');
+        status(outside?'The predicted position leaves the frame. Keep the camera still.':'Tracking. The cyan marker shows the predicted position in 0.5 seconds.');
         if(t-lastIssue>=.1){predictions.push({...prediction});lastIssue=t;}
       }else{
-        text('camera-forecast','Observation');
-        status(prediction.reason==='stationary_or_low_motion'?'L’objet est immobile. Observez son mouvement pour prévoir sa trajectoire.':'Observation du mouvement… La prévision apparaît dès que le suivi est assez stable.');
+        text('camera-forecast','Observing');
+        status(prediction.reason==='stationary_or_low_motion'?'The object is still. Move it to see a motion forecast.':'Observing movement. A forecast appears when tracking is stable.');
       }
     }else{
-      prediction=null;text('camera-confidence','—');text('camera-forecast','Suspendue');
-      text('camera-selection',result.status==='camera_moving'?'Téléphone en mouvement':'Objet perdu');
-      status(result.status==='camera_moving'?'Le téléphone a bougé. Stabilisez-le et sélectionnez à nouveau l’objet.':'Objet perdu ou masqué. Aucune trajectoire inventée : replacez-le dans le cadre ou sélectionnez-le à nouveau.');
+      prediction=null;text('camera-confidence','—');text('camera-forecast','Paused');
+      text('camera-selection',result.status==='camera_moving'?'Camera moving':'Object lost');
+      status(result.status==='camera_moving'?'The camera moved. Hold it still and select the object again.':'Object lost or hidden. Bring it back into view or select it again.');
     }
     for(const p of predictions){
       if(p.assessment||p.targetTime>t)continue;
@@ -135,7 +142,7 @@ function processFrame(t,wallTime){
       if(assessment){p.assessment=assessment;assessments.push(assessment);}
     }
     const scores=assessments.filter(a=>a.status==='scored'&&Number.isFinite(a.errorPx));
-    if(scores.length)text('camera-error',(scores.reduce((n,a)=>n+a.errorPx,0)/scores.length).toFixed(1)+' px · '+scores.length+' prévisions');
+    if(scores.length)text('camera-error',(scores.reduce((n,a)=>n+a.errorPx,0)/scores.length).toFixed(1)+' px · '+scores.length+' forecasts');
   }
   buttons();draw();lastProcess=wallTime;
 }
@@ -160,14 +167,14 @@ function selectAt(box){
   const t=Math.max(0,lastFrameTime);
   result=tracker.select(frame,box,t);selected=result.status==='tracking';prediction=null;
   observations=[];predictions=[];assessments=[];lastIssue=-Infinity;
-  text('camera-error','—');text('camera-confidence','—');text('camera-forecast','Observation');
+  text('camera-error','—');text('camera-confidence','—');text('camera-forecast','Observing');
   if(selected){
     observations.push({t,point:result.point,box:result.box,confidence:result.confidence,status:result.status,trackId:result.trackId});
-    text('camera-selection','Objet sélectionné');status('Objet sélectionné. Gardez le téléphone fixe et observez son mouvement.');
+    text('camera-selection','Object selected');status('Object selected. Keep the camera still and watch it move.');
     showImage();
-    if(source==='file'&&video.paused){video.play().catch(()=>{video.controls=true;overlay.style.pointerEvents='none';status('Touchez Lecture dans la vidéo pour démarrer, puis resélectionnez si nécessaire.');});}
+    if(source==='file'&&video.paused){video.play().catch(()=>{video.controls=true;overlay.style.pointerEvents='none';status('Press Play in the video to begin, then select the object again if needed.');});}
   }else{
-    text('camera-selection','Sélection à refaire');status(result.reason==='selection_too_small'?'L’objet est trop petit dans l’image. Rapprochez la caméra ou agrandissez le rectangle.':'Choisissez un objet avec des contours visibles. Encadrez-le en glissant le doigt, avec un peu de fond autour.');
+    text('camera-selection','Select again');status(result.reason==='selection_too_small'?'The object is too small. Move closer or draw a larger selection.':'Choose an object with clear edges. Draw around it, leaving a little background.');
   }
   buttons();draw();
 }
@@ -188,19 +195,19 @@ overlay.addEventListener('pointerup',()=>{
 });
 overlay.addEventListener('pointercancel',()=>{selectionStart=selectionEnd=null;draw();});
 $('camera-center').onclick=()=>{if(frame){const size=Math.min(frame.width,frame.height)*.22;selectAt({x:(frame.width-size)/2,y:(frame.height-size)/2,width:size,height:size});}};
-$('camera-reset').onclick=()=>{clearMeasurement();buttons();status('Touchez l’objet ou encadrez-le en glissant le doigt.');};
+$('camera-reset').onclick=()=>{clearMeasurement();buttons();status('Tap the object or drag a rectangle around it.');};
 async function startCamera(){
   stopSource(null);const generation=sourceGeneration;clearMeasurement();
-  if(!window.isSecureContext){status('Pour utiliser la caméra, ouvrez cette page en HTTPS. Vous pouvez aussi importer une vidéo.');return;}
-  $('camera-start').disabled=true;$('camera-stop').disabled=false;status('Autorisez la caméra dans la demande du navigateur. Le microphone reste désactivé.');
+  if(!window.isSecureContext){status('Open this page over HTTPS to use the camera. You can also import a video.');return;}
+  $('camera-start').disabled=true;$('camera-stop').disabled=false;status('Allow camera access in your browser. The microphone stays off.');
   if($('mobile-camera-start'))$('mobile-camera-start').disabled=true;
   if($('mobile-camera-stop'))$('mobile-camera-stop').disabled=false;
   try{
     const stream=await camera.start(facing);if(!stream||generation!==sourceGeneration)return;
     video.srcObject=stream;await video.play();if(generation!==sourceGeneration)return;
     newSource('camera');running=true;
-    for(const track of stream.getVideoTracks())track.addEventListener('ended',()=>{if(source==='camera')stopSource('La caméra a été interrompue. Vous pouvez la rouvrir.');},{once:true});
-    status('Caméra prête. Touchez l’objet ou encadrez-le avec le doigt. Gardez le téléphone immobile.');showImage();schedule();
+    for(const track of stream.getVideoTracks())track.addEventListener('ended',()=>{if(source==='camera')stopSource('Camera access was interrupted. You can open it again.');},{once:true});
+    status('Camera ready. Tap the object or drag around it. Keep the camera still.');showImage();schedule();
   }catch(error){if(generation===sourceGeneration){camera.stop();status(cameraErrorMessage(error));}}
   finally{if(generation===sourceGeneration){$('camera-start').disabled=false;buttons();}}
 }
@@ -209,23 +216,23 @@ $('camera-stop').onclick=()=>stopSource();
 $('camera-flip').onclick=()=>{facing=facing==='environment'?'user':'environment';startCamera();};
 $('camera-example').onclick=()=>{
   stopSource(null);newSource('example');video.hidden=true;fixtureTime=0;fixtureLast=0;renderFixture(0);frame=capturePixels();lastFrameTime=performance.now()/1000;running=true;
-  status('Exemple synthétique : sélectionnez l’objet violet au centre. Le suivi analyse les pixels affichés.');buttons();draw();showImage();schedule();
+  status('Synthetic example: select the purple object in the center. Tracking uses the displayed pixels.');buttons();draw();showImage();schedule();
 };
 $('camera-file').onchange=async event=>{
   const file=event.target.files[0];if(!file)return;
-  if(!file.type.startsWith('video/')||file.size>64*1024*1024){status('Choisissez une vidéo de moins de 64 Mo.');event.target.value='';return;}
+  if(!file.type.startsWith('video/')||file.size>64*1024*1024){status('Choose a video smaller than 64 MB.');event.target.value='';return;}
   stopSource(null);const generation=sourceGeneration;newSource('file');sourceURL=URL.createObjectURL(file);video.src=sourceURL;
-  status('Chargement de la vidéo sur cet appareil…');
+  status('Loading video on this device…');
   video.onloadeddata=()=>{
     if(generation!==sourceGeneration||source!=='file')return;
     lastFrameTime=video.currentTime;frame=capturePixels();buttons();draw();showImage();
-    status('Vidéo prête. Sélectionnez l’objet sur la première image pour lancer le suivi.');
+    status('Video ready. Select the object in the first frame to start tracking.');
   };
-  video.onerror=()=>{if(source==='file')stopSource('Ce format vidéo n’est pas lisible ici. Essayez MP4/H.264 ou une capture de la caméra.');};
+  video.onerror=()=>{if(source==='file')stopSource('This video format cannot be played here. Try MP4/H.264 or a camera recording.');};
   video.load();event.target.value='';
 };
 video.addEventListener('ended',()=>{
-  if(source==='file'){running=false;prediction=null;text('camera-forecast','Terminée');text('camera-fps','— i/s');draw();status('Vidéo terminée. Exportez les mesures, ou importez-la à nouveau pour une autre sélection.');}
+  if(source==='file'){running=false;prediction=null;text('camera-forecast','Finished');text('camera-fps','— fps');draw();status('Video finished. Export your measurements, or import it again to select another object.');}
 });
 video.addEventListener('playing',()=>{
   if(source==='file'&&!running){video.controls=false;overlay.style.pointerEvents='';running=true;schedule();}
@@ -235,16 +242,16 @@ function download(name,blob){
 }
 $('camera-export').onclick=()=>{
   const report={schema_version:'twinforge.mobile-observations.v1',session_id:sessionId,created_at:new Date().toISOString(),source:sessionSource,processing:'local deterministic visual tracking; no SAM or cloud calls',calibration:{mode:'image_plane',metric:false,dimensions_observed:2,width:frame?.width??sample.width,height:frame?.height??sample.height,units:'px'},horizon_s:.5,observations,predictions,assessments,limitations:['Camera must remain fixed.','Short-term motion extrapolation; collisions and physical properties are not inferred.','No metric 3D reconstruction or guaranteed identity through occlusion.','Only forecasts whose target time was observed receive an error score.']};
-  download('twinforge-scan-'+sessionId+'.json',new Blob([JSON.stringify(report,null,2)],{type:'application/json'}));status('Mesures exportées. Les images de la caméra ne sont pas incluses.');
+  download('twinforge-scan-'+sessionId+'.json',new Blob([JSON.stringify(report,null,2)],{type:'application/json'}));status('Measurements exported. Camera images are not included.');
 };
 $('camera-record').onclick=()=>{
   if(recorder){if(recorder.state==='recording')stopRecorder();return;}
-  if(!camera.stream||!window.MediaRecorder){text('camera-record-status','Enregistrement indisponible. Utilisez la capture vidéo de votre téléphone.');return;}
+  if(!camera.stream||!window.MediaRecorder){text('camera-record-status','Recording is unavailable. Use your device camera app instead.');return;}
   try{
     const type=recordingMime(window.MediaRecorder);recorder=new MediaRecorder(camera.stream,type?{mimeType:type,videoBitsPerSecond:2000000}:{videoBitsPerSecond:2000000});
     recordData=[];recordBytes=0;let capture=recorder;
     capture.ondataavailable=e=>{if(e.data.size){recordData.push(e.data);recordBytes+=e.data.size;if(recordBytes>16*1024*1024)stopRecorder();}};
-    capture.onerror=()=>{text('camera-record-status','Enregistrement interrompu par le navigateur.');stopRecorder();};
+    capture.onerror=()=>{text('camera-record-status','Recording was interrupted by the browser.');stopRecorder();};
     capture.onstop=()=>{
       const type=capture.mimeType||'video/webm';
       const link=$('camera-record-download');
@@ -254,12 +261,12 @@ $('camera-record').onclick=()=>{
         recordURL=URL.createObjectURL(new Blob(recordData,{type}));link.href=recordURL;
         link.download='twinforge-camera.'+(type.includes('mp4')?'mp4':'webm');link.hidden=false;
       }
-      recorder=null;recordData=[];$('camera-record').textContent='Enregistrer 8 s';text('camera-record-status',recordURL?'Clip prêt. Touchez « Télécharger le clip » pour le conserver, sans son ni envoi.':'Aucune image enregistrée. Vous pouvez réessayer.');buttons();
+      recorder=null;recordData=[];$('camera-record').textContent='Record 8 s';text('camera-record-status',recordURL?'Clip ready. Download it to keep a local copy, without audio or uploads.':'No frames were recorded. You can try again.');buttons();
     };
-    capture.start(500);recordTimer=setTimeout(stopRecorder,8000);$('camera-record').textContent='Terminer le clip';text('camera-record-status','Enregistrement local en cours · 8 secondes maximum · sans son');
-  }catch{recorder=null;text('camera-record-status','Ce navigateur ne peut pas enregistrer ce format. Utilisez la capture vidéo native.');}
+    capture.start(500);recordTimer=setTimeout(stopRecorder,8000);$('camera-record').textContent='Stop recording';text('camera-record-status','Recording locally · up to 8 seconds · no audio');
+  }catch{recorder=null;text('camera-record-status','This browser cannot record that format. Use your device camera app.');}
 };
-document.addEventListener('visibilitychange',()=>{if(document.hidden)stopSource('Capture arrêtée lorsque la page est passée en arrière-plan.');});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopSource('Capture stopped when the page moved to the background.');});
 if($('mobile-camera-start'))$('mobile-camera-start').onclick=()=>{$('camera-start').click();};
 if($('mobile-camera-example'))$('mobile-camera-example').onclick=()=>{$('camera-example').click();};
 if($('mobile-camera-stop'))$('mobile-camera-stop').onclick=()=>{$('camera-stop').click();};
@@ -267,5 +274,5 @@ window.addEventListener('pagehide',()=>stopSource(null));
 window.addEventListener('resize',resize);
 new ResizeObserver(resize).observe(stage);
 resize();buttons();
-if(!window.isSecureContext)status('La caméra directe nécessite HTTPS. L’import vidéo et l’exemple restent disponibles.');
+if(!window.isSecureContext)status('Live camera access requires HTTPS. Video import and the example are still available.');
 

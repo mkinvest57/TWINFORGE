@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-04",
+  "scope": "Motion lab presentation and English copy",
+  "sources": [
+    {
+      "id": 1279,
+      "pattern": "compact toolbar"
+    },
+    {
+      "id": 25010,
+      "pattern": "native scrollable dialog sheets"
+    },
+    {
+      "id": 27028,
+      "pattern": "collapsed advanced tool sections"
+    }
+  ],
+  "files": [
+    "workbench.html",
+    "web/workbench-ui.css",
+    "web/workbench-ui.js",
+    "web/workbench.js",
+    "web/recording.js"
+  ],
+  "browser_checks": {
+    "desktop": "1280\u00d7720",
+    "phones": [
+      "390\u00d7844",
+      "320\u00d7740"
+    ],
+    "horizontal_overflow": false,
+    "mobile_toolbar_touch_target_height_px": 44,
+    "scenes": "chaos, multi, hoop",
+    "actions": [
+      "start",
+      "pause",
+      "reset",
+      "scenario selection",
+      "ballistics shot",
+      "settings drawer",
+      "evidence drawer",
+      "data tools drawer",
+      "Escape closes drawer and restores trigger focus"
+    ],
+    "browser_console_errors_on_local_server": [],
+    "visible_french_in_data_drawer": [],
+    "software_checks": "4/4"
+  },
+  "terminal_checks": {
+    "physics_regression_tests": "9/9 passed (legacy scenes, pendulum forecast, early goal policy)",
+    "syntax": "inline module, workbench, UI and recording JavaScript pass node --check",
+    "existing_static_ids": "all preserved, no duplicates",
+    "diff_check": "passed"
+  },
+  "presentation_changes": [
+    "Removed permanent sidebars; fullscreen-width primary stage with one toolbar",
+    "Advanced settings, receipts, imports and recording tools stay available in native dialogs",
+    "English captions, UI, errors and runtime forecast copy",
+    "Scene-specific camera framing; neutral visual floor for pendulum and collisions",
+    "Physics integrators and evaluation outputs unchanged"
+  ],
+  "screenshots": [
+    "workbench-mobile.png",
+    "workbench-desktop.png",
+    "workbench-evidence.png"
+  ],
+  "limitations": [
+    "No real camera/video or hardware test performed",
+    "No paid model calls made for this review",
+    "Local recording output was translated but a new 150-second recording was not generated"
+  ]
+}

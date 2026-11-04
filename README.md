@@ -1,56 +1,58 @@
-# TWINFORGE — Une décision. Deux futurs.
+# TWINFORGE — One decision. Two futures.
 
-Un chariot déclenche une chaîne de collisions. Vous pouvez agir une seule fois : freiner, dévier, ou attendre. Twinforge calcule les conséquences de chaque commande, cherche la plus petite intervention admissible et montre les deux futurs côte à côte.
+A carrier starts a chain of collisions. Meta proposes one intervention. Twinforge calculates the consequences, keeps the failed attempts, and lets you replay both futures from the same starting point.
 
-[Ouvrir la démo](https://mkinvest57.github.io/TWINFORGE/) · [Journal Meta vérifiable](assets/causal-meta-session.json) · [Dossier concours](docs/SUBMISSION.md) · [Caméra mobile](https://mkinvest57.github.io/TWINFORGE/scan.html)
+[Try the demo](https://mkinvest57.github.io/TWINFORGE/) · [Actual Meta session](assets/causal-meta-session.json) · [Submission brief](docs/SUBMISSION.md) · [English video script](docs/VOICEOVER_3MIN_EN.txt)
 
-## Une décision dont on peut vérifier les conséquences
+## Start with the actual Meta decision
 
-Trois épreuves civiles : réaction en chaîne, intersection aveugle et passage critique. La page compare **37 commandes** sur un horizon de **12 secondes simulées**. L’utilisateur peut choisir une autre commande, changer la vitesse initiale, retarder l’intervention, relire les branches au même instant et exporter les données.
+The English interface opens on **Muse Spark 1.3’s recorded decision**, verified again by the browser’s physics engine. Press **Replay decision**, then compare the three recorded attempts. Open **Try your decision** to change the scene, speed, delay, or command; these changes run the separate local search. The Meta journal preserves the original responses. Its English translations are labeled and tied to the exact recorded requests.
 
-Les trajectoires sont calculées et figées **avant le rejeu**. Le curseur lit ces données; il ne dessine pas une prévision réajustée sur la position suivante. Les deux branches partagent l’état initial et le modèle physique; seule la commande change.
+For the default chain reaction (`cascade`, seed `20261104`, speed `100%`, intervention at `0.25 s`):
 
-Le scénario `cascade`, graine `20261104`, vitesse `100 %`, action à `0,25 s` donne :
-
-| Choix | Choc maximal sur la charge protégée | Impulsion de commande |
+| Decision | Peak contact energy on protected cargo | Control impulse |
 |---|---:|---:|
-| Ne rien changer | 116,562 J | 0 N·s |
-| Meilleure commande parmi les 37 testées : déviation +0,20 rad | **0 J** | **39,190 N·s** |
-| Proposition Meta retenue : déviation −0,32 rad | **4,564 J** | **62,540 N·s** |
+| No intervention | 116.562 J | 0 N·s |
+| **Recorded Meta proposal: steer −0.32 rad** | **4.564 J** | **62.540 N·s** |
+| Local search: steer +0.20 rad | 0 J | 39.190 N·s |
 
-Le seuil de **8 J** est un critère arbitraire de cette expérience, fixé avant le calcul. Ce n’est pas un seuil industriel de dommage ou une certification de sécurité. Le score mesure l’énergie cinétique normale relative avant contact, maximale parmi les contacts impliquant la charge protégée; il ne signifie pas « zéro collision dans tout l’entrepôt ».
+The **8 J threshold is a predeclared experimental criterion**, not an industrial damage limit. The score is the maximum relative normal kinetic energy before a contact involving protected cargo. Zero here does not mean no collisions elsewhere.
 
-Dans cette cascade, la grille des retards trouve une commande admissible à `0,25 s`, mais aucune à `0,50 s`. La recherche couvre neuf retards de `0` à `2 s` par pas de `0,25 s` : elle ne prouve pas une frontière continue exacte.
+## Where Meta is used
 
-La sensibilité reste visible. La commande nominale est réévaluée avec la vitesse du chariot à `95 %`, `100 %` et `105 %`. La cascade passe les trois essais; le meilleur choix nominal de l’intersection n’en passe qu’un. Trois essais ne sont ni une probabilité de succès ni une garantie physique.
+| Component | Responsibility |
+|---|---|
+| Meta Muse Spark 1.3 | Proposes a bounded action and revises it after receiving calculated outcomes. Three actual calls are recorded. |
+| Deterministic physics engine | Calculates trajectories, collisions, contact energy, and control effort. |
+| Local search | Evaluates 37 commands and selects the smallest control effort among those meeting the criterion. This search is not AI. |
+| Public demo | Replays the recorded session and recomputes its consequences. It does not silently make new model calls. |
+| Local Python service | Can run a new study with the privately configured Meta provider and explicit cost limits. |
 
-[Benchmark reproductible des trois épreuves](validation/runs/causal-benchmark-2026-11-04.json) · [Revue du moteur](validation/runs/causal-engine-review-2026-11-04.json)
+The actual Meta session produced **104.609 J → 8.485 J → 4.564 J**: two rejected proposals, then one below the 8 J threshold. Spark received the scene, available actions, and outcomes of its previous proposals. It did not receive the exhaustive search scores. Recorded usage: **3 calls, 37.86 seconds, $0.028276**.
 
-## Meta propose, la physique vérifie
+The local search does better on this small problem: lower impact and less effort. The demonstrated contribution is a proposal–verification–revision loop whose failures are inspectable, not a performance advantage over exhaustive search. [Original responses, receipts, and hashes](assets/causal-meta-session.json).
 
-Une session réelle de **Muse Spark 1.3**, exécutée le 4 novembre 2026, a produit trois propositions. Spark reçoit la géométrie, les paramètres et le menu d’actions admissibles. Après chaque appel, le solveur mesure la proposition; seul cet historique est transmis à l’appel suivant. Les scores de la recherche exhaustive ne lui sont pas montrés.
+## Explore the decision
 
-| Appel | Proposition à 0,25 s | Choc maximal mesuré | Critère 8 J |
-|---|---|---:|---|
-| 1 | Dévier de −0,16 rad | 104,609 J | Échec |
-| 2 | Dévier de −0,36 rad | 8,485 J | Échec |
-| 3 | Dévier de −0,32 rad | 4,564 J | Réussi dans ce modèle |
+Three civilian scenarios—chain reaction, blind intersection, and narrow passage—compare 37 commands over **12 simulated seconds**. Both branches share the initial state and physical model; only the intervention changes. Trajectories are calculated and frozen before playback. The timeline reads those data rather than redrawing a prediction from the next observed position.
 
-**3 appels, 37,86 secondes, 0,028276 USD** selon les usages conservés. Les réponses originales, reçus, hashes et évaluations sont dans le [journal public](assets/causal-meta-session.json). L’interface identifie sa relecture comme une session enregistrée; les nouvelles études passent par le serveur Python local.
+In the default cascade, the tested delay grid finds an admissible command at `0.25 s`, but none at `0.50 s`. Nine delays from `0` to `2 s` are tested in `0.25 s` steps. This is a grid result, not an exact continuous deadline.
 
-La recherche exhaustive locale fait mieux sur ce petit espace de 37 actions : moins de choc et moins d’effort. Le résultat démontré est une boucle de **proposition, contradiction numérique et révision**, pas une supériorité de Meta sur le solveur. Le simulateur calcule les conséquences; Meta ne produit pas les chiffres affichés.
+The selected nominal action is also checked at `95%`, `100%`, and `105%` carrier speed. The local cascade choice passes all three; the intersection choice passes one. These sensitivity checks are not a probability of safety. The interface exposes failed cases and exports initial states, actions, trajectories, and contacts.
 
-## Modèle et limites
+[Reproducible benchmark](validation/runs/causal-benchmark-2026-11-04.json) · [Engine review](validation/runs/causal-engine-review-2026-11-04.json)
 
-Les positions, vitesses, masses et coefficients sont fournis. Des corps rigides circulaires se déplacent dans un plan; la vue 3D représente leurs enveloppes de contact. Le moteur utilise un amortissement linéaire, des impulsions de collision sans frottement tangent et un pas de calcul de `1/240 s`. Une commande est un changement instantané et borné de vitesse ou de direction; la dynamique d’un actionneur réel n’est pas modélisée.
+## What the experiment establishes
 
-C’est une comparaison contrefactuelle dans **un modèle connu**. Elle ne démontre ni apprentissage de lois à partir d’une vidéo, ni précision prédictive indépendante, ni contrôle d’un robot physique. La caméra mobile est un outil distinct de suivi et d’extrapolation **2D en pixels**; elle ne reconstruit pas ces scènes industrielles.
+Initial positions, velocities, masses, and coefficients are supplied. Circular rigid bodies move in a plane; the 3D scene depicts their contact envelopes. The engine uses linear damping, collision impulses without tangential friction, and a `1/240 s` integration step. An intervention is a bounded, instantaneous velocity or direction change; real actuator dynamics are not modeled.
 
-Les contrôles du moteur couvrent conservation d’énergie et de quantité de mouvement lors d’un contact élastique, restitution, solution analytique de l’amortissement, séparation des corps, bornes des commandes, métriques issues des contacts et immutabilité des trajectoires. Le pas divisé par deux conserve l’admissibilité des trois commandes sélectionnées; la variation des pics d’énergie de référence reste sous 3 % sur ces trois cas.
+This is a counterfactual comparison within a **known numerical model**. It does not establish independent prediction accuracy, learning physical laws from video, or control of a physical robot. The separate [mobile camera tool](https://mkinvest57.github.io/TWINFORGE/scan.html) tracks and extrapolates **2D pixel motion** locally; it does not reconstruct these warehouse scenarios.
 
-## Lancer et vérifier
+Engine checks cover elastic-contact conservation, restitution, analytic damping, body separation, action bounds, contact-derived metrics, and frozen trajectories. Halving the time step preserves feasibility for the three selected nominal local actions; baseline peak-energy changes stay below 3% in those cases.
 
-Python 3.9+ et Node.js. La simulation, la recherche locale et la relecture du journal fonctionnent sans clé. Les clés nécessaires à de nouveaux appels Meta restent côté serveur.
+## Run and verify
+
+Requires Python 3.9+ and Node.js. Simulation, local search, and recorded-session replay need no API key. Keys for new Meta requests stay on the local server.
 
 ```bash
 python3 -m venv .venv
@@ -58,33 +60,31 @@ python3 -m venv .venv
 .venv/bin/python server.py
 ```
 
-Ouvrir `http://localhost:8000`. Le serveur écoute uniquement sur la machine locale.
+Open `http://localhost:8000`. The server binds to the local machine only.
 
 ```bash
-# Recherche numérique gratuite : aucun appel de modèle
+# Free numerical study; no model call
 .venv/bin/python -m twinforge_runtime.causal_lab --out output/causal-local.json
 
-# Benchmark de physique et des trois scénarios
+# Reproduce the three-scenario benchmark
 node validation/causal_benchmark.mjs output/causal-benchmark.json
 
-# Vérifications complètes pour les sources courantes
+# Verify the current sources
 .venv/bin/python validation/run_checks.py --out output/software-checks-causal.json
 ```
 
-Pour une nouvelle étude payante, cocher l’option Meta de l’interface ou ajouter `--models` à la commande de l’étude. Maximum trois propositions, **plafond de 0,12 USD par étude**, sous le plafond persistant de **0,50 USD pour la scène `causal`**. Une erreur ne déclenche pas de nouvel essai automatique. Les garde-fous HTTP refusent les origines externes, les hôtes non locaux, les champs inconnus et les corps JSON trop grands.
+A new paid study requires the Meta option in the local interface or `--models` on the study command. It permits up to three proposals, with a **$0.12 study ceiling** under a persistent **$0.50 ceiling for the `causal` scene**. Errors do not trigger automatic paid retries. HTTP checks reject external origins, non-local hosts, unknown fields, and oversized JSON bodies.
 
-## Vérifications de cette refonte
+**225 automated tests pass: 114 Python and 111 JavaScript.** The [English studio check report](validation/runs/jury-studio-software-checks-2026-11-04.json) records the current source hashes and confirms that sources did not change during the checks. These are software checks; provider calls may be mocked, and no physical-camera or hardware validation is claimed. The [earlier browser review](validation/runs/causal-browser-2026-11-04/browser-review.json) and [earlier publication proof](validation/runs/causal-browser-2026-11-04/public-deployment.json) remain historical records of the previous interface.
 
-**221 tests passent : 114 Python et 107 JavaScript.** Le [rapport complet](validation/runs/software-checks-causal-release-2026-11-04.json) couvre les sources de la livraison. Le [parcours navigateur](validation/runs/causal-browser-2026-11-04/browser-review.json) vérifie la lecture, les échecs, les exports, la session Meta enregistrée, une nouvelle étude gratuite et les largeurs 320, 390, 768 et 1280 pixels. Les [corrections de l’atelier](validation/runs/legacy-repair-2026-11-04/) ont leurs propres preuves.
+## Three-minute presentation
 
-La [version publique de cette refonte](https://mkinvest57.github.io/TWINFORGE/) est déployée. Douze fichiers essentiels ont été relus sans authentification et correspondent aux sources; un export obtenu dans le navigateur public reproduit exactement les états, commandes, collisions et résultats locaux. [Preuve de publication](validation/runs/causal-browser-2026-11-04/public-deployment.json).
+[English voiceover](docs/VOICEOVER_3MIN_EN.txt) · [180-second English storyboard](docs/VIDEO_3MIN_STORYBOARD.json) · [Provisional English subtitles](docs/CAUSAL_DEMO_SUBTITLES_EN.srt)
 
-## Périmètre de la présentation
+These are editing materials, not an attestation that a final video or synthetic voice has been rendered. The storyboard opens with the actual Meta decision and retains both failed proposals, the better local baseline, and the model’s limits. Subtitle timing must be aligned with the final voice.
 
-Le laboratoire causal remplace la cuve en page d’accueil. La cuve et l’orbite ne font plus partie du parcours de présentation. Les essais historiques et leurs preuves restent archivés; ils ne deviennent pas des résultats de cette nouvelle expérience. L’atelier du pendule et la caméra gardent leur portée propre.
+The causal laboratory is the main presentation. The tank and orbit are outside that path. Historical experiments and evidence remain archived; they do not become results for this new experiment. The [original PDF compliance record](docs/PROMPT_COMPLIANCE.md) still records its separate physical requirements.
 
-[Script FR de trois minutes](docs/VOICEOVER_3MIN_FR.txt) · [English script](docs/VOICEOVER_3MIN_EN.txt) · [Storyboard](docs/VIDEO_3MIN_STORYBOARD.json) · [Sous-titres FR provisoires](docs/CAUSAL_DEMO_SUBTITLES_FR.srt)
+[Archived French README](docs/archive/README_CAUSAL_FR_2026-11-04.md) · [Earlier project history](docs/archive/README_PRE_PROCESS_2026-11-04.md) · [Licenses](docs/THIRD_PARTY.md)
 
-Ces fichiers préparent le montage. Ils ne prouvent pas encore la production de la voix ni le rendu d’une nouvelle vidéo finale. Le [dossier PDF historique](docs/PROMPT_COMPLIANCE.md) conserve ses exigences et ses lacunes; une expérience logicielle ne remplace pas rétroactivement ses exigences physiques.
-
-[Historique de la première version](docs/archive/README_PRE_PROCESS_2026-11-04.md) · [Version intermédiaire archivée](docs/archive/README_PROCESS_2026-11-04.md) · [Licences](docs/THIRD_PARTY.md)
+Current English-interface verification: [browser review](validation/runs/jury-studio-2026-11-04/browser-review.json). The separate motion-lab review includes all three scenarios, playback controls and mobile drawers.

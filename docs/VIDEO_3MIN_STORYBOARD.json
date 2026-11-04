@@ -1,17 +1,16 @@
 {
-  "schema_version": "twinforge.video-storyboard.causal.v1",
-  "updated_at": "2026-11-04T17:11:20.168623+00:00",
+  "schema_version": "twinforge.video-storyboard.causal.v2",
+  "updated_at": "2026-11-04T20:36:40.713675+00:00",
   "duration_seconds": 180,
-  "status": "Storyboard and voiceover text only; no generated voice or final rendered video attested.",
+  "status": "English storyboard, narration text and provisional subtitles only; no generated voice or final rendered video attested.",
   "word_counts": {
-    "fr": 409,
-    "en": 391
+    "en": 394
   },
-  "voice_timing_note": "Cible : 162 secondes de voix et 18 secondes de respiration, soit environ 151 mots/minute en français et 145 en anglais. Recaler après synthèse de la voix, puis revoir le rendu final de 180 secondes.",
+  "voice_timing_note": "Target: 162 seconds of narration and 18 seconds of breathing room. Align timings to the synthesized voice, then inspect the complete 180-second render.",
   "creative_direction": {
-    "voice": "Calme, incisive, curieuse. Poser la question au spectateur. Laisser les impacts et les échecs interrompre le rythme; aucune voix de bande-annonce.",
-    "editing": "Commencer par le choix et ses conséquences. Faire apparaître un seul nombre à la fois. Montrer les véritables commandes, réponses et échecs. Éviter une visite de toutes les cartes.",
-    "sound": "Musique instrumentale discrète. Les effets de choc sont des effets de montage, jamais présentés comme une mesure sonore réelle."
+    "voice": "Calm, precise, curious. Invite the viewer to judge the decision. Let impacts and failed proposals interrupt the rhythm. Avoid a trailer-announcer delivery.",
+    "editing": "Start with the choice and its actual consequences. Reveal one number at a time. Keep original commands and failures paired with their calculated outcomes. Use the real English interface.",
+    "sound": "Restrained instrumental bed. Any impact sound is an editorial effect, not an acoustic measurement."
   },
   "main_experiment": {
     "scenario_id": "cascade",
@@ -27,7 +26,11 @@
     "threshold_j": 8,
     "threshold_scope": "Arbitrary predeclared experimental peak-contact-energy criterion for protected cargo only; not an industrial damage threshold.",
     "prediction_scope": "Frozen same-model trajectories from supplied initial conditions; no held-out prediction-accuracy claim.",
-    "capture_status": "Use a fresh browser capture and its export for the final edit; the engine report alone is not a captured film."
+    "capture_status": "Use a fresh browser capture and its export for the final edit; the engine report alone is not a captured film.",
+    "default_source": "actual recorded Meta proposal, re-evaluated with the matching engine",
+    "meta_action_id": "steer:-0.32@0.25",
+    "meta_peak_j": 4.564491902149546,
+    "meta_control_impulse_ns": 62.540380368913944
   },
   "meta_experiment": {
     "source": "assets/causal-meta-session.json",
@@ -66,14 +69,13 @@
       "end_seconds": 13,
       "breathing_room_seconds": 2,
       "voice_target_seconds": 11,
-      "title": "Une décision avant le choc",
-      "fr": "Vous avez un seul geste. Freiner, dévier… ou ne rien faire. Quelle décision protège cette charge ? Regardez les deux futurs. Même départ. Une seule différence : votre intervention.",
-      "en": "You get one move. Brake, turn… or do nothing. Which decision protects this cargo? Watch both futures. Same starting point. One difference: your intervention.",
-      "shot": "Démarrer directement dans la comparaison réelle. Montrer brièvement la cascade sans action et la branche corrigée. Identifier ce plan comme un aperçu du résultat, puis revenir à t = 0. Aucun logo animé avant la question.",
+      "title": "One move before the impact",
+      "en": "You get one move. Brake, turn… or do nothing. Which decision protects this cargo? Watch both futures. Same starting point. One difference: the command Meta chose.",
+      "shot": "Open directly on the actual default comparison. Show a short preview of both outcomes, label it a simulation preview, then reset to time zero. No logo animation before the question.",
       "on_screen": [
-        "UN SEUL GESTE.",
-        "MÊME ÉTAT INITIAL. DEUX FUTURS.",
-        "SIMULATION · APERÇU DU RÉSULTAT"
+        "ONE MOVE.",
+        "SAME START. TWO FUTURES.",
+        "SIMULATION · RECORDED META DECISION"
       ]
     },
     {
@@ -81,14 +83,13 @@
       "end_seconds": 33,
       "breathing_room_seconds": 2,
       "voice_target_seconds": 18,
-      "title": "Ce que change une commande",
-      "fr": "Twinforge explore les conséquences avant de rejouer la scène. Ici, un transporteur frappe une charge, qui en frappe une autre. Sans action, le choc maximal sur l’équipement fragile atteint cent seize joules et demi. Avec la commande sélectionnée, aucun contact ne l’atteint dans cet essai.",
-      "en": "Twinforge explores the consequences before replaying the scene. Here, one carrier hits a load, which hits another. Without intervention, the largest impact involving the protected equipment reaches one hundred sixteen and a half joules. With the selected command, no contact reaches that equipment in this experiment.",
-      "shot": "Revenir au départ du scénario cascade, vitesse à 100 %, retard à 0,25 s. Lire les deux branches. Ralentir la première cascade au montage en gardant le temps simulé visible. Montrer les valeurs finales du calcul sur 12 s, sans les présenter comme une mesure du seul instant affiché.",
+      "title": "The real Meta decision",
+      "en": "Twinforge tests a decision before replaying its consequences. Here, one carrier triggers a chain of collisions. Without intervention: one hundred sixteen and a half joules on the protected cargo. Meta’s steering command brings that down to four point six. Both futures come from the same physical model.",
+      "shot": "Replay the default cascade: speed 100%, action at 0.25 s, recorded Meta steer −0.32 rad. Keep both branch labels and the recorded-source label visible. Metrics describe the complete 12-second calculation, not only the displayed instant.",
       "on_screen": [
-        "RÉACTION EN CHAÎNE · HORIZON 12 S",
-        "PIC SUR LA CHARGE PROTÉGÉE : 116,562 J → 0 J",
-        "ÉTATS ET LOIS FOURNIS"
+        "NO INTERVENTION: 116.562 J",
+        "META’S COMMAND: 4.564 J",
+        "12-SECOND HORIZON · KNOWN MODEL"
       ]
     },
     {
@@ -96,14 +97,13 @@
       "end_seconds": 52,
       "breathing_room_seconds": 2,
       "voice_target_seconds": 17,
-      "title": "Une recherche contestable et inspectable",
-      "fr": "Ce résultat ne vient pas d’une animation choisie à l’avance. Trente-sept commandes sont calculées. Freinages, déviations, absence d’action. Le logiciel cherche le plus petit effort parmi celles qui respectent le seuil fixé pour cet essai. Vous pouvez choisir une mauvaise commande et voir la différence.",
-      "en": "This result is not a hand-picked animation. The software calculates thirty-seven commands: braking, steering, and doing nothing. It looks for the smallest control effort among those meeting the threshold set for this experiment. You can choose a bad command and inspect what changes.",
-      "shot": "Ouvrir le sélecteur de candidats. Montrer le choix local de +0,20 rad, puis essayer une commande réellement évaluée qui échoue, par exemple aucune intervention. Revenir au choix local pour la suite. Garder chaque score associé à sa commande.",
+      "title": "Give the model a testable job",
+      "en": "Muse Spark receives the scene and a menu of allowed commands. It proposes one move and explains why. The simulator calculates the outcome. Those measurements go back to Spark for revision. The model never sees the exhaustive search scores.",
+      "shot": "Open Decision log. Briefly identify the initial scene, bounded action, physics feedback and revised proposal. Use actual interface content. Do not add a fake terminal or imply that playback starts another model call.",
       "on_screen": [
-        "37 COMMANDES TESTÉES",
-        "CRITÈRE EXPÉRIMENTAL : PIC ≤ 8 J",
-        "+0,20 RAD À 0,25 S · 39,190 N·s"
+        "META MUSE SPARK 1.3",
+        "PROPOSE → TEST → REFINE",
+        "PHYSICS CALCULATES THE OUTCOME"
       ]
     },
     {
@@ -111,14 +111,14 @@
       "end_seconds": 72,
       "breathing_room_seconds": 2,
       "voice_target_seconds": 18,
-      "title": "Le moment où il est trop tard",
-      "fr": "Maintenant, retardons ce geste. À un quart de seconde, une solution existe. À une demi-seconde, aucune des commandes testées ne protège la charge selon notre critère. La collision a déjà transmis le mouvement. Twinforge montre aussi les décisions qui arrivent trop tard. La limite affichée appartient à cette grille de tests.",
-      "en": "Now delay the move. At a quarter of a second, there is a solution. At half a second, none of the tested commands protects the cargo under our criterion. The collision has already transferred motion. Twinforge also shows when a decision comes too late. This boundary belongs to the tested time grid.",
-      "shot": "Dans la cascade, régler le retard à 0,50 s, attendre la fin du calcul, puis montrer qu’aucune commande ne passe le critère. Insister sur les deux instants effectivement testés. Ne pas annoncer 0,25 s comme une frontière continue exacte.",
+      "title": "Keep the failed attempts",
+      "en": "Here are the three proposals that actually ran. First: one hundred four point six joules. Rejected. Second: eight point five. Still too high. Third: four point six, under our eight-joule threshold. You can replay each attempt. The failures stay in the evidence.",
+      "shot": "Close the log and click the actual attempt buttons in order. Capture each recomputed branch. Label time-compressed playback as edited. Keep command and result paired; finish on attempt 3.",
       "on_screen": [
-        "0,25 S : UNE SOLUTION TESTÉE",
-        "0,50 S : AUCUNE DES 37 COMMANDES NE PASSE",
-        "RECHERCHE PAR PAS DE 0,25 S"
+        "ATTEMPT 1: 104.609 J · REJECTED",
+        "ATTEMPT 2: 8.485 J · REJECTED",
+        "ATTEMPT 3: 4.564 J · PASSES",
+        "EXPERIMENT CRITERION: ≤ 8 J"
       ]
     },
     {
@@ -126,14 +126,13 @@
       "end_seconds": 94,
       "breathing_room_seconds": 2,
       "voice_target_seconds": 20,
-      "title": "Faire entrer Meta dans la boucle",
-      "fr": "Et Meta, dans tout ça ? Muse Spark reçoit la scène et les commandes possibles. Il propose un geste, avec une explication. Le simulateur calcule ce qui se passe vraiment dans le modèle. Puis Spark reçoit ces résultats pour réviser sa proposition. Il ne voit pas les réponses de la recherche exhaustive.",
-      "en": "Where does Meta fit? Muse Spark receives the scene and the allowed commands. It proposes a move and explains why. The simulator calculates what actually happens in the model. Spark then receives those measurements and revises its proposal. It does not see the exhaustive search results.",
-      "shot": "Passer à l’onglet du raisonnement. Montrer les rôles, puis le journal réel. Expliquer la boucle : état initial, proposition, solveur, mesure retournée. Garder « session enregistrée » visible. Aucun faux terminal ni nouvel appel payant pour filmer.",
+      "title": "Make the evidence inspectable",
+      "en": "This is a recorded real session: three calls, about thirty-eight seconds, for less than three US cents. Open the journal to inspect the reasoning, then export the original responses and receipts. The English text is a translation. The original evidence remains intact. Nothing here depends on a convincing explanation alone.",
+      "shot": "Open Decision log and show the translation disclosure, original-log export, recorded-call count, and cost. Use the exported JSON for the precise duration overlay. Preserve original request IDs; never display credentials. Hold a readable evidence detail rather than scrolling rapidly.",
       "on_screen": [
-        "META MUSE SPARK 1.3",
-        "PROPOSER → SIMULER → MESURER → RÉVISER",
-        "SESSION RÉELLE ENREGISTRÉE"
+        "RECORDED REAL SESSION",
+        "3 CALLS · 37.86 S · $0.028276",
+        "ENGLISH TRANSLATION · ORIGINALS IN EXPORT"
       ]
     },
     {
@@ -141,15 +140,13 @@
       "end_seconds": 117,
       "breathing_room_seconds": 2,
       "voice_target_seconds": 21,
-      "title": "Trois réponses, deux échecs conservés",
-      "fr": "Voici les trois appels réellement exécutés. Première proposition : cent quatre joules, échec. Deuxième : huit virgule cinq, encore trop. Troisième : quatre virgule six, sous le seuil de huit joules. Les deux échecs restent dans le journal. Environ trente-huit secondes, pour moins de trois centimes de dollar.",
-      "en": "These are the three calls that actually ran. First proposal: one hundred four joules. Failure. Second: eight point five. Still too high. Third: four point six, below the eight-joule threshold. Both failures stay in the journal. About thirty-eight seconds, for less than three US cents.",
-      "shot": "Montrer les réponses dans leur ordre réel : 104,609, puis 8,485, puis 4,564 J. Afficher la mesure exacte lorsque la voix l’arrondit. Souligner la seconde réponse qui ne suffit pas, avant la révision. Coût et durée proviennent du rapport exporté.",
+      "title": "Challenge the model with a better baseline",
+      "en": "Can a simpler method do better? Here, yes. The separate local search tests thirty-seven commands and finds zero impact on the protected cargo, using less control effort. That search is not AI. We show it beside Meta’s result. The useful thing is a decision you can challenge, measure, and improve.",
+      "shot": "Open Try your decision, click Find best local command, and show the source changing to Local search. Compare the actual 0 J and 39.190 N·s local result with Meta’s 4.564 J and 62.540 N·s. Do not attribute local results to Meta.",
       "on_screen": [
-        "104,609 J : ÉCHEC",
-        "8,485 J : ÉCHEC",
-        "4,564 J : SOUS LE SEUIL",
-        "3 APPELS · 37,86 S · 0,028276 USD"
+        "META: 4.564 J · 62.540 N·s",
+        "LOCAL SEARCH: 0 J · 39.190 N·s",
+        "37 COMMANDS · LOCAL SEARCH IS NOT AI"
       ]
     },
     {
@@ -157,14 +154,13 @@
       "end_seconds": 138,
       "breathing_room_seconds": 2,
       "voice_target_seconds": 19,
-      "title": "La comparaison qui rend la preuve utile",
-      "fr": "La recherche locale fait mieux sur ce petit problème : zéro joule sur la charge, avec moins d’effort. Nous affichons cette comparaison. L’intérêt de Meta ici, c’est une proposition que l’on peut contredire, mesurer et améliorer. Une bonne explication ne remplace jamais la vérification de ses conséquences.",
-      "en": "The local search does better on this small problem: zero joules on the protected cargo, using less control effort. We show that comparison. Meta’s contribution here is a proposal we can challenge, measure, and revise. A persuasive explanation never replaces checking its consequences.",
-      "shot": "Comparer Meta à 4,564 J et 62,540 N·s, avec la recherche locale à 0 J et 39,190 N·s. Cliquer sur « Comparer la proposition Meta » avant le rejeu; vérifier que le libellé d’origine change. Aucun montage ne doit attribuer les 0 J à Meta.",
+      "title": "Show when the tested move is too late",
+      "en": "Now delay the move. At a quarter of a second, a tested solution exists. At half a second, none of the thirty-seven commands passes our criterion. The collision has already transferred motion. Twinforge also exposes decisions that arrive too late. This boundary belongs to the tested time grid.",
+      "shot": "Keep the cascade at 100% speed. Change delay from 0.25 s to 0.50 s, wait for calculation, and show the failure. The tested delay grid runs from 0 to 2 s in 0.25 s steps; do not present 0.25 s as an exact continuous deadline.",
       "on_screen": [
-        "META : 4,564 J · 62,540 N·s",
-        "RECHERCHE LOCALE : 0 J · 39,190 N·s",
-        "PROPOSITION ≠ PREUVE"
+        "0.25 S: A TESTED SOLUTION",
+        "0.50 S: NO TESTED COMMAND PASSES",
+        "DELAY GRID: 0.25 S STEPS"
       ]
     },
     {
@@ -172,14 +168,13 @@
       "end_seconds": 160,
       "breathing_room_seconds": 2,
       "voice_target_seconds": 20,
-      "title": "Montrer aussi la fragilité",
-      "fr": "Changeons d’épreuve. Dans l’intersection, la meilleure commande nominale échoue quand la vitesse varie de cinq pour cent. Le test le montre : un essai réussi sur trois. Vous pouvez changer la vitesse, examiner les trajectoires, puis exporter les états, les commandes et chaque collision. Les contre-exemples font partie du résultat.",
-      "en": "Change the challenge. At the intersection, the best nominal command fails when speed changes by five percent. The test shows it: one successful check out of three. Change the speed, inspect the trajectories, then export the states, commands, and every collision. Counterexamples are part of the result.",
-      "shot": "Choisir l’intersection, vitesse à 100 %, retard à 0,25 s, recherche locale. Montrer le résultat nominal de 3,464 J et le résultat de sensibilité de 1 sur 3. Rétablir les paramètres avant chaque prise. Exporter le rapport réel, puis montrer un seul événement lisible.",
+      "title": "Expose sensitivity, not just success",
+      "en": "Change the challenge. At the intersection, the best nominal command fails when speed changes by five percent. One successful check out of three. That is a sensitivity test, not a safety probability. Inspect the trajectories. Export the states, commands, and collisions. Counterexamples are part of the result.",
+      "shot": "Select Blind intersection, restore speed 100% and delay 0.25 s, and run local search. Show 3.464 J nominal and 1 / 3 sensitivity checks. Optionally turn on precomputed paths, then export the current experiment and show one readable contact event.",
       "on_screen": [
-        "INTERSECTION · COMMANDE NOMINALE",
-        "SENSIBILITÉ ±5 % : 1 ESSAI SUR 3 PASSE",
-        "ÉTATS · COMMANDES · CONTACTS · EXPORT"
+        "BLIND INTERSECTION · LOCAL SEARCH",
+        "±5% SPEED: 1 OF 3 CHECKS PASSES",
+        "STATES · COMMANDS · CONTACTS · EXPORT"
       ]
     },
     {
@@ -187,21 +182,20 @@
       "end_seconds": 180,
       "breathing_room_seconds": 2,
       "voice_target_seconds": 18,
-      "title": "Une portée claire, une invitation à essayer",
-      "fr": "Aujourd’hui, les états et les lois sont fournis. C’est un laboratoire numérique, pas encore un robot validé dans le monde réel. L’ambition : tester une décision avant d’en subir les conséquences. Twinforge. Une décision. Deux futurs. À vous de trouver le geste.",
+      "title": "Close with a clear ambition",
       "en": "Today, the initial states and physical laws are supplied. This is a numerical laboratory, not yet a robot validated in the real world. The ambition: test a decision before facing its consequences. Twinforge. One decision. Two futures. Now find the move that makes the difference.",
-      "shot": "Revenir à une vue large de la comparaison, puis à une carte finale avec le lien public et le dépôt vérifiés. Garder « simulation » et « modèle connu » lisibles. Laisser les deux dernières secondes sans voix. Aucun plan industriel réel ne doit suggérer une validation physique.",
+      "shot": "Return to recorded Meta attempt 3 and a wide comparison view. End on the verified public URL. Keep Simulation and Known model readable. Leave the final two seconds without narration. Do not suggest that real industrial footage is evidence of physical validation.",
       "on_screen": [
-        "SIMULATION · MODÈLE CONNU",
-        "UNE DÉCISION. DEUX FUTURS.",
+        "SIMULATION · KNOWN MODEL",
+        "ONE DECISION. TWO FUTURES.",
         "mkinvest57.github.io/TWINFORGE"
       ]
     }
   ],
   "outputs": {
-    "voiceover_fr": "docs/VOICEOVER_3MIN_FR.txt",
     "voiceover_en": "docs/VOICEOVER_3MIN_EN.txt",
-    "subtitles_fr": "docs/CAUSAL_DEMO_SUBTITLES_FR.srt"
+    "subtitles_en": "docs/CAUSAL_DEMO_SUBTITLES_EN.srt",
+    "archived_bilingual_storyboard": "docs/archive/VIDEO_CAUSAL_BILINGUAL_2026-11-04.json"
   },
   "review_requirements": [
     "Match every captured value and command to that capture’s exported report.",
@@ -213,7 +207,12 @@
     "Do not turn 3 speed checks into a success probability.",
     "Do not imply that the camera reconstructed the industrial simulation.",
     "Recalibrate subtitle timings to the actual generated voice.",
-    "Inspect the final rendered film and public links before submitting; this document is not a submission receipt."
+    "Inspect the final rendered film and public links before submitting; this document is not a submission receipt.",
+    "The opening uses the actual recorded Meta result of 4.564 J; the 0 J local-search comparison appears later.",
+    "Do not imply receding-horizon robot control: this laboratory compares a single bounded intervention.",
+    "All jury-facing narration, overlays, and controls are English; original provider responses remain unchanged in the export."
   ],
-  "subtitle_timing_note": "Minutage éditorial provisoire. Les sous-titres reproduisent exactement la voix française, avec deux lignes de 42 caractères au maximum par entrée. Recaler les entrées et sorties sur la voix effectivement générée, puis vérifier la lisibilité du montage."
+  "subtitle_timing_note": "Provisional editorial timing, not audio alignment. Subtitles reproduce the English narration exactly, with at most two lines of 42 characters per cue. Align cue boundaries to the generated voice and verify readability in the final edit.",
+  "language": "en",
+  "subtitle_cues": 35
 }

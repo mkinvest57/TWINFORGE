@@ -5,6 +5,7 @@
  * Industrial objects are schematic bodies inside the engine's circular envelopes.
  */
 import * as THREE from '../../assets/vendor/three/build/three.module.js';
+import {SCENARIO_COPY} from './copy.mjs';
 
 const C={background:0x11161d,floor:0x1b242d,edge:0x44515e,grid:0x33414e,rail:0x313d49,muted:0x7f929f,orange:0xff9b60,cyan:0x62dce7,metal:0xa6b2bc,dark:0x18212a,success:0x80d3ac};
 const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
@@ -13,7 +14,7 @@ export function createCausalScene(container,options={}){
   if(!container?.appendChild)throw new TypeError('A DOM container is required.');
   const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false,preserveDrawingBuffer:true,powerPreference:'low-power'});
   renderer.setClearColor(C.background,1);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.3;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;
-  renderer.domElement.setAttribute('role','img');renderer.domElement.setAttribute('aria-label','Deux vues du même scénario : référence à gauche, intervention à droite.');container.appendChild(renderer.domElement);
+  renderer.domElement.setAttribute('role','img');renderer.domElement.setAttribute('aria-label','Two views of the same scenario: baseline on the left, intervention on the right.');container.appendChild(renderer.domElement);
   const geometries=new Set(),materials=new Set(),textures=new Set();let disposed=false,width=1,height=1,last=null,signature='',stacked=false;
   const ownGeometry=g=>(geometries.add(g),g),ownMaterial=m=>(materials.add(m),m),ownTexture=t=>(textures.add(t),t);
   const standard=(color,props={})=>ownMaterial(new THREE.MeshStandardMaterial({color,roughness:.72,metalness:.22,...props}));
@@ -81,7 +82,7 @@ export function createCausalScene(container,options={}){
       box(physical,r*.45,r*.3,.015,lightMaterial,r*.16,r*.82,r*.565);top=r*1.45;
     }
     const shortLabel=(body.label||body.id).split(' · ')[0],label=textSprite(shortLabel,{color:body.id===scenario.protectedBodyId?'#a4eedb':'#ced8df',width:.42,height:.48,fontSize:64});label.position.y=top+.22;group.add(label);
-    if(body.id===scenario.protectedBodyId){const tag=textSprite('CHARGE SENSIBLE',{color:'#a5c9be',width:2.8,height:.42,fontSize:38});tag.position.y=top+.72;group.add(tag);}
+    if(body.id===scenario.protectedBodyId){const tag=textSprite('FRAGILE CARGO',{color:'#a5c9be',width:2.8,height:.42,fontSize:38});tag.position.y=top+.72;group.add(tag);}
     view.bodyGroup.add(group);view.bodies.set(body.id,{group,physical,label,initial:body});return group;
   }
   function configure(scenario){
@@ -125,7 +126,7 @@ export function createCausalScene(container,options={}){
     if(disposed)return;last=input;const scenario=input.scenario;if(!scenario?.bodies||!scenario?.arena)return;configure(scenario);const timeS=finite(input.timeS)?input.timeS:0;
     updateBranch(branches[0],input.baseline,input.baselinePrediction??input.plan?.baseline?.paths,input.baselineEvents??input.plan?.baseline?.events,scenario,timeS,input.showPredictions!==false);
     updateBranch(branches[1],input.intervention,input.interventionPrediction??input.plan?.best?.paths,input.interventionEvents??input.plan?.best?.events,scenario,timeS,input.showPredictions!==false);
-    renderer.domElement.setAttribute('aria-label',`Deux branches du scénario ${scenario.title||scenario.id}, à ${timeS.toFixed(2)} secondes. Référence ${stacked?'en haut':'à gauche'}, intervention ${stacked?'en bas':'à droite'}.`);draw();
+    renderer.domElement.setAttribute('aria-label',`Two branches of ${SCENARIO_COPY[scenario.id]?.title||scenario.id}, at ${timeS.toFixed(2)} seconds. Baseline ${stacked?'above':'on the left'}, intervention ${stacked?'below':'on the right'}.`);draw();
   }
   const observer=new ResizeObserver(resize);observer.observe(container);
   const contextLost=event=>{event.preventDefault();container.dispatchEvent(new CustomEvent('causal-context-lost',{bubbles:true}));};renderer.domElement.addEventListener('webglcontextlost',contextLost);

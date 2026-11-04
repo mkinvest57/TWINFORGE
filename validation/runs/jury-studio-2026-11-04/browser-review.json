@@ -1,0 +1,82 @@
+{
+  "checked_at": "2026-11-04T20:39:26.453239+00:00",
+  "scope": "Local rendered English UI and deterministic replay; no physical phone or camera tested.",
+  "pages": {
+    "decision_lab": {
+      "widths_checked": [
+        320,
+        390,
+        768,
+        1280
+      ],
+      "horizontal_overflow": false,
+      "dialogs": [
+        "controls",
+        "meta",
+        "evidence"
+      ],
+      "escape_closes_and_restores_focus": true,
+      "replay_pause_reset_and_scrub": true,
+      "default_selected_action": {
+        "id": "steer:-0.32@0.25",
+        "kind": "steer",
+        "bodyId": "carrier",
+        "atS": 0.25,
+        "amount": -0.32
+      },
+      "default_selected_energy_j": 4.564491902149546,
+      "reference_energy_j": 116.56200059920455,
+      "default_matches_original_meta": true,
+      "failed_meta_attempt_1_replayed_j": 104.609273,
+      "local_search_independent_and_labeled": true,
+      "scenario_change_to_crossing_local_energy_j": 3.464,
+      "recorded_attempt_restores_recorded_scenario": true,
+      "source_language": "en",
+      "raw_original_meta_responses_unchanged": true
+    },
+    "camera": {
+      "widths_checked": [
+        320,
+        390
+      ],
+      "horizontal_overflow": false,
+      "synthetic_pixel_tracking_completed": true,
+      "observed_error_px": 1.8,
+      "scored_forecasts_at_capture": 44,
+      "model_calls": 0,
+      "physical_camera_tested": false
+    },
+    "motion_lab": {
+      "report": "../../../.21st/verification/2026-11-04/workbench-review.json",
+      "widths_checked": [
+        320,
+        390,
+        1280
+      ],
+      "physics_unchanged": true
+    }
+  },
+  "backend_free_job": {
+    "status": "complete",
+    "provider_calls": 0,
+    "report": "free-backend-job.json"
+  },
+  "console_errors_warnings": [],
+  "design_review": {
+    "tool": "21st review",
+    "result": "17 informational color-token findings, no warnings or errors",
+    "primary_white_contrast": 4.5035
+  },
+  "screenshots": [
+    "decision-tablet-768.png",
+    "decision-desktop-1280.png",
+    "meta-journal-1280.png",
+    "decision-mobile-390.png",
+    "camera-mobile-390.png"
+  ],
+  "limitations": [
+    "Responsive browser viewport checks are not tests on physical iOS/Android devices.",
+    "No new paid Meta calls were made. Public proposal playback uses the recorded real session.",
+    "The MPC reference video informed hierarchy only; no video or third-party media was copied into the product."
+  ]
+}

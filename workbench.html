@@ -4,123 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <link rel="icon" href="data:,">
-<title>Twinforge — Bancs d’essai techniques</title>
-<style>
-  [hidden]{display:none!important}
-  :root{
-    --bg:#0e1013; --panel:#16181d; --panel2:#1c1f26; --line:#2a2e38;
-    --txt:#e8e6e1; --dim:#9aa0ad; --accent:#ff6b1a; --ok:#3ecf6e; --bad:#ff4545;
-    --cyan:#37c8d9; --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
-    --sans:-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--txt);font-family:var(--sans)}
-  #app{display:flex;height:100vh;width:100vw}
-  #scene-wrap{flex:1;position:relative;min-width:0}
-  #scene-wrap canvas{display:block}
-  .panel{width:328px;flex:none;background:var(--panel);overflow-y:auto;overflow-x:hidden}
-  .panel.left{border-right:1px solid var(--line)}
-  .panel.right{border-left:1px solid var(--line);width:348px}
-  .panel::-webkit-scrollbar{width:8px}
-  .panel::-webkit-scrollbar-thumb{background:#2c303a;border-radius:4px}
-  .pad{padding:14px 14px 20px}
-  h1{font-size:19px;letter-spacing:.04em;font-weight:800}
-  h1 .x{color:var(--accent)}
-  .pitch{font-size:12.5px;line-height:1.45;color:var(--txt);margin:6px 0 4px;font-weight:600}
-  .sub{font-size:11px;line-height:1.5;color:var(--dim)}
-  .badge{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 7px;border:1px solid var(--line);
-    border-radius:3px;color:var(--dim);margin:0;background:var(--panel2)}
-  .badge.hot{color:#ffb38a;border-color:#5a3418}
-  .sec{margin-top:11px;border-top:1px solid var(--line);padding-top:9px}
-  .sec h2{font-size:11px;letter-spacing:.12em;color:var(--dim);font-weight:700;margin-bottom:9px}
-  .sec h2 b{color:var(--accent);font-weight:800}
-  label.ctl{display:block;font-size:11.5px;color:var(--dim);margin:9px 0 3px}
-  label.ctl output{float:right;font-family:var(--mono);color:var(--txt);font-size:11.5px}
-  input[type=range]{width:100%;accent-color:var(--accent);height:22px}
-  .row{display:flex;gap:8px;flex-wrap:wrap}
-  button{font-family:var(--sans);font-size:12.5px;font-weight:700;border:1px solid var(--line);
-    background:var(--panel2);color:var(--txt);border-radius:6px;padding:9px 12px;cursor:pointer}
-  button:hover{border-color:#454b5a}
-  button:active{transform:translateY(1px)}
-  button.primary{background:var(--accent);border-color:var(--accent);color:#14100c;flex:1;font-size:14px;padding:11px}
-  button.primary:hover{background:#ff7d38}
-  button.on{border-color:var(--accent);color:#ffb38a;background:#2a1c10}
-  button:disabled{opacity:.45;cursor:default}
-  .scene-btns button{flex:1 1 30%;font-size:11.5px;padding:8px 4px}
-  .scene-btns button.on{background:#2a1c10}
-  table{width:100%;border-collapse:collapse;font-size:11.5px}
-  th{font-size:10px;letter-spacing:.08em;color:var(--dim);text-align:left;padding:4px 4px;border-bottom:1px solid var(--line)}
-  td{padding:5px 4px;border-bottom:1px solid #22252e;font-family:var(--mono);font-size:11px}
-  td:first-child{font-family:var(--sans);color:var(--dim)}
-  .verdict{border:1px solid var(--line);border-radius:8px;padding:12px;text-align:center;background:var(--panel2)}
-  .verdict .big{font-size:26px;font-weight:800;letter-spacing:.03em}
-  .verdict .when{font-family:var(--mono);font-size:10.5px;color:var(--dim);margin-top:3px}
-  .ok{color:var(--ok)} .bad{color:var(--bad)} .wait{color:var(--dim)}
-  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-  .stat{border:1px solid var(--line);border-radius:6px;padding:8px 10px;background:var(--panel2)}
-  .stat .k{font-size:10px;color:var(--dim);letter-spacing:.06em}
-  .stat .v{font-family:var(--mono);font-size:17px;margin-top:2px}
-  .stat .v small{font-size:10px;color:var(--dim)}
-  .log{font-family:var(--mono);font-size:10.5px;line-height:1.6;background:#101216;border:1px solid var(--line);
-    border-radius:6px;padding:8px 10px;max-height:132px;overflow-y:auto;white-space:pre-wrap;word-break:break-word}
-  .log .t{color:#5f6675}
-  input[type=text],input[type=password]{width:100%;background:#101216;border:1px solid var(--line);color:var(--txt);
-    border-radius:6px;padding:9px 10px;font-size:12.5px;font-family:var(--sans)}
-  input[type=text]:focus,input[type=password]:focus{outline:1px solid var(--accent)}
-  .hint{font-size:10.5px;color:var(--dim);line-height:1.5;margin-top:5px}
-  #hud{position:absolute;top:12px;left:50%;transform:translateX(-50%);text-align:center;pointer-events:none;z-index:5;width:max-content;max-width:92%}
-  #hud-verdict{display:inline-block;background:rgba(10,11,14,.88);border:1px solid var(--line);border-radius:8px;
-    padding:8px 18px;font-size:18px;font-weight:800;letter-spacing:.03em}
-  #hud-sub{margin-top:8px;display:inline-block;background:rgba(10,11,14,.72);border-radius:5px;padding:3px 10px;font-family:var(--mono);font-size:11px;color:#cfd3dc}
-  #ghost-tag{position:absolute;pointer-events:none;z-index:4;font-family:var(--mono);font-size:10px;font-weight:700;
-    color:#0b2b30;background:var(--cyan);padding:2px 6px;border-radius:3px;transform:translate(-50%,-140%);white-space:nowrap}
-  #errbar{position:absolute;left:12px;bottom:12px;z-index:5;background:rgba(10,11,14,.85);border:1px solid var(--line);
-    border-radius:8px;padding:8px 12px;font-family:var(--mono);font-size:11px;line-height:1.7;min-width:230px}
-  #errbar b{font-size:16px}
-  #chart-wrap{position:absolute;right:12px;bottom:12px;z-index:5;background:rgba(10,11,14,.85);
-    border:1px solid var(--line);border-radius:8px;padding:6px 8px 2px}
-  #chart-wrap .cap{font-family:var(--mono);font-size:9.5px;color:var(--dim);padding:0 2px 4px}
-  #err-overlay{position:absolute;inset:0;display:none;place-items:center;background:rgba(10,10,12,.9);z-index:50;padding:20px}
-  #err-overlay .box{max-width:520px;border:1px solid var(--bad);border-radius:8px;padding:18px;background:var(--panel)}
-  #err-overlay h3{color:var(--bad);margin-bottom:8px;font-size:15px}
-  #err-overlay p{font-size:12.5px;line-height:1.6;color:var(--dim);font-family:var(--mono);word-break:break-word}
-  .check{font-size:11.5px;line-height:1.9;font-family:var(--mono)}
-  .check .p{color:var(--ok)} .check .f{color:var(--bad)} .check .n{color:var(--dim)}
-  #btn-shoot-float{display:none}
-  .camera-entry{display:block;margin:12px 0;padding:13px 14px;border:1px solid var(--accent);border-radius:8px;color:var(--txt);text-decoration:none;font-size:14px;font-weight:700}
-  .camera-entry small{display:block;color:var(--dim);font-size:12px;font-weight:400;margin-top:5px}
-  .mobile-camera-entry{display:none}
-  .panel.right .verdict{position:sticky;top:0;z-index:3}
-  @media (max-width:980px){
-    html,body{height:auto;overflow:auto}
-    body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
-    button{min-height:44px}
-    input,select{font-size:16px!important;max-width:100%}
-    .mobile-camera-entry{display:block;position:fixed;bottom:0;left:0;right:0;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:var(--bg);border-top:1px solid var(--line);z-index:60}
-    .mobile-camera-entry a{display:block;text-align:center;padding:14px;border-radius:8px;background:var(--accent);color:#14100c;text-decoration:none;font-weight:750}
-    #btn-shoot-float{display:block;position:absolute;right:12px;bottom:108px;z-index:6;background:var(--accent);color:#14100c;border-color:var(--accent);font-size:14px;padding:12px 16px;box-shadow:0 4px 18px rgba(0,0,0,.5)}
-    #app{flex-direction:column;height:auto;min-height:100svh;width:100%}
-    #scene-wrap{flex:none;height:52svh;min-height:320px}
-    .panel{width:100%!important;overflow:visible}
-    .panel.left{order:2;border-right:none;border-top:1px solid var(--line)}
-    .panel.right{order:3;border-left:none}
-    #chart-wrap{display:none}
-  }
-</style>
+<title>Twinforge — Motion lab</title>
+<link rel="stylesheet" href="./web/workbench-ui.css">
 </head>
 <body>
-<nav class="mobile-camera-entry" aria-label="Laboratoire"><a href="./index.html">← Retour à Twinforge</a></nav>
+<header class="site-header"><a class="wordmark" href="./index.html" aria-label="Twinforge home">TWINFORGE<span>®</span></a><nav aria-label="Main navigation"><a href="./index.html">Decision lab</a><a href="./workbench.html?scene=chaos" aria-current="page">Motion lab</a><a href="./scan.html">Camera</a></nav><span class="header-note">Observe. Predict. Test.</span></header>
 <div id="app">
-  <aside class="panel left"><div class="pad">
-    <h1>TWINFORGE <span class="x">LAB</span></h1>
-    <a class="camera-entry" href="./index.html">← Twinforge</a>
-    <a class="camera-entry" href="./scan.html">Scanner avec ma caméra <small>Sur téléphone · suivi local · prévision du mouvement</small></a>
-    <p class="pitch">Banc d’essai technique : tirs, collisions et pendule. La démonstration principale se trouve dans Twinforge.</p>
-    <p class="sub">L3 · Known-model calibration · Predictive ghost +0.5s · Simulation control</p>
-    <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">
-      <span class="badge hot">INDIE · PUSH THE FRONTIER</span><span class="badge">SAM 3.1</span><span class="badge">MUSE SPARK</span><span class="badge" id="mode-badge">DEMO MODE — LOCAL PHYSICS</span>
-    </div>
+  <section class="workbench-heading" aria-labelledby="page-title"><div><p class="eyebrow">Motion lab</p><h1 id="page-title">See the next half-second.</h1><p class="page-description">Watch a forecast meet the motion it predicted.</p></div><a class="meta-route" href="./index.html">Looking for Meta AI? Open Decision lab <span aria-hidden="true">↗</span></a></section>
+  <section class="experiment-shell" aria-label="Motion experiment">
+    <div class="experiment-toolbar"><div class="scenario-picker"><label for="workbench-scene">Experiment</label><select id="workbench-scene"><option value="chaos">Double pendulum</option><option value="multi">Collisions</option><option value="hoop">Ballistics</option></select></div><div class="playback-controls" role="group" aria-label="Playback"><button class="primary" id="btn-shoot">Start</button><button id="btn-alt-pause" hidden disabled>Pause</button><button id="btn-reset">Reset</button></div><div class="toolbar-tools"><button data-open-dialog="settings-drawer" aria-haspopup="dialog">Settings</button><button data-open-dialog="evidence-drawer" aria-haspopup="dialog">Evidence</button><button data-open-dialog="data-drawer" aria-haspopup="dialog">Data tools</button></div></div>
+    <main id="scene-wrap" aria-label="Interactive 3D motion simulation">
 
+    <div id="ghost-tag" style="display:none">GHOST · +0.5s</div>
+    <div id="chart-wrap"><div class="cap">SIMULATION vs PREDICTION (cm) — per shot</div><canvas id="chart" width="264" height="74"></canvas></div>
+    <button id="btn-shoot-float" hidden>Start</button>
+    <div id="err-overlay"><div class="box"><h3>The 3D renderer could not start</h3><p id="err-msg"></p></div></div>
+  <div class="scene-corner"><span class="scene-dot"></span> Local simulation</div><div class="scene-navigation">Drag to orbit <span>·</span> Scroll to zoom</div>
+    </main>
+    <div class="scene-readout">    <div id="hud"><div id="hud-verdict" class="wait">Ready when you are</div><div id="hud-sub">ghost projected +0.5s ahead of the ball · verdict locked before it lands</div></div>
+<div id="errbar"><span>Forecast error <b id="err-now">—</b></span><span><span id="err-average-label">Session mean</span> <b id="err-avg">—</b></span><span class="recal-summary">Recalibrations <b id="err-recal">0</b></span></div></div>
+  </section>
+  <footer class="lab-footnote"><p>Motion forecasts use local physics. Optional model tools are separate.</p><a href="./index.html">Compare actions with Meta AI <span aria-hidden="true">↗</span></a></footer>
+</div>
+<dialog id="settings-drawer" class="lab-drawer" aria-labelledby="settings-title"><div class="drawer-heading"><div><p class="eyebrow">Motion lab</p><h2 id="settings-title">Experiment settings</h2></div><button data-close-dialog aria-label="Close settings">×</button></div><div class="drawer-content panel left"><div class="pad"><span class="badge" id="mode-badge">LOCAL PHYSICS</span>
     <div class="sec"><h2><b>1</b> · OBSERVER — DATA SOURCE</h2>
       <div class="row">
         <span class="badge" id="sam-ball">ball · simulated sensor</span><span class="badge" id="sam-hoop">hoop · declared fixture</span><span class="badge" id="sam-board">board · declared fixture</span>
@@ -129,7 +35,7 @@
       <p class="hint" id="sam-status">Source: generated 3D simulation. No video tracking or occlusion test has been run here. Import a measured dataset to inspect its calibration and provenance.</p>
     </div>
 
-    <div class="sec"><h2>LAUNCH</h2>
+    <div class="sec"><h2>Simulation settings</h2>
       <div id="shot-settings"><label class="ctl">Shot angle <output id="o-angle">52°</output></label>
       <input type="range" id="in-angle" min="35" max="75" step="0.5" value="52">
       <label class="ctl">Power <output id="o-power">7.8 m/s</output></label>
@@ -139,9 +45,9 @@
       <label class="ctl">Lateral wind (scene) <output id="o-wind">0.0 m/s</output></label>
       <input type="range" id="in-wind" min="-3" max="3" step="0.1" value="0">
       </div><div class="row" style="margin-top:12px">
-        <button class="primary" id="btn-shoot">SHOOT THE BALL</button>
-        <button id="btn-reset">Reset</button>
-        <button id="btn-alt-pause" hidden disabled>Pause</button>
+
+
+
         <button id="btn-view">Reset view</button>
       </div>
       <div class="row" style="margin-top:8px">
@@ -169,36 +75,27 @@
       </div>
     </div>
 
-    <div class="sec"><h2>EXPÉRIENCES TECHNIQUES</h2>
+    <div class="sec" hidden><h2>Experiments</h2>
       <div class="row scene-btns">
-        <button data-scene="hoop" class="on" style="flex:1">Tir balistique</button>
+        <button data-scene="hoop" class="on" style="flex:1">Ballistics</button>
       </div>
       <details style="margin-top:8px">
-        <summary style="cursor:pointer;color:var(--dim);font-size:12px">Autres bancs d’essai</summary>
+        <summary style="cursor:pointer;color:var(--dim);font-size:12px">Other experiments</summary>
         <div class="row scene-btns" style="margin-top:8px">
           <button data-scene="multi">Collisions</button>
-          <button data-scene="chaos">Double pendule</button>
+          <button data-scene="chaos">Double pendulum</button>
         </div>
       </details>
       <p class="hint" id="scene-hint">Scene 1 — vertical hoop shot. Full checklist in the right panel.</p>
     </div>
 
-    <div class="sec"><h2>MODEL SERVICES — LOCAL SERVER</h2>
+    <div class="sec"><h2>Model services</h2>
       <p class="hint" id="api-status">API status: checking the local server…</p>
-      <p class="hint">Run <span style="font-family:var(--mono)">python3 server.py</span> for the local Meta model services. Perception, model-assisted calibration and media generation are available in the data workbench below. A configured credential does not prove a successful call; the event log records actual requests and costs.</p>
+      <p class="hint">Run <span style="font-family:var(--mono)">python3 server.py</span> for the local Meta model services. Perception, model-assisted calibration and media generation are available in Data tools. A configured credential does not prove a successful call; the event log records actual requests and costs.</p>
     </div>
-  </div></aside>
+  </div></div><div class="drawer-footer"><button data-close-dialog>Done</button></div></dialog>
+<dialog id="evidence-drawer" class="lab-drawer" aria-labelledby="evidence-title"><div class="drawer-heading"><div><p class="eyebrow">Measurements, not claims</p><h2 id="evidence-title">Run evidence</h2></div><button data-close-dialog aria-label="Close evidence">×</button></div><div class="drawer-content panel right"><div class="pad">
 
-  <main id="scene-wrap">
-    <div id="hud"><div id="hud-verdict" class="wait">READY — SHOOT THE BALL</div><div id="hud-sub">ghost projected +0.5s ahead of the ball · verdict locked before it lands</div></div>
-    <div id="ghost-tag" style="display:none">GHOST · +0.5s</div>
-    <div id="errbar">ghost error <b id="err-now">—</b><br><span id="err-average-label" style="color:var(--dim)">session avg</span> <span id="err-avg">—</span> · <span style="color:var(--dim)">recalibrations</span> <span id="err-recal">0</span><br><span style="color:var(--dim)">recalibration threshold: 30 cm</span></div>
-    <div id="chart-wrap"><div class="cap">SIMULATION vs PREDICTION (cm) — per shot</div><canvas id="chart" width="264" height="74"></canvas></div>
-    <button id="btn-shoot-float">SHOOT</button>
-    <div id="err-overlay"><div class="box"><h3>The 3D renderer could not start</h3><p id="err-msg"></p></div></div>
-  </main>
-
-  <aside class="panel right"><div class="pad">
     <div class="verdict" id="verdict-box">
       <div class="big wait" id="verdict-big">WAITING</div>
       <div class="when" id="verdict-when">no verdict yet</div>
@@ -218,7 +115,7 @@
         <div class="stat"><div class="k">MAKE PROBABILITY (MONTE-CARLO)</div><div class="v" id="st-prob">—</div></div>
         <div class="stat"><div class="k">CORRECT VERDICTS</div><div class="v" id="st-verdicts">0 / 0</div></div>
         <div class="stat"><div class="k">SHOTS</div><div class="v" id="st-shots">0</div></div>
-        <div class="stat"><div class="k">SENSIBILITÉ INITIALE · 0,003 RAD</div><div class="v" id="st-horizon">—</div></div>
+        <div class="stat"><div class="k">INITIAL SENSITIVITY · 0.003 RAD</div><div class="v" id="st-horizon">—</div></div>
       </div>
     </div>
 
@@ -246,6 +143,7 @@
     <div class="sec"><h2>GAUNTLET — PER-SCENE CHECKLIST</h2>
       <div class="check" id="gauntlet-check"></div>
       <div class="row" style="margin-top:8px"><button id="export-evidence">Export evidence JSON</button><button id="validate-software">Run checks</button></div>
+      <p class="hint" id="validation-status" role="status" hidden></p>
       <p class="hint" id="evidence-status">Measured runs are stored locally and can be exported.</p>
       <p class="hint">A scene is VALIDATED only if every test passes live. Failure = a named failure point (FP-01…FP-06), never averaged away.</p>
     </div>
@@ -254,12 +152,13 @@
       <p class="hint" style="margin-top:0">
         <b style="color:var(--txt)">FP-01</b> rim occlusion → re-acquisition by predicted trajectory ·
         <b style="color:var(--txt)">FP-02</b> blur at apex → outliers excluded from fit ·
-        <b style="color:var(--txt)">FP-03/05</b> bancs d’essai (pendule / collisions) ·
+        <b style="color:var(--txt)">FP-03/05</b> experimental scenes (pendulum / collisions) ·
         <b style="color:var(--txt)">FP-06</b> free induction not demonstrated → current L3 addendum; the historical Oct 29 record is preserved.
       </p>
     </div>
-  </div></aside>
-</div>
+  </div></div><div class="drawer-footer"><button data-close-dialog>Done</button></div></dialog>
+<dialog id="data-drawer" class="lab-drawer" aria-labelledby="data-title"><div class="drawer-heading"><div><p class="eyebrow">Advanced</p><h2 id="data-title">Data &amp; model tools</h2></div><button data-close-dialog aria-label="Close data tools">×</button></div><div class="drawer-content" id="data-tools-body"></div><div class="drawer-footer"><button data-close-dialog>Done</button></div></dialog>
+<script src="./web/workbench-ui.js"></script>
 <script type="importmap">
 {"imports":{
   "three":"./assets/vendor/three/build/three.module.js",
@@ -328,6 +227,7 @@ window.addEventListener('error', e => { if(!bootedFlag) showError(e.message); })
 window.addEventListener('unhandledrejection', e => { if(!bootedFlag) showError(e.reason); });
 
 /* ============ RENDERER / SCENE ============ */
+let gymEnvironment, labFloor;
 let renderer, scene, camera, controls, lastFrameMs = performance.now();
 let ball, ballSpin = new THREE.Vector3(0,-6,0), ghostBall, ghostLine, arcLine, mcGroup, netMesh, netBase = [];
 let rimMesh, boardGroup, hoopGroup, mcCone;
@@ -336,7 +236,7 @@ const ballState = { p: LAUNCH_POS.clone(), v: new THREE.Vector3(), spin: new THR
 let observed = []; // simulated sensor observations {t,p,contact}; no SAM claim
 let predictedTrail = []; // timestamped predicted points for real-vs-predicted error
 /* Prédiction des scènes gauntlet (simulation) : même contrat que le basket —
-   prévision émise à sourceT, comparée à l'observation à targetT, jamais à la position courante. */
+   prévision issued at sourceT, comparée à l'observation à targetT, jamais à la position courante. */
 let altRunning = false, altErrorSum = 0, altErrorCount = 0;
 let altClock = 0, altGhostTimer = 0, altFrameDt = 0, altPrevPositions = [], altAcc = 0;
 const altModels={multi:{g:8.7,restitution:0.5,friction:0.12,source:'unmeasured prior'},chaos:{g:8.8,source:'unmeasured prior'},orbit:{mu:2,source:'unmeasured prior'}};
@@ -464,37 +364,41 @@ function onResize(){
 
 /* ---------- 3D scene construction ---------- */
 function buildCourt(){
+  gymEnvironment = new THREE.Group(); scene.add(gymEnvironment);
   const wood = woodTexture();
   const floorMat = new THREE.MeshStandardMaterial({ map: wood, roughness: 0.38, metalness: 0.05, envMapIntensity: 0.7 });
   const floor = new THREE.Mesh(new THREE.PlaneGeometry(11, 13), floorMat);
   floor.rotation.x = -Math.PI/2; floor.position.set(0, 0, 1.6);
-  floor.receiveShadow = true; scene.add(floor);
+  floor.receiveShadow = true; gymEnvironment.add(floor);
   // gridded back wall + dark stands
   const wallMat = new THREE.MeshStandardMaterial({ color: 0x232830, roughness: 0.92, metalness: 0.05 });
   const back = new THREE.Mesh(new THREE.BoxGeometry(11, 5.4, 0.18), wallMat);
-  back.position.set(0, 2.7, -1.15); back.receiveShadow = true; scene.add(back);
+  back.position.set(0, 2.7, -1.15); back.receiveShadow = true; gymEnvironment.add(back);
   const gridMat = new THREE.LineBasicMaterial({ color: 0x39404e, transparent: true, opacity: 0.5 });
   const gridPts = [];
   for(let gx=-5; gx<=5; gx+=0.55){ gridPts.push(gx, 0, -1.04, gx, 5.4, -1.04); }
   for(let gy=0.4; gy<5.4; gy+=0.55){ gridPts.push(-5.5, gy, -1.04, 5.5, gy, -1.04); }
   const gridGeo = new THREE.BufferGeometry();
   gridGeo.setAttribute('position', new THREE.Float32BufferAttribute(gridPts, 3));
-  scene.add(new THREE.LineSegments(gridGeo, gridMat));
+  gymEnvironment.add(new THREE.LineSegments(gridGeo, gridMat));
   for(const sx of [-1, 1]){
     const side = new THREE.Mesh(new THREE.BoxGeometry(0.18, 4.6, 12), new THREE.MeshStandardMaterial({ color: 0x1d2129, roughness: 0.95 }));
-    side.position.set(sx*5.6, 2.3, 1.6); scene.add(side);
+    side.position.set(sx*5.6, 2.3, 1.6); gymEnvironment.add(side);
   }
   // ceiling lights + coloured wall mats (gym dressing)
   const lightMat = new THREE.MeshStandardMaterial({ color: 0xf4f6ff, emissive: 0xdfe8ff, emissiveIntensity: 1.6, roughness: 0.4 });
   for (const lx of [-3.2, 0, 3.2]){
     const lamp = new THREE.Mesh(new THREE.BoxGeometry(1.9, 0.07, 0.55), lightMat);
-    lamp.position.set(lx, 5.32, 1.8); scene.add(lamp);
+    lamp.position.set(lx, 5.32, 1.8); gymEnvironment.add(lamp);
   }
   const matCols = [0x27354f, 0x4f2730, 0x27354f, 0x354f27];
   for (let i = 0; i < 4; i++){
     const mat = new THREE.Mesh(new THREE.BoxGeometry(2.2, 2.6, 0.06), new THREE.MeshStandardMaterial({ color: matCols[i], roughness: 0.95 }));
-    mat.position.set(-4.1 + i * 2.75, 1.55, -1.03); mat.receiveShadow = true; scene.add(mat);
+    mat.position.set(-4.1 + i * 2.75, 1.55, -1.03); mat.receiveShadow = true; gymEnvironment.add(mat);
   }
+  // Neutral visual ground for the motion experiments; the physics ground is unchanged.
+  labFloor = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.MeshStandardMaterial({color:0x191d25,roughness:.95}));
+  labFloor.rotation.x = -Math.PI/2; labFloor.receiveShadow = true; labFloor.visible = false; scene.add(labFloor);
   // hoop post + launch ring (hoop scene only)
   courtProps = new THREE.Group(); scene.add(courtProps);
   const postMat = new THREE.MeshStandardMaterial({ color: 0x2e3440, roughness: 0.35, metalness: 0.85 });
@@ -704,9 +608,9 @@ function induceFromObserved(){
 }
 function updateParamTable(){
   if(ui.scene==='chaos'||ui.scene==='multi'){
-    const p=altModels[ui.scene],entries=[['Gravité g',fmt(p.g,3)+' m/s²',p.source]];
-    if(ui.scene==='multi')entries.push(['Restitution',fmt(p.restitution,3),p.source],['Frottement',fmt(p.friction,3),p.source]);
-    else entries.push(['Longueurs',`${fmt(pendulum.L1)} / ${fmt(pendulum.L2)} m`,'géométrie déclarée'],['Masse relative','1 : 1','hypothèse du modèle']);
+    const p=altModels[ui.scene],entries=[['Gravity g',fmt(p.g,3)+' m/s²',p.source]];
+    if(ui.scene==='multi')entries.push(['Restitution',fmt(p.restitution,3),p.source],['Friction',fmt(p.friction,3),p.source]);
+    else entries.push(['Lengths',`${fmt(pendulum.L1)} / ${fmt(pendulum.L2)} m`,'declared geometry'],['Relative mass','1 : 1','model assumption']);
     $('param-body').replaceChildren(...entries.map(values=>{const tr=document.createElement('tr');for(const v of [values[0],values[1],'—',values[2]]){const td=document.createElement('td');td.textContent=v;tr.appendChild(td);}return tr;}));
     return;
   }
@@ -729,12 +633,12 @@ function abortShot(reason){
   S.flying=false;ballState.active=false;shotEvidence=null;
 }
 function sceneGhostLabel(name){
-  return name==='liquid'?'NIVEAU PRÉVU DANS 5 s':name==='orbit'?'GHOST · +0.6s':name==='chaos'?'APERÇU · +0,5 s':'GHOST · +0.5s';
+  return name==='liquid'?'LEVEL FORECAST IN 5 s':name==='orbit'?'GHOST · +0.6s':name==='chaos'?'PREVIEW · +0.5 s':'GHOST · +0.5s';
 }
 function resetSceneReadout(name=ui.scene){
   $('ghost-tag').textContent=sceneGhostLabel(name);$('ghost-tag').style.display='none';
   $('err-now').textContent='—';$('err-now').classList.remove('bad');$('err-avg').textContent='—';
-  $('err-average-label').textContent=name==='hoop'?'session avg':'moyenne des prévisions figées';
+  $('err-average-label').textContent=name==='hoop'?'Session mean':'Frozen forecast mean';
 }
 function resetBall(){
   resetSceneReadout();
@@ -771,29 +675,29 @@ function playSceneAction(){
     pendulum.th1 = 2.25; pendulum.th2 = 2.85; pendulum.w1 = 0; pendulum.w2 = 0;
     pendulum.th1b = pendulum.th1 + 0.003; pendulum.th2b = pendulum.th2; pendulum.w1b = 0; pendulum.w2b = 0; pendulum.t = 0; pendulum.horizon = null;
     pendulum.shadowPts = [];
-    $('st-horizon').textContent = 'mesure… 0,0 s';
-    logTo($('ind-log'), 'Pendule relancé. Trace cyan = positions observées, attachées à la masse. Courbe orange = aperçu calculé depuis la position courante jusqu’à +0,5 s. Une prévision distincte est figée toutes les 0,5 s pour mesurer l’erreur sans la réécrire.');
+    $('st-horizon').textContent = 'measuring… 0.0 s';
+    logTo($('ind-log'), 'Pendulum restarted. Cyan traces the observed mass. Orange previews the next 0.5 s from its current position. A separate forecast is frozen every 0.5 s and evaluated at its target time.');
   } else if (ui.scene === 'liquid' && liquidPts){
     fillState = { level: 0.34, rate: 0.17, running: true, obsStart: altClock, levelStart: 0.34, inducedRate: null, t: 0 };
     liquidOverflowMeasured = null;
-    logTo($('ind-log'), 'Eau : le robinet est ouvert, le bac se remplit. TwinForge observe d’abord la montée pendant 1,2 s pour induire le débit, puis verrouille sa prédiction.');
+    logTo($('ind-log'), 'Archived tank: observe the rise for 1.2 s, estimate flow, then freeze a forecast.');
   } else if (ui.scene === 'orbit' && orbitGroup){
     satState.p.set(2.35, 2.1, 1.4); satState.v.set(0, 0, 1.05); satState.trail = []; orbitGroup.laps = 0; orbitGroup.recal = 0;
     logTo($('ind-log'), 'Orbit simulation restarted — ghost +0.6s; μ calibrated from position observations.');
   }
   if (ui.scene === 'liquid'){
     // pas de verrouillage au clic : d'abord observer la montée (1,2 s), induire le débit, puis prédire
-    $('verdict-big').textContent = 'OBSERVATION DE LA MONTÉE…';
+    $('verdict-big').textContent = 'OBSERVING WATER LEVEL…';
     $('verdict-big').className = 'big wait';
-    $('hud-verdict').textContent = 'OBSERVATION — mesure du débit de remplissage…';
-    $('verdict-when').textContent = 'le niveau monte : TwinForge mesure la vitesse de montée avant de prédire (simulation)';
+    $('hud-verdict').textContent = 'OBSERVING — estimating fill rate…';
+    $('verdict-when').textContent = 'The rising level is measured before forecasting (simulation)';
     renderGauntletCheck();
     return;
   }
-  lockAltPrediction('action scène');
+  lockAltPrediction('scene action');
 }
 function shoot(){
-  $('err-average-label').textContent='session avg';
+  $('err-average-label').textContent='Session mean';
   if(ui.scene==='observations')setScene('hoop');
   if (ui.scene !== 'hoop'){ playSceneAction(); return; }
   abortShot('new shot before completion');
@@ -978,10 +882,10 @@ function finalizeShot(){
   hud.textContent = controlled
     ? (S.scored ? 'MADE (MPC) — control corrected the predicted trajectory' : 'MISSED (MPC) — see correction log')
     : (S.scored ? `MADE! — locked verdict ${correct ? 'CORRECT ✓' : 'WRONG ✗'}` : `MISSED — locked verdict ${correct ? 'CORRECT ✓' : 'WRONG ✗'}`);
-  if (controlled) hud.textContent = (S.scored ? 'PANIER (MPC) — ' : 'MANQUÉ (MPC) — ') + `controlled verdict ${correct ? 'CORRECT ✓' : 'WRONG ✗'}`;
+  if (controlled) hud.textContent = (S.scored ? 'SCORED (MPC) — ' : 'MISSED (MPC) — ') + `controlled verdict ${correct ? 'CORRECT ✓' : 'WRONG ✗'}`;
   hud.className = correct ? 'ok' : 'bad'; hud.id = 'hud-verdict';
   if (induceFromObserved()){
-    logTo($('ind-log'), `L3 calibration shot #${S.shots} : g=${fmt(induced.g)} m/s² (±${fmt(induced.unc.g)}), k=${fmt(induced.drag,4)}, floor restitution=${fmt(induced.restGround)} (${induced.measured.restGround?'bounce estimate':'unmeasured prior'}) · within-shot error = ${induced.heldOut!==null?fmt(induced.heldOut,1)+' cm':'—'} · ${controlled ? 'tir contrôlé MPC (verdict planifié avec la politique, compté)' : `verdict ${correct?'juste':'FAUX'} (${S.verdictsOk}/${S.verdictsTot})`}.`);
+    logTo($('ind-log'), `L3 calibration shot #${S.shots} : g=${fmt(induced.g)} m/s² (±${fmt(induced.unc.g)}), k=${fmt(induced.drag,4)}, floor restitution=${fmt(induced.restGround)} (${induced.measured.restGround?'bounce estimate':'unmeasured prior'}) · within-shot error = ${induced.heldOut!==null?fmt(induced.heldOut,1)+' cm':'—'} · ${controlled ? 'MPC-controlled shot (policy-aware verdict, counted)' : `verdict ${correct?'correct':'WRONG'} (${S.verdictsOk}/${S.verdictsTot})`}.`);
   } else {
     logTo($('ind-log'), S.controlledShot ? `Shot #${S.shots} (controlled): trajectory excluded from induction (known MPC impulses) — last free-flight parameters kept.` : `Shot #${S.shots}: not enough observations for a clean fit — priors kept, wide uncertainties shown.`);
   }
@@ -1138,12 +1042,12 @@ function forecastAlt(sceneName){
         if (!seen.has(i+'-'+j) && clones[i].p.distanceTo(clones[j].p) < clones[i].r + clones[j].r + 0.02){ seen.add(i+'-'+j); collisions++; }
     }
     return { positions: clones.map(c => c.p.clone()), collisions,
-      text: `positions des 7 corps à +${fmt(h,1)} s · ${collisions} contact(s) corps/corps prévu(s) dans la fenêtre` };
+      text: `7 body positions at +${fmt(h,1)} s · ${collisions} body/body contacts predicted in the window` };
   }
   if (sceneName === 'chaos' && pendulum){
     const prediction=forecastPendulum(pendulum,{...altModels.chaos,L1:pendulum.L1,L2:pendulum.L2},{horizon:h,dt:DT});
     const path=prediction.path.map(p=>pendulumM2(p.th1,p.th2,pendulum)),pos=path.at(-1);
-    return {positions:[pos],path,collisions:0,text:`masse 2 à +${fmt(h,1)} s · gravité estimée ${fmt(altModels.chaos.g,3)} m/s² · aperçu courant, mesures figées séparément`};
+    return {positions:[pos],path,collisions:0,text:`mass 2 at +${fmt(h,1)} s · estimated gravity ${fmt(altModels.chaos.g,3)} m/s² · rolling preview, separate frozen measurements`};
   }
   if (sceneName === 'liquid' && liquidPts){
     const rate = fillState.inducedRate;
@@ -1154,7 +1058,7 @@ function forecastAlt(sceneName){
     const pos = new THREE.Vector3(0, lv, 1.6);
     const overflowDt = rate > 0 ? Math.max(0, (TANK_ALERT - fillState.level) / rate) : null;
     const profile = [new THREE.Vector3(-1.01, lv, 2.21), new THREE.Vector3(1.01, lv, 2.21)];
-    const text = `le robinet remplit le bac (débit induit de la montée observée : ${fmt(rate*100,1)} cm/s) — prédiction : dans 5 s, l'eau sera exactement au plan orange, à ${fmt((lv-TANK_BOTTOM)*100,0)} cm de hauteur${overflowDt !== null ? ` · elle atteindra la ligne rouge dans ${fmt(overflowDt,1)} s` : ''}. La surface réelle doit rattraper le plan orange.`;
+    const text = `the tank fills (flow estimated from observed rise: ${fmt(rate*100,1)} cm/s) — forecast: in 5 s, water reaches the orange plane at ${fmt((lv-TANK_BOTTOM)*100,0)} cm high${overflowDt !== null ? ` · red line reached in ${fmt(overflowDt,1)} s` : ''}. The observed surface should reach the orange plane.`;
     return { positions: [pos], collisions: 0, horizon: FILL_HORIZON, path: profile, fillOverflowDt: overflowDt, entryPos: pos, text };
   }
   if (sceneName === 'orbit' && orbitGroup && satState){
@@ -1162,7 +1066,7 @@ function forecastAlt(sceneName){
     const step = (st, mu, hh) => { const r = st.p.clone().sub(C), d = Math.max(r.length(), 0.95); const a = r.multiplyScalar(-mu/(d*d*d)); st.v.addScaledVector(a, hh); st.p.addScaledVector(st.v, hh); };
     for(let i=0;i<Math.round(h/DT);i++)stepOrbitState(ghost,C,altModels.orbit.mu,DT);
     return { positions: [ghost.p.clone()], collisions: 0,
-      text: `satellite à +${fmt(h,1)} s · μ calibré ${fmt(altModels.orbit.mu,3)} (${altModels.orbit.source}); validation réelle non exécutée` };
+      text: `satellite at +${fmt(h,1)} s · calibrated μ ${fmt(altModels.orbit.mu,3)} (${altModels.orbit.source}); real-world validation not run` };
   }
   return null;
 }
@@ -1208,18 +1112,18 @@ function lockAltPrediction(reason,{announce=true}={}){
   updateParamTable();
   if(!announce)return;
   const big = $('verdict-big'), hud = $('hud-verdict');
-  big.textContent = 'PRÉDICTION VERROUILLÉE'; big.className = 'big wait';
+  big.textContent = 'FORECAST LOCKED'; big.className = 'big wait';
   hud.textContent = (ui.scene === 'liquid')
-    ? `PRÉDICTION VERROUILLÉE — dans 5 s, l'eau sera au plan orange`
-    : 'PRÉDICTION VERROUILLÉE — +' + fmt(h,1) + 's'; hud.className = 'wait'; hud.id = 'hud-verdict';
-  $('verdict-when').textContent = `émise à ${altPred.issuedAt.toTimeString().slice(0,8)} · cible t+${fmt(h,1)}s · ${f.text} · mode simulation`;
+    ? `FORECAST LOCKED — water level at the orange plane in 5 s`
+    : 'Forecast locked · +' + fmt(h,1) + ' s'; hud.className = 'wait'; hud.id = 'hud-verdict';
+  $('verdict-when').textContent = `issued at ${altPred.issuedAt.toTimeString().slice(0,8)} · target t+${fmt(h,1)}s · ${f.text} · simulation mode`;
   $('hud-sub').textContent = ui.scene === 'liquid'
-    ? 'plan orange FIXE = niveau prévu dans 5 s · la surface bleue doit le rattraper · ligne rouge = niveau d’alerte'
+    ? 'Fixed orange plane: forecast at +5 s · Blue: observed surface · Red: alert level'
     : ui.scene === 'chaos'
-    ? 'cyan : trajectoire observée · orange : aperçu +0,5 s · erreur : prévisions figées'
-    : `fantôme projeté +${fmt(h,1)}s · erreur mesurée quand la cible est atteinte`;
+    ? 'Cyan: observed path · Orange: next 0.5 s'
+    : `forecast +${fmt(h,1)}s · error measured at target time`;
   $('err-now').textContent = '—';$('err-avg').textContent='—';
-  logTo($('ind-log'), `Prédiction verrouillée (${reason}) · scène ${ui.scene} · +${fmt(h,1)}s · ${f.text}.`);
+  logTo($('ind-log'), `Forecast locked (${reason}) · scene ${ui.scene} · +${fmt(h,1)}s · ${f.text}.`);
   showAltGhosts(); renderGauntletCheck();
 }
 function evaluateAltPrediction(){
@@ -1242,24 +1146,24 @@ function evaluateAltPrediction(){
 
   altErrorSum+=mean;altErrorCount++;
   $('err-now').textContent = fmt(mean, 2) + ' cm';
-  $('err-avg').textContent = fmt(altErrorSum/altErrorCount, 2) + ` cm (${altErrorCount} mesures)`;
+  $('err-avg').textContent = fmt(altErrorSum/altErrorCount, 2) + ` cm (${altErrorCount} measurements)`;
   const big = $('verdict-big'), hud = $('hud-verdict');
-  big.textContent = 'PRÉDICTION MESURÉE'; big.className = 'big ' + (mean < 30 ? 'ok' : 'bad');
-  hud.textContent = `ERREUR FANTÔME +${fmt(altPred.horizon,1)}s : ${fmt(mean,2)} cm (max ${fmt(mx,2)})`;
+  big.textContent = 'FORECAST MEASURED'; big.className = 'big ' + (mean < 30 ? 'ok' : 'bad');
+  hud.textContent = `Forecast checked · +${fmt(altPred.horizon,1)} s`;
   hud.className = mean < 30 ? 'ok' : 'bad'; hud.id = 'hud-verdict';
   let entryTxt = '';
   if (altPred.scene === 'liquid'){
-    entryTxt = ` · à l'instant prévu, la surface réelle est à ${fmt(mean,2)} cm du plan orange`;
+    entryTxt = ` · at target time, observed surface is ${fmt(mean,2)} cm from the orange plane`;
   }
-  $('verdict-when').textContent = `cible t+${fmt(altPred.horizon,1)}s atteinte · erreur position ${fmt(mean,2)} cm · max ${fmt(mx,2)} cm${entryTxt} · modèle ${altPred.modelId} · simulation, paramètres estimés ou priors déclarés; aucune validation réelle revendiquée`;
-  if(altErrorCount<=3||altErrorCount%10===0)logTo($('ind-log'), `Fantôme ${altPred.scene} mesuré à t+${fmt(altPred.horizon,1)}s : erreur position ${fmt(mean,2)} cm, max ${fmt(mx,2)} cm${entryTxt} (comparée à l'observation au temps cible, pas à la position courante).`);
+  $('verdict-when').textContent = `target t+${fmt(altPred.horizon,1)}s reached · position error ${fmt(mean,2)} cm · max ${fmt(mx,2)} cm${entryTxt} · model ${altPred.modelId} · simulation with estimated parameters or declared priors; no real-world validation claimed`;
+  if(altErrorCount<=3||altErrorCount%10===0)logTo($('ind-log'), `Forecast ${altPred.scene} measured at t+${fmt(altPred.horizon,1)}s: position error ${fmt(mean,2)} cm, max ${fmt(mx,2)} cm${entryTxt} (compared with the observation at target time, not the current position).`);
   renderGauntletCheck();
 }
 const SCENE_INFO = {
   hoop: 'Scene 1 — basketball simulation · L3 calibration · forecast + simulation MPC',
-  multi: 'Collisions — 7 sphères · chocs entre corps et sol · paramètres estimés depuis les observations',
-  chaos: 'Pendule — cyan : trajet observé · orange : aperçu futur +0,5 s · erreur mesurée sur des prévisions figées',
-  liquid: 'Scene 4 — modèle de bilan de volume (pas un solveur de fluide) · le robinet remplit le bac · après 1,2 s d’observation de la montée, prédiction : le niveau exact dans 5 s (plan orange à rattraper) et l’arrivée à la ligne rouge',
+  multi: 'Collisions — seven bodies, shared contacts, measured forecasts',
+  chaos: 'Pendulum — cyan observed path, orange 0.5 s preview',
+  liquid: 'Archived tank — volume balance model, observed rise and frozen 5 s forecast',
   orbit: 'Scene 5 — orbit simulation · μ estimated from positions · forecast +0.6s',
 };
 function setScene(name){
@@ -1277,50 +1181,52 @@ function setScene(name){
   document.querySelectorAll('[data-scene]').forEach(b => b.classList.toggle('on', b.dataset.scene === name));
   $('scene-hint').textContent = SCENE_INFO[name];
   const isHoop = name === 'hoop';
+  gymEnvironment.visible = isHoop; labFloor.visible = !isHoop;
+  resetWorkbenchView();
   $('btn-alt-pause').hidden=isHoop;$('btn-alt-pause').disabled=true;$('btn-alt-pause').textContent='Pause';
   for(const id of ['in-angle','in-power','in-spin','in-wind','btn-challenge','tg-mc','tg-mpc','in-cf','btn-cf','btn-advisor'])$(id).disabled=!isHoop;
   document.querySelectorAll('.cf-chip').forEach(b=>b.disabled=!isHoop);
   $('btn-advisor').disabled=!isHoop||!localModelService;
-  $('tg-ghost').textContent=isHoop?'Ghost +0.5s':'Aperçu +0,5 s';
+  $('tg-ghost').textContent=isHoop?'Ghost +0.5s':'Preview +0.5 s';
   for(const id of ['shot-settings','hoop-counterfactual','hoop-comparison','hoop-control','chart-wrap','tg-mc','tg-mpc'])$(id).hidden=!isHoop;
   $('btn-challenge').parentElement.hidden=!isHoop;$('btn-challenge').parentElement.nextElementSibling.hidden=!isHoop;
   [...$('scene-stats').children].forEach((stat,i)=>stat.hidden=i===3?name!=='chaos':!isHoop);
-  $('sam-ball').textContent=isHoop?'ball · simulated sensor':name==='chaos'?'2 masses · angles observés':'7 sphères · positions observées';
+  $('sam-ball').textContent=isHoop?'ball · simulated sensor':name==='chaos'?'2 masses · observed angles':'7 spheres · observed positions';
   $('sam-hoop').hidden=!isHoop;$('sam-board').hidden=!isHoop;
-  $('err-average-label').textContent=isHoop?'session avg':'moyenne des prévisions figées';
+  $('err-average-label').textContent=isHoop?'Session mean':'Frozen forecast mean';
   hoopGroup.visible = isHoop; ball.visible = isHoop; if (courtProps) courtProps.visible = isHoop;
   ghostBall.visible = false; arcLine.visible = false;if(mcCone)mcCone.visible=false;
   mcGroup.children.forEach(m => m.visible = false);
   gMulti.visible = name === 'multi'; gChaos.visible = name === 'chaos';
   gLiquid.visible = name === 'liquid'; gOrbit.visible = name === 'orbit';
-  if (name === 'chaos'){ pendulum.th1 = 2.25; pendulum.th2 = 2.85; pendulum.w1 = 0; pendulum.w2 = 0; pendulum.th1b = 2.253; pendulum.th2b = 2.85; pendulum.w1b = 0; pendulum.w2b = 0; pendulum.t = 0; pendulum.horizon = null; pendulum.shadowPts = []; $('st-horizon').textContent = 'mesure…'; }
+  if (name === 'chaos'){ pendulum.th1 = 2.25; pendulum.th2 = 2.85; pendulum.w1 = 0; pendulum.w2 = 0; pendulum.th1b = 2.253; pendulum.th2b = 2.85; pendulum.w1b = 0; pendulum.w2b = 0; pendulum.t = 0; pendulum.horizon = null; pendulum.shadowPts = []; $('st-horizon').textContent = 'measuring…'; }
   if (name === 'liquid' && liquidPts){ fillState = { level: 0.34, rate: 0.17, running: false, obsStart: 0, levelStart: 0.34, inducedRate: null, t: 0 }; liquidOverflowMeasured = null; }
   if (name === 'orbit' && orbitGroup){ satState.p.set(2.35, 2.1, 1.4); satState.v.set(0, 0, 1.05); satState.trail = []; orbitGroup.laps = 0; orbitGroup.recal = 0; }
   const hud = $('hud-verdict');
-  hud.textContent = isHoop ? 'READY — SHOOT THE BALL' : SCENE_INFO[name].split('—')[1].trim().toUpperCase();
+  hud.textContent = 'Ready when you are';
   hud.className = 'wait'; hud.id = 'hud-verdict';
   $('hud-sub').textContent = name === 'orbit'
     ? 'forecast +0.6s · μ calibrated from simulated observations · real validation pending'
     : isHoop ? 'ghost projected +0.5s ahead of the ball · verdict locked before it lands'
     : SCENE_INFO[name].split('—')[1].trim();
   if (name !== 'chaos' && !(pendulum && pendulum.horizon !== null)) $('st-horizon').textContent = '—';
-  const shootLabels = { hoop: 'SHOOT THE BALL', multi: 'LANCER LES COLLISIONS', chaos: 'LANCER LE PENDULE', liquid: 'OPEN THE TAP', orbit: "RELAUNCH THE ORBIT" };
+  const shootLabels = { hoop: 'Shoot', multi: 'Start', chaos: 'Start', liquid: 'OPEN THE TAP', orbit: "RELAUNCH THE ORBIT" };
   $('btn-shoot').textContent = shootLabels[name];
   $('btn-shoot-float').textContent = shootLabels[name];
   if (!isHoop){
     altPred = null; altClock = 0; altAcc = 0; hideAltGhosts();
-    $('verdict-big').textContent = 'PRÊT — LANCEZ LA SCÈNE';
+    $('verdict-big').textContent = 'READY';
     $('verdict-big').className = 'big wait';
     $('verdict-when').textContent = name === 'liquid'
-      ? 'Cliquez OPEN THE TAP : le bac se remplit. Après 1,2 s d’observation de la montée, la prédiction se verrouille : le niveau exact dans 5 s (plan orange fixe) et l’arrivée à la ligne rouge (simulation).'
+      ? 'Open the tap. After 1.2 s of observations, the 5 s forecast is frozen (simulation).'
       : name === 'chaos'
-      ? 'Lancez le pendule. Le trait cyan suit exactement la masse observée. La courbe orange part de sa position courante et montre les 0,5 prochaines secondes. Les erreurs comparent séparément les prévisions figées à leur instant cible.'
-      : 'appuyez sur le bouton d’action : la prédiction +' + fmt(ALT_HORIZON[name] || 0.5, 1) + 's sera verrouillée puis mesurée au temps cible (simulation)';
+      ? 'Start the pendulum. Cyan follows the observed mass. Orange previews the next 0.5 s from its current position. Frozen forecasts are evaluated separately at their target time.'
+      : 'start the experiment: forecast +' + fmt(ALT_HORIZON[name] || 0.5, 1) + 's will be frozen and evaluated at its target time (simulation)';
     $('hud-sub').textContent = name === 'liquid'
-      ? 'plan orange FIXE = niveau prévu dans 5 s · la surface bleue doit le rattraper · ligne rouge = niveau d’alerte'
+      ? 'Fixed orange plane: forecast at +5 s · Blue: observed surface · Red: alert level'
       : name === 'chaos'
-      ? 'cyan : trajectoire observée · orange : aperçu +0,5 s · erreur : prévisions figées'
-      : 'fantôme projeté +' + fmt(ALT_HORIZON[name] || 0.5, 1) + 's · prédiction verrouillée à l’action · erreur affichée à la cible';
+      ? 'Cyan: observed path · Orange: next 0.5 s'
+      : 'forecast +' + fmt(ALT_HORIZON[name] || 0.5, 1) + 's · forecast locked before measurement';
     showAltGhosts();
   } else if (S.lockedVerdict !== null && S.lockedAt){
     setVerdict(S.lockedVerdict, true);
@@ -1330,6 +1236,7 @@ function setScene(name){
   }
   updateParamTable();renderGauntletCheck();
   logTo($('ind-log'), `Gauntlet → ${SCENE_INFO[name]}`);
+  window.dispatchEvent(new CustomEvent('twinforge:scene',{detail:{scene:name}}));
 }
 function renderGauntletCheck(){
   const current=sceneEvidence[ui.scene]||sceneEvidence.hoop;
@@ -1349,8 +1256,8 @@ function renderEvidenceStatus(status){
 async function checkApiStatus(){
   const localHttp = /^https?:$/.test(location.protocol) && /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
   if (!localHttp){
-    $('api-status').textContent = 'Version publique : simulation et import JSON disponibles. Les appels Meta nécessitent le serveur local.';
-    $('btn-advisor').disabled=true;$('btn-advisor').title='Nécessite le serveur local Meta.';
+    $('api-status').textContent = 'Public version: simulation and JSON imports available. Meta calls require the local server.';
+    $('btn-advisor').disabled=true;$('btn-advisor').title='Requires the local Meta server.';
     return;
   }
   try {
@@ -1490,10 +1397,16 @@ window.Twinforge=Object.freeze({importObservationBundle,exportEvidence,runValida
   clearImportedObservation(){restoreSimulationVisibility();importedBundle=null;importedReplay=null;$('replay-observations').hidden=true;if(importedTrajectory){scene.remove(importedTrajectory);importedTrajectory=null;}setScene('hoop');camera.position.set(4.4,2.7,8.8);controls.target.set(0,1.95,1.7);$('mode-badge').textContent='L3 · SIMULATION';}
 });
 
+function resetWorkbenchView(){
+  if(ui.scene === 'chaos'){camera.position.set(3.4,3.6,8.6);controls.target.set(0,2.8,1.6);}
+  else if(ui.scene === 'multi'){camera.position.set(4.4,3.1,8.8);controls.target.set(0,1.7,1.6);}
+  else {camera.position.set(4.4,2.7,8.8);controls.target.set(0,1.95,1.7);}
+  controls.update();
+}
 function bindUI(){
   $('replay-observations').addEventListener('click',startObservationReplay);
   $('export-evidence').addEventListener('click',async()=>{try{const bundle=await exportEvidence();for(const file of bundle.files)downloadJson(file.name,file.content);}catch(error){$('evidence-status').textContent=error.message;}});
-  $('validate-software').addEventListener('click',()=>{const result=runValidation();$('evidence-status').textContent=`Software checks: ${result.checks.filter(c=>c.passed).length}/${result.checks.length}. Real-world gauntlet remains unvalidated.`;});
+  $('validate-software').addEventListener('click',()=>{const result=runValidation();$('validation-status').hidden=false;$('validation-status').textContent=`Software checks: ${result.checks.filter(c=>c.passed).length}/${result.checks.length}. Real-world gauntlet remains unvalidated.`;});
   const sync = () => {
     $('o-angle').textContent = $('in-angle').value + '°';
     $('o-power').textContent = fmt(parseFloat($('in-power').value),1) + ' m/s';
@@ -1502,7 +1415,7 @@ function bindUI(){
   };
   ['in-angle','in-power','in-spin','in-wind'].forEach(id => $(id).addEventListener('input', sync)); sync();
   $('btn-shoot').addEventListener('click', shoot);
-  $('btn-alt-pause').addEventListener('click',()=>{altRunning=!altRunning;$('btn-alt-pause').textContent=altRunning?'Pause':'Reprendre';});
+  $('btn-alt-pause').addEventListener('click',()=>{altRunning=!altRunning;$('btn-alt-pause').textContent=altRunning?'Pause':'Resume';});
   $('btn-shoot-float').addEventListener('click', shoot);
   $('btn-challenge').addEventListener('click', () => {
     if (ui.scene !== 'hoop') setScene('hoop');
@@ -1513,8 +1426,8 @@ function bindUI(){
     logTo($('ind-log'), `Surprise shot: angle ${a}°, power ${fmt(p,1)} m/s, spin ${s} rad/s, wind ${fmt(w,1)} m/s — configuration recorded; random sampling is not proof of an independent test.`);
     shoot();
   });
-  $('btn-view').addEventListener('click', () => { camera.position.set(4.4, 2.7, 8.8); controls.target.set(0, 1.95, 1.7); logTo($('ind-log'), 'Camera back to the default view (orbit bounded to the gym).'); });
-  $('btn-reset').addEventListener('click', () => { if(ui.scene!=='hoop'){setScene(ui.scene);return;} resetBall(); S.hoopOffsetX = 0; hoopGroup.position.x = 0; $('hud-verdict').textContent = 'READY — SHOOT THE BALL'; $('hud-verdict').className = 'wait'; $('verdict-big').textContent = 'WAITING'; $('verdict-big').className = 'big wait'; logTo($('ind-log'), 'Scene reset — hoop centred, ball back at the shooter.'); });
+  $('btn-view').addEventListener('click', () => { resetWorkbenchView(); logTo($('ind-log'), 'Camera reset to the experiment view.'); });
+  $('btn-reset').addEventListener('click', () => { if(ui.scene!=='hoop'){setScene(ui.scene);return;} resetBall(); S.hoopOffsetX = 0; hoopGroup.position.x = 0; $('hud-verdict').textContent = 'Ready when you are'; $('hud-verdict').className = 'wait'; $('verdict-big').textContent = 'WAITING'; $('verdict-big').className = 'big wait'; logTo($('ind-log'), 'Scene reset — hoop centred, ball back at the shooter.'); });
   const tg = (id, key, label) => $(id).addEventListener('click', () => { ui[key] = !ui[key]; $(id).classList.toggle('on', ui[key]); if (key==='mpc') renderGauntletCheck(); if (!ui.ghost){ ghostBall.visible=false; ghostLine.visible=false; arcLine.visible=false; $('ghost-tag').style.display='none'; hideAltGhosts(); if (orbitGroup) orbitGroup.satGhost.visible = false; $('err-now').textContent = 'off'; } else if (ui.scene !== 'hoop'){ showAltGhosts(); if (orbitGroup) orbitGroup.satGhost.visible = true; } if(key==='mc'&&!ui.mc){mcGroup.children.forEach(m=>m.visible=false);if(mcCone)mcCone.visible=false;}if(!ui.ghost&&mcCone)mcCone.visible=false; });
   tg('tg-ghost', 'ghost'); tg('tg-mc', 'mc'); tg('tg-mpc', 'mpc');
   $('btn-cf').addEventListener('click', () => applyCounterfactual($('in-cf').value));
@@ -1523,7 +1436,7 @@ function bindUI(){
   document.querySelectorAll('[data-scene]').forEach(b => b.addEventListener('click', () => setScene(b.dataset.scene)));
   checkApiStatus();
   $('btn-advisor').addEventListener('click', askAdvisor);
-  window.addEventListener('keydown', e => { if (e.code === 'Space' && document.activeElement.tagName !== 'INPUT'){ e.preventDefault(); shoot(); } });
+  window.addEventListener('keydown', e => { if (e.code === 'Space' && !document.querySelector('dialog[open]') && !document.activeElement.matches('input, textarea, select, button, a')){ e.preventDefault(); shoot(); } });
 }
 function drawChart(){
   const cv = $('chart'); if (!cv) return;
@@ -1572,12 +1485,12 @@ function updateAltScenes(dt){
           fillState.inducedRate = (fillState.level - fillState.levelStart) / Math.max(0.001, altClock + DT - fillState.obsStart);
           altClock += DT; altAcc -= DT; steps++;
     observeAltParameters(ui.scene);
-          lockAltPrediction('observation du débit');
+          lockAltPrediction('observed flow');
           continue;
         }
         if (liquidOverflowMeasured === null && fillState.level >= TANK_ALERT){
           liquidOverflowMeasured = { t: altClock + DT };
-          const predTxt = (altPred && altPred.fillPred) ? ` (prévu dans ${fmt(altPred.fillPred.overflowDt,1)} s après le verrouillage, mesuré ${fmt(liquidOverflowMeasured.t - altPred.sourceT,1)} s)` : '';
+          const predTxt = (altPred && altPred.fillPred) ? ` (predicted in ${fmt(altPred.fillPred.overflowDt,1)} s after locking, measured ${fmt(liquidOverflowMeasured.t - altPred.sourceT,1)} s)` : '';
           logTo($('ind-log'), `Eau : la surface atteint la ligne rouge${predTxt}.`);
           renderGauntletCheck();
         }
@@ -1590,7 +1503,7 @@ function updateAltScenes(dt){
     if (altPred && !altPred.evaluated && altClock+1e-9 >= altPred.targetT){
       evaluateAltPrediction();
       const settled=ui.scene==='multi'&&altClock>2&&multiBodies.every(b=>b.p.y<=b.r+.002&&b.v.length()<.02);
-      if(settled||ui.scene==='multi'&&altClock>=10){altRunning=false;altAcc=0;$('btn-alt-pause').textContent='Terminé';$('btn-alt-pause').disabled=true;}
+      if(settled||ui.scene==='multi'&&altClock>=10){altRunning=false;altAcc=0;$('btn-alt-pause').textContent='Finished';$('btn-alt-pause').disabled=true;}
       else if(['multi','chaos'].includes(ui.scene))lockAltPrediction('cadence fixe',{announce:false});
     }
   }

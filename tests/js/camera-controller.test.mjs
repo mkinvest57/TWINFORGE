@@ -82,7 +82,7 @@ test('switching a pending permission request to the example survives late grant 
   const ui=await mount(t),pending=ui.start();ui.example();const exampleStatus=ui.element('camera-status').textContent;
   const old=stream();ui.permissions[0].resolve(old);await pending;
   assert.equal(old.track.stopCount,1);assert.equal(ui.video.srcObject,null);assert.equal(ui.video.hidden,true);
-  assert.equal(ui.element('camera-status').textContent,exampleStatus);assert.match(ui.element('camera-source').textContent,/Exemple synthétique/);
+  assert.equal(ui.element('camera-status').textContent,exampleStatus);assert.match(ui.element('camera-source').textContent,/Synthetic example/);
   assert.equal(ui.element('camera-start').disabled,false);assert.equal(ui.element('camera-stop').disabled,false);
   assert.equal(ui.element('camera-center').disabled,false);assert.equal(ui.element('camera-record').disabled,true);
   assert.equal(ui.animation.size,1);assert.equal(ui.videoFrames.size,0);
@@ -91,7 +91,7 @@ test('switching a pending permission request to the example survives late grant 
 test('late permission refusal leaves the replacement example running with coherent mobile controls',async t=>{
   const ui=await mount(t),pending=ui.start();ui.example();const message=ui.element('camera-status').textContent;
   ui.permissions[0].reject({name:'NotAllowedError'});await pending;
-  assert.equal(ui.element('camera-status').textContent,message);assert.match(ui.element('camera-source').textContent,/Exemple synthétique/);
+  assert.equal(ui.element('camera-status').textContent,message);assert.match(ui.element('camera-source').textContent,/Synthetic example/);
   assert.equal(ui.element('camera-start').disabled,false);assert.equal(ui.element('mobile-camera-start').disabled,false);
   assert.equal(ui.element('camera-stop').disabled,false);assert.equal(ui.element('mobile-camera-stop').disabled,false);
   assert.equal(ui.element('camera-center').disabled,false);assert.equal(ui.element('camera-reset').disabled,false);
@@ -104,7 +104,7 @@ test('a stale playback rejection cannot replace the active example or its button
   ui.example();const message=ui.element('camera-status').textContent;
   ui.playbacks[0].reject({name:'NotAllowedError'});await pending;
   assert.equal(old.track.stopCount,1);assert.equal(ui.element('camera-status').textContent,message);
-  assert.match(ui.element('camera-source').textContent,/Exemple synthétique/);assert.equal(ui.animation.size,1);
+  assert.match(ui.element('camera-source').textContent,/Synthetic example/);assert.equal(ui.animation.size,1);
   assert.equal(ui.element('camera-stop').disabled,false);assert.equal(ui.element('mobile-camera-stop').disabled,false);
   assert.equal(ui.element('camera-start').disabled,false);assert.equal(ui.element('camera-center').disabled,false);
 });
@@ -113,7 +113,7 @@ test('an older rejected playback cannot unlock buttons for a newer pending camer
   const ui=await mount(t,{deferPlayback:true}),first=ui.start(),old=stream();
   ui.permissions[0].resolve(old);await flush();ui.stop();const second=ui.start();pendingButtons(ui);
   ui.playbacks[0].reject({name:'NotAllowedError'});await first;pendingButtons(ui);
-  assert.match(ui.element('camera-status').textContent,/Autorisez la caméra/);
+  assert.match(ui.element('camera-status').textContent,/Allow camera access/);
   ui.stop();ui.permissions[1].reject({name:'NotAllowedError'});await second;stoppedButtons(ui);
 });
 

@@ -1,14 +1,14 @@
 {
   "id": "./scan.html",
-  "name": "Twinforge — caméra locale",
+  "name": "Twinforge — local camera",
   "short_name": "Twinforge",
-  "description": "Suivi visuel 2D et prévision approximative dans le navigateur, sans envoi des images.",
-  "lang": "fr",
+  "description": "On-device 2D visual tracking and short-term motion forecasts. No image uploads.",
+  "lang": "en",
   "start_url": "./scan.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#101419",
-  "theme_color": "#101419",
+  "background_color": "#f7f8fa",
+  "theme_color": "#f7f8fa",
   "icons": [
     {
       "src": "./assets/mobile/icon.svg",

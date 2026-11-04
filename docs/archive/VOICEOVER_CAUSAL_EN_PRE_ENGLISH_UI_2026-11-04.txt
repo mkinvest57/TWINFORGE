@@ -1,0 +1,17 @@
+You get one move. Brake, turn… or do nothing. Which decision protects this cargo? Watch both futures. Same starting point. One difference: your intervention.
+
+Twinforge explores the consequences before replaying the scene. Here, one carrier hits a load, which hits another. Without intervention, the largest impact involving the protected equipment reaches one hundred sixteen and a half joules. With the selected command, no contact reaches that equipment in this experiment.
+
+This result is not a hand-picked animation. The software calculates thirty-seven commands: braking, steering, and doing nothing. It looks for the smallest control effort among those meeting the threshold set for this experiment. You can choose a bad command and inspect what changes.
+
+Now delay the move. At a quarter of a second, there is a solution. At half a second, none of the tested commands protects the cargo under our criterion. The collision has already transferred motion. Twinforge also shows when a decision comes too late. This boundary belongs to the tested time grid.
+
+Where does Meta fit? Muse Spark receives the scene and the allowed commands. It proposes a move and explains why. The simulator calculates what actually happens in the model. Spark then receives those measurements and revises its proposal. It does not see the exhaustive search results.
+
+These are the three calls that actually ran. First proposal: one hundred four joules. Failure. Second: eight point five. Still too high. Third: four point six, below the eight-joule threshold. Both failures stay in the journal. About thirty-eight seconds, for less than three US cents.
+
+The local search does better on this small problem: zero joules on the protected cargo, using less control effort. We show that comparison. Meta’s contribution here is a proposal we can challenge, measure, and revise. A persuasive explanation never replaces checking its consequences.
+
+Change the challenge. At the intersection, the best nominal command fails when speed changes by five percent. The test shows it: one successful check out of three. Change the speed, inspect the trajectories, then export the states, commands, and every collision. Counterexamples are part of the result.
+
+Today, the initial states and physical laws are supplied. This is a numerical laboratory, not yet a robot validated in the real world. The ambition: test a decision before facing its consequences. Twinforge. One decision. Two futures. Now find the move that makes the difference.

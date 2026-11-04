@@ -1,8 +1,8 @@
 {
   "version": 1,
   "project": {
-    "name": "TWINFORGE — Une décision. Deux futurs.",
-    "productType": "Civil counterfactual collision intervention lab with explicit Meta proposal verification",
+    "name": "TWINFORGE — Decision lab, Motion lab & Camera",
+    "productType": "English-first experiment platform: verified Meta intervention proposals, local motion simulation and on-device camera tracking",
     "stack": [
       "HTML",
       "CSS",
@@ -14,6 +14,7 @@
   "sources": {
     "tokens": [
       "web/causal/lab.css",
+      "web/workbench-ui.css",
       "web/camera/scanner.css"
     ],
     "components": [
@@ -24,47 +25,103 @@
       "assets/vendor/three"
     ],
     "instructions": [
-      "docs/SUBMISSION.md"
+      "docs/SUBMISSION.md",
+      ".21st/DESIGN.md"
     ]
   },
   "design": {
-    "colorMode": "dark",
+    "colorMode": "light",
     "colors": {
-      "background": "#0e1013",
-      "panel": "#16191e",
-      "panelSoft": "#1b1e24",
-      "line": "#2a2e36",
-      "text": "#edece8",
-      "muted": "#a1a8b5",
-      "quiet": "#737d8c",
-      "accent": "#ff7a32",
-      "accentSoft": "#ffb386",
-      "observation": "#52cddd",
-      "prediction": "#ff7a32",
-      "success": "#80d3ac"
+      "background": "#f7f8fa",
+      "panel": "#fff",
+      "text": "#181b21",
+      "muted": "#687181",
+      "line": "#e3e6eb",
+      "accent": "#cf4b08",
+      "accentHover": "#b94006"
     },
     "typography": {
-      "sans": "-apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif",
-      "mono": "SF Mono, ui-monospace, Menlo, Consolas, monospace"
+      "sans": "System sans-serif; Inter is a non-required first preference in Motion lab.",
+      "mono": "ui-monospace, SF Mono, Menlo, Consolas, monospace",
+      "language": "English by default; original provider text remains preserved in exported logs."
     },
-    "spacing": {},
-    "radius": {},
-    "shadows": {},
-    "motion": {},
-    "density": "One primary synchronized comparison, bounded controls and measured consequences; compact desktop and stacked phone scene"
+    "spacing": {
+      "controlTargetMinPx": 44,
+      "pageGutterDesktopPx": "24–40",
+      "pageGutterPhonePx": "10–16",
+      "drawerPaddingPx": "20–24"
+    },
+    "radius": {
+      "controlsPx": "7–8",
+      "stagesPx": "10–14"
+    },
+    "shadows": {
+      "policy": "Subtle stage and dialog separation; no decorative glow or full-page card grid."
+    },
+    "motion": {
+      "policy": "Explicit playback controls; reduced-motion preference respected. No changes to physics integration or evaluation are part of the visual refresh.",
+      "drawerTransitionMs": "0–180"
+    },
+    "density": "Primary stage first, compact controls, one subordinate model-decision inspector on desktop. Settings, evidence, recording and optional model tools are progressively disclosed.",
+    "tokenAliases": {
+      "background": {
+        "web/causal/lab.css": "--bg",
+        "web/workbench-ui.css": "--bg",
+        "web/camera/scanner.css": "--bg"
+      },
+      "panel": {
+        "web/causal/lab.css": "--panel",
+        "web/workbench-ui.css": "--panel",
+        "web/camera/scanner.css": "--panel"
+      },
+      "text": {
+        "web/causal/lab.css": "--text",
+        "web/workbench-ui.css": "--txt",
+        "web/camera/scanner.css": "--ink"
+      },
+      "muted": {
+        "web/causal/lab.css": "--muted",
+        "web/workbench-ui.css": "--dim",
+        "web/camera/scanner.css": "--muted"
+      },
+      "line": {
+        "web/causal/lab.css": "--line",
+        "web/workbench-ui.css": "--line",
+        "web/camera/scanner.css": "--line"
+      },
+      "accent": {
+        "web/causal/lab.css": "--accent",
+        "web/workbench-ui.css": "--accent",
+        "web/camera/scanner.css": "--accent"
+      }
+    },
+    "stageColors": {
+      "decisionStage": "#11161c",
+      "motionStage": "#14171c",
+      "observation": "#37c8d9",
+      "note": "Stage/material/result colors are semantic rendering colors, separate from the shared light interface palette.",
+      "motionForecast": "#ffb38a"
+    },
+    "stageTreatment": "Dark simulation and camera stages inside light interface chrome."
   },
   "components": {
     "installed": [],
     "preferredPrimitives": [
-      "Native buttons, inputs and accessible segmented tabs",
-      "Existing Three.js renderer with deterministic measurements",
-      "HTML metric cards and canvas chart"
+      "Native navigation links, buttons, labeled inputs and select controls",
+      "Native dialog sheets with scrollable content and native focus/Escape behavior",
+      "Native details/summary for secondary content",
+      "Existing Three.js scenes and on-device camera overlay with actual measurements"
     ],
     "patterns": [
-      "Dashboard Sidebar",
-      "Segmented Tabs",
-      "Progress Metric Card",
-      "Vertical Descriptive Stepper"
+      "Toolbar Dynamic (1279)",
+      "Sheet with Scrollable Content (25010)",
+      "AI Reasoning Block disclosure hierarchy (27028)",
+      "Segmented Tabs horizontal navigation (26923)",
+      "Vertical Descriptive Stepper inside expanded model log only (29866)"
+    ],
+    "supersededPatterns": [
+      "Dashboard Sidebar permanent shell (14941)",
+      "Progress Metric Card dashboard grids (15024)"
     ]
   },
   "constraints": {
@@ -75,7 +132,10 @@
       "Identify the arbitrary experiment threshold and instantaneous actuator assumption.",
       "Show failed proposals, sensitivity failures and absence of a passing tested action.",
       "No independent accuracy claim for same-model replay.",
-      "Keep local scanner frames on device and separate pixels from physical units."
+      "Keep local scanner frames on device and separate pixels from physical units.",
+      "Use English for all public page copy, dynamic controls, captions and display explanations; preserve original model receipts.",
+      "Keep Meta proposals, local numerical predictions and on-device image tracking visibly distinct.",
+      "Keep the user-provided mpcdetails.mp4 video as a reference only; never publish third-party footage or frames."
     ],
     "avoid": [
       "Claiming real robotic control or reconstruction from synthetic inputs.",
@@ -84,17 +144,42 @@
     ]
   },
   "decisions": [
-    "User rejected the water-tank main example and orbit. They are removed from the public presentation; historical source and evidence remain archived.",
-    "Use the four previously retrieved 21st source patterns as native HTML/CSS primitives, composed around two synchronized causal branches.",
-    "Civil industrial scenario: compare 37 one-command interventions, show a discrete intervention-time limit and three speed sensitivity checks.",
-    "Keep model proposals, numerical verification, local exhaustive-search baseline and recorded/new provider sessions distinct.",
-    "Retain the mobile camera tool as local image-plane tracking, separate from supplied-state 3D simulation."
+    "Replace the former dark dashboard shell with consistent light chrome across Decision lab, Motion lab and Camera. Keep the simulation and camera stages dark for visual contrast.",
+    "Use #cf4b08 for primary buttons and #b94006 on hover. The previous #e95d14 button color was darkened after contrast review; existing canvas orange is unchanged.",
+    "Remove permanent navigation sidebars and metric-card grids. Keep the experiment central and reveal settings, raw evidence and advanced tools on demand.",
+    "The three navigation links are Decision lab, Motion lab and Camera. The selected page is visually and semantically indicated.",
+    "Use the inspected 1279 toolbar, 25010 scrollable sheet and 27028 disclosure patterns as native HTML/CSS. Retain 26923 for horizontal navigation and 29866 only for the detailed model log.",
+    "Reject 4880 because retrieved component and demo mismatch. Do not install or adapt that candidate.",
+    "Decision lab foregrounds the recorded Muse Spark proposals, actual rejection/verification results, and the distinction between model suggestions and a separate local numerical search.",
+    "Motion lab exposes one scene selector and Start/Pause/Reset group. Numerical integration is unchanged; camera framing and decorative environments are presentation-only.",
+    "Camera starts from one primary action. Optional examples, video import, exports, recording and limitations are collapsed. Tracking remains local and pixel-based.",
+    "User-rejected water and orbit presentations remain out of public navigation; historical code and evidence remain archived.",
+    "Keep the user-provided MPC video as an unshipped visual reference, not as a product asset."
   ],
   "evidence": [
-    "Four 21st previews visually inspected during the design pass, with code stored in .21st/cache.",
-    "Source names, registry URLs and hashes recorded in .21st/sources.json.",
-    "Actual CSS tokens read from web/process/lab.css.",
-    "Native adaptation provenance is named in index.html and web/process/lab.css."
+    "Fresh 21st component, demo and dependency payloads are cached for 1279, 25010 and 27028; their previews were visually inspected by the coordinating agent.",
+    "Source names, registry URLs, cache hashes, code hashes, adaptations, superseded patterns and rejected candidates are recorded in .21st/sources.json.",
+    "Actual shared light CSS tokens were read from web/causal/lab.css, web/workbench-ui.css and web/camera/scanner.css.",
+    "Motion lab desktop and 390px/320px phone checks, 44px targets, clean console, native drawers and three scene controls are recorded in .21st/verification/2026-11-04/workbench-review.json.",
+    "Motion lab proof screenshots are in .21st/verification/2026-11-04/.",
+    "Coordinating agent reports the 21st review passed: 17 informational hardcoded-color findings, zero warnings. The shared token mappings are now explicit in this file."
   ],
-  "generatedAt": "2026-11-04T14:07:00.065568+00:00"
+  "generatedAt": "2026-11-04T20:37:15.436364+00:00",
+  "verification": {
+    "reviewSource": "Coordinating agent report, 2026-11-04",
+    "twentyFirstReview": {
+      "status": "passed",
+      "informationalFindings": 17,
+      "warnings": 0,
+      "note": "Hardcoded-color information; shared interface palette and aliases documented here. Semantic 3D/material colors remain separate."
+    },
+    "motionReview": ".21st/verification/2026-11-04/workbench-review.json",
+    "coordinatingReviewDirectory": "validation/runs/jury-studio-2026-11-04",
+    "coordinatingReviewDirectoryPresentAtLedgerUpdate": true,
+    "contrastReview": {
+      "change": "Primary control orange darkened from #e95d14 to #cf4b08; hover #b94006.",
+      "source": "Coordinating agent measured white-on-orange contrast as approximately 4.50:1 for the updated base color.",
+      "scope": "UI controls only; 3D rendering colors unchanged."
+    }
+  }
 }

@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "project": "TWINFORGE — Une décision. Deux futurs.",
-  "updated_at": "2026-11-04T14:07:00.065568+00:00",
-  "usage": "Interface patterns adapted to the existing native HTML/CSS/ES module project. No React runtime or copied sample metrics introduced.",
+  "project": "TWINFORGE — Decision lab, Motion lab & Camera",
+  "updated_at": "2026-11-04T20:37:15.436364+00:00",
+  "usage": "Native HTML/CSS/ES-module adaptations of inspected 21st source patterns. Three public English-first pages share light chrome, compact controls and progressive disclosure. No React runtime, upstream sample content or fabricated metrics introduced.",
   "sources": [
     {
       "id": 14941,
@@ -18,18 +18,17 @@
         "preview": "Visually inspected in browser during the project design pass",
         "code": "Source code fetched and inspected before native adaptation"
       },
-      "adapted_pattern": "Navigation latérale, cadre de travail et hiérarchie discrète du dashboard.",
-      "implementation_files": [
-        "index.html",
-        "web/causal/lab.css"
-      ],
+      "adapted_pattern": "Previous permanent sidebar layout, removed from the public interface.",
+      "implementation_files": [],
       "react_component_installed": false,
       "imported_demo_metrics": false,
       "previous_implementation_files": [
         "index.html (Process Lab, superseded)",
-        "web/process/lab.css"
+        "web/process/lab.css",
+        "index.html (dark causal-lab shell, superseded 2026-11-04)",
+        "web/causal/lab.css (dark causal-lab shell, superseded 2026-11-04)"
       ],
-      "status": "active native adaptation in causal lab"
+      "status": "superseded in the public light redesign; retained for historical provenance only"
     },
     {
       "id": 26923,
@@ -45,10 +44,14 @@
         "preview": "Visually inspected in browser during the project design pass",
         "code": "Source code fetched and inspected before native adaptation"
       },
-      "adapted_pattern": "Onglets segmentés Expérience / Meta / Preuves avec état sélectionné accessible.",
+      "adapted_pattern": "Horizontal Decision lab / Motion lab / Camera navigation with selected-page treatment, visible focus and 44px targets. Native links retain navigation semantics; no incorrect ARIA tab behavior.",
       "implementation_files": [
         "index.html",
-        "web/causal/lab.css"
+        "workbench.html",
+        "scan.html",
+        "web/causal/lab.css",
+        "web/workbench-ui.css",
+        "web/camera/scanner.css"
       ],
       "react_component_installed": false,
       "imported_demo_metrics": false,
@@ -56,7 +59,7 @@
         "index.html (Process Lab, superseded)",
         "web/process/lab.css"
       ],
-      "status": "active native adaptation in causal lab"
+      "status": "retained as a horizontal navigation pattern in the three-page light redesign"
     },
     {
       "id": 15024,
@@ -72,18 +75,17 @@
         "preview": "Visually inspected in browser during the project design pass",
         "code": "Source code fetched and inspected before native adaptation"
       },
-      "adapted_pattern": "Cartes de métriques avec valeur réelle, contexte de comparaison et mini-graphe.",
-      "implementation_files": [
-        "index.html",
-        "web/causal/lab.css"
-      ],
+      "adapted_pattern": "Previous boxed metric-card grid, replaced by direct stage readouts, compact rows and evidence sheets.",
+      "implementation_files": [],
       "react_component_installed": false,
       "imported_demo_metrics": false,
       "previous_implementation_files": [
         "index.html (Process Lab, superseded)",
-        "web/process/lab.css"
+        "web/process/lab.css",
+        "index.html (dark causal-lab shell, superseded 2026-11-04)",
+        "web/causal/lab.css (dark causal-lab shell, superseded 2026-11-04)"
       ],
-      "status": "active native adaptation in causal lab"
+      "status": "superseded in the public light redesign; retained for historical provenance only"
     },
     {
       "id": 29866,
@@ -99,10 +101,11 @@
         "preview": "Visually inspected in browser during the project design pass",
         "code": "Source code fetched and inspected before native adaptation"
       },
-      "adapted_pattern": "Étapes verticales des hypothèses, validation et modèle gelé.",
+      "adapted_pattern": "Subordinate chronological proposal-and-verification timeline inside the Decision log sheet. No permanent stepper or dashboard-wide card layout.",
       "implementation_files": [
         "index.html",
-        "web/causal/lab.css"
+        "web/causal/lab.css",
+        "web/causal/lab.mjs"
       ],
       "react_component_installed": false,
       "imported_demo_metrics": false,
@@ -110,8 +113,123 @@
         "index.html (Process Lab, superseded)",
         "web/process/lab.css"
       ],
-      "status": "active native adaptation in causal lab"
+      "status": "retained only for the expanded model-response timeline"
+    },
+    {
+      "id": 1279,
+      "component_id": 723,
+      "name": "Toolbar Dynamic",
+      "demo_name": "Default",
+      "registry_url": "https://21st.dev/r/ibelick/toolbar-dynamic",
+      "author_handle": "ibelick",
+      "preview_url": "https://cdn.21st.dev/user_motion_primitives/toolbar-dynamic/default/preview.png",
+      "cache_path": ".21st/cache/1279.json",
+      "cache_sha256": "c94387b1a65a0d33a84892e96d6569fb99c38baee9d14c8a70a35f6c9f9e39b8",
+      "component_code_sha256": "fd5ac01b73c3b06cdd83364ff17c3d2c7502fae3132964c98480287849b4fd48",
+      "demo_code_sha256": "ddc8418e625c67093f7329c90aa85392f4bebc2f02f5a3739067014e1c1a2c9f",
+      "registry_dependencies_sha256": "7d0016197690ee452d6dc1d3d72e834a9235280230b72d0f1be23aeb33678aed",
+      "inspection": {
+        "preview": "Visually inspected by the coordinating agent on 2026-11-04.",
+        "code": "Full component, demo and registry dependencies fetched into the cache and inspected before native adaptation."
+      },
+      "adapted_pattern": "Compact control groups for scenario selection, playback and camera actions. The native adaptation uses bordered rounded groups and explicit text/accessible names instead of upstream icons or floating placement.",
+      "implementation_files": [
+        "index.html",
+        "workbench.html",
+        "scan.html",
+        "web/causal/lab.css",
+        "web/workbench-ui.css",
+        "web/camera/scanner.css"
+      ],
+      "react_component_installed": false,
+      "imported_demo_metrics": false,
+      "status": "active native adaptation in the three-page light redesign"
+    },
+    {
+      "id": 25010,
+      "component_id": 12234,
+      "name": "Sheet with Scrollable Content",
+      "demo_name": "Default",
+      "registry_url": "https://21st.dev/r/shadcnspace/sheet-02",
+      "author_handle": "shadcnspace",
+      "preview_url": "https://cdn.21st.dev/user_38qAOtph5HovpSn2yjNYXjbTOm2/sheet-02/default/preview.1787762237746.webp",
+      "cache_path": ".21st/cache/25010.json",
+      "cache_sha256": "40205336e4638ce2fb329946e9faffbe407dd96f379ab642aef41b64836aac14",
+      "component_code_sha256": "c594e03e4cd752ec91011c5cf601fdd2656ecf4cfae9b8ba13f5cd01072f0932",
+      "demo_code_sha256": "ee4deeff77250d585d85970bd9a5f7bd17cd354384e393a6fff52d569a16bd34",
+      "registry_dependencies_sha256": "cf646cf07a609edd21caf6d30898c48612b29eda23cfebbccd17a949f86f3d7b",
+      "inspection": {
+        "preview": "Visually inspected by the coordinating agent on 2026-11-04.",
+        "code": "Full component, demo and registry dependencies fetched into the cache and inspected before native adaptation."
+      },
+      "adapted_pattern": "Right-side native dialog sheets with a fixed heading, scrollable content, keyboard focus trapping, Escape dismissal and focus return. Motion lab also has a fixed Done footer.",
+      "implementation_files": [
+        "index.html",
+        "workbench.html",
+        "web/causal/lab.css",
+        "web/causal/lab.mjs",
+        "web/workbench-ui.css",
+        "web/workbench-ui.js"
+      ],
+      "react_component_installed": false,
+      "imported_demo_metrics": false,
+      "status": "active native adaptation in the three-page light redesign"
+    },
+    {
+      "id": 27028,
+      "component_id": 13616,
+      "name": "AI Reasoning Block",
+      "demo_name": "Default",
+      "registry_url": "https://21st.dev/r/laziekiki/ai-reasoning-block",
+      "author_handle": "laziekiki",
+      "preview_url": "https://cdn.21st.dev/user_3J39TADh2eUXcUqIKX6ozU6RE62/ai-reasoning-block/default/preview.1789375340107.png",
+      "cache_path": ".21st/cache/27028.json",
+      "cache_sha256": "ac535f05a35fad6dfe0348014389a81bbb9399593aa16bc10848851b6112121d",
+      "component_code_sha256": "747665bfded2027f0b07a3dbc47c0df7a7c0eccfda79b2bbd7cad36fcfa7b034",
+      "demo_code_sha256": "2f79acb471872777311b39814041e51f77ae31c01597205c3d03b3a1a4eec77c",
+      "registry_dependencies_sha256": "d839986943013d711b319da5c24476e297fd9471a120ed466a14f45e12bd033b",
+      "inspection": {
+        "preview": "Visually inspected by the coordinating agent on 2026-11-04.",
+        "code": "Full component, demo and registry dependencies fetched into the cache and inspected before native adaptation."
+      },
+      "adapted_pattern": "Collapsed secondary information and advanced tools. Native details/summary replaces React state; visible summaries reveal scope, optional model calls, camera options and diagnostics. No private model chain-of-thought is exposed.",
+      "implementation_files": [
+        "index.html",
+        "workbench.html",
+        "scan.html",
+        "web/causal/lab.css",
+        "web/workbench-ui.css",
+        "web/workbench.js",
+        "web/camera/scanner.css"
+      ],
+      "react_component_installed": false,
+      "imported_demo_metrics": false,
+      "status": "active native adaptation in the three-page light redesign"
     }
   ],
-  "licensing_note": "This is provenance for inspected source patterns, not a declaration of upstream license terms. No project license is chosen here."
+  "licensing_note": "This is provenance for inspected source patterns, not a declaration of upstream license terms. No project license is chosen here.",
+  "rejected_candidates": [
+    {
+      "id": 4880,
+      "component_id": 3631,
+      "name": "Navbars",
+      "demo_name": "Tab  Navbar.tsx",
+      "registry_url": "https://21st.dev/r/arihantcodes_1f7b8c4d/navbars",
+      "preview_url": "https://cdn.21st.dev/user_2xmIUPynCyYHPXZPBwS1EDV1Aq8/navbars/tab-navbar/preview.1787008358490.png",
+      "cache_path": ".21st/cache/4880.json",
+      "cache_sha256": "71e4f5238d481d7ca633a590bce5ead0e6814abe379b776d5dee92d4e06f836f",
+      "status": "retrieved but rejected; not used or installed",
+      "reason": "Component and demo did not match; coordinating agent rejected the candidate before implementation."
+    }
+  ],
+  "external_visual_references": [
+    {
+      "name": "mpcdetails.mp4",
+      "source": "User-provided video reference",
+      "usage": "Reference for explanatory visual pacing only.",
+      "published": false,
+      "copied_into_product": false,
+      "note": "Third-party video and its frames are not product assets and must not be published with the site."
+    }
+  ]
 }
