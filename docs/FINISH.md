@@ -1,4 +1,6 @@
-# État de livraison — 4 novembre 2026
+# [Archive — état antérieur au laboratoire causal] État de livraison — 4 novembre 2026
+
+> État historique conservé. Pour la livraison courante, consulter le [README](../README.md) et le [dossier concours](SUBMISSION.md). Les chiffres et commandes ci-dessous décrivent la révision antérieure.
 
 **Le périmètre demandé est désormais le logiciel local sans caméra ni dispositif physique.** Il possède un profil `simulation-only` séparé. Le profil PDF strict reste incomplet : L1 réel, contrôle matériel et échéances historiques ne sont pas démontrés.
 

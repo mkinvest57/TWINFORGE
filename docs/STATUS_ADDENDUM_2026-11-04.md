@@ -1,4 +1,6 @@
-# Addendum de statut — 4 novembre 2026
+# [Archive — état antérieur au laboratoire causal] Addendum de statut — 4 novembre 2026
+
+> État historique conservé. Pour la livraison courante, consulter le [README](../README.md) et le [dossier concours](SUBMISSION.md). Les chiffres et commandes ci-dessous décrivent la révision antérieure.
 
 **L1 réel non démontré. Périmètre actuel déclaré : L3, sélection et calibration de moteurs physiques connus, avec démonstration en simulation. Contrôle physique coupé.**
 

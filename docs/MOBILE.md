@@ -4,7 +4,7 @@ La page [scan.html](../scan.html) constitue un parcours mobile distinct du labor
 
 ## Ouvrir la page
 
-Sur téléphone : [ouvrir la caméra Twinforge en HTTPS](https://mkinvest57.github.io/TWINFORGE/scan.html). Cette version est publique et ne demande pas de compte ChatGPT. La [preuve de publication du 4 novembre](../validation/runs/process-browser-2026-11-04/public-deployment.json) vérifie son HTML sans cookie ni authentification. L’ancien aperçu Sites conserve son accès privé au propriétaire.
+Sur téléphone : [ouvrir la caméra Twinforge en HTTPS](https://mkinvest57.github.io/TWINFORGE/scan.html). Cette version est publique et ne demande pas de compte ChatGPT. La [preuve de publication du 4 novembre](../validation/runs/causal-browser-2026-11-04/public-deployment.json) vérifie son HTML sans cookie ni authentification. L’ancien aperçu Sites conserve son accès privé au propriétaire.
 
 Sur la machine de développement :
 
@@ -47,7 +47,7 @@ Lorsqu’un enregistrement vidéo est proposé, le format doit être choisi parm
 
 Les tests mobiles vérifient leur propre version des sources : accès aux fichiers statiques, permissions, arrêt des pistes, suivi/prédiction, export et absence d’appel fournisseur. Un flux caméra synthétique utilisé par l’automatisation n’est pas annoncé comme un essai sur téléphone réel.
 
-La livraison mobile précédant Process Lab a passé **148 tests : 87 Python et 61 JavaScript**, avec hashes des sources alors stables. Ce [relevé historique mobile](../validation/runs/software-checks-mobile-2026-11-04.json) reste archivé. La version Process Lab passe désormais [192 tests](../validation/runs/software-checks-process-release-2026-11-04.json). L’ancien [manifeste statique](../validation/runs/mobile-static-assets-2026-11-04.json) décrit les 29 fichiers de cette livraison mobile initiale, sans backend ni clé.
+La livraison mobile précédant Process Lab a passé **148 tests : 87 Python et 61 JavaScript**, avec hashes des sources alors stables. Ce [relevé historique mobile](../validation/runs/software-checks-mobile-2026-11-04.json) reste archivé. La version intermédiaire Process Lab comptait [192 tests](../validation/runs/software-checks-process-release-2026-11-04.json). La livraison causale actuelle passe [221 tests](../validation/runs/software-checks-causal-release-2026-11-04.json). L’ancien [manifeste statique](../validation/runs/mobile-static-assets-2026-11-04.json) décrit les 29 fichiers de cette livraison mobile initiale, sans backend ni clé.
 
 La [revue navigateur](../validation/runs/mobile-2026-11-04/browser-review.json) mesure le parcours local sur des tailles de fenêtre de 320, 390, 844 et 1 280 pixels, sans débordement horizontal. Le suivi continue après rotation. L’exemple synthétique exporté comprend 839 observations, 400 prévisions émises et 396 évaluées, avec **1,631 pixel d’erreur moyenne** dans l’image d’analyse réduite. Ce chiffre n’est ni une mesure réelle ni un score en centimètres. L’import H.264 a été vérifié comme parcours fonctionnel; un format vidéo non pris en charge produit une erreur visible. Aucun téléphone physique ni caméra réelle n’a été utilisé pour cette revue.
 

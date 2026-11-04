@@ -77,6 +77,8 @@ Pour une nouvelle étude payante, cocher l’option Meta de l’interface ou ajo
 
 **221 tests passent : 114 Python et 107 JavaScript.** Le [rapport complet](validation/runs/software-checks-causal-release-2026-11-04.json) couvre les sources de la livraison. Le [parcours navigateur](validation/runs/causal-browser-2026-11-04/browser-review.json) vérifie la lecture, les échecs, les exports, la session Meta enregistrée, une nouvelle étude gratuite et les largeurs 320, 390, 768 et 1280 pixels. Les [corrections de l’atelier](validation/runs/legacy-repair-2026-11-04/) ont leurs propres preuves.
 
+La [version publique de cette refonte](https://mkinvest57.github.io/TWINFORGE/) est déployée. Douze fichiers essentiels ont été relus sans authentification et correspondent aux sources; un export obtenu dans le navigateur public reproduit exactement les états, commandes, collisions et résultats locaux. [Preuve de publication](validation/runs/causal-browser-2026-11-04/public-deployment.json).
+
 ## Périmètre de la présentation
 
 Le laboratoire causal remplace la cuve en page d’accueil. La cuve et l’orbite ne font plus partie du parcours de présentation. Les essais historiques et leurs preuves restent archivés; ils ne deviennent pas des résultats de cette nouvelle expérience. L’atelier du pendule et la caméra gardent leur portée propre.

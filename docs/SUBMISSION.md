@@ -69,7 +69,7 @@ Ces documents sont des livrables de préparation. Aucune nouvelle voix synthéti
 
 [Dépôt public](https://github.com/mkinvest57/TWINFORGE) · [Démo publique](https://mkinvest57.github.io/TWINFORGE/) · [Guide officiel](https://cerebralvalley.ai/e/meta-ai-developer-hackathon/details)
 
-La version statique donne accès aux simulations et au journal enregistré; elle n’expose aucune clé. La validation finale des liens publics et du parcours navigateur doit correspondre au déploiement de cette refonte, et non aux captures de la version précédente.
+La version statique donne accès aux simulations et au journal enregistré; elle n’expose aucune clé. La refonte a été déployée depuis le commit `4bad3a75fc24625db156212938a97d126c57c485`. Douze fichiers essentiels correspondent aux sources après téléchargement sans connexion; le rejeu public a terminé ses 12 secondes et son export reproduit exactement les branches et résultats locaux. Le journal Meta public et les contrôles désactivés pour de nouveaux appels ont été vérifiés. [Preuve de publication](../validation/runs/causal-browser-2026-11-04/public-deployment.json). Les 221 tests passent (114 Python, 107 JavaScript); aucun test de caméra physique n’est revendiqué.
 
 Le guide consulté donne l’échéance du **4 novembre à 21 h EST, soit le 5 novembre à 03 h à Paris**. Le dossier ne constitue pas une soumission ni un reçu du portail. L’éligibilité du track, les informations d’équipe, la vidéo effectivement rendue et l’envoi final restent à confirmer par le participant.
 

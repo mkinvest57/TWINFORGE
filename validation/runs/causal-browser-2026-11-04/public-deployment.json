@@ -1,0 +1,123 @@
+{
+  "url": "https://mkinvest57.github.io/TWINFORGE/",
+  "checked_at": "2026-11-04T17:18:16.388020+00:00",
+  "source_commit": "4bad3a75fc24625db156212938a97d126c57c485",
+  "workflow": "https://github.com/mkinvest57/TWINFORGE/actions/runs/41876061700",
+  "workflow_result": "success",
+  "anonymous_requests": true,
+  "files": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "6628d6712ad94afe30459d1527ffd6fb117319a8290519e43b2779d7769476c6",
+      "matches_source": true
+    },
+    {
+      "path": "workbench.html",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "aa928a88544253558e3808c39e1bd93c18c68a5881d623e2cf49f9765f8af56a",
+      "matches_source": true
+    },
+    {
+      "path": "scan.html",
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "sha256": "dd1ff806c146843fa43a089b02596eb388e397ef032f54af88abb8a9d78817ea",
+      "matches_source": true
+    },
+    {
+      "path": "web/causal/engine.mjs",
+      "status": 200,
+      "content_type": "text/javascript; charset=utf-8",
+      "sha256": "ff7d00a37a118b42179cb5314d6056f66ab93e30d22027600250ddd01b239a09",
+      "matches_source": true
+    },
+    {
+      "path": "web/causal/lab.mjs",
+      "status": 200,
+      "content_type": "text/javascript; charset=utf-8",
+      "sha256": "9568c8ee3992107da2e817b33a62613ee9a29494231d762aadfd1b440e6e3c96",
+      "matches_source": true
+    },
+    {
+      "path": "web/causal/lab.css",
+      "status": 200,
+      "content_type": "text/css; charset=utf-8",
+      "sha256": "a37d8ad57b87f6a1c0828ec7e78c7cda98ae812bdf0e6fdb5e8de0909881d58f",
+      "matches_source": true
+    },
+    {
+      "path": "web/causal/scene.mjs",
+      "status": 200,
+      "content_type": "text/javascript; charset=utf-8",
+      "sha256": "9f219f1462c9f50f5eb1657c509c0be9fe771fc3a009edf27b34fd441235af74",
+      "matches_source": true
+    },
+    {
+      "path": "web/causal/worker.mjs",
+      "status": 200,
+      "content_type": "text/javascript; charset=utf-8",
+      "sha256": "6c22ce3b6417a2116e2e062ed9bc899033e8e57642a094b2cbeb88eeb0efbebb",
+      "matches_source": true
+    },
+    {
+      "path": "web/physics/alt-models.mjs",
+      "status": 200,
+      "content_type": "text/javascript; charset=utf-8",
+      "sha256": "1ee9d536ef414abb22348d595cfe3f7210a965e85fa3df4739f212cec3e57721",
+      "matches_source": true
+    },
+    {
+      "path": "web/workbench.js",
+      "status": 200,
+      "content_type": "application/javascript; charset=utf-8",
+      "sha256": "2b415cb38da65ac5898ffb98a2890cb0982169301821fb9ab926b14a4031a4ac",
+      "matches_source": true
+    },
+    {
+      "path": "assets/causal-meta-session.json",
+      "status": 200,
+      "content_type": "application/json; charset=utf-8",
+      "sha256": "0bd106566a3343f03a3f8f25abe9a15c6fdc64de5a867d5a90e8ab602a6093fa",
+      "matches_source": true
+    },
+    {
+      "path": "assets/vendor/three/build/three.module.js",
+      "status": 200,
+      "content_type": "application/javascript; charset=utf-8",
+      "sha256": "9052042d676cb0fdc1ddfefe193053f34b7ac0513a616fdac4535d49987812ea",
+      "matches_source": true
+    }
+  ],
+  "browser": {
+    "public_replay_complete_s": 12,
+    "export_physics_equals_local": {
+      "scenario": true,
+      "baseline": true,
+      "best": true,
+      "bestAction": true,
+      "candidates": true,
+      "deadline": true,
+      "robustness": true
+    },
+    "baseline_peak_j": 116.56200059920455,
+    "selected_peak_j": 0,
+    "recorded_meta_journal_readable": true,
+    "new_model_calls_disabled_on_static_site": true,
+    "recorded_meta_replay_enabled": true,
+    "console_errors_warnings": [],
+    "camera_example": {
+      "source": "synthetic",
+      "prediction_horizon_s": 0.5,
+      "displayed_error_px": 1.6,
+      "scored_forecasts_when_stopped": 289,
+      "physical_camera_tested": false
+    },
+    "screenshots": [
+      "public-demo.jpg",
+      "public-meta.jpg"
+    ]
+  }
+}
