@@ -40,7 +40,7 @@ Open `http://127.0.0.1:8000/` and press **Start observation**. To use another po
 
 The local service binds to loopback and rejects non-local hosts and cross-origin requests. A phone needs an HTTPS deployment serving both the interface and its protected SAM backend; the local loopback URL is not a phone-accessible deployment. GitHub Pages alone can serve the scene and interface but cannot execute the private model calls. No usable SAM connection means no new SAM-based forecasts.
 
-The [owner-private hosted workspace](https://twinforge-mobile-camera.mkinvest57.chatgpt.site/) has a verified **version 5** live SAM browser capture, recorded in the [deployment proof](validation/runs/sam-live-2026-11-05/private-deployment-v5.json). Its [collision trial](validation/runs/sam-live-2026-11-05/hosted-collisions-020.json) is synthetic; it does not validate a physical phone camera or newer local changes. The next hosted revision remains subject to its own review.
+The [owner-private hosted workspace](https://twinforge-mobile-camera.mkinvest57.chatgpt.site/) now runs verified **version 6**, with actual SAM calls in retained launch/rebound and pendulum trials. See the [deployment proof](validation/runs/sam-live-2026-11-05/private-deployment-v6.json) and [browser review](validation/runs/sam-live-2026-11-05/browser-review.json). It remains private to the owner. Browser layout checks do not establish physical-phone camera operation or accuracy.
 
 SAM requests are accounted at `$0.0025` per image in the implementation. All randomized runs share the persistent `vision` budget; generating a new scene does not reset it. `TWINFORGE_LIVE_SAM_BUDGET_USD` can allocate a smaller local ceiling, including existing vision spending, without raising the global ceiling or changing historical ledger entries. The browser permits at most 60 submissions per page session, and the backend persists a 60-attempt ceiling per run. Only an explicitly unbilled busy response can be retried on a later frame; provider failures do not trigger paid automatic retries. Stopping does not cancel a provider request that has already begun.
 
@@ -55,6 +55,17 @@ node --test tests/js/*.test.mjs
 ```
 
 These checks verify software contracts and numerical behavior. They do not establish real-camera accuracy or an accuracy bound for every random scene. See the [architecture document](docs/SAM_LIVE_OBSERVATION.md) for the exact observation, timing, and scoring limits.
+
+The [recorded software check](validation/runs/sam-live-2026-11-05/software-checks.json) reports **280 passing tests: 145 JavaScript, 128 Python, and 7 hosted-worker tests**, with no provider calls during those tests.
+
+The two version 6 live captures remain separate cohorts. Both observe synthetic scenes at 480 × 300 pixels; error is against later visual tracking, not independent physical measurements.
+
+| Actual v6 trial | Horizon | Scored / unscorable targets | Mean tracked error | SAM calls |
+|---|---:|---:|---:|---:|
+| [Launch and rebound](validation/runs/sam-live-2026-11-05/hosted-final-flight-020.json) | 0.2 s | 242 / 21 | 8.004 px | 8 |
+| [Double pendulum](validation/runs/sam-live-2026-11-05/hosted-final-pendulum-020.json) | 0.2 s | 166 / 16 | 14.142 px | 5 |
+
+These are two recorded trials, not a pooled accuracy claim. Earlier trials with larger errors, different trackers, or different horizons remain in the [audit](validation/runs/sam-live-2026-11-05/live-evidence-summary.json). Offline development replays remain labeled separately and do not replace any original live result. No physical-phone camera test is claimed.
 
 ## Earlier experiments and their evidence
 

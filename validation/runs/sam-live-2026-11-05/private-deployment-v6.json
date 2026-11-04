@@ -1,0 +1,19 @@
+{
+  "project_id": "appgprj_6aeb201bbbb88191b56d8dd45accb560",
+  "deployment_id": "appgdep_6aebbea07910819187ec2b5135162d81",
+  "version_id": "appgprj_6aeb201bbbb88191b56d8dd45accb560~appgver_4860388e260881919e2c1da883f41165",
+  "version_number": 6,
+  "status": "succeeded",
+  "url": "https://twinforge-mobile-camera.mkinvest57.chatgpt.site",
+  "source_commit": "93c087061d1b81e073cf8f9824b6d170b82c8d57",
+  "worker_sha256": "f73756b4c11a403e44cc18b39e0e58117451619f6ad0bdb829692abf05bf7ca2",
+  "access": "owner-private preserved",
+  "real_sam_browser_checks": [
+    "hosted-final-flight-020.json",
+    "hosted-final-pendulum-020.json"
+  ],
+  "runtime_secret_in_source": false,
+  "local_allowance_usd": 0.1,
+  "hosted_allowance_usd": 0.4,
+  "combined_ceiling_usd": 0.5
+}

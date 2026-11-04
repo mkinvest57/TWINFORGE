@@ -12,6 +12,7 @@ import math
 from pathlib import Path
 import re
 import statistics
+import subprocess
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,7 +24,14 @@ COHORTS = [
     ("pendulum-live-020-auto.json", "pendulum", "image_plane_adaptive_motion", .2),
     ("hosted-collisions-020.json", "collisions", "image_plane_adaptive_motion", .2),
     ("pendulum-color-020.json", "pendulum", "image_plane_adaptive_motion", .2),
+    ("hosted-final-flight-020.json", "flight", "image_plane_adaptive_motion", .2),
+    ("hosted-final-pendulum-020.json", "pendulum", "image_plane_adaptive_motion", .2),
 ]
+HOSTED_DEPLOYMENTS = {
+    "hosted-collisions-020.json": "private-deployment-v5.json",
+    "hosted-final-flight-020.json": "private-deployment-v6.json",
+    "hosted-final-pendulum-020.json": "private-deployment-v6.json",
+}
 
 
 def sha(data):
@@ -81,12 +89,15 @@ def audit():
             r["exported_at"], r["run"]["timeS"] or 0,
             len(r["run"]["issued"]), len(r["run"]["assessments"]), r["location"] == "current"))
 
-    deployment_path = FOLDER / "private-deployment-v5.json"
-    deployment = json.loads(deployment_path.read_text())
-    deployment_reference = {"file": deployment_path.name, "sha256": sha(deployment_path.read_bytes()),
-                            "version_number": deployment["version_number"], "status": deployment["status"],
-                            "source_commit": deployment["source_commit"], "access": deployment["access"]}
-    check("hosted_deployment_record_matches_capture", deployment["status"] == "succeeded" and deployment["real_sam_browser_check"] == "hosted-collisions-020.json", deployment_path.name)
+    deployment_references = {}
+    for filename, proof in HOSTED_DEPLOYMENTS.items():
+        deployment_path = FOLDER / proof
+        deployment = json.loads(deployment_path.read_text())
+        deployment_references[proof] = {"file": proof, "sha256": sha(deployment_path.read_bytes()),
+                                       "version_number": deployment["version_number"], "status": deployment["status"],
+                                       "source_commit": deployment["source_commit"], "access": deployment["access"]}
+        captures = deployment.get("real_sam_browser_checks", [deployment.get("real_sam_browser_check")])
+        check("hosted_deployment_record_matches_capture", deployment["status"] == "succeeded" and filename in captures, filename)
     ledger = [json.loads(line) for line in (ROOT / ".twinforge/credits.jsonl").read_text().splitlines() if line.strip()]
     reserved = {r["id"]: r for r in ledger if r["event"] == "reserved"}
     settled = {r["id"]: r for r in ledger if r["event"] == "settled"}
@@ -103,7 +114,7 @@ def audit():
             check("receipt_unique_across_deduplicated_runs", request_id not in receipt_ids, request_id)
             receipt_ids.add(request_id)
             receipts[request_id] = record
-            if owners[rid] == "hosted-collisions-020.json":
+            if owners[rid] in HOSTED_DEPLOYMENTS:
                 check("hosted_receipt_source_is_synthetic", record["sourceKind"] == "synthetic" and record["runId"] == rid, request_id)
                 check("hosted_receipt_names_sam", receipt["model"] == record["model"] == "sam-3.1", request_id)
                 check("hosted_receipt_hashes_well_formed", bool(re.fullmatch(r"[0-9a-f]{32}", request_id) and re.fullmatch(r"[0-9a-f]{64}", receipt["request_sha256"]) and re.fullmatch(r"[0-9a-f]{64}", record["imageSha256"])), request_id)
@@ -182,7 +193,7 @@ def audit():
                 early_unscorable += assessment["scoredAtSourceTimeS"] < p["targetTime"]
 
         failed_local_attempts = []
-        if owners[rid] != "hosted-collisions-020.json":
+        if owners[rid] not in HOSTED_DEPLOYMENTS:
             for path in (ROOT / ".twinforge/live-sam" / rid).glob("*.json"):
                 if path.name == "state.json":
                     continue
@@ -200,6 +211,7 @@ def audit():
             "run_id": rid, "selected_snapshot": {k: snapshot[k] for k in ("file", "location", "exported_at", "run_sha256")},
             "all_snapshot_sources": [{k: s[k] for k in ("file", "location", "exported_at", "run_sha256")} for s in snapshots[rid]],
             "source_kind": run["sourceKind"], "image_width": run["width"], "image_height": run["height"],
+            "empty_reset_run": not run["samRecords"] and not run["observations"] and not run["issued"],
             "duration_source_s": run["timeS"], "horizon_s": sorted({p["horizon"] for p in run["issued"]}),
             "run_horizon_metadata_s": run.get("horizonS"), "models": dict(Counter(p["model"] for p in run["issued"])),
             "motion_models": dict(Counter(p.get("motionModel", "baseline") for p in run["issued"])),
@@ -211,8 +223,8 @@ def audit():
             "error_px_on_scored_forecasts_only": distribution(errors),
             "sam_actual_completed_calls": len(public_receipts), "sam_accounted_usd": round(sum(r["accounted_usd"] for r in public_receipts), 6),
             "browser_submission_attempts": run["runCalls"], "failed_local_frame_attempts": failed_local_attempts,
-            "serverReceiptVerifiedLocally": all(r["serverReceiptVerifiedLocally"] for r in public_receipts),
-            "backend": "private_hosted" if owners[rid] == "hosted-collisions-020.json" else "local_python",
+            "serverReceiptVerifiedLocally": owners[rid] not in HOSTED_DEPLOYMENTS and bool(public_receipts) and all(r["serverReceiptVerifiedLocally"] for r in public_receipts),
+            "backend": "private_hosted" if owners[rid] in HOSTED_DEPLOYMENTS else "local_python",
             "sam_response_latency_ms": distribution([r["latency_ms"] for r in public_receipts]),
             "sam_receipts": public_receipts,
         }
@@ -221,11 +233,12 @@ def audit():
     for filename, family, model, horizon in COHORTS:
         runs = [public_runs[rid] for rid in selected if owners[rid] == filename]
         for run in runs:
-            check("cohort_horizon_matches_forecasts", run["horizon_s"] == [horizon], run["run_id"])
-            check("cohort_model_matches_forecasts", set(run["models"]) == {model}, run["run_id"])
+            check("cohort_horizon_matches_forecasts", run["horizon_s"] == [horizon] or (run["empty_reset_run"] and run["run_horizon_metadata_s"] == horizon), run["run_id"])
+            check("cohort_model_matches_forecasts", set(run["models"]) == {model} or run["empty_reset_run"], run["run_id"])
         cohorts.append({"cohort_file": filename, "file_sha256": loaded[filename]["sha256"], "family_label": family,
                         "family_label_source": "operator capture filename; family is not passed to the predictor",
                         "forecast_model": model, "forecast_horizon_s": horizon,
+                        "hosted_deployment": deployment_references.get(HOSTED_DEPLOYMENTS.get(filename)),
                         "runs": runs, "aggregate_error_metrics": None})
 
     replay_path = FOLDER / "motion-replay.json"
@@ -242,18 +255,33 @@ def audit():
     for entry in short_replay["runs"]:
         live = public_runs[entry["runId"]]
         check("short_window_replay_preserves_original_live_metrics", entry["originalScored"] == live["scored_forecasts"] and abs(entry["originalMeanErrorPx"] - live["error_px_on_scored_forecasts_only"]["mean"]) < 1e-8, entry["runId"])
+    pinned_source = deployment_references["private-deployment-v6.json"]["source_commit"]
+    source_hashes = {}
+    for path in ("web/vision/motion.mjs", "web/camera/prediction.mjs"):
+        pinned = subprocess.check_output(["git", "show", pinned_source + ":public/" + path], cwd=ROOT / "output/mobile-site")
+        actual = (ROOT / path).read_bytes()
+        source_hashes[path] = sha(actual)
+        check("v6_forecaster_source_matches_deployment_commit", pinned == actual, path)
+    final_runs = [s["run"] for rid, s in selected.items() if HOSTED_DEPLOYMENTS.get(owners[rid]) == "private-deployment-v6.json"]
+    reproduced = subprocess.run(["node", str(ROOT / "validation/audit_live_sam_motion.mjs")],
+                                input=json.dumps(final_runs), text=True, capture_output=True, cwd=ROOT, check=True)
+    motion_reproduction = json.loads(reproduced.stdout)
+    motion_reproduction.update(source_commit=pinned_source, source_sha256=source_hashes)
+    check("v6_issued_targets_reproduce_from_past_only", not motion_reproduction["failures"], "v6 forecasts")
     summary = {
         "schema_version": "twinforge.live-sam-evidence-audit.v1", "audited_at": datetime.now(timezone.utc).isoformat(),
         "audit_command": ".venv/bin/python -B validation/audit_live_sam_evidence.py", "audit_script_sha256": sha(Path(__file__).read_bytes()),
         "timestamp_comparison_tolerance_s": 1e-9,
         "provider_calls_by_audit": 0, "audit_passed": not failures, "checks_executed": dict(checks), "failures": failures,
         "inputs": list(loaded.values()), "snapshot_records": sum(map(len, snapshots.values())), "unique_runs": len(selected),
+        "empty_reset_runs": sum(r["empty_reset_run"] for r in public_runs.values()),
         "duplicate_snapshot_records_removed": sum(map(len, snapshots.values())) - len(selected),
         "deduplication": "One latest exported snapshot per run ID; ties use source time, completeness, then current snapshot. A run belongs to the first input cohort containing it.",
         "unique_actual_completed_sam_calls": len(receipt_ids),
         "locally_matched_private_completed_calls": sum(r["sam_actual_completed_calls"] for r in public_runs.values() if r["serverReceiptVerifiedLocally"]),
         "hosted_calls_from_production_browser_export": sum(r["sam_actual_completed_calls"] for r in public_runs.values() if not r["serverReceiptVerifiedLocally"]),
-        "hosted_deployment_reference": deployment_reference,
+        "hosted_deployment_references": list(deployment_references.values()),
+        "v6_forecast_reproduction": motion_reproduction,
         "pooled_error_metrics": None, "cohorts": cohorts,
         "separate_offline_analysis": {"file": replay_path.name, "sha256": sha(replay_path.read_bytes()),
                                       "type": replay["type"], "new_live_calls": replay["newLiveCalls"],
@@ -271,7 +299,8 @@ def audit():
             "Early unscorable invalidations are permissible: a stop or reset can abandon a target before its time. Numeric scores must wait until target observations exist.",
             "SAM latency is the exported server response latency including local work, not a pure model-runtime measurement.",
             "Local cohorts were matched to private completed audits, exact JPEG hashes, reconstructed provider request hashes and ledger settlements. Hosted receipts were not matched to that local storage; serverReceiptVerifiedLocally is false for them.",
-            "The hosted cohort is supported by the production-browser export and the recorded private v5 deployment check. This audit did not query the hosted database or independently rerun inference, and makes no statement about a later deployment.",
+            "Hosted cohorts are supported by production-browser exports and their mapped private v5 or v6 deployment records. This audit did not query the hosted database or independently rerun SAM inference.",
+            "The v6 motion check reproduces existing issued targets from past observations and tests invariance to added future observations; it is a causality/reproducibility check, not a new accuracy benchmark.",
             "Public output contains no images, raw provider responses or credentials.",
             "Application hashes and receipts provide traceability, not provider-signed attestation.",
         ],

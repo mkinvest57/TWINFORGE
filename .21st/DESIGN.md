@@ -8,6 +8,8 @@ The established 21st toolbar (1279), sheet (25010), disclosure (27028) and horiz
 
 The source render is 640 × 400; CSS scales it to the iframe without Three.js fixed inline dimensions. The 480 × 300 observation overlay uses the same aspect ratio. Metrics remain image pixels, not metres. Random trials, no-match states, response latency and failed predictions remain part of the experiment.
 
+Current verification is recorded in `validation/runs/sam-live-2026-11-05/browser-review.json`: actual hosted SAM on randomized flight and pendulum trials; 390px camera layout without overflow; 44px primary controls; native explanation dialog; explicit disabled inference on static GitHub Pages. `21st review` reports two informational hardcoded-color findings and no warnings or errors for the changed UI.
+
 ## Previous interface rationale (historical)
 
 # TWINFORGE — Decision lab, Motion lab & Camera

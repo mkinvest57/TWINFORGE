@@ -1,0 +1,37 @@
+{
+  "recorded_at": "2026-11-04T23:27:10.641155+00:00",
+  "hosted_release_version": 6,
+  "hosted_url": "https://twinforge-mobile-camera.mkinvest57.chatgpt.site",
+  "private_frontend_matches_source_files": 57,
+  "desktop_actual_sam_runs": [
+    "hosted-final-flight-020.json",
+    "hosted-final-pendulum-020.json"
+  ],
+  "screenshots": [
+    "hosted-flight-live.png",
+    "hosted-pendulum-live.png",
+    "mobile-camera-ready.png",
+    "public-static-no-sam.png"
+  ],
+  "mobile_viewport": {
+    "width": 390,
+    "height": 844,
+    "document_scroll_width": 390,
+    "primary_control_heights_px": [
+      44,
+      44,
+      44,
+      44
+    ]
+  },
+  "mobile_camera_layout_checked": true,
+  "real_phone_camera_tested": false,
+  "native_explanation_dialog_checked": true,
+  "public_static_without_sam": {
+    "start_disabled": true,
+    "forecasts_created": 0,
+    "live_workspace_link_visible": true
+  },
+  "requests_stopped_before_handoff": true,
+  "no_claim_of_independent_physical_ground_truth": true
+}

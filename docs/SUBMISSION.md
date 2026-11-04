@@ -1,6 +1,6 @@
 # TWINFORGE — See a scene. Predict its next move.
 
-**Current submission draft; not submitted.** Presentation language: English. This brief describes the implemented live SAM observation path. Live-run measurements and deployment verification must be added from retained evidence; the historical benchmark results below do not substitute for them.
+**Current submission draft; not submitted.** Presentation language: English. This brief describes the live SAM observation path, now verified in the owner's private hosted version 6 workspace. Retained synthetic trials remain separate from earlier numerical benchmarks and from physical-camera validation.
 
 ## Pitch
 
@@ -44,7 +44,7 @@ SAM requests are sparse, with a default interval of at least three source second
 
 A short fit can fail at a bounce, collision, direction change, occlusion, or ambiguous crossing. Camera motion also violates its stationary-camera assumption. Insufficient samples, low motion, lost tracking, or an uncertain fit can cause the system to withhold a prediction. Conditional fit confidence is not a calibrated probability of correctness.
 
-Displayed errors compare predictions against subsequent visual tracking. Both use the same image-processing pipeline; this is **not independent physical ground truth**. No current live accuracy number, latency result, or real-phone result is asserted by this draft.
+Displayed errors compare predictions against subsequent visual tracking. Both use the same image-processing pipeline; this is **not independent physical ground truth**. The version 6 launch/rebound capture scored 242 targets with mean error 8.004 pixels; its separate pendulum capture scored 166 with mean error 14.142 pixels. Both used a 0.2-second horizon and 480 × 300 synthetic images. There were respectively 21 and 16 unscorable targets. These are two individual trials, not a general accuracy guarantee or a real-phone result; their [retained evidence](../validation/runs/sam-live-2026-11-05/live-evidence-summary.json) includes the earlier larger errors.
 
 The 0.2-second default is a shorter, easier task than the 0.5-second stress setting. It does not erase the earlier horizon's errors. Changing the setting starts a fresh trial with fresh SAM segmentation and cleared display metrics; the previous trial remains in export history. Measurements must remain separate by horizon, scene family, source kind, and relevant version, with scored and unscorable counts visible. Past targets used to choose the motion model are not independent future-test results. This brief makes no aggregate precision claim across those groups.
 
@@ -52,15 +52,15 @@ The 0.2-second default is a shorter, easier task than the 0.5-second stress sett
 
 [Main interface](../index.html) · [Camera interface](../index.html?mode=camera) · [Architecture and setup](SAM_LIVE_OBSERVATION.md) · [Repository](https://github.com/mkinvest57/TWINFORGE)
 
-The local service requires a privately configured Meta credential and the installed SAM mask decoder. The static GitHub Pages interface cannot execute private SAM calls by itself. Hosting with a private backend is being prepared; this brief does not claim that a new public live deployment has been verified. A phone requires HTTPS and a working backend, not just the static page.
+The local service requires a privately configured Meta credential and the installed SAM mask decoder. The static GitHub Pages interface cannot execute private SAM calls by itself. The [owner-private hosted workspace](https://twinforge-mobile-camera.mkinvest57.chatgpt.site/) has [version 6 deployment proof](../validation/runs/sam-live-2026-11-05/private-deployment-v6.json) and retained actual SAM browser runs. It is not public jury access. A phone requires HTTPS and a working backend; no physical-phone camera test is claimed.
 
 All randomized trials share the persistent `vision` spending budget. The default ceiling is $0.50; the implementation accounts at $0.0025 per image. Scene resets do not replenish it. Browser submission limits, a persistent per-run limit, and a single active server request bound usage. Provider failures do not trigger automatic paid retries. An explicitly unbilled busy response can be followed by a later fresh frame.
 
-The prepared hosting allocation reserves $0.10 for local live requests and leaves $0.40 for hosted requests. The local cap includes earlier vision spending; the hosted baseline of `1000` units records that reserved allowance, not a measured $0.10 charge. This configuration must be enforced and verified before both services operate, so two independent $0.50 allowances are never presented as one budget.
+The configured hosting allocation reserves $0.10 for local live requests and leaves $0.40 for hosted requests. The local cap includes earlier vision spending; the hosted baseline of `1000` units records that reserved allowance, not a measured $0.10 charge when hosting began. The version 6 proof records this allocation, preventing two independently spendable $0.50 allowances from being presented as one budget.
 
-The local Python server privately retains the exact submitted JPEG and raw response linked to the exported receipt. The prepared hosted service retains hashes and normalized results rather than original images or raw provider text. Camera images submitted for segmentation go to Meta; no audio is captured. The browser export excludes image bytes and credentials. Hashes and application receipts support traceability but are not provider-signed attestations.
+The local Python server privately retains the exact submitted JPEG and raw response linked to the exported receipt. The hosted service retains hashes and normalized results rather than original images or raw provider text. Camera images submitted for segmentation go to Meta; no audio is captured. The browser export excludes image bytes and credentials. Hashes and application receipts support traceability but are not provider-signed attestations.
 
-Automated tests cover the observation contract, image/request binding, forecast chronology, run reset behavior, budget handling, and missing-evidence cases. Provider tests use mocks. Software-test results must remain separate from actual inference, camera, or forecast-accuracy measurements.
+The [software report](../validation/runs/sam-live-2026-11-05/software-checks.json) records 280 passing tests: 145 JavaScript, 128 Python, and 7 hosted-worker tests. They cover the observation contract, image/request binding, forecast chronology, run reset behavior, budget handling, and missing-evidence cases. Provider tests use mocks and make no paid calls. Software-test results remain separate from actual inference, camera, or forecast-accuracy measurements.
 
 ## Earlier work and presentation files
 
