@@ -1,0 +1,54 @@
+{
+  "schema_version": "twinforge.worker_decoder_parity.v1",
+  "checked_at": "2026-11-04T23:12:00.433Z",
+  "mode": "offline_real_provider_response_replay",
+  "model": "sam-3.1",
+  "provider": "meta-model-api",
+  "provider_calls_made": 0,
+  "additional_cost_usd": 0,
+  "reference": "Saved completed Python live SAM observations",
+  "candidate": "Hosted Worker official @meta-sam/parser 0.1.0 with jpeg-js 0.4.4",
+  "response_count": 2,
+  "object_count": 7,
+  "passed": true,
+  "boxes_areas_contours_exact": true,
+  "max_centroid_difference_px": 0,
+  "max_median_color_difference_8bit": 3,
+  "color_note": "Median color differs by at most 3/255 between the Python/Pillow and Worker/jpeg-js JPEG decoders; geometric mask measurements are identical.",
+  "no_match_check": {
+    "real_no_match_response_available": false,
+    "official_parser_contract": "An empty lane is a valid completed zero-match response.",
+    "empty_output_supported_by_both": true,
+    "nonempty_unknown_text_is_error": true
+  },
+  "samples": [
+    {
+      "request_id": "c25e98749f2d4f948634abd62a582bf0",
+      "image_sha256": "90f28390cee4b50e629c19de47d44c97c69167acdb8956e6a2d12bf544b0e0b9",
+      "width": 480,
+      "height": 300,
+      "source_kind": "synthetic",
+      "object_count": 4,
+      "image_hash_matches": true,
+      "boxes_exact": true,
+      "areas_exact": true,
+      "contours_exact": true,
+      "max_centroid_difference_px": 0,
+      "max_median_color_difference_8bit": 3
+    },
+    {
+      "request_id": "42f1fa2935ea471da687beec59b695d1",
+      "image_sha256": "c0428eb52349c611c4c09edf262f5ba77b2cc4733c73682cdd987df492da9c94",
+      "width": 480,
+      "height": 300,
+      "source_kind": "synthetic",
+      "object_count": 3,
+      "image_hash_matches": true,
+      "boxes_exact": true,
+      "areas_exact": true,
+      "contours_exact": true,
+      "max_centroid_difference_px": 0,
+      "max_median_color_difference_8bit": 2
+    }
+  ]
+}

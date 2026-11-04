@@ -1,3 +1,15 @@
+# TWINFORGE — SAM visual observer
+
+The active entry point is now the English SAM visual observation lab, with two navigation links: Live simulation and Camera. A new isolated 3D trial receives random initial conditions. The observer receives timestamped JPEG pixels, not simulator state. SAM 3.1 masks are mandatory before local tracking and a separate short-horizon predictor can begin. The previous decision and known-model workbench pages are explicitly archived under “How it works”.
+
+Keep one scene, one start/stop group, an optional scene selector and three measured outputs. The right inspector shows the real last SAM image and mask, its latency and the number of issued forecasts. On phones it moves below the experiment. Native dialogs contain method, limitations and connection details. Display missing or failed inference honestly; never populate an empty state with sample metrics.
+
+The established 21st toolbar (1279), sheet (25010), disclosure (27028) and horizontal navigation (26923) patterns are reused in native HTML, CSS and ES modules. Their original inspection and attribution remain recorded below. Camera observation now shares occasional frames with Meta after explicit Start, and this is stated near the action and in the manifest. It is no longer an upload-free camera mode.
+
+The source render is 640 × 400; CSS scales it to the iframe without Three.js fixed inline dimensions. The 480 × 300 observation overlay uses the same aspect ratio. Metrics remain image pixels, not metres. Random trials, no-match states, response latency and failed predictions remain part of the experiment.
+
+## Previous interface rationale (historical)
+
 # TWINFORGE — Decision lab, Motion lab & Camera
 
 The public platform uses English by default and one shared light interface around dark simulation and camera stages. Three navigation links — Decision lab, Motion lab and Camera — make the product areas explicit. Keep the experiment central, controls compact and advanced details available on demand. Permanent navigation sidebars and dashboard-wide metric-card grids are superseded.

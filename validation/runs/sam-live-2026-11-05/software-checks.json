@@ -1,0 +1,21 @@
+{
+  "recorded_at": "2026-11-04T23:23:14.666276+00:00",
+  "javascript_tests_passed": 145,
+  "python_tests_passed": 128,
+  "worker_tests_passed": 7,
+  "total_tests_passed": 280,
+  "provider_calls_during_tests": 0,
+  "production_dependencies_audit_vulnerabilities": 0,
+  "source_hashes": {
+    "index.html": "04faa1c40efc57b20f6e1eaf35785a73f06c4a964688e79a9f5d99ca66209498",
+    "web/vision/live.mjs": "7ea576f524df398bbdf9df66c56fa3d3ed81ebad043070e6dcb5e26ff0df7cac",
+    "web/vision/observer.mjs": "61fdec67cfdb394e32b379f384ada84fce925e41ce0625f56542c71100a05245",
+    "web/vision/motion.mjs": "af91bde1d556ea3a4570aefe1710015d3739dc28cb4036498fc337974aa0d332",
+    "web/vision/sam-tracker.mjs": "384d963b3e2aef0e66a9d3e35b5d1e2aac85616009f7472f0be5595650c7b20f",
+    "web/vision/world.mjs": "657c1991e9e13afdf44d0d412c3a9b6343e3200cac49df53b1a8872c397e93f5",
+    "web/vision/random-dynamics.mjs": "6fcc370fcd3a28dc8b5c63322b92bcf08abe483c75bef7f525cbc3ec418dd05e",
+    "web/camera/tracker.mjs": "16652f4ad8616df7cd63b5c38ceda3c37b7362ad60a274eeada2a84ddda9e551"
+  },
+  "js_log_sha256": "4f02aac39bcfc2a163220e9d998e1757f4eec41c5e0b2f16e88d7a5590282c36",
+  "physical_camera_tested": false
+}

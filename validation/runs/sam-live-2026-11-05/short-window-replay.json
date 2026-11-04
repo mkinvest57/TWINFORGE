@@ -1,0 +1,112 @@
+{
+  "type": "offline_development_replay",
+  "newLiveCalls": 0,
+  "originalRecordingsModified": false,
+  "horizonS": 0.2,
+  "inputs": [
+    {
+      "file": "hosted-collisions-020.json",
+      "sha256": "f4b9ec5da2889bf1e8b4453bce2b3dec6b51b43818c1b67f53eb0991ac119515"
+    },
+    {
+      "file": "pendulum-color-020.json",
+      "sha256": "9bb0963b4c4e663b8a117ede01745a0b3c6ac88ee686c4fed288f130fd792b0a"
+    },
+    {
+      "file": "pendulum-live-020-auto.json",
+      "sha256": "e128e2255177cecefecbdd02f3019c530fd3db0b64b3792547be719de23a1ea0"
+    }
+  ],
+  "modelSha256": "af91bde1d556ea3a4570aefe1710015d3739dc28cb4036498fc337974aa0d332",
+  "method": "Identical originally scored targets. Every replay forecast receives only observations available by its original source time. Additional short velocity and turn candidates are selected using earlier observed targets. Three window pairs were compared during development; this is not an independent new live benchmark.",
+  "shortLinearWindowS": 0.2,
+  "shortTurnWindowS": 0.32,
+  "minimumObservationGate": 6,
+  "runs": [
+    {
+      "runId": "df949c7a-eb4e-486d-b3ff-590f08416da1",
+      "file": "hosted-collisions-020.json",
+      "colorAnchored": false,
+      "originalScored": 424,
+      "replayedScored": 424,
+      "refused": 0,
+      "originalMeanErrorPx": 1.7412858729044163,
+      "replayedMeanErrorPx": 1.2709776885984763,
+      "models": {
+        "short_turn": 11,
+        "short_linear": 71,
+        "linear": 335,
+        "harmonic": 1,
+        "turn": 6
+      }
+    },
+    {
+      "runId": "3af87e72-208b-446e-aab1-648188974c2b",
+      "file": "pendulum-color-020.json",
+      "colorAnchored": true,
+      "originalScored": 118,
+      "replayedScored": 118,
+      "refused": 0,
+      "originalMeanErrorPx": 53.01302670293886,
+      "replayedMeanErrorPx": 20.938980167090314,
+      "models": {
+        "short_turn": 116,
+        "linear": 1,
+        "short_linear": 1
+      }
+    },
+    {
+      "runId": "c334cbea-8e87-484e-b788-6f8594636a87",
+      "file": "pendulum-live-020-auto.json",
+      "colorAnchored": false,
+      "originalScored": 212,
+      "replayedScored": 212,
+      "refused": 0,
+      "originalMeanErrorPx": 36.25275226394895,
+      "replayedMeanErrorPx": 18.97038615287165,
+      "models": {
+        "harmonic": 18,
+        "short_turn": 162,
+        "short_linear": 17,
+        "quad": 1,
+        "linear": 14
+      }
+    },
+    {
+      "runId": "bac23d64-3b78-4935-b015-47c231ab0c0b",
+      "file": "pendulum-live-020-auto.json",
+      "colorAnchored": false,
+      "originalScored": 146,
+      "replayedScored": 146,
+      "refused": 0,
+      "originalMeanErrorPx": 41.64076165891822,
+      "replayedMeanErrorPx": 25.863383646126863,
+      "models": {
+        "linear": 16,
+        "short_turn": 104,
+        "harmonic": 8,
+        "short_linear": 12,
+        "quad": 5,
+        "turn": 1
+      }
+    },
+    {
+      "runId": "83effe22-9f25-4813-a880-cc031243559f",
+      "file": "pendulum-live-020-auto.json",
+      "colorAnchored": false,
+      "originalScored": 120,
+      "replayedScored": 120,
+      "refused": 0,
+      "originalMeanErrorPx": 29.915583325231335,
+      "replayedMeanErrorPx": 19.621879413441857,
+      "models": {
+        "short_turn": 65,
+        "harmonic": 21,
+        "linear": 15,
+        "short_linear": 17,
+        "turn": 1,
+        "quad": 1
+      }
+    }
+  ]
+}

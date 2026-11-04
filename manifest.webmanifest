@@ -1,8 +1,8 @@
 {
   "id": "./scan.html",
-  "name": "Twinforge — local camera",
+  "name": "Twinforge — SAM visual observer",
   "short_name": "Twinforge",
-  "description": "On-device 2D visual tracking and short-term motion forecasts. No image uploads.",
+  "description": "SAM 3.1 object segmentation with short-term visual forecasts. Starting sends selected image frames to Meta.",
   "lang": "en",
   "start_url": "./scan.html",
   "scope": "./",

@@ -1,84 +1,71 @@
-# TWINFORGE — One decision. Two futures.
+# TWINFORGE — See a scene. Predict its next move.
 
-**Submission draft; not submitted.** Proposed track: Indie, subject to participant eligibility. Proposed theme: Push the Frontier. Presentation language: English.
+**Current submission draft; not submitted.** Presentation language: English. This brief describes the implemented live SAM observation path. Live-run measurements and deployment verification must be added from retained evidence; the historical benchmark results below do not substitute for them.
 
 ## Pitch
 
-Seeing an incident coming is only the start. Twinforge tests the action that could change its outcome. Meta proposes one bounded intervention, a physical simulator calculates its consequences, and the model can revise its decision using that feedback. Failed proposals remain visible beside a separate numerical baseline.
+A new scene starts. Twinforge sees the images, but receives none of the simulator's positions, velocities, forces, or masses. Meta SAM 3.1 finds the objects. Their observed motion becomes a recorded prediction of where they will appear next: 0.2 seconds ahead by default, or 0.5 seconds in the stress setting. When that moment arrives, Twinforge checks the prediction against what it subsequently observes.
 
-The demo begins with a carrier triggering a chain of collisions. Two branches share the exact same starting state; one proceeds without intervention, the other applies a recorded Meta decision. Their trajectories are calculated before playback and shown with a synchronized timeline and exportable data.
+The user can generate another scene immediately: a double pendulum with different initial motion, balls colliding with different velocities, or a new launch and rebound. The observer must acquire the objects again from fresh SAM segmentation. Camera mode sends phone images through the same observation pipeline.
 
-The intended value is preparing decisions in simulation before more expensive physical trials. The project does not claim industrial customers, measured financial savings, or real-world safety validation.
+The intended value is making visual prediction inspectable: what the model actually saw, which object it found, what the system predicted before the target time, and how that prediction compared with later images. This is an experimental image-motion observer, with no claim of physical control or safety certification.
 
-## The actual Meta contribution
+## Where Meta is essential
 
-The default view replays **Muse Spark 1.3’s actual recorded proposal**, evaluated again with the matching physics engine. Without intervention, peak contact energy involving protected cargo is **116.562 J**. Meta’s selected steering command reduces it to **4.564 J**, below the experiment’s **8 J criterion**.
+**SAM 3.1 is required before a track can produce a forecast.** The server sends a captured JPEG and a short object phrase to the Meta Model API, decodes the actual returned masks, and returns their contours and centroids with a request receipt. The frontend checks the image hash, capture identity, dimensions, timestamp, and model receipt. No usable SAM result means no SAM-initialized track.
 
-The session completed on **November 4, 2026 at 17:06:58 UTC**. Spark received initial states, physical parameters, and the permitted action IDs. It did not see the exhaustive search results. Each proposal was evaluated by the solver, and the calculated outcome was returned for the next revision.
+SAM performs segmentation. Local appearance tracking follows the segmented regions between model responses. A separate image-motion predictor compares generic linear, curved, turning, and harmonic fits against earlier targets that have already been observed, then uses the selected fit for its next forecast. Selection receives no scene family or hidden physics. This project does not attribute the local motion fit, discovery of physical laws, or a learned physical simulator to SAM.
 
-| Actual call | Proposed action at 0.25 s | Calculated peak | Experimental result |
-|---|---|---:|---|
-| 1 | Steer −0.16 rad | 104.609 J | Rejected |
-| 2 | Steer −0.36 rad | 8.485 J | Rejected |
-| 3 | Steer −0.32 rad | 4.564 J | Below 8 J |
+| Part | What it knows |
+|---|---|
+| Randomized 3D renderer | The hidden physical state required to generate the scene |
+| Observation path | Captured pixels, capture time, opaque run ID, and an object phrase |
+| SAM 3.1 | The submitted JPEG and object phrase |
+| Local tracker and predictor | The SAM initialization and subsequently captured image measurements |
+| Retrospective assessment | The previously stored prediction and later tracked image positions |
 
-The selected proposal uses **62.540 N·s** of control impulse. Recorded usage is **3 calls, 37.8556 seconds, $0.028276**. Original responses, receipts, request hashes, outcomes, and both failures are retained. English translations in the interface are labeled and bound to the original records; exports preserve the originals.
+The scene family is available to label the UI, not as physical state supplied to the observer. The separate renderer and strict message/API contracts make this data flow inspectable; they are not a security sandbox against a person modifying the application.
 
-**The separate local search performs better here: 0 J and 39.190 N·s, using +0.20 rad.** It evaluates 37 commands without AI. The project demonstrates a verifiable proposal–revision loop, not an advantage over exhaustive search on this small action space. Meta proposes the action; the numerical solver produces the displayed metrics.
+## What the demonstration shows
 
-[Public original journal](../assets/causal-meta-session.json) · [Original run report](../validation/runs/causal-meta-live-2026-11-04.json)
+1. Start observation on a newly randomized scene. Show the actual image submitted to SAM and its returned masks.
+2. Allow enough usable motion observations to accumulate. The interface displays an issued target **0.2 seconds ahead by default**, or **0.5 seconds** with the stress setting selected. Its horizon, issue time, and target time are retained.
+3. Let the target time arrive. The system compares the frozen target to later tracked image positions and reports error in **pixels**. Missing observations remain unscored.
+4. Generate another scene. Its old masks and tracks are discarded, and a new actual SAM segmentation is required.
+5. Export the record. It contains image hashes, model receipts, image observations, predictions, later assessments, and source labels.
 
-The public site replays a recorded real session rather than making a fresh live request. New studies require the local Python service and privately configured credentials. Paid studies are explicitly enabled, limited to three proposals and $0.12 per study, within the persistent $0.50 `causal` scene ceiling. Model output selects bounded action IDs, never executable code.
+Optional automatic regeneration starts another simulated scene every 20 source seconds. Camera mode applies the same segmentation-and-tracking path to live images after camera permission. A physical phone demonstration should only be described as verified once its own run has been retained and reviewed.
 
-## Three test scenarios
+## The limits are part of the result
 
-The numerical search compares 37 commands over 12 simulated seconds. Nominal conditions are seed `20261104`, carrier speed `100%`, and intervention at `0.25 s`.
+The scene is rendered in 3D, but the observer predicts **2D camera-image coordinates**. It does not reconstruct metric depth, mass, material, or the full physical state. Initial conditions vary within the implemented families; this is not generation of arbitrary new physical laws.
 
-| Scenario | No intervention | Local search result | Speed checks passing at 95/100/105% |
-|---|---:|---:|---:|
-| Chain reaction | 116.562 J | 0 J | 3 / 3 |
-| Blind intersection | 112.755 J | 3.464 J | 1 / 3 |
-| Narrow passage | 149.926 J | 0 J | 3 / 3 |
+SAM requests are sparse, with a default interval of at least three source seconds. Local tracking bridges their latency and spacing. A delayed response can initialize tracking on its captured frame and catch up through already observed images; any resulting forecast is issued from the current time, never backdated as a successful prediction.
 
-The **8 J threshold is an arbitrary, predeclared experimental criterion** for protected cargo, not a certified damage threshold. The score is the maximum relative normal kinetic energy before contact involving that cargo. It does not certify the absence of damage elsewhere.
+A short fit can fail at a bounce, collision, direction change, occlusion, or ambiguous crossing. Camera motion also violates its stationary-camera assumption. Insufficient samples, low motion, lost tracking, or an uncertain fit can cause the system to withhold a prediction. Conditional fit confidence is not a calibrated probability of correctness.
 
-Among candidates meeting the criterion, the local search minimizes control impulse. If none pass, it reports failure and selects the smallest peak. Speed sensitivity re-evaluates the nominal action; it does not optimize a new action for each speed and does not estimate a success probability.
+Displayed errors compare predictions against subsequent visual tracking. Both use the same image-processing pipeline; this is **not independent physical ground truth**. No current live accuracy number, latency result, or real-phone result is asserted by this draft.
 
-The cascade makes timing tangible: an admissible command exists at `0.25 s`; none of the 37 tested commands passes at `0.50 s`. The search tests nine delays from `0` to `2 s`, in `0.25 s` steps. Its last feasible tested delay is not an exact continuous deadline.
+The 0.2-second default is a shorter, easier task than the 0.5-second stress setting. It does not erase the earlier horizon's errors. Changing the setting starts a fresh trial with fresh SAM segmentation and cleared display metrics; the previous trial remains in export history. Measurements must remain separate by horizon, scene family, source kind, and relevant version, with scored and unscorable counts visible. Past targets used to choose the motion model are not independent future-test results. This brief makes no aggregate precision claim across those groups.
 
-[Reproducible benchmark](../validation/runs/causal-benchmark-2026-11-04.json) · [Engine review](../validation/runs/causal-engine-review-2026-11-04.json)
+## Access, operation, and evidence
 
-## Technical scope
+[Main interface](../index.html) · [Camera interface](../index.html?mode=camera) · [Architecture and setup](SAM_LIVE_OBSERVATION.md) · [Repository](https://github.com/mkinvest57/TWINFORGE)
 
-- Supplied positions, velocities, masses, and coefficients; no camera reconstruction of the warehouse.
-- Circular rigid bodies moving in a plane, with a 3D visualization of their contact envelopes.
-- Linear damping, normal collision impulses without tangential friction, and a `1/240 s` integration step.
-- One instantaneous intervention: braking up to 90%, or a bounded velocity rotation up to ±0.36 rad.
-- Frozen trajectories before playback, synchronized comparisons, inspectable contacts, and JSON exports.
-- Half-step checks preserve feasibility of the three nominal local choices; baseline peak-energy variation remains below 3% for those cases.
+The local service requires a privately configured Meta credential and the installed SAM mask decoder. The static GitHub Pages interface cannot execute private SAM calls by itself. Hosting with a private backend is being prepared; this brief does not claim that a new public live deployment has been verified. A phone requires HTTPS and a working backend, not just the static page.
 
-The calculations and replay use the **same known model**. This is not an independent predictive-accuracy benchmark, discovery of physical laws, or a validated physical robot. Perception uncertainty, actuator dynamics, and industrial deployment remain future work.
+All randomized trials share the persistent `vision` spending budget. The default ceiling is $0.50; the implementation accounts at $0.0025 per image. Scene resets do not replenish it. Browser submission limits, a persistent per-run limit, and a single active server request bound usage. Provider failures do not trigger automatic paid retries. An explicitly unbilled busy response can be followed by a later fresh frame.
 
-The separate mobile camera tool provides local 2D pixel tracking and extrapolation without uploading images. It does not reconstruct this simulation. The historical pendulum workbench retains separate diagnostics.
+The prepared hosting allocation reserves $0.10 for local live requests and leaves $0.40 for hosted requests. The local cap includes earlier vision spending; the hosted baseline of `1000` units records that reserved allowance, not a measured $0.10 charge. This configuration must be enforced and verified before both services operate, so two independent $0.50 allowances are never presented as one budget.
 
-## Three-minute video
+The local Python server privately retains the exact submitted JPEG and raw response linked to the exported receipt. The prepared hosted service retains hashes and normalized results rather than original images or raw provider text. Camera images submitted for segmentation go to Meta; no audio is captured. The browser export excludes image bytes and credentials. Hashes and application receipts support traceability but are not provider-signed attestations.
 
-The English video opens with the actual Meta decision and its two futures: **116.562 J → 4.564 J**. It then shows the three real proposals, both failures, the inspectable journal, and the better local 0 J baseline. Delay and sensitivity tests reveal when the tested intervention fails.
+Automated tests cover the observation contract, image/request binding, forecast chronology, run reset behavior, budget handling, and missing-evidence cases. Provider tests use mocks. Software-test results must remain separate from actual inference, camera, or forecast-accuracy measurements.
 
-[English voiceover](VOICEOVER_3MIN_EN.txt) · [180-second storyboard](VIDEO_3MIN_STORYBOARD.json) · [Provisional English subtitles](CAUSAL_DEMO_SUBTITLES_EN.srt)
+## Earlier work and presentation files
 
-These are preparation files, not a completed film or generated-voice receipt. The final edit must keep “simulation,” “known model,” and “recorded session” readable. Captured values must match the export from that capture. The original French response can remain in the evidence export; the jury-facing view is English.
+The [recorded Meta decision experiment](../decision.html) uses supplied simulation states and actual recorded Muse Spark 1.3 proposals. Its [original responses](../assets/causal-meta-session.json), [numerical benchmark](../validation/runs/causal-benchmark-2026-11-04.json), and [archived submission brief](archive/SUBMISSION_CAUSAL_EN_2026-11-05.md) remain intact as earlier work. They do not establish the new observation pipeline's accuracy.
 
-## Access and verification
+The existing [English voiceover](VOICEOVER_3MIN_EN.txt), [storyboard](VIDEO_3MIN_STORYBOARD.json), and [provisional subtitles](CAUSAL_DEMO_SUBTITLES_EN.srt) describe that earlier decision experiment. They are **historical preparation files, not a current film for the live SAM project**. This revision does not claim that a replacement video or synthetic narration has been produced.
 
-[Public demo](https://mkinvest57.github.io/TWINFORGE/) · [Public repository](https://github.com/mkinvest57/TWINFORGE) · [Official event guide](https://cerebralvalley.ai/e/meta-ai-developer-hackathon/details)
-
-The static site exposes the simulations and recorded journal without credentials. **225 automated tests pass: 114 Python and 111 JavaScript.** The [English studio verification report](../validation/runs/jury-studio-software-checks-2026-11-04.json) pins the current source hashes and confirms no source changes during the checks. Provider calls may be mocked in software tests; no physical-camera or hardware validation is claimed. The [earlier browser review](../validation/runs/causal-browser-2026-11-04/browser-review.json) and [earlier publication proof](../validation/runs/causal-browser-2026-11-04/public-deployment.json) apply to the previous interface.
-
-The consulted event guide lists **November 4 at 9 p.m. EST**, equivalent to **November 5 at 3 a.m. in Paris**. This document is not a submission receipt. Participant eligibility, team details, the rendered video, and the final portal submission require the entrant’s confirmation.
-
-The [French causal brief](archive/SUBMISSION_CAUSAL_FR_2026-11-04.md), [initial workbench brief](archive/SUBMISSION_PRE_PROCESS_2026-11-04.md), and [intermediate version](archive/SUBMISSION_PROCESS_2026-11-04.md) are archived unchanged. The [PDF compliance record](PROMPT_COMPLIANCE.md) retains its original physical requirements; the October 27–29 evidence is not rewritten.
-
-Current English-interface verification: [browser review](../validation/runs/jury-studio-2026-11-04/browser-review.json). The separate motion-lab review includes all three scenarios, playback controls and mobile drawers.
-
-Publication verified: [public deployment proof](../validation/runs/jury-studio-2026-11-04/public-deployment.json). All 17 checked public files match the release sources; the browser export reproduces the locally verified Meta decision.
+The [original PDF compliance record](PROMPT_COMPLIANCE.md) retains its earlier scope and physical requirements. This brief is neither a submission receipt nor confirmation of participant eligibility, judging outcome, or acceptance by the event organizer.

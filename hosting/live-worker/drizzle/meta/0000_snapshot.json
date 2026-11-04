@@ -1,0 +1,197 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "e334b352-0e61-43a4-a693-57aa87bc969c",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "tables": {
+    "vision_budget_baseline": {
+      "name": "vision_budget_baseline",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "initial_units": {
+          "name": "initial_units",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "vision_baseline_id": {
+          "name": "vision_baseline_id",
+          "value": "\"vision_budget_baseline\".\"id\" = 'vision'"
+        },
+        "vision_baseline_nonnegative": {
+          "name": "vision_baseline_nonnegative",
+          "value": "\"vision_budget_baseline\".\"initial_units\" >= 0"
+        }
+      }
+    },
+    "vision_requests": {
+      "name": "vision_requests",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "run_id": {
+          "name": "run_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "frame_id": {
+          "name": "frame_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "source_time_s": {
+          "name": "source_time_s",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "source_kind": {
+          "name": "source_kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "image_sha256": {
+          "name": "image_sha256",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "request_sha256": {
+          "name": "request_sha256",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "units": {
+          "name": "units",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_ms": {
+          "name": "created_ms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "completed_at": {
+          "name": "completed_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "response_sha256": {
+          "name": "response_sha256",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "result_json": {
+          "name": "result_json",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "vision_requests_run_time": {
+          "name": "vision_requests_run_time",
+          "columns": [
+            "run_id",
+            "source_time_s"
+          ],
+          "isUnique": false
+        },
+        "vision_requests_inflight": {
+          "name": "vision_requests_inflight",
+          "columns": [
+            "status",
+            "created_ms"
+          ],
+          "isUnique": false
+        },
+        "vision_unique_frame": {
+          "name": "vision_unique_frame",
+          "columns": [
+            "run_id",
+            "frame_id"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {
+        "vision_source_kind": {
+          "name": "vision_source_kind",
+          "value": "\"vision_requests\".\"source_kind\" IN ('synthetic', 'camera')"
+        },
+        "vision_image_price": {
+          "name": "vision_image_price",
+          "value": "\"vision_requests\".\"units\" = 25"
+        },
+        "vision_status": {
+          "name": "vision_status",
+          "value": "\"vision_requests\".\"status\" IN ('requesting', 'complete', 'failed')"
+        }
+      }
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

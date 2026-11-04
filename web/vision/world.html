@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Twinforge · isolated visual experiment</title>
+  <style>
+    html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#d9e1e8}
+    body{display:grid;place-items:center}
+    canvas{display:block;width:100%;height:100%;object-fit:contain}
+    #error{font:14px/1.5 system-ui,sans-serif;color:#25313d;padding:24px;text-align:center}
+  </style>
+</head>
+<body>
+<div id="error" hidden>3D rendering is unavailable in this browser.</div>
+<script type="module" src="./world.mjs"></script>
+</body>
+</html>

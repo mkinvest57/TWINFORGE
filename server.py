@@ -22,6 +22,7 @@ from twinforge_runtime.narration import narrate_local
 from twinforge_runtime.synthetic_capture import build_capture
 from twinforge_runtime.process_lab import run_job as run_process_job, validate_options as validate_process_options, specification as process_specification
 from twinforge_runtime.causal_lab import run_job as run_causal_job, validate_options as validate_causal_options
+from twinforge_runtime.live_sam import segment_frame as segment_live_frame, status as live_sam_status, LiveSamBusy, MAX_BODY_BYTES as MAX_SAM_BODY
 
 ROOT = Path(__file__).resolve().parent
 load_env()
@@ -37,7 +38,7 @@ def static_file(url):
     candidate = (ROOT / path).resolve()
     if not candidate.is_relative_to(ROOT) or not candidate.is_file():
         return None
-    if path in {'index.html', 'workbench.html', 'scan.html', 'manifest.webmanifest'} or (parts[0] in {'web', 'assets', 'artifacts'} and candidate.suffix.lower() in {
+    if path in {'index.html', 'workbench.html', 'scan.html', 'decision.html', 'legacy-workbench.html', 'camera-local.html', 'web/vision/world.html', 'manifest.webmanifest'} or (parts[0] in {'web', 'assets', 'artifacts'} and candidate.suffix.lower() in {
         '.js', '.mjs', '.css', '.json', '.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg', '.woff2', '.mp4', '.webm'}):
         return candidate
     return None
@@ -184,6 +185,8 @@ class Handler(BaseHTTPRequestHandler):
         if not self._local_request():
             return self._json(403, {'error': 'Local same-origin access only'})
         path = urllib.parse.urlsplit(self.path).path
+        if path == '/api/sam/status':
+            return self._json(200, live_sam_status())
         if path == '/api/status':
             return self._json(200, {'meta': bool(os.environ.get('META_MODEL_API_KEY')),
                 'baseten': bool(os.environ.get('BASETEN_API_KEY')), 'baseten_model': 'not used by calibrated L3 runner',
@@ -218,6 +221,8 @@ class Handler(BaseHTTPRequestHandler):
             return self._json(403, {'error': 'Local same-origin access only'})
         try:
             path = urllib.parse.urlsplit(self.path).path
+            if path == '/api/sam/segment':
+                return self._json(200, segment_live_frame(self._read_json(MAX_SAM_BODY)))
             if path == '/api/capture':
                 kind = self.headers.get('Content-Type', '').split(';')[0]
                 extension = {'video/webm': '.webm', 'image/png': '.png'}.get(kind)
@@ -308,8 +313,11 @@ class Handler(BaseHTTPRequestHandler):
                 (folder / name).write_text(json.dumps({'received_at': utc_now(), 'evidence': evidence}, ensure_ascii=False, indent=2))
                 return self._json(201, {'saved': True, 'id': name, 'path': str(folder / name)})
             return self._json(404, {'error': 'Not found'})
+        except LiveSamBusy as error:
+            return self._json(429, {'error': str(error), 'code': 'sam_busy',
+                                    'retry_after_s': 1, 'provider_call_made': False})
         except BudgetExceeded as error:
-            return self._json(429, {'error': str(error)})
+            return self._json(429, {'error': str(error), 'code': 'budget_exhausted'})
         except ProviderUnavailable as error:
             return self._json(503, {'error': str(error)})
         except (ValueError, TypeError, KeyError) as error:

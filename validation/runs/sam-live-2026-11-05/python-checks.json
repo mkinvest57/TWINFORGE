@@ -1,0 +1,46 @@
+{
+  "recorded_at": "2026-11-04T23:13:16.286554+00:00",
+  "command": ".venv/bin/python -B -m unittest discover -s tests -v",
+  "tests_passed": 128,
+  "duration_s": 6.238,
+  "provider_calls_by_this_check": 0,
+  "provider_transport": "mocked in tests",
+  "log": "output/live-sam-python-tests.txt",
+  "log_sha256": "accfd16846d87bdd66056445402bddc068e7916fc285922b23ef2c17ec72b5e8",
+  "source_hashes_captured_after_tests": {
+    "server.py": "5d1398133150181e327f9f0de41dcf4971e7125441214c961958bebd867ce3c1",
+    "twinforge_runtime/live_sam.py": "3af48124c2a680f443a83ecdeabba9ed1dff23416640c4e544202054e4544092",
+    "tests/test_live_sam.py": "83886d608a764d5361830611111a4a5c5f5f628a65656d3800d902321cec6138",
+    "twinforge_runtime/budget.py": "fbcbb610948662ed2354d0486488cf2a2bc57758353cf795ad8165b2c888b54e",
+    "twinforge_runtime/providers.py": "9e6c0c3ee43dfc8c2adc5a4f26d945f395e93457acd3260a7aa783f11e0bf9f1"
+  },
+  "source_stability_during_test_run_asserted": false,
+  "local_sam_status": {
+    "schema_version": "twinforge.sam.status.v1",
+    "available": true,
+    "key_available": true,
+    "decoder_available": true,
+    "model": "sam-3.1",
+    "provider": "meta-model-api",
+    "live_only": true,
+    "price_per_image_usd": 0.0025,
+    "max_requests_per_run": 60,
+    "max_image_side": 640,
+    "budget_scene": "vision",
+    "budget": {
+      "currency": "USD",
+      "limit_per_scene": 0.1,
+      "scenes": {
+        "causal": 0.028276,
+        "hoop": 0.409278,
+        "liquid": 0.013077,
+        "vision": 0.0325
+      },
+      "requests": 176,
+      "last_hash": "083bf69a4b56fd49b1bd5c4f53ddf5b2792e2d4b0020b910cc276b7bfcd48ddf"
+    },
+    "remaining_requests": 27,
+    "remaining_usd": 0.0675,
+    "scope": "SAM segments pixels; a separate predictor estimates future motion."
+  }
+}

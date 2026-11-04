@@ -1,0 +1,70 @@
+<!doctype html>
+<!-- Native adaptations of inspected 21st sources 1279, 25010, 27028 and 26923. See .21st/sources.json. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f8fa">
+  <meta name="description" content="Meta proposes a decision. Physics tests its consequences. Replay three real model proposals and compare two physical futures in Twinforge.">
+  <title>TWINFORGE — One decision. Two futures.</title>
+  <link rel="icon" href="./assets/mobile/icon.svg" type="image/svg+xml">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./web/causal/lab.css">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to experiment</a>
+<header class="site-header">
+  <a class="wordmark" href="./index.html" aria-label="Twinforge home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none"><path d="M5 7h18M14 7v16M5 14h7M18 14h5"/></svg></span>TWINFORGE</a>
+  <nav class="site-nav" aria-label="Main navigation"><a href="./index.html" aria-current="page">Decision lab</a><a href="./workbench.html?scene=chaos">Motion lab</a><a href="./scan.html">Camera</a></nav>
+  <span class="header-note">A PHYSICAL DECISION LAB</span>
+</header>
+<main id="main-content">
+  <section class="page-heading"><div><p class="eyebrow">SIMULATE BEFORE YOU ACT</p><h1>One decision. Two futures.</h1><p>Meta proposes a command. Physics puts it to the test.</p></div><button class="button secondary" type="button" data-open-dialog="evidence">Evidence <span aria-hidden="true">↗</span></button></section>
+  <div class="lab-layout">
+    <section class="experiment" aria-label="Physical comparison">
+      <div class="experiment-toolbar"><div class="scenario-field"><label class="sr-only" for="scenario-select">Scenario</label><select id="scenario-select" aria-describedby="scenario-description"><option value="" disabled selected>Loading scenarios…</option></select></div><button type="button" class="button quiet" data-open-dialog="controls"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 17h16M9 4v6M15 14v6"/></svg>Try your decision</button></div>
+      <article class="comparison" aria-label="Two futures from the same initial state">
+        <header class="comparison-top"><span id="scene-phase">READY TO COMPARE</span><span>SAME INITIAL STATE</span></header>
+        <div class="comparison-stage"><div id="causal-scene" aria-label="Reference and intervention branches"></div><div id="scene-loading" class="scene-loading"><span class="loading-mark" aria-hidden="true">TF</span><p>Computing physical futures…</p></div><div id="scene-fallback" class="scene-fallback" hidden><p>The 3D view is unavailable.<br>Calculations and evidence exports remain available.</p></div>
+          <div class="branch-label baseline-label"><span class="branch-number">A</span><div><h2>No intervention</h2><output id="baseline-impact" class="branch-impact">— J</output><p id="baseline-result">Reference branch</p></div></div>
+          <div class="branch-label intervention-label"><span class="branch-number">B</span><div><h2 id="intervention-title">Meta’s decision</h2><output id="intervention-impact" class="branch-impact">— J</output><p id="intervention-result">Selected branch</p></div></div>
+          <div class="split-divider" aria-hidden="true"></div><div class="stage-floor-note">PEAK CONTACT ENERGY ON FRAGILE CARGO</div>
+        </div>
+        <div class="playback"><div class="playback-buttons"><button id="replay-button" class="button primary" type="button"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg>Replay decision</button><button id="pause-button" class="button icon-button" type="button" aria-label="Pause" title="Pause"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></button><button id="reset-button" class="button icon-button" type="button" aria-label="Reset playback" title="Reset playback"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg></button></div><label class="scrubber-label" for="time-scrubber"><span class="sr-only">Playback time</span><input id="time-scrubber" type="range" min="0" max="12" step="0.01" value="0"></label><output id="time-value">0.00 s</output></div>
+      </article>
+      <p id="scenario-description" class="scenario-description">Preparing the experiment.</p>
+    </section>
+    <aside class="decision-inspector" aria-label="Meta model contribution">
+      <div class="inspector-heading"><span class="eyebrow">THE MODEL’S DECISION</span><span class="recorded-dot">RECORDED</span></div>
+      <h2>Propose. <br>Test. Refine.</h2>
+      <p id="meta-inline-model" class="model-name">Muse Spark 1.3 · recorded run</p>
+      <p id="meta-inline-summary" class="muted">Loading the verified model proposals…</p>
+      <div class="attempts-heading"><span>MODEL PROPOSAL</span><span>PHYSICS RESULT</span></div>
+      <div id="meta-inline-steps" class="meta-inline-steps" aria-label="Replay a recorded proposal"></div>
+      <p class="threshold-note">Pass criterion: at most 8 J in this experiment.</p>
+      <div class="chosen-action"><span id="selection-source" class="eyebrow">RECORDED META DECISION</span><p id="meta-inline-action">Loading the selected command…</p></div>
+      <button type="button" class="button secondary log-button" data-open-dialog="meta">Open decision log <span aria-hidden="true">↗</span></button>
+      <p class="inspector-footnote">These are real model responses. Playback and impact measurements run locally.</p>
+    </aside>
+  </div>
+  <footer class="session-footer"><p id="experiment-status" role="status" aria-live="polite">Preparing the experiment.</p><button id="export-evidence" class="button quiet" type="button">Export experiment <span aria-hidden="true">↓</span></button></footer>
+</main>
+<dialog id="controls-dialog" class="sheet" aria-labelledby="controls-title">
+  <header class="sheet-header"><div><p class="eyebrow">EXPLORE THE ALTERNATIVES</p><h2 id="controls-title">Try your decision</h2></div><button type="button" class="button icon-button" data-close-dialog aria-label="Close controls">×</button></header>
+  <div class="sheet-body"><p class="muted">Adjust the scenario or compare the model’s proposal with a numerical search.</p><div class="field"><label for="candidate-select">Command <span id="candidate-count" class="count-pill">— actions</span></label><select id="candidate-select"><option value="">Waiting for calculation</option></select></div><div class="field"><label for="speed-factor">Initial speed <output id="speed-factor-value">100%</output></label><input id="speed-factor" type="range" min="0.6" max="1.4" step="0.05" value="1"></div><div class="field"><label for="action-delay">Command delay <output id="action-delay-value">0.25 s</output></label><input id="action-delay" type="range" min="0" max="2" step="0.05" value="0.25"><p id="deadline-statement">Finding the latest passing delay on the tested grid.</p></div><button id="search-button" type="button" class="button primary wide-button">Find best local command</button><label class="checkbox-label"><input id="show-predictions" type="checkbox"><span>Show precomputed paths</span></label>
+  <section class="detail-section"><p class="eyebrow">SELECTED COMMAND</p><h3 id="decision-title">Waiting for calculation</h3><p id="decision-explanation"></p><dl class="metric-list"><div><dt>Reference impact</dt><dd id="impact-before">—</dd></div><div><dt>Selected impact</dt><dd id="impact-after">—</dd></div><div><dt>Command impulse</dt><dd id="effort-value">—</dd></div><div><dt>Latest passing delay tested</dt><dd id="deadline-value">—</dd></div><div><dt>Speed sensitivity</dt><dd id="robustness-value">—</dd></div></dl><p id="outcome-explanation" class="muted"></p></section>
+  <details class="disclosure"><summary>Compare leading local commands</summary><ol id="candidate-list" class="candidate-list"><li>Waiting for calculation.</li></ol></details></div>
+</dialog>
+<dialog id="meta-dialog" class="sheet" aria-labelledby="meta-title">
+  <header class="sheet-header"><div><p class="eyebrow">META PROPOSES · PHYSICS VERIFIES</p><h2 id="meta-title">Decision log</h2></div><button type="button" class="button icon-button" data-close-dialog aria-label="Close decision log">×</button></header>
+  <div class="sheet-body"><p id="meta-source" class="model-name">Loading recorded run…</p><p id="meta-translation" class="muted">Original responses remain in the export.</p><ol id="meta-timeline" class="meta-timeline"><li>Loading proposals and measurements…</li></ol><div class="detail-section"><p class="eyebrow">SELECTED PROPOSAL</p><h3 id="meta-selection">—</h3><p id="meta-result">—</p><p id="meta-reference" class="muted"></p><p id="meta-compatibility" class="muted">Checking engine compatibility.</p><button id="meta-apply-button" type="button" class="button secondary wide-button" disabled>Replay Meta’s decision</button></div><p id="meta-status" class="meta-status" role="status">Checking the recorded run.</p><button id="meta-export" type="button" class="button quiet" disabled>Export original model log <span aria-hidden="true">↓</span></button><details class="disclosure"><summary>Run a new study</summary><p id="backend-status" class="muted">Checking local server…</p><label class="checkbox-label"><input id="meta-use-models" type="checkbox" disabled><span>Use Meta · $0.12 maximum per run</span></label><button id="meta-run-button" type="button" class="button secondary wide-button" disabled>Run local search · free</button></details></div>
+</dialog>
+<dialog id="evidence-dialog" class="sheet" aria-labelledby="evidence-title">
+  <header class="sheet-header"><div><p class="eyebrow">INSPECT THE EXPERIMENT</p><h2 id="evidence-title">Evidence & scope</h2></div><button type="button" class="button icon-button" data-close-dialog aria-label="Close evidence">×</button></header>
+  <div class="sheet-body"><h3>Computed before playback.</h3><p id="evidence-summary">Waiting for the experiment.</p><p id="evidence-detail">Export both branches, initial states, candidate commands, frozen trajectories and measured impacts as JSON.</p><button id="export-evidence-secondary" class="button primary wide-button" type="button">Export experiment <span aria-hidden="true">↓</span></button><section class="detail-section"><h3>What Meta does</h3><p>Muse Spark 1.3 receives a supplied scene and a bounded command space. It proposes a command, receives measured feedback, then revises its proposal. The public example preserves all three actual provider responses.</p></section><section class="detail-section"><h3>What physics does</h3><p>The local engine computes planar collisions and contact energy. A separate search compares 37 commands. Neither the solver nor the 3D rendering is a Meta model.</p></section><section class="detail-section"><h3>What this proves</h3><p>A model proposal can be tested, rejected and improved in a known simulation. Initial states are supplied; contact shapes are discs and commands change velocity instantly. The 8 J threshold belongs to this experiment.</p><p>This replay is not a measurement of real-world prediction accuracy or a demonstration of physical robot control.</p></section><a class="button secondary wide-button" href="./scan.html">Explore on-device camera tracking <span aria-hidden="true">↗</span></a></div>
+</dialog>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<noscript><p class="noscript-message">Enable JavaScript to calculate and compare physical futures.</p></noscript>
+<script type="module" src="./web/causal/lab.mjs"></script>
+</body>
+</html>

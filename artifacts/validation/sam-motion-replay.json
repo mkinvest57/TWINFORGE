@@ -1,0 +1,36 @@
+{
+  "type": "offline_past_only_motion_replay",
+  "inputSha256": "02ec4124a65ed2bca337d2ba6bc9431d65de47637da35b612671176c980408b6",
+  "horizonS": 0.5,
+  "comparison": "Identical originally issued forecasts and originally scored target positions; original export unchanged",
+  "newLiveCalls": 0,
+  "runs": [
+    {
+      "runId": "8fac92ca-0ef8-4481-9dab-5a3278ecfba2",
+      "originalScored": 127,
+      "replayedScored": 127,
+      "refused": 0,
+      "originalMeanErrorPx": 107.08315999854,
+      "replayedMeanErrorPx": 45.48334951942531,
+      "models": {
+        "harmonic": 72,
+        "linear": 52,
+        "turn": 3
+      }
+    },
+    {
+      "runId": "4d294666-6089-4ded-89fe-0f2d46620882",
+      "originalScored": 185,
+      "replayedScored": 185,
+      "refused": 0,
+      "originalMeanErrorPx": 12.38559398177979,
+      "replayedMeanErrorPx": 12.141275967153428,
+      "models": {
+        "linear": 162,
+        "quad": 4,
+        "turn": 10,
+        "harmonic": 9
+      }
+    }
+  ]
+}

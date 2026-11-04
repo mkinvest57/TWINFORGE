@@ -68,6 +68,12 @@ function cameraMotion(previous,current,exclude,o){
     matches:shifts.length,coherence:shifts.length?coherent.length/shifts.length:0,displacementPx:{x:dx,y:dy}};
 }
 
+/** Shared pixel-only background check for alternative appearance trackers. */
+export function estimateCameraMotion(previous,current,exclude,options={}){
+  const o={...TRACKER_DEFAULTS,...options},im=imageOf(current,o.maxDimension),before=imageOf(previous,o.maxDimension);
+  return cameraMotion(before,im,{x:exclude.x/im.sx,y:exclude.y/im.sy,width:exclude.width/im.sx,height:exclude.height/im.sy},o);
+}
+
 export function createTracker(options={}){
   const o={...TRACKER_DEFAULTS,...options};
   for(const k of Object.keys(TRACKER_DEFAULTS))if(!Number.isFinite(o[k])||o[k]<0)throw new TypeError(`Invalid tracker option ${k}`);

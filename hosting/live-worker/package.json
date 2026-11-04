@@ -1,0 +1,21 @@
+{
+  "name": "twinforge-private-live-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "stage-public": "node scripts/stage-public.mjs",
+    "db:generate": "drizzle-kit generate",
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "validate": "node scripts/validate-artifact.mjs"
+  },
+  "dependencies": {
+    "@meta-sam/parser": "0.1.0",
+    "jpeg-js": "0.4.4"
+  },
+  "devDependencies": {
+    "drizzle-kit": "0.31.8",
+    "drizzle-orm": "0.44.7",
+    "esbuild": "0.25.12"
+  }
+}
