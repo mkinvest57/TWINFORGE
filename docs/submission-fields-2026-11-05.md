@@ -80,17 +80,17 @@ README, evidence and assets are pushed before submitting.
 
 ## Three-minute demo video link
 
-Prepared public player URL:
+YouTube URL:
 
 ```text
-https://mkinvest57.github.io/TWINFORGE/demo.html
+https://youtu.be/ySzrCQ7G3Tk
 ```
 
-**Pending final MP4 publication and playback verification.** The page references
-`assets/twinforge-demo.mp4`. Use the URL only after the final file is pushed and
-GitHub Pages finishes publishing. Test playback without the owner's login,
-including audio and the full ending. The prepared URL is not evidence of a
-completed upload.
+Upload completed and public publication requested; processing/playback confirmation
+was pending at handoff. Verify public playback, audio and the ending.
+
+Backup: https://mkinvest57.github.io/TWINFORGE/demo.html — the final MP4 is committed
+at `assets/twinforge-demo.mp4`; the latest Pages deployment must finish.
 
 ## How did you use Meta AI models or tools?
 

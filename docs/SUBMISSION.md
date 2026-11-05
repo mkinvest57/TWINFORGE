@@ -93,9 +93,10 @@ and [fixture provenance](../validation/runs/camera-horizon-2026-11-05/fixture-pr
   Public visibility verified November 5. The final pushed commit must match the demo.
 - [Hosted workspace](https://twinforge-mobile-camera.mkinvest57.chatgpt.site/): owner-private.
   Do not claim public judge access unless access is explicitly changed and checked.
-- Prepared video page: [Watch the three-minute demo](https://mkinvest57.github.io/TWINFORGE/demo.html).
-  The page serves `assets/twinforge-demo.mp4`. **Publication and playback verification
-  remain pending until the final MP4 is committed and the Pages build completes.**
+- Primary video: [Watch the three-minute demo on YouTube](https://youtu.be/ySzrCQ7G3Tk).
+  Upload completed and public publication requested; processing/playback confirmation was pending at handoff.
+- [Video backup](https://mkinvest57.github.io/TWINFORGE/demo.html) serves the committed final
+  `assets/twinforge-demo.mp4`; verify the latest Pages deployment before relying on this link.
 - Ready-to-paste copy and participant decisions:
   [submission-fields-2026-11-05.md](submission-fields-2026-11-05.md).
 
