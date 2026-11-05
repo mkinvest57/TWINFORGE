@@ -60,3 +60,28 @@ test('color tracking preserves the existing coherent-background camera-motion re
   const tracker=createSamTracker({samMaskPolygons:mask(60,50)});tracker.select(initial,roi(60,50),0);
   const result=tracker.update(moved,.08);assert.equal(result.status,'camera_moving');assert.equal(result.point,null);assert.equal(result.requiresReselection,true);
 });
+
+test('SAM-learned brightness separates a bright object from a connected dark background of the same hue',()=>{
+  function blueStudio(x){
+    const frame=scene([{x,y:50,rgb:blue}]);
+    for(let i=0;i<frame.width*frame.height;i++)if(frame.data[i*4]===80&&frame.data[i*4+1]===80){
+      // Same hue and similar saturation; only the learned brightness and
+      // chroma distinguish this background from the masked object.
+      frame.data.set([9,29,58,255],i*4);
+    }
+    return frame;
+  }
+  const tracker=createSamTracker({samMaskPolygons:mask(60,50),maxSearchRadiusPx:28});
+  assert.equal(tracker.select(blueStudio(60),roi(60,50),0).status,'tracking');
+  const tracked=tracker.update(blueStudio(65),.08);
+  assert.equal(tracked.status,'tracking');assert.ok(Math.abs(tracked.point.x-65)<.1);
+});
+
+test('an unexpected direction reversal remains inside the measured-position search neighborhood',()=>{
+  const tracker=createSamTracker({samMaskPolygons:mask(50,50),maxSearchRadiusPx:18});
+  tracker.select(scene([{x:50,y:50,rgb:red}]),roi(50,50),0);
+  assert.equal(tracker.update(scene([{x:65,y:50,rgb:red}]),.08).status,'tracking');
+  assert.equal(tracker.update(scene([{x:80,y:50,rgb:red}]),.16).status,'tracking');
+  const reversed=tracker.update(scene([{x:65,y:50,rgb:red}]),.24);
+  assert.equal(reversed.status,'tracking');assert.ok(Math.abs(reversed.point.x-65)<.1);
+});

@@ -1,0 +1,28 @@
+{
+  "deployment": "v8",
+  "sourceDurationS": 10.358333333333066,
+  "samImages": 4,
+  "issued": 192,
+  "scored": 186,
+  "meanVisualErrorPx": 6.488620411865869,
+  "ticketErrorsPx": [
+    0.20035256979724375
+  ],
+  "interactionEvents": [
+    {
+      "kind": "private_random_impulse_acknowledged",
+      "runId": "b49a70bb-c215-402c-99bd-43e4b5f4ddf0",
+      "sourceTimeS": 6.27916666666663,
+      "wallTime": "2026-11-05T00:31:00.405Z",
+      "physicsStateShared": false
+    }
+  ],
+  "checks": [
+    "Locked point equals its original issued forecast.",
+    "All model usedTimes are at or before lock time.",
+    "Source time is strictly before target time."
+  ],
+  "consoleErrorsObserved": 0,
+  "softwareState": "private source d269dc7309f90eb0025594454e80e043b6fd4e72",
+  "limitation": "One randomized trial; 2D error against visual tracking, not independent physical ground truth."
+}

@@ -7,9 +7,10 @@ import {spawn} from 'node:child_process';
 import {createInterface} from 'node:readline';
 import jpeg from 'jpeg-js';
 import {encodeSegmentationMask} from '../node_modules/@meta-sam/parser/dist/mask-codec.js';
-import {initializeBudget, summary, reserve, settle} from '../src/budget.mjs';
+import {initializeBudget, summary, reserve, settle, HttpError, IN_FLIGHT_LEASE_MS} from '../src/budget.mjs';
 import {validateFrame, readBoundedBody, MAX_BODY_BYTES} from '../src/frame.mjs';
 import {segment, samStatus, detectionsFromText} from '../src/sam.mjs';
+import {createHandler} from '../src/http.mjs';
 
 function sqlite(path) {
   const process = spawn('python3', [new URL('./sqlite-bridge.py', import.meta.url).pathname, path], {stdio:['pipe','pipe','inherit']});
@@ -119,4 +120,64 @@ test('missing credentials, baseline or persistent storage disables hosted SAM', 
   assert.equal((await samStatus({})).available,false);
   assert.equal((await samStatus({META_MODEL_API_KEY:'test',INITIAL_VISION_SPENT_UNITS:'0'})).available,false);
   await assert.rejects(initializeBudget({INITIAL_VISION_SPENT_UNITS:'0.5'}),/existing vision spend/);
+});
+
+test('busy readiness is temporary, stale disconnected leases expire without refunding their paid image', async t => {
+  const env = await environment(t, '1000'); await initializeBudget(env);
+  const id = await reserve(env, fakeFrame(), 'b'.repeat(64));
+  const busy = await samStatus(env);
+  assert.equal(busy.available, true);
+  assert.equal(busy.accepting_frame, false);
+  assert.equal(busy.service_state, 'busy');
+  assert.equal(busy.reason_code, 'sam_busy');
+  assert.ok(busy.retry_after_s > 0 && busy.retry_after_s <= 3);
+  assert.ok(busy.busy_until_ms > Date.now());
+  await env.DB.prepare('UPDATE vision_requests SET created_ms=? WHERE id=?')
+    .bind(Date.now() - IN_FLIGHT_LEASE_MS - 1, id).run();
+  const ready = await samStatus(env);
+  assert.equal(ready.service_state, 'ready');
+  assert.equal(ready.remaining_requests, 159);
+  const next = await reserve(env, fakeFrame(1, crypto.randomUUID()), 'c'.repeat(64));
+  assert.equal((await env.DB.prepare('SELECT status FROM vision_requests WHERE id=?').bind(id).first()).status, 'failed');
+  await settle(env, next, 'complete');
+  assert.equal((await summary(env)).scenes.vision, .105);
+});
+
+test('HTTP handler retains one dispatched task before response completion and settles after a client disconnect', async t => {
+  const env = await environment(t); let finishProvider, calls = 0;
+  const retained = [];
+  const handler = createHandler({assets:{}, segmenter:(request, env) => segment(request, env, async () => {
+    calls++;
+    return await new Promise(resolve => { finishProvider = () => resolve(providerResponse(WIRE)); });
+  })});
+  const controller = new AbortController();
+  const incoming = new Request(request(payload()), {signal:controller.signal});
+  const responsePromise = handler.fetch(incoming, env, {waitUntil:work => retained.push(work)});
+  assert.equal(retained.length, 1, 'register Worker lifetime before awaiting the response');
+  while (!finishProvider) await new Promise(resolve => setImmediate(resolve));
+  controller.abort(); // Existing request is disconnected; provider job must still finish.
+  finishProvider();
+  await retained[0];
+  const response = await responsePromise;
+  assert.equal(response.status, 200);
+  assert.equal(calls, 1);
+  assert.equal((await env.DB.prepare('SELECT status FROM vision_requests').first()).status, 'complete');
+  assert.equal((await samStatus(env)).service_state, 'ready');
+});
+
+test('retained failed work settles and returns an explicit billed error; an unbilled busy response has Retry-After', async t => {
+  const env = await environment(t), retained = [];
+  const failing = createHandler({assets:{}, segmenter:(request, env) => segment(request, env, async () => new Response('',{status:503}))});
+  const response = await failing.fetch(request(payload()), env, {waitUntil:promise=>retained.push(promise)});
+  await Promise.all(retained);
+  const body = await response.json();
+  assert.equal(response.status, 503);
+  assert.equal(body.code, 'sam_provider_error');
+  assert.equal(body.provider_call_made, true);
+  assert.equal(body.charged_usd, .0025);
+  assert.equal((await samStatus(env)).service_state, 'ready');
+  const blocked = createHandler({assets:{}, segmenter:async()=>{throw new HttpError(429,'Busy',{code:'sam_busy',provider_call_made:false,retry_after_s:3});}});
+  const busy = await blocked.fetch(request(payload()), env, {waitUntil:()=>{}});
+  assert.equal(busy.status,429); assert.equal(busy.headers.get('Retry-After'),'3');
+  assert.equal((await busy.json()).provider_call_made,false);
 });

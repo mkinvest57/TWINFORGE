@@ -1,0 +1,33 @@
+{
+  "javascript": {
+    "passed": 163,
+    "command": "node --test tests/js/*.test.mjs"
+  },
+  "python": {
+    "passed": 129,
+    "command": ".venv/bin/python -B -m unittest discover -s tests -q"
+  },
+  "worker": {
+    "passed": 10,
+    "command": "npm test in hosting/live-worker"
+  },
+  "providerCallsInSoftwareTests": "mocked transport; real hosted tests separately recorded",
+  "21stReview": {
+    "errors": 0,
+    "warnings": 0,
+    "informational": 5
+  },
+  "responsive": {
+    "390px": {
+      "overflow": false,
+      "startControlHeightPx": 44,
+      "mobileLockControlHeightPx": 44,
+      "hostedCameraViewVerified": true
+    },
+    "1024x1366": {
+      "overflow": false,
+      "sourceAspect": 1.6000464882036185
+    }
+  },
+  "physicalPhoneCameraTested": false
+}

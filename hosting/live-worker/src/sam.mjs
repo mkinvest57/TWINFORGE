@@ -1,5 +1,5 @@
 import {parseImageStream, decodeMaskToRaster, decodeMaskToSVGPath, recordsOfKind} from '@meta-sam/parser';
-import {HttpError, initializeBudget, summary, reserve, settle, IMAGE_UNITS, MAX_RUN_REQUESTS} from './budget.mjs';
+import {HttpError, initializeBudget, summary, inFlight, reserve, settle, IMAGE_UNITS, MAX_RUN_REQUESTS, PROVIDER_TIMEOUT_MS} from './budget.mjs';
 import {validateFrame, readBoundedBody, sha256} from './frame.mjs';
 
 const MODEL = 'sam-3.1';
@@ -8,12 +8,20 @@ const encoder = new TextEncoder();
 
 export async function samStatus(env) {
   const keyAvailable = typeof env.META_MODEL_API_KEY === 'string' && env.META_MODEL_API_KEY.length > 0;
-  let budget = null, budgetError = null;
-  try { await initializeBudget(env); budget = await summary(env); }
+  let budget = null, budgetError = null, pending = null;
+  try { await initializeBudget(env); budget = await summary(env); pending = await inFlight(env); }
   catch (error) { budgetError = error instanceof HttpError ? error.message : 'Persistent vision budget storage is unavailable.'; }
   const remaining = budget?.remaining_requests ?? 0;
+  const available = keyAvailable && !budgetError && remaining > 0;
+  const reason = !keyAvailable ? 'key_missing' : budgetError ? 'budget_storage_unavailable' : !remaining ? 'budget_exhausted' : pending ? 'sam_busy' : null;
+  const message = !keyAvailable ? 'The Meta API credential is not configured on this server.'
+    : budgetError || (!remaining ? 'The shared $0.50 image allowance is exhausted. Changing scenes does not reset it.'
+      : pending ? 'SAM is finishing an image already submitted. This wait does not spend another image.' : 'SAM 3.1 is ready to observe an image.');
   return {
-    schema_version: 'twinforge.sam.status.v1', available: keyAvailable && !budgetError && remaining > 0,
+    schema_version: 'twinforge.sam.status.v1', available,
+    service_state: !available ? 'unavailable' : pending ? 'busy' : 'ready',
+    accepting_frame: available && !pending, reason_code: reason, message,
+    ...(pending ? {retry_after_s:pending.retry_after_s, busy_until_ms:pending.busy_until_ms} : {}),
     key_available: keyAvailable, decoder_available: true, budget_available: !budgetError,
     model: MODEL, provider: PROVIDER, live_only: true,
     price_per_image_usd: IMAGE_UNITS / 10000, max_requests_per_run: MAX_RUN_REQUESTS,
@@ -117,7 +125,8 @@ export async function detectionsFromText(text, frame) {
 export async function segment(request, env, providerFetch = fetch) {
   const started = performance.now();
   const frame = await validateFrame(await readBoundedBody(request));
-  if (typeof env.META_MODEL_API_KEY !== 'string' || !env.META_MODEL_API_KEY) throw new HttpError(503, 'META_MODEL_API_KEY is not configured.');
+  if (typeof env.META_MODEL_API_KEY !== 'string' || !env.META_MODEL_API_KEY) throw new HttpError(503, 'META_MODEL_API_KEY is not configured.',
+    {code:'key_missing', provider_call_made:false});
   await initializeBudget(env);
   const payload = {model: MODEL, input: [{role: 'user', content: [
     {type: 'input_text', text: frame.concept},
@@ -131,7 +140,7 @@ export async function segment(request, env, providerFetch = fetch) {
     try {
       response = await providerFetch('https://api.meta.ai/v1/responses', {
         method: 'POST', headers: {'Content-Type': 'application/json', Authorization: 'Bearer ' + env.META_MODEL_API_KEY},
-        body: payloadJson, signal: AbortSignal.timeout(120000),
+        body: payloadJson, signal: AbortSignal.timeout(PROVIDER_TIMEOUT_MS),
       });
     } catch { throw new HttpError(503, 'SAM provider connection failed. The reserved image cost is retained.'); }
     if (!response.ok) throw new HttpError(503, 'SAM provider returned HTTP ' + response.status + '.');
@@ -167,7 +176,11 @@ export async function segment(request, env, providerFetch = fetch) {
     return result;
   } catch (error) {
     await settle(env, id, 'failed', responseHash);
-    if (error instanceof HttpError) throw error;
-    throw new HttpError(503, 'SAM observation failed; no fallback detection was created.');
+    if (error instanceof HttpError) {
+      error.detail = {code:'sam_provider_error', provider_call_made:true, charged_usd:IMAGE_UNITS / 10000, ...error.detail};
+      throw error;
+    }
+    throw new HttpError(503, 'SAM observation failed; no fallback detection was created.',
+      {code:'sam_provider_error', provider_call_made:true, charged_usd:IMAGE_UNITS / 10000});
   }
 }

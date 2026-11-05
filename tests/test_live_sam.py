@@ -160,6 +160,21 @@ class LiveSamTests(unittest.TestCase):
         readiness = sam.status(self.client)
         self.assertEqual(readiness["remaining_requests"], 0)
         self.assertFalse(readiness["available"])
+        self.assertEqual(readiness["reason_code"], "budget_exhausted")
+        self.assertEqual(readiness["service_state"], "unavailable")
+
+    def test_status_distinguishes_temporary_work_from_missing_service(self):
+        with patch.object(sam, "_decoder_available", return_value=True):
+            ready = sam.status(self.client)
+            self.assertEqual(ready["service_state"], "ready")
+            self.assertTrue(ready["accepting_frame"])
+            with patch.object(sam, "_REQUEST_STARTED_AT", 1.):
+                busy = sam.status(self.client)
+            self.assertTrue(busy["available"])
+            self.assertFalse(busy["accepting_frame"])
+            self.assertEqual(busy["service_state"], "busy")
+            self.assertEqual(busy["reason_code"], "sam_busy")
+            self.assertEqual(busy["retry_after_s"], 1)
 
     def test_default_live_budget_cap_preserves_existing_spend_and_global_limit(self):
         with patch.dict(os.environ, {

@@ -68,9 +68,21 @@ cannot observe subsequent changes to local environment configuration.
 All quota predicates are in one conditional D1/SQLite `INSERT`. The database
 also enforces unique `(run_id, frame_id)` pairs. A reservation is retained even
 if Meta fails or the request is interrupted. One provider request can be in flight;
-an abandoned slot becomes available after 180 seconds but its dollars remain
-charged. Only the rejected busy path returns `code: sam_busy`,
-`provider_call_made: false`, and `retry_after_s: 1`; budget/run limits never do.
+an abandoned slot becomes available after 30 seconds but its dollars remain
+charged. The Worker registers the paid task with `context.waitUntil` before
+awaiting it, so a tab reset or disconnect does not cancel durable settlement.
+The provider request has a 15-second deadline, inside the
+[documented post-disconnect Worker lifetime](https://developers.cloudflare.com/workers/runtime-apis/context/).
+Only the rejected busy path
+returns `code: sam_busy` with `retry_after_s` (1–3 seconds); budget/run limits
+never suggest an automatic retry. Every rejection before the provider explicitly
+returns `provider_call_made: false`.
+
+The free status endpoint reports `service_state` (`ready`, `busy`, or
+`unavailable`), `accepting_frame`, an explicit `reason_code`, and a user-facing
+`message`. Busy is temporary and does not mark a configured service unavailable;
+`retry_after_s` and `busy_until_ms` describe that wait. Billed provider failures
+carry `code: sam_provider_error`, `provider_call_made: true`, and the reserved cost.
 
 D1 stores the image hash, request-body hash, response hash, normalized result,
 timestamp and charge. JPEG bytes and credentials are not stored. Unlike the
@@ -85,7 +97,8 @@ atomic quota tests and the real official SAM mask decoder for contour tests.
 The provider transport alone is mocked. Tests cover image/hidden-field
 validation, exact provider payload, durable receipts, duplicate rejection,
 failure costs, concurrent last-dollar reservations, monotonically imported
-spend, per-run limits and unavailable configuration. `npm run validate` imports
+spend, per-run limits, unavailable configuration, disconnect settlement, and
+stale-lease recovery without a refund. `npm run validate` imports
 the complete built ESM artifact, checks static assets and verifies that private
 paths remain absent and missing backend configuration fails closed.
 

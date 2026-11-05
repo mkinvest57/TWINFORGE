@@ -46,3 +46,12 @@ test('short candidates retain the required six-sample observation gate',()=>{
   assert.equal(observations.length,5);
   assert.equal(forecastMotion(observations,{sourceTime:.32,horizon:.2}).status,'refused');
 });
+
+test('validated short motion is usable before the longer linear validation window fills',()=>{
+  const path=t=>({x:100+120*t,y:140-260*t+245*t*t}),observations=rows(path,.72),sourceTime=observations.at(-1).t;
+  const prediction=forecastMotion(observations,{sourceTime,horizon:.2});
+  assert.equal(prediction.status,'predicted');assert.equal(prediction.motionModel,'short_turn');
+  assert.equal(prediction.diagnostics.pastTargetErrorsPx.linear,undefined);
+  assert.ok(prediction.diagnostics.pastTargetCounts.short_turn>=2);
+  assert.ok(distance(prediction.point,path(sourceTime+.2))<8);
+});

@@ -117,9 +117,13 @@ test('a response from the previous scene cannot initialize the replacement scene
   const f=fixture(),first=deferred(),second=deferred(),requests=[];
   const io=transport(body=>{requests.push(body);return (requests.length===1?first:second).promise.then(()=>({ok:true,status:200,json:async()=>responseFor(body)}));});
   const o=new SamObserver({fetcher:io.fetcher});o.start({runId:RUN});o.pushFrame(f.frame(0));await settle();
-  o.reset({runId:NEXT});assert.equal(io.requests[0].signal.aborted,true);
-  o.pushFrame(f.frame(0,{runId:NEXT}));await settle();first.resolve();await settle();
-  assert.equal(o.snapshot().tracks.length,0);assert.equal(o.snapshot().runId,NEXT);assert.equal(o.snapshot().samPending,true);
+  o.reset({runId:NEXT});assert.equal(io.requests[0].signal.aborted,false,'a dispatched paid POST must be allowed to settle');
+  o.pushFrame(f.frame(0,{runId:NEXT}));await settle();
+  assert.equal(io.requests.length,1,'a reset cannot create a second in-flight provider request');
+  first.resolve();await settle();
+  assert.equal(o.snapshot().tracks.length,0);assert.equal(o.snapshot().runId,NEXT);assert.equal(o.snapshot().samPending,false);
+  assert.equal(o.retryPendingFrame(),true,'the new run may submit its never-sent first frame while the source clock remains paused');
+  await settle();assert.equal(o.snapshot().samPending,true);
   second.resolve();await settle();assert.equal(o.snapshot().tracks.length,1);
   assert.equal(o.exportEvidence().current.samRecords[0].runId,NEXT);assert.equal(o.snapshot().samCalls,2);
 });
@@ -153,8 +157,9 @@ test('only explicitly unbilled busy responses retry on a later captured frame',a
   const io=transport(body=>++calls===1?
     {ok:false,status:429,json:async()=>({error:'Busy',code:'sam_busy',provider_call_made:false,retry_after_s:1})}:
     {ok:true,status:200,json:async()=>responseFor(body)});
-  const o=new SamObserver({fetcher:io.fetcher});o.start({runId:RUN});o.pushFrame(f.frame(0));await settle();
+  const o=new SamObserver({fetcher:io.fetcher,maxRequests:1});o.start({runId:RUN});o.pushFrame(f.frame(0));await settle();
   assert.equal(o.snapshot().status,'sam_busy');assert.equal(o.snapshot().samAccepted,0);
+  assert.equal(o.snapshot().samCalls,0,'an explicitly unbilled busy response cannot consume the paid request cap');
   o.pushFrame(f.frame(.5));o.pushFrame(f.frame(2.9));await settle();assert.equal(io.requests.length,1);
   o.pushFrame(f.frame(3));await settle();assert.equal(io.requests.length,2);
   assert.equal(io.requests[1].body.source_time_s,3);assert.equal(o.snapshot().samAccepted,1);assert.equal(o.snapshot().busyResponses,1);
@@ -166,11 +171,104 @@ test('only explicitly unbilled busy responses retry on a later captured frame',a
   }
 });
 
-test('stop aborts requests, retains unscorable future targets and releases frame pixels',async()=>{
+test('stop retains unscorable future targets and releases frame pixels',async()=>{
   const {observer:o}=makeObserver(),f=fixture();o.start({runId:RUN});o.pushFrame(f.frame(0));await settle();
   for(let i=1;i<=7;i++)o.pushFrame(f.frame(i*.1));
   assert.ok(o.snapshot().issuedCount>0);o.stop();
   assert.equal(o.frames.length,0);assert.equal(o.snapshot().tracks.length,0);
   assert.equal(o.exportEvidence().current.assessments.filter(a=>a.reason==='observation_stopped').length,o.snapshot().issuedCount);
   assert.equal(o.pushFrame(f.frame(.8)),false);
+});
+
+test('a fresh SAM confirmation retains continuous visual identity, past history and pending forecasts',async()=>{
+  const f=fixture(),{observer:o}=makeObserver({minSamIntervalS:1});o.start({runId:RUN});o.pushFrame(f.frame(0));await settle();
+  for(let i=1;i<=9;i++)o.pushFrame(f.frame(i*.1));
+  const before=o.exportEvidence().current,trackId=o.snapshot().tracks[0].id;
+  const pending=before.issued.find(p=>Math.abs(p.sourceTime-.9)<1e-8);
+  assert.ok(pending);const oldObservations=structuredClone(before.observations);
+  for(let i=10;i<=12;i++)o.pushFrame(f.frame(i*.1));await settle();
+  assert.equal(o.snapshot().tracks[0].id,trackId);assert.equal(o.snapshot().revalidationCount,1);
+  let e=o.exportEvidence().current;
+  assert.deepEqual(e.observations.slice(0,oldObservations.length),oldObservations,'SAM refresh cannot rewrite earlier measured positions');
+  assert.deepEqual(e.issued.find(p=>p.id===pending.id),pending,'SAM refresh cannot move a pending target');
+  assert.equal(e.assessments.some(a=>a.predictionId===pending.id),false,'the target remains pending while its source-time is unseen');
+  assert.equal(e.observations.filter(o=>o.t===1&&o.trackId===trackId).length,1,'revalidation cannot backfill duplicate observations into continuous history');
+  for(let i=13;i<=16;i++)o.pushFrame(f.frame(i*.1));
+  e=o.exportEvidence().current;
+  assert.equal(e.assessments.find(a=>a.predictionId===pending.id)?.status,'scored');
+  assert.ok(e.assessments.find(a=>a.predictionId===pending.id).errorPx<2);
+});
+
+test('SAM no-match refresh preserves existing visual tracking only until its own anchor expires',async()=>{
+  const f=fixture();let requests=0;
+  const io=transport(body=>({ok:true,status:200,json:async()=>responseFor(body,{detections:++requests===1})}));
+  const o=new SamObserver({fetcher:io.fetcher,minSamIntervalS:1,maxSamAgeS:1.5});o.start({runId:RUN});o.pushFrame(f.frame(0));await settle();
+  const id=o.snapshot().tracks[0].id;
+  for(let i=1;i<=12;i++)o.pushFrame(f.frame(i*.1));await settle();
+  assert.equal(o.snapshot().tracks[0].id,id);assert.equal(o.snapshot().tracks[0].samTimeS,0);
+  o.pushFrame(f.frame(1.6));assert.equal(o.snapshot().tracks.length,0);
+  assert.equal(o.snapshot().status,'sam_stale');
+});
+
+test('a locked prediction is immutable, future-only and resolved from a subsequent measured frame',async()=>{
+  const f=fixture(),{observer:o}=makeObserver({horizon:.2});o.start({runId:RUN});o.pushFrame(f.frame(0));await settle();
+  assert.equal(o.lockPrediction(),null);
+  for(let i=1;i<=7;i++)o.pushFrame(f.frame(i*.1));
+  const ticket=o.lockPrediction();assert.ok(ticket);assert.equal(ticket.status,'locked');assert.ok(Math.abs(ticket.sourceTime-.7)<1e-9);
+  assert.ok(ticket.targetTime>ticket.lockedAtSourceTimeS);assert.equal(ticket.sourceFrameId,'f700');assert.equal(ticket.outcome,null);
+  const frozen=structuredClone(ticket.prediction),point={...ticket.point};
+  ticket.point.x=-1000;ticket.prediction.point.x=-1000;
+  assert.deepEqual(o.snapshot().predictionTicket.point,point,'callers cannot mutate the stored ticket');
+  o.pushFrame(f.frame(.8,{x:42}));o.pushFrame(f.frame(.9,{x:40}));
+  const resolved=o.snapshot().predictionTicket;
+  assert.equal(resolved.status,'scored');assert.deepEqual(resolved.prediction,frozen);
+  assert.deepEqual(resolved.point,point);assert.ok(resolved.outcome.errorPx>5,'an unexpected reversal must remain a visible miss');
+  assert.equal(resolved.outcome.observedTime,resolved.targetTime);assert.equal(resolved.outcome.frameId,'f900');
+  assert.equal(o.exportEvidence().current.tickets[0].id,resolved.id);
+});
+
+test('stop marks a locked future unscorable and lets a dispatched provider call settle',async()=>{
+  const f=fixture(),pending=deferred(),io=transport(body=>pending.promise.then(()=>({ok:true,status:200,json:async()=>responseFor(body)})));
+  const o=new SamObserver({fetcher:io.fetcher});o.start({runId:RUN});o.pushFrame(f.frame(0));await settle();
+  o.stop();assert.equal(io.requests[0].signal.aborted,false);assert.equal(o.snapshot().samPending,true);
+  pending.resolve();await settle();assert.equal(o.snapshot().samPending,false);assert.equal(o.snapshot().tracks.length,0);
+  const active=makeObserver({horizon:.2}).observer;active.start({runId:RUN});active.pushFrame(f.frame(0));await settle();
+  for(let i=1;i<=7;i++)active.pushFrame(f.frame(i*.1));
+  assert.ok(active.lockPrediction());active.stop();
+  assert.equal(active.snapshot().predictionTicket.status,'unscorable');assert.equal(active.snapshot().predictionTicket.assessment.reason,'observation_stopped');
+});
+
+test('a paused source retries the same frame only after a proven unbilled busy wall-clock delay',async()=>{
+  const f=fixture();let calls=0,now=0;
+  const io=transport(body=>++calls===1?
+    {ok:false,status:429,json:async()=>({error:'Busy',code:'sam_busy',provider_call_made:false,retry_after_s:2})}:
+    {ok:true,status:200,json:async()=>responseFor(body)});
+  const o=new SamObserver({fetcher:io.fetcher,maxRequests:1,now:()=>now});o.start({runId:RUN});
+  assert.equal(o.retryPendingFrame(),false);o.pushFrame(f.frame(0));await settle();
+  assert.equal(o.snapshot().retryAfterMs,2000);assert.equal(o.retryPendingFrame(),false);
+  now=1999;assert.equal(o.retryPendingFrame(),false);now=2000;assert.equal(o.retryPendingFrame(),true);
+  assert.equal(o.retryPendingFrame(),false,'one request at a time even if the UI timer fires twice');await settle();
+  assert.equal(io.requests.length,2);assert.equal(io.requests[1].body.frame_id,io.requests[0].body.frame_id);
+  assert.equal(o.snapshot().timeS,0);assert.equal(o.snapshot().samAccepted,1);assert.equal(o.snapshot().samCalls,1);
+  assert.equal(o.snapshot().observationsCount,1,'retrying a captured image must not fabricate extra motion samples');
+  assert.equal(o.snapshot().forecastReadiness.state,'learning');assert.equal(o.snapshot().forecastReadiness.sampleCount,1);
+  assert.equal(o.retryPendingFrame(),false,'an accepted image cannot be billed again by the retry pump');
+});
+
+test('the paused retry pump cannot retry billed errors or unproved pre-provider failures',async()=>{
+  for(const failure of [{code:'sam_provider_error',provider_call_made:true},{code:'sam_busy'},{code:'budget_exhausted',provider_call_made:false}]){
+    const f=fixture(),io=transport(()=>({ok:false,status:429,json:async()=>({error:'Unavailable',...failure})}));
+    const o=new SamObserver({fetcher:io.fetcher});o.start({runId:RUN});o.pushFrame(f.frame(0));await settle();
+    assert.equal(o.retryPendingFrame(),false);assert.equal(io.requests.length,1);assert.equal(o.snapshot().forecastReadiness.state,'unavailable');
+  }
+});
+
+test('a delayed unbilled busy response corrects the archived run counter without touching the new run',async()=>{
+  const f=fixture(),pending=deferred();
+  const io=transport(()=>pending.promise.then(()=>({ok:false,status:429,json:async()=>({error:'Busy',code:'sam_busy',provider_call_made:false})})));
+  const o=new SamObserver({fetcher:io.fetcher});o.start({runId:RUN});o.pushFrame(f.frame(0));await settle();
+  o.reset({runId:NEXT});o.pushFrame(f.frame(0,{runId:NEXT}));pending.resolve();await settle();
+  const e=o.exportEvidence();assert.equal(e.sessionCalls,0);assert.equal(e.current.runCalls,0);
+  assert.equal(e.previousRuns[0].runCalls,0);assert.equal(e.previousRuns[0].busyResponses,1);
+  assert.equal(o.snapshot().samPending,false);assert.equal(o.snapshot().samAccepted,0);assert.equal(o.snapshot().retryableBusy,false);
 });

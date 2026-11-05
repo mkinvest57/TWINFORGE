@@ -30,8 +30,8 @@ The scene family is available to label the UI, not as physical state supplied to
 
 1. Start observation on a newly randomized scene. Show the actual image submitted to SAM and its returned masks.
 2. Allow enough usable motion observations to accumulate. The interface displays an issued target **0.2 seconds ahead by default**, or **0.5 seconds** with the stress setting selected. Its horizon, issue time, and target time are retained.
-3. Let the target time arrive. The system compares the frozen target to later tracked image positions and reports error in **pixels**. Missing observations remain unscored.
-4. Generate another scene. Its old masks and tracks are discarded, and a new actual SAM segmentation is required.
+3. Press **Lock a prediction**. Synthetic time pauses with that target already stored. Press **Reveal the outcome** to advance to later tracked frames; the target stays fixed and visual error is reported in pixels. Missing observations remain unscored.
+4. Press **Change the motion** to apply a private random impulse that the observer does not receive. Then test another target. Alternatively generate a new scene, which requires fresh SAM segmentation.
 5. Export the record. It contains image hashes, model receipts, image observations, predictions, later assessments, and source labels.
 
 Optional automatic regeneration starts another simulated scene every 20 source seconds. Camera mode applies the same segmentation-and-tracking path to live images after camera permission. A physical phone demonstration should only be described as verified once its own run has been retained and reviewed.
@@ -69,3 +69,9 @@ The [recorded Meta decision experiment](../decision.html) uses supplied simulati
 The existing [English voiceover](VOICEOVER_3MIN_EN.txt), [storyboard](VIDEO_3MIN_STORYBOARD.json), and [provisional subtitles](CAUSAL_DEMO_SUBTITLES_EN.srt) describe that earlier decision experiment. They are **historical preparation files, not a current film for the live SAM project**. This revision does not claim that a replacement video or synthetic narration has been produced.
 
 The [original PDF compliance record](PROMPT_COMPLIANCE.md) retains its earlier scope and physical requirements. This brief is neither a submission receipt nor confirmation of participant eligibility, judging outcome, or acceptance by the event organizer.
+
+## Current studio release
+
+The current interface adds a visible lock/reveal test, private random impulses, a dark 21st-inspired studio and continuity across confirmed SAM refreshes. It fixes the production request-cancellation lockout; [diagnosis](../validation/runs/sam-reliability-2026-11-05/diagnosis.json) and [current checks](../validation/runs/studio-2026-11-05/software-checks.json) are retained. There are 302 passing checks (163 JavaScript,129 Python,10 Worker); provider transport is mocked in those software tests.
+
+Real v7 locked targets were 1.204 px and 5.392 px in the collision trial, and 7.184 px in the pendulum trial. Those are individual target errors; corresponding run means and failures are retained. The flight trial before tracker changes had 33.525 px mean error. The fresh v8 flight trial and its locked outcomes are reported in [flight-v8-summary.json](../validation/runs/studio-2026-11-05/flight-v8-summary.json). Different randomized scenes are not a controlled before/after accuracy test. Unknown impacts remain a limitation. No physical phone camera accuracy was measured.

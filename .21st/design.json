@@ -1,8 +1,8 @@
 {
   "version": 1,
   "project": {
-    "name": "TWINFORGE — Decision lab, Motion lab & Camera",
-    "productType": "English-first experiment platform: verified Meta intervention proposals, local motion simulation and on-device camera tracking",
+    "name": "TWINFORGE \u2014 Visual intelligence lab",
+    "productType": "SAM image-only perception, causal motion forecasts, locked prediction challenges",
     "stack": [
       "HTML",
       "CSS",
@@ -13,6 +13,7 @@
   },
   "sources": {
     "tokens": [
+      "web/vision/live.css",
       "web/causal/lab.css",
       "web/workbench-ui.css",
       "web/camera/scanner.css"
@@ -30,15 +31,17 @@
     ]
   },
   "design": {
-    "colorMode": "light",
+    "colorMode": "dark",
     "colors": {
-      "background": "#f7f8fa",
-      "panel": "#fff",
-      "text": "#181b21",
-      "muted": "#687181",
-      "line": "#e3e6eb",
-      "accent": "#cf4b08",
-      "accentHover": "#b94006"
+      "background": "#0b1016",
+      "panel": "#111820",
+      "raised": "#18212a",
+      "text": "#edf2f3",
+      "muted": "#94a2ad",
+      "line": "#29343e",
+      "accent": "#d4fa72",
+      "observed": "#68dbed",
+      "predicted": "#ffbd69"
     },
     "typography": {
       "sans": "System sans-serif; Inter is a non-required first preference in Motion lab.",
@@ -47,20 +50,20 @@
     },
     "spacing": {
       "controlTargetMinPx": 44,
-      "pageGutterDesktopPx": "24–40",
-      "pageGutterPhonePx": "10–16",
-      "drawerPaddingPx": "20–24"
+      "pageGutterDesktopPx": "24\u201340",
+      "pageGutterPhonePx": "10\u201316",
+      "drawerPaddingPx": "20\u201324"
     },
     "radius": {
-      "controlsPx": "7–8",
-      "stagesPx": "10–14"
+      "controlsPx": "7\u20138",
+      "stagesPx": "10\u201314"
     },
     "shadows": {
       "policy": "Subtle stage and dialog separation; no decorative glow or full-page card grid."
     },
     "motion": {
       "policy": "Explicit playback controls; reduced-motion preference respected. No changes to physics integration or evaluation are part of the visual refresh.",
-      "drawerTransitionMs": "0–180"
+      "drawerTransitionMs": "0\u2013180"
     },
     "density": "Primary stage first, compact controls, one subordinate model-decision inspector on desktop. Settings, evidence, recording and optional model tools are progressively disclosed.",
     "tokenAliases": {
@@ -154,7 +157,11 @@
     "Motion lab exposes one scene selector and Start/Pause/Reset group. Numerical integration is unchanged; camera framing and decorative environments are presentation-only.",
     "Camera starts from one primary action. Optional examples, video import, exports, recording and limitations are collapsed. Tracking remains local and pixel-based.",
     "User-rejected water and orbit presentations remain out of public navigation; historical code and evidence remain archived.",
-    "Keep the user-provided MPC video as an unshipped visual reference, not as a product asset."
+    "Keep the user-provided MPC video as an unshipped visual reference, not as a product asset.",
+    "2026-11-05: User requested a substantial 21st redesign. Selected a dark scientific studio with one dominant actual 3D scene, a frozen prediction ticket, exact source/target timecodes and progressively disclosed settings.",
+    "A fresh real SAM mask starts the scene. User lock pauses synthetic time, reveal advances it, later visual error remains visible. Live camera cannot be paused and is labeled accordingly.",
+    "21st Filmstrip Scrub 29384 informs timecodes, temporal ticks and preview framing; Usage Dashboard 31642 informs actual remaining-allowance display. Native HTML/CSS/ES modules, no sample metrics or decorative fake signals.",
+    "A mobile Lock prediction shortcut is beside scene controls. Desktop source and overlay share an aspect-preserving surface. Automatic randomization is opt-in to preserve continuous observation."
   ],
   "evidence": [
     "Fresh 21st component, demo and dependency payloads are cached for 1279, 25010 and 27028; their previews were visually inspected by the coordinating agent.",

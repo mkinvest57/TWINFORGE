@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {createHiddenWorld,stepHiddenWorld,FIXED_STEP,FAMILIES} from '../../web/vision/random-dynamics.mjs';
+import {createHiddenWorld,stepHiddenWorld,applyHiddenImpulse,FIXED_STEP,FAMILIES} from '../../web/vision/random-dynamics.mjs';
 import {pendulumEnergy} from '../../web/physics/alt-models.mjs';
 
 test('random trials vary initial impulses, geometry and body counts reproducibly',()=>{
@@ -55,4 +55,44 @@ test('rendering bridge exports pixels only, never hidden state or seed',()=>{
   assert.match(frame,/image_base64/);assert.match(frame,/t:world.time/);
   assert.doesNotMatch(frame,/seed|bodies|params|pendulum|gravity|velocity|forces/);
   assert.match(source,/crypto.getRandomValues/);assert.match(source,/event.source!==parent/);
+});
+
+test('unknown impulses change the future without rewriting already observed positions or time',()=>{
+  for(const family of FAMILIES){
+    const w=createHiddenWorld(41,family);
+    for(let i=0;i<120;i++)stepHiddenWorld(w);
+    const observed=w.bodies.map(b=>({...b.p})),time=w.time;
+    const original=structuredClone(w),same=structuredClone(w),different=structuredClone(w);
+    applyHiddenImpulse(w,901);applyHiddenImpulse(same,901);applyHiddenImpulse(different,902);
+    assert.equal(w.time,time);assert.deepEqual(w.bodies.map(b=>b.p),observed);
+    assert.deepEqual(w,same);assert.notDeepEqual(w,different);
+    for(let i=0;i<60;i++){stepHiddenWorld(w);stepHiddenWorld(original);}
+    assert.ok(w.bodies.some((b,i)=>Math.hypot(b.p.x-original.bodies[i].p.x,b.p.y-original.bodies[i].p.y,b.p.z-original.bodies[i].p.z)>.02));
+  }
+});
+
+test('repeated private impulses remain finite and inside the apparatus',()=>{
+  for(const family of FAMILIES)for(let seed=0;seed<8;seed++){
+    const w=createHiddenWorld(seed,family);
+    for(let i=0;i<4800;i++){
+      if(i%240===0)applyHiddenImpulse(w,seed*100+i);
+      stepHiddenWorld(w);
+      for(const b of w.bodies){
+        assert.ok(Object.values(b.p).every(Number.isFinite));
+        if(w.bounds){
+          assert.ok(Math.abs(b.p.x)<=w.bounds.x-b.radius+.002);
+          assert.ok(Math.abs(b.p.z)<=w.bounds.z-b.radius+.002);
+          if(w.bounds.y)assert.ok(b.p.y<=w.bounds.y-b.radius+.002&&b.p.y>=b.radius-.002);
+        }
+      }
+    }
+  }
+});
+
+test('intervention acknowledgements contain no force, seed, or selected object',()=>{
+  const source=readFileSync(new URL('../../web/vision/world.mjs',import.meta.url),'utf8');
+  const acknowledgement=source.match(/respond\(\{type:'tf-world-intervention'[^;]+/)[0];
+  assert.equal(acknowledgement,"respond({type:'tf-world-intervention',run_id:runId,t:world.time})");
+  assert.match(source,/value.command==='impulse'&&running&&world/);
+  assert.match(source,/applyHiddenImpulse\(world,seed\[0\]\)/);
 });

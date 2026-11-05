@@ -2,6 +2,7 @@
  * Hue is learned from masked image pixels, never a renderer palette. */
 import {createTracker,estimateCameraMotion} from '../camera/tracker.mjs';
 const distance=(a,b)=>Math.min(Math.abs(a-b),360-Math.abs(a-b));
+const quantile=(values,fraction)=>{const sorted=[...values].sort((a,b)=>a-b);return sorted[Math.floor((sorted.length-1)*fraction)];};
 function hsv(data,i){
   const r=data[i],g=data[i+1],b=data[i+2],high=Math.max(r,g,b),low=Math.min(r,g,b),delta=high-low;
   let h=0;if(delta)h=high===r?60*((g-b)/delta%6):high===g?60*((b-r)/delta+2):60*((r-g)/delta+4);
@@ -24,7 +25,11 @@ function dominant(frame,roi,polygons){
   const cluster=pixels.filter(p=>distance(p.h,best*10+5)<25);
   if(cluster.length<pixels.length*.8)return null;
   const angle=Math.atan2(cluster.reduce((s,p)=>s+Math.sin(p.h*Math.PI/180),0),cluster.reduce((s,p)=>s+Math.cos(p.h*Math.PI/180),0));
-  return {h:(angle*180/Math.PI+360)%360,minS:Math.max(.22,cluster.reduce((s,p)=>Math.min(s,p.s),1)*.7),area:cluster.length,
+  return {h:(angle*180/Math.PI+360)%360,minS:Math.max(.22,cluster.reduce((s,p)=>Math.min(s,p.s),1)*.7),
+    // A hue alone is not an object's appearance. A dark blue wall/grid must
+    // not join a bright blue object into one connected component. These
+    // thresholds are learned from the real SAM mask's lower color quantile.
+    minV:Math.max(35,quantile(cluster.map(p=>p.v),.1)*.70),minChroma:Math.max(25,quantile(cluster.map(p=>p.chroma),.1)*.65),area:cluster.length,
     point:{x:cluster.reduce((s,p)=>s+p.x+.5,0)/cluster.length,y:cluster.reduce((s,p)=>s+p.y+.5,0)/cluster.length}};
 }
 function components(frame,region,color){
@@ -33,7 +38,7 @@ function components(frame,region,color){
   if(w<=0||h<=0)return [];
   const mask=new Uint8Array(w*h),queue=new Int32Array(w*h),out=[];
   for(let y=0;y<h;y++)for(let x=0;x<w;x++){
-    const p=hsv(frame.data,((y+y0)*frame.width+x+x0)*4);if(p.s>=color.minS&&p.chroma>=25&&p.v>=35&&distance(p.h,color.h)<=22)mask[y*w+x]=1;
+    const p=hsv(frame.data,((y+y0)*frame.width+x+x0)*4);if(p.s>=color.minS&&p.chroma>=color.minChroma&&p.v>=color.minV&&distance(p.h,color.h)<=22)mask[y*w+x]=1;
   }
   for(let start=0;start<mask.length;start++)if(mask[start]){
     let head=0,tail=1,sx=0,sy=0,minX=w,minY=h,maxX=0,maxY=0,touches=false;queue[0]=start;mask[start]=0;
@@ -65,8 +70,14 @@ export function createSamTracker(options={}){
     const scale=Math.max(1,Math.max(frame.width,frame.height)/(options.maxDimension??320));
     const radius=(options.maxSearchRadiusPx??52)*scale;
     const center={x:state.point.x+state.velocity.x*Math.min(dt,.18),y:state.point.y+state.velocity.y*Math.min(dt,.18)};
-    const region={x:center.x-state.box.width/2-radius,y:center.y-state.box.height/2-radius,width:state.box.width+radius*2,height:state.box.height+radius*2};
-    const candidates=components(frame,region,state.color).filter(c=>!c.touches&&c.area>=state.color.area*.65&&c.area<=state.color.area*1.8&&Math.hypot(c.point.x-center.x,c.point.y-center.y)<=radius);
+    // A velocity extrapolation can point away from an object immediately
+    // after an unseen collision. Search both the predicted neighborhood and
+    // the last actually measured neighborhood; do not assume the bounce.
+    const left=Math.min(center.x,state.point.x),top=Math.min(center.y,state.point.y);
+    const region={x:left-state.box.width/2-radius,y:top-state.box.height/2-radius,
+      width:Math.abs(center.x-state.point.x)+state.box.width+radius*2,height:Math.abs(center.y-state.point.y)+state.box.height+radius*2};
+    const candidates=components(frame,region,state.color).filter(c=>!c.touches&&c.area>=state.color.area*.65&&c.area<=state.color.area*1.8&&
+      Math.min(Math.hypot(c.point.x-center.x,c.point.y-center.y),Math.hypot(c.point.x-state.point.x,c.point.y-state.point.y))<=radius);
     if(candidates.length!==1){state.failed=true;return lost(t,candidates.length?'ambiguous_color_components':'color_component_occluded_or_missing',{requiresReselection:true});}
     const c=candidates[0],old=state.point;
     state.velocity={x:.4*state.velocity.x+.6*(c.point.x-old.x)/dt,y:.4*state.velocity.y+.6*(c.point.y-old.y)/dt};state.point=c.point;state.box=c.box;state.lastSeen=t;

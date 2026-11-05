@@ -95,7 +95,10 @@ export function forecastMotion(observations,options={}){
   }
   // A more flexible model must demonstrate a material past-target advantage.
   // This keeps near-linear motion from being mistaken for a periodic arc.
-  if(selected!=='linear'&&!(bestLoss<losses.linear*(selected==='harmonic'?.6:.8)))selected='linear';
+  // During initial warm-up, short models can already have two observed
+  // validation targets while the long linear window has none. An undefined
+  // linear loss must not veto those validated candidates.
+  if(selected!=='linear'&&Number.isFinite(losses.linear)&&!(bestLoss<losses.linear*(selected==='harmonic'?.6:.8)))selected='linear';
   const result=candidate(past,sourceTime,horizon,selected)||candidate(past,sourceTime,horizon,'linear');
   if(!result||!Number.isFinite(result.point.x)||!Number.isFinite(result.point.y))return baseline;
   const {velocityPxS,accelerationPxS2,...metadata}=baseline;

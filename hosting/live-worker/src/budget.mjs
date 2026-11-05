@@ -2,6 +2,10 @@
 export const LIMIT_UNITS = 5000;
 export const IMAGE_UNITS = 25;
 export const MAX_RUN_REQUESTS = 60;
+// Keep the paid task within Workers' post-disconnect waitUntil window. A
+// disconnected tab must not leave every later scene locked out for 3 minutes.
+export const PROVIDER_TIMEOUT_MS = 15000;
+export const IN_FLIGHT_LEASE_MS = 30000;
 export class HttpError extends Error {
   constructor(status, message, detail = {}) { super(message); this.status = status; this.detail = detail; }
 }
@@ -44,6 +48,18 @@ export async function summary(env) {
   };
 }
 
+export async function inFlight(env, now = Date.now()) {
+  const row = await env.DB.prepare(`SELECT created_ms FROM vision_requests
+    WHERE status = 'requesting' AND created_ms > ? ORDER BY created_ms DESC LIMIT 1`)
+    .bind(now - IN_FLIGHT_LEASE_MS).first();
+  if (!row) return null;
+  return {
+    started_at: new Date(row.created_ms).toISOString(),
+    busy_until_ms: row.created_ms + IN_FLIGHT_LEASE_MS,
+    retry_after_s: Math.min(3, Math.max(1, Math.ceil((row.created_ms + IN_FLIGHT_LEASE_MS - now) / 1000))),
+  };
+}
+
 export const RESERVE_SQL = `INSERT INTO vision_requests
   (id, run_id, frame_id, source_time_s, source_kind, image_sha256,
    request_sha256, units, created_ms, status)
@@ -59,34 +75,45 @@ export const RESERVE_SQL = `INSERT INTO vision_requests
 
 export async function reserve(env, frame, requestHash) {
   const id = crypto.randomUUID().replaceAll('-', ''), now = Date.now();
+  // Preserve interrupted reservations and their cost, but close stale leases
+  // so status and audit history describe what actually happened.
+  await env.DB.prepare(`UPDATE vision_requests SET status = 'failed', completed_at = ?
+    WHERE status = 'requesting' AND created_ms <= ?`)
+    .bind(new Date(now).toISOString(), now - IN_FLIGHT_LEASE_MS).run();
   // This single SQLite write checks and claims every quota atomically. A
   // restarted Worker or another isolate cannot overspend or duplicate a frame.
   const row = await env.DB.prepare(RESERVE_SQL).bind(
     id, frame.run_id, frame.frame_id, frame.source_time_s, frame.source_kind,
     frame.image_sha256, requestHash, now,
     frame.run_id, frame.run_id, frame.frame_id, frame.run_id, frame.source_time_s,
-    now - 180000,
+    now - IN_FLIGHT_LEASE_MS,
   ).first();
   if (row) return id;
   const previous = await env.DB.prepare(`SELECT frame_id, source_time_s FROM vision_requests
     WHERE run_id = ? ORDER BY source_time_s DESC LIMIT 1`).bind(frame.run_id).first();
   const duplicate = await env.DB.prepare('SELECT id FROM vision_requests WHERE run_id = ? AND frame_id = ?')
     .bind(frame.run_id, frame.frame_id).first();
-  if (duplicate) throw new HttpError(400, 'Frame already submitted; no duplicate paid request was made.');
+  if (duplicate) throw new HttpError(400, 'Frame already submitted; no duplicate paid request was made.',
+    {code:'duplicate_frame', provider_call_made:false});
   if (previous && frame.source_time_s <= previous.source_time_s) {
-    throw new HttpError(400, 'Frames must use strictly increasing source timestamps.');
+    throw new HttpError(400, 'Frames must use strictly increasing source timestamps.',
+      {code:'out_of_order_frame', provider_call_made:false});
   }
   const budget = await summary(env);
-  if (!budget.remaining_requests) throw new HttpError(429, 'The shared $0.50 vision budget is exhausted.');
+  if (!budget.remaining_requests) throw new HttpError(429, 'The shared $0.50 vision budget is exhausted.',
+    {code:'budget_exhausted', provider_call_made:false, remaining_requests:0});
   const run = await env.DB.prepare('SELECT COUNT(*) AS requests FROM vision_requests WHERE run_id = ?').bind(frame.run_id).first();
-  if (run.requests >= MAX_RUN_REQUESTS) throw new HttpError(429, 'Live SAM run reached its 60-image request limit.');
+  if (run.requests >= MAX_RUN_REQUESTS) throw new HttpError(429, 'Live SAM run reached its 60-image request limit.',
+    {code:'run_limit', provider_call_made:false, max_requests_per_run:MAX_RUN_REQUESTS});
+  const busy = await inFlight(env, now);
   throw new HttpError(429, 'SAM is processing another frame; wait before sending the next.',
-    {code:'sam_busy', provider_call_made:false, retry_after_s:1});
+    {code:'sam_busy', provider_call_made:false, retry_after_s:busy?.retry_after_s ?? 1,
+      ...(busy ? {busy_until_ms:busy.busy_until_ms} : {})});
 }
 
 export async function settle(env, id, status, responseHash = null, result = null) {
   // Every reservation remains charged, including failed or interrupted calls.
-  // A stale in-flight slot expires after 180s, but its dollars never expire.
+  // A stale in-flight slot expires after 30s, but its dollars never expire.
   await env.DB.prepare(`UPDATE vision_requests SET status = ?, completed_at = ?,
     response_sha256 = ?, result_json = ? WHERE id = ? AND status = 'requesting'`)
     .bind(status, new Date().toISOString(), responseHash, result ? JSON.stringify(result) : null, id).run();

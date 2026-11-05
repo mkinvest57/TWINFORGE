@@ -1,0 +1,21 @@
+{
+  "deployment": "v8",
+  "runId": "e7f73ba5-cde2-4e6f-a13d-73175e67be74",
+  "sourceDurationS": 11.75416666666632,
+  "samImagesAccepted": 4,
+  "issued": 71,
+  "scored": 68,
+  "meanVisualErrorPx": 26.199266444458974,
+  "trackedObservations": 208,
+  "localObservations": 208,
+  "ticketErrorsPx": [
+    17.554621279406696,
+    5.332656901273666
+  ],
+  "sceneWasResetWhileFirstSAMWasPending": true,
+  "notes": [
+    "A fresh randomized trial, not a paired controlled accuracy comparison.",
+    "First unseen bounce still causes forecast errors. Later visually valid tracking makes lock/reveal available.",
+    "Camera hardware not used. Software tests use mocked transport; this run used the actual hosted Meta service."
+  ]
+}

@@ -1,0 +1,40 @@
+[
+  {
+    "file": "collisions-two-tickets.json",
+    "runId": "206849f8-4338-4e85-a58d-f3cc519010ec",
+    "timeS": 8.949999999999813,
+    "samImages": 3,
+    "issued": 108,
+    "scored": 106,
+    "meanErrorPx": 6.5657000911917756,
+    "lockedTickets": 2,
+    "ticketErrorsPx": [
+      1.2036111987942952,
+      5.391715172009541
+    ]
+  },
+  {
+    "file": "flight-before-tracker-fix.json",
+    "runId": "62b42a6e-59a2-4203-9052-b0368d77a790",
+    "timeS": 17.912499999999305,
+    "samImages": 6,
+    "issued": 53,
+    "scored": 48,
+    "meanErrorPx": 33.52518517060825,
+    "lockedTickets": 0,
+    "ticketErrorsPx": []
+  },
+  {
+    "file": "pendulum-ticket.json",
+    "runId": "85e15bc0-54d5-4fb4-9acd-8a5f539221e3",
+    "timeS": 1.4083333333333297,
+    "samImages": 1,
+    "issued": 14,
+    "scored": 12,
+    "meanErrorPx": 16.618171701480616,
+    "lockedTickets": 1,
+    "ticketErrorsPx": [
+      7.184160032997843
+    ]
+  }
+]

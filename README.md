@@ -1,8 +1,18 @@
-# TWINFORGE — See a scene. Predict its next move.
+# TWINFORGE — The next frame is the test.
 
 The main interface now observes changing 3D scenes through images. **Actual Meta SAM 3.1 segmentation is required before a track can produce a forecast.** A separate local tracker follows the segmented objects between SAM responses, and a short-horizon motion model estimates their future image position. The observer receives no simulator positions, velocities, masses, forces, or seed.
 
 [Live observation interface](index.html) · [Camera mode](index.html?mode=camera) · [Architecture and setup](docs/SAM_LIVE_OBSERVATION.md)
+
+## The live challenge
+
+Open the [connected workspace](https://twinforge-mobile-camera.mkinvest57.chatgpt.site/), then **Start experiment → Lock a prediction → Reveal the outcome**. The synthetic world waits for its first real SAM mask, pauses with a recorded future target, and resumes until later tracked pixels can test that target. **Change the motion** applies a new private random impulse; only its rendered effect reaches the observer. A phone camera keeps running and records the outcome automatically.
+
+The dark English interface uses native adaptations of inspected 21st.dev temporal, usage, toolbar and dialog patterns. Settings and connection details are separate from the experiment. The static GitHub Pages address links to the connected workspace because it cannot run the private model API.
+
+The November 5 reliability update fixes a disconnected SAM request that could hold the shared service busy for 180 seconds. Paid requests now finish durably; the provider deadline is 15 seconds and a stale lease expires after 30 seconds. A scene reset discards old responses without aborting the underlying paid request. Uniquely matched SAM confirmations preserve visual identity and motion history.
+
+Current release evidence is in [the studio validation folder](validation/runs/studio-2026-11-05/). It retains successful locked targets **and** the flight-tracking failure that led to the color/search correction. Do not turn a single good target into a general accuracy claim.
 
 ## What runs
 

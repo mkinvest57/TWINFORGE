@@ -1,14 +1,14 @@
 {
   "id": "./scan.html",
-  "name": "Twinforge — SAM visual observer",
+  "name": "Twinforge \u2014 SAM visual observer",
   "short_name": "Twinforge",
   "description": "SAM 3.1 object segmentation with short-term visual forecasts. Starting sends selected image frames to Meta.",
   "lang": "en",
   "start_url": "./scan.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f7f8fa",
-  "theme_color": "#f7f8fa",
+  "background_color": "#0b1016",
+  "theme_color": "#0b1016",
   "icons": [
     {
       "src": "./assets/mobile/icon.svg",

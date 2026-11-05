@@ -31,6 +31,7 @@ MAX_BODY_BYTES = 560 * 1024
 MAX_RUN_REQUESTS = 60
 MAX_OBJECTS = 32
 _IN_FLIGHT = threading.BoundedSemaphore(1)
+_REQUEST_STARTED_AT = None
 _FIELDS = {"image_base64", "concept", "frame_id", "source_time_s", "run_id", "source_kind"}
 
 
@@ -71,9 +72,23 @@ def status(client=None):
     budget = client.ledger.summary()
     remaining = max(0., budget["limit_per_scene"] - budget["scenes"].get(SCENE, 0.))
     remaining_requests = max(0, math.floor((remaining + 1e-10) / IMAGE_PRICE_USD))
+    available = key_available and decoder_available and remaining_requests > 0
+    pending = _REQUEST_STARTED_AT is not None
+    reason = ("key_missing" if not key_available else "decoder_missing" if not decoder_available
+              else "budget_exhausted" if not remaining_requests else "sam_busy" if pending else None)
+    message = ("The Meta API credential is not configured on this server." if not key_available
+               else "The SAM mask decoder is unavailable on this server." if not decoder_available
+               else "The local SAM image allowance is exhausted. Changing scenes does not reset it." if not remaining_requests
+               else "SAM is finishing an image already submitted. This wait does not spend another image." if pending
+               else "SAM 3.1 is ready to observe an image.")
     return {
         "schema_version": "twinforge.sam.status.v1",
-        "available": key_available and decoder_available and remaining_requests > 0,
+        "available": available,
+        "service_state": "unavailable" if not available else "busy" if pending else "ready",
+        "accepting_frame": available and not pending,
+        "reason_code": reason,
+        "message": message,
+        **({"retry_after_s": 1} if pending else {}),
         "key_available": key_available,
         "decoder_available": decoder_available,
         "model": MODEL,
@@ -237,10 +252,12 @@ def _detections(text, frame, decoder):
 
 
 def segment_frame(raw, client=None, decoder=None, data_root=None):
+    global _REQUEST_STARTED_AT
     frame = validate_frame(raw)
     if not _IN_FLIGHT.acquire(blocking=False):
         raise LiveSamBusy("SAM is processing another frame; wait for it before sending the next")
     started = time.perf_counter()
+    _REQUEST_STARTED_AT = time.time()
     audit = None
     audit_path = None
     try:
@@ -296,4 +313,5 @@ def segment_frame(raw, client=None, decoder=None, data_root=None):
             _write_private(audit_path, audit)
         raise
     finally:
+        _REQUEST_STARTED_AT = None
         _IN_FLIGHT.release()

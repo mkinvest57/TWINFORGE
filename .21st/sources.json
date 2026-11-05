@@ -1,8 +1,8 @@
 {
   "version": 1,
-  "project": "TWINFORGE — Decision lab, Motion lab & Camera",
-  "updated_at": "2026-11-04T20:37:15.436364+00:00",
-  "usage": "Native HTML/CSS/ES-module adaptations of inspected 21st source patterns. Three public English-first pages share light chrome, compact controls and progressive disclosure. No React runtime, upstream sample content or fabricated metrics introduced.",
+  "project": "TWINFORGE \u2014 Visual intelligence lab",
+  "updated_at": "2026-11-05",
+  "usage": "English dark studio; native adaptations of inspected 21st temporal, usage and project toolbar/dialog primitives. Actual recorded model images and forecasts only.",
   "sources": [
     {
       "id": 14941,
@@ -205,6 +205,48 @@
       "react_component_installed": false,
       "imported_demo_metrics": false,
       "status": "active native adaptation in the three-page light redesign"
+    },
+    {
+      "id": 29384,
+      "name": "Filmstrip Scrub",
+      "registry_url": "https://21st.dev/r/rmahammad/filmstrip-scrub",
+      "preview_url": "https://cdn.21st.dev/rmahammad/filmstrip-scrub/default/preview.1790072120543-2563d96d-37c9-4216-98b8-e9d6eb6d17c1.png",
+      "cache_path": ".21st/cache/29384-2026-11-05.json",
+      "cache_sha256": "bb5c30a52254074f9dd30c2b41df0c699482df32742d7c6ab5384c4ce7321a92",
+      "component_code_sha256": "7480e0f1dbb36ceb2bc6040ce60ce2fa7ffc205ad4c3fcc6fd366d64390a67e1",
+      "adapted_pattern": "Preview framing, exact timecodes, timeline ticks and locked-target progression; no scrubbed future images or sample footage.",
+      "inspection": {
+        "preview": "Visually inspected in in-app browser 2026-11-05",
+        "code": "Full source and demo retrieved before native implementation"
+      },
+      "implementation_files": [
+        "index.html",
+        "web/vision/live.css",
+        "web/vision/live.mjs"
+      ],
+      "react_component_installed": false,
+      "imported_demo_metrics": false
+    },
+    {
+      "id": 31642,
+      "name": "Usage Dashboard",
+      "registry_url": "https://21st.dev/r/mohammadshehadeh/usage-dashboard",
+      "preview_url": "https://cdn.21st.dev/hirael/usage-dashboard/default/preview.1790322364201-dbcf7395-7496-4c98-9334-5a70ad43569d.png",
+      "cache_path": ".21st/cache/31642-2026-11-05.json",
+      "cache_sha256": "7fadb7e065c5c2a10384b2453d47a7b8bd4649a794363876910dfd7606768893",
+      "component_code_sha256": "448446c5a3b472383189bc766767c55d88c3f061a1102fca84c14e07b43ed896",
+      "adapted_pattern": "Actual remaining allowance and simple meter in the connection dialog; no fabricated usage values.",
+      "inspection": {
+        "preview": "Visually inspected in in-app browser 2026-11-05",
+        "code": "Full source and demo retrieved before native implementation"
+      },
+      "implementation_files": [
+        "index.html",
+        "web/vision/live.css",
+        "web/vision/live.mjs"
+      ],
+      "react_component_installed": false,
+      "imported_demo_metrics": false
     }
   ],
   "licensing_note": "This is provenance for inspected source patterns, not a declaration of upstream license terms. No project license is chosen here.",

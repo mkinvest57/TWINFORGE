@@ -1,0 +1,126 @@
+{
+  "schema_version": "twinforge.live-reliability-diagnosis.v1",
+  "inspected_at": "2026-11-05T00:16:08.311Z",
+  "project_id": "appgprj_6aeb201bbbb88191b56d8dd45accb560",
+  "sources": [
+    "Sites production Worker logs (errors_only=true)",
+    "Sites D1 read-only database inspection"
+  ],
+  "budget": {
+    "baseline_units": 1000,
+    "charged_request_count": 35,
+    "hosted_spend_usd": 0.0875,
+    "combined_reserved_usd": 0.1875,
+    "ceiling_usd": 0.5,
+    "remaining_requests": 125
+  },
+  "request_states": {
+    "complete": 34,
+    "requesting": 1
+  },
+  "unsettled_requests": [
+    {
+      "id": "941b31f109c1470ead595896c7f20ba6",
+      "run_id": "5654faf3-0edf-4f43-9524-477894268e33",
+      "created_at": "2026-11-05T00:08:19.375Z",
+      "status": "requesting",
+      "units": 25
+    }
+  ],
+  "failed_events": [
+    {
+      "at": "2026-11-05T00:09:14.432Z",
+      "request_id": "741e5fea5c361c8f2d1f1e812eae0ed0",
+      "path": "/api/sam/segment",
+      "status": null,
+      "outcome": "canceled",
+      "wall_time_ms": 74
+    },
+    {
+      "at": "2026-11-05T00:09:07.135Z",
+      "request_id": "eb6b77135849dd54411fc77fbde8bd21",
+      "path": "/api/sam/segment",
+      "status": 429,
+      "outcome": "ok",
+      "wall_time_ms": 155
+    },
+    {
+      "at": "2026-11-05T00:08:54.702Z",
+      "request_id": "fef065e48940ee8e40d968f8a82d1a99",
+      "path": "/api/sam/segment",
+      "status": 429,
+      "outcome": "ok",
+      "wall_time_ms": 145
+    },
+    {
+      "at": "2026-11-05T00:08:51.054Z",
+      "request_id": "ae1b478555dae5151ab82da22f90ccbb",
+      "path": "/api/sam/segment",
+      "status": 429,
+      "outcome": "ok",
+      "wall_time_ms": 149
+    },
+    {
+      "at": "2026-11-05T00:08:49.408Z",
+      "request_id": "a6994ea9db5f73afd423771d0a135ea5",
+      "path": "/api/sam/segment",
+      "status": 429,
+      "outcome": "ok",
+      "wall_time_ms": 151
+    },
+    {
+      "at": "2026-11-05T00:08:45.877Z",
+      "request_id": "d9e4c6288073107551d9bf955f16f542",
+      "path": "/api/sam/segment",
+      "status": 429,
+      "outcome": "ok",
+      "wall_time_ms": 147
+    },
+    {
+      "at": "2026-11-05T00:08:43.561Z",
+      "request_id": "3cf8ba3cf4386f587be88ec6832823aa",
+      "path": "/api/sam/segment",
+      "status": 429,
+      "outcome": "ok",
+      "wall_time_ms": 196
+    },
+    {
+      "at": "2026-11-05T00:08:23.942Z",
+      "request_id": "4fcc9a1355fcd886e120528bb15856cc",
+      "path": "/api/sam/segment",
+      "status": 429,
+      "outcome": "ok",
+      "wall_time_ms": 158
+    },
+    {
+      "at": "2026-11-05T00:08:20.042Z",
+      "request_id": "e550ae3a4e336c1e5f7690e20095ea45",
+      "path": "/api/sam/segment",
+      "status": 429,
+      "outcome": "ok",
+      "wall_time_ms": 181
+    },
+    {
+      "at": "2026-11-05T00:08:19.408Z",
+      "request_id": "eb433bf7a342d2e5daa9404b99c9ea17",
+      "path": "/api/sam/segment",
+      "status": null,
+      "outcome": "canceled",
+      "wall_time_ms": 361
+    }
+  ],
+  "diagnosis": "A canceled Worker invocation left a durable requesting reservation. The existing 180-second global lease rejected later scene requests as busy despite remaining image allowance. Client resets aborted the original request; Worker fetch did not retain it via waitUntil.",
+  "implemented_fix": [
+    "Retain the exact paid task with context.waitUntil until durable settlement",
+    "Bound provider response to 15 seconds and stale in-flight leases to 30 seconds",
+    "Let HTTP status expose busy versus unavailable state and retry metadata",
+    "Keep all reservations charged; unchanged $0.50 combined ceiling"
+  ],
+  "verification": {
+    "worker_tests": 10,
+    "python_live_sam_tests": 15,
+    "provider_transport": "mocked for tests; diagnosis from real production logs and D1",
+    "new_paid_calls": 0,
+    "deployment": "pending parent integration"
+  }
+}

@@ -1,0 +1,220 @@
+{
+  "schema_version": "twinforge.live-runtime-check.v1",
+  "inspection_started_at": "2026-11-05T00:30:01Z",
+  "inspection_completed_at": "2026-11-05T00:31:09.150Z",
+  "project_id": "appgprj_6aeb201bbbb88191b56d8dd45accb560",
+  "deployment": {
+    "version": 8,
+    "reported_success_at": "2026-11-05T00:27:41Z",
+    "private_source_commit": "d269dc7309f90eb0025594454e80e043b6fd4e72"
+  },
+  "read_only": true,
+  "new_provider_calls": 0,
+  "sources": [
+    "Sites production Worker logs; errors_only=true, since_minutes=10, limit=100",
+    "Sites production Worker logs; errors_only=false, since_minutes=5, limit=100",
+    "Sites D1 bounded read-only table pagination with exact returned next_offset"
+  ],
+  "worker_logs": {
+    "errors_query_events": [],
+    "successful_api_events": [
+      {
+        "at": "2026-11-05T00:29:36.067Z",
+        "request_id": "b9a78597d30178ecdce2734fc06f970b",
+        "path": "/api/sam/status",
+        "status": 200,
+        "outcome": "ok",
+        "wall_time_ms": 420,
+        "script_version": "a76ed85a-f13e-41a3-a73e-6bb2fbbf2391"
+      },
+      {
+        "at": "2026-11-05T00:29:05.704Z",
+        "request_id": "1e0501385a811e6050b5232cb3dce9f5",
+        "path": "/api/sam/status",
+        "status": 200,
+        "outcome": "ok",
+        "wall_time_ms": 496,
+        "script_version": "a76ed85a-f13e-41a3-a73e-6bb2fbbf2391"
+      },
+      {
+        "at": "2026-11-05T00:29:00.717Z",
+        "request_id": "3f94927c472a7fd943e7b4f235acecfd",
+        "path": "/api/sam/status",
+        "status": 200,
+        "outcome": "ok",
+        "wall_time_ms": 427,
+        "script_version": "a76ed85a-f13e-41a3-a73e-6bb2fbbf2391"
+      },
+      {
+        "at": "2026-11-05T00:28:43.742Z",
+        "request_id": "f3382bc8675263718b9a5d3de17ed789",
+        "path": "/api/sam/status",
+        "status": 200,
+        "outcome": "ok",
+        "wall_time_ms": 73,
+        "script_version": "a76ed85a-f13e-41a3-a73e-6bb2fbbf2391"
+      },
+      {
+        "at": "2026-11-05T00:28:41.113Z",
+        "request_id": "7ea528f21b31b0573d0048768ebcbfb6",
+        "path": "/api/sam/status",
+        "status": 200,
+        "outcome": "ok",
+        "wall_time_ms": 400,
+        "script_version": "a76ed85a-f13e-41a3-a73e-6bb2fbbf2391"
+      },
+      {
+        "at": "2026-11-05T00:28:25.044Z",
+        "request_id": "b515c245bfda34ce15edd63ba2bdd999",
+        "path": "/api/sam/status",
+        "status": 200,
+        "outcome": "ok",
+        "wall_time_ms": 415,
+        "script_version": "a76ed85a-f13e-41a3-a73e-6bb2fbbf2391"
+      }
+    ],
+    "full_log_result_count": 100,
+    "caveat": "Success-log query reached its 100-event bound; it is not a complete traffic log. D1 was inspected separately for paid request settlement."
+  },
+  "database": {
+    "pagination": {
+      "pages": 9,
+      "complete": true,
+      "next_offset": null
+    },
+    "reservation_count": 50,
+    "distinct_request_ids": 50,
+    "states": {
+      "complete": 49,
+      "failed": 1
+    },
+    "requesting": [],
+    "stale_requesting_count": 0,
+    "historical_interrupted_request": {
+      "request_id": "941b31f109c1470ead595896c7f20ba6",
+      "run_id": "5654faf3-0edf-4f43-9524-477894268e33",
+      "frame_id": "fh5",
+      "created_at": "2026-11-05T00:08:19.375Z",
+      "completed_at": "2026-11-05T00:22:28.771Z",
+      "status": "failed",
+      "charge_usd": 0.0025,
+      "elapsed_ms": 849396,
+      "image_sha256": "5b972e8b5085c00bcb77129e8cef49bb8a33f3bf9b770effc5e98b37cc45e427",
+      "request_sha256": "d50c146fa28b8f11e0ab232c763df99969d3f1c36dd161ad612f11abc3239df0",
+      "response_sha256": null
+    },
+    "post_v8_requests": [
+      {
+        "request_id": "4962ec401f934cf39963983ca1e86b69",
+        "run_id": "9eb170ef-d8cd-477b-8dd5-28dc84f251fd",
+        "frame_id": "f1",
+        "created_at": "2026-11-05T00:27:59.201Z",
+        "completed_at": "2026-11-05T00:28:00.302Z",
+        "status": "complete",
+        "charge_usd": 0.0025,
+        "elapsed_ms": 1101,
+        "image_sha256": "06287abb30e4142b2eadcaa29752b6cb341591385eda2ad31494e80799677f17",
+        "request_sha256": "608ede11c3e0263b3d639cba987ca159c7e9a09a3cf56ded99e200792127cc70",
+        "response_sha256": "8fb9d54d0b10ebc9344cd1f9ee79bf6df48869f75ca36e88810a6fabed54d6a4"
+      },
+      {
+        "request_id": "7b2d970ba5a14c869088eaf9b83ee0f2",
+        "run_id": "e7f73ba5-cde2-4e6f-a13d-73175e67be74",
+        "frame_id": "f4",
+        "created_at": "2026-11-05T00:28:00.604Z",
+        "completed_at": "2026-11-05T00:28:02.084Z",
+        "status": "complete",
+        "charge_usd": 0.0025,
+        "elapsed_ms": 1480,
+        "image_sha256": "a73ad550b91ef6d613fbbf1ca2e5969ea49a4f373ce74b418633c5470c412c6d",
+        "request_sha256": "3acf9cca158a3650e87f15e3320779c72088f21a516203ba135fbced1092561b",
+        "response_sha256": "4ab94a181f9c790598b5d33596d94d0f30c8454ec32d75b206b6955f58b2385b"
+      },
+      {
+        "request_id": "2cfe95a95c7d47c5aa42a32d74c21aeb",
+        "run_id": "e7f73ba5-cde2-4e6f-a13d-73175e67be74",
+        "frame_id": "f25",
+        "created_at": "2026-11-05T00:28:11.537Z",
+        "completed_at": "2026-11-05T00:28:12.620Z",
+        "status": "complete",
+        "charge_usd": 0.0025,
+        "elapsed_ms": 1083,
+        "image_sha256": "e0432cb4f2eeb3163e430694cfd2a3962caac976a484496287120ba87584487f",
+        "request_sha256": "9c5ab2a3f227e4b0151737eb2e85b09806ed94bcbd13f67cf63e9d86824d1961",
+        "response_sha256": "6266095f32ed5b154dc836a5fae6b2d6be7fd8dfd1b4f7d8775570873c63474a"
+      },
+      {
+        "request_id": "badda7a858614ac9a5f02b26dbf4c9b9",
+        "run_id": "e7f73ba5-cde2-4e6f-a13d-73175e67be74",
+        "frame_id": "f37",
+        "created_at": "2026-11-05T00:28:18.145Z",
+        "completed_at": "2026-11-05T00:28:19.606Z",
+        "status": "complete",
+        "charge_usd": 0.0025,
+        "elapsed_ms": 1461,
+        "image_sha256": "e26a17fc38f88c0eeeeefccedb7bdd697b14b12cacac4f3b48346d0c683995bf",
+        "request_sha256": "55577ed8349b081e42a25a875e531b7daafa1d115d902d6dcce34b4dcc588e63",
+        "response_sha256": "f146e98a0a9e03775c2a2025ecc142bf8026039089eb6fb9b54fe6f84b103306"
+      },
+      {
+        "request_id": "82455ef3226c4d4683ac27fbbe6eb23d",
+        "run_id": "e7f73ba5-cde2-4e6f-a13d-73175e67be74",
+        "frame_id": "f53",
+        "created_at": "2026-11-05T00:28:20.472Z",
+        "completed_at": "2026-11-05T00:28:22.019Z",
+        "status": "complete",
+        "charge_usd": 0.0025,
+        "elapsed_ms": 1547,
+        "image_sha256": "bc10f011d85431adfffc4d9c43b8c57a53609b0ce39ece3e6e99ce3513f6087f",
+        "request_sha256": "35d5509bef73807533860184b05acafc6026105547b1d724ea8d0d631ae23b0f",
+        "response_sha256": "42897f14c864a55b57e817251d0728ea14c8f25517d7d1bdc4de116e78624b02"
+      }
+    ],
+    "reserved_baseline_usd": 0.1,
+    "hosted_reserved_usd": 0.125,
+    "combined_reserved_usd": 0.225,
+    "ceiling_usd": 0.5,
+    "remaining_images": 110
+  },
+  "flight_export_receipt_checks": [
+    {
+      "request_id": "7b2d970ba5a14c869088eaf9b83ee0f2",
+      "exists": true,
+      "same_image_sha256": true,
+      "same_request_sha256": true,
+      "complete": true
+    },
+    {
+      "request_id": "2cfe95a95c7d47c5aa42a32d74c21aeb",
+      "exists": true,
+      "same_image_sha256": true,
+      "same_request_sha256": true,
+      "complete": true
+    },
+    {
+      "request_id": "badda7a858614ac9a5f02b26dbf4c9b9",
+      "exists": true,
+      "same_image_sha256": true,
+      "same_request_sha256": true,
+      "complete": true
+    },
+    {
+      "request_id": "82455ef3226c4d4683ac27fbbe6eb23d",
+      "exists": true,
+      "same_image_sha256": true,
+      "same_request_sha256": true,
+      "complete": true
+    }
+  ],
+  "findings": [
+    "No failed or canceled events returned by the errors-only query.",
+    "No requesting rows or stale in-flight leases found at this inspection.",
+    "All five post-v8 paid requests settled complete, including the initial run replaced while SAM was pending.",
+    "The four accepted flight-export receipts match D1 image and request hashes.",
+    "The prior canceled reservation remains charged and is now failed rather than blocking later runs."
+  ],
+  "limitations": [
+    "D1 pages are read sequentially, not a transactional snapshot; later activity may change these counts.",
+    "No camera hardware was tested by this runtime inspection."
+  ]
+}
