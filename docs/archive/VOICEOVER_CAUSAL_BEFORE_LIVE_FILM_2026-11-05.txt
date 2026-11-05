@@ -1,0 +1,17 @@
+You get one move. Brake, turn… or do nothing. Which decision protects this cargo? Watch both futures. Same starting point. One difference: the command Meta chose.
+
+Twinforge tests a decision before replaying its consequences. Here, one carrier triggers a chain of collisions. Without intervention: one hundred sixteen and a half joules on the protected cargo. Meta’s steering command brings that down to four point six. Both futures come from the same physical model.
+
+Muse Spark receives the scene and a menu of allowed commands. It proposes one move and explains why. The simulator calculates the outcome. Those measurements go back to Spark for revision. The model never sees the exhaustive search scores.
+
+Here are the three proposals that actually ran. First: one hundred four point six joules. Rejected. Second: eight point five. Still too high. Third: four point six, under our eight-joule threshold. You can replay each attempt. The failures stay in the evidence.
+
+This is a recorded real session: three calls, about thirty-eight seconds, for less than three US cents. Open the journal to inspect the reasoning, then export the original responses and receipts. The English text is a translation. The original evidence remains intact. Nothing here depends on a convincing explanation alone.
+
+Can a simpler method do better? Here, yes. The separate local search tests thirty-seven commands and finds zero impact on the protected cargo, using less control effort. That search is not AI. We show it beside Meta’s result. The useful thing is a decision you can challenge, measure, and improve.
+
+Now delay the move. At a quarter of a second, a tested solution exists. At half a second, none of the thirty-seven commands passes our criterion. The collision has already transferred motion. Twinforge also exposes decisions that arrive too late. This boundary belongs to the tested time grid.
+
+Change the challenge. At the intersection, the best nominal command fails when speed changes by five percent. One successful check out of three. That is a sensitivity test, not a safety probability. Inspect the trajectories. Export the states, commands, and collisions. Counterexamples are part of the result.
+
+Today, the initial states and physical laws are supplied. This is a numerical laboratory, not yet a robot validated in the real world. The ambition: test a decision before facing its consequences. Twinforge. One decision. Two futures. Now find the move that makes the difference.

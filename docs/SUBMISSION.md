@@ -1,77 +1,106 @@
-# TWINFORGE — See a scene. Predict its next move.
+# TWINFORGE — The next frame is the test.
 
-**Current submission draft; not submitted.** Presentation language: English. This brief describes the live SAM observation path, now verified in the owner's private hosted version 6 workspace. Retained synthetic trials remain separate from earlier numerical benchmarks and from physical-camera validation.
+**Submission package draft, November 5, 2026. Not submitted.**
+Track: **Indie Developer Track**. Theme: **Push the Frontier**. Language: English.
+Eligibility, team membership and consent remain the entrant's declarations.
 
-## Pitch
+## The project
 
-A new scene starts. Twinforge sees the images, but receives none of the simulator's positions, velocities, forces, or masses. Meta SAM 3.1 finds the objects. Their observed motion becomes a recorded prediction of where they will appear next: 0.2 seconds ahead by default, or 0.5 seconds in the stress setting. When that moment arrives, Twinforge checks the prediction against what it subsequently observes.
+Twinforge turns visual motion into a prediction you can test. Select an object,
+let Meta SAM 3.1 find its shape, then lock where it should appear half a second
+or a full second later. When the future arrives, the target stays fixed and the
+observed error appears beside it.
 
-The user can generate another scene immediately: a double pendulum with different initial motion, balls colliding with different velocities, or a new launch and rebound. The observer must acquire the objects again from fresh SAM segmentation. Camera mode sends phone images through the same observation pipeline.
+The problem is practical: a convincing moving overlay does not tell a developer
+whether a system predicted anything. Twinforge gives builders and educators an
+inspectable test bench: choose the object, observe the input, commit the
+prediction, and examine the miss. It accepts uploaded video, camera input and
+randomized 3D scenes. Camera operation is implemented; the retained real-world
+evidence is uploaded footage, not a physical-phone test.
 
-The intended value is making visual prediction inspectable: what the model actually saw, which object it found, what the system predicted before the target time, and how that prediction compared with later images. This is an experimental image-motion observer, with no claim of physical control or safety certification.
+The contribution is connecting visual object selection to causal forecasting
+and visible evaluation. This prototype does not claim to solve general physics
+or human intention prediction. Longer forecasts expose those limits.
 
-## Where Meta is essential
+## Why Meta is essential
 
-**SAM 3.1 is required before a track can produce a forecast.** The server sends a captured JPEG and a short object phrase to the Meta Model API, decodes the actual returned masks, and returns their contours and centroids with a request receipt. The frontend checks the image hash, capture identity, dimensions, timestamp, and model receipt. No usable SAM result means no SAM-initialized track.
+SAM 3.1 is the mandatory visual entry point. A tap or box becomes a native SAM
+spatial prompt bound to an exact JPEG; **Hands** uses a text concept. The actual
+returned mask initializes tracking. No valid SAM mask means no new track and no
+forecast. Image hashes, timestamps, model identity and request receipts bind
+the model response to the observed frame.
 
-SAM performs segmentation. Local appearance tracking follows the segmented regions between model responses. A separate image-motion predictor compares generic linear, curved, turning, and harmonic fits against earlier targets that have already been observed, then uses the selected fit for its next forecast. Selection receives no scene family or hidden physics. This project does not attribute the local motion fit, discovery of physical laws, or a learned physical simulator to SAM.
+SAM segments; Twinforge predicts. Sparse feature flow follows camera/video
+objects between SAM calls. Robust motion fits compete on already-observed past
+targets, then forecast image position at 0.5, 0.75 or 1 second. The displayed
+uncertainty grows with the horizon. A separate renderer generates changing 3D
+scenes, but its positions, velocities, masses, forces and seed never enter the
+observer.
 
-| Part | What it knows |
-|---|---|
-| Randomized 3D renderer | The hidden physical state required to generate the scene |
-| Observation path | Captured pixels, capture time, opaque run ID, and an object phrase |
-| SAM 3.1 | The submitted JPEG and object phrase |
-| Local tracker and predictor | The SAM initialization and subsequently captured image measurements |
-| Retrospective assessment | The previously stored prediction and later tracked image positions |
+A user can therefore choose a bottle or a hand without supplying simulator
+state or a separate hand-authored detector. SAM's role is concrete and
+inspectable; subsequent forecasting is not attributed to SAM itself.
 
-The scene family is available to label the UI, not as physical state supplied to the observer. The separate renderer and strict message/API contracts make this data flow inspectable; they are not a security sandbox against a person modifying the application.
+## Three-minute demonstration
 
-## What the demonstration shows
+1. Open with a future target already locked, then reveal its actual outcome.
+2. Show selection and the actual SAM mask: point/box on an object, then **Hands**
+   on the recorded hand clip. Label photo-motion fixtures clearly.
+3. Show the 0.5- and 1-second paths, uncertainty and source/target timestamps.
+   Keep one complete lock-to-outcome sequence uncut.
+4. Show the randomized scene and its image-only boundary. New scenes require
+   visual acquisition; hidden physics never supplies the prediction.
+5. Close on the evidence export: model receipt, input hash, immutable target and
+   later error. Explain that unexpected human motion remains difficult.
 
-1. Start observation on a newly randomized scene. Show the actual image submitted to SAM and its returned masks.
-2. Allow enough usable motion observations to accumulate. The interface displays an issued target **0.2 seconds ahead by default**, or **0.5 seconds** with the stress setting selected. Its horizon, issue time, and target time are retained.
-3. Press **Lock a prediction**. Synthetic time pauses with that target already stored. Press **Reveal the outcome** to advance to later tracked frames; the target stays fixed and visual error is reported in pixels. Missing observations remain unscored.
-4. Press **Change the motion** to apply a private random impulse that the observer does not receive. Then test another target. Alternatively generate a new scene, which requires fresh SAM segmentation.
-5. Export the record. It contains image hashes, model receipts, image observations, predictions, later assessments, and source labels.
+Editing may condense waiting time if the cut is clear. It must not substitute a
+new target, erase an error, present transformed photographs as physical motion,
+or imply that the provider runs at the local tracking frame rate.
 
-Optional automatic regeneration starts another simulated scene every 20 source seconds. Camera mode applies the same segmentation-and-tracking path to live images after camera permission. A physical phone demonstration should only be described as verified once its own run has been retained and reviewed.
+## Inspectable evidence
 
-## The limits are part of the result
+The [live results](../validation/runs/camera-horizon-2026-11-05/live-results.json)
+retain eight separate runs, including two failed hand trials. These actual SAM
+API runs are separate from manual-ROI tests and offline replays. Pixel errors
+use later visual tracking, not independent physical ground truth.
 
-The scene is rendered in 3D, but the observer predicts **2D camera-image coordinates**. It does not reconstruct metric depth, mass, material, or the full physical state. Initial conditions vary within the implemented families; this is not generation of arbitrary new physical laws.
+| Recorded test | Horizon | Scored / unscorable | Mean error |
+| --- | ---: | ---: | ---: |
+| Bottle photo with controlled motion, point prompt | 0.5 s | 60 / 4 | 3.52 px |
+| Bottle photo with controlled motion, box prompt | 1 s | 55 / 8 | 10.17 px |
+| Two-hand photo with controlled motion, v14 | 1 s | 114 / 18 | 8.52 px |
+| Actual recorded hand movement, v14 | 0.5 s | 61 / 5 | 20.27 px |
+| Actual recorded hand movement, final v16 | 1 s | 57 / 8 | 34.10 px |
 
-SAM requests are sparse, with a default interval of at least three source seconds. Local tracking bridges their latency and spacing. A delayed response can initialize tracking on its captured frame and catch up through already observed images; any resulting forecast is issued from the current time, never backdated as a successful prediction.
+The real-hand 0.5-second locked target had **29.39 px** error. It was fixed before
+the outcome and honestly scored; it was not perfect. The v16 real-hand 1-second
+maximum was **129.41 px**. Different runs are not pooled into one accuracy claim.
 
-A short fit can fail at a bounce, collision, direction change, occlusion, or ambiguous crossing. Camera motion also violates its stationary-camera assumption. Insufficient samples, low motion, lost tracking, or an uncertain fit can cause the system to withhold a prediction. Conditional fit confidence is not a calibrated probability of correctness.
+The v16 run maintained approximately 25 captured frames/s while SAM ran
+separately. Its two retained responses had provider times of 1456 and 1004 ms;
+client round trips were 5427 and 1381 ms. A third submitted request had no
+retained response and is not counted as a confirmed success.
 
-Displayed errors compare predictions against subsequent visual tracking. Both use the same image-processing pipeline; this is **not independent physical ground truth**. The version 6 launch/rebound capture scored 242 targets with mean error 8.004 pixels; its separate pendulum capture scored 166 with mean error 14.142 pixels. Both used a 0.2-second horizon and 480 × 300 synthetic images. There were respectively 21 and 16 unscorable targets. These are two individual trials, not a general accuracy guarantee or a real-phone result; their [retained evidence](../validation/runs/sam-live-2026-11-05/live-evidence-summary.json) includes the earlier larger errors.
+[Software verification](../validation/runs/camera-horizon-2026-11-05/verification.json)
+records **358 passing tests**: 207 JavaScript, 132 Python and 19 Worker tests.
+Transport tests use mocks; live evidence supplies the actual model calls.
+See [architecture](SAM_LIVE_OBSERVATION.md), [forecast limits](long-horizon-forecasting.md)
+and [fixture provenance](../validation/runs/camera-horizon-2026-11-05/fixture-provenance.json).
 
-The 0.2-second default is a shorter, easier task than the 0.5-second stress setting. It does not erase the earlier horizon's errors. Changing the setting starts a fresh trial with fresh SAM segmentation and cleared display metrics; the previous trial remains in export history. Measurements must remain separate by horizon, scene family, source kind, and relevant version, with scored and unscorable counts visible. Past targets used to choose the motion model are not independent future-test results. This brief makes no aggregate precision claim across those groups.
+## Access and completion
 
-## Access, operation, and evidence
+- Public repository: [github.com/mkinvest57/TWINFORGE](https://github.com/mkinvest57/TWINFORGE).
+  Public visibility verified November 5. The final pushed commit must match the demo.
+- [Hosted workspace](https://twinforge-mobile-camera.mkinvest57.chatgpt.site/): owner-private.
+  Do not claim public judge access unless access is explicitly changed and checked.
+- Prepared video page: [Watch the three-minute demo](https://mkinvest57.github.io/TWINFORGE/demo.html).
+  The page serves `assets/twinforge-demo.mp4`. **Publication and playback verification
+  remain pending until the final MP4 is committed and the Pages build completes.**
+- Ready-to-paste copy and participant decisions:
+  [submission-fields-2026-11-05.md](submission-fields-2026-11-05.md).
 
-[Main interface](../index.html) · [Camera interface](../index.html?mode=camera) · [Architecture and setup](SAM_LIVE_OBSERVATION.md) · [Repository](https://github.com/mkinvest57/TWINFORGE)
-
-The local service requires a privately configured Meta credential and the installed SAM mask decoder. The static GitHub Pages interface cannot execute private SAM calls by itself. The [owner-private hosted workspace](https://twinforge-mobile-camera.mkinvest57.chatgpt.site/) has [version 6 deployment proof](../validation/runs/sam-live-2026-11-05/private-deployment-v6.json) and retained actual SAM browser runs. It is not public jury access. A phone requires HTTPS and a working backend; no physical-phone camera test is claimed.
-
-All randomized trials share the persistent `vision` spending budget. The default ceiling is $0.50; the implementation accounts at $0.0025 per image. Scene resets do not replenish it. Browser submission limits, a persistent per-run limit, and a single active server request bound usage. Provider failures do not trigger automatic paid retries. An explicitly unbilled busy response can be followed by a later fresh frame.
-
-The configured hosting allocation reserves $0.10 for local live requests and leaves $0.40 for hosted requests. The local cap includes earlier vision spending; the hosted baseline of `1000` units records that reserved allowance, not a measured $0.10 charge when hosting began. The version 6 proof records this allocation, preventing two independently spendable $0.50 allowances from being presented as one budget.
-
-The local Python server privately retains the exact submitted JPEG and raw response linked to the exported receipt. The hosted service retains hashes and normalized results rather than original images or raw provider text. Camera images submitted for segmentation go to Meta; no audio is captured. The browser export excludes image bytes and credentials. Hashes and application receipts support traceability but are not provider-signed attestations.
-
-The [software report](../validation/runs/sam-live-2026-11-05/software-checks.json) records 280 passing tests: 145 JavaScript, 128 Python, and 7 hosted-worker tests. They cover the observation contract, image/request binding, forecast chronology, run reset behavior, budget handling, and missing-evidence cases. Provider tests use mocks and make no paid calls. Software-test results remain separate from actual inference, camera, or forecast-accuracy measurements.
-
-## Earlier work and presentation files
-
-The [recorded Meta decision experiment](../decision.html) uses supplied simulation states and actual recorded Muse Spark 1.3 proposals. Its [original responses](../assets/causal-meta-session.json), [numerical benchmark](../validation/runs/causal-benchmark-2026-11-04.json), and [archived submission brief](archive/SUBMISSION_CAUSAL_EN_2026-11-05.md) remain intact as earlier work. They do not establish the new observation pipeline's accuracy.
-
-The existing [English voiceover](VOICEOVER_3MIN_EN.txt), [storyboard](VIDEO_3MIN_STORYBOARD.json), and [provisional subtitles](CAUSAL_DEMO_SUBTITLES_EN.srt) describe that earlier decision experiment. They are **historical preparation files, not a current film for the live SAM project**. This revision does not claim that a replacement video or synthetic narration has been produced.
-
-The [original PDF compliance record](PROMPT_COMPLIANCE.md) retains its earlier scope and physical requirements. This brief is neither a submission receipt nor confirmation of participant eligibility, judging outcome, or acceptance by the event organizer.
-
-## Current studio release
-
-The current interface adds a visible lock/reveal test, private random impulses, a dark 21st-inspired studio and continuity across confirmed SAM refreshes. It fixes the production request-cancellation lockout; [diagnosis](../validation/runs/sam-reliability-2026-11-05/diagnosis.json) and [current checks](../validation/runs/studio-2026-11-05/software-checks.json) are retained. There are 302 passing checks (163 JavaScript,129 Python,10 Worker); provider transport is mocked in those software tests.
-
-Real v7 locked targets were 1.204 px and 5.392 px in the collision trial, and 7.184 px in the pendulum trial. Those are individual target errors; corresponding run means and failures are retained. The flight trial before tracker changes had 33.525 px mean error. The fresh v8 flight trial and its locked outcomes are reported in [flight-v8-summary.json](../validation/runs/studio-2026-11-05/flight-v8-summary.json). Different randomized scenes are not a controlled before/after accuracy test. Unknown impacts remain a limitation. No physical phone camera accuracy was measured.
+Credentials stay server-side. Submitted images go to Meta; camera capture does
+not request audio. This is 2D image forecasting, without metric 3D reconstruction,
+an actuator, a safety guarantee or verified physical-phone accuracy. The camera
+path is not model predictive control. Earlier numerical decision benchmarks and
+Muse experiments are archived, not presented as the live SAM observer's ability.

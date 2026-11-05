@@ -1,0 +1,218 @@
+{
+  "schema_version": "twinforge.video-storyboard.causal.v2",
+  "updated_at": "2026-11-04T20:36:40.713675+00:00",
+  "duration_seconds": 180,
+  "status": "English storyboard, narration text and provisional subtitles only; no generated voice or final rendered video attested.",
+  "word_counts": {
+    "en": 394
+  },
+  "voice_timing_note": "Target: 162 seconds of narration and 18 seconds of breathing room. Align timings to the synthesized voice, then inspect the complete 180-second render.",
+  "creative_direction": {
+    "voice": "Calm, precise, curious. Invite the viewer to judge the decision. Let impacts and failed proposals interrupt the rhythm. Avoid a trailer-announcer delivery.",
+    "editing": "Start with the choice and its actual consequences. Reveal one number at a time. Keep original commands and failures paired with their calculated outcomes. Use the real English interface.",
+    "sound": "Restrained instrumental bed. Any impact sound is an editorial effect, not an acoustic measurement."
+  },
+  "main_experiment": {
+    "scenario_id": "cascade",
+    "seed": 20261104,
+    "speed_factor": 1,
+    "action_delay_s": 0.25,
+    "horizon_s": 12,
+    "local_action_id": "steer:0.20@0.25",
+    "baseline_peak_j": 116.56200059920455,
+    "local_peak_j": 0,
+    "local_control_impulse_ns": 39.18961921118314,
+    "candidate_count": 37,
+    "threshold_j": 8,
+    "threshold_scope": "Arbitrary predeclared experimental peak-contact-energy criterion for protected cargo only; not an industrial damage threshold.",
+    "prediction_scope": "Frozen same-model trajectories from supplied initial conditions; no held-out prediction-accuracy claim.",
+    "capture_status": "Use a fresh browser capture and its export for the final edit; the engine report alone is not a captured film.",
+    "default_source": "actual recorded Meta proposal, re-evaluated with the matching engine",
+    "meta_action_id": "steer:-0.32@0.25",
+    "meta_peak_j": 4.564491902149546,
+    "meta_control_impulse_ns": 62.540380368913944
+  },
+  "meta_experiment": {
+    "source": "assets/causal-meta-session.json",
+    "playback_label": "Recorded real session",
+    "model": "muse-spark-1.3",
+    "provider_calls": 3,
+    "cost_usd": 0.028276,
+    "duration_seconds": 37.855568333,
+    "proposal_peaks_j": [
+      104.60927319707069,
+      8.485268178096002,
+      4.564491902149546
+    ],
+    "selected_action_id": "steer:-0.32@0.25",
+    "selected_control_impulse_ns": 62.540380368913944,
+    "local_search_better": true,
+    "role": "Propose bounded actions, revise with measured outcomes. Numerical solver owns metrics. No exhaustive ranking shown to Meta."
+  },
+  "evidence": [
+    {
+      "path": "web/causal/engine.mjs",
+      "sha256": "ff7d00a37a118b42179cb5314d6056f66ab93e30d22027600250ddd01b239a09"
+    },
+    {
+      "path": "validation/runs/causal-benchmark-2026-11-04.json",
+      "sha256": "c837e90354762558f8c4103418fe76895c8c5659f57bd1ebd24120158abedf3d"
+    },
+    {
+      "path": "assets/causal-meta-session.json",
+      "sha256": "0bd106566a3343f03a3f8f25abe9a15c6fdc64de5a867d5a90e8ab602a6093fa"
+    }
+  ],
+  "segments": [
+    {
+      "start_seconds": 0,
+      "end_seconds": 13,
+      "breathing_room_seconds": 2,
+      "voice_target_seconds": 11,
+      "title": "One move before the impact",
+      "en": "You get one move. Brake, turn… or do nothing. Which decision protects this cargo? Watch both futures. Same starting point. One difference: the command Meta chose.",
+      "shot": "Open directly on the actual default comparison. Show a short preview of both outcomes, label it a simulation preview, then reset to time zero. No logo animation before the question.",
+      "on_screen": [
+        "ONE MOVE.",
+        "SAME START. TWO FUTURES.",
+        "SIMULATION · RECORDED META DECISION"
+      ]
+    },
+    {
+      "start_seconds": 13,
+      "end_seconds": 33,
+      "breathing_room_seconds": 2,
+      "voice_target_seconds": 18,
+      "title": "The real Meta decision",
+      "en": "Twinforge tests a decision before replaying its consequences. Here, one carrier triggers a chain of collisions. Without intervention: one hundred sixteen and a half joules on the protected cargo. Meta’s steering command brings that down to four point six. Both futures come from the same physical model.",
+      "shot": "Replay the default cascade: speed 100%, action at 0.25 s, recorded Meta steer −0.32 rad. Keep both branch labels and the recorded-source label visible. Metrics describe the complete 12-second calculation, not only the displayed instant.",
+      "on_screen": [
+        "NO INTERVENTION: 116.562 J",
+        "META’S COMMAND: 4.564 J",
+        "12-SECOND HORIZON · KNOWN MODEL"
+      ]
+    },
+    {
+      "start_seconds": 33,
+      "end_seconds": 52,
+      "breathing_room_seconds": 2,
+      "voice_target_seconds": 17,
+      "title": "Give the model a testable job",
+      "en": "Muse Spark receives the scene and a menu of allowed commands. It proposes one move and explains why. The simulator calculates the outcome. Those measurements go back to Spark for revision. The model never sees the exhaustive search scores.",
+      "shot": "Open Decision log. Briefly identify the initial scene, bounded action, physics feedback and revised proposal. Use actual interface content. Do not add a fake terminal or imply that playback starts another model call.",
+      "on_screen": [
+        "META MUSE SPARK 1.3",
+        "PROPOSE → TEST → REFINE",
+        "PHYSICS CALCULATES THE OUTCOME"
+      ]
+    },
+    {
+      "start_seconds": 52,
+      "end_seconds": 72,
+      "breathing_room_seconds": 2,
+      "voice_target_seconds": 18,
+      "title": "Keep the failed attempts",
+      "en": "Here are the three proposals that actually ran. First: one hundred four point six joules. Rejected. Second: eight point five. Still too high. Third: four point six, under our eight-joule threshold. You can replay each attempt. The failures stay in the evidence.",
+      "shot": "Close the log and click the actual attempt buttons in order. Capture each recomputed branch. Label time-compressed playback as edited. Keep command and result paired; finish on attempt 3.",
+      "on_screen": [
+        "ATTEMPT 1: 104.609 J · REJECTED",
+        "ATTEMPT 2: 8.485 J · REJECTED",
+        "ATTEMPT 3: 4.564 J · PASSES",
+        "EXPERIMENT CRITERION: ≤ 8 J"
+      ]
+    },
+    {
+      "start_seconds": 72,
+      "end_seconds": 94,
+      "breathing_room_seconds": 2,
+      "voice_target_seconds": 20,
+      "title": "Make the evidence inspectable",
+      "en": "This is a recorded real session: three calls, about thirty-eight seconds, for less than three US cents. Open the journal to inspect the reasoning, then export the original responses and receipts. The English text is a translation. The original evidence remains intact. Nothing here depends on a convincing explanation alone.",
+      "shot": "Open Decision log and show the translation disclosure, original-log export, recorded-call count, and cost. Use the exported JSON for the precise duration overlay. Preserve original request IDs; never display credentials. Hold a readable evidence detail rather than scrolling rapidly.",
+      "on_screen": [
+        "RECORDED REAL SESSION",
+        "3 CALLS · 37.86 S · $0.028276",
+        "ENGLISH TRANSLATION · ORIGINALS IN EXPORT"
+      ]
+    },
+    {
+      "start_seconds": 94,
+      "end_seconds": 117,
+      "breathing_room_seconds": 2,
+      "voice_target_seconds": 21,
+      "title": "Challenge the model with a better baseline",
+      "en": "Can a simpler method do better? Here, yes. The separate local search tests thirty-seven commands and finds zero impact on the protected cargo, using less control effort. That search is not AI. We show it beside Meta’s result. The useful thing is a decision you can challenge, measure, and improve.",
+      "shot": "Open Try your decision, click Find best local command, and show the source changing to Local search. Compare the actual 0 J and 39.190 N·s local result with Meta’s 4.564 J and 62.540 N·s. Do not attribute local results to Meta.",
+      "on_screen": [
+        "META: 4.564 J · 62.540 N·s",
+        "LOCAL SEARCH: 0 J · 39.190 N·s",
+        "37 COMMANDS · LOCAL SEARCH IS NOT AI"
+      ]
+    },
+    {
+      "start_seconds": 117,
+      "end_seconds": 138,
+      "breathing_room_seconds": 2,
+      "voice_target_seconds": 19,
+      "title": "Show when the tested move is too late",
+      "en": "Now delay the move. At a quarter of a second, a tested solution exists. At half a second, none of the thirty-seven commands passes our criterion. The collision has already transferred motion. Twinforge also exposes decisions that arrive too late. This boundary belongs to the tested time grid.",
+      "shot": "Keep the cascade at 100% speed. Change delay from 0.25 s to 0.50 s, wait for calculation, and show the failure. The tested delay grid runs from 0 to 2 s in 0.25 s steps; do not present 0.25 s as an exact continuous deadline.",
+      "on_screen": [
+        "0.25 S: A TESTED SOLUTION",
+        "0.50 S: NO TESTED COMMAND PASSES",
+        "DELAY GRID: 0.25 S STEPS"
+      ]
+    },
+    {
+      "start_seconds": 138,
+      "end_seconds": 160,
+      "breathing_room_seconds": 2,
+      "voice_target_seconds": 20,
+      "title": "Expose sensitivity, not just success",
+      "en": "Change the challenge. At the intersection, the best nominal command fails when speed changes by five percent. One successful check out of three. That is a sensitivity test, not a safety probability. Inspect the trajectories. Export the states, commands, and collisions. Counterexamples are part of the result.",
+      "shot": "Select Blind intersection, restore speed 100% and delay 0.25 s, and run local search. Show 3.464 J nominal and 1 / 3 sensitivity checks. Optionally turn on precomputed paths, then export the current experiment and show one readable contact event.",
+      "on_screen": [
+        "BLIND INTERSECTION · LOCAL SEARCH",
+        "±5% SPEED: 1 OF 3 CHECKS PASSES",
+        "STATES · COMMANDS · CONTACTS · EXPORT"
+      ]
+    },
+    {
+      "start_seconds": 160,
+      "end_seconds": 180,
+      "breathing_room_seconds": 2,
+      "voice_target_seconds": 18,
+      "title": "Close with a clear ambition",
+      "en": "Today, the initial states and physical laws are supplied. This is a numerical laboratory, not yet a robot validated in the real world. The ambition: test a decision before facing its consequences. Twinforge. One decision. Two futures. Now find the move that makes the difference.",
+      "shot": "Return to recorded Meta attempt 3 and a wide comparison view. End on the verified public URL. Keep Simulation and Known model readable. Leave the final two seconds without narration. Do not suggest that real industrial footage is evidence of physical validation.",
+      "on_screen": [
+        "SIMULATION · KNOWN MODEL",
+        "ONE DECISION. TWO FUTURES.",
+        "mkinvest57.github.io/TWINFORGE"
+      ]
+    }
+  ],
+  "outputs": {
+    "voiceover_en": "docs/VOICEOVER_3MIN_EN.txt",
+    "subtitles_en": "docs/CAUSAL_DEMO_SUBTITLES_EN.srt",
+    "archived_bilingual_storyboard": "docs/archive/VIDEO_CAUSAL_BILINGUAL_2026-11-04.json"
+  },
+  "review_requirements": [
+    "Match every captured value and command to that capture’s exported report.",
+    "Keep simulation, known-model and recorded-session labels legible.",
+    "Do not attribute the local search result of 0 J to Meta.",
+    "Keep both actual Meta failures and its better local baseline visible.",
+    "Distinguish the 9-delay feasibility grid from a continuous deadline proof.",
+    "Describe 8 J as an experimental criterion, not a real damage guarantee.",
+    "Do not turn 3 speed checks into a success probability.",
+    "Do not imply that the camera reconstructed the industrial simulation.",
+    "Recalibrate subtitle timings to the actual generated voice.",
+    "Inspect the final rendered film and public links before submitting; this document is not a submission receipt.",
+    "The opening uses the actual recorded Meta result of 4.564 J; the 0 J local-search comparison appears later.",
+    "Do not imply receding-horizon robot control: this laboratory compares a single bounded intervention.",
+    "All jury-facing narration, overlays, and controls are English; original provider responses remain unchanged in the export."
+  ],
+  "subtitle_timing_note": "Provisional editorial timing, not audio alignment. Subtitles reproduce the English narration exactly, with at most two lines of 42 characters per cue. Align cue boundaries to the generated voice and verify readability in the final edit.",
+  "language": "en",
+  "subtitle_cues": 35
+}

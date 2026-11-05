@@ -2,7 +2,7 @@
 
 The main interface observes changing 3D scenes, a phone camera, or a local video through images. **Actual Meta SAM 3.1 segmentation is required before a track can produce a forecast.** A separate local tracker follows the segmented objects between SAM responses, and a motion model estimates their image position 0.5–1 second ahead. The observer receives no simulator positions, velocities, masses, forces, or seed.
 
-[Live observation interface](index.html) · [Camera mode](index.html?mode=camera) · [Architecture and setup](docs/SAM_LIVE_OBSERVATION.md)
+[Watch the 3-minute demo](https://mkinvest57.github.io/TWINFORGE/demo.html) · [Live observation interface](index.html) · [Camera mode](index.html?mode=camera) · [Architecture and setup](docs/SAM_LIVE_OBSERVATION.md)
 
 ## The live challenge
 

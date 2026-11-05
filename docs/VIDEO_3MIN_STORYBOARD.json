@@ -1,218 +1,551 @@
 {
-  "schema_version": "twinforge.video-storyboard.causal.v2",
-  "updated_at": "2026-11-04T20:36:40.713675+00:00",
+  "schema_version": "twinforge.video-storyboard.live-sam.v3",
+  "updated_at": "2026-11-05",
+  "language": "en",
   "duration_seconds": 180,
-  "status": "English storyboard, narration text and provisional subtitles only; no generated voice or final rendered video attested.",
+  "frame_rate": 30,
+  "total_frames": 5400,
+  "status": "Production-ready narration/storyboard draft; no final audio alignment or rendered-film review attested.",
   "word_counts": {
-    "en": 394
+    "en": 355
   },
-  "voice_timing_note": "Target: 162 seconds of narration and 18 seconds of breathing room. Align timings to the synthesized voice, then inspect the complete 180-second render.",
+  "voice_timing_note": "24 independent 7.5-second edit slots. Target 6.5 seconds of speech plus 1 second of visual breathing room per slot. The 180-second picture timeline is exact; generated voice duration is not yet verified. Align natural speech in the final edit and trim pauses, never imply provider timing from edited waits.",
   "creative_direction": {
-    "voice": "Calm, precise, curious. Invite the viewer to judge the decision. Let impacts and failed proposals interrupt the rhythm. Avoid a trailer-announcer delivery.",
-    "editing": "Start with the choice and its actual consequences. Reveal one number at a time. Keep original commands and failures paired with their calculated outcomes. Use the real English interface.",
-    "sound": "Restrained instrumental bed. Any impact sound is an editorial effect, not an acoustic measurement."
+    "voice": "One consistent English voice: curious, clear, confident, conversational; about 138 words/minute during voiced portions. No trailer announcer. Stress select, lock, reveal, and measure. Pronounce Twinforge as twin-forge and SAM 3.1 as Sam three point one.",
+    "editing": "Lead with the product and a visible question. Alternate tight details and wide interface views. Keep the lock/reveal sequence continuous within one run. Use brief silence before Reveal and after the actual error. One visual claim at a time; never speed-scroll evidence.",
+    "sound": "Low instrumental pulse under speech; drop the bed for the locked-target reveal. Sparse UI clicks. Editorial sound effects are not sensor measurements.",
+    "graphics": "English throughout. Amber = prediction, cyan = later tracked observation. Use actual UI captures for capabilities. Generated shots may illustrate future use or transitions only, always visibly labelled."
   },
-  "main_experiment": {
-    "scenario_id": "cascade",
-    "seed": 20261104,
-    "speed_factor": 1,
-    "action_delay_s": 0.25,
-    "horizon_s": 12,
-    "local_action_id": "steer:0.20@0.25",
-    "baseline_peak_j": 116.56200059920455,
-    "local_peak_j": 0,
-    "local_control_impulse_ns": 39.18961921118314,
-    "candidate_count": 37,
-    "threshold_j": 8,
-    "threshold_scope": "Arbitrary predeclared experimental peak-contact-energy criterion for protected cargo only; not an industrial damage threshold.",
-    "prediction_scope": "Frozen same-model trajectories from supplied initial conditions; no held-out prediction-accuracy claim.",
-    "capture_status": "Use a fresh browser capture and its export for the final edit; the engine report alone is not a captured film.",
-    "default_source": "actual recorded Meta proposal, re-evaluated with the matching engine",
-    "meta_action_id": "steer:-0.32@0.25",
-    "meta_peak_j": 4.564491902149546,
-    "meta_control_impulse_ns": 62.540380368913944
-  },
-  "meta_experiment": {
-    "source": "assets/causal-meta-session.json",
-    "playback_label": "Recorded real session",
-    "model": "muse-spark-1.3",
-    "provider_calls": 3,
-    "cost_usd": 0.028276,
-    "duration_seconds": 37.855568333,
-    "proposal_peaks_j": [
-      104.60927319707069,
-      8.485268178096002,
-      4.564491902149546
+  "verified_trial": {
+    "source": "validation/runs/camera-horizon-2026-11-05/real-hand-1-v16.json",
+    "summary": "validation/runs/camera-horizon-2026-11-05/live-results.json",
+    "run_id": "d0b07f2c-52b6-40c8-989e-f0497e96d396",
+    "release": "v16",
+    "source_kind": "video",
+    "source_description": "Uploaded recording of actual hand movement; not synthetic photo motion and not a live phone-camera test.",
+    "horizon_seconds": 1,
+    "dimensions": [
+      413,
+      480
     ],
-    "selected_action_id": "steer:-0.32@0.25",
-    "selected_control_impulse_ns": 62.540380368913944,
-    "local_search_better": true,
-    "role": "Propose bounded actions, revise with measured outcomes. Numerical solver owns metrics. No exhaustive ranking shown to Meta."
+    "scored": 57,
+    "unscorable": 8,
+    "mean_error_px_display": 34.1,
+    "max_error_px_display": 129.41,
+    "capture_hz_display": 25.12,
+    "sam_retained_responses": 2,
+    "sam_submitted_requests": 3,
+    "sam_provider_seconds_display": [
+      1.46,
+      1.0
+    ],
+    "client_round_trip_seconds_display": [
+      5.43,
+      1.38
+    ],
+    "reference": "Later visual tracker positions, not independent annotations. Individual trial, not a general performance guarantee.",
+    "prior_failures": "Previous trials and their failures remain in the linked report; do not overwrite them or claim a controlled before/after improvement."
   },
   "evidence": [
     {
-      "path": "web/causal/engine.mjs",
-      "sha256": "ff7d00a37a118b42179cb5314d6056f66ab93e30d22027600250ddd01b239a09"
+      "path": "web/vision/live.mjs",
+      "sha256": "d99f99ee965e864f2b088bed14091134d2e60accb43721c37eb26cf21d339a41"
     },
     {
-      "path": "validation/runs/causal-benchmark-2026-11-04.json",
-      "sha256": "c837e90354762558f8c4103418fe76895c8c5659f57bd1ebd24120158abedf3d"
+      "path": "web/vision/observer.mjs",
+      "sha256": "ac42a0888379dcc14a914acdb9bfe33ffea4c9d0523258452ad120b0a02e22ac"
     },
     {
-      "path": "assets/causal-meta-session.json",
-      "sha256": "0bd106566a3343f03a3f8f25abe9a15c6fdc64de5a867d5a90e8ab602a6093fa"
+      "path": "hosting/live-worker/src/frame.mjs",
+      "sha256": "5ac867a2d988191fe6a7477c3ec5d11bf1746a93bfcb7a104efc8ba4de5835d1"
+    },
+    {
+      "path": "hosting/live-worker/src/sam.mjs",
+      "sha256": "f25a61f06febe13f293695400d2669820526d2e62a01d794f95cee8e2493e85d"
+    },
+    {
+      "path": "validation/runs/camera-horizon-2026-11-05/live-results.json",
+      "sha256": "2c1dc33131a0c1b4011397b01c63a9a34ea825942d1c42f6fef027c3300a3a62"
+    },
+    {
+      "path": "validation/runs/camera-horizon-2026-11-05/real-hand-1-v16.json",
+      "sha256": "1c8f3b9cf14eb3a8dcf46b74b248921de77b83d63bf3bd465cb706377900bad4"
+    },
+    {
+      "path": "docs/SAM_LIVE_OBSERVATION.md",
+      "sha256": "3cf5553a2030725d86bf92e86bb851665f435a00358dfe556fff2a2829f78396"
     }
   ],
   "segments": [
     {
-      "start_seconds": 0,
-      "end_seconds": 13,
-      "breathing_room_seconds": 2,
-      "voice_target_seconds": 11,
-      "title": "One move before the impact",
-      "en": "You get one move. Brake, turn… or do nothing. Which decision protects this cargo? Watch both futures. Same starting point. One difference: the command Meta chose.",
-      "shot": "Open directly on the actual default comparison. Show a short preview of both outcomes, label it a simulation preview, then reset to time zero. No logo animation before the question.",
+      "id": "beat-01",
+      "start_seconds": 0.0,
+      "end_seconds": 7.5,
+      "start_frame": 0,
+      "end_frame_exclusive": 225,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 15,
+      "title": "The question",
+      "en": "A camera shows you what just happened. Twinforge asks: where will this object be next?",
+      "shot": "Actual Twinforge randomized scene, cropped tightly around one moving object. Freeze the edit just before a visible event; this editorial freeze is not a locked prediction. Reveal the product name in the last second.",
       "on_screen": [
-        "ONE MOVE.",
-        "SAME START. TWO FUTURES.",
-        "SIMULATION · RECORDED META DECISION"
-      ]
+        "WHERE WILL IT BE NEXT?",
+        "TWINFORGE · VISUAL MOTION FORECASTING"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Simulation · image-only observation"
     },
     {
-      "start_seconds": 13,
-      "end_seconds": 33,
-      "breathing_room_seconds": 2,
-      "voice_target_seconds": 18,
-      "title": "The real Meta decision",
-      "en": "Twinforge tests a decision before replaying its consequences. Here, one carrier triggers a chain of collisions. Without intervention: one hundred sixteen and a half joules on the protected cargo. Meta’s steering command brings that down to four point six. Both futures come from the same physical model.",
-      "shot": "Replay the default cascade: speed 100%, action at 0.25 s, recorded Meta steer −0.32 rad. Keep both branch labels and the recorded-source label visible. Metrics describe the complete 12-second calculation, not only the displayed instant.",
+      "id": "beat-02",
+      "start_seconds": 7.5,
+      "end_seconds": 15.0,
+      "start_frame": 225,
+      "end_frame_exclusive": 450,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 15,
+      "title": "What the product does",
+      "en": "Select an object. Predict its position. Test the result. A forecast becomes a measurable claim.",
+      "shot": "Three quick actual-interface cuts: select an object, show its issued forecast, show a later measured result. Do not fabricate a result or splice one run's target into another run.",
       "on_screen": [
-        "NO INTERVENTION: 116.562 J",
-        "META’S COMMAND: 4.564 J",
-        "12-SECOND HORIZON · KNOWN MODEL"
-      ]
+        "SELECT → FORECAST → MEASURE"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Actual interface capture"
     },
     {
-      "start_seconds": 33,
-      "end_seconds": 52,
-      "breathing_room_seconds": 2,
-      "voice_target_seconds": 17,
-      "title": "Give the model a testable job",
-      "en": "Muse Spark receives the scene and a menu of allowed commands. It proposes one move and explains why. The simulator calculates the outcome. Those measurements go back to Spark for revision. The model never sees the exhaustive search scores.",
-      "shot": "Open Decision log. Briefly identify the initial scene, bounded action, physics feedback and revised proposal. Use actual interface content. Do not add a fake terminal or imply that playback starts another model call.",
+      "id": "beat-03",
+      "start_seconds": 15.0,
+      "end_seconds": 22.5,
+      "start_frame": 450,
+      "end_frame_exclusive": 675,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 16,
+      "title": "Make Meta visible",
+      "en": "Meta's SAM three point one segments the object. Twinforge tracks it and estimates its next position.",
+      "shot": "Open the actual submitted-frame/mask preview. Highlight the real SAM 3.1 label and mask; then cut back to the forecast.",
       "on_screen": [
-        "META MUSE SPARK 1.3",
-        "PROPOSE → TEST → REFINE",
-        "PHYSICS CALCULATES THE OUTCOME"
-      ]
+        "META SAM 3.1: SEGMENTATION",
+        "TWINFORGE: MOTION FORECASTING"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Real SAM result · separate local forecast"
     },
     {
-      "start_seconds": 52,
-      "end_seconds": 72,
-      "breathing_room_seconds": 2,
-      "voice_target_seconds": 18,
-      "title": "Keep the failed attempts",
-      "en": "Here are the three proposals that actually ran. First: one hundred four point six joules. Rejected. Second: eight point five. Still too high. Third: four point six, under our eight-joule threshold. You can replay each attempt. The failures stay in the evidence.",
-      "shot": "Close the log and click the actual attempt buttons in order. Capture each recomputed branch. Label time-compressed playback as edited. Keep command and result paired; finish on attempt 3.",
+      "id": "beat-04",
+      "start_seconds": 22.5,
+      "end_seconds": 30.0,
+      "start_frame": 675,
+      "end_frame_exclusive": 900,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 14,
+      "title": "The honest boundary",
+      "en": "The input is pixels. No simulator coordinates, hidden velocity feed, or prerecorded future trajectory.",
+      "shot": "Minimal editorial diagram: renderer → captured image → observer. The image is the only payload crossing the boundary apart from prompts and capture IDs/timestamps. No scrolling fake terminal.",
       "on_screen": [
-        "ATTEMPT 1: 104.609 J · REJECTED",
-        "ATTEMPT 2: 8.485 J · REJECTED",
-        "ATTEMPT 3: 4.564 J · PASSES",
-        "EXPERIMENT CRITERION: ≤ 8 J"
-      ]
+        "PIXELS + VISUAL PROMPT",
+        "NO SIMULATOR STATE"
+      ],
+      "asset_kind": "editorial_diagram",
+      "required_label": "Architecture diagram"
     },
     {
-      "start_seconds": 72,
-      "end_seconds": 94,
-      "breathing_room_seconds": 2,
-      "voice_target_seconds": 20,
-      "title": "Make the evidence inspectable",
-      "en": "This is a recorded real session: three calls, about thirty-eight seconds, for less than three US cents. Open the journal to inspect the reasoning, then export the original responses and receipts. The English text is a translation. The original evidence remains intact. Nothing here depends on a convincing explanation alone.",
-      "shot": "Open Decision log and show the translation disclosure, original-log export, recorded-call count, and cost. Use the exported JSON for the precise duration overlay. Preserve original request IDs; never display credentials. Hold a readable evidence detail rather than scrolling rapidly.",
+      "id": "beat-05",
+      "start_seconds": 30.0,
+      "end_seconds": 37.5,
+      "start_frame": 900,
+      "end_frame_exclusive": 1125,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 15,
+      "title": "A fresh scene",
+      "en": "Start a new trial: randomized launches, collisions, or pendulums. Different starting conditions. A fresh observation.",
+      "shot": "Record real New scene actions across launch/rebound, collisions, and pendulum. Short cuts may compress resets; retain scene labels and never imply unknown physical laws were discovered.",
       "on_screen": [
-        "RECORDED REAL SESSION",
-        "3 CALLS · 37.86 S · $0.028276",
-        "ENGLISH TRANSLATION · ORIGINALS IN EXPORT"
-      ]
+        "NEW TRIAL. NEW INITIAL CONDITIONS."
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Randomized simulation · edited resets"
     },
     {
-      "start_seconds": 94,
-      "end_seconds": 117,
-      "breathing_room_seconds": 2,
-      "voice_target_seconds": 21,
-      "title": "Challenge the model with a better baseline",
-      "en": "Can a simpler method do better? Here, yes. The separate local search tests thirty-seven commands and finds zero impact on the protected cargo, using less control effort. That search is not AI. We show it beside Meta’s result. The useful thing is a decision you can challenge, measure, and improve.",
-      "shot": "Open Try your decision, click Find best local command, and show the source changing to Local search. Compare the actual 0 J and 39.190 N·s local result with Meta’s 4.564 J and 62.540 N·s. Do not attribute local results to Meta.",
+      "id": "beat-06",
+      "start_seconds": 37.5,
+      "end_seconds": 45.0,
+      "start_frame": 1125,
+      "end_frame_exclusive": 1350,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 15,
+      "title": "Show what is withheld",
+      "en": "The renderer knows its world. Our observer never receives its positions, velocities, masses, or forces.",
+      "shot": "Hold the pixel preview next to the rendered scene. A restrained graphic lists the withheld state: position, velocity, mass, force. Do not show invented source-code output.",
       "on_screen": [
-        "META: 4.564 J · 62.540 N·s",
-        "LOCAL SEARCH: 0 J · 39.190 N·s",
-        "37 COMMANDS · LOCAL SEARCH IS NOT AI"
-      ]
+        "STATE STAYS WITH THE RENDERER"
+      ],
+      "asset_kind": "editorial_diagram",
+      "required_label": "Observer receives image observations"
     },
     {
-      "start_seconds": 117,
-      "end_seconds": 138,
-      "breathing_room_seconds": 2,
-      "voice_target_seconds": 19,
-      "title": "Show when the tested move is too late",
-      "en": "Now delay the move. At a quarter of a second, a tested solution exists. At half a second, none of the thirty-seven commands passes our criterion. The collision has already transferred motion. Twinforge also exposes decisions that arrive too late. This boundary belongs to the tested time grid.",
-      "shot": "Keep the cascade at 100% speed. Change delay from 0.25 s to 0.50 s, wait for calculation, and show the failure. The tested delay grid runs from 0 to 2 s in 0.25 s steps; do not present 0.25 s as an exact continuous deadline.",
+      "id": "beat-07",
+      "start_seconds": 45.0,
+      "end_seconds": 52.5,
+      "start_frame": 1350,
+      "end_frame_exclusive": 1575,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 16,
+      "title": "Three distinct jobs",
+      "en": "Here is the division: SAM finds the object. Local tracking follows it. Twinforge forecasts its motion.",
+      "shot": "Animate three plain labels using the actual mask, observed trail, and forecast as examples. Each visual is labelled by its actual producing component.",
       "on_screen": [
-        "0.25 S: A TESTED SOLUTION",
-        "0.50 S: NO TESTED COMMAND PASSES",
-        "DELAY GRID: 0.25 S STEPS"
-      ]
+        "SAM → LOCAL TRACKER → FORECASTER"
+      ],
+      "asset_kind": "editorial_diagram",
+      "required_label": "Segmentation ≠ tracking ≠ prediction"
     },
     {
-      "start_seconds": 138,
-      "end_seconds": 160,
-      "breathing_room_seconds": 2,
-      "voice_target_seconds": 20,
-      "title": "Expose sensitivity, not just success",
-      "en": "Change the challenge. At the intersection, the best nominal command fails when speed changes by five percent. One successful check out of three. That is a sensitivity test, not a safety probability. Inspect the trajectories. Export the states, commands, and collisions. Counterexamples are part of the result.",
-      "shot": "Select Blind intersection, restore speed 100% and delay 0.25 s, and run local search. Show 3.464 J nominal and 1 / 3 sensitivity checks. Optionally turn on precomputed paths, then export the current experiment and show one readable contact event.",
+      "id": "beat-08",
+      "start_seconds": 52.5,
+      "end_seconds": 60.0,
+      "start_frame": 1575,
+      "end_frame_exclusive": 1800,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 14,
+      "title": "Choose the challenge",
+      "en": "Choose half a second, three quarters, or one second ahead. Shading shows conditional uncertainty.",
+      "shot": "Actual horizon control: 0.5, 0.75, 1.0 seconds. Show the uncertainty region without depicting it as a guaranteed confidence bound.",
       "on_screen": [
-        "BLIND INTERSECTION · LOCAL SEARCH",
-        "±5% SPEED: 1 OF 3 CHECKS PASSES",
-        "STATES · COMMANDS · CONTACTS · EXPORT"
-      ]
+        "+0.5 s  /  +0.75 s  /  +1.0 s",
+        "CONDITIONAL UNCERTAINTY"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Image coordinates · uncalibrated envelope"
     },
     {
-      "start_seconds": 160,
-      "end_seconds": 180,
-      "breathing_room_seconds": 2,
-      "voice_target_seconds": 18,
-      "title": "Close with a clear ambition",
-      "en": "Today, the initial states and physical laws are supplied. This is a numerical laboratory, not yet a robot validated in the real world. The ambition: test a decision before facing its consequences. Twinforge. One decision. Two futures. Now find the move that makes the difference.",
-      "shot": "Return to recorded Meta attempt 3 and a wide comparison view. End on the verified public URL. Keep Simulation and Known model readable. Leave the final two seconds without narration. Do not suggest that real industrial footage is evidence of physical validation.",
+      "id": "beat-09",
+      "start_seconds": 60.0,
+      "end_seconds": 67.5,
+      "start_frame": 1800,
+      "end_frame_exclusive": 2025,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 14,
+      "title": "Freeze the claim",
+      "en": "Lock a target before the future arrives. Its position and timestamp are now fixed.",
+      "shot": "Continuous capture of Lock prediction in a synthetic run. Hold the target and its source/target timestamps. Keep this exact run for the next shot.",
       "on_screen": [
-        "SIMULATION · KNOWN MODEL",
-        "ONE DECISION. TWO FUTURES.",
-        "mkinvest57.github.io/TWINFORGE"
-      ]
+        "PREDICTION LOCKED",
+        "ISSUED BEFORE THE TARGET TIME"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Simulation · same run continues"
+    },
+    {
+      "id": "beat-10",
+      "start_seconds": 67.5,
+      "end_seconds": 75.0,
+      "start_frame": 2025,
+      "end_frame_exclusive": 2250,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 16,
+      "title": "Let time answer",
+      "en": "Reveal. The scene advances. Amber is the prediction. Cyan is the later observation. Measure the gap.",
+      "shot": "Continue the previous capture through Reveal and the measured outcome. Amber target stays fixed. Hold the actual error number long enough to read; never substitute a lower error.",
+      "on_screen": [
+        "AMBER: PREDICTED",
+        "CYAN: LATER TRACKED POSITION"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Error measured against later visual tracking"
+    },
+    {
+      "id": "beat-11",
+      "start_seconds": 75.0,
+      "end_seconds": 82.5,
+      "start_frame": 2250,
+      "end_frame_exclusive": 2475,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 15,
+      "title": "Keep the record honest",
+      "en": "Keep the misses. Keep unscorable attempts. Each result stays tied to its source and horizon.",
+      "shot": "Open that run's actual scored/unscorable counts or export. Show one real unscorable record alongside measured results, with no invented percentages.",
+      "on_screen": [
+        "SCORED + UNSCORABLE",
+        "FAILURES STAY IN THE RECORD"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Individual run · not a universal accuracy claim"
+    },
+    {
+      "id": "beat-12",
+      "start_seconds": 82.5,
+      "end_seconds": 90.0,
+      "start_frame": 2475,
+      "end_frame_exclusive": 2700,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 15,
+      "title": "Your images",
+      "en": "Now use camera mode, or open a local video. Tap an object. Box a bottle.",
+      "shot": "Show actual camera-mode controls and native point/box selection on the bottle fixture. If using the existing fixture, its photo-motion label must remain visible. A phone mockup is layout illustration only.",
+      "on_screen": [
+        "TAP AN OBJECT · DRAW A BOX"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Bottle example: controlled photo motion"
+    },
+    {
+      "id": "beat-13",
+      "start_seconds": 90.0,
+      "end_seconds": 97.5,
+      "start_frame": 2700,
+      "end_frame_exclusive": 2925,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 15,
+      "title": "Real hand movement",
+      "en": "Choose Hands. SAM finds visible hands. This example uses a recording of real human movement.",
+      "shot": "Use the retained real-hand run, preferably v16, and its corresponding original hand clip. Show Hands selection and actual SAM mask. Do not use the two-hand synthetic photo-motion clip here.",
+      "on_screen": [
+        "HANDS · REAL RECORDED MOVEMENT"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Uploaded real hand video · not a live phone test"
+    },
+    {
+      "id": "beat-14",
+      "start_seconds": 97.5,
+      "end_seconds": 105.0,
+      "start_frame": 2925,
+      "end_frame_exclusive": 3150,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 14,
+      "title": "An uncertain human future",
+      "en": "The fingers change shape. The hand changes direction. We forecast overall motion, not intention.",
+      "shot": "Continue that real-hand run through a direction or shape change. Keep both the observed position and predicted point visible; retain visible disagreement.",
+      "on_screen": [
+        "FORECASTING OVERALL HAND MOTION"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Recorded real movement · same trial"
+    },
+    {
+      "id": "beat-15",
+      "start_seconds": 105.0,
+      "end_seconds": 112.5,
+      "start_frame": 3150,
+      "end_frame_exclusive": 3375,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 15,
+      "title": "An auditable number",
+      "en": "In this recorded trial, one-second forecasts averaged thirty-four pixels of error across fifty-seven scored targets.",
+      "shot": "Show a clean result card derived from real-hand-1-v16.json, paired with that exact run. This may be an editorial data card; label it Recorded trial, never Live measurement.",
+      "on_screen": [
+        "+1.0 s · 57 SCORED",
+        "34.10 px MEAN ERROR",
+        "129.41 px MAX ERROR"
+      ],
+      "asset_kind": "verified_data_card",
+      "required_label": "Recorded v16 trial · 413 × 480 observations"
+    },
+    {
+      "id": "beat-16",
+      "start_seconds": 112.5,
+      "end_seconds": 120.0,
+      "start_frame": 3375,
+      "end_frame_exclusive": 3600,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 14,
+      "title": "The denominator matters",
+      "en": "Eight more were unscorable. These comparisons use later visual tracking, not independent ground truth.",
+      "shot": "Continue the same card: add 8 unscorable outcomes, and identify the comparison method. Do not turn this into a success percentage or accuracy guarantee.",
+      "on_screen": [
+        "57 SCORED · 8 UNSCORABLE",
+        "REFERENCE: LATER VISUAL TRACKING"
+      ],
+      "asset_kind": "verified_data_card",
+      "required_label": "Not independent ground truth"
+    },
+    {
+      "id": "beat-17",
+      "start_seconds": 120.0,
+      "end_seconds": 127.5,
+      "start_frame": 3600,
+      "end_frame_exclusive": 3825,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 16,
+      "title": "Two different clocks",
+      "en": "Local tracking ran around twenty-five frames per second. SAM inference ran separately, with its latency measured.",
+      "shot": "Use the same v16 measurements. Show local observed cadence separately from the two retained SAM provider response times, and keep client round-trip timing in smaller readable text.",
+      "on_screen": [
+        "LOCAL CAPTURE: 25.12 Hz",
+        "SAM PROVIDER: 1.00–1.46 s",
+        "CLIENT ROUND TRIP: 1.38–5.43 s"
+      ],
+      "asset_kind": "verified_data_card",
+      "required_label": "v16 · 2 retained SAM responses / 3 submissions"
+    },
+    {
+      "id": "beat-18",
+      "start_seconds": 127.5,
+      "end_seconds": 135.0,
+      "start_frame": 3825,
+      "end_frame_exclusive": 4050,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 15,
+      "title": "Stay responsive while waiting",
+      "en": "During that wait, captured frames keep arriving. SAM's confirmed mask anchors tracking through those observations.",
+      "shot": "Actual refresh capture after an established SAM anchor: local movement continues while a later SAM request is pending. Initial synthetic/video acquisition may pause; do not use that initial wait as the example.",
+      "on_screen": [
+        "LOCAL TRACKING BETWEEN SAM REQUESTS"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Any compressed wait must be labelled"
+    },
+    {
+      "id": "beat-19",
+      "start_seconds": 135.0,
+      "end_seconds": 142.5,
+      "start_frame": 4050,
+      "end_frame_exclusive": 4275,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 14,
+      "title": "Open the proof",
+      "en": "Open the evidence: submitted image, segmentation mask, request receipts, prediction timestamps, and measured outcomes.",
+      "shot": "Actual evidence dialog: submitted frame and its mask, then real receipt/timestamp fields. Mask must correspond to the displayed frame. Hide credentials; do not invent a diagnostic dashboard.",
+      "on_screen": [
+        "IMAGE · MASK · RECEIPT · TIMESTAMP"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Actual retained evidence"
+    },
+    {
+      "id": "beat-20",
+      "start_seconds": 142.5,
+      "end_seconds": 150.0,
+      "start_frame": 4275,
+      "end_frame_exclusive": 4500,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 15,
+      "title": "Make it inspectable",
+      "en": "Export the record. Anyone reviewing it can ask: was this claim recorded before its outcome?",
+      "shot": "Click the real export action. Show a readable excerpt with the same run ID and issue/target/observation times; timestamps must come from that file.",
+      "on_screen": [
+        "CLAIM FIRST. OBSERVATION LATER.",
+        "EXPORT THE RECORD"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Forecast chronology from actual export"
+    },
+    {
+      "id": "beat-21",
+      "start_seconds": 150.0,
+      "end_seconds": 157.5,
+      "start_frame": 4500,
+      "end_frame_exclusive": 4725,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 14,
+      "title": "What exists today",
+      "en": "Today, Twinforge forecasts two-dimensional image positions. Physical reconstruction and robot control are future work.",
+      "shot": "Return to a clear wide product view. Use two simple labels: built today, future work. No robot actuation footage presented as implemented functionality.",
+      "on_screen": [
+        "TODAY: 2D VISUAL FORECASTING",
+        "FUTURE: PHYSICAL VALIDATION"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "No full 3D reconstruction or robot control"
+    },
+    {
+      "id": "beat-22",
+      "start_seconds": 157.5,
+      "end_seconds": 165.0,
+      "start_frame": 4725,
+      "end_frame_exclusive": 4950,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 15,
+      "title": "Where it could matter",
+      "en": "The potential is practical: help robotics teams test anticipation before trusting predictions with real actions.",
+      "shot": "Optional short generated robotics concept shot, visually distinct from the app capture, or a clean editorial diagram of perception → forecast → test. No fake SAM overlays or claims of deployed hardware.",
+      "on_screen": [
+        "POTENTIAL USE: ROBOTICS VALIDATION"
+      ],
+      "asset_kind": "concept_illustration",
+      "required_label": "Future application · concept illustration"
+    },
+    {
+      "id": "beat-23",
+      "start_seconds": 165.0,
+      "end_seconds": 172.5,
+      "start_frame": 4950,
+      "end_frame_exclusive": 5175,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 13,
+      "title": "The next experiment",
+      "en": "Next: independent annotations, harder motion, and physical device trials. Keep testing the limits.",
+      "shot": "Three concise roadmap cards over actual hand/simulation stills: independent annotations, harder motion, device trials. These are next steps, not completed validations.",
+      "on_screen": [
+        "INDEPENDENT LABELS",
+        "HARDER MOTION",
+        "REAL DEVICE TRIALS"
+      ],
+      "asset_kind": "editorial_diagram",
+      "required_label": "Next validation steps"
+    },
+    {
+      "id": "beat-24",
+      "start_seconds": 172.5,
+      "end_seconds": 180.0,
+      "start_frame": 5175,
+      "end_frame_exclusive": 5400,
+      "voice_target_seconds": 6.5,
+      "breathing_room_seconds": 1,
+      "word_count": 15,
+      "title": "End on the product",
+      "en": "Twinforge. See motion. Freeze a forecast. Measure what happens next. Then improve the next prediction.",
+      "shot": "Return to the real UI and logo. Resolve to the public source/evidence URL; keep it readable through the final second. Do not identify the owner-private backend as public jury access.",
+      "on_screen": [
+        "TWINFORGE",
+        "SEE → FORECAST → MEASURE",
+        "github.com/mkinvest57/TWINFORGE"
+      ],
+      "asset_kind": "actual_ui",
+      "required_label": "Source + recorded evidence"
     }
   ],
   "outputs": {
     "voiceover_en": "docs/VOICEOVER_3MIN_EN.txt",
-    "subtitles_en": "docs/CAUSAL_DEMO_SUBTITLES_EN.srt",
-    "archived_bilingual_storyboard": "docs/archive/VIDEO_CAUSAL_BILINGUAL_2026-11-04.json"
+    "readable_script": "docs/VIDEO_SCRIPT.md",
+    "storyboard": "docs/VIDEO_3MIN_STORYBOARD.json",
+    "final_video": "Not rendered by this script task"
   },
   "review_requirements": [
-    "Match every captured value and command to that capture’s exported report.",
-    "Keep simulation, known-model and recorded-session labels legible.",
-    "Do not attribute the local search result of 0 J to Meta.",
-    "Keep both actual Meta failures and its better local baseline visible.",
-    "Distinguish the 9-delay feasibility grid from a continuous deadline proof.",
-    "Describe 8 J as an experimental criterion, not a real damage guarantee.",
-    "Do not turn 3 speed checks into a success probability.",
-    "Do not imply that the camera reconstructed the industrial simulation.",
-    "Recalibrate subtitle timings to the actual generated voice.",
-    "Inspect the final rendered film and public links before submitting; this document is not a submission receipt.",
-    "The opening uses the actual recorded Meta result of 4.564 J; the 0 J local-search comparison appears later.",
-    "Do not imply receding-horizon robot control: this laboratory compares a single bounded intervention.",
-    "All jury-facing narration, overlays, and controls are English; original provider responses remain unchanged in the export."
-  ],
-  "subtitle_timing_note": "Provisional editorial timing, not audio alignment. Subtitles reproduce the English narration exactly, with at most two lines of 42 characters per cue. Align cue boundaries to the generated voice and verify readability in the final edit.",
-  "language": "en",
-  "subtitle_cues": 35
+    "Final picture duration must be exactly 180 seconds; at 30 fps this is 5400 frames. Verify the exported media, not just the edit grid.",
+    "Review the complete film with audio and again muted. Subtitles must match actual speech and fit mobile-readable safe margins.",
+    "Do not claim that SAM predicts motion: SAM segments; local tracking and the separate Twinforge predictor handle motion.",
+    "Do not attribute 25 Hz local capture/tracking to the SAM provider. Keep inference and client round-trip times distinct.",
+    "Do not fake a mask, a receipt, a successful lock outcome, a mobile camera test, or a physical-control demonstration.",
+    "Every lock/reveal pair must use the same real run and unchanged issued target. Any displayed error comes from its export.",
+    "The 34.10 px / 57 scored / 8 unscorable card refers only to the retained real-hand v16 one-second trial.",
+    "Keep uploaded real video, controlled photo motion, randomized simulation, and generated concept illustrations clearly distinct.",
+    "Keep synthetic initial conditions hidden from the observer; do not claim arbitrary physics discovery or general 3D reconstruction.",
+    "No prediction is available without an actual usable SAM mask. Do not depict manual rectangles as a SAM result.",
+    "Owner-private hosted access is not public jury access. The closing public link is the source/evidence repository.",
+    "No claimed win probability, prize entitlement, universal accuracy, guaranteed safety, or implemented robot actuation."
+  ]
 }

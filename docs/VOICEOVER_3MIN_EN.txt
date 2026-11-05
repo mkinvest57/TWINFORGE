@@ -1,17 +1,47 @@
-You get one move. Brake, turn… or do nothing. Which decision protects this cargo? Watch both futures. Same starting point. One difference: the command Meta chose.
+A camera shows you what just happened. Twinforge asks: where will this object be next?
 
-Twinforge tests a decision before replaying its consequences. Here, one carrier triggers a chain of collisions. Without intervention: one hundred sixteen and a half joules on the protected cargo. Meta’s steering command brings that down to four point six. Both futures come from the same physical model.
+Select an object. Predict its position. Test the result. A forecast becomes a measurable claim.
 
-Muse Spark receives the scene and a menu of allowed commands. It proposes one move and explains why. The simulator calculates the outcome. Those measurements go back to Spark for revision. The model never sees the exhaustive search scores.
+Meta's SAM three point one segments the object. Twinforge tracks it and estimates its next position.
 
-Here are the three proposals that actually ran. First: one hundred four point six joules. Rejected. Second: eight point five. Still too high. Third: four point six, under our eight-joule threshold. You can replay each attempt. The failures stay in the evidence.
+The input is pixels. No simulator coordinates, hidden velocity feed, or prerecorded future trajectory.
 
-This is a recorded real session: three calls, about thirty-eight seconds, for less than three US cents. Open the journal to inspect the reasoning, then export the original responses and receipts. The English text is a translation. The original evidence remains intact. Nothing here depends on a convincing explanation alone.
+Start a new trial: randomized launches, collisions, or pendulums. Different starting conditions. A fresh observation.
 
-Can a simpler method do better? Here, yes. The separate local search tests thirty-seven commands and finds zero impact on the protected cargo, using less control effort. That search is not AI. We show it beside Meta’s result. The useful thing is a decision you can challenge, measure, and improve.
+The renderer knows its world. Our observer never receives its positions, velocities, masses, or forces.
 
-Now delay the move. At a quarter of a second, a tested solution exists. At half a second, none of the thirty-seven commands passes our criterion. The collision has already transferred motion. Twinforge also exposes decisions that arrive too late. This boundary belongs to the tested time grid.
+Here is the division: SAM finds the object. Local tracking follows it. Twinforge forecasts its motion.
 
-Change the challenge. At the intersection, the best nominal command fails when speed changes by five percent. One successful check out of three. That is a sensitivity test, not a safety probability. Inspect the trajectories. Export the states, commands, and collisions. Counterexamples are part of the result.
+Choose half a second, three quarters, or one second ahead. Shading shows conditional uncertainty.
 
-Today, the initial states and physical laws are supplied. This is a numerical laboratory, not yet a robot validated in the real world. The ambition: test a decision before facing its consequences. Twinforge. One decision. Two futures. Now find the move that makes the difference.
+Lock a target before the future arrives. Its position and timestamp are now fixed.
+
+Reveal. The scene advances. Amber is the prediction. Cyan is the later observation. Measure the gap.
+
+Keep the misses. Keep unscorable attempts. Each result stays tied to its source and horizon.
+
+Now use camera mode, or open a local video. Tap an object. Box a bottle.
+
+Choose Hands. SAM finds visible hands. This example uses a recording of real human movement.
+
+The fingers change shape. The hand changes direction. We forecast overall motion, not intention.
+
+In this recorded trial, one-second forecasts averaged thirty-four pixels of error across fifty-seven scored targets.
+
+Eight more were unscorable. These comparisons use later visual tracking, not independent ground truth.
+
+Local tracking ran around twenty-five frames per second. SAM inference ran separately, with its latency measured.
+
+During that wait, captured frames keep arriving. SAM's confirmed mask anchors tracking through those observations.
+
+Open the evidence: submitted image, segmentation mask, request receipts, prediction timestamps, and measured outcomes.
+
+Export the record. Anyone reviewing it can ask: was this claim recorded before its outcome?
+
+Today, Twinforge forecasts two-dimensional image positions. Physical reconstruction and robot control are future work.
+
+The potential is practical: help robotics teams test anticipation before trusting predictions with real actions.
+
+Next: independent annotations, harder motion, and physical device trials. Keep testing the limits.
+
+Twinforge. See motion. Freeze a forecast. Measure what happens next. Then improve the next prediction.
