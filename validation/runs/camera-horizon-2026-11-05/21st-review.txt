@@ -1,0 +1,7 @@
+web/vision/live.css:3:30 info design-hardcoded-color Hardcoded color may drift from project design tokens.
+web/vision/live.css:7:360 info design-hardcoded-color Hardcoded color may drift from project design tokens.
+web/vision/live.css:8:615 info design-hardcoded-color Hardcoded color may drift from project design tokens.
+web/vision/live.css:10:47 info design-hardcoded-color Hardcoded color may drift from project design tokens.
+web/vision/live.css:12:90 info design-hardcoded-color Hardcoded color may drift from project design tokens.
+web/vision/live.css:35:323 info design-hardcoded-color Hardcoded color may drift from project design tokens.
+2 file(s), 6 finding(s), 0 fixed.

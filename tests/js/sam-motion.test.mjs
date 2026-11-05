@@ -55,3 +55,55 @@ test('validated short motion is usable before the longer linear validation windo
   assert.ok(prediction.diagnostics.pastTargetCounts.short_turn>=2);
   assert.ok(distance(prediction.point,path(sourceTime+.2))<8);
 });
+
+test('one-second forecast smooths centroid noise while retaining a complete future path',()=>{
+  const path=t=>({x:50+23*t,y:90-8*t});
+  const observations=Array.from({length:121},(_,i)=>({t:i*.05,point:{x:path(i*.05).x+1.5*Math.sin(i*2.7),y:path(i*.05).y+1.2*Math.sin(i*1.91)},status:'tracking',confidence:.95,trackId:'camera-object'}));
+  const errors=[];
+  for(let i=60;i<=120;i+=12){
+    const prefix=observations.slice(0,i+1),sourceTime=prefix.at(-1).t,p=forecastMotion(prefix,{sourceTime,horizon:1});
+    assert.equal(p.status,'predicted');errors.push(distance(p.point,path(sourceTime+1)));
+    assert.deepEqual(p.trajectory.map(s=>s.dt),[0,.25,.5,.75,1]);
+    assert.deepEqual(p.trajectory[0].point,prefix.at(-1).point);
+    assert.deepEqual(p.trajectory.at(-1).point,p.point);
+    assert.ok(p.trajectory.every((s,j)=>Number.isFinite(s.uncertaintyPx)&&s.uncertaintyPx>=0&&(!j||s.uncertaintyPx>=p.trajectory[j-1].uncertaintyPx)));
+    assert.equal(p.uncertainty.calibrated,false);
+  }
+  assert.ok(errors.reduce((a,b)=>a+b,0)/errors.length<1.5,'one second must not magnify ordinary measurement noise');
+});
+
+test('a repeatedly observed collision boundary influences a one-second prediction without receiving geometry',()=>{
+  const path=t=>{const d=(t*120+20)%560;return{x:60+(d<=280?d:560-d),y:130+5*t};};
+  const observations=Array.from({length:281},(_,i)=>({t:i*.04,point:path(i*.04),status:'tracking',confidence:.95,trackId:'unknown-puck'}));
+  const sourceTime=observations.at(-1).t,p=forecastMotion(observations,{sourceTime,horizon:1});
+  assert.equal(p.status,'predicted');
+  assert.ok(distance(p.point,path(sourceTime+1))<3,'the future target is after a previously seen rebound');
+  assert.ok(p.point.x<observations.at(-1).point.x,'the forecast crosses the next impact and reverses');
+  const poison=[...observations,{t:sourceTime+.5,point:{x:999999,y:-999999},status:'tracking',confidence:1,trackId:'unknown-puck',boundary:1}];
+  assert.deepEqual(forecastMotion(poison,{sourceTime,horizon:1}),p,'future samples cannot teach the contact model');
+});
+
+test('a selected stationary object still has an explicit position forecast',()=>{
+  const observations=rows(t=>({x:220+.2*Math.sin(17*t),y:150+.2*Math.cos(13*t)}),2.4),sourceTime=observations.at(-1).t;
+  const p=forecastMotion(observations,{sourceTime,horizon:1});
+  assert.equal(p.status,'predicted');assert.equal(p.reason,'observed_stationary');assert.ok(distance(p.point,{x:220,y:150})<1);
+  assert.ok(p.trajectory.every(s=>Number.isFinite(s.point.x)&&Number.isFinite(s.point.y)));
+});
+
+test('a new hand direction is learned from later observations and cannot rewrite the earlier target',()=>{
+  const path=t=>t<=2?{x:80+40*t,y:120}:{x:160-35*(t-2),y:120+18*(t-2)};
+  const before=rows(path,1.92),source=before.at(-1).t,locked=forecastMotion(before,{sourceTime:source,horizon:1}),copy=structuredClone(locked);
+  const after=rows(path,3.2),next=forecastMotion(after,{sourceTime:after.at(-1).t,horizon:1});
+  assert.deepEqual(locked,copy);assert.ok(distance(locked.point,path(source+1))>40,'the old forecast cannot know a new human intention');
+  assert.equal(next.status,'predicted');assert.ok(distance(next.point,path(after.at(-1).t+1))<10,'observed new motion must replace the previous direction');
+});
+
+test('long forecasts retain stale, missing and identity-boundary guards',()=>{
+  const observations=rows(t=>({x:80+40*t,y:120+7*t}),2.4),sourceTime=observations.at(-1).t;
+  assert.equal(forecastMotion(observations,{sourceTime:sourceTime+.5,horizon:1}).reason,'stale_observation');
+  assert.equal(forecastMotion(observations,{sourceTime,horizon:1.1}).reason,'invalid_time_or_horizon');
+  const lost=[...observations,{...observations.at(-1),t:sourceTime+.08,status:'lost',point:null}];
+  assert.equal(forecastMotion(lost,{sourceTime:sourceTime+.08,horizon:1}).status,'refused');
+  const changed=observations.map((o,i)=>i<observations.length-3?o:{...o,trackId:'new-object'});
+  assert.equal(forecastMotion(changed,{sourceTime,horizon:1}).reason,'insufficient_samples');
+});

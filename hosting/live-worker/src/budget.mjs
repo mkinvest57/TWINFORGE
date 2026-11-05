@@ -1,5 +1,7 @@
-// Integer 0.0001 USD units avoid rounding at the persistent $0.50 ceiling.
+// Integer 0.0001 USD units avoid rounding at the persistent combined ceiling.
+// The default remains $0.50. A larger allowance requires explicit server config.
 export const LIMIT_UNITS = 5000;
+export const MAX_LIMIT_UNITS = 20000;
 export const IMAGE_UNITS = 25;
 export const MAX_RUN_REQUESTS = 60;
 // Keep the paid task within Workers' post-disconnect waitUntil window. A
@@ -10,6 +12,21 @@ export class HttpError extends Error {
   constructor(status, message, detail = {}) { super(message); this.status = status; this.detail = detail; }
 }
 
+export function limitUnits(env) {
+  const raw = env.TOTAL_VISION_BUDGET_UNITS ?? LIMIT_UNITS;
+  if (raw === 'unlimited') return null;
+  const units = typeof raw === 'number' ? raw
+    : typeof raw === 'string' && /^[1-9][0-9]*$/.test(raw) ? Number(raw) : NaN;
+  if (!Number.isSafeInteger(units) || units < 1 || units > MAX_LIMIT_UNITS) {
+    throw new HttpError(503, 'TOTAL_VISION_BUDGET_UNITS must be an integer from 1 to 20000 (0.0001 USD units), or the explicit value "unlimited".');
+  }
+  return units;
+}
+
+export const formatUsd = amount => '$' + amount.toLocaleString('en-US', {
+  minimumFractionDigits: 2, maximumFractionDigits: 4,
+});
+
 export function baselineUnits(env) {
   const raw = String(env.INITIAL_VISION_SPENT_UNITS ?? '');
   if (!/^(0|[1-9][0-9]{0,8})$/.test(raw)) {
@@ -19,6 +36,7 @@ export function baselineUnits(env) {
 }
 
 export async function initializeBudget(env) {
+  limitUnits(env); // Fail closed before mutating the ledger on invalid config.
   const units = baselineUnits(env);
   if (!env.DB?.prepare) throw new HttpError(503, 'Persistent vision budget storage is unavailable.');
   // DML only; schema creation is exclusively a deployment migration. This
@@ -32,6 +50,8 @@ export async function initializeBudget(env) {
 }
 
 export async function summary(env) {
+  const limit = limitUnits(env);
+  const unlimited = limit === null;
   const row = await env.DB.prepare(`SELECT
     (SELECT initial_units FROM vision_budget_baseline WHERE id = 'vision') AS initial_units,
     COALESCE(SUM(units), 0) AS hosted_units, COUNT(*) AS requests
@@ -39,12 +59,14 @@ export async function summary(env) {
   if (!row || !Number.isInteger(row.initial_units)) throw new HttpError(503, 'Vision budget has not been initialized.');
   const spent = row.initial_units + row.hosted_units;
   return {
-    currency: 'USD', limit_per_scene: LIMIT_UNITS / 10000,
+    currency: 'USD', unlimited, limit_per_scene: unlimited ? null : limit / 10000,
     scenes: {vision: spent / 10000}, requests: row.requests,
     reserved_local_or_prior_usd: row.initial_units / 10000,
-    budget_scope: 'The $0.50 combined ceiling includes the reserved local allowance or prior spend plus hosted image reservations. The reserved portion is unavailable to this hosted runtime; it is not necessarily money already spent.',
+    budget_scope: unlimited
+      ? 'No Twinforge spending cap. Meta account credit still applies. Recorded spend includes the reserved local allowance or prior spend plus hosted image reservations; it is not a Meta account balance.'
+      : `The ${formatUsd(limit / 10000)} combined ceiling includes the reserved local allowance or prior spend plus hosted image reservations. The reserved portion is unavailable to this hosted runtime; it is not necessarily money already spent.`,
     hosted_requests: row.requests, persistent: true,
-    remaining_requests: Math.max(0, Math.floor((LIMIT_UNITS - spent) / IMAGE_UNITS)),
+    remaining_requests: unlimited ? null : Math.max(0, Math.floor((limit - spent) / IMAGE_UNITS)),
   };
 }
 
@@ -65,15 +87,18 @@ export const RESERVE_SQL = `INSERT INTO vision_requests
    request_sha256, units, created_ms, status)
   SELECT ?, ?, ?, ?, ?, ?, ?, 25, ?, 'requesting'
   WHERE
-    (SELECT initial_units FROM vision_budget_baseline WHERE id = 'vision')
-      + (SELECT COALESCE(SUM(units), 0) FROM vision_requests) + 25 <= 5000
-    AND (SELECT COUNT(*) FROM vision_requests WHERE run_id = ?) < 60
+    EXISTS (SELECT 1 FROM vision_budget_baseline WHERE id = 'vision')
+    AND (? IS NULL OR (SELECT initial_units FROM vision_budget_baseline WHERE id = 'vision')
+      + (SELECT COALESCE(SUM(units), 0) FROM vision_requests) + 25 <= ?)
+    AND (? IS NULL OR (SELECT COUNT(*) FROM vision_requests WHERE run_id = ?) < ?)
     AND NOT EXISTS (SELECT 1 FROM vision_requests WHERE run_id = ? AND frame_id = ?)
     AND NOT EXISTS (SELECT 1 FROM vision_requests WHERE run_id = ? AND source_time_s >= ?)
     AND NOT EXISTS (SELECT 1 FROM vision_requests WHERE status = 'requesting' AND created_ms > ?)
   RETURNING id`;
 
 export async function reserve(env, frame, requestHash) {
+  const limit = limitUnits(env);
+  const maxRunRequests = limit === null ? null : MAX_RUN_REQUESTS;
   const id = crypto.randomUUID().replaceAll('-', ''), now = Date.now();
   // Preserve interrupted reservations and their cost, but close stale leases
   // so status and audit history describe what actually happened.
@@ -84,8 +109,9 @@ export async function reserve(env, frame, requestHash) {
   // restarted Worker or another isolate cannot overspend or duplicate a frame.
   const row = await env.DB.prepare(RESERVE_SQL).bind(
     id, frame.run_id, frame.frame_id, frame.source_time_s, frame.source_kind,
-    frame.image_sha256, requestHash, now,
-    frame.run_id, frame.run_id, frame.frame_id, frame.run_id, frame.source_time_s,
+    frame.image_sha256, requestHash, now, limit, limit,
+    maxRunRequests, frame.run_id, maxRunRequests,
+    frame.run_id, frame.frame_id, frame.run_id, frame.source_time_s,
     now - IN_FLIGHT_LEASE_MS,
   ).first();
   if (row) return id;
@@ -100,10 +126,10 @@ export async function reserve(env, frame, requestHash) {
       {code:'out_of_order_frame', provider_call_made:false});
   }
   const budget = await summary(env);
-  if (!budget.remaining_requests) throw new HttpError(429, 'The shared $0.50 vision budget is exhausted.',
+  if (!budget.unlimited && !budget.remaining_requests) throw new HttpError(429, `The shared ${formatUsd(limit / 10000)} vision budget is exhausted.`,
     {code:'budget_exhausted', provider_call_made:false, remaining_requests:0});
   const run = await env.DB.prepare('SELECT COUNT(*) AS requests FROM vision_requests WHERE run_id = ?').bind(frame.run_id).first();
-  if (run.requests >= MAX_RUN_REQUESTS) throw new HttpError(429, 'Live SAM run reached its 60-image request limit.',
+  if (maxRunRequests !== null && run.requests >= maxRunRequests) throw new HttpError(429, 'Live SAM run reached its 60-image request limit.',
     {code:'run_limit', provider_call_made:false, max_requests_per_run:MAX_RUN_REQUESTS});
   const busy = await inFlight(env, now);
   throw new HttpError(429, 'SAM is processing another frame; wait before sending the next.',

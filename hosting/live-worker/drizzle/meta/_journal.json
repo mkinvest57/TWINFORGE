@@ -8,6 +8,13 @@
       "when": 1793833728062,
       "tag": "0000_vision_budget",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1793841666356,
+      "tag": "0001_video_source_kind",
+      "breakpoints": true
     }
   ]
 }

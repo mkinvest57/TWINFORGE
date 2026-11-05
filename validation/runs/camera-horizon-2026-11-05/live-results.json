@@ -1,0 +1,1187 @@
+{
+  "schema": "twinforge.actual-sam-video-results.v1",
+  "updatedAt": "2026-11-05T01:39:58.293Z",
+  "status": "v16_final_smoke_complete_all_prior_cohorts_preserved",
+  "scope": "Actual SAM 3.1 requests through the hosted interface, on locally uploaded video fixtures, with live-issued future targets.",
+  "sourceDistinctions": {
+    "controlledPhotoClips": "Real photographs transformed with controlled synthetic motion. They are not recordings of physical bottle or hand motion.",
+    "sam": "These runs use real provider receipts and SAM masks; manual rectangles do not initialize their tracker.",
+    "spatialPrompt": "User point/box prompts guide SAM; the tracker begins from returned SAM masks, not the prompt rectangle.",
+    "manualTrackerReference": {
+      "file": "tracker-only.json",
+      "liveSamCalls": 0,
+      "manualRoi": true,
+      "includedInActualSamMetrics": false
+    },
+    "physicalPhoneTest": false,
+    "recordedRealHandClip": "Uploaded recording of actual hand movement, distinct from the controlled photo-motion clips. It is not a live phone-camera test and has no independent hand-position annotations."
+  },
+  "measurementLimits": [
+    "Errors compare future predictions with later visual tracker observations, not independent physical ground truth.",
+    "Tracking cadence and SAM provider latency are different measurements; SAM is not run for every frame.",
+    "The observed cadence is from this browser session, not a claim of phone performance.",
+    "Historical exports can repeat previous runs; only each named file current run is summarized here.",
+    "The hands failure is retained. A 0.5183-second input gap exceeded the then-configured 0.5-second feature-tracker window; this is not evidence that SAM failed to segment the later hands.",
+    "Retesting after a fix creates an additional case and does not replace the failed run."
+  ],
+  "runs": [
+    {
+      "file": "bottle-point-05.json",
+      "sha256": "f5ab93a683d0508373b5fb06fefb4f43cc781322b8df0654840a01a346f47e1b",
+      "runId": "703ebc0a-eab1-4946-afb4-6f3bb7589225",
+      "sourceKind": "video",
+      "fixture": "bottle_photo_controlled_motion",
+      "manualRoiInitialization": false,
+      "selection": {
+        "type": "point",
+        "x": 240,
+        "y": 135
+      },
+      "concept": "object",
+      "dimensions": [
+        480,
+        270
+      ],
+      "durationS": 7.9767,
+      "interpretation": "Native point selection confirmed and continuous visual tracking; 0.5-second future targets scored.",
+      "sam": {
+        "submittedRequests": 3,
+        "retainedResponses": 2,
+        "submissionsWithoutRetainedResponse": 1,
+        "unretainedNote": "A submitted request without a retained response is not counted as a confirmed successful inference; it may have settled after stop. Provider-side completion is not established by this export.",
+        "responses": [
+          {
+            "requestId": "a9a0ac574d194dd7bad53b319dfae161",
+            "promptKind": "point",
+            "selection": {
+              "type": "point",
+              "x": 240,
+              "y": 135
+            },
+            "sourceTimeS": 0,
+            "receivedAtSourceTimeS": 0,
+            "objects": 1,
+            "providerMs": 1002,
+            "serverMs": 1079,
+            "chargedUsd": 0.0025
+          },
+          {
+            "requestId": "b09c3956c02c411682c1691eeb6f27df",
+            "promptKind": "box",
+            "selection": {
+              "type": "box",
+              "x": 207,
+              "y": 22,
+              "width": 79,
+              "height": 236
+            },
+            "sourceTimeS": 3.0163,
+            "receivedAtSourceTimeS": 4.0966,
+            "objects": 1,
+            "providerMs": 781,
+            "serverMs": 852,
+            "chargedUsd": 0.0025
+          }
+        ],
+        "providerMs": {
+          "count": 2,
+          "min": 781,
+          "mean": 891.5,
+          "median": 1002,
+          "p90": 1002,
+          "max": 1002
+        },
+        "serverMs": {
+          "count": 2,
+          "min": 852,
+          "mean": 965.5,
+          "median": 1079,
+          "p90": 1079,
+          "max": 1079
+        },
+        "lateResponses": 0,
+        "busyResponses": 0
+      },
+      "tracking": {
+        "observationCount": 199,
+        "uniqueCaptureTimes": 199,
+        "observedSpanS": 7.9767,
+        "effectiveCaptureHz": 24.82229493399526,
+        "captureGapS": {
+          "count": 198,
+          "min": 0.01130000000000031,
+          "mean": 0.04028636363636365,
+          "median": 0.0400999999999998,
+          "p90": 0.040899999999999714,
+          "max": 0.15510000000000002
+        },
+        "trackIdentities": 1,
+        "revalidations": 1,
+        "states": {
+          "tracking:sam_mask_feature_anchor": 1,
+          "tracking:feature_flow_consensus": 198
+        },
+        "firstLoss": null
+      },
+      "horizons": [
+        {
+          "horizonS": 0.5,
+          "issued": 64,
+          "scored": 60,
+          "unscorable": 4,
+          "pending": 0,
+          "outcomes": {
+            "scored:target_observed": 60,
+            "unscorable:observation_stopped": 4
+          },
+          "errorPx": {
+            "count": 60,
+            "min": 0.13143347457957838,
+            "mean": 3.5218044856363826,
+            "median": 3.3275431474028987,
+            "p90": 7.372826482139499,
+            "max": 8.935888322803429
+          },
+          "envelope": {
+            "calibrated": false,
+            "contained": 54,
+            "total": 60
+          },
+          "motionModels": {
+            "velocity_smooth": 7,
+            "velocity_recent": 18,
+            "damped_acceleration": 17,
+            "acceleration": 4,
+            "hold": 1,
+            "harmonic": 13,
+            "turn": 4
+          },
+          "causalViolations": 0
+        }
+      ]
+    },
+    {
+      "file": "bottle-box-1.json",
+      "sha256": "72947391c08b90fb22b8793f0461221d58a59de6145e88f4ef562a3a467bff79",
+      "runId": "4dbe7d68-4c5d-4353-ac38-c2fa4a653970",
+      "sourceKind": "video",
+      "fixture": "bottle_photo_controlled_motion",
+      "manualRoiInitialization": false,
+      "selection": {
+        "type": "box",
+        "x": 198,
+        "y": 14,
+        "width": 77,
+        "height": 245
+      },
+      "concept": "object",
+      "dimensions": [
+        480,
+        270
+      ],
+      "durationS": 7.9657,
+      "interpretation": "Native box selection confirmed and continuous visual tracking; 1-second future targets scored.",
+      "sam": {
+        "submittedRequests": 3,
+        "retainedResponses": 2,
+        "submissionsWithoutRetainedResponse": 1,
+        "unretainedNote": "A submitted request without a retained response is not counted as a confirmed successful inference; it may have settled after stop. Provider-side completion is not established by this export.",
+        "responses": [
+          {
+            "requestId": "9d87cceb1ec9430ab0184ce0e1682614",
+            "promptKind": "box",
+            "selection": {
+              "type": "box",
+              "x": 198,
+              "y": 14,
+              "width": 77,
+              "height": 245
+            },
+            "sourceTimeS": 0,
+            "receivedAtSourceTimeS": 0,
+            "objects": 1,
+            "providerMs": 490,
+            "serverMs": 564,
+            "chargedUsd": 0.0025
+          },
+          {
+            "requestId": "ad924c234e974b71acefb464c3e6153e",
+            "promptKind": "box",
+            "selection": {
+              "type": "box",
+              "x": 207,
+              "y": 22,
+              "width": 79,
+              "height": 237
+            },
+            "sourceTimeS": 3.0048,
+            "receivedAtSourceTimeS": 4.5255,
+            "objects": 1,
+            "providerMs": 1132,
+            "serverMs": 1202,
+            "chargedUsd": 0.0025
+          }
+        ],
+        "providerMs": {
+          "count": 2,
+          "min": 490,
+          "mean": 811,
+          "median": 1132,
+          "p90": 1132,
+          "max": 1132
+        },
+        "serverMs": {
+          "count": 2,
+          "min": 564,
+          "mean": 883,
+          "median": 1202,
+          "p90": 1202,
+          "max": 1202
+        },
+        "lateResponses": 0,
+        "busyResponses": 0
+      },
+      "tracking": {
+        "observationCount": 198,
+        "uniqueCaptureTimes": 198,
+        "observedSpanS": 7.9657,
+        "effectiveCaptureHz": 24.73103430960242,
+        "captureGapS": {
+          "count": 197,
+          "min": 0.0056,
+          "mean": 0.040435025380710664,
+          "median": 0.040000000000000036,
+          "p90": 0.04090000000000016,
+          "max": 0.16629999999999967
+        },
+        "trackIdentities": 1,
+        "revalidations": 1,
+        "states": {
+          "tracking:sam_mask_feature_anchor": 1,
+          "tracking:feature_flow_consensus": 197
+        },
+        "firstLoss": null
+      },
+      "horizons": [
+        {
+          "horizonS": 1,
+          "issued": 63,
+          "scored": 55,
+          "unscorable": 8,
+          "pending": 0,
+          "outcomes": {
+            "scored:target_observed": 55,
+            "unscorable:observation_stopped": 8
+          },
+          "errorPx": {
+            "count": 55,
+            "min": 0.870857618998664,
+            "mean": 10.168833596084319,
+            "median": 8.668400953823502,
+            "p90": 20.445075612319297,
+            "max": 25.4789178911567
+          },
+          "envelope": {
+            "calibrated": false,
+            "contained": 41,
+            "total": 55
+          },
+          "motionModels": {
+            "velocity_smooth": 10,
+            "velocity_recent": 12,
+            "hold": 1,
+            "acceleration": 2,
+            "harmonic": 33,
+            "damped_acceleration": 4,
+            "turn": 1
+          },
+          "causalViolations": 0
+        }
+      ]
+    },
+    {
+      "file": "hands-photo-1-failed.json",
+      "sha256": "6c89b9d6c63fcc1f8b707541ca3f0b1202c6c007bad3d3c391aa37e496699676",
+      "runId": "10824ce9-067a-414c-9f3f-1f326ab197fd",
+      "sourceKind": "video",
+      "fixture": "hands_photo_controlled_motion",
+      "manualRoiInitialization": false,
+      "selection": null,
+      "concept": "hand",
+      "dimensions": [
+        480,
+        270
+      ],
+      "durationS": 7.9749,
+      "interpretation": "Failed forecast trial: initial SAM result had no matches, later responses found two hands, then a capture gap exceeded the tracker time limit. No target was scored.",
+      "sam": {
+        "submittedRequests": 3,
+        "retainedResponses": 3,
+        "submissionsWithoutRetainedResponse": 0,
+        "unretainedNote": "A submitted request without a retained response is not counted as a confirmed successful inference; it may have settled after stop. Provider-side completion is not established by this export.",
+        "responses": [
+          {
+            "requestId": "5d016993ed1046afb6338dcf45ab8d6e",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 0,
+            "receivedAtSourceTimeS": 0,
+            "objects": 0,
+            "providerMs": 1317,
+            "serverMs": 1399,
+            "chargedUsd": 0.0025
+          },
+          {
+            "requestId": "982a98edb82a4bb8ad5d2215b561ad89",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 3.0139,
+            "receivedAtSourceTimeS": 4.6544,
+            "objects": 2,
+            "providerMs": 1076,
+            "serverMs": 1146,
+            "chargedUsd": 0.0025
+          },
+          {
+            "requestId": "12d7a63d214a4f60b94226623fb92510",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 6.0543,
+            "receivedAtSourceTimeS": 7.4548,
+            "objects": 2,
+            "providerMs": 786,
+            "serverMs": 875,
+            "chargedUsd": 0.0025
+          }
+        ],
+        "providerMs": {
+          "count": 3,
+          "min": 786,
+          "mean": 1059.6666666666667,
+          "median": 1076,
+          "p90": 1317,
+          "max": 1317
+        },
+        "serverMs": {
+          "count": 3,
+          "min": 875,
+          "mean": 1140,
+          "median": 1146,
+          "p90": 1399,
+          "max": 1399
+        },
+        "lateResponses": 0,
+        "busyResponses": 0
+      },
+      "tracking": {
+        "observationCount": 278,
+        "uniqueCaptureTimes": 103,
+        "observedSpanS": 4.961,
+        "effectiveCaptureHz": 20.56037089296513,
+        "captureGapS": {
+          "count": 102,
+          "min": 0.017000000000000348,
+          "mean": 0.04863725490196079,
+          "median": 0.040000000000000036,
+          "p90": 0.04090000000000016,
+          "max": 0.5183
+        },
+        "trackIdentities": 4,
+        "revalidations": 0,
+        "states": {
+          "tracking:sam_mask_feature_anchor": 4,
+          "tracking:feature_flow_consensus": 158,
+          "lost:tracking_window_expired": 2,
+          "lost:sam_resegmentation_required": 114
+        },
+        "firstLoss": {
+          "timeS": 5.1727,
+          "reason": "tracking_window_expired",
+          "previousTrackTimeS": 4.6544,
+          "gapS": 0.5183
+        }
+      },
+      "horizons": [
+        {
+          "horizonS": 1,
+          "issued": 4,
+          "scored": 0,
+          "unscorable": 4,
+          "pending": 0,
+          "outcomes": {
+            "unscorable:missing_target_bracket": 2,
+            "unscorable:observation_stopped": 2
+          },
+          "errorPx": {
+            "count": 0,
+            "min": null,
+            "mean": null,
+            "median": null,
+            "p90": null,
+            "max": null
+          },
+          "envelope": {
+            "calibrated": false,
+            "contained": 0,
+            "total": 0
+          },
+          "motionModels": {
+            "acceleration": 1,
+            "turn": 1,
+            "velocity_recent": 2
+          },
+          "causalViolations": 0
+        }
+      ],
+      "initialNoMatchesExplanation": "Its exact initial submitted JPEG matches the all-black image retained in failureInvestigation; zero detections do not test visible-hand segmentation."
+    },
+    {
+      "file": "hands-photo-1-v13-failed.json",
+      "sha256": "2e03c39233160d33f149fdb598f0d84d4234b2339cd8ebbdcc273b1b2c44ec13",
+      "runId": "19670d7e-3103-466e-b7ce-ad76c442da48",
+      "sourceKind": "video",
+      "fixture": "hands_photo_controlled_motion",
+      "manualRoiInitialization": false,
+      "selection": null,
+      "concept": "hand",
+      "dimensions": [
+        480,
+        270
+      ],
+      "durationS": 7.9657,
+      "interpretation": "Failed v13 retest: initial SAM found no hands; the second response found two hands but arrived 4.1602 source seconds after its submitted frame. The observer recorded one expired-buffer response, so no local tracking or forecast began.",
+      "sam": {
+        "submittedRequests": 3,
+        "retainedResponses": 2,
+        "submissionsWithoutRetainedResponse": 1,
+        "unretainedNote": "An unretained submission is not counted as confirmed successful inference.",
+        "responses": [
+          {
+            "requestId": "9140acc495de4c3b8c1b6c3d96ad410e",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 0,
+            "receivedAtSourceTimeS": 0,
+            "objects": 0,
+            "providerMs": 869,
+            "serverMs": 945,
+            "chargedUsd": 0.0025
+          },
+          {
+            "requestId": "b86eef8eadb946d19a3207940e68c71d",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 3.006,
+            "receivedAtSourceTimeS": 7.1662,
+            "objects": 2,
+            "providerMs": 1051,
+            "serverMs": 1126,
+            "chargedUsd": 0.0025
+          }
+        ],
+        "providerMs": {
+          "count": 2,
+          "min": 869,
+          "mean": 960,
+          "median": 1051,
+          "p90": 1051,
+          "max": 1051
+        },
+        "serverMs": {
+          "count": 2,
+          "min": 945,
+          "mean": 1035.5,
+          "median": 1126,
+          "p90": 1126,
+          "max": 1126
+        },
+        "lateResponses": 1,
+        "busyResponses": 0
+      },
+      "tracking": {
+        "observationCount": 0,
+        "uniqueCaptureTimes": 0,
+        "observedSpanS": null,
+        "effectiveCaptureHz": null,
+        "captureGapS": {
+          "count": 0,
+          "min": null,
+          "mean": null,
+          "median": null,
+          "p90": null,
+          "max": null
+        },
+        "trackIdentities": 0,
+        "revalidations": 0,
+        "states": {},
+        "firstLoss": null
+      },
+      "horizons": [
+        {
+          "horizonS": 1,
+          "issued": 0,
+          "scored": 0,
+          "unscorable": 0,
+          "pending": 0,
+          "outcomes": {},
+          "errorPx": {
+            "count": 0,
+            "min": null,
+            "mean": null,
+            "median": null,
+            "p90": null,
+            "max": null
+          },
+          "envelope": {
+            "calibrated": false,
+            "contained": 0,
+            "total": 0
+          },
+          "motionModels": {},
+          "causalViolations": 0
+        }
+      ],
+      "initialNoMatchesExplanation": "Its exact initial submitted JPEG matches the all-black image retained in failureInvestigation; zero detections do not test visible-hand segmentation."
+    },
+    {
+      "file": "hands-photo-1-v14.json",
+      "sha256": "303d1578cc5162b64f628462f724b8f464bc33b26180a8a10fa825f27f887041",
+      "runId": "ddcaafdb-b000-4db2-bec3-f22624dd59da",
+      "sourceKind": "video",
+      "fixture": "hands_photo_controlled_motion",
+      "manualRoiInitialization": false,
+      "selection": null,
+      "concept": "hand",
+      "dimensions": [
+        480,
+        270
+      ],
+      "durationS": 7.9742,
+      "interpretation": "Successful v14 retest: initial SAM found two hands; both remained tracked and 1-second targets were scored. The motion is a controlled transformation of a photograph, not physical hand movement.",
+      "sam": {
+        "submittedRequests": 3,
+        "retainedResponses": 2,
+        "submissionsWithoutRetainedResponse": 1,
+        "unretainedNote": "A submitted request without a retained response is not counted as a confirmed successful inference; it may have settled after stop. Provider-side completion is not established by this export.",
+        "responses": [
+          {
+            "requestId": "aa636e45f4924594aa080ba328725fe1",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 0.0091,
+            "receivedAtSourceTimeS": 0.0091,
+            "objects": 2,
+            "providerMs": 2014,
+            "serverMs": 2101,
+            "clientRoundTripMs": 2817,
+            "chargedUsd": 0.0025
+          },
+          {
+            "requestId": "9e31cc338f59428fb566f34ba8a86215",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 3.0142,
+            "receivedAtSourceTimeS": 5.5346,
+            "objects": 2,
+            "providerMs": 1187,
+            "serverMs": 1267,
+            "clientRoundTripMs": 2543,
+            "chargedUsd": 0.0025
+          }
+        ],
+        "providerMs": {
+          "count": 2,
+          "min": 1187,
+          "mean": 1600.5,
+          "median": 2014,
+          "p90": 2014,
+          "max": 2014
+        },
+        "serverMs": {
+          "count": 2,
+          "min": 1267,
+          "mean": 1684,
+          "median": 2101,
+          "p90": 2101,
+          "max": 2101
+        },
+        "clientRoundTripMs": {
+          "count": 2,
+          "min": 2543,
+          "mean": 2680,
+          "median": 2817,
+          "p90": 2817,
+          "max": 2817
+        },
+        "lateResponses": 0,
+        "busyResponses": 0
+      },
+      "tracking": {
+        "observationCount": 402,
+        "uniqueCaptureTimes": 201,
+        "observedSpanS": 7.9651,
+        "effectiveCaptureHz": 25.10954036986353,
+        "captureGapS": {
+          "count": 200,
+          "min": 0.004199999999999999,
+          "mean": 0.039825500000000014,
+          "median": 0.040000000000000036,
+          "p90": 0.04099999999999948,
+          "max": 0.06879999999999953
+        },
+        "trackIdentities": 2,
+        "revalidations": 2,
+        "states": {
+          "tracking:sam_mask_feature_anchor": 2,
+          "tracking:feature_flow_consensus": 400
+        },
+        "firstLoss": null
+      },
+      "horizons": [
+        {
+          "horizonS": 1,
+          "issued": 132,
+          "scored": 114,
+          "unscorable": 18,
+          "pending": 0,
+          "outcomes": {
+            "scored:target_observed": 114,
+            "unscorable:observation_stopped": 18
+          },
+          "errorPx": {
+            "count": 114,
+            "min": 0.8538638714371766,
+            "mean": 8.515201782656268,
+            "median": 7.058301616245705,
+            "p90": 16.006167616657777,
+            "max": 19.572589986387257
+          },
+          "envelope": {
+            "calibrated": false,
+            "contained": 87,
+            "total": 114
+          },
+          "motionModels": {
+            "velocity_smooth": 20,
+            "velocity_recent": 25,
+            "turn": 36,
+            "damped_acceleration": 22,
+            "acceleration": 8,
+            "harmonic": 18,
+            "hold": 3
+          },
+          "causalViolations": 0
+        }
+      ],
+      "lockedTargets": []
+    },
+    {
+      "file": "real-hand-1-v14.json",
+      "sha256": "b5a91c8440f7da4d6a26011042ec2ba11ac88b0c249739d47d81742c567154ea",
+      "runId": "2aac16ab-55b6-4c3d-a632-78188bb99740",
+      "sourceKind": "video",
+      "fixture": "recorded_real_hand_movement",
+      "manualRoiInitialization": false,
+      "selection": null,
+      "concept": "hand",
+      "dimensions": [
+        413,
+        480
+      ],
+      "durationS": 7.9732,
+      "interpretation": "Actual recorded hand movement in an uploaded clip, with real SAM segmentation and continuously tracked image positions. Future errors use later tracker output, not independent annotations.",
+      "sam": {
+        "submittedRequests": 3,
+        "retainedResponses": 3,
+        "submissionsWithoutRetainedResponse": 0,
+        "unretainedNote": "A submitted request without a retained response is not counted as a confirmed successful inference; it may have settled after stop. Provider-side completion is not established by this export.",
+        "responses": [
+          {
+            "requestId": "38639cf5c0a047eeb18e011c0aec8522",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 0.0049,
+            "receivedAtSourceTimeS": 0.0049,
+            "objects": 1,
+            "providerMs": 771,
+            "serverMs": 850,
+            "clientRoundTripMs": 1165,
+            "chargedUsd": 0.0025
+          },
+          {
+            "requestId": "a7043ad089064993a604b25b02ce9ea6",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 3.0121,
+            "receivedAtSourceTimeS": 5.172,
+            "objects": 1,
+            "providerMs": 791,
+            "serverMs": 876,
+            "clientRoundTripMs": 2181,
+            "chargedUsd": 0.0025
+          },
+          {
+            "requestId": "be62de86df4e47eba31258b7765d406b",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 6.0523,
+            "receivedAtSourceTimeS": 7.4517,
+            "objects": 1,
+            "providerMs": 1023,
+            "serverMs": 1098,
+            "clientRoundTripMs": 1401,
+            "chargedUsd": 0.0025
+          }
+        ],
+        "providerMs": {
+          "count": 3,
+          "min": 771,
+          "mean": 861.6666666666666,
+          "median": 791,
+          "p90": 1023,
+          "max": 1023
+        },
+        "serverMs": {
+          "count": 3,
+          "min": 850,
+          "mean": 941.3333333333334,
+          "median": 876,
+          "p90": 1098,
+          "max": 1098
+        },
+        "clientRoundTripMs": {
+          "count": 3,
+          "min": 1165,
+          "mean": 1582.3333333333333,
+          "median": 1401,
+          "p90": 2181,
+          "max": 2181
+        },
+        "lateResponses": 0,
+        "busyResponses": 0
+      },
+      "tracking": {
+        "observationCount": 198,
+        "uniqueCaptureTimes": 198,
+        "observedSpanS": 7.9683,
+        "effectiveCaptureHz": 24.722964747813208,
+        "captureGapS": {
+          "count": 197,
+          "min": 0.007000000000000001,
+          "mean": 0.04044822335025381,
+          "median": 0.040000000000000036,
+          "p90": 0.04100000000000037,
+          "max": 0.16169999999999973
+        },
+        "trackIdentities": 1,
+        "revalidations": 2,
+        "states": {
+          "tracking:sam_mask_feature_anchor": 1,
+          "tracking:feature_flow_consensus": 197
+        },
+        "firstLoss": null
+      },
+      "horizons": [
+        {
+          "horizonS": 1,
+          "issued": 63,
+          "scored": 54,
+          "unscorable": 9,
+          "pending": 0,
+          "outcomes": {
+            "scored:target_observed": 54,
+            "unscorable:observation_stopped": 9
+          },
+          "errorPx": {
+            "count": 54,
+            "min": 3.986438357685375,
+            "mean": 40.90412243420486,
+            "median": 37.051642250413195,
+            "p90": 104.5666600809418,
+            "max": 140.39852358956512
+          },
+          "envelope": {
+            "calibrated": false,
+            "contained": 35,
+            "total": 54
+          },
+          "motionModels": {
+            "velocity_smooth": 14,
+            "hold": 7,
+            "velocity_recent": 22,
+            "harmonic": 1,
+            "learned_contacts": 14,
+            "turn": 1,
+            "velocity_long": 4
+          },
+          "causalViolations": 0
+        }
+      ],
+      "lockedTargets": [
+        {
+          "id": "2aac16ab-55b6-4c3d-a632-78188bb99740:ticket-1",
+          "horizonS": 1,
+          "sourceTimeS": 7.6918,
+          "targetTimeS": 8.6918,
+          "status": "unscorable",
+          "predictedPoint": {
+            "x": 217.37903086871742,
+            "y": 170.02169896421057
+          },
+          "actualPoint": null,
+          "errorPx": null,
+          "reason": "observation_stopped",
+          "sourceDurationS": 7.9732
+        }
+      ]
+    },
+    {
+      "file": "real-hand-05-v14.json",
+      "sha256": "ade2e5b07a8b7012b3658f9801b5f9d9811c03ef624348e0b822d3605af67a5c",
+      "runId": "e1b7da01-ec93-4bcd-b655-069b69d09660",
+      "sourceKind": "video",
+      "fixture": "recorded_real_hand_movement",
+      "manualRoiInitialization": false,
+      "selection": null,
+      "concept": "hand",
+      "dimensions": [
+        413,
+        480
+      ],
+      "durationS": 7.9645,
+      "interpretation": "Actual recorded hand movement in an uploaded clip, with real SAM segmentation and continuously tracked image positions. Future errors use later tracker output, not independent annotations.",
+      "sam": {
+        "submittedRequests": 3,
+        "retainedResponses": 3,
+        "submissionsWithoutRetainedResponse": 0,
+        "unretainedNote": "A submitted request without a retained response is not counted as a confirmed successful inference; it may have settled after stop. Provider-side completion is not established by this export.",
+        "responses": [
+          {
+            "requestId": "a927668f39e74cbdb27de16084f50d6f",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 0.0069,
+            "receivedAtSourceTimeS": 0.0069,
+            "objects": 1,
+            "providerMs": 532,
+            "serverMs": 609,
+            "clientRoundTripMs": 1056,
+            "chargedUsd": 0.0025
+          },
+          {
+            "requestId": "6617a33d45e3496c8ff8e1d66a7102e8",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 3.0438,
+            "receivedAtSourceTimeS": 4.324,
+            "objects": 1,
+            "providerMs": 837,
+            "serverMs": 918,
+            "clientRoundTripMs": 1275,
+            "chargedUsd": 0.0025
+          },
+          {
+            "requestId": "2f2713e378d449fd99970b28aaacdae9",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 6.084,
+            "receivedAtSourceTimeS": 7.3243,
+            "objects": 1,
+            "providerMs": 927,
+            "serverMs": 1007,
+            "clientRoundTripMs": 1239,
+            "chargedUsd": 0.0025
+          }
+        ],
+        "providerMs": {
+          "count": 3,
+          "min": 532,
+          "mean": 765.3333333333334,
+          "median": 837,
+          "p90": 927,
+          "max": 927
+        },
+        "serverMs": {
+          "count": 3,
+          "min": 609,
+          "mean": 844.6666666666666,
+          "median": 918,
+          "p90": 1007,
+          "max": 1007
+        },
+        "clientRoundTripMs": {
+          "count": 3,
+          "min": 1056,
+          "mean": 1190,
+          "median": 1239,
+          "p90": 1275,
+          "max": 1275
+        },
+        "lateResponses": 0,
+        "busyResponses": 0
+      },
+      "tracking": {
+        "observationCount": 201,
+        "uniqueCaptureTimes": 201,
+        "observedSpanS": 7.9576,
+        "effectiveCaptureHz": 25.13320599175631,
+        "captureGapS": {
+          "count": 200,
+          "min": 0.003300000000000001,
+          "mean": 0.03978799999999999,
+          "median": 0.040000000000000036,
+          "p90": 0.040800000000000836,
+          "max": 0.04670000000000041
+        },
+        "trackIdentities": 1,
+        "revalidations": 2,
+        "states": {
+          "tracking:sam_mask_feature_anchor": 1,
+          "tracking:feature_flow_consensus": 200
+        },
+        "firstLoss": null
+      },
+      "horizons": [
+        {
+          "horizonS": 0.5,
+          "issued": 66,
+          "scored": 61,
+          "unscorable": 5,
+          "pending": 0,
+          "outcomes": {
+            "scored:target_observed": 61,
+            "unscorable:observation_stopped": 5
+          },
+          "errorPx": {
+            "count": 61,
+            "min": 1.4266715369252312,
+            "mean": 20.26780969897792,
+            "median": 15.129608026034537,
+            "p90": 41.67694417126644,
+            "max": 57.869536736334545
+          },
+          "envelope": {
+            "calibrated": false,
+            "contained": 49,
+            "total": 61
+          },
+          "motionModels": {
+            "velocity_smooth": 13,
+            "velocity_recent": 35,
+            "hold": 4,
+            "learned_contacts": 3,
+            "harmonic": 2,
+            "velocity_long": 9
+          },
+          "causalViolations": 0
+        }
+      ],
+      "lockedTargets": [
+        {
+          "id": "e1b7da01-ec93-4bcd-b655-069b69d09660:ticket-1",
+          "horizonS": 0.5,
+          "sourceTimeS": 4.0038,
+          "targetTimeS": 4.5038,
+          "status": "scored",
+          "predictedPoint": {
+            "x": 230.75694624571946,
+            "y": 259.8539081934446
+          },
+          "actualPoint": {
+            "x": 205.96545106385815,
+            "y": 244.06885594249638
+          },
+          "errorPx": 29.390238309980038,
+          "reason": "target_observed",
+          "sourceDurationS": 7.9645
+        }
+      ]
+    },
+    {
+      "file": "real-hand-1-v16.json",
+      "sha256": "1c8f3b9cf14eb3a8dcf46b74b248921de77b83d63bf3bd465cb706377900bad4",
+      "release": "v16",
+      "runId": "d0b07f2c-52b6-40c8-989e-f0497e96d396",
+      "sourceKind": "video",
+      "fixture": "recorded_real_hand_movement",
+      "manualRoiInitialization": false,
+      "selection": null,
+      "concept": "hand",
+      "dimensions": [
+        413,
+        480
+      ],
+      "durationS": 7.9696,
+      "interpretation": "Final v16 live smoke test of the uploaded real-hand recording. This is a separate cohort: different capture and SAM timing mean its error cannot establish model improvement over v14.",
+      "sam": {
+        "submittedRequests": 3,
+        "retainedResponses": 2,
+        "submissionsWithoutRetainedResponse": 1,
+        "unretainedNote": "A submitted request without a retained response is not counted as confirmed successful inference; it may have settled after stop.",
+        "responses": [
+          {
+            "requestId": "00bc7ae5d8b34281b3c20723df951cce",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 0.0082,
+            "receivedAtSourceTimeS": 0.0082,
+            "objects": 1,
+            "providerMs": 1456,
+            "serverMs": 1540,
+            "clientRoundTripMs": 5427,
+            "chargedUsd": 0.0025
+          },
+          {
+            "requestId": "2ce8876ecf3144ddb299e1944eca9fe8",
+            "promptKind": "concept",
+            "selection": null,
+            "sourceTimeS": 3.0097,
+            "receivedAtSourceTimeS": 4.3692,
+            "objects": 1,
+            "providerMs": 1004,
+            "serverMs": 1083,
+            "clientRoundTripMs": 1381,
+            "chargedUsd": 0.0025
+          }
+        ],
+        "providerMs": {
+          "count": 2,
+          "min": 1004,
+          "mean": 1230,
+          "median": 1456,
+          "p90": 1456,
+          "max": 1456
+        },
+        "serverMs": {
+          "count": 2,
+          "min": 1083,
+          "mean": 1311.5,
+          "median": 1540,
+          "p90": 1540,
+          "max": 1540
+        },
+        "clientRoundTripMs": {
+          "count": 2,
+          "min": 1381,
+          "mean": 3404,
+          "median": 5427,
+          "p90": 5427,
+          "max": 5427
+        },
+        "lateResponses": 0,
+        "busyResponses": 0
+      },
+      "tracking": {
+        "observationCount": 201,
+        "uniqueCaptureTimes": 201,
+        "observedSpanS": 7.961399999999999,
+        "effectiveCaptureHz": 25.121209837465774,
+        "captureGapS": {
+          "count": 200,
+          "min": 0.0026,
+          "mean": 0.03980700000000001,
+          "median": 0.040000000000000036,
+          "p90": 0.04079999999999995,
+          "max": 0.05399999999999938
+        },
+        "trackIdentities": 1,
+        "revalidations": 1,
+        "states": {
+          "tracking:sam_mask_feature_anchor": 1,
+          "tracking:feature_flow_consensus": 200
+        },
+        "firstLoss": null
+      },
+      "horizons": [
+        {
+          "horizonS": 1,
+          "issued": 65,
+          "scored": 57,
+          "unscorable": 8,
+          "pending": 0,
+          "outcomes": {
+            "scored:target_observed": 57,
+            "unscorable:observation_stopped": 8
+          },
+          "errorPx": {
+            "count": 57,
+            "min": 1.7555142227865452,
+            "mean": 34.099646731815746,
+            "median": 22.385923352515317,
+            "p90": 97.05178219367839,
+            "max": 129.410023165825
+          },
+          "envelope": {
+            "calibrated": false,
+            "contained": 40,
+            "total": 57
+          },
+          "motionModels": {
+            "velocity_smooth": 15,
+            "hold": 6,
+            "velocity_recent": 20,
+            "harmonic": 10,
+            "learned_contacts": 5,
+            "turn": 3,
+            "velocity_long": 6
+          },
+          "causalViolations": 0
+        }
+      ],
+      "lockedTargets": []
+    }
+  ],
+  "failureInvestigation": {
+    "firstSamImage": {
+      "path": "output/camera-qa/hand-first-submitted.jpg",
+      "sha256": "99c2da57581f3f5330a589982762a65b4c5eefe395b8a7238856579c78537856",
+      "dimensions": [
+        480,
+        270
+      ],
+      "rgbChannelExtrema": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "matchesInitialSubmittedImageHashes": [
+        "hands-photo-1-failed.json",
+        "hands-photo-1-v13-failed.json"
+      ],
+      "finding": "The exact initial submitted JPEG is entirely black in both failed hands runs. Initial no_matches responses are therefore correct for the submitted pixels; the failure is first-frame capture timing, not established SAM inability to find hands."
+    },
+    "additionalCauses": [
+      {
+        "run": "hands-photo-1-failed.json",
+        "finding": "After later SAM responses found two hands, a 0.5183 s capture gap exceeded the 0.5 s tracker window."
+      },
+      {
+        "run": "hands-photo-1-v13-failed.json",
+        "finding": "A later two-hand SAM response arrived after 4.1602 source seconds; the required anchor had left the fixed 80-frame buffer, so it was refused before tracking."
+      }
+    ],
+    "newSuccessClaimed": true,
+    "changesRetestedInV14": [
+      "Wait for an actually presented initial video frame before selection/submission.",
+      "Retain temporally thinned pixel history rather than only the most recent 80 captures.",
+      "Yield long catch-up tracking batches to keep capture responsive.",
+      "Preserve the full SAM contour when creating the tracker mask."
+    ],
+    "retestEvidence": "hands-photo-1-v14.json: two initial SAM detections, no lost observations,114 scored 1-second targets; both earlier failed exports remain retained."
+  },
+  "postV14UiCorrection": {
+    "problem": "The real-hand 1-second run locked at7.6918 for target8.6918, beyond the approximately8-second clip end; that ticket correctly remained unscorable.",
+    "change": "The UI now disables video target locking when the selected horizon would pass the video end.",
+    "evidenceScope": "Implemented after these v14 exports. This does not change the retained failed ticket or create an additional successful locked-target test."
+  },
+  "finalRelease": "v16"
+}

@@ -1,6 +1,7 @@
 /** Local appearance tracking initialized exclusively from a decoded SAM mask.
  * Hue is learned from masked image pixels, never a renderer palette. */
 import {createTracker,estimateCameraMotion} from '../camera/tracker.mjs';
+import {createFeatureFlowTracker} from './feature-flow.mjs';
 const distance=(a,b)=>Math.min(Math.abs(a-b),360-Math.abs(a-b));
 const quantile=(values,fraction)=>{const sorted=[...values].sort((a,b)=>a-b);return sorted[Math.floor((sorted.length-1)*fraction)];};
 function hsv(data,i){
@@ -48,7 +49,7 @@ function components(frame,region,color){
     out.push({area:tail,point:{x:sx/tail,y:sy/tail},box:{x:minX+x0,y:minY+y0,width:maxX-minX+1,height:maxY-minY+1},touches});
   }return out;
 }
-export function createSamTracker(options={}){
+function createAppearanceTracker(options={}){
   const fallback=createTracker(options);let state=null,mode='ncc';
   const lost=(t,reason,extra={})=>({status:'lost',t,point:null,box:null,confidence:0,reason,identityGuaranteed:false,units:'px',...extra});
   const seen=(t,confidence,reason)=>({status:'tracking',t,point:{...state.point},box:{...state.box},confidence,reason,identityGuaranteed:false,units:'px',diagnostics:{method:'sam_mask_color_components',cameraMotionObservable:state.motionObservable??false}});
@@ -84,4 +85,22 @@ export function createSamTracker(options={}){
     return seen(t,Math.max(.25,1-Math.abs(Math.log(c.area/state.color.area))), 'sam_color_component');
   }
   return {select,update,reset(){state=null;mode='ncc';fallback.reset();}};
+}
+
+/** Real camera/video objects may deform or change scale. Sparse feature flow
+ * is the preferred measured-pixel tracker there; synthetic colored balls keep
+ * the existing color tracker. The fallback is chosen only at initialization,
+ * never silently after an identity has been lost. */
+export function createSamTracker(options={}){
+  if(!['camera','video'].includes(options.sourceKind))return createAppearanceTracker(options);
+  let selected=null;
+  return {
+    select(frame,roi,t){
+      const feature=createFeatureFlowTracker(options),initial=feature.select(frame,roi,t);
+      if(initial.status==='tracking'){selected=feature;return initial;}
+      selected=createAppearanceTracker(options);return selected.select(frame,roi,t);
+    },
+    update(frame,t){return selected?selected.update(frame,t):{status:'lost',t,point:null,box:null,confidence:0,reason:'no_selection',identityGuaranteed:false,units:'px'};},
+    reset(){selected?.reset();selected=null;},
+  };
 }

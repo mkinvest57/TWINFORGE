@@ -97,6 +97,8 @@ def status(client=None):
         "price_per_image_usd": IMAGE_PRICE_USD,
         "max_requests_per_run": MAX_RUN_REQUESTS,
         "max_image_side": 640,
+        "prompt_modes": ["concept", "point", "box"],
+        "image_transport": "single_frame",
         "budget_scene": SCENE,
         "budget": budget,
         "remaining_requests": remaining_requests,
@@ -105,9 +107,37 @@ def status(client=None):
     }
 
 
+def validate_selection(value, width, height):
+    """Accept only image-pixel selections, never arbitrary SAM grammar."""
+    if value is None:
+        return None
+    if not isinstance(value, dict):
+        raise ValueError("Selection must be a point or box in image pixels")
+    fields = {"type", "x", "y"} if value.get("type") == "point" else {"type", "x", "y", "width", "height"} if value.get("type") == "box" else None
+    if fields is None or set(value) != fields or any(type(value[k]) is not int for k in fields - {"type"}):
+        raise ValueError("Selection accepts only integer point or box coordinates")
+    if not 0 <= value["x"] < width or not 0 <= value["y"] < height:
+        raise ValueError("Selection lies outside the submitted image")
+    if value["type"] == "box" and (value["width"] < 1 or value["height"] < 1 or value["x"] + value["width"] > width or value["y"] + value["height"] > height):
+        raise ValueError("Selection lies outside the submitted image")
+    return dict(value)
+
+
+def build_sam_prompt(frame):
+    """Native SAM 3.1 location grammar; boxes have inclusive end pixels."""
+    selected = validate_selection(frame.get("selection"), frame["width"], frame["height"])
+    if selected is None:
+        return frame["concept"]
+    x, y = selected["x"], selected["y"]
+    size = ";w=%d;h=%d|>" % (frame["width"], frame["height"])
+    if selected["type"] == "point":
+        return "<0f>1<|point;x=%d;y=%d" % (x, y) + size
+    return "<0f>1<|box;x1=%d;y1=%d;x2=%d;y2=%d" % (x, y, x + selected["width"] - 1, y + selected["height"] - 1) + size
+
+
 def validate_frame(raw):
-    if not isinstance(raw, dict) or set(raw) != _FIELDS:
-        raise ValueError("A SAM frame requires only image_base64, concept, frame_id, source_time_s, run_id and source_kind")
+    if not isinstance(raw, dict) or set(raw) - {"selection"} != _FIELDS:
+        raise ValueError("A SAM frame requires image_base64, concept, frame_id, source_time_s, run_id and source_kind; only selection is optional")
     concept = raw["concept"]
     if not isinstance(concept, str) or not 1 <= len(concept.strip()) <= 80 or any(ord(c) < 32 for c in concept) or any(c in concept for c in "<>|,;\n"):
         raise ValueError("Use one short object concept, such as ball or red cup")
@@ -126,8 +156,8 @@ def validate_frame(raw):
     source_time = raw["source_time_s"]
     if isinstance(source_time, bool) or not isinstance(source_time, (int, float)) or not math.isfinite(source_time) or not 0 <= source_time <= 86400:
         raise ValueError("source_time_s must be a finite timestamp in [0, 86400]")
-    if raw["source_kind"] not in {"synthetic", "camera"}:
-        raise ValueError("source_kind must be synthetic or camera")
+    if raw["source_kind"] not in {"synthetic", "camera", "video"}:
+        raise ValueError("source_kind must be synthetic, camera or video")
     encoded = raw["image_base64"]
     if not isinstance(encoded, str) or not encoded or len(encoded) > 4 * ((MAX_IMAGE_BYTES + 2) // 3):
         raise ValueError("JPEG exceeds the 400 KiB limit")
@@ -157,6 +187,7 @@ def validate_frame(raw):
         "image_bytes": data, "image_base64": encoded, "image": rgb,
         "image_sha256": hashlib.sha256(data).hexdigest(),
         "width": width, "height": height, "concept": concept.strip(),
+        "selection": validate_selection(raw.get("selection"), width, height),
         "frame_id": frame_id, "run_id": run_id,
         "source_time_s": float(source_time), "source_kind": raw["source_kind"],
     }
@@ -253,10 +284,11 @@ def _detections(text, frame, decoder):
 
 def segment_frame(raw, client=None, decoder=None, data_root=None):
     global _REQUEST_STARTED_AT
+    started = time.perf_counter()
     frame = validate_frame(raw)
+    validated = time.perf_counter()
     if not _IN_FLIGHT.acquire(blocking=False):
         raise LiveSamBusy("SAM is processing another frame; wait for it before sending the next")
-    started = time.perf_counter()
     _REQUEST_STARTED_AT = time.time()
     audit = None
     audit_path = None
@@ -270,7 +302,7 @@ def segment_frame(raw, client=None, decoder=None, data_root=None):
         folder = root / "live-sam" / frame["run_id"]
         tag = _claim_frame(folder, frame)
         audit_path = folder / (tag + ".json")
-        audit = {k: frame[k] for k in ("run_id", "frame_id", "source_time_s", "source_kind", "image_sha256", "width", "height", "concept")}
+        audit = {k: frame[k] for k in ("run_id", "frame_id", "source_time_s", "source_kind", "image_sha256", "width", "height", "concept", "selection")}
         jpeg_name = tag + ".jpg"
         fd = os.open(folder / jpeg_name, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
         with os.fdopen(fd, "wb") as stream:
@@ -278,7 +310,9 @@ def segment_frame(raw, client=None, decoder=None, data_root=None):
         audit.update(received_at=utc_now(), provider="meta-model-api", model=MODEL, status="requesting", input_jpeg=jpeg_name)
         _write_private(audit_path, audit)
         # Exact submitted bytes: no geometry, masses, velocities or random seed.
-        response = client.segment(frame["image_base64"], frame["concept"], scene=SCENE)
+        reserved = time.perf_counter()
+        response = client.segment(frame["image_base64"], build_sam_prompt(frame), scene=SCENE)
+        received = time.perf_counter()
         receipt = response.get("twinforge_receipt")
         if not isinstance(receipt, dict) or receipt.get("model") != MODEL or not re.fullmatch(r"[0-9a-f]{32}", str(receipt.get("request_id", ""))) or not re.fullmatch(r"[0-9a-f]{64}", str(receipt.get("request_sha256", ""))):
             raise ProviderUnavailable("SAM response lacks its request receipt")
@@ -289,6 +323,7 @@ def segment_frame(raw, client=None, decoder=None, data_root=None):
         _write_private(audit_path, audit)
         text = _output_text(response)
         detections = _detections(text, frame, decoder)
+        decoded_at = time.perf_counter()
         result = {
             "schema_version": "twinforge.sam.frame.v1",
             "run_id": frame["run_id"], "frame_id": frame["frame_id"],
@@ -298,8 +333,15 @@ def segment_frame(raw, client=None, decoder=None, data_root=None):
             "model": MODEL, "provider": "meta-model-api",
             "evidence_id": tag,
             "status": "detected" if detections else "no_matches",
+            "prompt_kind": frame["selection"]["type"] if frame["selection"] else "concept",
+            "selection": frame["selection"],
             "detections": detections, "receipt": receipt,
             "latency_ms": round((time.perf_counter() - started) * 1000, 2),
+            "timings_ms": {"input_decode": round((validated - started) * 1000, 2),
+                           "reservation": round((reserved - validated) * 1000, 2),
+                           "provider": round((received - reserved) * 1000, 2),
+                           "mask_decode": round((decoded_at - received) * 1000, 2),
+                           "server_until_result": round((decoded_at - started) * 1000, 2)},
             "charged_usd": IMAGE_PRICE_USD,
             "budget": client.ledger.summary(),
             "observation_units": "px", "live_provider_call": True,

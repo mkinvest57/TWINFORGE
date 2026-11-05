@@ -1,6 +1,6 @@
 import {parseImageStream, decodeMaskToRaster, decodeMaskToSVGPath, recordsOfKind} from '@meta-sam/parser';
-import {HttpError, initializeBudget, summary, inFlight, reserve, settle, IMAGE_UNITS, MAX_RUN_REQUESTS, PROVIDER_TIMEOUT_MS} from './budget.mjs';
-import {validateFrame, readBoundedBody, sha256} from './frame.mjs';
+import {HttpError, initializeBudget, summary, inFlight, reserve, settle, formatUsd, IMAGE_UNITS, MAX_RUN_REQUESTS, PROVIDER_TIMEOUT_MS} from './budget.mjs';
+import {validateFrame, readBoundedBody, sha256, buildSamPrompt} from './frame.mjs';
 
 const MODEL = 'sam-3.1';
 const PROVIDER = 'meta-model-api';
@@ -11,12 +11,15 @@ export async function samStatus(env) {
   let budget = null, budgetError = null, pending = null;
   try { await initializeBudget(env); budget = await summary(env); pending = await inFlight(env); }
   catch (error) { budgetError = error instanceof HttpError ? error.message : 'Persistent vision budget storage is unavailable.'; }
-  const remaining = budget?.remaining_requests ?? 0;
-  const available = keyAvailable && !budgetError && remaining > 0;
-  const reason = !keyAvailable ? 'key_missing' : budgetError ? 'budget_storage_unavailable' : !remaining ? 'budget_exhausted' : pending ? 'sam_busy' : null;
+  const unlimited = budget?.unlimited === true;
+  const remaining = unlimited ? null : budget?.remaining_requests ?? 0;
+  const exhausted = !unlimited && !remaining;
+  const available = keyAvailable && !budgetError && !exhausted;
+  const reason = !keyAvailable ? 'key_missing' : budgetError ? 'budget_storage_unavailable' : exhausted ? 'budget_exhausted' : pending ? 'sam_busy' : null;
   const message = !keyAvailable ? 'The Meta API credential is not configured on this server.'
-    : budgetError || (!remaining ? 'The shared $0.50 image allowance is exhausted. Changing scenes does not reset it.'
-      : pending ? 'SAM is finishing an image already submitted. This wait does not spend another image.' : 'SAM 3.1 is ready to observe an image.');
+    : budgetError || (exhausted ? `The shared ${formatUsd(budget.limit_per_scene)} image allowance is exhausted. Changing scenes does not reset it.`
+      : pending ? 'SAM is finishing an image already submitted. This wait does not spend another image.'
+      : unlimited ? 'No Twinforge spending cap. Meta account credit still applies.' : 'SAM 3.1 is ready to observe an image.');
   return {
     schema_version: 'twinforge.sam.status.v1', available,
     service_state: !available ? 'unavailable' : pending ? 'busy' : 'ready',
@@ -24,10 +27,11 @@ export async function samStatus(env) {
     ...(pending ? {retry_after_s:pending.retry_after_s, busy_until_ms:pending.busy_until_ms} : {}),
     key_available: keyAvailable, decoder_available: true, budget_available: !budgetError,
     model: MODEL, provider: PROVIDER, live_only: true,
-    price_per_image_usd: IMAGE_UNITS / 10000, max_requests_per_run: MAX_RUN_REQUESTS,
+    price_per_image_usd: IMAGE_UNITS / 10000, max_requests_per_run: unlimited ? null : MAX_RUN_REQUESTS,
     max_image_side: 640, budget_scene: 'vision', budget,
+    prompt_modes: ['concept', 'point', 'box'], image_transport: 'single_frame',
     remaining_requests: remaining,
-    remaining_usd: budget ? Math.max(0, budget.limit_per_scene - budget.scenes.vision) : 0,
+    remaining_usd: unlimited ? null : budget ? Math.max(0, budget.limit_per_scene - budget.scenes.vision) : 0,
     ...(budgetError ? {error: budgetError} : {}),
     scope: 'SAM segments pixels; a separate predictor estimates future motion.',
   };
@@ -125,15 +129,17 @@ export async function detectionsFromText(text, frame) {
 export async function segment(request, env, providerFetch = fetch) {
   const started = performance.now();
   const frame = await validateFrame(await readBoundedBody(request));
+  const validated = performance.now();
   if (typeof env.META_MODEL_API_KEY !== 'string' || !env.META_MODEL_API_KEY) throw new HttpError(503, 'META_MODEL_API_KEY is not configured.',
     {code:'key_missing', provider_call_made:false});
   await initializeBudget(env);
   const payload = {model: MODEL, input: [{role: 'user', content: [
-    {type: 'input_text', text: frame.concept},
+    {type: 'input_text', text: buildSamPrompt(frame)},
     {type: 'input_image', image_url: 'data:image/jpeg;base64,' + frame.image_base64},
   ]}]};
   const payloadJson = JSON.stringify(payload), requestHash = await sha256(encoder.encode(payloadJson));
   const id = await reserve(env, frame, requestHash);
+  const reserved = performance.now();
   let responseHash = null;
   try {
     let response;
@@ -160,15 +166,21 @@ export async function segment(request, env, providerFetch = fetch) {
     let data;
     try { data = JSON.parse(new TextDecoder().decode(bytes)); }
     catch { throw new HttpError(503, 'SAM returned invalid JSON.'); }
+    const received = performance.now();
     const detections = await detectionsFromText(outputText(data), frame);
+    const decoded = performance.now();
+    const ms = value => Math.round(value * 100) / 100;
     const result = {
       schema_version: 'twinforge.sam.frame.v1', run_id: frame.run_id, frame_id: frame.frame_id,
       source_time_s: frame.source_time_s, source_kind: frame.source_kind,
       width: frame.width, height: frame.height, image_sha256: frame.image_sha256,
       model: MODEL, provider: PROVIDER, evidence_id: id,
       status: detections.length ? 'detected' : 'no_matches', detections,
+      prompt_kind: frame.selection?.type ?? 'concept', selection: frame.selection,
       receipt: {request_id: id, model: MODEL, request_sha256: requestHash},
       latency_ms: Math.round((performance.now() - started) * 100) / 100,
+      timings_ms: {input_decode:ms(validated-started), reservation:ms(reserved-validated),
+        provider:ms(received-reserved), mask_decode:ms(decoded-received), server_until_result:ms(decoded-started)},
       charged_usd: IMAGE_UNITS / 10000, budget: await summary(env),
       observation_units: 'px', live_provider_call: true,
     };

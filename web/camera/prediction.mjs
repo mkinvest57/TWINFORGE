@@ -38,7 +38,7 @@ export function forecast(observations,options={}){
   const sourceTime=options.sourceTime??observations.at(-1)?.t;
   const base={status:'refused',point:null,confidence:0,sourceTime,targetTime:sourceTime+o.horizon,horizon:o.horizon,units:'px',model:'image_plane_kinematics',identityGuaranteed:false};
   const refuse=(reason,diagnostics={})=>({...base,reason,diagnostics});
-  if(!Number.isFinite(sourceTime)||!Number.isFinite(o.horizon)||o.horizon<=0||o.horizon>.75)return refuse('invalid_time_or_horizon');
+  if(!Number.isFinite(sourceTime)||!Number.isFinite(o.horizon)||o.horizon<=0||o.horizon>1)return refuse('invalid_time_or_horizon');
   const past=observations.filter(s=>Number.isFinite(s.t)&&s.t<=sourceTime+1e-10),last=past.at(-1);
   if(!last)return refuse('no_past_observation');
   base.trackId=last.trackId??null;

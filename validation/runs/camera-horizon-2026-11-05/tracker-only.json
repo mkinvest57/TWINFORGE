@@ -1,0 +1,1152 @@
+{
+  "kind": "tracker_only_not_sam_evidence",
+  "date": "2026-11-05T01:16:45.123Z",
+  "manualRoi": true,
+  "liveSamCalls": 0,
+  "units": "480x270 image pixels",
+  "sources": "See README.md and assembly-commands.json in this private folder",
+  "limits": [
+    "Initial rectangles are manually chosen on decoded first frames, not SAM segmentations.",
+    "Controlled clips move real photographs using known FFmpeg transforms; they do not show real physical bottle or hand motion.",
+    "The known transform is used exclusively by the evaluator, never passed to tracking or forecasting.",
+    "Tracking truth follows the selected initial rectangle center under the ideal affine transform; crop/chroma integer rounding contributes subpixel discrepancy.",
+    "Real dance hand clip has no independent annotations: tracked duration does not establish accuracy.",
+    "Local update timings are this development Mac only, not phone timings."
+  ],
+  "results": [
+    {
+      "name": "bottle-whole",
+      "file": "bottle-controlled-photo-motion.mp4",
+      "roi": {
+        "x": 202,
+        "y": 23,
+        "width": 74,
+        "height": 229
+      },
+      "frameCount": 240,
+      "initialReason": "sam_mask_feature_anchor",
+      "initialFeatures": 42,
+      "productionWrapperInitialReason": "sam_mask_feature_anchor",
+      "trackedFrames": 240,
+      "trackedFraction": 1,
+      "firstLost": null,
+      "trackingErrorPx": {
+        "count": 240,
+        "mean": 0.8318346424709632,
+        "p95": 2.55797779561502,
+        "max": 3.2629939349579167
+      },
+      "localUpdateMs": {
+        "count": 239,
+        "mean": 2.4402029288702933,
+        "p95": 3.969416000000024,
+        "max": 11.906166999999982
+      },
+      "forecastErrorPx": {
+        "1": {
+          "count": 34,
+          "mean": 7.569660369124875,
+          "p95": 20.75131170620446,
+          "max": 24.742019223543902
+        },
+        ".5": {
+          "count": 37,
+          "mean": 2.989998926456925,
+          "p95": 6.278971880003452,
+          "max": 9.003486531271509
+        },
+        ".75": {
+          "count": 36,
+          "mean": 4.750908655231616,
+          "p95": 12.44399759389339,
+          "max": 14.44427301935747
+        }
+      },
+      "samples": [
+        {
+          "frame": 0,
+          "status": "tracking",
+          "point": {
+            "x": 238.99999999999997,
+            "y": 137.5
+          },
+          "truth": {
+            "x": 239,
+            "y": 137.5
+          },
+          "reason": "sam_mask_feature_anchor",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane"
+          }
+        },
+        {
+          "frame": 30,
+          "status": "tracking",
+          "point": {
+            "x": 220.43368448519274,
+            "y": 132.0178448795257
+          },
+          "truth": {
+            "x": 219.84996859206305,
+            "y": 131.75107572759563
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.15884898000224057,
+            "scale": 1.0017750875667824,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 60,
+          "status": "tracking",
+          "point": {
+            "x": 225.2166416211844,
+            "y": 135.3124119344637
+          },
+          "truth": {
+            "x": 225.00957527417765,
+            "y": 135.21224364278123
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.22061925390754114,
+            "scale": 0.9990082553480862,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 90,
+          "status": "tracking",
+          "point": {
+            "x": 246.82478593105094,
+            "y": 141.56710407879206
+          },
+          "truth": {
+            "x": 247.7363452722947,
+            "y": 142.24938223650625
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.10728175618528668,
+            "scale": 0.9988694732934065,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 120,
+          "status": "tracking",
+          "point": {
+            "x": 255.36873769176233,
+            "y": 140.81111256410748
+          },
+          "truth": {
+            "x": 257.64633937355194,
+            "y": 141.43035139369934
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 41,
+            "retained": 42,
+            "flowResidualPx": 0.09717095569668378,
+            "scale": 0.9990740130503717,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 150,
+          "status": "tracking",
+          "point": {
+            "x": 243.49559419244562,
+            "y": 134.63431272989936
+          },
+          "truth": {
+            "x": 244.169634846089,
+            "y": 134.61336203745006
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.2529047932778057,
+            "scale": 0.9993445835352762,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 180,
+          "status": "tracking",
+          "point": {
+            "x": 224.31223898888965,
+            "y": 132.37657338205548
+          },
+          "truth": {
+            "x": 224.0052737169234,
+            "y": 132.1756095811011
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.16049176520809416,
+            "scale": 1.0018813546099814,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 210,
+          "status": "tracking",
+          "point": {
+            "x": 222.74606072535332,
+            "y": 138.57978234844148
+          },
+          "truth": {
+            "x": 221.82530585568736,
+            "y": 138.2815714246616
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.12222841429775208,
+            "scale": 1.0010328694405137,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 239,
+          "status": "tracking",
+          "point": {
+            "x": 242.0185224414643,
+            "y": 143.2456471359946
+          },
+          "truth": {
+            "x": 241.7278255851337,
+            "y": 143.66720080557798
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.13468575140525502,
+            "scale": 1.0001000228242192,
+            "forwardBackwardChecked": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "bottle-transparent-body",
+      "file": "bottle-controlled-photo-motion.mp4",
+      "roi": {
+        "x": 209,
+        "y": 95,
+        "width": 60,
+        "height": 117
+      },
+      "frameCount": 240,
+      "initialReason": "sam_mask_feature_anchor",
+      "initialFeatures": 42,
+      "productionWrapperInitialReason": "sam_mask_feature_anchor",
+      "trackedFrames": 240,
+      "trackedFraction": 1,
+      "firstLost": null,
+      "trackingErrorPx": {
+        "count": 240,
+        "mean": 0.899554325288403,
+        "p95": 2.247122666450729,
+        "max": 3.0802289213195104
+      },
+      "localUpdateMs": {
+        "count": 239,
+        "mean": 2.2512995104602402,
+        "p95": 2.6430829999999332,
+        "max": 3.8834170000000086
+      },
+      "forecastErrorPx": {
+        "1": {
+          "count": 34,
+          "mean": 8.674361383845472,
+          "p95": 20.936439520192256,
+          "max": 24.994901116766272
+        },
+        ".5": {
+          "count": 37,
+          "mean": 3.345859193495551,
+          "p95": 6.547925643381809,
+          "max": 8.992589937547221
+        },
+        ".75": {
+          "count": 36,
+          "mean": 5.69776839977305,
+          "p95": 12.523097688155325,
+          "max": 14.730569110401703
+        }
+      },
+      "samples": [
+        {
+          "frame": 0,
+          "status": "tracking",
+          "point": {
+            "x": 239,
+            "y": 153.5
+          },
+          "truth": {
+            "x": 239,
+            "y": 153.49999999999997
+          },
+          "reason": "sam_mask_feature_anchor",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane"
+          }
+        },
+        {
+          "frame": 30,
+          "status": "tracking",
+          "point": {
+            "x": 220.3077201238716,
+            "y": 148.64755706308813
+          },
+          "truth": {
+            "x": 219.84996859206305,
+            "y": 148.574682856221
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.19729332378745812,
+            "scale": 1.0011132999891101,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 60,
+          "status": "tracking",
+          "point": {
+            "x": 225.21169784353373,
+            "y": 152.21962079096937
+          },
+          "truth": {
+            "x": 225.00957527417765,
+            "y": 152.14647888923253
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.18502608882518978,
+            "scale": 0.9979564871377995,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 90,
+          "status": "tracking",
+          "point": {
+            "x": 246.96368420798854,
+            "y": 157.6215439096751
+          },
+          "truth": {
+            "x": 247.7363452722947,
+            "y": 158.48549820324635
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.10412978531624487,
+            "scale": 0.998977019232218,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 120,
+          "status": "tracking",
+          "point": {
+            "x": 255.8049923591193,
+            "y": 156.05647675865694
+          },
+          "truth": {
+            "x": 257.64633937355194,
+            "y": 156.76394755704496
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.08851337831898662,
+            "scale": 0.999069353419711,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 150,
+          "status": "tracking",
+          "point": {
+            "x": 243.63080516193975,
+            "y": 149.09872118304872
+          },
+          "truth": {
+            "x": 244.169634846089,
+            "y": 149.62132989303916
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 40,
+            "retained": 42,
+            "flowResidualPx": 0.29771698211977715,
+            "scale": 0.9973842245777844,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 180,
+          "status": "tracking",
+          "point": {
+            "x": 223.85240931290048,
+            "y": 147.12253844463888
+          },
+          "truth": {
+            "x": 224.0052737169234,
+            "y": 147.71673006030298
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.1776537581184813,
+            "scale": 1.002290755020081,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 210,
+          "status": "tracking",
+          "point": {
+            "x": 222.27403305756764,
+            "y": 153.76503790997276
+          },
+          "truth": {
+            "x": 221.82530585568736,
+            "y": 154.7530866778214
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.12702774036693898,
+            "scale": 1.0013059002813085,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 239,
+          "status": "tracking",
+          "point": {
+            "x": 241.43295154063057,
+            "y": 158.59924463153231
+          },
+          "truth": {
+            "x": 241.7278255851337,
+            "y": 160.65680700764398
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.14631156263731582,
+            "scale": 0.9996075151379172,
+            "forwardBackwardChecked": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "left-hand-photo",
+      "file": "hands-controlled-photo-motion.mp4",
+      "roi": {
+        "x": 35,
+        "y": 2,
+        "width": 191,
+        "height": 258
+      },
+      "frameCount": 240,
+      "initialReason": "sam_mask_feature_anchor",
+      "initialFeatures": 42,
+      "productionWrapperInitialReason": "sam_mask_feature_anchor",
+      "trackedFrames": 240,
+      "trackedFraction": 1,
+      "firstLost": null,
+      "trackingErrorPx": {
+        "count": 240,
+        "mean": 5.121832431238524,
+        "p95": 10.280861812587434,
+        "max": 10.667219981260711
+      },
+      "localUpdateMs": {
+        "count": 239,
+        "mean": 2.6694996443514616,
+        "p95": 2.9541669999998703,
+        "max": 3.761666999999761
+      },
+      "forecastErrorPx": {
+        "1": {
+          "count": 34,
+          "mean": 6.816131025150305,
+          "p95": 12.170951138353317,
+          "max": 17.489879325371206
+        },
+        ".5": {
+          "count": 37,
+          "mean": 4.307182432553241,
+          "p95": 7.793083854980748,
+          "max": 8.193631362033157
+        },
+        ".75": {
+          "count": 36,
+          "mean": 4.703414591296808,
+          "p95": 7.270171827039441,
+          "max": 12.530040916567746
+        }
+      },
+      "samples": [
+        {
+          "frame": 0,
+          "status": "tracking",
+          "point": {
+            "x": 130.5,
+            "y": 131
+          },
+          "truth": {
+            "x": 130.5,
+            "y": 130.99999999999997
+          },
+          "reason": "sam_mask_feature_anchor",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane"
+          }
+        },
+        {
+          "frame": 30,
+          "status": "tracking",
+          "point": {
+            "x": 118.07389246901295,
+            "y": 131.30167454315674
+          },
+          "truth": {
+            "x": 110.33815236266445,
+            "y": 125.192422928314
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 41,
+            "retained": 42,
+            "flowResidualPx": 0.35451748155879204,
+            "scale": 0.9999336052234378,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 60,
+          "status": "tracking",
+          "point": {
+            "x": 118.25644514888914,
+            "y": 134.5750186813
+          },
+          "truth": {
+            "x": 111.91802587106858,
+            "y": 130.90351912195638
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 41,
+            "retained": 42,
+            "flowResidualPx": 0.20248013303660173,
+            "scale": 0.9996784659182447,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 90,
+          "status": "tracking",
+          "point": {
+            "x": 130.4936738843257,
+            "y": 133.16809058171071
+          },
+          "truth": {
+            "x": 133.35605569429796,
+            "y": 136.37720059646912
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 41,
+            "retained": 42,
+            "flowResidualPx": 0.17338140489711412,
+            "scale": 0.9989838811876464,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 120,
+          "status": "tracking",
+          "point": {
+            "x": 144.2675683849025,
+            "y": 126.59957720786034
+          },
+          "truth": {
+            "x": 150.27756162650243,
+            "y": 131.0125225043226
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.1645818849936971,
+            "scale": 0.9993226160641743,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 150,
+          "status": "tracking",
+          "point": {
+            "x": 142.02943175362532,
+            "y": 123.38762922215466
+          },
+          "truth": {
+            "x": 145.96809238356596,
+            "y": 126.07831866329062
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 41,
+            "retained": 42,
+            "flowResidualPx": 0.17538123254230295,
+            "scale": 0.999234715769414,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 180,
+          "status": "tracking",
+          "point": {
+            "x": 125.39315330077076,
+            "y": 129.51752727810702
+          },
+          "truth": {
+            "x": 124.93740797716089,
+            "y": 131.2780738823433
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 35,
+            "retained": 42,
+            "flowResidualPx": 0.27243367253252376,
+            "scale": 1.0012358339053022,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 210,
+          "status": "tracking",
+          "point": {
+            "x": 112.76049810456487,
+            "y": 135.13660919068542
+          },
+          "truth": {
+            "x": 108.91461873402473,
+            "y": 136.4271777242344
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.10918648625233073,
+            "scale": 1.0013395416552986,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 239,
+          "status": "tracking",
+          "point": {
+            "x": 117.63382288171607,
+            "y": 128.9496076066196
+          },
+          "truth": {
+            "x": 115.89209219731754,
+            "y": 130.73062941507217
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 41,
+            "retained": 42,
+            "flowResidualPx": 0.24834473769436918,
+            "scale": 1.0008095233708336,
+            "forwardBackwardChecked": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "right-hand-photo",
+      "file": "hands-controlled-photo-motion.mp4",
+      "roi": {
+        "x": 255,
+        "y": 10,
+        "width": 194,
+        "height": 254
+      },
+      "frameCount": 240,
+      "initialReason": "sam_mask_feature_anchor",
+      "initialFeatures": 42,
+      "productionWrapperInitialReason": "sam_mask_feature_anchor",
+      "trackedFrames": 240,
+      "trackedFraction": 1,
+      "firstLost": null,
+      "trackingErrorPx": {
+        "count": 240,
+        "mean": 2.6102316665411016,
+        "p95": 5.227604992208077,
+        "max": 5.5109590617321915
+      },
+      "localUpdateMs": {
+        "count": 239,
+        "mean": 2.655558246861906,
+        "p95": 2.9110829999999623,
+        "max": 4.175584000000072
+      },
+      "forecastErrorPx": {
+        "1": {
+          "count": 34,
+          "mean": 5.167090488655129,
+          "p95": 9.930582078563544,
+          "max": 10.622984419122245
+        },
+        ".5": {
+          "count": 37,
+          "mean": 2.863832782936923,
+          "p95": 4.599716902257418,
+          "max": 5.5223078204889
+        },
+        ".75": {
+          "count": 36,
+          "mean": 3.7491611101320874,
+          "p95": 6.59504342998512,
+          "max": 9.200927970351103
+        }
+      },
+      "samples": [
+        {
+          "frame": 0,
+          "status": "tracking",
+          "point": {
+            "x": 352,
+            "y": 137
+          },
+          "truth": {
+            "x": 352,
+            "y": 136.99999999999997
+          },
+          "reason": "sam_mask_feature_anchor",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane"
+          }
+        },
+        {
+          "frame": 30,
+          "status": "tracking",
+          "point": {
+            "x": 345.0404885163382,
+            "y": 134.85788217213783
+          },
+          "truth": {
+            "x": 342.03820572279506,
+            "y": 131.46872234213245
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 41,
+            "retained": 42,
+            "flowResidualPx": 0.15035988629558972,
+            "scale": 1.001079814214029,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 60,
+          "status": "tracking",
+          "point": {
+            "x": 345.84979864892205,
+            "y": 138.13313037599954
+          },
+          "truth": {
+            "x": 343.8418810651025,
+            "y": 137.18588088793473
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 40,
+            "retained": 42,
+            "flowResidualPx": 0.259067050407722,
+            "scale": 0.9989142692714971,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 90,
+          "status": "tracking",
+          "point": {
+            "x": 351.49463681899783,
+            "y": 140.03035790986854
+          },
+          "truth": {
+            "x": 355.30856985218634,
+            "y": 142.38945831632162
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 41,
+            "retained": 42,
+            "flowResidualPx": 0.13569975565716777,
+            "scale": 0.9989800426120481,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 120,
+          "status": "tracking",
+          "point": {
+            "x": 357.42637243148,
+            "y": 134.5684194329598
+          },
+          "truth": {
+            "x": 361.8161493127692,
+            "y": 136.74268740778808
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 41,
+            "retained": 42,
+            "flowResidualPx": 0.16126975606530564,
+            "scale": 0.9979297692798701,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 150,
+          "status": "tracking",
+          "point": {
+            "x": 354.6626164094912,
+            "y": 131.0502367039189
+          },
+          "truth": {
+            "x": 356.8356001588674,
+            "y": 131.79030532989023
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.16016958141458054,
+            "scale": 1.0008032885360967,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 180,
+          "status": "tracking",
+          "point": {
+            "x": 345.736751241133,
+            "y": 137.91235339734237
+          },
+          "truth": {
+            "x": 345.53303798673863,
+            "y": 137.2535762753793
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 40,
+            "retained": 42,
+            "flowResidualPx": 0.2903865982767112,
+            "scale": 1.0034596233305164,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 210,
+          "status": "tracking",
+          "point": {
+            "x": 341.18068256925574,
+            "y": 142.86491361924897
+          },
+          "truth": {
+            "x": 340.1228979679521,
+            "y": 142.69015594276067
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.25255527854446846,
+            "scale": 1.0004164132271793,
+            "forwardBackwardChecked": true
+          }
+        },
+        {
+          "frame": 239,
+          "status": "tracking",
+          "point": {
+            "x": 346.3497949952473,
+            "y": 136.39582923763615
+          },
+          "truth": {
+            "x": 348.3788319655325,
+            "y": 137.02823861872588
+          },
+          "reason": "feature_flow_consensus",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 42,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane",
+            "matched": 42,
+            "retained": 42,
+            "flowResidualPx": 0.1762440380237148,
+            "scale": 0.9985649374188645,
+            "forwardBackwardChecked": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "small-real-moving-hand",
+      "file": "sam3-hands-real-scene-5s.mp4",
+      "roi": {
+        "x": 343,
+        "y": 217,
+        "width": 17,
+        "height": 26
+      },
+      "frameCount": 150,
+      "initialReason": "sam_mask_feature_anchor",
+      "initialFeatures": 8,
+      "productionWrapperInitialReason": "sam_mask_feature_anchor",
+      "trackedFrames": 10,
+      "trackedFraction": 0.06666666666666667,
+      "firstLost": {
+        "frame": 10,
+        "timeS": 0.3333333333333333,
+        "reason": "ambiguous_feature_motion"
+      },
+      "trackingErrorPx": null,
+      "localUpdateMs": {
+        "count": 149,
+        "mean": 0.05653410738257711,
+        "p95": 0.7871660000000702,
+        "max": 0.8746670000000449
+      },
+      "forecastErrorPx": {
+        "1": null,
+        ".5": null,
+        ".75": null
+      },
+      "samples": [
+        {
+          "frame": 0,
+          "status": "tracking",
+          "point": {
+            "x": 351.5,
+            "y": 229.99999999999997
+          },
+          "truth": null,
+          "reason": "sam_mask_feature_anchor",
+          "diagnostics": {
+            "method": "sam_mask_pyramidal_feature_flow",
+            "featureCount": 8,
+            "cameraMotionCompensated": false,
+            "coordinates": "image_plane"
+          }
+        },
+        {
+          "frame": 30,
+          "status": "lost",
+          "point": null,
+          "truth": null,
+          "reason": "sam_resegmentation_required"
+        },
+        {
+          "frame": 60,
+          "status": "lost",
+          "point": null,
+          "truth": null,
+          "reason": "sam_resegmentation_required"
+        },
+        {
+          "frame": 90,
+          "status": "lost",
+          "point": null,
+          "truth": null,
+          "reason": "sam_resegmentation_required"
+        },
+        {
+          "frame": 120,
+          "status": "lost",
+          "point": null,
+          "truth": null,
+          "reason": "sam_resegmentation_required"
+        },
+        {
+          "frame": 149,
+          "status": "lost",
+          "point": null,
+          "truth": null,
+          "reason": "sam_resegmentation_required"
+        }
+      ]
+    }
+  ]
+}

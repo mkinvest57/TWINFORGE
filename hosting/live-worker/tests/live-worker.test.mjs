@@ -7,8 +7,8 @@ import {spawn} from 'node:child_process';
 import {createInterface} from 'node:readline';
 import jpeg from 'jpeg-js';
 import {encodeSegmentationMask} from '../node_modules/@meta-sam/parser/dist/mask-codec.js';
-import {initializeBudget, summary, reserve, settle, HttpError, IN_FLIGHT_LEASE_MS} from '../src/budget.mjs';
-import {validateFrame, readBoundedBody, MAX_BODY_BYTES} from '../src/frame.mjs';
+import {initializeBudget, summary, reserve, settle, limitUnits, HttpError, IN_FLIGHT_LEASE_MS} from '../src/budget.mjs';
+import {validateFrame, readBoundedBody, MAX_BODY_BYTES, buildSamPrompt} from '../src/frame.mjs';
 import {segment, samStatus, detectionsFromText} from '../src/sam.mjs';
 import {createHandler} from '../src/http.mjs';
 
@@ -27,13 +27,15 @@ function sqlite(path) {
     script:script => call({script}), close:() => process.stdin.end(),
   };
 }
-async function environment(t, initial = '0') {
+async function environment(t, initial = '0', migrationCount = Infinity) {
   const folder = await mkdtemp(join(tmpdir(), 'tf-worker-test-'));
   const path = join(folder, 'vision.sqlite'), db = sqlite(path);
-  const migrations = (await readdir(new URL('../drizzle/', import.meta.url))).filter(p => p.endsWith('.sql')).sort();
-  assert.equal(migrations.length, 1);
-  await db.script(await readFile(new URL('../drizzle/' + migrations[0], import.meta.url), 'utf8'));
   t.after(async () => {db.close(); await rm(folder, {recursive:true, force:true});});
+  const migrations = (await readdir(new URL('../drizzle/', import.meta.url))).filter(p => p.endsWith('.sql')).sort();
+  assert.ok(migrations.length >= 2);
+  for (const migration of migrations.slice(0,migrationCount)) {
+    await db.script(await readFile(new URL('../drizzle/' + migration, import.meta.url), 'utf8'));
+  }
   return {DB:db, INITIAL_VISION_SPENT_UNITS:initial, META_MODEL_API_KEY:'test-placeholder', path};
 }
 const RUN = '11111111-1111-4111-8111-111111111111';
@@ -52,6 +54,89 @@ test('validates actual JPEG bytes and forbids hidden simulator state before any 
   }
   await assert.rejects(readBoundedBody(new Request('https://x',{method:'POST',body:'{}'})), error => error.status===415);
   await assert.rejects(readBoundedBody(new Request('https://x',{method:'POST',headers:{'Content-Type':'application/json'},body:'x'.repeat(MAX_BODY_BYTES+1)})), error => error.status===413);
+});
+
+test('native SAM selections use full JPEG pixel coordinates and inclusive box endpoints', async () => {
+  const point = await validateFrame(payload({selection:{type:'point',x:0,y:63},source_kind:'camera'}));
+  assert.equal(buildSamPrompt(point), '<0f>1<|point;x=0;y=63;w=64;h=64|>');
+  const box = await validateFrame(payload({selection:{type:'box',x:10,y:20,width:3,height:3},source_kind:'video'}));
+  assert.equal(buildSamPrompt(box), '<0f>1<|box;x1=10;y1=20;x2=12;y2=22;w=64;h=64|>');
+  assert.equal(buildSamPrompt(await validateFrame(payload({selection:null,concept:'hand'}))), 'hand');
+  for (const selection of [{type:'point',x:64,y:0},{type:'point',x:2.5,y:3},{type:'point',x:true,y:3},
+    {type:'point',x:1,y:1,seed:5},{type:'box',x:63,y:1,width:2,height:2},{type:'box',x:1,y:1,width:0,height:5},
+    {type:'mask',text:'injected'},[],5]) {
+    await assert.rejects(validateFrame(payload({selection})), error=>error.status===400);
+  }
+});
+
+test('a selected object reaches SAM as spatial prompt only and selection is bound to its receipt', async t => {
+  const env = await environment(t), selection={type:'point',x:10,y:20};
+  let actualPayload;
+  const body=payload({selection,concept:'bottle',source_kind:'camera'});
+  const result=await segment(request(body),env,async(_url,options)=>{
+    actualPayload=JSON.parse(options.body);
+    assert.equal(actualPayload.input[0].content[0].text,'<0f>1<|point;x=10;y=20;w=64;h=64|>');
+    assert.equal(actualPayload.input[0].content.length,2,'do not mix a concept and a spatial prompt');
+    assert.equal(actualPayload.input[0].content[1].image_url,'data:image/jpeg;base64,'+body.image_base64);
+    return providerResponse(WIRE);
+  });
+  assert.deepEqual(result.selection,selection);assert.equal(result.prompt_kind,'point');
+  assert.equal(result.image_sha256,(await validateFrame(body)).image_sha256);
+  for(const value of Object.values(result.timings_ms))assert.ok(Number.isFinite(value)&&value>=0);
+  const saved=await env.DB.prepare('SELECT result_json FROM vision_requests WHERE id=?').bind(result.evidence_id).first();
+  assert.deepEqual(JSON.parse(saved.result_json).selection,selection);
+  const invalid=payload({selection:{type:'point',x:64,y:0},frame_id:'invalid',source_time_s:1});
+  await assert.rejects(segment(request(invalid),env,()=>assert.fail('Invalid selection must never spend')));
+  assert.equal((await summary(env)).requests,1);
+});
+
+test('imported video reaches the provider and preserves its source through a real SQLite reservation', async t => {
+  const env=await environment(t),selection={type:'box',x:10,y:20,width:3,height:3};
+  let calls=0;
+  const result=await segment(request(payload({source_kind:'video',selection,concept:'bottle'})),env,async(_url,options)=>{
+    calls++;
+    assert.equal(JSON.parse(options.body).input[0].content[0].text,
+      '<0f>1<|box;x1=10;y1=20;x2=12;y2=22;w=64;h=64|>');
+    return providerResponse(WIRE);
+  });
+  assert.equal(calls,1);assert.equal(result.source_kind,'video');assert.equal(result.status,'detected');
+  const saved=await env.DB.prepare('SELECT source_kind, status, units, result_json FROM vision_requests WHERE id=?')
+    .bind(result.evidence_id).first();
+  assert.equal(saved.source_kind,'video');assert.equal(saved.status,'complete');assert.equal(saved.units,25);
+  assert.equal(JSON.parse(saved.result_json).source_kind,'video');
+  assert.equal((await summary(env)).requests,1);
+});
+
+test('video source migration preserves every existing ledger column, baseline, indexes and constraints', async t => {
+  const env=await environment(t,'1000',1);await initializeBudget(env);
+  await assert.rejects(segment(request(payload({source_kind:'video'})),env,
+    ()=>assert.fail('Old schema must reject video before the provider')),/vision_source_kind/);
+  const complete=await reserve(env,{...fakeFrame(0),source_kind:'camera'},'b'.repeat(64));
+  await settle(env,complete,'complete','c'.repeat(64),{evidence:'existing receipt',selection:null});
+  const failed=await reserve(env,fakeFrame(1),'d'.repeat(64));await settle(env,failed,'failed');
+  const pending=await reserve(env,{...fakeFrame(2),source_kind:'camera'},'e'.repeat(64));
+  const rows=await env.DB.prepare('SELECT * FROM vision_requests ORDER BY id').run();
+  const baseline=await env.DB.prepare('SELECT * FROM vision_budget_baseline').first();
+  const migration=await readFile(new URL('../drizzle/0001_video_source_kind.sql',import.meta.url),'utf8');
+  await env.DB.script(migration);
+  assert.deepEqual(await env.DB.prepare('SELECT * FROM vision_requests ORDER BY id').run(),rows);
+  assert.deepEqual(await env.DB.prepare('SELECT * FROM vision_budget_baseline').first(),baseline);
+  assert.equal((await summary(env)).scenes.vision,.1075);
+  const indexes=(await env.DB.prepare("PRAGMA index_list('vision_requests')").run()).results;
+  for(const name of ['vision_requests_run_time','vision_requests_inflight','vision_unique_frame']) {
+    assert.ok(indexes.some(index=>index.name===name),name+' is preserved');
+  }
+  assert.equal(indexes.find(index=>index.name==='vision_unique_frame').unique,1);
+  await assert.rejects(env.DB.prepare('UPDATE vision_requests SET frame_id=? WHERE id=?').bind('frame-0',failed).run(),/UNIQUE constraint/);
+  await assert.rejects(env.DB.prepare('UPDATE vision_requests SET source_kind=? WHERE id=?').bind('unknown',complete).run(),/vision_source_kind/);
+  await assert.rejects(env.DB.prepare('UPDATE vision_requests SET units=? WHERE id=?').bind(0,complete).run(),/vision_image_price/);
+  await assert.rejects(env.DB.prepare('UPDATE vision_requests SET status=? WHERE id=?').bind('unknown',complete).run(),/vision_status/);
+  await assert.rejects(env.DB.prepare('UPDATE vision_requests SET id=? WHERE id=?').bind(complete,failed).run(),/UNIQUE constraint/);
+  await assert.rejects(env.DB.prepare('UPDATE vision_requests SET image_sha256=NULL WHERE id=?').bind(complete).run(),/NOT NULL constraint/);
+  await assert.rejects(env.DB.prepare('UPDATE vision_budget_baseline SET initial_units=-1').run(),/vision_baseline_nonnegative/);
+  await settle(env,pending,'complete');
+  const video=await segment(request(payload({source_kind:'video',frame_id:'frame-3',source_time_s:3})),env,async()=>providerResponse(WIRE));
+  assert.equal(video.source_kind,'video');assert.equal((await summary(env)).scenes.vision,.11);
 });
 
 test('real official mask decoder computes a foreground centroid, contour and image color', async () => {
@@ -102,6 +187,103 @@ test('atomic reservations across separate SQLite connections enforce global cap 
   assert.equal((await summary(env)).scenes.vision,.5);
   assert.equal((await samStatus(env)).remaining_requests,0);
   await assert.rejects(reserve(env,fakeFrame(2,crypto.randomUUID()),'d'.repeat(64)),/exhausted/);
+});
+
+test('optional total cap defaults to $0.50 and rejects invalid config before accessing the ledger', async () => {
+  assert.equal(limitUnits({}),5000);
+  assert.equal(limitUnits({TOTAL_VISION_BUDGET_UNITS:'20000'}),20000);
+  assert.equal(limitUnits({TOTAL_VISION_BUDGET_UNITS:5000}),5000);
+  assert.equal(limitUnits({TOTAL_VISION_BUDGET_UNITS:'unlimited'}),null);
+  for (const value of ['', '0', 0, -1, 1.5, '1.5', '2e4', '020000', ' 20000',
+    '20001', 20001, NaN, Infinity, Number.MAX_SAFE_INTEGER+1, true, {}, 'UNLIMITED', ' unlimited']) {
+    const env={TOTAL_VISION_BUDGET_UNITS:value,INITIAL_VISION_SPENT_UNITS:'0',
+      DB:{prepare:()=>assert.fail('Invalid cap must not read or mutate the ledger')}};
+    const invalid=error=>error.status===503 && error.message.includes('TOTAL_VISION_BUDGET_UNITS');
+    assert.throws(()=>limitUnits(env),invalid);
+    await assert.rejects(initializeBudget(env),invalid);
+    await assert.rejects(summary(env),invalid);
+    await assert.rejects(reserve(env,fakeFrame(),'b'.repeat(64)),invalid);
+  }
+});
+
+test('an explicitly configured $2 total cap is enforced atomically and reported in exhausted status', async t => {
+  const env={...await environment(t,'19975'),TOTAL_VISION_BUDGET_UNITS:'20000'};
+  await initializeBudget(env);
+  const second=sqlite(env.path);t.after(()=>second.close());
+  const results=await Promise.allSettled([
+    reserve(env,fakeFrame(),'b'.repeat(64)),
+    reserve({...env,DB:second},fakeFrame(1,crypto.randomUUID()),'c'.repeat(64)),
+  ]);
+  assert.equal(results.filter(value=>value.status==='fulfilled').length,1);
+  const budget=await summary(env);
+  assert.equal(budget.limit_per_scene,2);assert.equal(budget.scenes.vision,2);
+  assert.equal(budget.remaining_requests,0);assert.match(budget.budget_scope,/\$2\.00 combined ceiling/);
+  const status=await samStatus(env);
+  assert.equal(status.accepting_frame,false);assert.equal(status.reason_code,'budget_exhausted');
+  assert.match(status.message,/\$2\.00 image allowance/);
+  await assert.rejects(reserve(env,fakeFrame(2,crypto.randomUUID()),'d'.repeat(64)),
+    error=>error.status===429 && error.detail.code==='budget_exhausted' && error.message.includes('$2.00'));
+});
+
+test('changing the total cap never resets reservations or lowers the imported baseline', async t => {
+  const env=await environment(t,'4975');await initializeBudget(env);
+  await settle(env,await reserve(env,fakeFrame(),'b'.repeat(64)),'complete');
+  const raised={...env,TOTAL_VISION_BUDGET_UNITS:'20000',INITIAL_VISION_SPENT_UNITS:'0'};
+  await initializeBudget(raised);
+  const before=await summary(raised);
+  assert.equal(before.scenes.vision,.5);assert.equal(before.remaining_requests,600);
+  assert.equal(before.reserved_local_or_prior_usd,.4975);assert.equal(before.hosted_requests,1);
+  await settle(raised,await reserve(raised,fakeFrame(1),'c'.repeat(64)),'failed');
+  const after=await summary(raised);
+  assert.equal(after.scenes.vision,.5025);assert.equal(after.remaining_requests,599);
+  // Omitting the cap restores the conservative default, but never refunds cost.
+  await initializeBudget({...env,INITIAL_VISION_SPENT_UNITS:'0'});
+  const lowered=await summary(env);
+  assert.equal(lowered.limit_per_scene,.5);assert.equal(lowered.scenes.vision,.5025);
+  assert.equal(lowered.remaining_requests,0);assert.equal(lowered.hosted_requests,2);
+  await assert.rejects(reserve(env,fakeFrame(2),'d'.repeat(64)),/\$0\.50 vision budget is exhausted/);
+});
+
+test('explicit unlimited mode removes total and per-run caps but preserves costs, ordering and one in-flight request', async t => {
+  const env={...await environment(t,'25000'),TOTAL_VISION_BUDGET_UNITS:'unlimited'};
+  await initializeBudget(env);
+  const second=sqlite(env.path);t.after(()=>second.close());
+  const first=await reserve(env,fakeFrame(),'b'.repeat(64));
+  await assert.rejects(reserve({...env,DB:second},fakeFrame(1),'c'.repeat(64)),
+    error=>error.status===429 && error.detail.code==='sam_busy' && !error.detail.provider_call_made);
+  const busy=await samStatus(env);
+  assert.equal(busy.available,true);assert.equal(busy.accepting_frame,false);
+  assert.equal(busy.service_state,'busy');assert.equal(busy.remaining_requests,null);
+  assert.equal(busy.remaining_usd,null);assert.equal(busy.max_requests_per_run,null);
+  await settle(env,first,'failed');
+  await assert.rejects(reserve(env,fakeFrame(),'b'.repeat(64)),/already submitted/);
+  await assert.rejects(reserve(env,{...fakeFrame(1),source_time_s:0},'c'.repeat(64)),/strictly increasing/);
+  // The same run crosses the finite 60-request limit and begins above $2.
+  for(let i=1;i<62;i++)await settle(env,await reserve(env,fakeFrame(i),'b'.repeat(64)),'complete');
+  await initializeBudget({...env,INITIAL_VISION_SPENT_UNITS:'0'});
+  const budget=await summary({...env,DB:second});
+  assert.equal(budget.unlimited,true);assert.equal(budget.limit_per_scene,null);
+  assert.equal(budget.remaining_requests,null);assert.equal(budget.hosted_requests,62);
+  assert.equal(budget.reserved_local_or_prior_usd,2.5);assert.equal(budget.scenes.vision,2.655);
+  const ready=await samStatus(env);
+  assert.equal(ready.available,true);assert.equal(ready.accepting_frame,true);
+  assert.equal(ready.reason_code,null);assert.match(ready.message,/No Twinforge spending cap\. Meta account credit still applies/);
+  assert.equal(ready.remaining_requests,null);assert.equal(ready.remaining_usd,null);
+  assert.equal(ready.max_requests_per_run,null);
+  // Returning to the default changes the cap, not the persistent history.
+  const finite={...env,TOTAL_VISION_BUDGET_UNITS:undefined,INITIAL_VISION_SPENT_UNITS:'0'};
+  const capped=await samStatus(finite);
+  assert.equal(capped.available,false);assert.equal(capped.budget.unlimited,false);
+  assert.equal(capped.budget.scenes.vision,2.655);assert.equal(capped.max_requests_per_run,60);
+});
+
+test('unlimited mode still requires the private key and initialized persistent ledger', async t => {
+  const env={...await environment(t),TOTAL_VISION_BUDGET_UNITS:'unlimited'};
+  await assert.rejects(reserve(env,fakeFrame(),'b'.repeat(64)),/has not been initialized/);
+  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS count FROM vision_requests').first()).count,0);
+  assert.equal((await samStatus({...env,META_MODEL_API_KEY:''})).available,false);
+  assert.equal((await samStatus({...env,DB:undefined})).available,false);
+  assert.equal((await samStatus({...env,INITIAL_VISION_SPENT_UNITS:undefined})).available,false);
 });
 
 test('per-run quota and in-flight limit survive new service instances while global budget spans runs', async t => {

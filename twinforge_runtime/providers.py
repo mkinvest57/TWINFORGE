@@ -45,7 +45,9 @@ class ModelClient:
             headers["Authorization"] = "Bearer " + key
         request = urllib.request.Request(url, data=json.dumps(payload).encode(), headers=headers, method="POST")
         try:
-            with urllib.request.urlopen(request, timeout=120) as response:
+            # SAM drives an interactive view. A stalled frame must not hold its
+            # local inference slot for two minutes; other model deadlines stay unchanged.
+            with urllib.request.urlopen(request, timeout=15 if payload.get("model") == "sam-3.1" else 120) as response:
                 return json.load(response)
         except urllib.error.HTTPError as error:
             # Never echo response bodies: a provider might repeat submitted credentials or data.

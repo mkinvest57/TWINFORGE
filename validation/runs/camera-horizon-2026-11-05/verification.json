@@ -1,0 +1,66 @@
+{
+  "date": "2026-11-05",
+  "scope": "Camera selection, raw frame tracking, 0.5\u20131 second forecasting",
+  "software": {
+    "javascript": {
+      "passed": 207,
+      "command": "node --test tests/js/*.test.mjs"
+    },
+    "python": {
+      "passed": 132,
+      "command": ".venv/bin/python -m unittest discover -s tests -q"
+    },
+    "worker": {
+      "passed": 19,
+      "command": "npm test in hosting/live-worker"
+    },
+    "note": "Transport tests use mocks. These are not live SAM or physical-phone accuracy results.",
+    "totalPassed": 358,
+    "slowDeviceRegression": "Finite catch-up with 45ms tracker and 40ms frame arrival; stale revalidation preserves the fresher tracker."
+  },
+  "browser": {
+    "source": "Owner-private hosted v16",
+    "layoutWidths": [
+      390,
+      320
+    ],
+    "horizontalOverflow": false,
+    "primaryCameraTargetsPx": 44,
+    "localVideoImport": "Preview waits for a decoded/presented frame and explicit selection",
+    "horizonValues": [
+      0.5,
+      0.75,
+      1
+    ],
+    "pointAndBox": "Actual SAM-anchored bottle trials retained",
+    "hands": "Two-hand photo-motion and recorded real-hand movement trials retained",
+    "physicalPhoneCameraTest": false,
+    "sourceReport": "live-results.json",
+    "portraitLayout": "Video, selection and forecast layers share identical fitted dimensions; laptop stage height constrained.",
+    "portraitFinalWidth": 390,
+    "portraitFinalSurfacePx": [
+      360,
+      418.390625
+    ],
+    "finalRun": "real-hand-1-v16.json",
+    "finalSamRetainedResponses": 2,
+    "finalSamSubmittedRequests": 3,
+    "finalInputFrames": 201,
+    "finalScoredForecasts": 57,
+    "finalMeanErrorPx": 34.099646,
+    "finalClientRoundTripMs": [
+      5427,
+      1381
+    ],
+    "applicationCapVerifiedInUi": "No Twinforge cap"
+  },
+  "interpretation": "Live trials and failed attempts retained in live-results.json. Error is against later tracked pixels, not independent physical ground truth. Photo-motion and real recorded hand movement are separate cohorts. No physical phone hardware test was performed.",
+  "budget": {
+    "applicationCap": "unlimited",
+    "configurationRevision": 2,
+    "authorization": "Owner explicitly authorized removal of Twinforge spending and image-count caps.",
+    "providerCredit": "Meta account credit still applies; no live balance was verified.",
+    "accounting": "Persistent accounting and a single in-flight request remain enabled.",
+    "historicalBlock": "The earlier v9 application-cap block is resolved."
+  }
+}

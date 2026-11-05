@@ -22,9 +22,10 @@ export const requests = sqliteTable('vision_requests', {
   responseHash: text('response_sha256'),
   result: text('result_json'),
 }, table => [
-  check('vision_source_kind', sql`${table.sourceKind} IN ('synthetic', 'camera')`),
-  check('vision_image_price', sql`${table.units} = 25`),
-  check('vision_status', sql`${table.status} IN ('requesting', 'complete', 'failed')`),
+  // Unqualified CHECK columns survive SQLite's temporary-table migration rename.
+  check('vision_source_kind', sql`"source_kind" IN ('synthetic', 'camera', 'video')`),
+  check('vision_image_price', sql`"units" = 25`),
+  check('vision_status', sql`"status" IN ('requesting', 'complete', 'failed')`),
   unique('vision_unique_frame').on(table.runId, table.frameId),
   index('vision_requests_run_time').on(table.runId, table.sourceTime),
   index('vision_requests_inflight').on(table.status, table.createdMs),

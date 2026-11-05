@@ -27,3 +27,15 @@ main{max-width:1580px;margin:auto;padding:32px 3.5% 16px}.page-heading{display:f
 /* Both dimensions are derived from a single aspect ratio, including tall tablets. */
 .scene-surface{top:50%;bottom:auto;width:100%;height:auto;max-width:none;transform:translate(-50%,-50%)}
 @media(min-width:881px){.vision-stage{--stage-height:clamp(280px,calc(100dvh - 430px),540px);height:var(--stage-height)}.scene-surface{width:min(100%,calc(var(--stage-height) * 1.6))}.camera-stage .scene-surface{width:100%;height:100%}}
+
+/* Camera acquisition and explicit, accessible target selection. */
+#selection-overlay{z-index:6;pointer-events:auto;touch-action:none;cursor:crosshair;outline-offset:-3px}
+.site-nav a,.setup-button{min-height:44px}
+.camera-selection{padding:12px 15px;border-top:1px solid var(--line);background:var(--bg)}
+.selection-modes{display:flex;gap:5px}.selection-modes button{flex:1;min-height:44px;padding:9px 10px;border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--muted);font-size:11px;cursor:pointer}.selection-modes button[aria-pressed=true]{color:var(--accent);background:var(--raised);border-color:#506044}
+.camera-selection p{font-size:11px;color:var(--muted);line-height:1.6;margin-top:10px}.camera-selection>span{display:block;font:9px var(--mono);color:var(--observed);margin-top:6px;min-height:14px}.concept-form{display:flex;gap:7px;margin-top:10px}.concept-form input{flex:1;min-width:0}
+.forecast-toolbar{display:flex;align-items:center;gap:16px;padding:12px 0 18px}.forecast-toolbar>div{display:flex;align-items:center;gap:10px}.forecast-toolbar label{font:8px var(--mono);letter-spacing:1px;color:var(--muted);white-space:nowrap}.forecast-toolbar select{font-size:12px;min-width:132px;color:var(--predicted)}.forecast-toolbar p{font-size:10px;color:var(--muted);line-height:1.5}.forecast-toolbar>span{margin-left:auto;font:9px var(--mono);color:var(--observed);white-space:nowrap}.camera-stage .stage-message{max-width:320px}.camera-stage .stage-legend{z-index:7}
+/* Fit portrait input without pushing camera controls below a laptop screen.
+   Video, selection and forecast canvases share the same fitted surface. */
+@media(min-width:881px){.vision-stage.camera-stage{width:100%;height:var(--stage-height)}.camera-stage .scene-surface{width:min(100%,calc(var(--stage-height) * var(--camera-aspect,1.6)));height:auto}}
+@media(max-width:560px){.forecast-toolbar{gap:10px;flex-wrap:wrap}.forecast-toolbar p{order:3;flex-basis:100%}.forecast-toolbar>span{font-size:9px}.forecast-toolbar select{min-width:125px}.camera-selection{padding:10px}.selection-modes button{font-size:10px}.camera-stage .stage-message{max-width:260px}.camera-selection p{font-size:10px}#camera-controls .button{flex:1}.concept-form input{font-size:16px}}

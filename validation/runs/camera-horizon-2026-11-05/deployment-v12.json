@@ -1,0 +1,19 @@
+{
+  "id": "appgdep_6aebda3cbb4c81918db2e713e4c68e18",
+  "project_id": "appgprj_6aeb201bbbb88191b56d8dd45accb560",
+  "title": "Twinforge — SAM visual observer",
+  "version_id": "appgprj_6aeb201bbbb88191b56d8dd45accb560~appgver_f9539d21ba34819189806cf8a19b27d9",
+  "type": "publish",
+  "status": "succeeded",
+  "url": "https://twinforge-mobile-camera.mkinvest57.chatgpt.site",
+  "has_mcp": false,
+  "screenshot_asset_pointer": null,
+  "provider_deployment_id": "site---6aeb201bbbb88191b56d8dd45accb560",
+  "failure_message": null,
+  "env_set_revision": 2,
+  "updated_at": "2026-11-05T01:22:18.538195+00:00",
+  "source_commit": "eee347a2d3ac49fec27824c54846278b8ca957d0",
+  "audience": "owner-private preserved",
+  "schemaMigration": "0001_video_source_kind applied through Sites publication",
+  "budgetMode": "unlimited authorized by owner; Meta credit remains finite"
+}

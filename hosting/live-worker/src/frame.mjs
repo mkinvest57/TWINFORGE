@@ -4,6 +4,32 @@ import {HttpError} from './budget.mjs';
 export const MAX_IMAGE_BYTES = 400 * 1024;
 export const MAX_BODY_BYTES = 560 * 1024;
 const FIELDS = ['concept', 'frame_id', 'image_base64', 'run_id', 'source_kind', 'source_time_s'];
+
+// Coordinates are pixels in the exact submitted JPEG, not browser/CSS pixels.
+// Meta's object-prompt grammar uses inclusive box ends; the public UI contract
+// stays x/y/width/height, matching the tracker and avoiding edge off-by-ones.
+export function validateSelection(value, width, height) {
+  if (value == null) return null;
+  if (!value || Array.isArray(value) || typeof value !== 'object') throw new HttpError(400, 'Selection must be a point or box in image pixels.');
+  const fields = value.type === 'point' ? ['type', 'x', 'y'] : value.type === 'box' ? ['height', 'type', 'width', 'x', 'y'] : null;
+  if (!fields || Object.keys(value).sort().join(',') !== fields.join(',') ||
+      fields.filter(k => k !== 'type').some(k => !Number.isSafeInteger(value[k]))) {
+    throw new HttpError(400, 'Selection accepts only integer point or box coordinates.');
+  }
+  if (value.x < 0 || value.y < 0 || value.x >= width || value.y >= height ||
+      (value.type === 'box' && (value.width < 1 || value.height < 1 || value.x + value.width > width || value.y + value.height > height))) {
+    throw new HttpError(400, 'Selection lies outside the submitted image.');
+  }
+  return {...value};
+}
+
+export function buildSamPrompt(frame) {
+  const selection = validateSelection(frame.selection, frame.width, frame.height);
+  if (!selection) return frame.concept;
+  const {x, y} = selection, size = ';w=' + frame.width + ';h=' + frame.height;
+  if (selection.type === 'point') return '<0f>1<|point;x=' + x + ';y=' + y + size + '|>';
+  return '<0f>1<|box;x1=' + x + ';y1=' + y + ';x2=' + (x + selection.width - 1) + ';y2=' + (y + selection.height - 1) + size + '|>';
+}
 export async function sha256(bytes) {
   return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), n => n.toString(16).padStart(2, '0')).join('');
 }
@@ -77,8 +103,8 @@ export function jpegDimensions(bytes) {
 }
 
 export async function validateFrame(raw) {
-  if (!raw || Array.isArray(raw) || typeof raw !== 'object' || Object.keys(raw).sort().join(',') !== FIELDS.join(',')) {
-    throw new HttpError(400, 'A SAM frame accepts only pixels, concept, frame identity, source time, run identity and source kind.');
+  if (!raw || Array.isArray(raw) || typeof raw !== 'object' || Object.keys(raw).filter(k => k !== 'selection').sort().join(',') !== FIELDS.join(',')) {
+    throw new HttpError(400, 'A SAM frame accepts only pixels, concept, an optional visual selection, frame identity, source time, run identity and source kind.');
   }
   if (typeof raw.concept !== 'string' || !raw.concept.trim() || raw.concept.trim().length > 80 || /[\x00-\x1f<>|,;]/.test(raw.concept)) {
     throw new HttpError(400, 'Use one short object concept, such as ball or red cup.');
@@ -86,7 +112,7 @@ export async function validateFrame(raw) {
   if (typeof raw.frame_id !== 'string' || !/^[A-Za-z0-9_.:-]{1,64}$/.test(raw.frame_id)) throw new HttpError(400, 'Invalid frame_id.');
   if (typeof raw.run_id !== 'string' || !/^(?:[0-9a-f]{32}|[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12})$/.test(raw.run_id)) throw new HttpError(400, 'run_id must be a canonical lowercase UUID.');
   if (typeof raw.source_time_s !== 'number' || !Number.isFinite(raw.source_time_s) || raw.source_time_s < 0 || raw.source_time_s > 86400) throw new HttpError(400, 'Invalid source_time_s.');
-  if (!['synthetic', 'camera'].includes(raw.source_kind)) throw new HttpError(400, 'Invalid source_kind.');
+  if (!['synthetic', 'camera', 'video'].includes(raw.source_kind)) throw new HttpError(400, 'Invalid source_kind.');
   const encoded = raw.image_base64;
   if (typeof encoded !== 'string' || !encoded || encoded.length > 4*Math.ceil(MAX_IMAGE_BYTES/3) || encoded.length%4 || !/^[A-Za-z0-9+/]+={0,2}$/.test(encoded)) throw new HttpError(400, 'Supply raw JPEG base64 below 400 KiB.');
   let bytes;
@@ -98,5 +124,6 @@ export async function validateFrame(raw) {
   try { image = jpeg.decode(bytes, {useTArray: true, formatAsRGBA: false, tolerantDecoding: false, maxResolutionInMP: 1, maxMemoryUsageInMB: 32}); }
   catch { throw new HttpError(400, 'JPEG could not be decoded.'); }
   if (image.width !== dimensions.width || image.height !== dimensions.height) throw new HttpError(400, 'JPEG dimensions disagree.');
-  return {...raw, concept: raw.concept.trim(), ...dimensions, image, image_sha256: await sha256(bytes)};
+  return {...raw, concept: raw.concept.trim(), selection:validateSelection(raw.selection, dimensions.width, dimensions.height),
+    ...dimensions, image, image_sha256: await sha256(bytes)};
 }

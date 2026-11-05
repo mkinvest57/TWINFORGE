@@ -121,6 +121,37 @@ class LiveSamTests(unittest.TestCase):
         self.assertEqual(result["detections"], [])
         self.assertEqual(len(self.requests), 1)
 
+    def test_native_point_selection_replaces_concept_and_preserves_full_image(self):
+        selected = {"type": "point", "x": 10, "y": 20}
+        body = payload(selection=selected, concept="bottle", source_kind="camera")
+        result = self.segment(body)
+        content = self.requests[0][1]["input"][0]["content"]
+        self.assertEqual(content[0], {"type": "input_text", "text": "<0f>1<|point;x=10;y=20;w=64;h=64|>"})
+        self.assertEqual(len(content), 2)
+        self.assertEqual(content[1]["image_url"], "data:image/jpeg;base64," + body["image_base64"])
+        self.assertEqual(result["selection"], selected)
+        self.assertEqual(result["prompt_kind"], "point")
+        self.assertTrue(all(isinstance(value, (int, float)) and value >= 0 for value in result["timings_ms"].values()))
+
+    def test_native_box_and_video_frame_use_inclusive_provider_coordinates(self):
+        selected = {"type": "box", "x": 10, "y": 20, "width": 3, "height": 3}
+        frame = sam.validate_frame(payload(selection=selected, source_kind="video"))
+        self.assertEqual(sam.build_sam_prompt(frame), "<0f>1<|box;x1=10;y1=20;x2=12;y2=22;w=64;h=64|>")
+        self.assertEqual(sam.build_sam_prompt(sam.validate_frame(payload(selection=None, concept="hand"))), "hand")
+
+    def test_invalid_spatial_selection_cannot_spend_or_inject_prompt_text(self):
+        invalid = [
+            {"type": "point", "x": 64, "y": 0}, {"type": "point", "x": 1.5, "y": 2},
+            {"type": "point", "x": True, "y": 2}, {"type": "point", "x": 1, "y": 2, "seed": 5},
+            {"type": "box", "x": 63, "y": 0, "width": 2, "height": 1},
+            {"type": "box", "x": 1, "y": 1, "width": 0, "height": 1},
+            {"type": "mask", "text": "injected"}, [], 5,
+        ]
+        for selection in invalid:
+            with self.subTest(selection=selection), self.assertRaises(ValueError):
+                self.segment(payload(selection=selection))
+        self.assertEqual(self.requests, [])
+
     def test_box_without_mask_fails_and_retains_raw_response(self):
         self.response["output"][0]["content"][0]["text"] = WIRE.split("<|mask")[0]
         with self.assertRaises(ProviderUnavailable):

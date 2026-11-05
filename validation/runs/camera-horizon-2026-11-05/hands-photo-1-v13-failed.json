@@ -1,0 +1,165 @@
+{
+  "schema_version": "twinforge.sam-observer.v1",
+  "exportedAt": "2026-11-05T01:27:15.959Z",
+  "sessionCalls": 3,
+  "httpAttempts": 3,
+  "sessionAccepted": 2,
+  "requestLimit": null,
+  "unlimitedRequests": true,
+  "current": {
+    "runId": "19670d7e-3103-466e-b7ce-ad76c442da48",
+    "sourceKind": "video",
+    "concept": "hand",
+    "selection": null,
+    "horizonS": 1,
+    "selectedHorizonS": 1,
+    "mixedHorizon": false,
+    "horizonChanges": [],
+    "horizonsUsed": [
+      1
+    ],
+    "rawFramesSeen": true,
+    "width": 480,
+    "height": 270,
+    "timeS": 7.9657,
+    "samRecords": [
+      {
+        "runId": "19670d7e-3103-466e-b7ce-ad76c442da48",
+        "sourceKind": "video",
+        "frameId": "f1",
+        "sourceTimeS": 0,
+        "imageSha256": "99c2da57581f3f5330a589982762a65b4c5eefe395b8a7238856579c78537856",
+        "model": "sam-3.1",
+        "receipt": {
+          "request_id": "9140acc495de4c3b8c1b6c3d96ad410e",
+          "model": "sam-3.1",
+          "request_sha256": "a1029ddbefee78c1046444693632df777f4b04febd62c4f94126616ea0507148"
+        },
+        "selection": null,
+        "promptKind": "concept",
+        "timingsMs": {
+          "input_decode": 0,
+          "reservation": 76,
+          "provider": 869,
+          "mask_decode": 0,
+          "server_until_result": 945
+        },
+        "latencyMs": 945,
+        "chargedUsd": 0.0025,
+        "receivedAtSourceTimeS": 0,
+        "receivedAtWallTime": "2026-11-05T01:26:57.605Z",
+        "detectedCount": 0,
+        "width": 480,
+        "height": 270,
+        "evidenceId": "9140acc495de4c3b8c1b6c3d96ad410e",
+        "evidence": null,
+        "budget": {
+          "currency": "USD",
+          "unlimited": true,
+          "limit_per_scene": null,
+          "scenes": {
+            "vision": 0.525
+          },
+          "requests": 170,
+          "reserved_local_or_prior_usd": 0.1,
+          "budget_scope": "No Twinforge spending cap. Meta account credit still applies. Recorded spend includes the reserved local allowance or prior spend plus hosted image reservations; it is not a Meta account balance.",
+          "hosted_requests": 170,
+          "persistent": true,
+          "remaining_requests": null
+        }
+      },
+      {
+        "runId": "19670d7e-3103-466e-b7ce-ad76c442da48",
+        "sourceKind": "video",
+        "frameId": "f25",
+        "sourceTimeS": 3.006,
+        "imageSha256": "a37b5a2accc143cf4af84032b42ef197bee59aa1000738c0d9351fbf654711f6",
+        "model": "sam-3.1",
+        "receipt": {
+          "request_id": "b86eef8eadb946d19a3207940e68c71d",
+          "model": "sam-3.1",
+          "request_sha256": "a8c5996efdd694256a1f0ce028f58e58a5eae3eda0995abb73a9f08d2b538dbf"
+        },
+        "selection": null,
+        "promptKind": "concept",
+        "timingsMs": {
+          "input_decode": 0,
+          "reservation": 75,
+          "provider": 1051,
+          "mask_decode": 0,
+          "server_until_result": 1126
+        },
+        "latencyMs": 1126,
+        "chargedUsd": 0.0025,
+        "receivedAtSourceTimeS": 7.1662,
+        "receivedAtWallTime": "2026-11-05T01:27:04.787Z",
+        "detectedCount": 2,
+        "width": 480,
+        "height": 270,
+        "evidenceId": "b86eef8eadb946d19a3207940e68c71d",
+        "evidence": null,
+        "budget": {
+          "currency": "USD",
+          "unlimited": true,
+          "limit_per_scene": null,
+          "scenes": {
+            "vision": 0.5275
+          },
+          "requests": 171,
+          "reserved_local_or_prior_usd": 0.1,
+          "budget_scope": "No Twinforge spending cap. Meta account credit still applies. Recorded spend includes the reserved local allowance or prior spend plus hosted image reservations; it is not a Meta account balance.",
+          "hosted_requests": 171,
+          "persistent": true,
+          "remaining_requests": null
+        }
+      }
+    ],
+    "observations": [],
+    "issued": [],
+    "assessments": [],
+    "tickets": [],
+    "revalidations": [],
+    "runCalls": 3,
+    "lateSamResponses": 1,
+    "busyResponses": 0
+  },
+  "previousRuns": [],
+  "units": "px",
+  "perception": "SAM 3.1 keyframes; local appearance tracking between SAM responses",
+  "prediction": "Causal motion forecast from past measured pixels, not a SAM motion-prediction capability.",
+  "pixelPipeline": "SAM masks use submitted JPEGs. Local tracking may use raw captured pixels between those submissions; each observation records its encoding.",
+  "hiddenSimulationStateConsumed": false,
+  "physicalGroundTruthUsed": false,
+  "limitations": [
+    "SAM input is an image and an object prompt, never simulator positions, velocities, forces, masses or seed.",
+    "The forecast is frozen before its target capture time; delayed SAM responses are caught up from previously observed pixels.",
+    "Scores compare forecasts with subsequent tracked image positions, not independently measured physical coordinates.",
+    "Occlusion, motion changes, camera motion and ambiguous identity can make a forecast unavailable or wrong.",
+    "Random 3D simulations are observed in their two-dimensional camera image; no metric 3D reconstruction is claimed."
+  ],
+  "interfaceEvents": [
+    {
+      "kind": "forecast_horizon_changed",
+      "runId": null,
+      "sourceTimeS": 0,
+      "wallTime": "2026-11-05T01:26:55.703Z",
+      "horizonS": 1
+    },
+    {
+      "kind": "visual_object_selected",
+      "runId": "19670d7e-3103-466e-b7ce-ad76c442da48",
+      "sourceTimeS": 0,
+      "wallTime": "2026-11-05T01:26:56.266Z",
+      "selection": null,
+      "concept": "hand",
+      "sourceKind": "video"
+    },
+    {
+      "kind": "observation_stopped",
+      "runId": "19670d7e-3103-466e-b7ce-ad76c442da48",
+      "sourceTimeS": 7.9657,
+      "wallTime": "2026-11-05T01:27:05.607Z",
+      "reason": "Video ended. Replay it or open another clip."
+    }
+  ]
+}
